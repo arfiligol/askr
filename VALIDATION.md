@@ -110,7 +110,7 @@ quarto render .
 
 Succeeded in a fresh temporary consumer using
 `examples/consumer-override.yml`: its compiled stylesheet contains
-`--qdk-link: #2D5E85`; the installed extension contains `licenses/QDK-MIT.txt`
+`--qdk-link: #2D5E85`; the installed extension contains `licenses/Askr-MIT.txt`
 and `assets/fonts/SourceSans3VF-Upright.ttf.woff2`. The Quartz revision
 additionally confirmed `assets/fonts/SchibstedGrotesk-Regular.woff2` and
 `licenses/Schibsted-Grotesk-OFL.txt`. Its rendered CSS resolves
