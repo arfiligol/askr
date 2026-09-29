@@ -53,7 +53,9 @@ copy.
 
 ## Gallery and credits
 
-Render the source gallery locally with `quarto render .`; it demonstrates
+The published gallery is [https://arfiligol.github.io/askr/](https://arfiligol.github.io/askr/).
+A merge from `develop` into `main` renders and publishes it. Render the source
+gallery locally with `quarto render .`; it demonstrates
 article/navigation/TOC/mobile reading, native callouts, tables, code, formulas,
 and real saved notebook output. See [credits.qmd](credits.qmd),
 [THIRD_PARTY.md](THIRD_PARTY.md), and [ASSET_MANIFEST.md](ASSET_MANIFEST.md).

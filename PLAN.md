@@ -47,12 +47,13 @@ would require a new authoring syntax transformer or public contract.
 
 ## Exclusions
 
-No tests or CI are written while this scope is CONVERGING. This package does
-not provide a website deployment, analytics, a separate search engine, graphs,
-backlinks, hover previews, robots, emoji, consumer APIs, or scientific
-execution policy. The theme styles Quarto's native overlay search. A website
-turns that control on with `search.location: navbar` and `search.type: overlay`.
-This gallery does that.
+No tests are written while this scope is CONVERGING. A merge from `develop`
+into `main` renders this gallery and publishes it to GitHub Pages. Askr does
+not deploy a consumer's site. It also does not provide analytics, a separate
+search engine, graphs, backlinks, hover previews, robots, emoji, consumer APIs,
+or scientific execution policy. The theme styles Quarto's native overlay search.
+A website turns that control on with `search.location: navbar` and
+`search.type: overlay`. This gallery does that.
 
 ## Validation endpoint
 
