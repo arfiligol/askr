@@ -2,13 +2,14 @@
 title: "Install, customize, and update"
 ---
 
-## Install this checkpoint
+## Install the release
 
-Askr's public format is `askr-html`. Quarto's GitHub installer resolves tags
-and branches; a commit SHA is not a supported `@` modifier.
+`0.3.0` is the current release. Askr's public format is `askr-html`. Quarto's
+GitHub installer resolves tags and branches; a commit SHA is not a supported
+`@` modifier.
 
 ```bash
-quarto add arfiligol/askr@develop
+quarto add arfiligol/askr@v0.3.0
 ```
 
 Then select the format in a consumer `_quarto.yml`:
