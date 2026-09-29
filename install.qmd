@@ -2,27 +2,45 @@
 title: "Install, customize, and update"
 ---
 
-## Install the release
+## Install this checkpoint
 
-Use the reviewed `v0.2.1` tag, not an editable symlink or
-an unversioned moving branch. Quarto's GitHub installer resolves tags and
-branches; a commit SHA is not a supported `@` modifier.
+Askr's public format is `askr-html`. Quarto's GitHub installer resolves tags
+and branches; a commit SHA is not a supported `@` modifier. After the
+repository is renamed to `arfiligol/askr`:
 
 ```bash
-quarto add arfiligol/quarto-design-kit@v0.2.1
+quarto add arfiligol/askr@develop
+```
+
+Until that rename, the same tree is:
+
+```bash
+quarto add arfiligol/quarto-design-kit@develop
 ```
 
 Then select the format in a consumer `_quarto.yml`:
 
 ```yaml
 format:
-  qdk-html:
+  askr-html:
     toc: true
     code-copy: true
 ```
 
-The installed copy belongs under the consumer's tracked `_extensions` folder.
-QDK does not fetch fonts, icons, or styles from a CDN.
+The installed copy belongs under the consumer's tracked `_extensions` folder,
+at `_extensions/arfiligol/askr`. Askr does not fetch fonts, icons, or styles
+from a CDN.
+
+## v0.2.1
+
+Release `v0.2.1` was published as `qdk-html` from `arfiligol/quarto-design-kit`.
+That install line is unchanged:
+
+```bash
+quarto add arfiligol/quarto-design-kit@v0.2.1
+```
+
+It still installs `qdk-html` at `_extensions/arfiligol/qdk`.
 
 ## Override tokens in the consumer
 
@@ -32,20 +50,20 @@ consumer's explicit final override visible:
 
 ```yaml
 format:
-  qdk-html:
+  askr-html:
     theme:
-      light: [default, _extensions/arfiligol/qdk/qdk.scss, styles.scss]
-      dark: [default, _extensions/arfiligol/qdk/qdk.scss, _extensions/arfiligol/qdk/qdk-dark.scss, styles.scss]
+      light: [default, _extensions/arfiligol/askr/qdk.scss, styles.scss]
+      dark: [default, _extensions/arfiligol/askr/qdk.scss, _extensions/arfiligol/askr/qdk-dark.scss, styles.scss]
 ```
 
 ```scss
-/* Consumer-owned final override: change only a declared QDK token. */
+/* Consumer-owned final override: change only a declared Askr token. */
 /*-- scss:rules --*/
 :root { --qdk-link: #2D5E85; }
 ```
 
 Render the consumer and inspect the resulting CSS to verify its final token
-value. Do not edit a copy inside `_extensions/arfiligol/qdk`; reinstall the
+value. Do not edit a copy inside `_extensions/arfiligol/askr`; reinstall the
 reviewed tag instead.
 
 ## Update
@@ -64,4 +82,4 @@ A cell can emit a light output and a dark output. Quarto shows the one that matc
 #| renderings: [light, dark]
 ```
 
-Draw or display the light figure, then the dark figure. With `qdk-html` and `theme-toggle`, the dark stylesheet carries `data-mode="dark"`, and the toggle adds `quarto-dark` to `body`. Do not set `data-mode` from the page. The Figures page in this gallery renders a pair of swatches this way.
+Draw or display the light figure, then the dark figure. With `askr-html` and `theme-toggle`, the dark stylesheet carries `data-mode="dark"`, and the toggle adds `quarto-dark` to `body`. Do not set `data-mode` from the page. The Figures page in this gallery renders a pair of swatches this way.

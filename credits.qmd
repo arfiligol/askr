@@ -2,7 +2,7 @@
 title: "Credits and attribution"
 ---
 
-This Quarto Design Kit draws substantial visual inspiration from Quartz and
+Askr draws substantial visual inspiration from Quartz and
 adapts selected styling ideas to Quarto; the precise sources and modification
 record are in the third-party source list.
 

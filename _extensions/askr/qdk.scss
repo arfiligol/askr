@@ -1,4 +1,4 @@
-/* Single token authority for the qdk-html candidate. Consumer overrides belong after this theme. */
+/* Single token authority for the askr-html candidate. Consumer overrides belong after this theme. */
 /*-- scss:defaults --*/
 $body-bg: #faf8f8 !default;
 $body-color: #4e4e4e !default;
@@ -49,7 +49,7 @@ $grid-body-width: 630px;
 $grid-margin-width: 264px;
 $grid-column-gutter-width: 26px;
 $grid-docked-body-width: 630px;
-$qdk-assets-root: "_extensions/arfiligol/qdk/assets" !default;
+$qdk-assets-root: "_extensions/arfiligol/askr/assets" !default;
 
 /*-- scss:rules --*/
 @font-face { font-family: "Schibsted Grotesk"; src: url("#{$qdk-assets-root}/fonts/SchibstedGrotesk-Regular.woff2") format("woff2"); font-style: normal; font-weight: 400; font-display: swap; }

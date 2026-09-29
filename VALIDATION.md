@@ -37,7 +37,7 @@ Quartz warning `#db8942`. A browser surface was unavailable to this worker for
 a replacement screenshot; owner browser review remains the visual receipt.
 
 The gallery's native titleless/iconless simple callout now renders as
-`title=""` plus Quarto's `no-icon` DOM class, with no title container; QDK
+`title=""` plus Quarto's `no-icon` DOM class, with no title container; Askr
 explicitly hides that native no-icon container. Dark navigation surfaces now
 resolve through `--qdk-canvas` and `--qdk-border`; clean-consumer installation
 and Sass override rendering were rerun successfully.

@@ -2,7 +2,7 @@
 title: "Layout"
 ---
 
-This site is the Quarto Design Kit explaining itself. The names below are the
+This site is Askr explaining itself. The names below are the
 three navigation roles used on these pages.
 
 ## Areas

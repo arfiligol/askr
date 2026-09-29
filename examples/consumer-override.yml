@@ -1,6 +1,6 @@
-# Consumer example: retain qdk tokens, then make an explicit final local override.
+# Consumer example: retain Askr tokens, then make an explicit final local override.
 format:
-  qdk-html:
+  askr-html:
     theme:
-      light: [default, _extensions/arfiligol/qdk/qdk.scss, styles.scss]
-      dark: [default, _extensions/arfiligol/qdk/qdk.scss, _extensions/arfiligol/qdk/qdk-dark.scss, styles.scss]
+      light: [default, _extensions/arfiligol/askr/qdk.scss, styles.scss]
+      dark: [default, _extensions/arfiligol/askr/qdk.scss, _extensions/arfiligol/askr/qdk-dark.scss, styles.scss]
