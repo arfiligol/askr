@@ -4,6 +4,7 @@ project:
 
 website:
   title: Askr
+  site-url: https://arfiligol.github.io/askr/
   search:
     location: navbar
     type: overlay
