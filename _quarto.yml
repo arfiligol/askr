@@ -4,7 +4,9 @@ project:
 
 website:
   title: Askr
-  search: false
+  search:
+    location: navbar
+    type: overlay
   navbar:
     left:
       - href: index.qmd

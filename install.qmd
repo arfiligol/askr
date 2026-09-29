@@ -74,6 +74,22 @@ with that tag, commit the resulting `_extensions` change in the consumer, and
 repeat its own validation. The installed directory and its checked-in content
 are the consumer's dependency pin.
 
+## Search
+
+Askr styles Quarto's overlay search. It does not add another index. Turn the
+control on in the consumer website:
+
+```yaml
+website:
+  search:
+    location: navbar
+    type: overlay
+```
+
+At 1280px and wider the button sits on the right, immediately left of the
+theme toggle, and the header stays one row. Below that width it moves to the
+left so the right side of the bar does not wrap.
+
 ## Figures that follow the toggle
 
 A cell can emit a light output and a dark output. Quarto shows the one that matches `body.quarto-dark`. Put the light output first:
