@@ -1,16 +1,18 @@
-# Quarto Design Kit release plan
+# Askr release plan
 
 ## Goal and state
 
-This repository owns the `qdk-html` native Quarto HTML extension and its local
-gallery. The **0.2.1 release** targets Quarto 1.10.18. Its visual
-semantics remain CONVERGING until explicit Human acceptance; a version number,
-merge, or tag does not establish semantic stabilization or deployment.
+This repository owns the `askr-html` native Quarto HTML extension and its local
+gallery. Askr is the reading page: measure, type, citations, and callouts.
+Quiet Quartz remains the visual theme name. This checkpoint targets Quarto
+1.10.18. Visual semantics remain CONVERGING until explicit Human
+acceptance; a version number, merge, or tag does not establish semantic
+stabilization or deployment.
 
 ## Ownership and interfaces
 
-The extension is self-contained at `_extensions/qdk` and exposes one public
-format name: `qdk-html`. Its token authority is `qdk.scss`: documented Quarto
+The extension is self-contained at `_extensions/askr` and exposes one public
+format name: `askr-html`. Its token authority is `qdk.scss`: documented Quarto
 Sass variables own color, type, callout color, code, navbar, sidebar, and grid
 widths, and `scss:rules` applies the remaining Quartz-derived visuals without
 importing a Quartz runtime. Schibsted Grotesk (400/700) owns titles and navigation UI;
@@ -21,7 +23,7 @@ gallery at this repository root is the source-backed evaluation surface.
 The shared token authority distinguishes content dividers from quieter layout
 dividers in each native theme; manual Markdown `---` is the opt-in content
 divider, while sidebar and navigation boundaries use the layout token.
-QDK is a reusable design-system candidate for direct SCQ-repository adoption.
+Askr is a reusable design-system candidate for direct SCQ-repository adoption.
 Its layout contract is the theme variables `$grid-sidebar-width` and
 `$grid-margin-width` at 264px, `$grid-body-width` and `$grid-docked-body-width`
 at 630px, and `$grid-column-gutter-width` at 26px. The root font size is 18px. `$sidebar-border` is
@@ -45,9 +47,11 @@ would require a new authoring syntax transformer or public contract.
 ## Exclusions
 
 No tests or CI are written while this scope is CONVERGING. This package does
-not provide a website deployment, analytics, search, graphs,
+not provide a website deployment, analytics, a separate search engine, graphs,
 backlinks, hover previews, robots, emoji, consumer APIs, or scientific
-execution policy.
+execution policy. The theme styles Quarto's native overlay search. A website
+turns that control on with `search.location: navbar` and `search.type: overlay`.
+This gallery does that.
 
 ## Validation endpoint
 

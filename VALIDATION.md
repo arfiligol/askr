@@ -37,7 +37,7 @@ Quartz warning `#db8942`. A browser surface was unavailable to this worker for
 a replacement screenshot; owner browser review remains the visual receipt.
 
 The gallery's native titleless/iconless simple callout now renders as
-`title=""` plus Quarto's `no-icon` DOM class, with no title container; QDK
+`title=""` plus Quarto's `no-icon` DOM class, with no title container; Askr
 explicitly hides that native no-icon container. Dark navigation surfaces now
 resolve through `--qdk-canvas` and `--qdk-border`; clean-consumer installation
 and Sass override rendering were rerun successfully.
@@ -119,8 +119,9 @@ those local files relative to the installed extension; no CDN is involved.
 Asset SHA-256 values and immutable source URLs/revisions are recorded in
 `ASSET_MANIFEST.md` and `THIRD_PARTY.md`. Quarto output contains both native
 light/dark stylesheet alternatives and the color-scheme toggle script.
-Website search is explicitly disabled in `_quarto.yml`; the rendered page has
-no search control or `search.json` index.
+The gallery now enables Quarto overlay search (`search.location: navbar`,
+`search.type: overlay`) and the theme styles that control. An earlier gallery
+receipt left search disabled and rendered no search control or `search.json`.
 
 ## Pending manual inspection
 

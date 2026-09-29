@@ -8,7 +8,7 @@ transparent fill, a 1px border, and a 5px radius, with padding that leaves
 the copy control clear of the first line. Copy stays Quarto's control.
 Long lines scroll inside the block instead of widening the page.
 
-An inline sample is `qdk-html`.
+An inline sample is `askr-html`.
 
 ```python
 def describe_reading_surface(theme: str, width: int) -> str:

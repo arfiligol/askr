@@ -48,12 +48,12 @@ This is a native titleless, iconless simple tip. It is still semantically a tip.
 :::
 
 ::: {.callout-warning title="Collapsed native warning" collapse="true"}
-This body is available through Quarto's own disclosure control. The Kit replaces
+This body is available through Quarto's own disclosure control. Askr replaces
 the chevron graphic and keeps the control centered with the title.
 :::
 
 ::: {.callout-caution title="Expanded native caution" collapse="false" appearance="minimal"}
-Minimal appearance continues to be Quarto's presentation choice, with Kit
+Minimal appearance continues to be Quarto's presentation choice, with Askr
 colors applied to the supported callout DOM.
 :::
 

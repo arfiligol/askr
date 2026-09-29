@@ -1,13 +1,14 @@
 ---
-title: "Quarto Design Kit"
+title: "Askr"
 subtitle: "A warm, native reading theme"
 ---
 
-Quarto Design Kit is a local `qdk-html` extension candidate for complete,
-long-form reading. It leaves Quarto's navigation, TOC, callout collapse,
-highlighting, math, and execution features intact while supplying a restrained
-typographic and panel system. How this site arranges Areas, the Page List,
-and the Section List is recorded on the [Layout](gallery/layout.qmd) page.
+Askr is the reading page: measure, type, citations, and callouts. It is a
+local `askr-html` extension for complete, long-form reading. It leaves Quarto's
+navigation, TOC, callout collapse, highlighting, math, and execution features
+intact while supplying a restrained typographic and panel system. Quiet Quartz
+remains the name of this visual theme. How this site arranges Areas, the Page
+List, and the Section List is recorded on the [Layout](gallery/layout.qmd) page.
 
 > This candidate puts a clear information hierarchy and long-form reading first. Content and data stay with the project that uses the extension.
 
@@ -18,7 +19,7 @@ the local system fallback sequence. A thin teal link and a lavender quote rule
 are deliberately quieter than the document itself.
 
 ::: {.callout-note title="Native Quarto, not a replacement runtime"}
-The Kit is presentation only. A consumer continues to own site structure,
+Askr is presentation only. A consumer continues to own site structure,
 notebook execution, mathematics, viewer integrations, access control, and data.
 :::
 

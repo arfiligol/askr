@@ -2,7 +2,7 @@
 title: "Credits and attribution"
 ---
 
-This Quarto Design Kit draws substantial visual inspiration from Quartz and
+Askr draws substantial visual inspiration from Quartz and
 adapts selected styling ideas to Quarto; the precise sources and modification
 record are in the third-party source list.
 
@@ -11,9 +11,9 @@ Grotesk, Source Sans 3, and IBM Plex Mono are bundled locally under their SIL
 Open Font Licenses. Source Sans 3 is the intentional version-pinned Source
 Sans Pro successor adaptation for body text; Schibsted Grotesk owns titles and
 navigation UI. Lucide icons are bundled locally under its ISC license and Feather-derived MIT
-notices. The Kit's own source is MIT licensed; that does not replace any of
+notices. Askr's own source is MIT licensed; that does not replace any of
 these third-party terms.
 
 - [Third-party source list](THIRD_PARTY.md)
 - [Bundled asset manifest](ASSET_MANIFEST.md)
-- [Kit MIT license](LICENSE)
+- [Askr MIT license](LICENSE)

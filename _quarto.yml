@@ -3,8 +3,10 @@ project:
   output-dir: _site
 
 website:
-  title: Quarto Design Kit
-  search: false
+  title: Askr
+  search:
+    location: navbar
+    type: overlay
   navbar:
     left:
       - href: index.qmd
@@ -289,10 +291,10 @@ website:
           href: ASSET_MANIFEST.md
 
 format:
-  qdk-html:
+  askr-html:
     theme:
-      light: [default, _extensions/qdk/qdk.scss, gallery-assets.scss]
-      dark: [default, _extensions/qdk/qdk.scss, _extensions/qdk/qdk-dark.scss, gallery-assets.scss]
+      light: [default, _extensions/askr/qdk.scss, gallery-assets.scss]
+      dark: [default, _extensions/askr/qdk.scss, _extensions/askr/qdk-dark.scss, gallery-assets.scss]
     toc: true
     toc-title: "Sections"
     toc-location: right

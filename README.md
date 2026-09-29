@@ -1,38 +1,39 @@
-# Quarto Design Kit
+# Askr
 
-`0.2.1` is the current release of the native Quarto HTML design kit,
-validated with Quarto 1.10.18. Its visual contract remains CONVERGING until
-explicitly accepted; the version does not imply semantic stabilization.
+Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz
+remains the name of the visual theme. This develop checkpoint publishes the
+format `askr-html`. The visual contract remains CONVERGING until explicitly
+accepted.
 
 ## Install
 
-Install the reviewed release tag `v0.2.1`. Quarto's GitHub
-installer accepts branch and tag names, not commit SHA modifiers:
+Quarto's GitHub installer accepts branch and tag names, not commit SHA
+modifiers.
 
 ```bash
-quarto add arfiligol/quarto-design-kit@v0.2.1
+quarto add arfiligol/askr@develop
 ```
 
 ```yaml
 format:
-  qdk-html:
+  askr-html:
     toc: true
     code-copy: true
 ```
 
-The GitHub installation lives at `_extensions/arfiligol/qdk`. It bundles local
+The GitHub installation lives at `_extensions/arfiligol/askr`. It bundles local
 Source Sans 3 body text, Schibsted Grotesk title/navigation UI, IBM Plex Mono code,
-Lucide icons, Kit MIT license, and third-party notices. Source Sans 3 is the
+Lucide icons, the Askr MIT license, and third-party notices. Source Sans 3 is the
 intentional version-pinned Source Sans Pro successor adaptation in this
 Quartz-on-Quarto candidate.
 No CDN, Quartz runtime, Python runtime, analytics, or consumer data is added.
 
-The Kit maps Quartz's typography, tokens, rhythm, links, code,
+Askr maps Quartz's typography, tokens, rhythm, links, code,
 and callout shell onto Quarto's native navbar/sidebar/TOC and runtime. It does
 not introduce Quartz's additional callout families or aliases: that would need
 a separate public authoring syntax contract.
 
-QDK is intended as a reusable design system for direct SCQ-repository
+Askr is intended as a reusable design system for direct SCQ-repository
 adoption. The theme Sass variables `$grid-sidebar-width` and `$grid-margin-width`
 are 264px, `$grid-body-width` and `$grid-docked-body-width` are 630px, and
 `$grid-column-gutter-width` is 26px. The root font size is 18px. One docked
