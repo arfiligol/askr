@@ -5,17 +5,10 @@ title: "Install, customize, and update"
 ## Install this checkpoint
 
 Askr's public format is `askr-html`. Quarto's GitHub installer resolves tags
-and branches; a commit SHA is not a supported `@` modifier. After the
-repository is renamed to `arfiligol/askr`:
+and branches; a commit SHA is not a supported `@` modifier.
 
 ```bash
 quarto add arfiligol/askr@develop
-```
-
-Until that rename, the same tree is:
-
-```bash
-quarto add arfiligol/quarto-design-kit@develop
 ```
 
 Then select the format in a consumer `_quarto.yml`:
@@ -31,21 +24,10 @@ The installed copy belongs under the consumer's tracked `_extensions` folder,
 at `_extensions/arfiligol/askr`. Askr does not fetch fonts, icons, or styles
 from a CDN.
 
-## v0.2.1
-
-Release `v0.2.1` was published as `qdk-html` from `arfiligol/quarto-design-kit`.
-That install line is unchanged:
-
-```bash
-quarto add arfiligol/quarto-design-kit@v0.2.1
-```
-
-It still installs `qdk-html` at `_extensions/arfiligol/qdk`.
-
 ## Override tokens in the consumer
 
 Create a consumer-owned Sass file, for example `styles.scss`, and list it after
-the format theme. This preserves one Kit token authority while making the
+the format theme. This preserves one Askr token authority while making the
 consumer's explicit final override visible:
 
 ```yaml

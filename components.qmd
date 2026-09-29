@@ -2,7 +2,7 @@
 title: "Components"
 ---
 
-The Kit restyles native Quarto article components. It does not add new
+Askr restyles native Quarto article components. It does not add new
 authoring syntax. Each page below is one family, so the current treatment can
 be reviewed before any further change.
 
@@ -24,7 +24,7 @@ be reviewed before any further change.
 ## Still Quarto's own presentation
 
 - [Figures and groups](components/figures.qmd). Columns, tabsets, diagrams,
-  and an image from the Plotly Design Kit. The groups stay Quarto's own
+  and an image from Embla. The groups stay Quarto's own
   presentation. The image uses Quarto's folded Source.
 - [Saved notebook output](notebook-output.qmd). A real executed cell, separate
   from a fenced code block.

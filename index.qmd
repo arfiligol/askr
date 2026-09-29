@@ -19,7 +19,7 @@ the local system fallback sequence. A thin teal link and a lavender quote rule
 are deliberately quieter than the document itself.
 
 ::: {.callout-note title="Native Quarto, not a replacement runtime"}
-The Kit is presentation only. A consumer continues to own site structure,
+Askr is presentation only. A consumer continues to own site structure,
 notebook execution, mathematics, viewer integrations, access control, and data.
 :::
 

@@ -5,22 +5,13 @@ remains the name of the visual theme. This develop checkpoint publishes the
 format `askr-html`. The visual contract remains CONVERGING until explicitly
 accepted.
 
-Release `v0.2.1` was published as `qdk-html` from `arfiligol/quarto-design-kit`.
-That tag is unchanged.
-
-## Install this checkpoint
+## Install
 
 Quarto's GitHub installer accepts branch and tag names, not commit SHA
-modifiers. After the repository is renamed to `arfiligol/askr`:
+modifiers.
 
 ```bash
 quarto add arfiligol/askr@develop
-```
-
-Until that rename, the same tree is:
-
-```bash
-quarto add arfiligol/quarto-design-kit@develop
 ```
 
 ```yaml
@@ -32,12 +23,12 @@ format:
 
 The GitHub installation lives at `_extensions/arfiligol/askr`. It bundles local
 Source Sans 3 body text, Schibsted Grotesk title/navigation UI, IBM Plex Mono code,
-Lucide icons, Kit MIT license, and third-party notices. Source Sans 3 is the
+Lucide icons, the Askr MIT license, and third-party notices. Source Sans 3 is the
 intentional version-pinned Source Sans Pro successor adaptation in this
 Quartz-on-Quarto candidate.
 No CDN, Quartz runtime, Python runtime, analytics, or consumer data is added.
 
-The Kit maps Quartz's typography, tokens, rhythm, links, code,
+Askr maps Quartz's typography, tokens, rhythm, links, code,
 and callout shell onto Quarto's native navbar/sidebar/TOC and runtime. It does
 not introduce Quartz's additional callout families or aliases: that would need
 a separate public authoring syntax contract.
@@ -59,14 +50,6 @@ token values explicit. A working pattern appears in
 For updates, install a newly reviewed version tag and commit the consumer's
 updated `_extensions` copy. Do not rely on a moving branch or edit the installed
 copy.
-
-## v0.2.1
-
-```bash
-quarto add arfiligol/quarto-design-kit@v0.2.1
-```
-
-That tag still installs `qdk-html` at `_extensions/arfiligol/qdk`.
 
 ## Gallery and credits
 

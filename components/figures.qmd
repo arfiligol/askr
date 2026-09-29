@@ -6,7 +6,7 @@ execute:
   echo: true
 ---
 
-These components render with Quarto's own layout. The Kit does not yet restyle
+These components render with Quarto's own layout. Askr does not yet restyle
 them. They are here so that choice can be reviewed.
 
 ## Columns
@@ -26,7 +26,7 @@ The right column is the other half. A narrow screen stacks them.
 ::: {.panel-tabset}
 ## First
 
-A tab is a Quarto panel, not a Kit component.
+A tab is a Quarto panel, not an Askr component.
 
 ## Second
 
@@ -35,7 +35,7 @@ The second panel stays in the same article width.
 
 ## Image
 
-Images in this document come from the Plotly Design Kit. The chart below is
+Images in this document come from Embla. The chart below is
 its bars-and-markers figure, saved here as a static image. Quarto's folded
 cell keeps the embed source behind Source and shows the image underneath.
 
@@ -55,7 +55,7 @@ directly:
 
 ## Theme toggle
 
-Quarto keeps two outputs from one cell and shows one of them. `body.quarto-dark` hides `.light-content`; `body.quarto-light` hides `.dark-content`. The Kit's dark stylesheet is marked `data-mode="dark"`, so the header toggle adds and removes `quarto-dark` with the stylesheet.
+Quarto keeps two outputs from one cell and shows one of them. `body.quarto-dark` hides `.light-content`; `body.quarto-light` hides `.dark-content`. Askr's dark stylesheet is marked `data-mode="dark"`, so the header toggle adds and removes `quarto-dark` with the stylesheet.
 
 Emit the light output first, then the dark output:
 
