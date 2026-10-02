@@ -6,9 +6,8 @@ Each version is one rendered site, kept in its own directory. The latest
 render is also copied to `/`. Older directories stay as they were.
 
 ```text
-/                         current release
-/v0.3/                    render of tag v0.3.0
-/v0.2/                    render of tag v0.2.0
+/                         current release, 0.4.0
+/v0.3.0/                  the 0.3.0 site, kept as it was
 /askr-versions.json       the only version list
 ```
 
@@ -18,8 +17,8 @@ render is also copied to `/`. Older directories stay as they were.
 {
   "mode": "inline",
   "versions": [
-    {"label": "0.3", "root": "/", "latest": true},
-    {"label": "0.2", "root": "/v0.2/"}
+    {"label": "0.4.0", "root": "/", "latest": true},
+    {"label": "0.3.0", "root": "/v0.3.0/"}
   ]
 }
 ```
@@ -36,11 +35,12 @@ Publishing a new release:
 3. Copy the same files to `/`.
 4. Add `0.4` to `/askr-versions.json`.
 
-Leave `/v0.2/` and `/v0.3/` untouched. Their pages, Page Lists, and Areas stay
-the text of that tag.
+Leave `/v0.3.0/` untouched when a newer release is published. Its pages,
+Page List, and Areas stay the text of that tag. In this gallery, 0.3.0 still
+has Install. It does not have Usage.
 
-The menu keeps the current path. From `/v0.3/reference/api.html`, choosing 0.2
-opens `/v0.2/reference/api.html`.
+The menu keeps the current path. From `/usage/versions.html`, choosing 0.3.0
+opens `/v0.3.0/usage/versions.html`. That page does not exist in 0.3.0.
 
 Askr does not invent that missing page. The project adds a `404.qmd`. When the
 path contains a version directory, the page sends the reader to that version's
@@ -52,10 +52,11 @@ such as `/askr/`:
 var path = location.pathname;
 var version = path.match(/(\/v[^/]+)\//);
 if (version) location.replace(path.slice(0, version.index) + version[1] + "/");
+else location.replace("/");
 </script>
 ```
 
-This gallery has that page. Version 0.2 is only [its home](/v0.2/). Open this
-Versioning Docs page, then choose 0.2: that page is not in 0.2, so you land on
-the 0.2 home. `longTitle` in this gallery's JSON is only for the long-name
-specimen above. A project omits it.
+This gallery's menu is 0.4.0 and 0.3.0. Version 0.3.0 is only
+[its home](/v0.3.0/). Open this Versioning Docs page, then choose 0.3.0: that
+page is not in 0.3.0, so you land on the 0.3.0 home. `longTitle` in this
+gallery's JSON is only for the long-name specimen above. A project omits it.

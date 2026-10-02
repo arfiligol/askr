@@ -9,5 +9,6 @@ This page is not in this version.
 var path = location.pathname;
 var version = path.match(/(\/v[^/]+)\//);
 if (version) location.replace(path.slice(0, version.index) + version[1] + "/");
+else location.replace(path.indexOf("/askr/") === 0 ? "/askr/" : "/");
 </script>
 ```
