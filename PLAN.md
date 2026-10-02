@@ -4,7 +4,7 @@
 
 This repository owns the `askr-html` native Quarto HTML extension and its local
 gallery. Askr is the reading page: measure, type, citations, and callouts.
-Quiet Quartz remains the visual theme name. The **0.4.0 release** targets
+Quiet Quartz remains the visual theme name. The **0.4.1 release** targets
 Quarto 1.10.18. The public format is `askr-html`. Visual semantics remain
 CONVERGING until explicit Human
 acceptance; a version number, merge, or tag does not establish semantic

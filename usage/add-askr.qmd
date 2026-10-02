@@ -2,11 +2,11 @@
 title: "Add Askr"
 ---
 
-`0.4.0` is the current release. The public format is `askr-html`. Quiet Quartz
+`0.4.1` is the current release. The public format is `askr-html`. Quiet Quartz
 is the visual theme.
 
 ```bash
-quarto add arfiligol/askr@v0.4.0
+quarto add arfiligol/askr@v0.4.1
 ```
 
 ```yaml
