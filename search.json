@@ -1,68 +1,35 @@
 [
   {
-    "objectID": "install.html",
-    "href": "install.html",
-    "title": "Install, customize, and update",
+    "objectID": "usage/versions.html",
+    "href": "usage/versions.html",
+    "title": "Versioning Docs",
     "section": "",
-    "text": "0.3.0 is the current release. Askr’s public format is askr-html. Quarto’s GitHub installer resolves tags and branches; a commit SHA is not a supported @ modifier.\nquarto add arfiligol/askr@v0.3.0\nThen select the format in a consumer _quarto.yml:\nformat:\n  askr-html:\n    toc: true\n    code-copy: true\nThe installed copy belongs under the consumer’s tracked _extensions folder, at _extensions/arfiligol/askr. Askr does not fetch fonts, icons, or styles from a CDN.",
+    "text": "Each version is one rendered site, kept in its own directory. The latest render is also copied to /. Older directories stay as they were.\n/                         current release\n/v0.3/                    render of tag v0.3.0\n/v0.2/                    render of tag v0.2.0\n/askr-versions.json       the only version list\n/askr-versions.json:\n{\n  \"mode\": \"inline\",\n  \"versions\": [\n    {\"label\": \"0.3\", \"root\": \"/\", \"latest\": true},\n    {\"label\": \"0.2\", \"root\": \"/v0.2/\"}\n  ]\n}\ninline prints the version on a short title, as in Askr  0.3. title is for a long name: the header shows the name and a chevron, and the version number appears only in the menu. This gallery’s long-name specimen is Versioning Docs with a long title.\nPublishing a new release:\n\nRender the tag you are freezing.\nPut that _site in /v0.4/.\nCopy the same files to /.\nAdd 0.4 to /askr-versions.json.\n\nLeave /v0.2/ and /v0.3/ untouched. Their pages, Page Lists, and Areas stay the text of that tag.\nThe menu keeps the current path. From /v0.3/reference/api.html, choosing 0.2 opens /v0.2/reference/api.html.\nAskr does not invent that missing page. The project adds a 404.qmd. When the path contains a version directory, the page sends the reader to that version’s home. This still works when the site is published under a repository prefix such as /askr/:\n&lt;script&gt;\nvar path = location.pathname;\nvar version = path.match(/(\\/v[^/]+)\\//);\nif (version) location.replace(path.slice(0, version.index) + version[1] + \"/\");\n&lt;/script&gt;\nThis gallery has that page. Version 0.2 is only its home. Open this Versioning Docs page, then choose 0.2: that page is not in 0.2, so you land on the 0.2 home. longTitle in this gallery’s JSON is only for the long-name specimen above. A project omits it.",
     "crumbs": [
-      "Install",
-      "Install, customize, and update"
+      "Usage",
+      "Versioning Docs"
     ]
   },
   {
-    "objectID": "install.html#install-the-release",
-    "href": "install.html#install-the-release",
-    "title": "Install, customize, and update",
+    "objectID": "usage/add-askr.html",
+    "href": "usage/add-askr.html",
+    "title": "Add Askr",
     "section": "",
-    "text": "0.3.0 is the current release. Askr’s public format is askr-html. Quarto’s GitHub installer resolves tags and branches; a commit SHA is not a supported @ modifier.\nquarto add arfiligol/askr@v0.3.0\nThen select the format in a consumer _quarto.yml:\nformat:\n  askr-html:\n    toc: true\n    code-copy: true\nThe installed copy belongs under the consumer’s tracked _extensions folder, at _extensions/arfiligol/askr. Askr does not fetch fonts, icons, or styles from a CDN.",
+    "text": "0.4.0 is the current release. The public format is askr-html. Quiet Quartz is the visual theme.\nquarto add arfiligol/askr@v0.4.0\nproject:\n  type: website\n\nwebsite:\n  title: Project Name\n  site-url: https://example.github.io/project/\n\nformat:\n  askr-html:\n    toc: true\n    toc-title: Sections\n    toc-location: right\nThe installed copy lives at _extensions/arfiligol/askr. Askr does not fetch fonts, icons, or styles from a CDN.\nTo move to a newer tag, install that tag and render the project again. Commit the updated _extensions copy. Reinstall a reviewed tag instead of editing files inside _extensions/arfiligol/askr.",
     "crumbs": [
-      "Install",
-      "Install, customize, and update"
+      "Usage",
+      "Add Askr"
     ]
   },
   {
-    "objectID": "install.html#override-tokens-in-the-consumer",
-    "href": "install.html#override-tokens-in-the-consumer",
-    "title": "Install, customize, and update",
-    "section": "Override tokens in the consumer",
-    "text": "Override tokens in the consumer\nCreate a consumer-owned Sass file, for example styles.scss, and list it after the format theme. This preserves one Askr token authority while making the consumer’s explicit final override visible:\nformat:\n  askr-html:\n    theme:\n      light: [default, _extensions/arfiligol/askr/qdk.scss, styles.scss]\n      dark: [default, _extensions/arfiligol/askr/qdk.scss, _extensions/arfiligol/askr/qdk-dark.scss, styles.scss]\n/* Consumer-owned final override: change only a declared Askr token. */\n/*-- scss:rules --*/\n:root { --qdk-link: #2D5E85; }\nRender the consumer and inspect the resulting CSS to verify its final token value. Do not edit a copy inside _extensions/arfiligol/askr; reinstall the reviewed tag instead.",
+    "objectID": "usage/figures.html",
+    "href": "usage/figures.html",
+    "title": "Figures that follow the toggle",
+    "section": "",
+    "text": "A cell can emit a light output and a dark output. Put the light output first:\n#| renderings: [light, dark]\nWith askr-html and theme-toggle, the dark stylesheet carries data-mode=\"dark\", and the toggle adds quarto-dark to body. The Figures page renders a pair of swatches this way.",
     "crumbs": [
-      "Install",
-      "Install, customize, and update"
-    ]
-  },
-  {
-    "objectID": "install.html#update",
-    "href": "install.html#update",
-    "title": "Install, customize, and update",
-    "section": "Update",
-    "text": "Update\nChoose a new version tag only after reviewing its provenance and rendering the consumer. Replace the installed extension through quarto add with that tag, commit the resulting _extensions change in the consumer, and repeat its own validation. The installed directory and its checked-in content are the consumer’s dependency pin.",
-    "crumbs": [
-      "Install",
-      "Install, customize, and update"
-    ]
-  },
-  {
-    "objectID": "install.html#search",
-    "href": "install.html#search",
-    "title": "Install, customize, and update",
-    "section": "Search",
-    "text": "Search\nAskr styles Quarto’s overlay search. It does not add another index. Turn the control on in the consumer website:\nwebsite:\n  search:\n    location: navbar\n    type: overlay\nAt 1280px and wider the button sits on the right, immediately left of the theme toggle, and the header stays one row. Below that width it moves to the left so the right side of the bar does not wrap.",
-    "crumbs": [
-      "Install",
-      "Install, customize, and update"
-    ]
-  },
-  {
-    "objectID": "install.html#figures-that-follow-the-toggle",
-    "href": "install.html#figures-that-follow-the-toggle",
-    "title": "Install, customize, and update",
-    "section": "Figures that follow the toggle",
-    "text": "Figures that follow the toggle\nA cell can emit a light output and a dark output. Quarto shows the one that matches body.quarto-dark. Put the light output first:\n#| renderings: [light, dark]\nDraw or display the light figure, then the dark figure. With askr-html and theme-toggle, the dark stylesheet carries data-mode=\"dark\", and the toggle adds quarto-dark to body. Do not set data-mode from the page. The Figures page in this gallery renders a pair of swatches this way.",
-    "crumbs": [
-      "Install",
-      "Install, customize, and update"
+      "Usage",
+      "Figures that follow the toggle"
     ]
   },
   {
@@ -147,7 +114,7 @@
     "href": "gallery/layout.html#areas",
     "title": "Layout",
     "section": "Areas",
-    "text": "Areas\nThe header items are Areas: Gallery, Components, Install, Credits, and Long list. Choosing an Area switches the Page List. An Area is not a heading inside a page, and it is not repeated as a row of the same pages on the left.",
+    "text": "Areas\nThe header items are Areas: Gallery, Components, Usage, Credits, and Long list. Choosing an Area switches the Page List. An Area is not a heading inside a page, and it is not repeated as a row of the same pages on the left.",
     "crumbs": [
       "Gallery",
       "Layout"
@@ -670,7 +637,7 @@
     "href": "gallery/rhythm.html",
     "title": "Reading rhythm",
     "section": "",
-    "text": "This page is a Gallery section. It is listed on the left, not in the header.\nThe header stays on Gallery, Components, Install, and Credits. The left list is only the reading samples that belong to Gallery.\nSource Sans 3 carries the paragraph. The measure stays the same 630px column used on the overview, so a section page and its parent share one reading width.",
+    "text": "This page is a Gallery section. It is listed on the left, not in the header.\nThe header stays on Gallery, Components, Usage, and Credits. The left list is only the reading samples that belong to Gallery.\nSource Sans 3 carries the paragraph. The measure stays the same 630px column used on the overview, so a section page and its parent share one reading width.",
     "crumbs": [
       "Gallery",
       "Rhythm"
@@ -736,7 +703,7 @@
     "href": "index.html#a-reading-sample",
     "title": "Askr",
     "section": "A reading sample",
-    "text": "A reading sample\n\nKeep the page quiet\nA design system for documents should make dense evidence easier to read without asking every author to become a frontend specialist. The useful unit is not a hero banner but a paragraph, a source cell, a careful note, and the space between them.\nCJK fallback for body text is on the CJK specimen page.\nSee Components for authoring source and edge cases, then Install for the bounded consumer interface.",
+    "text": "A reading sample\n\nKeep the page quiet\nA design system for documents should make dense evidence easier to read without asking every author to become a frontend specialist. The useful unit is not a hero banner but a paragraph, a source cell, a careful note, and the space between them.\nCJK fallback for body text is on the CJK specimen page.\nSee Components for authoring source and edge cases, then Usage for how a project sets up Askr.",
     "crumbs": [
       "Gallery",
       "Overview"
@@ -1602,14 +1569,14 @@
     "href": "PLAN.html",
     "title": "Askr release plan",
     "section": "",
-    "text": "This repository owns the askr-html native Quarto HTML extension and its local gallery. Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz remains the visual theme name. The 0.3.0 release targets Quarto 1.10.18. The public format is askr-html. Visual semantics remain CONVERGING until explicit Human acceptance; a version number, merge, or tag does not establish semantic stabilization or deployment.\n\n\n\nThe extension is self-contained at _extensions/askr and exposes one public format name: askr-html. Its token authority is qdk.scss: documented Quarto Sass variables own color, type, callout color, code, navbar, sidebar, and grid widths, and scss:rules applies the remaining Quartz-derived visuals without importing a Quartz runtime. Schibsted Grotesk (400/700) owns titles and navigation UI; Source Sans 3 (400/600 plus italic) is the locally pinned Source Sans Pro successor used for body text; IBM Plex Mono owns code. Consumers own content, IA, execution, math engine, viewer behavior, privacy, data, and navigation choices. The gallery at this repository root is the source-backed evaluation surface. The shared token authority distinguishes content dividers from quieter layout dividers in each native theme; manual Markdown --- is the opt-in content divider, while sidebar and navigation boundaries use the layout token. Askr is a reusable design-system candidate for direct SCQ-repository adoption. Its layout contract is the theme variables $grid-sidebar-width and $grid-margin-width at 264px, $grid-body-width and $grid-docked-body-width at 630px, and $grid-column-gutter-width at 26px. The root font size is 18px. $sidebar-border is false. One scss:rules track list restates the docked grid from those variables so the 630px measure stays centered; Quarto’s own formula would add 200px to the body and leave the spare space in a right-hand 5fr column. That track rule is the residual coupling to Quarto’s grid line names.\n\n\n\nThe candidate supplies local fonts/icons, Quartz-on-Quarto light and dark tokens, accessible focus, and native Quarto callout styling. It does not replace Quarto collapse, navigation, highlighting, copying, execution, or rendering runtimes. If the extension cannot be resolved by Quarto, a consumer must fix its extension reference; it must not silently fall back to a remotely hosted asset or a Quartz runtime. Callout type determines color independent of nesting depth. The five Quarto-native types are reproduced within their DOM boundary; Quartz’s additional twelve-family showcase/aliases are not exposed because doing so would require a new authoring syntax transformer or public contract.\n\n\n\nNo tests are written while this scope is CONVERGING. A merge from develop into main renders this gallery and publishes it to GitHub Pages. Askr does not deploy a consumer’s site. It also does not provide analytics, a separate search engine, graphs, backlinks, hover previews, robots, emoji, consumer APIs, or scientific execution policy. The theme styles Quarto’s native overlay search. A website turns that control on with search.location: navbar and search.type: overlay. This gallery does that.\n\n\n\nRender this gallery and a clean consumer that installs the reviewed version tag, including a documented Sass override. Inspect desktop/mobile and light/dark native Quarto behavior, focus, overflow, callout nesting/collapse, navigation, TOC and code-copy. Record factual outcomes in VALIDATION.md; those findings are not Human acceptance gates.\n\n\n\nBefore a final candidate review, inspect the native Quarto surface in this order: Callout geometry/rhythm (including nested and collapsed forms), Header alignment and toggle visibility, Layout tracks with and without a TOC plus mobile, Divider hierarchy, Typography rhythm, Code surface/overflow/copy, then the combined light/dark system. This checklist is a CONVERGING review aid, not an automated test suite or acceptance gate."
+    "text": "This repository owns the askr-html native Quarto HTML extension and its local gallery. Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz remains the visual theme name. The 0.4.0 release targets Quarto 1.10.18. The public format is askr-html. Visual semantics remain CONVERGING until explicit Human acceptance; a version number, merge, or tag does not establish semantic stabilization or deployment.\n\n\n\nThe extension is self-contained at _extensions/askr and exposes one public format name: askr-html. Its token authority is qdk.scss: documented Quarto Sass variables own color, type, callout color, code, navbar, sidebar, and grid widths, and scss:rules applies the remaining Quartz-derived visuals without importing a Quartz runtime. Schibsted Grotesk (400/700) owns titles and navigation UI; Source Sans 3 (400/600 plus italic) is the locally pinned Source Sans Pro successor used for body text; IBM Plex Mono owns code. Consumers own content, IA, execution, math engine, viewer behavior, privacy, data, and navigation choices. The gallery at this repository root is the source-backed evaluation surface. The shared token authority distinguishes content dividers from quieter layout dividers in each native theme; manual Markdown --- is the opt-in content divider, while sidebar and navigation boundaries use the layout token. Askr is a reusable design-system candidate for direct SCQ-repository adoption. Its layout contract is the theme variables $grid-sidebar-width and $grid-margin-width at 264px, $grid-body-width and $grid-docked-body-width at 630px, and $grid-column-gutter-width at 26px. The root font size is 18px. $sidebar-border is false. One scss:rules track list restates the docked grid from those variables so the 630px measure stays centered; Quarto’s own formula would add 200px to the body and leave the spare space in a right-hand 5fr column. That track rule is the residual coupling to Quarto’s grid line names.\n\n\n\nThe candidate supplies local fonts/icons, Quartz-on-Quarto light and dark tokens, accessible focus, and native Quarto callout styling. It does not replace Quarto collapse, navigation, highlighting, copying, execution, or rendering runtimes. If the extension cannot be resolved by Quarto, a consumer must fix its extension reference; it must not silently fall back to a remotely hosted asset or a Quartz runtime. Callout type determines color independent of nesting depth. The five Quarto-native types are reproduced within their DOM boundary; Quartz’s additional twelve-family showcase/aliases are not exposed because doing so would require a new authoring syntax transformer or public contract.\n\n\n\nNo tests are written while this scope is CONVERGING. A merge from develop into main renders this gallery and publishes it to GitHub Pages. Askr does not deploy a consumer’s site. It also does not provide analytics, a separate search engine, graphs, backlinks, hover previews, robots, emoji, consumer APIs, or scientific execution policy. The theme styles Quarto’s native overlay search. A website turns that control on with search.location: navbar and search.type: overlay. This gallery does that.\n\n\n\nRender this gallery and a clean consumer that installs the reviewed version tag, including a documented Sass override. Inspect desktop/mobile and light/dark native Quarto behavior, focus, overflow, callout nesting/collapse, navigation, TOC and code-copy. Record factual outcomes in VALIDATION.md; those findings are not Human acceptance gates.\n\n\n\nBefore a final candidate review, inspect the native Quarto surface in this order: Callout geometry/rhythm (including nested and collapsed forms), Header alignment and toggle visibility, Layout tracks with and without a TOC plus mobile, Divider hierarchy, Typography rhythm, Code surface/overflow/copy, then the combined light/dark system. This checklist is a CONVERGING review aid, not an automated test suite or acceptance gate."
   },
   {
     "objectID": "PLAN.html#goal-and-state",
     "href": "PLAN.html#goal-and-state",
     "title": "Askr release plan",
     "section": "",
-    "text": "This repository owns the askr-html native Quarto HTML extension and its local gallery. Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz remains the visual theme name. The 0.3.0 release targets Quarto 1.10.18. The public format is askr-html. Visual semantics remain CONVERGING until explicit Human acceptance; a version number, merge, or tag does not establish semantic stabilization or deployment."
+    "text": "This repository owns the askr-html native Quarto HTML extension and its local gallery. Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz remains the visual theme name. The 0.4.0 release targets Quarto 1.10.18. The public format is askr-html. Visual semantics remain CONVERGING until explicit Human acceptance; a version number, merge, or tag does not establish semantic stabilization or deployment."
   },
   {
     "objectID": "PLAN.html#ownership-and-interfaces",
@@ -1677,6 +1644,39 @@
     "crumbs": [
       "Components",
       "Overview"
+    ]
+  },
+  {
+    "objectID": "usage/search.html",
+    "href": "usage/search.html",
+    "title": "Search",
+    "section": "",
+    "text": "Search reads the index of the version you are in. Askr does not add another index, and it does not search across versions.\nwebsite:\n  search:\n    location: navbar\n    type: overlay\nAt 1280px and wider the button sits on the right, immediately left of the theme toggle, and the header stays one row. Below that width it moves to the left.\nRender each frozen version with a site-url that includes its directory, so its search.json and result links stay inside that directory:\n# the render that is published to /v0.2/\nwebsite:\n  site-url: https://example.github.io/project/v0.2/\nThe render copied to / uses the site root, without a version directory. Searching from a v0.2 page then uses /v0.2/search.json only. Version folders and the version menu are set up on Versioning Docs.",
+    "crumbs": [
+      "Usage",
+      "Search"
+    ]
+  },
+  {
+    "objectID": "usage/tokens.html",
+    "href": "usage/tokens.html",
+    "title": "Tokens",
+    "section": "",
+    "text": "Keep color and type overrides in the project, listed after Askr’s theme:\nformat:\n  askr-html:\n    theme:\n      light: [default, _extensions/arfiligol/askr/qdk.scss, styles.scss]\n      dark: [default, _extensions/arfiligol/askr/qdk.scss, _extensions/arfiligol/askr/qdk-dark.scss, styles.scss]\n/*-- scss:rules --*/\n:root { --qdk-link: #2D5E85; }\nReinstall a reviewed tag instead of editing _extensions/arfiligol/askr.",
+    "crumbs": [
+      "Usage",
+      "Tokens"
+    ]
+  },
+  {
+    "objectID": "usage/navigation.html",
+    "href": "usage/navigation.html",
+    "title": "Areas, the Page List, and Sections",
+    "section": "",
+    "text": "These are three different lists. An Area chooses which Page List is open. The Page List chooses a page. Sections are the headings of that page.\n\n\n\n\n\n\n\n\nRole\nWhere it appears\nWhat you put there\n\n\n\n\nAreas\nHeader\nOne item per group of pages\n\n\nPage List\nLeft column, titled Pages\nThe pages in the current Area\n\n\nSections\nRight column, titled Sections\nNothing. Quarto lists the current page’s headings\n\n\n\nwebsite:\n  navbar:\n    left:\n      - href: index.qmd\n        text: Guide\n      - href: reference.qmd\n        text: Reference\n  sidebar:\n    - title: Pages\n      style: docked\n      contents:\n        - text: Overview\n          href: index.qmd\n        - text: Measure\n          href: guide/measure.qmd\n    - title: Pages\n      style: docked\n      contents:\n        - text: Overview\n          href: reference.qmd\n        - text: API\n          href: reference/api.qmd\nOpening Guide shows the first Page List. Opening Reference shows the second. toc-title: Sections and toc-location: right make the right column. A heading belongs only in Sections, not in the Page List, and not as another Area.\nPages in one Area share a purpose. This Usage area is that kind of split: Add Askr, this page, Versioning Docs, and Search are separate pages because each one is a different job.\nThis gallery’s Areas are Gallery, Components, Usage, Credits, and Long list. The reading of that split is on the Layout page.",
+    "crumbs": [
+      "Usage",
+      "Areas, the Page List, and Sections"
     ]
   }
 ]
