@@ -1,0 +1,32 @@
+---
+title: "Add Askr"
+---
+
+`0.4.0` is the current release. The public format is `askr-html`. Quiet Quartz
+is the visual theme.
+
+```bash
+quarto add arfiligol/askr@v0.4.0
+```
+
+```yaml
+project:
+  type: website
+
+website:
+  title: Project Name
+  site-url: https://example.github.io/project/
+
+format:
+  askr-html:
+    toc: true
+    toc-title: Sections
+    toc-location: right
+```
+
+The installed copy lives at `_extensions/arfiligol/askr`. Askr does not fetch
+fonts, icons, or styles from a CDN.
+
+To move to a newer tag, install that tag and render the project again. Commit
+the updated `_extensions` copy. Reinstall a reviewed tag instead of editing
+files inside `_extensions/arfiligol/askr`.

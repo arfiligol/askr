@@ -1,0 +1,10 @@
+---
+title: "Askr 0.2"
+search: false
+---
+
+This is the 0.2 reading set. It has a home page and does not include
+Versioning Docs, Search, or the other pages added later.
+
+Choosing 0.3 from the title returns to the current docs. Choosing 0.2 from a
+page this set does not have sends you here.

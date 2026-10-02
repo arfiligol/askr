@@ -1,0 +1,13 @@
+---
+title: "Not in this version"
+---
+
+This page is not in this version.
+
+```{=html}
+<script>
+var path = location.pathname;
+var version = path.match(/(\/v[^/]+)\//);
+if (version) location.replace(path.slice(0, version.index) + version[1] + "/");
+</script>
+```

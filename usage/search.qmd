@@ -1,0 +1,30 @@
+---
+title: "Search"
+---
+
+Search reads the index of the version you are in. Askr does not add another
+index, and it does not search across versions.
+
+```yaml
+website:
+  search:
+    location: navbar
+    type: overlay
+```
+
+At 1280px and wider the button sits on the right, immediately left of the
+theme toggle, and the header stays one row. Below that width it moves to the
+left.
+
+Render each frozen version with a `site-url` that includes its directory, so
+its `search.json` and result links stay inside that directory:
+
+```yaml
+# the render that is published to /v0.2/
+website:
+  site-url: https://example.github.io/project/v0.2/
+```
+
+The render copied to `/` uses the site root, without a version directory.
+Searching from a v0.2 page then uses `/v0.2/search.json` only. Version folders
+and the version menu are set up on [Versioning Docs](versions.qmd).

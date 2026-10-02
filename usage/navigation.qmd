@@ -1,0 +1,48 @@
+---
+title: "Areas, the Page List, and Sections"
+---
+
+These are three different lists. An Area chooses which Page List is open. The
+Page List chooses a page. Sections are the headings of that page.
+
+| Role | Where it appears | What you put there |
+| --- | --- | --- |
+| Areas | Header | One item per group of pages |
+| Page List | Left column, titled Pages | The pages in the current Area |
+| Sections | Right column, titled Sections | Nothing. Quarto lists the current page's headings |
+
+```yaml
+website:
+  navbar:
+    left:
+      - href: index.qmd
+        text: Guide
+      - href: reference.qmd
+        text: Reference
+  sidebar:
+    - title: Pages
+      style: docked
+      contents:
+        - text: Overview
+          href: index.qmd
+        - text: Measure
+          href: guide/measure.qmd
+    - title: Pages
+      style: docked
+      contents:
+        - text: Overview
+          href: reference.qmd
+        - text: API
+          href: reference/api.qmd
+```
+
+Opening Guide shows the first Page List. Opening Reference shows the second.
+`toc-title: Sections` and `toc-location: right` make the right column. A
+heading belongs only in Sections, not in the Page List, and not as another Area.
+
+Pages in one Area share a purpose. This Usage area is that kind of split: Add
+Askr, this page, Versioning Docs, and Search are separate pages because each
+one is a different job.
+
+This gallery's Areas are Gallery, Components, Usage, Credits, and Long list.
+The reading of that split is on the [Layout](../gallery/layout.qmd) page.
