@@ -1,17 +1,17 @@
 # Askr
 
 Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz
-remains the name of the visual theme. `0.3.0` is the current release, validated
+remains the name of the visual theme. `0.4.0` is the current release, validated
 with Quarto 1.10.18. The public format is `askr-html`. The visual contract
 remains CONVERGING until explicitly accepted.
 
 ## Install
 
-Install the reviewed release tag `v0.3.0`. Quarto's GitHub installer accepts
+Install the reviewed release tag `v0.4.0`. Quarto's GitHub installer accepts
 branch and tag names, not commit SHA modifiers.
 
 ```bash
-quarto add arfiligol/askr@v0.3.0
+quarto add arfiligol/askr@v0.4.0
 ```
 
 ```yaml

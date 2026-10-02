@@ -1,0 +1,61 @@
+---
+title: "Versioning Docs"
+---
+
+Each version is one rendered site, kept in its own directory. The latest
+render is also copied to `/`. Older directories stay as they were.
+
+```text
+/                         current release
+/v0.3/                    render of tag v0.3.0
+/v0.2/                    render of tag v0.2.0
+/askr-versions.json       the only version list
+```
+
+`/askr-versions.json`:
+
+```json
+{
+  "mode": "inline",
+  "versions": [
+    {"label": "0.3", "root": "/", "latest": true},
+    {"label": "0.2", "root": "/v0.2/"}
+  ]
+}
+```
+
+`inline` prints the version on a short title, as in `Askr  0.3`. `title` is
+for a long name: the header shows the name and a chevron, and the version
+number appears only in the menu. This gallery's long-name specimen is
+[Versioning Docs with a long title](/usage/versions.html?askr-version-mode=title).
+
+Publishing a new release:
+
+1. Render the tag you are freezing.
+2. Put that `_site` in `/v0.4/`.
+3. Copy the same files to `/`.
+4. Add `0.4` to `/askr-versions.json`.
+
+Leave `/v0.2/` and `/v0.3/` untouched. Their pages, Page Lists, and Areas stay
+the text of that tag.
+
+The menu keeps the current path. From `/v0.3/reference/api.html`, choosing 0.2
+opens `/v0.2/reference/api.html`.
+
+Askr does not invent that missing page. The project adds a `404.qmd`. When the
+path contains a version directory, the page sends the reader to that version's
+home. This still works when the site is published under a repository prefix
+such as `/askr/`:
+
+```html
+<script>
+var path = location.pathname;
+var version = path.match(/(\/v[^/]+)\//);
+if (version) location.replace(path.slice(0, version.index) + version[1] + "/");
+</script>
+```
+
+This gallery has that page. Version 0.2 is only [its home](/v0.2/). Open this
+Versioning Docs page, then choose 0.2: that page is not in 0.2, so you land on
+the 0.2 home. `longTitle` in this gallery's JSON is only for the long-name
+specimen above. A project omits it.

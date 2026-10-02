@@ -1,0 +1,20 @@
+---
+title: "Tokens"
+---
+
+Keep color and type overrides in the project, listed after Askr's theme:
+
+```yaml
+format:
+  askr-html:
+    theme:
+      light: [default, _extensions/arfiligol/askr/qdk.scss, styles.scss]
+      dark: [default, _extensions/arfiligol/askr/qdk.scss, _extensions/arfiligol/askr/qdk-dark.scss, styles.scss]
+```
+
+```scss
+/*-- scss:rules --*/
+:root { --qdk-link: #2D5E85; }
+```
+
+Reinstall a reviewed tag instead of editing `_extensions/arfiligol/askr`.

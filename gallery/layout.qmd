@@ -7,7 +7,7 @@ three navigation roles used on these pages.
 
 ## Areas
 
-The header items are Areas: Gallery, Components, Install, Credits, and Long
+The header items are Areas: Gallery, Components, Usage, Credits, and Long
 list. Choosing an Area switches the Page List. An Area is not a heading
 inside a page, and it is not repeated as a row of the same pages on the left.
 

@@ -53,4 +53,4 @@ between them.
 CJK fallback for body text is on the [CJK specimen](gallery/cjk.qmd) page.
 
 See [Components](components.qmd) for authoring source and edge cases, then
-[Install](install.qmd) for the bounded consumer interface.
+[Usage](usage/add-askr.qmd) for how a project sets up Askr.

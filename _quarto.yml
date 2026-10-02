@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: _site
+  resources:
+    - askr-versions.json
 
 website:
   title: Askr
@@ -14,8 +16,8 @@ website:
         text: Gallery
       - href: components.qmd
         text: Components
-      - href: install.qmd
-        text: Install
+      - href: usage/add-askr.qmd
+        text: Usage
       - href: credits.qmd
         text: Credits
       - href: gallery/long-list.qmd
@@ -61,13 +63,23 @@ website:
           href: components/figures.qmd
         - text: "Saved notebook output"
           href: notebook-output.qmd
-    - id: install
+    - id: usage
       title: "Pages"
       style: docked
       collapse-level: 2
       contents:
-        - text: "Install, customize, and update"
-          href: install.qmd
+        - text: "Add Askr"
+          href: usage/add-askr.qmd
+        - text: "Areas, the Page List, and Sections"
+          href: usage/navigation.qmd
+        - text: "Versioning Docs"
+          href: usage/versions.qmd
+        - text: "Search"
+          href: usage/search.qmd
+        - text: "Tokens"
+          href: usage/tokens.qmd
+        - text: "Figures that follow the toggle"
+          href: usage/figures.qmd
     - id: long-list
       title: "Pages"
       style: docked
@@ -293,6 +305,9 @@ website:
 
 format:
   askr-html:
+    include-in-header:
+      - _extensions/askr/theme-color.html
+      - gallery-versions.html
     theme:
       light: [default, _extensions/askr/qdk.scss, gallery-assets.scss]
       dark: [default, _extensions/askr/qdk.scss, _extensions/askr/qdk-dark.scss, gallery-assets.scss]

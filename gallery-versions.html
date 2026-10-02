@@ -1,0 +1,30 @@
+<script id="askr-versions" type="application/json">
+{
+  "mode": "inline",
+  "longTitle": "Interferometric Purcell Filter",
+  "versions": [
+    {"label": "0.3", "href": "/?askr-version=0.3", "latest": true},
+    {"label": "0.2", "href": "/?askr-version=0.2"}
+  ]
+}
+</script>
+<script>
+document.addEventListener("click", function (event) {
+  var link = event.target.closest && event.target.closest(".askr-version-menu a");
+  if (!link) return;
+  var href = link.getAttribute("href");
+  if (!href) return;
+  event.preventDefault();
+  fetch(href).then(function (response) {
+    if (response.status !== 404) {
+      location.assign(href);
+      return;
+    }
+    var path = new URL(href, location.origin).pathname;
+    var version = path.match(/(\/v[^/]+)\//);
+    location.assign(version ? path.slice(0, version.index) + version[1] + "/" : href);
+  }).catch(function () {
+    location.assign(href);
+  });
+});
+</script>
