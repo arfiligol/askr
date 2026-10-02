@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Askr 0.2 – Askr</title>
+<title>validation – Askr</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,30 +26,65 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-079a207a29a081ff57bef15430bac181.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-d03052f407e1cf5fb44fa57d9e188bec.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-53b835d9a1443a4c8c527116f3d0e1ce.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-d03052f407e1cf5fb44fa57d9e188bec.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-079a207a29a081ff57bef15430bac181.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-fc6edc1b58ca177d2e7562e3afaadaab.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-2ebdba8be9c36dfe09b504813a369740.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-fc6edc1b58ca177d2e7562e3afaadaab.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -285,40 +320,29 @@ ul.task-list li input[type="checkbox"] {
     root.appendChild(button);
     root.appendChild(menu);
     slot.appendChild(root);
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest && event.target.closest(".askr-version-menu a");
+      if (!link || !root.contains(link)) return;
+      var href = link.getAttribute("href");
+      if (!href) return;
+      event.preventDefault();
+      fetch(href).then(function (response) {
+        if (response.status !== 404) {
+          location.assign(href);
+          return;
+        }
+        var target = new URL(href, location.origin).pathname;
+        var version = target.match(/(\/v[^/]+)\//);
+        if (version) location.assign(target.slice(0, version.index) + version[1] + "/");
+        else location.assign(target.indexOf("/askr/") === 0 ? "/askr/" : "/");
+      }).catch(function () {
+        location.assign(href);
+      });
+    });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", menus);
   else menus();
 })();
-</script>
-<script id="askr-versions" type="application/json">
-{
-  "mode": "inline",
-  "longTitle": "Interferometric Purcell Filter",
-  "versions": [
-    {"label": "0.3", "href": "/?askr-version=0.3", "latest": true},
-    {"label": "0.2", "href": "/?askr-version=0.2"}
-  ]
-}
-</script>
-<script>
-document.addEventListener("click", function (event) {
-  var link = event.target.closest && event.target.closest(".askr-version-menu a");
-  if (!link) return;
-  var href = link.getAttribute("href");
-  if (!href) return;
-  event.preventDefault();
-  fetch(href).then(function (response) {
-    if (response.status !== 404) {
-      location.assign(href);
-      return;
-    }
-    var path = new URL(href, location.origin).pathname;
-    var version = path.match(/(\/v[^/]+)\//);
-    location.assign(version ? path.slice(0, version.index) + version[1] + "/" : href);
-  }).catch(function () {
-    location.assign(href);
-  });
-});
 </script>
 
 
@@ -493,7 +517,7 @@ document.addEventListener("click", function (event) {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Askr</span>
     </a>
   </div>
@@ -504,23 +528,23 @@ document.addEventListener("click", function (event) {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Gallery</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../components.html"> 
+    <a class="nav-link" href="./components.html"> 
 <span class="menu-text">Components</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../usage/add-askr.html"> 
-<span class="menu-text">Usage</span></a>
+    <a class="nav-link" href="./install.html"> 
+<span class="menu-text">Install</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../credits.html"> 
+    <a class="nav-link" href="./credits.html"> 
 <span class="menu-text">Credits</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../gallery/long-list.html"> 
+    <a class="nav-link" href="./gallery/long-list.html"> 
 <span class="menu-text">Long list</span></a>
   </li>  
 </ul>
@@ -535,36 +559,66 @@ document.addEventListener("click", function (event) {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sections</h2>
+   
+  <ul>
+  <li><a href="#candidate-validation-receipt" id="toc-candidate-validation-receipt" class="nav-link active" data-scroll-target="#candidate-validation-receipt">Candidate validation receipt</a>
+  <ul class="collapse">
+  <li><a href="#toolchain-and-scope" id="toc-toolchain-and-scope" class="nav-link" data-scroll-target="#toolchain-and-scope">Toolchain and scope</a></li>
+  <li><a href="#commands-and-factual-results" id="toc-commands-and-factual-results" class="nav-link" data-scroll-target="#commands-and-factual-results">Commands and factual results</a></li>
+  <li><a href="#pending-manual-inspection" id="toc-pending-manual-inspection" class="nav-link" data-scroll-target="#pending-manual-inspection">Pending manual inspection</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Askr 0.2</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
 
 
-</header>
+<section id="candidate-validation-receipt" class="level1">
+<h1>Candidate validation receipt</h1>
+<p>Date: 2026-09-23. Semantic state: <strong>CONVERGING</strong>. These observations are technical evidence, not Human acceptance thresholds or visual acceptance.</p>
+<section id="toolchain-and-scope" class="level2">
+<h2 class="anchored" data-anchor-id="toolchain-and-scope">Toolchain and scope</h2>
+<ul>
+<li>Quarto <code>1.10.18</code> rendered the local gallery.</li>
+<li>A temporary, isolated Python 3.13 virtual environment supplied Jupyter only for local gallery validation; it is not a repository or extension dependency.</li>
+<li><code>notebooks/simple-output.ipynb</code> was executed by <code>jupyter nbconvert --execute --inplace</code>; its saved output is <code>Saved notebook output: [3, 5, 8] -&gt; 16</code>.</li>
+<li>No durable tests, CI configuration, release artifacts, or deployment files were added.</li>
+</ul>
+</section>
+<section id="commands-and-factual-results" class="level2">
+<h2 class="anchored" data-anchor-id="commands-and-factual-results">Commands and factual results</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">PATH</span><span class="op">=</span>/tmp/qdk-render-venv/bin:<span class="va">$PATH</span> <span class="ex">quarto</span> render .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Succeeded: all gallery pages rendered, including executed <code>notebook-output.qmd</code>; <code>_site/index.html</code> contains <code>#mobile-callout-inspection-target</code> and the rendered output contains the saved notebook result.</p>
+<p>The Human-selected Quartz-on-Quarto revision also rendered successfully with the same command: compiled light/dark styles contain the Quartz token values, and the gallery ships local Schibsted Grotesk 400/700 alongside Source Sans 3 body and IBM Plex Mono code faces.</p>
+<p>After browser review identified Quarto default-callout specificity leakage, the candidate was rerendered with <code>.callout.callout-style-*</code> shell overrides: compiled CSS confirms the uniform 1px semantic-alpha border, 6.3% semantic shell fill, transparent header, 5px radius, 1rem horizontal shell padding, and Quartz warning <code>#db8942</code>. A browser surface was unavailable to this worker for a replacement screenshot; owner browser review remains the visual receipt.</p>
+<p>The gallery’s native titleless/iconless simple callout now renders as <code>title=""</code> plus Quarto’s <code>no-icon</code> DOM class, with no title container; Askr explicitly hides that native no-icon container. Dark navigation surfaces now resolve through <code>--qdk-canvas</code> and <code>--qdk-border</code>; clean-consumer installation and Sass override rendering were rerun successfully.</p>
+<p>Nested final children now receive an explicit <code>1rem</code> bottom margin through a type/appearance-specific selector. Collapsible Quarto headers use <code>.75rem</code> block padding while ordinary headers retain <code>1rem</code>; title, icon, and chevron are direct flex items with <code>align-self: center</code>. These are authored geometry values verified in compiled CSS and DOM; browser-computed light/dark geometry remains an owner-side visual receipt.</p>
+<p>The dark-theme code correction was rerendered in <code>qdk-dark.scss</code> only. Quarto switches theme stylesheets without changing the body class, so its compiled dark-only selectors are intentionally unprefixed: <code>div.sourceCode</code> and source <code>pre</code> resolve to <code>#1f1f22</code> with a <code>#393639</code> border and <code>#d4d4d4</code> plain text. Pandoc comments, keywords/operators, strings/numbers, functions, and builtins/types resolve respectively to <code>#8b949e</code>, <code>#ff7b72</code>, <code>#a5d6ff</code>, <code>#d2a8ff</code>, and <code>#79c0ff</code>. The light stylesheet has no corresponding rules, so the light code palette remains unchanged. Browser-computed values and copy-control icon pixels remain owner-side visual inspection evidence.</p>
+<p>The common code-shell rule now assigns the visible border and 5px radius to <code>div.sourceCode</code> (with <code>pre</code> retained as a standalone fallback). For Quarto’s normal nested structure, <code>div.sourceCode &gt; pre.sourceCode</code> and its direct <code>code.sourceCode</code> are explicitly transparent with zero border/radius/shadow; the dark layer applies <code>#393639</code> only to that outer wrapper. Gallery and clean consumer rendering were rerun after this correction.</p>
+<p>The common stylesheet also clears Quarto’s automatic H2 border and bottom padding (including heading pseudo-elements) without depending on the active theme. Explicit <code>hr</code> elements instead render as a 1px top border using <code>--qdk-border</code>; <code>components.qmd</code> demonstrates the opt-in native Markdown sequence of a heading, blank line, and <code>---</code>. Browser-computed confirmation in both stylesheet modes remains owner-side visual evidence.</p>
+<p>The divider hierarchy was rerendered with explicit theme tokens. Light content and layout dividers are respectively <code>rgba(43, 43, 43, .18)</code> and <code>rgba(43, 43, 43, .08)</code>; dark values are <code>rgba(212, 212, 212, .24)</code> and <code>rgba(212, 212, 212, .10)</code>. The manual <code>hr</code> uses the content token at 1px with <code>opacity: 1</code>; mobile/offcanvas inline-end boundaries stay transparent. The desktop docked sidebar no longer draws a layout-token seam, so the side columns share the article canvas.</p>
+<p>The native article-grid defaults now compile from <code>$grid-sidebar-width</code> and <code>$grid-margin-width</code> at 264px, <code>$grid-body-width</code> and <code>$grid-docked-body-width</code> at 630px, and <code>$grid-column-gutter-width</code> at 26px. <code>$sidebar-border</code> is false, so the desktop docked sidebar does not draw a layout seam. Quarto’s docked formula still widens the body by 200px and leaves spare space in a right-hand flexible column, so one <code>qdk.scss</code> rule restates the desktop docked grid from those variables: outer flexible tracks, 264px side columns, 26px gutters, and a 630px measure. <code>#quarto-document-content</code> is a 630px-or-less box with <code>justify-self: center</code> and auto inline margins, so it fills that track and stays centered between the side columns. Navbar rules center the native container and tools as flex items at desktop width; below 992px the collapse keeps Bootstrap’s hidden menu instead of a forced flex row. Links use a 1.25 line-height with <code>.25rem</code> block padding. Article list rhythm is scoped to <code>#quarto-document-content</code>, with the navbar list explicitly reset to zero block margin so Quarto navigation cannot inherit article spacing. Desktop links are <code>.9rem</code>/400 (active 600) against the <code>.98rem</code>/700 brand; mobile links are <code>.85rem</code>. The theme toggle is a 28px control that shows a sun in the light scheme and a moon in the dark scheme, both painted with <code>currentColor</code>. The callout disclosure is a centered chevron in the same color as its title. Post-change browser center/contrast measurements remain owner-side visual evidence.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add <span class="op">&lt;</span>temporary-qdk-extension.zip<span class="op">&gt;</span> --no-prompt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render .</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Succeeded in a fresh temporary consumer using <code>examples/consumer-override.yml</code>: its compiled stylesheet contains <code>--qdk-link: #2D5E85</code>; the installed extension contains <code>licenses/Askr-MIT.txt</code> and <code>assets/fonts/SourceSans3VF-Upright.ttf.woff2</code>. The Quartz revision additionally confirmed <code>assets/fonts/SchibstedGrotesk-Regular.woff2</code> and <code>licenses/Schibsted-Grotesk-OFL.txt</code>. Its rendered CSS resolves those local files relative to the installed extension; no CDN is involved.</p>
+<p>Asset SHA-256 values and immutable source URLs/revisions are recorded in <code>ASSET_MANIFEST.md</code> and <code>THIRD_PARTY.md</code>. Quarto output contains both native light/dark stylesheet alternatives and the color-scheme toggle script. The gallery now enables Quarto overlay search (<code>search.location: navbar</code>, <code>search.type: overlay</code>) and the theme styles that control. An earlier gallery receipt left search disabled and rendered no search control or <code>search.json</code>.</p>
+</section>
+<section id="pending-manual-inspection" class="level2">
+<h2 class="anchored" data-anchor-id="pending-manual-inspection">Pending manual inspection</h2>
+<p>The consolidated visual review order is Callout, Header, Layout, Divider, Typography, Code, then final light/dark system behavior. This current pass addresses Callout geometry/rhythm only; the remaining entries must be reviewed as a system after their respective candidate changes settle.</p>
+<p>Browser inspection remains required for actual desktop/mobile visual behavior, keyboard focus traversal, collapse/copy interaction, and clipping/overflow. Contrast has not been measured; no acceptance threshold is asserted. The loopback preview is <code>http://127.0.0.1:4568/</code> (Quarto preview service); a 2026-09-23 loopback <code>curl -I</code> returned <code>HTTP/1.1 200 OK</code> with the gallery title.</p>
+<p>Quartz’s full additional callout aliases remain an explicit limitation: the candidate faithfully styles Quarto’s five native types, nesting, and collapse; adding the other Quartz authoring names requires a separate public syntax transformer contract.</p>
 
 
-<p>This is the 0.2 reading set. It has a home page and does not include Versioning Docs, Search, or the other pages added later.</p>
-<p>Choosing 0.3 from the title returns to the current docs. Choosing 0.2 from a page this set does not have sends you here.</p>
-
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -653,7 +707,7 @@ document.addEventListener("click", function (event) {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/arfiligol\.github\.io\/askr\/");
+        var filterRegex = new RegExp("http:\/\/127\.0\.0\.1:4321\/v0\.3\.0\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -985,5 +1039,5 @@ document.addEventListener("click", function (event) {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

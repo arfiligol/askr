@@ -320,6 +320,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     root.appendChild(button);
     root.appendChild(menu);
     slot.appendChild(root);
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest && event.target.closest(".askr-version-menu a");
+      if (!link || !root.contains(link)) return;
+      var href = link.getAttribute("href");
+      if (!href) return;
+      event.preventDefault();
+      fetch(href).then(function (response) {
+        if (response.status !== 404) {
+          location.assign(href);
+          return;
+        }
+        var target = new URL(href, location.origin).pathname;
+        var version = target.match(/(\/v[^/]+)\//);
+        if (version) location.assign(target.slice(0, version.index) + version[1] + "/");
+        else location.assign(target.indexOf("/askr/") === 0 ? "/askr/" : "/");
+      }).catch(function () {
+        location.assign(href);
+      });
+    });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", menus);
   else menus();
@@ -330,30 +349,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "mode": "inline",
   "longTitle": "Interferometric Purcell Filter",
   "versions": [
-    {"label": "0.3", "href": "/?askr-version=0.3", "latest": true},
-    {"label": "0.2", "href": "/?askr-version=0.2"}
+    {"label": "0.4.0", "root": "/", "latest": true},
+    {"label": "0.3.0", "root": "/v0.3.0/"}
   ]
 }
-</script>
-<script>
-document.addEventListener("click", function (event) {
-  var link = event.target.closest && event.target.closest(".askr-version-menu a");
-  if (!link) return;
-  var href = link.getAttribute("href");
-  if (!href) return;
-  event.preventDefault();
-  fetch(href).then(function (response) {
-    if (response.status !== 404) {
-      location.assign(href);
-      return;
-    }
-    var path = new URL(href, location.origin).pathname;
-    var version = path.match(/(\/v[^/]+)\//);
-    location.assign(version ? path.slice(0, version.index) + version[1] + "/" : href);
-  }).catch(function () {
-    location.assign(href);
-  });
-});
 </script>
 
 
@@ -650,16 +649,15 @@ document.addEventListener("click", function (event) {
 
 
 <p>Each version is one rendered site, kept in its own directory. The latest render is also copied to <code>/</code>. Older directories stay as they were.</p>
-<pre class="text"><code>/                         current release
-/v0.3/                    render of tag v0.3.0
-/v0.2/                    render of tag v0.2.0
+<pre class="text"><code>/                         current release, 0.4.0
+/v0.3.0/                  the 0.3.0 site, kept as it was
 /askr-versions.json       the only version list</code></pre>
 <p><code>/askr-versions.json</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"mode"</span><span class="fu">:</span> <span class="st">"inline"</span><span class="fu">,</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"versions"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.3"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/"</span><span class="fu">,</span> <span class="dt">"latest"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.2"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.2/"</span><span class="fu">}</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.4.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/"</span><span class="fu">,</span> <span class="dt">"latest"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.3.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.3.0/"</span><span class="fu">}</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><code>inline</code> prints the version on a short title, as in <code>Askr  0.3</code>. <code>title</code> is for a long name: the header shows the name and a chevron, and the version number appears only in the menu. This gallery’s long-name specimen is <a href="../usage/versions.html?askr-version-mode=title">Versioning Docs with a long title</a>.</p>
@@ -670,15 +668,16 @@ document.addEventListener("click", function (event) {
 <li>Copy the same files to <code>/</code>.</li>
 <li>Add <code>0.4</code> to <code>/askr-versions.json</code>.</li>
 </ol>
-<p>Leave <code>/v0.2/</code> and <code>/v0.3/</code> untouched. Their pages, Page Lists, and Areas stay the text of that tag.</p>
-<p>The menu keeps the current path. From <code>/v0.3/reference/api.html</code>, choosing 0.2 opens <code>/v0.2/reference/api.html</code>.</p>
+<p>Leave <code>/v0.3.0/</code> untouched when a newer release is published. Its pages, Page List, and Areas stay the text of that tag. In this gallery, 0.3.0 still has Install. It does not have Usage.</p>
+<p>The menu keeps the current path. From <code>/usage/versions.html</code>, choosing 0.3.0 opens <code>/v0.3.0/usage/versions.html</code>. That page does not exist in 0.3.0.</p>
 <p>Askr does not invent that missing page. The project adds a <code>404.qmd</code>. When the path contains a version directory, the page sends the reader to that version’s home. This still works when the site is published under a repository prefix such as <code>/askr/</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">script</span><span class="dt">&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> path <span class="op">=</span> location<span class="op">.</span><span class="at">pathname</span><span class="op">;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> version <span class="op">=</span> path<span class="op">.</span><span class="fu">match</span>(<span class="ss">/</span><span class="sc">(\/</span><span class="ss">v</span><span class="sc">[^/]+)\/</span><span class="ss">/</span>)<span class="op">;</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (version) location<span class="op">.</span><span class="fu">replace</span>(path<span class="op">.</span><span class="fu">slice</span>(<span class="dv">0</span><span class="op">,</span> version<span class="op">.</span><span class="at">index</span>) <span class="op">+</span> version[<span class="dv">1</span>] <span class="op">+</span> <span class="st">"/"</span>)<span class="op">;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This gallery has that page. Version 0.2 is only <a href="../v0.2/">its home</a>. Open this Versioning Docs page, then choose 0.2: that page is not in 0.2, so you land on the 0.2 home. <code>longTitle</code> in this gallery’s JSON is only for the long-name specimen above. A project omits it.</p>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> location<span class="op">.</span><span class="fu">replace</span>(<span class="st">"/"</span>)<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This gallery’s menu is 0.4.0 and 0.3.0. Version 0.3.0 is only <a href="../v0.3.0/">its home</a>. Open this Versioning Docs page, then choose 0.3.0: that page is not in 0.3.0, so you land on the 0.3.0 home. <code>longTitle</code> in this gallery’s JSON is only for the long-name specimen above. A project omits it.</p>
 
 
 

@@ -304,6 +304,25 @@ div.csl-indent {
     root.appendChild(button);
     root.appendChild(menu);
     slot.appendChild(root);
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest && event.target.closest(".askr-version-menu a");
+      if (!link || !root.contains(link)) return;
+      var href = link.getAttribute("href");
+      if (!href) return;
+      event.preventDefault();
+      fetch(href).then(function (response) {
+        if (response.status !== 404) {
+          location.assign(href);
+          return;
+        }
+        var target = new URL(href, location.origin).pathname;
+        var version = target.match(/(\/v[^/]+)\//);
+        if (version) location.assign(target.slice(0, version.index) + version[1] + "/");
+        else location.assign(target.indexOf("/askr/") === 0 ? "/askr/" : "/");
+      }).catch(function () {
+        location.assign(href);
+      });
+    });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", menus);
   else menus();
@@ -314,30 +333,10 @@ div.csl-indent {
   "mode": "inline",
   "longTitle": "Interferometric Purcell Filter",
   "versions": [
-    {"label": "0.3", "href": "/?askr-version=0.3", "latest": true},
-    {"label": "0.2", "href": "/?askr-version=0.2"}
+    {"label": "0.4.0", "root": "/", "latest": true},
+    {"label": "0.3.0", "root": "/v0.3.0/"}
   ]
 }
-</script>
-<script>
-document.addEventListener("click", function (event) {
-  var link = event.target.closest && event.target.closest(".askr-version-menu a");
-  if (!link) return;
-  var href = link.getAttribute("href");
-  if (!href) return;
-  event.preventDefault();
-  fetch(href).then(function (response) {
-    if (response.status !== 404) {
-      location.assign(href);
-      return;
-    }
-    var path = new URL(href, location.origin).pathname;
-    var version = path.match(/(\/v[^/]+)\//);
-    location.assign(version ? path.slice(0, version.index) + version[1] + "/" : href);
-  }).catch(function () {
-    location.assign(href);
-  });
-});
 </script>
 
 
