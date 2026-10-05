@@ -6,8 +6,7 @@ execute:
   echo: true
 ---
 
-These components render with Quarto's own layout. Askr does not yet restyle
-them. They are here so that choice can be reviewed.
+Columns and images stay Quarto's layout. Askr restyles grouped tabsets.
 
 ## Columns
 
@@ -23,14 +22,26 @@ The right column is the other half. A narrow screen stacks them.
 
 ## Tabset
 
-::: {.panel-tabset}
-## First
+These two groups stay in step. Choosing Palace or AEDT in one group selects it in the other. The article underneath does not sit in a second card.
 
-A tab is a Quarto panel, not an Askr component.
+::: {.panel-tabset group="backend"}
+## Palace
 
-## Second
+Palace uses the shared layout and its own electrostatic input.
 
-The second panel stays in the same article width.
+## AEDT
+
+AEDT Q3D uses the same layout and its own input binding.
+:::
+
+::: {.panel-tabset group="backend"}
+## Palace
+
+The eigenmode result is read from the Palace run.
+
+## AEDT
+
+The eigenmode result is read from the HFSS run.
 :::
 
 ## Image
