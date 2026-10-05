@@ -4,13 +4,29 @@
 
 This repository owns the `askr-html` native Quarto HTML extension and its local
 gallery. Askr is the reading page: measure, type, citations, and callouts.
-Quiet Quartz remains the visual theme name. The **0.4.1 release** targets
+Quiet Quartz remains the visual theme name. The **0.4.2 release** targets
 Quarto 1.10.18. The public format is `askr-html`. Visual semantics remain
 CONVERGING until explicit Human
 acceptance; a version number, merge, or tag does not establish semantic
 stabilization or deployment.
 
 ## Ownership and interfaces
+
+### Current bounded typography adjustment
+
+Reduce native grouped-tabset labels to 0.9rem, following the Human-requested
+smaller candidate after the H4 comparison. Preserve Cursor's current tab styling, native
+group synchronization, content, and heading sizes. Observe computed H3/H4/tab
+sizes and desktop (1440 × 900) and mobile (390 × 844) screenshots, then exercise
+the Palace/AEDT group synchronization. The Human requested publication on
+2026-10-06: checkpoint develop, promote main, tag v0.4.2, and verify the
+existing Pages workflow and public tabset. No consumer update, root pin,
+new durable tests, or stabilization are assigned.
+
+The Human retained the 0.9rem label candidate and requested tighter vertical
+spacing: reduce label padding to .35rem and remove duplicate first/last child
+block margins inside native tab panes. Preserve horizontal spacing and content
+padding. Inspect the current preview at desktop and mobile sizes.
 
 The extension is self-contained at `_extensions/askr` and exposes one public
 format name: `askr-html`. Its token authority is `qdk.scss`: documented Quarto

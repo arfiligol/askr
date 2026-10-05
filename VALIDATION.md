@@ -1,5 +1,17 @@
 # Candidate validation receipt
 
+## 0.4.2 grouped-tabset update — 2026-10-06
+
+Quarto 1.10.18 rendered `components/figures.qmd` without execution. Native
+grouped tabsets were inspected at 1440 × 900 and 390 × 844: labels measured
+16.2px and 14.4px respectively (0.9rem); label vertical padding is .35rem.
+First/last pane block margins are zero, avoiding duplicated paragraph spacing.
+Both groups' visible content follows a Palace/AEDT selection. The native group
+runtime leaves the second group's ARIA selection attributes inconsistent with
+its active classes; that pre-existing runtime issue is not modified here.
+No durable tests or consumer dependency updates were assigned. The Human
+requested publication of this visual candidate; no stabilization is claimed.
+
 Date: 2026-09-23. Semantic state: **CONVERGING**. These observations are
 technical evidence, not Human acceptance thresholds or visual acceptance.
 
