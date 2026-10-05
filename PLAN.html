@@ -47,9 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-75837a695788c22c5e2e9b69eb389972.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-4ac232a3a433ff342e39f0c1541b18ec.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-75837a695788c22c5e2e9b69eb389972.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-672d802646acab842d49fc779c0a3559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-daad064a14cf5bbde15e176d637aa58d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-672d802646acab842d49fc779c0a3559.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -314,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
   "mode": "inline",
   "longTitle": "Interferometric Purcell Filter",
   "versions": [
-    {"label": "0.4.0", "root": "/", "latest": true},
+    {"label": "0.4.2", "root": "/", "latest": true},
     {"label": "0.3.0", "root": "/v0.3.0/"}
   ]
 }
@@ -542,7 +542,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#askr-release-plan" id="toc-askr-release-plan" class="nav-link active" data-scroll-target="#askr-release-plan">Askr release plan</a>
   <ul class="collapse">
   <li><a href="#goal-and-state" id="toc-goal-and-state" class="nav-link" data-scroll-target="#goal-and-state">Goal and state</a></li>
-  <li><a href="#ownership-and-interfaces" id="toc-ownership-and-interfaces" class="nav-link" data-scroll-target="#ownership-and-interfaces">Ownership and interfaces</a></li>
+  <li><a href="#ownership-and-interfaces" id="toc-ownership-and-interfaces" class="nav-link" data-scroll-target="#ownership-and-interfaces">Ownership and interfaces</a>
+  <ul class="collapse">
+  <li><a href="#current-bounded-typography-adjustment" id="toc-current-bounded-typography-adjustment" class="nav-link" data-scroll-target="#current-bounded-typography-adjustment">Current bounded typography adjustment</a></li>
+  </ul></li>
   <li><a href="#candidate-behavior-and-failure-boundaries" id="toc-candidate-behavior-and-failure-boundaries" class="nav-link" data-scroll-target="#candidate-behavior-and-failure-boundaries">Candidate behavior and failure boundaries</a></li>
   <li><a href="#exclusions" id="toc-exclusions" class="nav-link" data-scroll-target="#exclusions">Exclusions</a></li>
   <li><a href="#validation-endpoint" id="toc-validation-endpoint" class="nav-link" data-scroll-target="#validation-endpoint">Validation endpoint</a></li>
@@ -562,11 +565,16 @@ ul.task-list li input[type="checkbox"] {
 <h1>Askr release plan</h1>
 <section id="goal-and-state" class="level2">
 <h2 class="anchored" data-anchor-id="goal-and-state">Goal and state</h2>
-<p>This repository owns the <code>askr-html</code> native Quarto HTML extension and its local gallery. Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz remains the visual theme name. The <strong>0.4.1 release</strong> targets Quarto 1.10.18. The public format is <code>askr-html</code>. Visual semantics remain CONVERGING until explicit Human acceptance; a version number, merge, or tag does not establish semantic stabilization or deployment.</p>
+<p>This repository owns the <code>askr-html</code> native Quarto HTML extension and its local gallery. Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz remains the visual theme name. The <strong>0.4.2 release</strong> targets Quarto 1.10.18. The public format is <code>askr-html</code>. Visual semantics remain CONVERGING until explicit Human acceptance; a version number, merge, or tag does not establish semantic stabilization or deployment.</p>
 </section>
 <section id="ownership-and-interfaces" class="level2">
 <h2 class="anchored" data-anchor-id="ownership-and-interfaces">Ownership and interfaces</h2>
+<section id="current-bounded-typography-adjustment" class="level3">
+<h3 class="anchored" data-anchor-id="current-bounded-typography-adjustment">Current bounded typography adjustment</h3>
+<p>Reduce native grouped-tabset labels to 0.9rem, following the Human-requested smaller candidate after the H4 comparison. Preserve Cursor’s current tab styling, native group synchronization, content, and heading sizes. Observe computed H3/H4/tab sizes and desktop (1440 × 900) and mobile (390 × 844) screenshots, then exercise the Palace/AEDT group synchronization. The Human requested publication on 2026-10-06: checkpoint develop, promote main, tag v0.4.2, and verify the existing Pages workflow and public tabset. No consumer update, root pin, new durable tests, or stabilization are assigned.</p>
+<p>The Human retained the 0.9rem label candidate and requested tighter vertical spacing: reduce label padding to .35rem and remove duplicate first/last child block margins inside native tab panes. Preserve horizontal spacing and content padding. Inspect the current preview at desktop and mobile sizes.</p>
 <p>The extension is self-contained at <code>_extensions/askr</code> and exposes one public format name: <code>askr-html</code>. Its token authority is <code>qdk.scss</code>: documented Quarto Sass variables own color, type, callout color, code, navbar, sidebar, and grid widths, and <code>scss:rules</code> applies the remaining Quartz-derived visuals without importing a Quartz runtime. Schibsted Grotesk (400/700) owns titles and navigation UI; Source Sans 3 (400/600 plus italic) is the locally pinned Source Sans Pro successor used for body text; IBM Plex Mono owns code. Consumers own content, IA, execution, math engine, viewer behavior, privacy, data, and navigation choices. The gallery at this repository root is the source-backed evaluation surface. The shared token authority distinguishes content dividers from quieter layout dividers in each native theme; manual Markdown <code>---</code> is the opt-in content divider, while sidebar and navigation boundaries use the layout token. Askr is a reusable design-system candidate for direct SCQ-repository adoption. Its layout contract is the theme variables <code>$grid-sidebar-width</code> and <code>$grid-margin-width</code> at 264px, <code>$grid-body-width</code> and <code>$grid-docked-body-width</code> at 630px, and <code>$grid-column-gutter-width</code> at 26px. The root font size is 18px. <code>$sidebar-border</code> is false. One <code>scss:rules</code> track list restates the docked grid from those variables so the 630px measure stays centered; Quarto’s own formula would add 200px to the body and leave the spare space in a right-hand 5fr column. That track rule is the residual coupling to Quarto’s grid line names.</p>
+</section>
 </section>
 <section id="candidate-behavior-and-failure-boundaries" class="level2">
 <h2 class="anchored" data-anchor-id="candidate-behavior-and-failure-boundaries">Candidate behavior and failure boundaries</h2>
