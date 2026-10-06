@@ -2,11 +2,11 @@
 title: "Add Askr"
 ---
 
-`0.5.0` is the current release. The public format is `askr-html`. Quiet Quartz
+`0.6.0` is the current release. The public format is `askr-html`. Quiet Quartz
 is the visual theme.
 
 ```bash
-quarto add arfiligol/askr@v0.5.0
+quarto add arfiligol/askr@v0.6.0
 ```
 
 ```yaml
@@ -33,10 +33,15 @@ files inside `_extensions/arfiligol/askr`.
 
 ## Quarto compatibility
 
-Askr 0.5.0 supports stable Quarto releases in `>=1.9.38 <1.11`.
+Askr 0.6.0 retains support for stable Quarto releases in `>=1.9.38 <1.11`.
 Quarto 1.10.18 remains the reproducible gallery and CI baseline; consumers
 may use a stable release inside the supported range instead of that exact patch.
 Older tags retain their original requirements.
+
+The optional Logout and image-viewer additions in 0.6.0 were rendered and
+operated on 1.10.18; their observations do not cover every supported patch.
+See [Protected docs and logout](protected-docs.qmd) and
+[Image viewer](image-viewer.qmd) for configuration and ownership boundaries.
 
 Actual non-executing renders and browser observations cover stable 1.9.38
 and 1.10.18, plus 1.10.16 as a diagnostic prerelease across upstream Sass

@@ -1,5 +1,53 @@
 # Askr release plan
 
+## 0.6.0 publication authorization — 2026-10-06
+
+The Human requested publication of the optional Logout and native image-viewer
+candidate so the NCUAS Private Repo owner can test it. Endpoint: checkpoint
+`develop`, promote to `main` by PR, tag/release `v0.6.0`, observe the existing
+Pages workflow and actual public routes, and synchronize this durable child
+checkout. Publication is authorized; these new semantic scopes remain
+CONVERGING, not automatically accepted or stabilized. No durable tests,
+root pins, NCUAS integration, infrastructure edits, or real authentication
+actions. Retain prior rendered/source-review evidence for unchanged feature
+bytes; render release metadata and install instructions, verify exact Git/tag
+and deployment identities, and inspect published Usage/Figures. Existing
+historical 0.3.0 contents remain unchanged; no new history directory is assigned.
+The local-only endpoint below is superseded only for this release delivery.
+
+## Optional logout and native image viewer — local candidate, 2026-10-06
+
+State: CONVERGING; endpoint: LOCAL CANDIDATE and running preview only. The
+Human assigned this bounded implementation and observations, not publication
+or automated-test stabilization. The Askr owner is the primary writer for
+extension, Gallery, Usage, and these receipts. `test_policy = no_test_writes`.
+
+- `askr.logout.href` (required when logout is configured) accepts HTTPS or a
+  domain-root `/` path; `label` defaults to Logout. Absence means no control.
+  An accessible Header icon navigates the current tab. Authentik/deployment
+  owns session state, outpost endpoints, and real logout; Askr owns no account,
+  cookie, or session handling. Invalid configuration fails at render time.
+- `askr-html` defaults to native `lightbox: auto`. Native `.nolightbox`, page
+  `lightbox: false`, linked/inline image treatment, captions, galleries, zoom,
+  drag, and close remain Quarto's responsibility. Askr styles controls and
+  descriptions and restores focus to the entry that opened the viewer.
+- `askr-image-view` accepts exactly one `target` (an existing eligible image/
+  figure ID) or `src` (a hidden native image), and optional `label` (View image).
+  Bad targets and disabled-Lightbox conflicts fail during rendering; there is
+  no image-page fallback. Non-HTML produces ordinary image/figure links.
+- Add two Usage pages and real Figures examples using existing public assets.
+  Never add private URLs/assets, change pixels, or promise sharper upscaling.
+
+Required evidence: non-executing render; actual desktop/mobile light/dark
+opening from image and both button forms, caption/relative-path handling,
+native zoom/drag, Escape/close, reading-position and focus restoration;
+excluded/linked images; missing-image behavior; temporary independent consumer
+with and without Logout, Header layout and exact destinations; invalid-input
+and non-HTML render probes; independent correctness/privacy review. One-off
+probes/screenshots stay outside the repository. Update VALIDATION with actual
+observations and limitations. No NCUAS/NPM/Authentik changes, real authentication
+exercise, consumer update, root pin, release, push, CI workflow, or durable test.
+
 ## 0.5.0 acceptance and delivery — 2026-10-06
 
 After direct preview iteration the Human confirmed the current candidate and

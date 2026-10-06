@@ -1,0 +1,57 @@
+---
+title: "Protected docs and logout"
+---
+
+Askr can show an optional Logout icon in the Header. It is only a navigation
+entry: **Authentik and your deployment determine what gets logged out**.
+Public documentation does not need the entry, and this public Gallery leaves
+it disabled.
+
+## Configure the entry
+
+In your protected site's `_quarto.yml`:
+
+```yaml
+askr:
+  logout:
+    href: "https://docs.example.org/outpost.goauthentik.io/sign_out"
+    label: "Logout"
+```
+
+`href` is required if `logout` is present. It accepts an absolute HTTPS URL or
+a path starting with `/` on the current domain. For example,
+`/outpost.goauthentik.io/sign_out` starts at the domain root, even when the
+document is inside `/v1.0/`. Protocol-relative `//host` and other URL schemes
+are not accepted. There is no default endpoint. `label` defaults to `Logout`
+and supplies the icon's accessible name and tooltip.
+
+The entry is a normal link in the current tab. Askr does not read your account,
+delete cookies, call authentication APIs, or report that logout succeeded.
+Omit the entire `logout` setting to omit the control.
+
+## Choose the correct Authentik destination
+
+For proxy or **single-application forward auth**, the outpost sign-out path
+is served on the protected application's host. For **domain-level forward
+auth**, use the provider's configured authentication URL host instead. A
+same-domain path is therefore not interchangeable with the authentication-host
+URL. Confirm the destination with your deployment owner; the example domain
+above is illustrative, not a configured service.
+
+The [Authentik proxy-provider logout documentation](https://docs.goauthentik.io/add-secure-apps/providers/proxy/#log-out)
+describes `/outpost.goauthentik.io/sign_out`. Outpost logout invalidates the
+user's sessions within that outpost, which can cover more than this document
+site. It is not a promise of “this site only” logout.
+
+## Three different scopes
+
+| Action | What controls its effect |
+|---|---|
+| Outpost sign-out | The proxy provider/outpost invalidates its sessions. A surviving Authentik login may let the user authenticate again without entering credentials. |
+| Authentik session logout | A configured logout flow ending in the [User Logout stage](https://docs.goauthentik.io/add-secure-apps/flows-stages/stages/user_logout/) ends the current Authentik session. Use your deployment's actual flow URL, not an invented Askr endpoint. |
+| Single Logout (SLO) | [Authentik's SLO configuration](https://docs.goauthentik.io/add-secure-apps/providers/single-logout/) determines propagation to participating applications. Support and provider configuration matter; it does not mean every application will always be logged out. |
+
+Askr can link to the destination you choose, but cannot choose or enforce
+these scopes. NPM rules, Authentik flows, access policy, real sign-out and
+reauthentication verification belong to the deployment owner. A successful
+navigation to a URL is not evidence that any session ended.

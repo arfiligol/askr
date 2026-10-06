@@ -1,18 +1,20 @@
 # Askr
 
 Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz
-remains the name of the visual theme. `0.5.0` is the current release, validated
+remains the name of the visual theme. `0.6.0` is the current release, rendered
 with Quarto 1.10.18. Stable Quarto `>=1.9.38 <1.11` is supported. The public
-format is `askr-html`. The 0.5.0 candidate was accepted for publication on
-2026-10-06; acceptance does not imply automated-test stabilization.
+format is `askr-html`. Publication of the optional Logout and native image
+viewer was authorized on 2026-10-06 for consumer testing. Those new scopes
+remain CONVERGING; publication is not authentication verification or
+automated-test stabilization.
 
 ## Install
 
-Install the reviewed release tag `v0.5.0`. Quarto's GitHub installer accepts
+Install the reviewed release tag `v0.6.0`. Quarto's GitHub installer accepts
 branch and tag names, not commit SHA modifiers.
 
 ```bash
-quarto add arfiligol/askr@v0.5.0
+quarto add arfiligol/askr@v0.6.0
 ```
 
 ```yaml
@@ -38,6 +40,14 @@ Standalone display formulas include a Copy button for their original LaTeX
 without dollar delimiters. Successful copies briefly show Copied!; if clipboard
 access is unavailable, the selectable source is revealed. Inline math stays
 native. Formula display and copy source are derived from the same authored math.
+
+Native Quarto Lightbox is enabled by default. Image and optional
+`askr-image-view` button entries keep viewing in the article; native exclusions
+and page-level disablement remain available. Protected sites can configure
+`askr.logout.href` for an optional Header link; Askr does not manage sessions.
+See [Image viewer](usage/image-viewer.qmd) and
+[Protected docs and logout](usage/protected-docs.qmd). The public Gallery
+leaves Logout disabled.
 
 Askr is intended as a reusable design system for direct SCQ-repository
 adoption. The theme Sass variables `$grid-sidebar-width` and `$grid-margin-width`

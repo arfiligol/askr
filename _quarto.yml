@@ -81,6 +81,10 @@ website:
           href: usage/tokens.qmd
         - text: "Figures that follow the toggle"
           href: usage/figures.qmd
+        - text: "Image viewer"
+          href: usage/image-viewer.qmd
+        - text: "Protected docs and logout"
+          href: usage/protected-docs.qmd
     - id: long-list
       title: "Pages"
       style: docked
