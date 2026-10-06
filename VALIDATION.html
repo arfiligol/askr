@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fc2f3cb778133f378d2c19a8ec6780c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-11b25a874e22af81f500cc992a82a78f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-fc2f3cb778133f378d2c19a8ec6780c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1b8f72e40c3f8d84d9a67d0fa069bc1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c8c70c31c7dae554679cdc2884b27c76.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-1b8f72e40c3f8d84d9a67d0fa069bc1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -111,7 +111,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<style>html{ scroll-behavior: smooth; }</style>
 <meta name="theme-color" content="#faf8f8">
 <script>
 (function () {
@@ -192,6 +191,85 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       window.bootstrap.Collapse.getOrCreateInstance(el, { toggle: false }).hide();
     });
   }
+  // Measure the existing inline layout, not a second navigation tree. Quarto /
+  // Bootstrap remain the owners of disclosure state and navigation links.
+  function adaptiveAreas() {
+    var header = document.querySelector("#quarto-header");
+    var container = header && header.querySelector(".navbar-container");
+    var area = header && header.querySelector("#navbarCollapse");
+    var button = header && header.querySelector(".navbar-toggler");
+    var brand = header && header.querySelector(".navbar-brand-container");
+    if (!container || !area || !button || !brand) return;
+    button.setAttribute("aria-label", "Areas");
+    button.removeAttribute("role");
+    button.title = "Areas";
+    var frame;
+    var compact;
+    function update() {
+      frame = null;
+      var active = document.activeElement;
+      var previous = compact;
+      header.classList.add("askr-areas-measuring");
+      header.classList.remove("askr-areas-collapsed");
+      var mobile = window.matchMedia("(max-width: 991.98px)").matches;
+      var list = area.querySelector(".navbar-nav");
+      var title = brand.querySelector(".askr-version-title") || brand.querySelector(".navbar-title");
+      if (title) title.title = title.textContent.trim();
+      var titleFits = !title || title.scrollWidth <= title.clientWidth;
+      var linksFit = !list || list.scrollWidth <= area.clientWidth;
+      var areaRect = area.getBoundingClientRect();
+      var brandRect = brand.getBoundingClientRect();
+      var controlsFit = Array.from(container.querySelectorAll("#quarto-search, .quarto-navbar-tools")).every(function (control) {
+        var rect = control.getBoundingClientRect();
+        return !rect.width || rect.right <= areaRect.left || rect.left >= areaRect.right;
+      });
+      compact = mobile || !titleFits || !linksFit || brandRect.right > areaRect.left || !controlsFit;
+      header.classList.toggle("askr-areas-collapsed", compact);
+      header.classList.remove("askr-areas-measuring");
+      if (mobile) {
+        var left = 0;
+        var right = container.getBoundingClientRect().right;
+        var gap = parseFloat(getComputedStyle(header.querySelector(".quarto-navbar-tools") || container).columnGap) || 0;
+        header.querySelectorAll(".quarto-btn-toggle, #quarto-search").forEach(function (control) {
+          var rect = control.getBoundingClientRect();
+          if (rect.width && getComputedStyle(control).display !== "none") left = Math.max(left, rect.right);
+        });
+        header.querySelectorAll(".quarto-navbar-tools, .navbar-toggler").forEach(function (control) {
+          var rect = control.getBoundingClientRect();
+          if (rect.width) right = Math.min(right, rect.left);
+        });
+        header.style.setProperty("--askr-brand-left", (left + gap) + "px");
+        header.style.setProperty("--askr-brand-right", (container.getBoundingClientRect().right - right + gap) + "px");
+      }
+      if (previous !== undefined && previous !== compact) {
+        // Complete any in-flight Bootstrap animation before resetting state.
+        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
+        hideShown("#navbarCollapse.show");
+        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
+        area.classList.remove("qdk-open");
+        document.querySelector("#qdk-area-glass").classList.remove("qdk-glass-in");
+        button.setAttribute("aria-expanded", "false");
+        if (compact && area.contains(active)) button.focus();
+        else if (!compact && active === button) {
+          var link = area.querySelector("a.nav-link");
+          if (link) link.focus();
+        }
+      }
+    }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+    new ResizeObserver(schedule).observe(container);
+    // Version and Logout entries are mounted after the original Header.
+    new MutationObserver(schedule).observe(container, { childList: true, subtree: true, characterData: true });
+    window.addEventListener("resize", schedule);
+    window.addEventListener("pageshow", schedule);
+    if (document.fonts) {
+      document.fonts.ready.then(schedule);
+      document.fonts.addEventListener("loadingdone", schedule);
+    }
+    schedule();
+  }
   function menus() {
     if (!document.querySelector("#qdk-area-glass")) {
       var glass = document.createElement("div");
@@ -214,6 +292,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         if (event.target !== area) return;
         area.classList.remove("qdk-open");
         areaGlass.classList.remove("qdk-glass-in");
+        var header = document.querySelector("#quarto-header");
+        if (header.classList.contains("headroom--frozen") && !(pages && pages.classList.contains("qdk-open")) && window.quartoToggleHeadroom) window.quartoToggleHeadroom();
       });
     }
     if (pages && pagesGlass) {
@@ -237,6 +317,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     if (areaButton) areaButton.addEventListener("click", function () {
       hideShown(".quarto-sidebar-collapse-item.show");
     });
+    if (area) area.addEventListener("click", function (event) {
+      if (event.target.closest("a.nav-link") && document.querySelector("#quarto-header.askr-areas-collapsed")) hideShown("#navbarCollapse.show");
+    });
     if (pagesButton) pagesButton.addEventListener("click", function () {
       hideShown("#navbarCollapse.show");
     });
@@ -246,7 +329,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       if (area.contains(event.target) || (areaButton && areaButton.contains(event.target))) return;
       hideShown("#navbarCollapse.show");
     });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && area && area.classList.contains("show")) {
+        event.preventDefault();
+        hideShown("#navbarCollapse.show");
+        areaButton.focus();
+      }
+    });
     versions(hideShown);
+    adaptiveAreas();
   }
   function versions(hideShown) {
     var brand = document.querySelector("#quarto-header .navbar-brand");
@@ -626,7 +717,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#candidate-validation-receipt" id="toc-candidate-validation-receipt" class="nav-link active" data-scroll-target="#candidate-validation-receipt">Candidate validation receipt</a>
   <ul class="collapse">
-  <li><a href="#publication-package-2026-10-06" id="toc-publication-package-2026-10-06" class="nav-link" data-scroll-target="#publication-package-2026-10-06">0.6.0 publication package — 2026-10-06</a></li>
+  <li><a href="#publication-package-2026-10-06" id="toc-publication-package-2026-10-06" class="nav-link" data-scroll-target="#publication-package-2026-10-06">0.6.1 publication package — 2026-10-06</a></li>
+  <li><a href="#adaptive-areas-requirejs-local-candidate-2026-10-06" id="toc-adaptive-areas-requirejs-local-candidate-2026-10-06" class="nav-link" data-scroll-target="#adaptive-areas-requirejs-local-candidate-2026-10-06">Adaptive Areas / RequireJS — local candidate, 2026-10-06</a>
+  <ul class="collapse">
+  <li><a href="#executed-gallery-runtime" id="toc-executed-gallery-runtime" class="nav-link" data-scroll-target="#executed-gallery-runtime">Executed Gallery runtime</a></li>
+  <li><a href="#header-observations" id="toc-header-observations" class="nav-link" data-scroll-target="#header-observations">Header observations</a></li>
+  </ul></li>
+  <li><a href="#publication-package-2026-10-06-1" id="toc-publication-package-2026-10-06-1" class="nav-link" data-scroll-target="#publication-package-2026-10-06-1">0.6.0 publication package — 2026-10-06</a></li>
   <li><a href="#optional-logout-and-native-image-viewer-local-candidate-2026-10-06" id="toc-optional-logout-and-native-image-viewer-local-candidate-2026-10-06" class="nav-link" data-scroll-target="#optional-logout-and-native-image-viewer-local-candidate-2026-10-06">Optional Logout and native image viewer — local candidate, 2026-10-06</a></li>
   <li><a href="#publication-authorization-2026-10-06" id="toc-publication-authorization-2026-10-06" class="nav-link" data-scroll-target="#publication-authorization-2026-10-06">0.5.0 publication authorization — 2026-10-06</a></li>
   <li><a href="#engineering-candidate-2026-10-06" id="toc-engineering-candidate-2026-10-06" class="nav-link" data-scroll-target="#engineering-candidate-2026-10-06">0.5.0 engineering candidate — 2026-10-06</a>
@@ -657,7 +754,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="candidate-validation-receipt" class="level1">
 <h1>Candidate validation receipt</h1>
 <section id="publication-package-2026-10-06" class="level2">
-<h2 class="anchored" data-anchor-id="publication-package-2026-10-06">0.6.0 publication package — 2026-10-06</h2>
+<h2 class="anchored" data-anchor-id="publication-package-2026-10-06">0.6.1 publication package — 2026-10-06</h2>
+<p>Human requested the complete release flow. Release metadata, README install tag, inline version manifest and CHANGELOG now identify 0.6.1. Core implementation bytes below are unchanged, so the recorded rendered interaction observations remain applicable; they are not relabeled as a new execution. Release-document renders and a fresh Figures render completed, including both Python3 cells. Exact-diff inspection found no newly included private URLs, images or consumer payloads; Git whitespace inspection completed. No durable tests were added. Develop checkpoint, main promotion, tag/Release and actual Pages observations are delivery obligations; no consumer or root pin is updated by this package.</p>
+</section>
+<section id="adaptive-areas-requirejs-local-candidate-2026-10-06" class="level2">
+<h2 class="anchored" data-anchor-id="adaptive-areas-requirejs-local-candidate-2026-10-06">Adaptive Areas / RequireJS — local candidate, 2026-10-06</h2>
+<p>Human-assigned scope: local preview, not publication or stabilization. Base <code>bd6e62bd6415df02512969714d97bf6d02777cfb</code>; package version remains 0.6.0; semantic state CONVERGING, delivery LOCAL CANDIDATE. No durable tests, consumer repository, root pins or infrastructure were changed.</p>
+<p>Quarto 1.10.18 <code>quarto render . --execute-daemon 0</code> completed all 104 Gallery inputs, including both Figures Python cells and existing public arithmetic output. Header JavaScript syntax and Git whitespace inspection completed. The separate <code>quarto check jupyter</code> probe encountered a stale default kernel path; the successful actual Python3 Gallery renders are the execution evidence.</p>
+<p>Core source SHA-256:</p>
+<ul>
+<li><code>qdk.scss</code>: <code>56f124025080f35e3dfcd492822175baa4f424c6562510f51a232e65b924e9e5</code></li>
+<li><code>theme-color.html</code>: <code>afdb8c2c1c14e088423cbbd8c03b1d01f54a498ba3c2104d321cf5266233d014</code></li>
+<li><code>_quarto.yml</code>: <code>4df6e410fcdf862a360eb9d295d92eaa64f92d1283ac232bb92ccfc6505c3668</code></li>
+</ul>
+<section id="executed-gallery-runtime" class="level3">
+<h3 class="anchored" data-anchor-id="executed-gallery-runtime">Executed Gallery runtime</h3>
+<p>In the Codex in-app browser, current Figures HTML still includes RequireJS and no longer includes Zenscroll. Error logs were empty on the observed page; the previous anonymous-module mismatch was not reproduced. Both light/dark HTML outputs, the Notebook image and actual Mermaid SVG were present. A Sections link navigated to <code>#diagram</code>. Both image-viewer buttons loaded the public 1600px image in-page; Escape returned focus to their respective entry buttons. The browser resolved native smooth scrolling; compiled CSS contains the reduced-motion <code>auto</code> override and disabled Areas transitions. The OS motion preference itself was not changed.</p>
+</section>
+<section id="header-observations" class="level3">
+<h3 class="anchored" data-anchor-id="header-observations">Header observations</h3>
+<p>A separate temporary consumer used a generic long title and five Areas, Pages and Search. Separate pages enabled Logout and an inline version manifest. No private consumer text, URL or screenshot was copied into product files. The absent external version manifest in these temporary cases is expected; no-version and inline-manifest behavior use the existing contract.</p>
+<ul>
+<li>1440px/1920px: full navigation fits without title/control overlap.</li>
+<li>1024px/1280px: the same navigation becomes an Areas disclosure; Pages stays a desktop sidebar. The vertical Areas panel begins below the Header.</li>
+<li>Version + Logout consumer: observed 1320px/1328px/1332px/1336px used the disclosure; 1340px/1360px/1440px used inline Areas. These are observations, not a fixed breakpoint or product threshold.</li>
+<li>Tablet 768px and phones 390px/320px: shortened titles retain their accessible name and tooltip. Page width matched viewport width; actual control rectangles did not intersect the title slot in the narrow examples.</li>
+<li>Light/dark controls were visually inspected. Pages opened/closed; Search returned real local results; version disclosure opened/closed; theme toggle changed native body mode. Logout reached its configured local receipt, which explicitly does not claim identity-provider logout.</li>
+<li>Areas opened via mouse and Enter. Escape returned to its button. An open-panel resize across the observed fit boundary cleared the panel/overlay, restored visible link focus and released Header freezing. Selecting Design Notes navigated to the real <code>#notes</code> destination with the panel and overlay closed.</li>
+</ul>
+<p>An intermediate candidate inherited Bootstrap row direction and vertical centering in the fixed panel; final styling explicitly uses a top-aligned column, independent of the Pages breakpoint. There is one navigation tree, no RequireJS suppression, and no new viewer implementation.</p>
+<p>Local Gallery: <code>http://127.0.0.1:4572/</code>. Generic long-Header consumer: <code>http://127.0.0.1:4585/</code>. Screenshots remain temporary owner-side observations, not product assets. Public Pages still serves 0.6.0; this candidate is not committed or published.</p>
+</section>
+</section>
+<section id="publication-package-2026-10-06-1" class="level2">
+<h2 class="anchored" data-anchor-id="publication-package-2026-10-06-1">0.6.0 publication package — 2026-10-06</h2>
 <p>The Human authorized publishing the reviewed Logout/image-viewer candidate for NCUAS consumer testing. Feature implementation bytes and prior local browser/source-review receipts are unchanged; only release metadata, current version manifest, installation guidance and delivery records change. The new scopes remain CONVERGING. No new tests, root pins, consumer/infrastructure changes, real authentication verification, or physical touch coverage. Existing Pages CI and exact public-route observations are still required delivery evidence and will be recorded after execution, not inferred here. Release-metadata render completed: 103 pages, Quarto 1.10.18, <code>--no-execute</code>, exit 0; the known computational-output specimen warning remains. Exact reviewed feature hashes below are unchanged. Whitespace/diff inspection completed and only scoped source files are staged; generated site files are excluded.</p>
 </section>
 <section id="optional-logout-and-native-image-viewer-local-candidate-2026-10-06" class="level2">
@@ -1271,5 +1401,4 @@ document.addEventListener('click', async (event) => {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

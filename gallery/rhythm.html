@@ -47,9 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-fc2f3cb778133f378d2c19a8ec6780c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-11b25a874e22af81f500cc992a82a78f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-fc2f3cb778133f378d2c19a8ec6780c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-1b8f72e40c3f8d84d9a67d0fa069bc1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-c8c70c31c7dae554679cdc2884b27c76.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-1b8f72e40c3f8d84d9a67d0fa069bc1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,7 +76,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<style>html{ scroll-behavior: smooth; }</style>
 <meta name="theme-color" content="#faf8f8">
 <script>
 (function () {
@@ -157,6 +156,85 @@ ul.task-list li input[type="checkbox"] {
       window.bootstrap.Collapse.getOrCreateInstance(el, { toggle: false }).hide();
     });
   }
+  // Measure the existing inline layout, not a second navigation tree. Quarto /
+  // Bootstrap remain the owners of disclosure state and navigation links.
+  function adaptiveAreas() {
+    var header = document.querySelector("#quarto-header");
+    var container = header && header.querySelector(".navbar-container");
+    var area = header && header.querySelector("#navbarCollapse");
+    var button = header && header.querySelector(".navbar-toggler");
+    var brand = header && header.querySelector(".navbar-brand-container");
+    if (!container || !area || !button || !brand) return;
+    button.setAttribute("aria-label", "Areas");
+    button.removeAttribute("role");
+    button.title = "Areas";
+    var frame;
+    var compact;
+    function update() {
+      frame = null;
+      var active = document.activeElement;
+      var previous = compact;
+      header.classList.add("askr-areas-measuring");
+      header.classList.remove("askr-areas-collapsed");
+      var mobile = window.matchMedia("(max-width: 991.98px)").matches;
+      var list = area.querySelector(".navbar-nav");
+      var title = brand.querySelector(".askr-version-title") || brand.querySelector(".navbar-title");
+      if (title) title.title = title.textContent.trim();
+      var titleFits = !title || title.scrollWidth <= title.clientWidth;
+      var linksFit = !list || list.scrollWidth <= area.clientWidth;
+      var areaRect = area.getBoundingClientRect();
+      var brandRect = brand.getBoundingClientRect();
+      var controlsFit = Array.from(container.querySelectorAll("#quarto-search, .quarto-navbar-tools")).every(function (control) {
+        var rect = control.getBoundingClientRect();
+        return !rect.width || rect.right <= areaRect.left || rect.left >= areaRect.right;
+      });
+      compact = mobile || !titleFits || !linksFit || brandRect.right > areaRect.left || !controlsFit;
+      header.classList.toggle("askr-areas-collapsed", compact);
+      header.classList.remove("askr-areas-measuring");
+      if (mobile) {
+        var left = 0;
+        var right = container.getBoundingClientRect().right;
+        var gap = parseFloat(getComputedStyle(header.querySelector(".quarto-navbar-tools") || container).columnGap) || 0;
+        header.querySelectorAll(".quarto-btn-toggle, #quarto-search").forEach(function (control) {
+          var rect = control.getBoundingClientRect();
+          if (rect.width && getComputedStyle(control).display !== "none") left = Math.max(left, rect.right);
+        });
+        header.querySelectorAll(".quarto-navbar-tools, .navbar-toggler").forEach(function (control) {
+          var rect = control.getBoundingClientRect();
+          if (rect.width) right = Math.min(right, rect.left);
+        });
+        header.style.setProperty("--askr-brand-left", (left + gap) + "px");
+        header.style.setProperty("--askr-brand-right", (container.getBoundingClientRect().right - right + gap) + "px");
+      }
+      if (previous !== undefined && previous !== compact) {
+        // Complete any in-flight Bootstrap animation before resetting state.
+        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
+        hideShown("#navbarCollapse.show");
+        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
+        area.classList.remove("qdk-open");
+        document.querySelector("#qdk-area-glass").classList.remove("qdk-glass-in");
+        button.setAttribute("aria-expanded", "false");
+        if (compact && area.contains(active)) button.focus();
+        else if (!compact && active === button) {
+          var link = area.querySelector("a.nav-link");
+          if (link) link.focus();
+        }
+      }
+    }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+    new ResizeObserver(schedule).observe(container);
+    // Version and Logout entries are mounted after the original Header.
+    new MutationObserver(schedule).observe(container, { childList: true, subtree: true, characterData: true });
+    window.addEventListener("resize", schedule);
+    window.addEventListener("pageshow", schedule);
+    if (document.fonts) {
+      document.fonts.ready.then(schedule);
+      document.fonts.addEventListener("loadingdone", schedule);
+    }
+    schedule();
+  }
   function menus() {
     if (!document.querySelector("#qdk-area-glass")) {
       var glass = document.createElement("div");
@@ -179,6 +257,8 @@ ul.task-list li input[type="checkbox"] {
         if (event.target !== area) return;
         area.classList.remove("qdk-open");
         areaGlass.classList.remove("qdk-glass-in");
+        var header = document.querySelector("#quarto-header");
+        if (header.classList.contains("headroom--frozen") && !(pages && pages.classList.contains("qdk-open")) && window.quartoToggleHeadroom) window.quartoToggleHeadroom();
       });
     }
     if (pages && pagesGlass) {
@@ -202,6 +282,9 @@ ul.task-list li input[type="checkbox"] {
     if (areaButton) areaButton.addEventListener("click", function () {
       hideShown(".quarto-sidebar-collapse-item.show");
     });
+    if (area) area.addEventListener("click", function (event) {
+      if (event.target.closest("a.nav-link") && document.querySelector("#quarto-header.askr-areas-collapsed")) hideShown("#navbarCollapse.show");
+    });
     if (pagesButton) pagesButton.addEventListener("click", function () {
       hideShown("#navbarCollapse.show");
     });
@@ -211,7 +294,15 @@ ul.task-list li input[type="checkbox"] {
       if (area.contains(event.target) || (areaButton && areaButton.contains(event.target))) return;
       hideShown("#navbarCollapse.show");
     });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && area && area.classList.contains("show")) {
+        event.preventDefault();
+        hideShown("#navbarCollapse.show");
+        areaButton.focus();
+      }
+    });
     versions(hideShown);
+    adaptiveAreas();
   }
   function versions(hideShown) {
     var brand = document.querySelector("#quarto-header .navbar-brand");
@@ -1165,5 +1256,4 @@ document.addEventListener('click', async (event) => {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

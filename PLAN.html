@@ -47,9 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fc2f3cb778133f378d2c19a8ec6780c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-11b25a874e22af81f500cc992a82a78f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-fc2f3cb778133f378d2c19a8ec6780c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-1b8f72e40c3f8d84d9a67d0fa069bc1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-c8c70c31c7dae554679cdc2884b27c76.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-1b8f72e40c3f8d84d9a67d0fa069bc1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -76,7 +76,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<style>html{ scroll-behavior: smooth; }</style>
 <meta name="theme-color" content="#faf8f8">
 <script>
 (function () {
@@ -157,6 +156,85 @@ ul.task-list li input[type="checkbox"] {
       window.bootstrap.Collapse.getOrCreateInstance(el, { toggle: false }).hide();
     });
   }
+  // Measure the existing inline layout, not a second navigation tree. Quarto /
+  // Bootstrap remain the owners of disclosure state and navigation links.
+  function adaptiveAreas() {
+    var header = document.querySelector("#quarto-header");
+    var container = header && header.querySelector(".navbar-container");
+    var area = header && header.querySelector("#navbarCollapse");
+    var button = header && header.querySelector(".navbar-toggler");
+    var brand = header && header.querySelector(".navbar-brand-container");
+    if (!container || !area || !button || !brand) return;
+    button.setAttribute("aria-label", "Areas");
+    button.removeAttribute("role");
+    button.title = "Areas";
+    var frame;
+    var compact;
+    function update() {
+      frame = null;
+      var active = document.activeElement;
+      var previous = compact;
+      header.classList.add("askr-areas-measuring");
+      header.classList.remove("askr-areas-collapsed");
+      var mobile = window.matchMedia("(max-width: 991.98px)").matches;
+      var list = area.querySelector(".navbar-nav");
+      var title = brand.querySelector(".askr-version-title") || brand.querySelector(".navbar-title");
+      if (title) title.title = title.textContent.trim();
+      var titleFits = !title || title.scrollWidth <= title.clientWidth;
+      var linksFit = !list || list.scrollWidth <= area.clientWidth;
+      var areaRect = area.getBoundingClientRect();
+      var brandRect = brand.getBoundingClientRect();
+      var controlsFit = Array.from(container.querySelectorAll("#quarto-search, .quarto-navbar-tools")).every(function (control) {
+        var rect = control.getBoundingClientRect();
+        return !rect.width || rect.right <= areaRect.left || rect.left >= areaRect.right;
+      });
+      compact = mobile || !titleFits || !linksFit || brandRect.right > areaRect.left || !controlsFit;
+      header.classList.toggle("askr-areas-collapsed", compact);
+      header.classList.remove("askr-areas-measuring");
+      if (mobile) {
+        var left = 0;
+        var right = container.getBoundingClientRect().right;
+        var gap = parseFloat(getComputedStyle(header.querySelector(".quarto-navbar-tools") || container).columnGap) || 0;
+        header.querySelectorAll(".quarto-btn-toggle, #quarto-search").forEach(function (control) {
+          var rect = control.getBoundingClientRect();
+          if (rect.width && getComputedStyle(control).display !== "none") left = Math.max(left, rect.right);
+        });
+        header.querySelectorAll(".quarto-navbar-tools, .navbar-toggler").forEach(function (control) {
+          var rect = control.getBoundingClientRect();
+          if (rect.width) right = Math.min(right, rect.left);
+        });
+        header.style.setProperty("--askr-brand-left", (left + gap) + "px");
+        header.style.setProperty("--askr-brand-right", (container.getBoundingClientRect().right - right + gap) + "px");
+      }
+      if (previous !== undefined && previous !== compact) {
+        // Complete any in-flight Bootstrap animation before resetting state.
+        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
+        hideShown("#navbarCollapse.show");
+        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
+        area.classList.remove("qdk-open");
+        document.querySelector("#qdk-area-glass").classList.remove("qdk-glass-in");
+        button.setAttribute("aria-expanded", "false");
+        if (compact && area.contains(active)) button.focus();
+        else if (!compact && active === button) {
+          var link = area.querySelector("a.nav-link");
+          if (link) link.focus();
+        }
+      }
+    }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+    new ResizeObserver(schedule).observe(container);
+    // Version and Logout entries are mounted after the original Header.
+    new MutationObserver(schedule).observe(container, { childList: true, subtree: true, characterData: true });
+    window.addEventListener("resize", schedule);
+    window.addEventListener("pageshow", schedule);
+    if (document.fonts) {
+      document.fonts.ready.then(schedule);
+      document.fonts.addEventListener("loadingdone", schedule);
+    }
+    schedule();
+  }
   function menus() {
     if (!document.querySelector("#qdk-area-glass")) {
       var glass = document.createElement("div");
@@ -179,6 +257,8 @@ ul.task-list li input[type="checkbox"] {
         if (event.target !== area) return;
         area.classList.remove("qdk-open");
         areaGlass.classList.remove("qdk-glass-in");
+        var header = document.querySelector("#quarto-header");
+        if (header.classList.contains("headroom--frozen") && !(pages && pages.classList.contains("qdk-open")) && window.quartoToggleHeadroom) window.quartoToggleHeadroom();
       });
     }
     if (pages && pagesGlass) {
@@ -202,6 +282,9 @@ ul.task-list li input[type="checkbox"] {
     if (areaButton) areaButton.addEventListener("click", function () {
       hideShown(".quarto-sidebar-collapse-item.show");
     });
+    if (area) area.addEventListener("click", function (event) {
+      if (event.target.closest("a.nav-link") && document.querySelector("#quarto-header.askr-areas-collapsed")) hideShown("#navbarCollapse.show");
+    });
     if (pagesButton) pagesButton.addEventListener("click", function () {
       hideShown("#navbarCollapse.show");
     });
@@ -211,7 +294,15 @@ ul.task-list li input[type="checkbox"] {
       if (area.contains(event.target) || (areaButton && areaButton.contains(event.target))) return;
       hideShown("#navbarCollapse.show");
     });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && area && area.classList.contains("show")) {
+        event.preventDefault();
+        hideShown("#navbarCollapse.show");
+        areaButton.focus();
+      }
+    });
     versions(hideShown);
+    adaptiveAreas();
   }
   function versions(hideShown) {
     var brand = document.querySelector("#quarto-header .navbar-brand");
@@ -591,7 +682,8 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#askr-release-plan" id="toc-askr-release-plan" class="nav-link active" data-scroll-target="#askr-release-plan">Askr release plan</a>
   <ul class="collapse">
-  <li><a href="#publication-authorization-2026-10-06" id="toc-publication-authorization-2026-10-06" class="nav-link" data-scroll-target="#publication-authorization-2026-10-06">0.6.0 publication authorization — 2026-10-06</a></li>
+  <li><a href="#publication-authorization-2026-10-06" id="toc-publication-authorization-2026-10-06" class="nav-link" data-scroll-target="#publication-authorization-2026-10-06">0.6.1 publication authorization — 2026-10-06</a></li>
+  <li><a href="#publication-authorization-2026-10-06-1" id="toc-publication-authorization-2026-10-06-1" class="nav-link" data-scroll-target="#publication-authorization-2026-10-06-1">0.6.0 publication authorization — 2026-10-06</a></li>
   <li><a href="#optional-logout-and-native-image-viewer-local-candidate-2026-10-06" id="toc-optional-logout-and-native-image-viewer-local-candidate-2026-10-06" class="nav-link" data-scroll-target="#optional-logout-and-native-image-viewer-local-candidate-2026-10-06">Optional logout and native image viewer — local candidate, 2026-10-06</a></li>
   <li><a href="#acceptance-and-delivery-2026-10-06" id="toc-acceptance-and-delivery-2026-10-06" class="nav-link" data-scroll-target="#acceptance-and-delivery-2026-10-06">0.5.0 acceptance and delivery — 2026-10-06</a></li>
   <li><a href="#goal-and-state" id="toc-goal-and-state" class="nav-link" data-scroll-target="#goal-and-state">Goal and state</a></li>
@@ -600,6 +692,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#active-0.5.0-engineering-package-2026-10-06" id="toc-active-0.5.0-engineering-package-2026-10-06" class="nav-link" data-scroll-target="#active-0.5.0-engineering-package-2026-10-06">Active 0.5.0 engineering package (2026-10-06)</a></li>
   <li><a href="#current-bounded-typography-adjustment" id="toc-current-bounded-typography-adjustment" class="nav-link" data-scroll-target="#current-bounded-typography-adjustment">Current bounded typography adjustment</a></li>
   </ul></li>
+  <li><a href="#adaptive-areas-and-smooth-scroll-repair-local-candidate" id="toc-adaptive-areas-and-smooth-scroll-repair-local-candidate" class="nav-link" data-scroll-target="#adaptive-areas-and-smooth-scroll-repair-local-candidate">Adaptive Areas and smooth-scroll repair — local candidate</a></li>
   <li><a href="#candidate-behavior-and-failure-boundaries" id="toc-candidate-behavior-and-failure-boundaries" class="nav-link" data-scroll-target="#candidate-behavior-and-failure-boundaries">Candidate behavior and failure boundaries</a></li>
   <li><a href="#exclusions" id="toc-exclusions" class="nav-link" data-scroll-target="#exclusions">Exclusions</a></li>
   <li><a href="#validation-endpoint" id="toc-validation-endpoint" class="nav-link" data-scroll-target="#validation-endpoint">Validation endpoint</a></li>
@@ -618,7 +711,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="askr-release-plan" class="level1">
 <h1>Askr release plan</h1>
 <section id="publication-authorization-2026-10-06" class="level2">
-<h2 class="anchored" data-anchor-id="publication-authorization-2026-10-06">0.6.0 publication authorization — 2026-10-06</h2>
+<h2 class="anchored" data-anchor-id="publication-authorization-2026-10-06">0.6.1 publication authorization — 2026-10-06</h2>
+<p>Human requested the complete publication flow for the adaptive Areas and RequireJS repair candidate. Deliver a develop checkpoint, develop-to-main PR, v0.6.1 tag and GitHub Release using CHANGELOG, existing Pages CI/deployment, public-site observation and clean local synchronization. The prior local-only endpoint is superseded for this delivery. No root pins, consumer or deployment configuration changes, new tests or stabilization are assigned. Semantic scope remains CONVERGING; release authorization is not automated-test stabilization. Reuse the recorded unchanged core implementation observations; render changed release documentation, verify exact source/tag identities and observe actual CI and published HTML/runtime rather than infer deployment from Git.</p>
+</section>
+<section id="publication-authorization-2026-10-06-1" class="level2">
+<h2 class="anchored" data-anchor-id="publication-authorization-2026-10-06-1">0.6.0 publication authorization — 2026-10-06</h2>
 <p>The Human requested publication of the optional Logout and native image-viewer candidate so the NCUAS Private Repo owner can test it. Endpoint: checkpoint <code>develop</code>, promote to <code>main</code> by PR, tag/release <code>v0.6.0</code>, observe the existing Pages workflow and actual public routes, and synchronize this durable child checkout. Publication is authorized; these new semantic scopes remain CONVERGING, not automatically accepted or stabilized. No durable tests, root pins, NCUAS integration, infrastructure edits, or real authentication actions. Retain prior rendered/source-review evidence for unchanged feature bytes; render release metadata and install instructions, verify exact Git/tag and deployment identities, and inspect published Usage/Figures. Existing historical 0.3.0 contents remain unchanged; no new history directory is assigned. The local-only endpoint below is superseded only for this release delivery.</p>
 </section>
 <section id="optional-logout-and-native-image-viewer-local-candidate-2026-10-06" class="level2">
@@ -678,6 +775,12 @@ ul.task-list li input[type="checkbox"] {
 <p>The Human retained the 0.9rem label candidate and requested tighter vertical spacing: reduce label padding to .35rem and remove duplicate first/last child block margins inside native tab panes. Preserve horizontal spacing and content padding. Inspect the current preview at desktop and mobile sizes.</p>
 <p>The extension is self-contained at <code>_extensions/askr</code> and exposes one public format name: <code>askr-html</code>. Its token authority is <code>qdk.scss</code>: documented Quarto Sass variables own color, type, callout color, code, navbar, sidebar, and grid widths, and <code>scss:rules</code> applies the remaining Quartz-derived visuals without importing a Quartz runtime. Schibsted Grotesk (400/700) owns titles and navigation UI; Source Sans 3 (400/600 plus italic) is the locally pinned Source Sans Pro successor used for body text; IBM Plex Mono owns code. Consumers own content, IA, execution, math engine, viewer behavior, privacy, data, and navigation choices. The gallery at this repository root is the source-backed evaluation surface. The shared token authority distinguishes content dividers from quieter layout dividers in each native theme; manual Markdown <code>---</code> is the opt-in content divider, while sidebar and navigation boundaries use the layout token. Askr is a reusable design-system candidate for direct SCQ-repository adoption. Its layout contract is the theme variables <code>$grid-sidebar-width</code> and <code>$grid-margin-width</code> at 264px, <code>$grid-body-width</code> and <code>$grid-docked-body-width</code> at 630px, and <code>$grid-column-gutter-width</code> at 26px. The root font size is 18px. <code>$sidebar-border</code> is false. One <code>scss:rules</code> track list restates the docked grid from those variables so the 630px measure stays centered; Quarto’s own formula would add 200px to the body and leave the spare space in a right-hand 5fr column. That track rule is the residual coupling to Quarto’s grid line names.</p>
 </section>
+</section>
+<section id="adaptive-areas-and-smooth-scroll-repair-local-candidate" class="level2">
+<h2 class="anchored" data-anchor-id="adaptive-areas-and-smooth-scroll-repair-local-candidate">Adaptive Areas and smooth-scroll repair — local candidate</h2>
+<p>Human-assigned scope: remove the Gallery RequireJS/Zenscroll conflict while retaining native CSS smooth scrolling; show desktop Areas inline only when the site title, navigation and actual controls fit. Otherwise use the same Bootstrap Areas disclosure, without changing the Pages sidebar breakpoint. Long titles truncate only when necessary, retaining their accessible name. Recalculate after viewport, font and header-content changes; clear open state, overlay and hidden focus when changing presentation.</p>
+<p>Owner: Askr Lead; primary writer: this local task in the registered child checkout. Semantic state: CONVERGING; delivery endpoint: LOCAL CANDIDATE and preview. No release, PR mutation, root pins, consumer or infrastructure edits, or durable tests are assigned. Record changes in an English CHANGELOG with an Unreleased section and a factual 0.6.0 summary; future PR/Release summaries derive from it, not a second release-notes authority.</p>
+<p>Observe executed Figures output (RequireJS remains, no mismatch, working navigation, diagram and viewer). Use temporary consumers with generic long titles/Areas, with/without version selector and Logout. Inspect desktop, tablet, phone, light/dark and the actual fit boundary; operate every header control, Escape, keyboard, link selection and resizing while Areas is open. Rendered browser geometry/state and console are the observation authority; source/build success alone does not establish these outcomes. Record findings in VALIDATION; no private consumer payload enters the repository.</p>
 </section>
 <section id="candidate-behavior-and-failure-boundaries" class="level2">
 <h2 class="anchored" data-anchor-id="candidate-behavior-and-failure-boundaries">Candidate behavior and failure boundaries</h2>
@@ -1201,5 +1304,4 @@ document.addEventListener('click', async (event) => {
 
 
 
-<script src="site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
