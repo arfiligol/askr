@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Versioning Docs – Askr</title>
+<title>Protected docs and logout – Askr</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -619,7 +619,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../usage/versions.html">Versioning Docs</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../usage/protected-docs.html">Protected docs and logout</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -645,7 +645,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../usage/versions.html" class="sidebar-item-text sidebar-link active">
+  <a href="../usage/versions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Versioning Docs</span></a>
   </div>
 </li>
@@ -675,7 +675,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../usage/protected-docs.html" class="sidebar-item-text sidebar-link">
+  <a href="../usage/protected-docs.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Protected docs and logout</span></a>
   </div>
 </li>
@@ -689,9 +689,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Sections</h2>
    
   <ul>
-  <li><a href="#keyboard-interaction" id="toc-keyboard-interaction" class="nav-link active" data-scroll-target="#keyboard-interaction">Keyboard interaction</a></li>
-  <li><a href="#corresponding-pages-and-missing-pages" id="toc-corresponding-pages-and-missing-pages" class="nav-link" data-scroll-target="#corresponding-pages-and-missing-pages">Corresponding pages and missing pages</a></li>
-  <li><a href="#publishing" id="toc-publishing" class="nav-link" data-scroll-target="#publishing">Publishing</a></li>
+  <li><a href="#configure-the-entry" id="toc-configure-the-entry" class="nav-link active" data-scroll-target="#configure-the-entry">Configure the entry</a></li>
+  <li><a href="#choose-the-correct-authentik-destination" id="toc-choose-the-correct-authentik-destination" class="nav-link" data-scroll-target="#choose-the-correct-authentik-destination">Choose the correct Authentik destination</a></li>
+  <li><a href="#three-different-scopes" id="toc-three-different-scopes" class="nav-link" data-scroll-target="#three-different-scopes">Three different scopes</a></li>
   </ul>
 </nav>
     </div>
@@ -701,7 +701,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Versioning Docs</h1>
+<h1 class="title">Protected docs and logout</h1>
 </div>
 
 
@@ -718,41 +718,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Each version is one rendered site, kept in its own directory. The current render is also copied to the deployment site root. Historical directories stay as they were. Paths below are relative to that site root, not the domain root: the same manifest works at <code>/</code> and a repository prefix such as <code>/askr/</code>.</p>
-<pre class="text"><code>/                         current release
-/v0.3.0/                  immutable 0.3.0 site
-/askr-versions.json       one version-list authority</code></pre>
-<p>Put <code>askr-versions.json</code> at the rendered site’s root and include it in <code>project.resources</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"mode"</span><span class="fu">:</span> <span class="st">"inline"</span><span class="fu">,</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"versions"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.6.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/"</span><span class="fu">,</span> <span class="dt">"latest"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.3.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.3.0/"</span><span class="fu">}</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Askr locates the manifest from Quarto’s page offset. Each <code>root</code> is a version directory relative to that deployment root; <code>/</code> selects the current site. Use <code>href</code> instead of <code>root</code> for a fixed destination. Relative or leading-slash hrefs are site-relative; absolute URLs keep their origin. Fixed destinations do not preserve the current page.</p>
-<p><code>inline</code> prints the version beside a short title. <code>title</code> shows the title and chevron, with the number only in the menu. Try the <a href="versions.html?askr-version-mode=title">long-title specimen</a>. Its <code>longTitle</code> manifest entry is only a gallery specimen, not required consumer configuration.</p>
-<p>Existing consumers can still supply an inline <code>&lt;script id="askr-versions" type="application/json"&gt;</code> when an external manifest is unavailable. Use one authority, not duplicated external and inline lists. This gallery uses only the external JSON.</p>
-<section id="keyboard-interaction" class="level2">
-<h2 class="anchored" data-anchor-id="keyboard-interaction">Keyboard interaction</h2>
-<p>The selector is a disclosure, not a listbox. Tab to its button, then press Enter or Space to open it. Tab and Shift-Tab move through ordinary links; Enter follows one. Escape closes it and returns focus to the button. Tabbing away or clicking outside closes it without moving outside focus back. The current version link has <code>aria-current="true"</code>.</p>
+<p>Askr can show an optional Logout icon in the Header. It is only a navigation entry: <strong>Authentik and your deployment determine what gets logged out</strong>. Public documentation does not need the entry, and this public Gallery leaves it disabled.</p>
+<section id="configure-the-entry" class="level2">
+<h2 class="anchored" data-anchor-id="configure-the-entry">Configure the entry</h2>
+<p>In your protected site’s <code>_quarto.yml</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">askr</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">logout</span><span class="kw">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">href</span><span class="kw">:</span><span class="at"> </span><span class="st">"https://docs.example.org/outpost.goauthentik.io/sign_out"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">label</span><span class="kw">:</span><span class="at"> </span><span class="st">"Logout"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>href</code> is required if <code>logout</code> is present. It accepts an absolute HTTPS URL or a path starting with <code>/</code> on the current domain. For example, <code>/outpost.goauthentik.io/sign_out</code> starts at the domain root, even when the document is inside <code>/v1.0/</code>. Protocol-relative <code>//host</code> and other URL schemes are not accepted. There is no default endpoint. <code>label</code> defaults to <code>Logout</code> and supplies the icon’s accessible name and tooltip.</p>
+<p>The entry is a normal link in the current tab. Askr does not read your account, delete cookies, call authentication APIs, or report that logout succeeded. Omit the entire <code>logout</code> setting to omit the control.</p>
 </section>
-<section id="corresponding-pages-and-missing-pages" class="level2">
-<h2 class="anchored" data-anchor-id="corresponding-pages-and-missing-pages">Corresponding pages and missing pages</h2>
-<p>The menu retains the current page path, query and fragment when switching between <code>root</code> entries. From <code>/askr/usage/versions.html</code>, 0.3.0 points to <code>/askr/v0.3.0/usage/versions.html</code>, not <code>/v0.3.0/askr/usage/versions.html</code>.</p>
-<p>For an ordinary same-origin click, Askr checks the destination. A 404 sends the reader to that selected version’s manifest root. Network errors retain the original destination, rather than inventing a page. Modified clicks (Cmd/Ctrl-click or a new tab) and external URLs retain browser link behavior; the host’s error page owns those cases. Projects own their hosting error page.</p>
-<p>This gallery supplies <code>404.qmd</code>, deriving its deployment root from Quarto’s rendered offset and matching the external manifest. Existing historical snapshots keep their original scripts and version lists: a new Askr install does not rewrite an old rendered site.</p>
-<p>Open this page and select 0.3.0. This page is absent from that snapshot, so the current selector takes you to its home. That historical gallery retains its original Install area rather than this site’s Usage area.</p>
+<section id="choose-the-correct-authentik-destination" class="level2">
+<h2 class="anchored" data-anchor-id="choose-the-correct-authentik-destination">Choose the correct Authentik destination</h2>
+<p>For proxy or <strong>single-application forward auth</strong>, the outpost sign-out path is served on the protected application’s host. For <strong>domain-level forward auth</strong>, use the provider’s configured authentication URL host instead. A same-domain path is therefore not interchangeable with the authentication-host URL. Confirm the destination with your deployment owner; the example domain above is illustrative, not a configured service.</p>
+<p>The <a href="https://docs.goauthentik.io/add-secure-apps/providers/proxy/#log-out">Authentik proxy-provider logout documentation</a> describes <code>/outpost.goauthentik.io/sign_out</code>. Outpost logout invalidates the user’s sessions within that outpost, which can cover more than this document site. It is not a promise of “this site only” logout.</p>
 </section>
-<section id="publishing" class="level2">
-<h2 class="anchored" data-anchor-id="publishing">Publishing</h2>
-<ol type="1">
-<li>Render the exact tag being frozen.</li>
-<li>Copy that rendered site into its version directory.</li>
-<li>Publish the current rendered site at the deployment root.</li>
-<li>Update the one version manifest.</li>
-</ol>
-<p>Keep historical directories unchanged. A version number is a source identity; it does not itself prove that deployment has finished.</p>
+<section id="three-different-scopes" class="level2">
+<h2 class="anchored" data-anchor-id="three-different-scopes">Three different scopes</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Action</th>
+<th>What controls its effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Outpost sign-out</td>
+<td>The proxy provider/outpost invalidates its sessions. A surviving Authentik login may let the user authenticate again without entering credentials.</td>
+</tr>
+<tr class="even">
+<td>Authentik session logout</td>
+<td>A configured logout flow ending in the <a href="https://docs.goauthentik.io/add-secure-apps/flows-stages/stages/user_logout/">User Logout stage</a> ends the current Authentik session. Use your deployment’s actual flow URL, not an invented Askr endpoint.</td>
+</tr>
+<tr class="odd">
+<td>Single Logout (SLO)</td>
+<td><a href="https://docs.goauthentik.io/add-secure-apps/providers/single-logout/">Authentik’s SLO configuration</a> determines propagation to participating applications. Support and provider configuration matter; it does not mean every application will always be logged out.</td>
+</tr>
+</tbody>
+</table>
+<p>Askr can link to the destination you choose, but cannot choose or enforce these scopes. NPM rules, Authentik flows, access policy, real sign-out and reauthentication verification belong to the deployment owner. A successful navigation to a URL is not evidence that any session ended.</p>
 
 
 </section>

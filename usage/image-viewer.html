@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Versioning Docs – Askr</title>
+<title>Image viewer – Askr</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -619,7 +619,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../usage/versions.html">Versioning Docs</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../usage/image-viewer.html">Image viewer</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -645,7 +645,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../usage/versions.html" class="sidebar-item-text sidebar-link active">
+  <a href="../usage/versions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Versioning Docs</span></a>
   </div>
 </li>
@@ -669,7 +669,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../usage/image-viewer.html" class="sidebar-item-text sidebar-link">
+  <a href="../usage/image-viewer.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Image viewer</span></a>
   </div>
 </li>
@@ -689,9 +689,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Sections</h2>
    
   <ul>
-  <li><a href="#keyboard-interaction" id="toc-keyboard-interaction" class="nav-link active" data-scroll-target="#keyboard-interaction">Keyboard interaction</a></li>
-  <li><a href="#corresponding-pages-and-missing-pages" id="toc-corresponding-pages-and-missing-pages" class="nav-link" data-scroll-target="#corresponding-pages-and-missing-pages">Corresponding pages and missing pages</a></li>
-  <li><a href="#publishing" id="toc-publishing" class="nav-link" data-scroll-target="#publishing">Publishing</a></li>
+  <li><a href="#images-and-opt-outs" id="toc-images-and-opt-outs" class="nav-link active" data-scroll-target="#images-and-opt-outs">Images and opt-outs</a></li>
+  <li><a href="#open-an-existing-figure-with-a-button" id="toc-open-an-existing-figure-with-a-button" class="nav-link" data-scroll-target="#open-an-existing-figure-with-a-button">Open an existing figure with a button</a></li>
+  <li><a href="#show-only-a-button" id="toc-show-only-a-button" class="nav-link" data-scroll-target="#show-only-a-button">Show only a button</a></li>
+  <li><a href="#galleries-and-viewing-controls" id="toc-galleries-and-viewing-controls" class="nav-link" data-scroll-target="#galleries-and-viewing-controls">Galleries and viewing controls</a></li>
   </ul>
 </nav>
     </div>
@@ -701,7 +702,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Versioning Docs</h1>
+<h1 class="title">Image viewer</h1>
 </div>
 
 
@@ -718,41 +719,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Each version is one rendered site, kept in its own directory. The current render is also copied to the deployment site root. Historical directories stay as they were. Paths below are relative to that site root, not the domain root: the same manifest works at <code>/</code> and a repository prefix such as <code>/askr/</code>.</p>
-<pre class="text"><code>/                         current release
-/v0.3.0/                  immutable 0.3.0 site
-/askr-versions.json       one version-list authority</code></pre>
-<p>Put <code>askr-versions.json</code> at the rendered site’s root and include it in <code>project.resources</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"mode"</span><span class="fu">:</span> <span class="st">"inline"</span><span class="fu">,</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"versions"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.6.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/"</span><span class="fu">,</span> <span class="dt">"latest"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.3.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.3.0/"</span><span class="fu">}</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Askr locates the manifest from Quarto’s page offset. Each <code>root</code> is a version directory relative to that deployment root; <code>/</code> selects the current site. Use <code>href</code> instead of <code>root</code> for a fixed destination. Relative or leading-slash hrefs are site-relative; absolute URLs keep their origin. Fixed destinations do not preserve the current page.</p>
-<p><code>inline</code> prints the version beside a short title. <code>title</code> shows the title and chevron, with the number only in the menu. Try the <a href="versions.html?askr-version-mode=title">long-title specimen</a>. Its <code>longTitle</code> manifest entry is only a gallery specimen, not required consumer configuration.</p>
-<p>Existing consumers can still supply an inline <code>&lt;script id="askr-versions" type="application/json"&gt;</code> when an external manifest is unavailable. Use one authority, not duplicated external and inline lists. This gallery uses only the external JSON.</p>
-<section id="keyboard-interaction" class="level2">
-<h2 class="anchored" data-anchor-id="keyboard-interaction">Keyboard interaction</h2>
-<p>The selector is a disclosure, not a listbox. Tab to its button, then press Enter or Space to open it. Tab and Shift-Tab move through ordinary links; Enter follows one. Escape closes it and returns focus to the button. Tabbing away or clicking outside closes it without moving outside focus back. The current version link has <code>aria-current="true"</code>.</p>
+<p><code>askr-html</code> enables Quarto’s native Lightbox automatically. Click an independent image or figure to see it in a floating viewer, including its caption, while remaining on the article. No separate image package or CDN is added.</p>
+<section id="images-and-opt-outs" class="level2">
+<h2 class="anchored" data-anchor-id="images-and-opt-outs">Images and opt-outs</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Layout](images/layout.png)</span>{#fig-layout}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Inline images and images that already have a link keep Quarto’s normal treatment. Exclude an individual image with the native class:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Layout](images/layout.png)</span>{.nolightbox}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Disable automatic floating image viewing for a whole page in its YAML header:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lightbox</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Do not put <code>askr-image-view</code> buttons on a page with <code>lightbox: false</code>. Rendering reports that conflict rather than producing a button that cannot work.</p>
 </section>
-<section id="corresponding-pages-and-missing-pages" class="level2">
-<h2 class="anchored" data-anchor-id="corresponding-pages-and-missing-pages">Corresponding pages and missing pages</h2>
-<p>The menu retains the current page path, query and fragment when switching between <code>root</code> entries. From <code>/askr/usage/versions.html</code>, 0.3.0 points to <code>/askr/v0.3.0/usage/versions.html</code>, not <code>/v0.3.0/askr/usage/versions.html</code>.</p>
-<p>For an ordinary same-origin click, Askr checks the destination. A 404 sends the reader to that selected version’s manifest root. Network errors retain the original destination, rather than inventing a page. Modified clicks (Cmd/Ctrl-click or a new tab) and external URLs retain browser link behavior; the host’s error page owns those cases. Projects own their hosting error page.</p>
-<p>This gallery supplies <code>404.qmd</code>, deriving its deployment root from Quarto’s rendered offset and matching the external manifest. Existing historical snapshots keep their original scripts and version lists: a new Askr install does not rewrite an old rendered site.</p>
-<p>Open this page and select 0.3.0. This page is absent from that snapshot, so the current selector takes you to its home. That historical gallery retains its original Install area rather than this site’s Usage area.</p>
+<section id="open-an-existing-figure-with-a-button" class="level2">
+<h2 class="anchored" data-anchor-id="open-an-existing-figure-with-a-button">Open an existing figure with a button</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Layout](images/layout.png)</span>{#fig-layout}</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>{{&lt; askr-image-view target="fig-layout" label="View image" &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use the ID without <code>#</code>. The button reuses the figure’s original image and caption. The target must exist on this page and be an independent Lightbox image, not an inline image, linked image, or <code>.nolightbox</code> exclusion. Invalid targets fail during rendering.</p>
 </section>
-<section id="publishing" class="level2">
-<h2 class="anchored" data-anchor-id="publishing">Publishing</h2>
-<ol type="1">
-<li>Render the exact tag being frozen.</li>
-<li>Copy that rendered site into its version directory.</li>
-<li>Publish the current rendered site at the deployment root.</li>
-<li>Update the one version manifest.</li>
-</ol>
-<p>Keep historical directories unchanged. A version number is a source identity; it does not itself prove that deployment has finished.</p>
+<section id="show-only-a-button" class="level2">
+<h2 class="anchored" data-anchor-id="show-only-a-button">Show only a button</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>{{&lt; askr-image-view src="images/layout.png" label="View image" &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This registers a hidden native image and opens the same Quarto viewer. Image paths resolve relative to the document, just like a normal Markdown image. Specify exactly one of <code>target</code> or <code>src</code>; <code>label</code> defaults to <code>View image</code>. Only <code>target</code> reuses an existing caption. The button-only form has no caption.</p>
+<p>For non-HTML output, native images remain native images and the entries become ordinary image/figure links, not interactive browser buttons.</p>
+</section>
+<section id="galleries-and-viewing-controls" class="level2">
+<h2 class="anchored" data-anchor-id="galleries-and-viewing-controls">Galleries and viewing controls</h2>
+<p>Use Quarto’s native <code>group</code> image attribute for a gallery:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="al">![First layout](images/first.png)</span>{group="layouts"}</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="al">![Second layout](images/second.png)</span>{group="layouts"}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>In a gallery, use the previous/next controls or keyboard arrow keys. Close with the close control or Escape to return to the original reading position and focus entry. On a touchscreen, native swipe and pinch gestures are available. On a desktop, click an image to zoom when its source dimensions allow it, then drag the enlarged image; click again to restore its size. There is no additional zoom toolbar. Small source images do not become sharper by being enlarged, and failed image loads remain native viewer failures.</p>
+<p>Try the real <a href="../components/figures.html#image-viewer">Figures examples</a>. See <a href="https://quarto.org/docs/output-formats/html-lightbox-figures.html">Quarto Lightbox figures</a> for native options, captions, and computational-image settings.</p>
 
 
 </section>
