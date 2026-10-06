@@ -78,7 +78,8 @@ $qdk-tab-active-weight: 600 !default;
 $qdk-tab-line-height: 1.25 !default;
 $qdk-tab-padding-y: .35rem !default;
 $qdk-tab-padding-x: .8rem !default;
-$qdk-tab-gap: var(--qdk-space) !default;
+$qdk-tab-gap: .5rem !default;
+$qdk-tab-content-padding: .65rem .8rem !default;
 $qdk-tab-border-width: 2px !default;
 $qdk-tab-color: var(--qdk-text) !default;
 $qdk-tab-active-color: var(--qdk-heading) !default;
@@ -91,7 +92,7 @@ $qdk-control-size: 31px !default;
 $qdk-control-color: var(--qdk-heading) !default;
 $qdk-control-border: var(--qdk-divider-layout) !default;
 $qdk-control-hover: var(--qdk-tertiary) !default;
-$qdk-nav-height: var(--qdk-nav-height) !default;
+$qdk-nav-height: 3.4rem !default;
 $qdk-nav-size: 16px !default;
 $qdk-nav-brand-size: 18px !default;
 $qdk-nav-font: var(--qdk-heading-font) !default;
@@ -196,6 +197,7 @@ $qdk-assets-root: "_extensions/arfiligol/askr/assets" !default;
   --qdk-tab-padding-y: #{$qdk-tab-padding-y};
   --qdk-tab-padding-x: #{$qdk-tab-padding-x};
   --qdk-tab-gap: #{$qdk-tab-gap};
+  --qdk-tab-content-padding: #{$qdk-tab-content-padding};
   --qdk-tab-border-width: #{$qdk-tab-border-width};
   --qdk-tab-color: #{$qdk-tab-color};
   --qdk-tab-active-color: #{$qdk-tab-active-color};
@@ -285,7 +287,7 @@ strong, #quarto-document-content a:not(:is(.btn, .nav-link, [role="tab"], [role=
 #quarto-document-content a:not(:is(.btn, .nav-link, [role="tab"], [role="button"], [data-bs-toggle], .anchorjs-link, .quarto-anchor, .code-copy-button, .sidebar-link, .quarto-color-scheme-toggle, .askr-version-menu a)) { color: var(--qdk-link); text-decoration: none; transition: color .2s ease; }
 #quarto-document-content a:not(:is(.btn, .nav-link, [role="tab"], [role="button"], [data-bs-toggle], .anchorjs-link, .quarto-anchor, .code-copy-button, .sidebar-link, .quarto-color-scheme-toggle, .askr-version-menu a)):hover { color: var(--qdk-link-hover); }
 #quarto-document-content p a:not(:is(.btn, .nav-link, [role="tab"], [role="button"], [data-bs-toggle], .anchorjs-link, .quarto-anchor, .code-copy-button, .sidebar-link, .quarto-color-scheme-toggle, .askr-version-menu a)):not(:has(img)) { background: var(--qdk-link-background); border-radius: var(--qdk-inline-radius); padding-inline: .1rem; }
-mark { background: var(--qdk-mark); border-radius: var(--qdk-inline-radius); padding-inline: .1rem; }
+mark { background: var(--qdk-mark); border-radius: var(--qdk-inline-radius); color: inherit; padding-inline: .1rem; }
 ::selection { background: color-mix(in srgb, var(--qdk-tertiary) 60%, transparent); color: var(--qdk-heading); }
 :where(a, button, input, select, textarea, summary):focus-visible { outline: var(--qdk-focus-width) solid var(--qdk-focus); outline-offset: var(--qdk-focus-offset); border-radius: var(--qdk-focus-radius); }
 
@@ -293,6 +295,7 @@ mark { background: var(--qdk-mark); border-radius: var(--qdk-inline-radius); pad
 #quarto-sidebar, #quarto-sidebar .sidebar, #quarto-sidebar .sidebar-navigation, #quarto-sidebar .sidebar-menu-container, #quarto-sidebar .sidebar-item-container, .navbar, .offcanvas, .offcanvas-body { background-color: var(--qdk-canvas); }
 #quarto-sidebar, .offcanvas { border-color: var(--qdk-divider-layout); }
 .navbar { min-height: var(--qdk-nav-height); }
+#quarto-header > .navbar { padding-block: 0; }
 .navbar .navbar-brand, .navbar .nav-link { color: var(--qdk-control-color); font-family: var(--qdk-nav-font); }
 .navbar .navbar-brand { font-size: calc(var(--qdk-nav-brand-size) * var(--qdk-ui) * var(--_qdk-ui-scale)); font-weight: 700; letter-spacing: -.015em; }
 #quarto-header .navbar-brand-container:has(.askr-version) { min-width: 0; max-width: 100%; z-index: 5; }
@@ -367,6 +370,7 @@ mark { background: var(--qdk-mark); border-radius: var(--qdk-inline-radius); pad
   padding: var(--qdk-tab-padding-y) var(--qdk-tab-padding-x);
 }
 #quarto-document-content .panel-tabset > .tab-content > .tab-pane > :first-child { margin-top: 0; }
+#quarto-document-content .panel-tabset > .tab-content { padding: var(--qdk-tab-content-padding); }
 #quarto-document-content .panel-tabset > .tab-content > .tab-pane > :last-child { margin-bottom: 0; }
 .panel-tabset [role="tab"][aria-selected="true"] {
   background: var(--qdk-tab-background);
@@ -543,6 +547,7 @@ mark { background: var(--qdk-mark); border-radius: var(--qdk-inline-radius); pad
     display: block !important;
     width: 100% !important;
     height: auto !important;
+    min-height: 0 !important;
     overflow-x: hidden;
     overflow-y: auto;
     background: var(--qdk-canvas);
@@ -723,16 +728,21 @@ div.callout.callout-style-default:is(.callout-note, .callout-tip, .callout-impor
 .callout.callout-style-default > .callout-header, .callout.callout-style-simple > .callout-header, .callout.callout-style-minimal > .callout-header { align-items: center; background: transparent !important; background-color: transparent !important; background-image: none !important; border-radius: 0; display: flex; gap: 6px; padding: calc(var(--qdk-callout-header-padding) * var(--_qdk-callout-scale)) 0; }
 .callout.callout-style-default > .callout-header::before, .callout.callout-style-default > .callout-header::after, .callout.callout-style-simple > .callout-header::before, .callout.callout-style-simple > .callout-header::after, .callout.callout-style-minimal > .callout-header::before, .callout.callout-style-minimal > .callout-header::after, .callout > .callout-header > .callout-title-container::before, .callout > .callout-header > .callout-title-container::after { background: transparent !important; background-image: none !important; }
 .callout .callout-body { padding: 0; }
-.callout .callout-title-container { font-family: var(--qdk-body-font); font-size: inherit; font-weight: var(--qdk-callout-title-weight); line-height: var(--qdk-callout-title-line-height); }
+/* Headered appearances share one row; native minimal shell padding must not
+   add a second vertical inset. Titleless appearances retain their body inset. */
+.callout.callout-style-default:has(> .callout-header), .callout.callout-style-simple:has(> .callout-header), .callout.callout-style-minimal:has(> .callout-header) { padding-block: 0; }
+div.callout.callout-style-default > .callout-header, div.callout.callout-style-simple > .callout-header, div.callout.callout-style-minimal > .callout-header { box-sizing: border-box; margin: 0; min-block-size: calc(var(--qdk-callout-icon-size) * var(--qdk-ui) * var(--_qdk-ui-scale) + 2 * var(--qdk-callout-header-padding) * var(--_qdk-callout-scale)); }
+.callout .callout-title-container { font-family: var(--qdk-body-font); font-size: inherit; font-weight: var(--qdk-callout-title-weight); line-height: var(--qdk-callout-title-line-height); margin: 0; }
+div.callout.callout-style-default:not(.no-icon) div.callout-title-container { margin: 0; }
 .callout .callout-icon-container { background: currentColor; height: calc(var(--qdk-callout-icon-size) * var(--qdk-ui) * var(--_qdk-ui-scale)); margin: 0; min-width: calc(var(--qdk-callout-icon-size) * var(--qdk-ui) * var(--_qdk-ui-scale)); width: calc(var(--qdk-callout-icon-size) * var(--qdk-ui) * var(--_qdk-ui-scale)); -webkit-mask: center / contain no-repeat; mask: center / contain no-repeat; }
 .callout .callout-icon-container > i { display: none; }
 .callout .callout-icon-container:has(.no-icon) { display: none; }
 .callout .callout-title-container, .callout .callout-icon-container, .callout .callout-btn-toggle { align-self: center; }
-.callout .callout-btn-toggle { align-items: center; display: inline-flex; font-size: .8rem; height: 1rem; justify-content: center; line-height: 1; margin-inline-start: auto; margin-top: 0; padding: 0; }
+.callout .callout-btn-toggle { align-items: center; display: inline-flex !important; font-size: .8rem; height: 1rem; justify-content: center; line-height: 1; margin-inline-start: auto; margin-top: 0; padding: 0 !important; }
 .callout .callout-toggle { align-items: center; display: inline-flex; height: 1rem; justify-content: center; width: 1rem; }
-div.callout .callout-header .callout-toggle::before { background-color: currentColor; background-image: none; background-position: center; display: block; height: calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale)); margin: 0; width: calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale)); -webkit-mask: center / calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale)) calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale)) no-repeat; mask: center / calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale)) calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale)) no-repeat; -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3.5 10.5 8 6 12.5'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3.5 10.5 8 6 12.5'/%3E%3C/svg%3E"); transform: translateY(-3px); }
-div.callout .callout-header[aria-expanded="false"] .callout-toggle::before { transform: translateY(-3px); }
-div.callout .callout-header[aria-expanded="true"] .callout-toggle::before { transform: translateY(-3px) rotate(90deg); }
+div.callout .callout-header .callout-toggle::before { background-color: currentColor; background-image: none; background-position: center; display: block; height: calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale)); margin: 0; width: calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale)); -webkit-mask: center / calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale)) calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale)) no-repeat; mask: center / calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale)) calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale)) no-repeat; -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3.5 10.5 8 6 12.5'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3.5 10.5 8 6 12.5'/%3E%3C/svg%3E"); transform: none; }
+div.callout .callout-header[aria-expanded="false"] .callout-toggle::before { transform: none; }
+div.callout .callout-header[aria-expanded="true"] .callout-toggle::before { transform: rotate(90deg); }
 .callout-note { --qdk-callout-color: var(--qdk-callout-note); }
 .callout-tip { --qdk-callout-color: var(--qdk-callout-tip); }
 .callout-important { --qdk-callout-color: var(--qdk-callout-important); }
@@ -779,6 +789,17 @@ thead th, .table > thead > tr > th { border-bottom: 1px solid var(--qdk-table-he
 tbody td, .table > tbody > tr > td { border-bottom: 1px solid var(--qdk-table-border); padding: var(--qdk-table-cell-padding); }
 .MathJax, .katex-display, img, video { max-width: 100%; }
 .MathJax, .katex-display { overflow-x: auto; overflow-y: hidden; padding: .15rem 0; }
+.askr-copyable-math { margin-block: 1rem; min-width: 0; }
+.askr-math-actions { align-items: center; display: flex; flex-wrap: wrap; gap: .5rem; justify-content: flex-end; }
+.askr-math-copy { background: transparent; border: 1px solid var(--qdk-border); border-radius: var(--qdk-inline-radius); color: var(--qdk-text); cursor: pointer; font: inherit; font-size: .8rem; padding: .25rem .5rem; }
+.askr-math-copy:hover { background: var(--qdk-highlight); }
+.askr-math-copy { transition: border-color .2s ease, color .2s ease, background-color .2s ease; }
+.askr-math-copy.is-copied { border-color: var(--qdk-tertiary); color: var(--qdk-tertiary); }
+.askr-math-status-success { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .askr-math-copy { transition: none; } }
+.askr-math-copy:focus-visible, .askr-math-source textarea:focus-visible { outline: 2px solid var(--qdk-focus); outline-offset: 2px; }
+.askr-math-status { color: var(--qdk-text); font-size: .8rem; }
+.askr-math-source textarea { background: var(--qdk-code-background); border: 1px solid var(--qdk-border); color: var(--qdk-text); display: block; font-family: var(--qdk-mono-font); min-height: 5rem; padding: .5rem; resize: vertical; width: 100%; }
 
 @media (max-width: 991.98px) {
   body { font-size: var(--qdk-body-size); }

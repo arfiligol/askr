@@ -1,6 +1,131 @@
 # Candidate validation receipt
 
+## 0.5.0 publication authorization — 2026-10-06
+
+The Human accepted the iterated candidate and requested publication. Release
+metadata, install instructions and current manifest now name 0.5.0. The final
+101-page non-executing render completed on Quarto 1.10.18; the known figure
+specimen warning about absent light/dark cell output persists in this mode.
+The existing Pages workflow performs its normal render; its CI/deployment and
+public-route observations are delivery receipts, not inferred from this build.
+No automated tests were added and no root/consumer revision was changed.
+
 ## 0.5.0 engineering candidate — 2026-10-06
+
+### Human preview spacing/navigation follow-up
+
+Copyable display mathematics: focused non-executing Mathematics render completed.
+The final Human refinement restores .8rem type and .25rem/.5rem padding,
+keeping the short Copy label. Actual rendered type/padding were 13.6px and
+4.25px/8.5px at the current desktop scale. A real click was observed as
+Copied! with is-copied styling, then returned to Copy with empty live status
+after its two-second timer. Green-outline feedback uses the existing tertiary
+token; reduced-motion disables color transitions. This supersedes compact
+button sizing measurements below.
+Two standalone display formulas have Copy LaTeX buttons. The
+later Human refinement changes visible labels to Copy and reduces type and
+padding. Actual rendered buttons measured approximately 39 × 21px; clicking
+the compact button still produced Copied. Accessible names remain Copy LaTeX.
+Inline formula remains native. Real button clicks produced Copied only after
+the browser clipboard write resolved. Captured short source is
+`\omega_r = 2\pi f`, with no dollar delimiters; the long source retains its
+TeX commands. The automation clipboard read returned empty, so external
+paste destination content is not independently verified and should be tried
+by the Human. Clipboard-denial disclosure is implemented but was not forced
+in this browser observation. At 1440 × 900 and 390 × 844 the page rendered;
+mobile light/dark keeps long mathematics in its local horizontal scroll area.
+No console errors/warnings observed. Source review identified textarea's
+leading-LF parsing behavior; the transport now supplies its own sacrificial
+LF and encodes CR. Screenshots remain outside the repository. No tests added.
+
+Marked-text follow-up: native mark kept a black foreground in both themes.
+Askr now inherits paragraph foreground and changes only the existing dark
+mark token to #e5c76b33. Actual Prose at 1440 × 900 and 390 × 844 showed
+dark foreground #d4d4d4 on rgba(229,199,107,.2), against canvas #161618.
+Light mode retained its yellow fill and inherited #4e4e4e foreground.
+Theme switching was operated; no console errors/warnings were recorded.
+Screenshots were kept outside the repository. This is local candidate
+evidence, not publication or arbitrary-browser coverage.
+
+Additional Human follow-up: icon/no-icon callout comparison found native
+minimal-shell block padding and disclosure utility padding causing unequal
+insets, plus a legacy -3px chevron translation. Headered shells now have no
+second block inset, all title margins are zero, and headers share a minimum
+row size derived from existing icon and padding tokens. Disclosure utilities
+are neutralized while native collapse ownership is unchanged. Titleless
+body padding remains outside this selector.
+
+At 1440 × 900 the icon warning and iconless minimal caution headers both
+measured 59px with 18px upper/lower padding; at 390 × 844 both measured 46px
+with 12.8px padding. Expanded/collapsed states were operated, and their
+icon/title/button centers coincided apart from subpixel rounding. Multi-line
+title observation exposed the remaining native -1px title margin, which is
+now zeroed for all appearances. Both light/dark render observations are scoped
+to these gallery callouts, not a guarantee for arbitrary consumer content.
+
+The next Human screenshot exposed a separate native simple/iconless header
+negative bottom margin (-3.24px at 1440px). It reduced the collapsed outer
+shell to 57.77px despite the shared 59px header, compared with 61px for the
+icon warning. The appearance-specific header margin reset now gives both
+collapsed shells 61px at 1440 × 900, and 48px at 390 × 844 (46px header,
+12.8px upper/lower padding). The mobile dark canvas was observed as #161618;
+both title centers exactly matched their row centers. Native collapse was
+operated, and the long-title margin computed as zero. Independent read-only
+review found no concrete defects in this final delta; SCSS identity:
+`5ad8994400bb9cf9bfbe76bb5bcbbc153eee1021481f751045a5a6a407aa9521`.
+
+The Prose gallery now separates Unordered list and Ordered list, each with
+a Structure example. Actual markup includes ul/ul/ul and ol/ol/ol hierarchies;
+mobile document width remained 390px. Definition lists retain their own
+section. These are native structural specimens, not scientific run outputs.
+The subsequent alternating-marker request uses native authored markers:
+the actual ordered DOM computed decimal → lower-alpha → decimal, with types
+1 → a → 1. This does not impose an automatic depth rule on consumer lists.
+Prose source identity after this change:
+`e260609c9bf6d147d6b40058eb9b73aecb2da38049c4fae46550836b5789ead6`.
+
+The Human subsequently requested tighter tabset padding, coherent header
+padding, repair of Areas expansion and inspection of all header controls.
+This local visual delta follows candidate `dbc3d3c2fc47e1ae16a535560cfb9ba02fece764`;
+it is not accepted or published. Prior implementation receipts below retain
+their original scope and identity, except header/tabset spacing now superseded
+by these observations. No durable tests were added.
+
+Browser inspection exposed an invalid self-reference in `$qdk-nav-height`,
+making the computed CSS variable empty. At 390 × 844 the header shrank to its
+31.62px controls and menu positioning lost its height reference. The default
+is now the documented 3.4rem. Pages also inherited native `min-height: 100%`,
+making its 844px panel extend below the viewport from its 54px top; resetting
+that minimum fixes the panel while native collapse still owns open/close.
+
+Actual Quarto 1.10.18 non-executing render and browser operations covered
+390 × 844, 900 × 900 and 1440 × 900. Tab-pane padding is now .65rem/.8rem
+(10.4px/12.8px mobile, 11.7px/14.4px desktop), label-to-pane gap .5rem
+(8px/9px), and .9rem labels/.35rem label block padding remain unchanged.
+`--qdk-tab-content-padding` is a documented Sass-derived consumer token.
+
+At 390px all five header controls (Pages, Search, version, theme and Areas)
+shared y=11.39px and height=31.62px inside the 54.40px header, giving equal
+upper/lower breathing room. The Areas panel settled at x=134px/y=54.40px,
+width=256px, extending to the viewport bottom. At 900px it settled at
+x=612px/y=61.20px, width=288px, with all five area links visible below the
+header. Pages settled at top=54px/bottom=844px instead of overflowing.
+At 1440px the header measured 61.20px and brand/search/theme controls and
+navigation text were visually centered, without extra native navbar padding.
+
+Operated both themes, Areas open/button-close/backdrop-close, Pages opening,
+Areas/Pages mutual closing, version disclosure opening/Escape, Search
+opening/Cancel, and native theme toggle. In the observed dark mobile view both
+menus remained correctly placed. Native Home switched paired tabsets to
+Palace after the existing next-frame native group bridge. No mobile document
+overflow was observed at 390px. Temporary screenshots remain outside the repo.
+Non-executing figures still have the previously disclosed missing cell outputs;
+this does not claim scientific figure execution. Independent read-only delta
+review found no requirement-backed defect or private-context leakage. Reviewed
+SCSS SHA-256: `1ed3c70bd57080cd0802992d50a7a5e54eae399a5d9f352cc02411c2e463b7b8`.
+The gallery was refreshed without execution so navigation shares the corrected
+styles. Desktop dark version/Search opening and Escape/Cancel closing were
+also operated; screenshot and geometry remained within the viewport.
 
 Scope: PLAN's active 0.5.0 package, based on develop
 `efab6e77ba91a9d7b71dd2816a4e191769683e89`. Semantic state is CONVERGING;

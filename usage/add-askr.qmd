@@ -2,11 +2,11 @@
 title: "Add Askr"
 ---
 
-`0.4.2` is the current release. The public format is `askr-html`. Quiet Quartz
+`0.5.0` is the current release. The public format is `askr-html`. Quiet Quartz
 is the visual theme.
 
 ```bash
-quarto add arfiligol/askr@v0.4.2
+quarto add arfiligol/askr@v0.5.0
 ```
 
 ```yaml
@@ -31,12 +31,12 @@ To move to a newer tag, install that tag and render the project again. Commit
 the updated `_extensions` copy. Reinstall a reviewed tag instead of editing
 files inside `_extensions/arfiligol/askr`.
 
-## Quarto compatibility — 0.5.0 candidate
+## Quarto compatibility
 
-The candidate supports stable Quarto releases in `>=1.9.38 <1.11`.
+Askr 0.5.0 supports stable Quarto releases in `>=1.9.38 <1.11`.
 Quarto 1.10.18 remains the reproducible gallery and CI baseline; consumers
 may use a stable release inside the supported range instead of that exact patch.
-The currently published 0.4.2 tag still declares its original requirement.
+Older tags retain their original requirements.
 
 Actual non-executing renders and browser observations cover stable 1.9.38
 and 1.10.18, plus 1.10.16 as a diagnostic prerelease across upstream Sass

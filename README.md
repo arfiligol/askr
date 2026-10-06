@@ -1,17 +1,18 @@
 # Askr
 
 Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz
-remains the name of the visual theme. `0.4.2` is the current release, validated
-with Quarto 1.10.18. The public format is `askr-html`. The visual contract
-remains CONVERGING until explicitly accepted.
+remains the name of the visual theme. `0.5.0` is the current release, validated
+with Quarto 1.10.18. Stable Quarto `>=1.9.38 <1.11` is supported. The public
+format is `askr-html`. The 0.5.0 candidate was accepted for publication on
+2026-10-06; acceptance does not imply automated-test stabilization.
 
 ## Install
 
-Install the reviewed release tag `v0.4.2`. Quarto's GitHub installer accepts
+Install the reviewed release tag `v0.5.0`. Quarto's GitHub installer accepts
 branch and tag names, not commit SHA modifiers.
 
 ```bash
-quarto add arfiligol/askr@v0.4.2
+quarto add arfiligol/askr@v0.5.0
 ```
 
 ```yaml
@@ -32,6 +33,11 @@ Askr maps Quartz's typography, tokens, rhythm, links, code,
 and callout shell onto Quarto's native navbar/sidebar/TOC and runtime. It does
 not introduce Quartz's additional callout families or aliases: that would need
 a separate public authoring syntax contract.
+
+Standalone display formulas include a Copy button for their original LaTeX
+without dollar delimiters. Successful copies briefly show Copied!; if clipboard
+access is unavailable, the selectable source is revealed. Inline math stays
+native. Formula display and copy source are derived from the same authored math.
 
 Askr is intended as a reusable design system for direct SCQ-repository
 adoption. The theme Sass variables `$grid-sidebar-width` and `$grid-margin-width`

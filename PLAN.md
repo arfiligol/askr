@@ -1,5 +1,18 @@
 # Askr release plan
 
+## 0.5.0 acceptance and delivery — 2026-10-06
+
+After direct preview iteration the Human confirmed the current candidate and
+requested publication ("可以餒！就先這樣。可以發佈了。"). This accepts the
+0.5.0 engineering and visual follow-ups below, including copyable display
+mathematics with original-sized Copy/Copied! feedback. State: ACCEPTED;
+automated-test stabilization is not assigned. Delivery endpoint: checkpoint
+develop, promote via PR to main, tag/release v0.5.0, observe existing CI/Pages,
+verify public routes and synchronize the durable child checkout. Existing
+historical v0.3.0 stays unchanged. No consumer changes or root pins.
+Earlier CONVERGING/pending statements below are historical candidate receipts
+superseded by this scope-bound acceptance, not additional active candidates.
+
 ## Goal and state
 
 This repository owns the `askr-html` native Quarto HTML extension and its local
@@ -69,6 +82,55 @@ found no remaining requirement-backed defects. Human acceptance precedes
 publication; this is not a released 0.5.0 yet.
 
 #### Human acceptance packet: 0.5.0 engineering candidate
+
+Copyable display mathematics follow-up (2026-10-06): add a shared HTML
+component around native standalone display math. A render filter captures
+the same Pandoc Math source used for display, without delimiters. A nearby
+keyboard-accessible Copy LaTeX button reports clipboard success; clipboard
+denial reveals selectable source, never false success. Inline math and
+non-HTML outputs remain native. Inspect actual clipboard content and
+light/dark desktop/mobile preview. Local candidate only; no durable tests
+or publication. Askr owns the wrapper and copy interaction, not math layout.
+Human visual refinement: visible button label is Copy; accessible name
+remains Copy LaTeX. The subsequent request restores the original .8rem type
+and .25rem/.5rem padding, superseding the compact-size candidate.
+Human success-feedback refinement: successful copy changes the button to
+green-outline Copied! for two seconds, then transitions back to Copy.
+Repeated clicks restart the feedback duration. Errors retain the manual-copy
+disclosure; reduced-motion preference disables transitions. Observe both
+success and automatic restoration in the local preview.
+
+Marked-text follow-up (2026-10-06): retain native mark semantics and the
+existing mark background token; inherit paragraph text color and use a muted
+amber dark fill. Inspect Prose in light/dark desktop and mobile. Deliver local
+preview only; no tests, release or consumer changes.
+
+Callout preview follow-up (2026-10-06): compare headered icon/no-icon native
+callouts, normalize shell/header block padding and center icon/title/disclosure
+glyph. Preserve titleless padding, nested content and native collapse. Inspect
+actual default/minimal, expanded/collapsed, long-title and desktop/mobile
+light/dark render geometry; deliver local preview, no tests or release.
+The same Human follow-up requests separate unordered/ordered list displays,
+each with a hierarchical Structure example in components/prose.qmd. Inspect
+their actual three-level list markup and mobile containment, without changing
+native list behavior or introducing scientific results. The ordered specimen
+uses native numeric/alphabetic/numeric markers at successive levels, as
+requested. A further callout follow-up removes native iconless-header negative
+bottom margin so the shared icon-derived row also produces equal outer insets.
+
+Human preview follow-up (2026-10-06): refine tab-pane padding and label-to-pane
+gap, refine header spacing, and repair Areas disclosure placement. Owner is
+the same Askr Lead; affected paths are qdk.scss, token documentation and this
+receipt. Preserve label size, native selection/collapse, consumer interfaces
+and other candidate behavior. Observe desktop/mobile light/dark spacing and
+actual Areas/Pages open/close/outside-click behavior in the rendered browser.
+Inspect every header control (Pages, Search, version, theme and Areas), including
+its position and resulting disclosure. Header-height self-reference and the
+native Pages minimum-height override are implementation defects in this scope.
+No test writes, consumer/root-pin change or release is assigned by this
+follow-up. Deliver an updated local preview for Human review. Only this visual
+delta invalidates the prior spacing/header observation; other source receipts
+remain bound to their original identity.
 
 - Scope and behavior: grouped native tabs agree across content, selection,
   ARIA and tab stops, including keyboard/reload/return. Version disclosure uses

@@ -86,6 +86,11 @@ Heading Sass sizes `$h1-font-size` through `$h4-font-size` are
 
 ## Global and component properties
 
+Headered callouts share the same block inset and minimum title-row height,
+whether an icon is shown or hidden. Icon, title and disclosure glyph share
+the row's vertical center; multiline titles expand it naturally. Titleless
+callouts keep their native body inset.
+
 For each row, the CSS name is `--qdk-` plus the token and the Sass default
 is `$qdk-` plus the same token. Values containing `var(...)` are live CSS
 aliases; values containing `$` derive from the Sass sources above.
@@ -120,7 +125,8 @@ aliases; values containing `$` derive from the Sass sources above.
 | `tab-line-height` | `1.25` |
 | `tab-padding-y` | `.35rem` |
 | `tab-padding-x` | `.8rem` |
-| `tab-gap` | `var(--qdk-space)` |
+| `tab-gap` | `.5rem` |
+| `tab-content-padding` | `.65rem .8rem` |
 | `tab-border-width` | `2px` |
 | `tab-color` | `var(--qdk-text)` |
 | `tab-active-color` | `var(--qdk-heading)` |
