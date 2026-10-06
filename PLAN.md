@@ -1,5 +1,18 @@
 # Askr release plan
 
+## 0.6.1 publication authorization — 2026-10-06
+
+Human requested the complete publication flow for the adaptive Areas and
+RequireJS repair candidate. Deliver a develop checkpoint, develop-to-main PR,
+v0.6.1 tag and GitHub Release using CHANGELOG, existing Pages CI/deployment,
+public-site observation and clean local synchronization. The prior local-only
+endpoint is superseded for this delivery. No root pins, consumer or deployment
+configuration changes, new tests or stabilization are assigned. Semantic scope
+remains CONVERGING; release authorization is not automated-test stabilization.
+Reuse the recorded unchanged core implementation observations; render changed
+release documentation, verify exact source/tag identities and observe actual
+CI and published HTML/runtime rather than infer deployment from Git.
+
 ## 0.6.0 publication authorization — 2026-10-06
 
 The Human requested publication of the optional Logout and native image-viewer
@@ -246,6 +259,32 @@ false. One `scss:rules` track list restates the docked grid from those
 variables so the 630px measure stays centered; Quarto's own formula would add
 200px to the body and leave the spare space in a right-hand 5fr column. That
 track rule is the residual coupling to Quarto's grid line names.
+
+## Adaptive Areas and smooth-scroll repair — local candidate
+
+Human-assigned scope: remove the Gallery RequireJS/Zenscroll conflict while
+retaining native CSS smooth scrolling; show desktop Areas inline only when
+the site title, navigation and actual controls fit. Otherwise use the same
+Bootstrap Areas disclosure, without changing the Pages sidebar breakpoint.
+Long titles truncate only when necessary, retaining their accessible name.
+Recalculate after viewport, font and header-content changes; clear open state,
+overlay and hidden focus when changing presentation.
+
+Owner: Askr Lead; primary writer: this local task in the registered child
+checkout. Semantic state: CONVERGING; delivery endpoint: LOCAL CANDIDATE and
+preview. No release, PR mutation, root pins, consumer or infrastructure edits,
+or durable tests are assigned. Record changes in an English CHANGELOG with an
+Unreleased section and a factual 0.6.0 summary; future PR/Release summaries
+derive from it, not a second release-notes authority.
+
+Observe executed Figures output (RequireJS remains, no mismatch, working
+navigation, diagram and viewer). Use temporary consumers with generic long
+titles/Areas, with/without version selector and Logout. Inspect desktop,
+tablet, phone, light/dark and the actual fit boundary; operate every header
+control, Escape, keyboard, link selection and resizing while Areas is open.
+Rendered browser geometry/state and console are the observation authority;
+source/build success alone does not establish these outcomes. Record findings
+in VALIDATION; no private consumer payload enters the repository.
 
 ## Candidate behavior and failure boundaries
 

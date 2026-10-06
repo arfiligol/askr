@@ -276,7 +276,8 @@ $qdk-assets-root: "_extensions/arfiligol/askr/assets" !default;
   --qdk-ui: #{$qdk-ui};
 }
 
-html { overflow-x: clip; text-size-adjust: none; color-scheme: light; background: var(--qdk-canvas); font-size: calc(var(--qdk-chrome) * var(--_qdk-chrome-scale)) !important; }
+html { overflow-x: clip; text-size-adjust: none; color-scheme: light; background: var(--qdk-canvas); font-size: calc(var(--qdk-chrome) * var(--_qdk-chrome-scale)) !important; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 #qdk-area-glass { pointer-events: none; }
 body { background: var(--qdk-canvas); color: var(--qdk-text); font-family: var(--qdk-body-font); font-weight: var(--qdk-body-weight); text-wrap: pretty; }
 #quarto-content { overflow-x: clip; }
@@ -427,17 +428,6 @@ mark { background: var(--qdk-mark); border-radius: var(--qdk-inline-radius); col
 @media (min-width: 1280px) {
   #quarto-header.askr-has-logout #quarto-search { margin-right: calc(2 * (var(--qdk-control-size) * var(--qdk-ui) * var(--_qdk-ui-scale) + var(--qdk-nav-gap))); }
 }
-@media (max-width: 991.98px) {
-  #quarto-header.askr-has-logout .navbar-brand-container,
-  #quarto-header.askr-has-logout .navbar-brand-container:has(.askr-version) {
-    // Reserve the real controls on both sides rather than covering a small brand.
-    left: calc(.75rem + 2 * (var(--qdk-control-size) * var(--qdk-ui) * var(--_qdk-ui-scale) + var(--qdk-nav-gap)));
-    right: calc(.75rem + 3 * (var(--qdk-control-size) * var(--qdk-ui) * var(--_qdk-ui-scale) + var(--qdk-nav-gap)));
-    width: auto;
-    max-width: none;
-    transform: none;
-  }
-}
 #quarto-header #quarto-search {
   grid-column: 6;
   grid-row: 1;
@@ -488,14 +478,7 @@ mark { background: var(--qdk-mark); border-radius: var(--qdk-inline-radius); col
 @media (min-width: 992px) {
   #quarto-header .navbar-container {
     display: grid;
-    grid-template-columns:
-      minmax(calc(var(--qdk-gutter) * var(--_qdk-gutter-scale)), 1fr)
-      calc(var(--qdk-sidebar) * var(--_qdk-sidebar-scale))
-      calc(var(--qdk-gutter) * var(--_qdk-gutter-scale))
-      minmax(0, calc(var(--qdk-body) * var(--_qdk-body-scale)))
-      calc(var(--qdk-gutter) * var(--_qdk-gutter-scale))
-      calc(var(--qdk-margin) * var(--_qdk-margin-scale))
-      minmax(calc(var(--qdk-gutter) * var(--_qdk-gutter-scale)), 1fr);
+    grid-template-columns: .75rem minmax(0, 1fr) auto minmax(0, 1fr) .75rem;
     align-items: center;
     padding-inline: 0;
     width: 100%;
@@ -504,28 +487,30 @@ mark { background: var(--qdk-mark); border-radius: var(--qdk-inline-radius); col
     grid-column: 2;
     justify-self: start;
     margin: 0;
-    max-width: none;
-    overflow: visible;
+    min-width: 0;
+    max-width: 100%;
   }
   #quarto-header .navbar-brand {
-    max-width: none;
-    overflow: visible;
-    text-overflow: clip;
+    max-width: 100%;
   }
   #quarto-header .navbar-collapse {
     align-items: center;
     align-self: center;
     display: flex;
-    grid-column: 4;
+    grid-column: 3;
     justify-content: center;
     justify-self: center;
-    width: auto;
+    min-width: 0;
+    width: 100%;
   }
+  #quarto-header .navbar-nav { flex-wrap: nowrap; width: max-content; margin-inline: auto !important; }
+  #quarto-header .navbar-nav .menu-text { white-space: nowrap; }
   #quarto-header .quarto-navbar-tools {
-    grid-column: 6;
+    grid-column: 4;
     grid-row: 1;
     justify-self: end;
   }
+  #quarto-header #quarto-search { grid-column: 4; }
 }
 @media (max-width: 1279.98px) {
   #quarto-header #quarto-search {
@@ -554,11 +539,6 @@ mark { background: var(--qdk-mark); border-radius: var(--qdk-inline-radius); col
     display: block !important;
     height: auto !important;
     overflow: visible !important;
-  }
-  #qdk-area-glass {
-    position: fixed;
-    inset: 0;
-    z-index: 999;
   }
   #quarto-sidebar-glass.qdk-glass-in,
   #qdk-area-glass.qdk-glass-in {
@@ -655,36 +635,6 @@ mark { background: var(--qdk-mark); border-radius: var(--qdk-inline-radius); col
   #quarto-header .navbar-brand { max-width: none; margin: 0 !important; overflow: visible; pointer-events: auto; text-overflow: clip; }
   #quarto-header .quarto-navbar-tools { grid-column: 3; grid-row: 1; }
   #quarto-header .navbar-toggler { grid-column: 4; grid-row: 1; margin: 0; }
-  #quarto-header .navbar-collapse {
-    position: fixed;
-    top: var(--qdk-nav-height);
-    right: 0;
-    bottom: 0;
-    z-index: 1040;
-    display: flex !important;
-    flex-direction: column;
-    align-items: stretch;
-    width: min(16rem, calc(100vw - 4rem)) !important;
-    height: calc(100vh - var(--qdk-nav-height)) !important;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    background: var(--qdk-canvas);
-    border-left: 1px solid var(--qdk-control-border);
-    transform: translateX(100%);
-    transition: transform .35s ease !important;
-  }
-  #quarto-header .navbar-collapse.qdk-open {
-    transform: translateX(0);
-  }
-  #quarto-header .navbar-nav { align-items: stretch; align-self: stretch; flex: none; width: min(16rem, calc(100vw - 4rem)); height: auto !important; max-height: none; overflow: visible; padding: 8px 0; }
-  #quarto-header .navbar-nav .nav-link {
-    justify-content: flex-start;
-    box-sizing: border-box;
-    min-height: 48px;
-    padding: 14px 20px;
-  }
   #quarto-header .quarto-secondary-nav {
     position: absolute;
     top: 0;
@@ -704,8 +654,7 @@ mark { background: var(--qdk-mark); border-radius: var(--qdk-inline-radius); col
   #quarto-header .quarto-secondary-nav .container-fluid { align-items: center; height: var(--qdk-nav-height); padding: 0; }
   #quarto-header .quarto-secondary-nav .quarto-page-breadcrumbs,
   #quarto-header .quarto-secondary-nav-title { display: none; }
-  #quarto-header .quarto-btn-toggle,
-  #quarto-header .navbar-toggler {
+  #quarto-header .quarto-btn-toggle {
     align-items: center;
     justify-content: center;
     display: inline-flex;
@@ -719,23 +668,70 @@ mark { background: var(--qdk-mark); border-radius: var(--qdk-inline-radius); col
     border-radius: var(--qdk-control-radius);
     box-shadow: none;
   }
-  #quarto-header .quarto-btn-toggle:hover,
-  #quarto-header .navbar-toggler:hover { border-color: var(--qdk-control-hover); color: var(--qdk-control-hover); }
+  #quarto-header .quarto-btn-toggle:hover { border-color: var(--qdk-control-hover); color: var(--qdk-control-hover); }
   #quarto-header .quarto-navbar-tools { margin-inline-end: var(--qdk-nav-gap); }
   #quarto-header .quarto-btn-toggle .bi { font-size: calc(var(--qdk-version-size) * var(--qdk-ui) * var(--_qdk-ui-scale)); line-height: 1; }
-  #quarto-header .navbar-toggler-icon {
-    display: block;
-    width: calc(var(--qdk-nav-size) * var(--qdk-ui) * var(--_qdk-ui-scale));
-    height: calc(var(--qdk-nav-size) * var(--qdk-ui) * var(--_qdk-ui-scale));
-    background-color: currentColor;
-    background-image: none;
-    -webkit-mask: center / contain no-repeat;
-    mask: center / contain no-repeat;
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M5 7h14M5 12h14M5 17h14'/%3E%3C/svg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M5 7h14M5 12h14M5 17h14'/%3E%3C/svg%3E");
-  }
 }
 .sidebar-navigation .sidebar-item a.sidebar-link, #TOC a { color: var(--qdk-text); font-size: calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale) - 2px); font-weight: 400; line-height: 1.35; }
+// Areas has one panel presentation, independent of the Pages breakpoint.
+#quarto-header .navbar-brand { display: block; min-width: 0; max-width: 100%; }
+#quarto-header .navbar-title { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#qdk-area-glass { position: fixed; inset: 0; z-index: 999; background: #000; opacity: 0; pointer-events: none; transition: opacity .35s ease; }
+#qdk-area-glass.qdk-glass-in { opacity: .32; pointer-events: auto; }
+#quarto-header.askr-areas-collapsed .navbar-collapse {
+  position: fixed;
+  top: var(--qdk-nav-height);
+  right: 0;
+  bottom: auto;
+  z-index: 1040;
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;
+  align-self: flex-start;
+  justify-content: flex-start;
+  width: min(18rem, calc(100vw - 4rem)) !important;
+  height: calc(100dvh - var(--qdk-nav-height)) !important;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: var(--qdk-canvas);
+  border-left: 1px solid var(--qdk-control-border);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform .35s ease, visibility .35s !important;
+}
+#quarto-header.askr-areas-collapsed .navbar-collapse.qdk-open { transform: translateX(0); visibility: visible; }
+#quarto-header.askr-areas-collapsed .navbar-nav { flex-direction: column; align-items: stretch; align-self: stretch; flex: none; width: 100%; height: auto !important; max-height: none; overflow: visible; padding: 8px 0; margin: 0 !important; }
+// Keep Bootstrap's transient collapse height out of the inline fit measurement.
+@media (min-width: 992px) {
+  #quarto-header.askr-areas-measuring .navbar-collapse { position: static; height: auto !important; transform: none; overflow: visible; }
+}
+#quarto-header.askr-areas-collapsed .navbar-nav .nav-link { justify-content: flex-start; box-sizing: border-box; min-height: 48px; padding: 14px 20px; }
+#quarto-header.askr-areas-collapsed .navbar-nav .menu-text { white-space: normal; overflow-wrap: anywhere; }
+#quarto-header.askr-areas-collapsed .navbar-toggler { display: inline-flex; align-items: center; justify-content: center; flex: none; width: calc(var(--qdk-control-size) * var(--qdk-ui) * var(--_qdk-ui-scale)); height: calc(var(--qdk-control-size) * var(--qdk-ui) * var(--_qdk-ui-scale)); margin: 0; padding: 0; color: var(--qdk-control-color); background: transparent; border: 1px solid var(--qdk-control-border); border-radius: var(--qdk-control-radius); box-shadow: none; }
+#quarto-header.askr-areas-collapsed .navbar-toggler:hover { border-color: var(--qdk-control-hover); color: var(--qdk-control-hover); }
+#quarto-header.askr-areas-collapsed .navbar-toggler-icon { display: block; width: calc(var(--qdk-nav-size) * var(--qdk-ui) * var(--_qdk-ui-scale)); height: calc(var(--qdk-nav-size) * var(--qdk-ui) * var(--_qdk-ui-scale)); background: currentColor; -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M5 7h14M5 12h14M5 17h14'/%3E%3C/svg%3E") center / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M5 7h14M5 12h14M5 17h14'/%3E%3C/svg%3E") center / contain no-repeat; }
+@media (min-width: 992px) {
+  #quarto-header.askr-areas-collapsed .navbar-container { display: flex; gap: var(--qdk-nav-gap); padding-inline: .75rem; }
+  #quarto-header.askr-areas-collapsed .navbar-brand-container { flex: 1; min-width: 0; max-width: none; margin: 0 !important; }
+  #quarto-header.askr-areas-collapsed #quarto-search { position: static; order: 2; flex: none; height: auto; margin: 0; }
+  #quarto-header.askr-areas-collapsed .quarto-navbar-tools { order: 3; flex: none; }
+  #quarto-header.askr-areas-collapsed .navbar-toggler { order: 4; }
+}
+@media (max-width: 991.98px) {
+  #quarto-header.askr-areas-collapsed .navbar-brand-container,
+  #quarto-header.askr-areas-collapsed .navbar-brand-container:has(.askr-version) {
+    left: var(--askr-brand-left, 6rem);
+    right: var(--askr-brand-right, 6rem);
+    width: auto;
+    max-width: none;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #quarto-header.askr-areas-collapsed .navbar-collapse, #qdk-area-glass { transition: none !important; }
+}
 .sidebar-navigation .sidebar-link.active, .navbar .nav-link.active, #TOC .active > a { color: var(--qdk-link); font-weight: 600; }
 #TOC { color: var(--qdk-muted); }
 

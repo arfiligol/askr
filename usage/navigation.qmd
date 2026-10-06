@@ -5,6 +5,13 @@ title: "Areas, the Page List, and Sections"
 These are three different lists. An Area chooses which Page List is open. The
 Page List chooses a page. Sections are the headings of that page.
 
+On desktop, Areas appear inline only when the site title, navigation and
+Header controls fit. Otherwise the Areas button opens the same navigation
+list in a panel. This adapts to long labels as well as narrow windows; no
+consumer breakpoint setting is required. Pages still follows its own mobile
+sidebar behavior. Very long site titles may be shortened visually, while
+their full accessible name is retained.
+
 | Role | Where it appears | What you put there |
 | --- | --- | --- |
 | Areas | Header | One item per group of pages |

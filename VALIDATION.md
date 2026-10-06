@@ -1,5 +1,84 @@
 # Candidate validation receipt
 
+## 0.6.1 publication package — 2026-10-06
+
+Human requested the complete release flow. Release metadata, README install tag,
+inline version manifest and CHANGELOG now identify 0.6.1. Core implementation
+bytes below are unchanged, so the recorded rendered interaction observations
+remain applicable; they are not relabeled as a new execution. Release-document
+renders and a fresh Figures render completed, including both Python3 cells.
+Exact-diff inspection found no newly included private URLs, images or consumer
+payloads; Git whitespace inspection completed. No durable tests were added.
+Develop checkpoint, main promotion, tag/Release and actual Pages observations
+are delivery obligations; no consumer or root pin is updated by this package.
+
+## Adaptive Areas / RequireJS — local candidate, 2026-10-06
+
+Human-assigned scope: local preview, not publication or stabilization. Base
+`bd6e62bd6415df02512969714d97bf6d02777cfb`; package version remains 0.6.0;
+semantic state CONVERGING, delivery LOCAL CANDIDATE. No durable tests, consumer
+repository, root pins or infrastructure were changed.
+
+Quarto 1.10.18 `quarto render . --execute-daemon 0` completed all 104 Gallery
+inputs, including both Figures Python cells and existing public arithmetic
+output. Header JavaScript syntax and Git whitespace inspection completed.
+The separate `quarto check jupyter` probe encountered a stale default kernel
+path; the successful actual Python3 Gallery renders are the execution evidence.
+
+Core source SHA-256:
+
+- `qdk.scss`: `56f124025080f35e3dfcd492822175baa4f424c6562510f51a232e65b924e9e5`
+- `theme-color.html`: `afdb8c2c1c14e088423cbbd8c03b1d01f54a498ba3c2104d321cf5266233d014`
+- `_quarto.yml`: `4df6e410fcdf862a360eb9d295d92eaa64f92d1283ac232bb92ccfc6505c3668`
+
+### Executed Gallery runtime
+
+In the Codex in-app browser, current Figures HTML still includes RequireJS and
+no longer includes Zenscroll. Error logs were empty on the observed page; the
+previous anonymous-module mismatch was not reproduced. Both light/dark HTML
+outputs, the Notebook image and actual Mermaid SVG were present. A Sections
+link navigated to `#diagram`. Both image-viewer buttons loaded the public
+1600px image in-page; Escape returned focus to their respective entry buttons.
+The browser resolved native smooth scrolling; compiled CSS contains the
+reduced-motion `auto` override and disabled Areas transitions. The OS motion
+preference itself was not changed.
+
+### Header observations
+
+A separate temporary consumer used a generic long title and five Areas,
+Pages and Search. Separate pages enabled Logout and an inline version manifest.
+No private consumer text, URL or screenshot was copied into product files.
+The absent external version manifest in these temporary cases is expected;
+no-version and inline-manifest behavior use the existing contract.
+
+- 1440px/1920px: full navigation fits without title/control overlap.
+- 1024px/1280px: the same navigation becomes an Areas disclosure; Pages stays
+  a desktop sidebar. The vertical Areas panel begins below the Header.
+- Version + Logout consumer: observed 1320px/1328px/1332px/1336px used the
+  disclosure; 1340px/1360px/1440px used inline Areas. These are observations,
+  not a fixed breakpoint or product threshold.
+- Tablet 768px and phones 390px/320px: shortened titles retain their accessible
+  name and tooltip. Page width matched viewport width; actual control rectangles
+  did not intersect the title slot in the narrow examples.
+- Light/dark controls were visually inspected. Pages opened/closed; Search
+  returned real local results; version disclosure opened/closed; theme toggle
+  changed native body mode. Logout reached its configured local receipt, which
+  explicitly does not claim identity-provider logout.
+- Areas opened via mouse and Enter. Escape returned to its button. An open-panel
+  resize across the observed fit boundary cleared the panel/overlay, restored
+  visible link focus and released Header freezing. Selecting Design Notes
+  navigated to the real `#notes` destination with the panel and overlay closed.
+
+An intermediate candidate inherited Bootstrap row direction and vertical
+centering in the fixed panel; final styling explicitly uses a top-aligned
+column, independent of the Pages breakpoint. There is one navigation tree,
+no RequireJS suppression, and no new viewer implementation.
+
+Local Gallery: `http://127.0.0.1:4572/`.
+Generic long-Header consumer: `http://127.0.0.1:4585/`.
+Screenshots remain temporary owner-side observations, not product assets.
+Public Pages still serves 0.6.0; this candidate is not committed or published.
+
 ## 0.6.0 publication package — 2026-10-06
 
 The Human authorized publishing the reviewed Logout/image-viewer candidate
