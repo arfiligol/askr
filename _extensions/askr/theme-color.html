@@ -1,29 +1,76 @@
 <meta name="theme-color" content="#faf8f8">
 <script>
 (function () {
-  var light = "#faf8f8", dark = "#161618";
   function paint() {
     var link = document.querySelector("link#quarto-bootstrap.quarto-color-alternate");
     var on = link && link.getAttribute("rel") === "stylesheet";
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", on ? dark : light);
+    var canvas = getComputedStyle(document.documentElement).getPropertyValue("--qdk-canvas").trim();
+    if (meta && canvas) meta.setAttribute("content", canvas);
     document.documentElement.style.colorScheme = on ? "dark" : "light";
   }
   function hook() {
-    paint();
+    requestAnimationFrame(paint);
+    // A newly enabled alternate sheet may finish loading after the rel change.
+    document.querySelectorAll('link.quarto-color-scheme').forEach(function (sheet) {
+      sheet.addEventListener("load", paint);
+    });
+    new MutationObserver(function () { requestAnimationFrame(paint); }).observe(document.body, {
+      attributes: true, attributeFilter: ["class"]
+    });
     var link = document.querySelector("link#quarto-bootstrap.quarto-color-alternate");
-    if (link) new MutationObserver(paint).observe(link, { attributes: true, attributeFilter: ["rel"] });
+    if (link) new MutationObserver(function () { requestAnimationFrame(paint); }).observe(link, { attributes: true, attributeFilter: ["rel"] });
     var orig = window.quartoToggleColorScheme;
     if (!orig || orig.__qdk) return;
     window.quartoToggleColorScheme = function () {
       var result = orig.apply(this, arguments);
-      paint();
+      requestAnimationFrame(paint);
       return result;
     };
     window.quartoToggleColorScheme.__qdk = true;
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", hook);
   else hook();
+
+  // Quarto owns group selection and persistence. Its grouped-tab runtime updates
+  // active classes; mirror those classes into attributes, never a second state.
+  function groupedTabs() {
+    document.querySelectorAll('.panel-tabset[data-group]').forEach(function (tabset) {
+      if (tabset.dataset.askrTabsBound) return;
+      tabset.dataset.askrTabsBound = "true";
+      var tabs = Array.from(tabset.querySelectorAll(':scope > [role="tablist"] [role="tab"]'));
+      // Persisted group choices may activate a tab that Bootstrap did not
+      // initialize on load. Initialize every native Tab once for keyboard use.
+      if (window.bootstrap) tabs.forEach(function (tab) {
+        window.bootstrap.Tab.getOrCreateInstance(tab);
+      });
+      function sync() {
+        tabs.forEach(function (tab) {
+          var selected = tab.classList.contains("active");
+          tab.setAttribute("aria-selected", selected ? "true" : "false");
+          tab.setAttribute("tabindex", selected ? "0" : "-1");
+        });
+      }
+      var observer = new MutationObserver(sync);
+      tabs.forEach(function (tab) {
+        observer.observe(tab, { attributes: true, attributeFilter: ["class"] });
+      });
+      // Bootstrap keyboard activation is not a click. After it selects/focuses
+      // a tab, route that native activation through Quarto's group click handler;
+      // no group or storage logic is duplicated here.
+      tabset.addEventListener("keydown", function (event) {
+        if (!tabs.includes(event.target) || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
+        requestAnimationFrame(function () {
+          var selected = document.activeElement;
+          if (tabs.includes(selected) && selected.classList.contains("active")) selected.click();
+        });
+      }, true);
+      sync();
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", groupedTabs);
+  else groupedTabs();
+  window.addEventListener("pageshow", groupedTabs);
 
   function hideShown(selector) {
     document.querySelectorAll(selector).forEach(function (el) {
@@ -97,43 +144,51 @@
       if (!response.ok) throw new Error("missing");
       return response.json();
     }).then(function (data) {
-      mountVersions(data, hideShown, brand, slot);
+      mountVersions(data, hideShown, brand, slot, new URL("./", manifest));
     }).catch(function () {
       var dataEl = document.getElementById("askr-versions");
       if (!dataEl) return;
-      try { mountVersions(JSON.parse(dataEl.textContent), hideShown, brand, slot); } catch (error) { return; }
+      try { mountVersions(JSON.parse(dataEl.textContent), hideShown, brand, slot, new URL("./", manifest)); } catch (error) { return; }
     });
   }
-  function mountVersions(data, hideShown, brand, slot) {
+  function mountVersions(data, hideShown, brand, slot, siteRoot) {
     if (!data.versions || !data.versions.length || slot.querySelector(".askr-version")) return;
     var params = new URLSearchParams(location.search);
     var mode = params.get("askr-version-mode") === "title" ? "title" : (data.mode === "title" ? "title" : "inline");
     var title = brand.textContent.trim();
     if (params.get("askr-version-mode") === "title" && data.longTitle) title = data.longTitle;
+    // Manifest roots are relative to the deployed site, not the origin. Quarto's
+    // offset locates that site even from a nested page under a repository prefix.
+    function versionRoot(item) {
+      var root = item.root || "/";
+      var relative = root.replace(/^\/+/, "");
+      return new URL(relative ? relative.replace(/\/?$/, "/") : "./", siteRoot);
+    }
     function pathMatches(root) {
       var path = location.pathname;
-      if (root === "/") return true;
-      var normalized = root.endsWith("/") ? root : root + "/";
+      var normalized = root.pathname;
       return path === normalized.slice(0, -1) || path.indexOf(normalized) === 0;
     }
     function itemHref(item) {
       if (item.href) {
-        var fixed = new URL(item.href, location.origin);
+        var fixed = new URL(item.href.replace(/^\/(?!\/)/, ""), siteRoot);
         if (params.get("askr-version-mode")) fixed.searchParams.set("askr-version-mode", params.get("askr-version-mode"));
-        return fixed.pathname + fixed.search + fixed.hash;
+        return fixed.href;
       }
       var path = location.pathname;
       var bases = data.versions.filter(function (version) { return version.root; })
-        .sort(function (a, b) { return b.root.length - a.root.length; });
-      var from = bases.filter(function (version) { return pathMatches(version.root); })[0];
-      var fromRoot = !from || from.root === "/" ? "/" : (from.root.endsWith("/") ? from.root : from.root + "/");
-      var rest = fromRoot === "/" ? path.replace(/^\//, "") : path.slice(fromRoot.length);
-      var toRoot = !item.root || item.root === "/" ? "/" : (item.root.endsWith("/") ? item.root : item.root + "/");
-      return toRoot + rest + location.search + location.hash;
+        .sort(function (a, b) { return versionRoot(b).pathname.length - versionRoot(a).pathname.length; });
+      var from = bases.filter(function (version) { return pathMatches(versionRoot(version)); })[0];
+      var fromRoot = from ? versionRoot(from) : siteRoot;
+      var rest = path.slice(fromRoot.pathname.length);
+      var target = new URL(rest, versionRoot(item));
+      target.search = location.search;
+      target.hash = location.hash;
+      return target.href;
     }
     var current = data.versions.filter(function (item) { return item.label === params.get("askr-version"); })[0];
     if (!current) {
-      var rooted = data.versions.filter(function (item) { return item.root && pathMatches(item.root); })
+      var rooted = data.versions.filter(function (item) { return item.root && pathMatches(versionRoot(item)); })
         .sort(function (a, b) { return b.root.length - a.root.length; });
       current = rooted[0] || data.versions.filter(function (item) { return item.latest; })[0] || data.versions[0];
     }
@@ -143,8 +198,8 @@
     var button = document.createElement("button");
     button.type = "button";
     button.className = "askr-version-button";
-    button.setAttribute("aria-haspopup", "listbox");
     button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "askr-version-links");
     var titleSpan = document.createElement("span");
     titleSpan.className = "askr-version-title";
     titleSpan.textContent = title;
@@ -171,12 +226,12 @@
     var menu = document.createElement("div");
     menu.className = "askr-version-menu";
     menu.hidden = true;
-    menu.setAttribute("role", "listbox");
+    menu.id = "askr-version-links";
     data.versions.forEach(function (item) {
       var link = document.createElement("a");
       link.href = itemHref(item);
-      link.setAttribute("role", "option");
-      if (item.label === current.label) link.setAttribute("aria-selected", "true");
+      link.dataset.versionHome = versionRoot(item).href;
+      if (item.label === current.label) link.setAttribute("aria-current", "true");
       var label = document.createElement("span");
       label.textContent = item.label;
       link.appendChild(label);
@@ -201,7 +256,14 @@
       if (!root.contains(event.target)) setOpen(false);
     });
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape" && !menu.hidden) {
+        event.preventDefault();
+        setOpen(false);
+        button.focus();
+      }
+    });
+    root.addEventListener("focusout", function (event) {
+      if (!root.contains(event.relatedTarget)) setOpen(false);
     });
     root.appendChild(button);
     root.appendChild(menu);
@@ -211,16 +273,14 @@
       if (!link || !root.contains(link)) return;
       var href = link.getAttribute("href");
       if (!href) return;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.origin !== location.origin) return;
       event.preventDefault();
       fetch(href).then(function (response) {
         if (response.status !== 404) {
           location.assign(href);
           return;
         }
-        var target = new URL(href, location.origin).pathname;
-        var version = target.match(/(\/v[^/]+)\//);
-        if (version) location.assign(target.slice(0, version.index) + version[1] + "/");
-        else location.assign(target.indexOf("/askr/") === 0 ? "/askr/" : "/");
+        location.assign(link.dataset.versionHome);
       }).catch(function () {
         location.assign(href);
       });

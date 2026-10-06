@@ -30,3 +30,24 @@ fonts, icons, or styles from a CDN.
 To move to a newer tag, install that tag and render the project again. Commit
 the updated `_extensions` copy. Reinstall a reviewed tag instead of editing
 files inside `_extensions/arfiligol/askr`.
+
+## Quarto compatibility — 0.5.0 candidate
+
+The candidate supports stable Quarto releases in `>=1.9.38 <1.11`.
+Quarto 1.10.18 remains the reproducible gallery and CI baseline; consumers
+may use a stable release inside the supported range instead of that exact patch.
+The currently published 0.4.2 tag still declares its original requirement.
+
+Actual non-executing renders and browser observations cover stable 1.9.38
+and 1.10.18, plus 1.10.16 as a diagnostic prerelease across upstream Sass
+changes. This is not an observation of every intervening patch or a promise
+that prereleases are supported. The native grouped-tab runtime, Bootstrap tab
+implementation and tabset markup used by Askr were unchanged at the inspected
+boundaries. Exact inputs, findings and limits are recorded in
+[the validation receipt](../VALIDATION.md).
+
+Before extending the range, inspect upstream changes to native tabs, theme
+switching, navigation/search and grid markup, then render and operate the
+affected Askr components using the proposed version. Quarto 1.11 is excluded
+from this candidate because it changes navigation and theme-control markup;
+support requires its own investigation, not a multi-version adapter framework.

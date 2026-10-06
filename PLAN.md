@@ -12,6 +12,94 @@ stabilization or deployment.
 
 ## Ownership and interfaces
 
+### Active 0.5.0 engineering package (2026-10-06)
+
+Human authorized execution of this package. Owner/writer: Askr Lead in the
+registered local child checkout, `arfiligol/askr` on `develop`, starting at
+`efab6e77ba91a9d7b71dd2816a4e191769683e89`. State: CONVERGING / LOCAL CANDIDATE.
+No Cursor writer is active. Worker leases, when allocated, are disjoint.
+
+1. Restore grouped tabs' visual selection, content, ARIA selection and keyboard
+   tab stops to one native Quarto state. Quarto retains switching, grouping and
+   persistence; Askr synchronizes accessibility attributes from native active
+   classes, including initial load and page return. Preserve .9rem labels and
+   current spacing. If a narrow package fix is not viable, report evidence and
+   discuss Plan B rather than silently removing groups.
+2. Resolve version links relative to the deployment site root, separately from
+   version roots and page paths. Manifest `/` means the site root, including
+   repository-prefix deployments. Keep the corresponding page and missing-page
+   version-home behavior without hardcoded product paths. Use a disclosure
+   button and ordinary links, native Enter/Space and Tab/Shift-Tab, Escape with
+   trigger-focus restoration, and outside/focus-leave closing without stealing
+   outside focus.
+3. Exclude controls from prose-link styling. Publish global and component
+   design tokens (tabs, callouts, navigation/version/search, code, tables and
+   blockquotes) while preserving `askr-html` and existing `--qdk-*` names.
+   Sass owns compile-time defaults and derived CSS variables; theme-color reads
+   the actual canvas token. Consumer bases remain authoritative at responsive
+   sizes. Keep one external gallery version manifest; existing inline consumer
+   input remains supported. Document overrides and show real rendered examples.
+4. Investigate a Quarto compatibility range rather than locking one patch.
+   Keep 1.10.18 as reproducible CI baseline. Inspect native dependencies and
+   upstream changes, then observe range boundaries/relevant changed releases.
+   Report supported range separately from actually observed versions. No broad
+   unobserved 1.x claim, adapter framework or standing CI version matrix.
+
+Required observations: desktop/mobile light/dark grouped tabs via mouse and
+keyboard, state/content/ARIA agreement, reload and page return; root and
+repository-prefix version routes including history/missing pages; disclosure
+focus; a clean independent consumer with token overrides; and selected Quarto
+versions. Source and rendered DOM/browser observations support these claims,
+not a synthetic PASS label. Temporary probes and screenshots stay outside the
+repository. Record interpretation and exact inputs in `VALIDATION.md`. No
+durable test writes or general validation framework are authorized.
+
+Independent review covers the frozen reusable/public-interface candidate.
+Present the full candidate for Human semantic acceptance before 0.5.0
+develop-to-main promotion, tag and actual Pages/public-site verification.
+Do not modify consumers, root pins, infrastructure or private artifacts. The
+separately received logout-action design context is pending Human discussion
+and is not part of this package.
+
+Candidate implementation and the assigned browser observations are complete;
+see `VALIDATION.md` for actual inputs, outcomes and limits. The range candidate
+is stable Quarto `>=1.9.38 <1.11`, with 1.10.18 retained for CI. Public component
+tokens are documented in `usage/tokens.qmd`. Final independent delta review
+found no remaining requirement-backed defects. Human acceptance precedes
+publication; this is not a released 0.5.0 yet.
+
+#### Human acceptance packet: 0.5.0 engineering candidate
+
+- Scope and behavior: grouped native tabs agree across content, selection,
+  ARIA and tab stops, including keyboard/reload/return. Version disclosure uses
+  ordinary links and predictable focus; routes remain deployment-root-relative.
+  Prose/control styling is separated. Global/component overrides have one
+  Sass compile authority and meaningful responsive consumer bases.
+- Public interfaces: existing `askr-html`, `--qdk-*` names and version manifest
+  fields remain; documented component tokens are added. Candidate Quarto range
+  is stable `>=1.9.38 <1.11`, with 1.10.18 as CI baseline. Global radius default
+  now actually controls component radii at the existing effective 6px value.
+- Ownership: Quarto owns tab selection/persistence, collapse and search;
+  Askr mirrors presentation/accessibility and owns tokens. Consumers own their
+  styles, content, manifest and hosting. Historical sites are unchanged.
+- Failure and edges: missing manifests keep the native brand (or existing
+  inline input); same-origin 404 links use the selected version home. Network
+  failure retains the original link; modified/external links stay browser-native.
+  Invalid Sass/CSS inputs use native compiler/browser behavior, not invented
+  replacement values. Native group persistence is unchanged.
+- Limits/exclusions: not every Quarto patch was exercised; prerelease support,
+  1.11 adapters, scientific output, new tests, consumer changes, root pins,
+  logout and infrastructure are excluded. A custom host error document remains
+  a consumer/hosting responsibility.
+- Completed evidence: actual desktop/mobile light/dark browser operations,
+  independent consumer and root/prefix routing observations, selected-version
+  renders/source investigation and independent review, detailed in VALIDATION.
+- Unresolved semantic decisions: none proposed by the implementation. Human
+  acceptance is pending; source candidate is not semantic acceptance.
+- Delivery: candidate checkpoint on develop, then after explicit acceptance
+  promote main/tag 0.5.0 and observe actual CI, Pages and public routes. The
+  Pages-hosted 404 receipt is intentionally pending that delivery stage.
+
 ### Current bounded typography adjustment
 
 Reduce native grouped-tabset labels to 0.9rem, following the Human-requested

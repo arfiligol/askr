@@ -308,7 +308,6 @@ format:
   askr-html:
     include-in-header:
       - _extensions/askr/theme-color.html
-      - gallery-versions.html
     theme:
       light: [default, _extensions/askr/qdk.scss, gallery-assets.scss]
       dark: [default, _extensions/askr/qdk.scss, _extensions/askr/qdk-dark.scss, gallery-assets.scss]

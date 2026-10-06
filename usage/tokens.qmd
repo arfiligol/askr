@@ -2,19 +2,257 @@
 title: "Tokens"
 ---
 
-Keep color and type overrides in the project, listed after Askr's theme:
+Askr exposes Sass defaults for compilation and `--qdk-*` CSS properties for
+the rendered page. Consumer styles belong after Askr; keep installed extension
+files unchanged. Native Quarto owns tab switching, collapse, navigation,
+search and copying; tokens change presentation.
+
+## Override in the consumer
 
 ```yaml
 format:
   askr-html:
     theme:
-      light: [default, _extensions/arfiligol/askr/qdk.scss, styles.scss]
-      dark: [default, _extensions/arfiligol/askr/qdk.scss, _extensions/arfiligol/askr/qdk-dark.scss, styles.scss]
+      light: [default, _extensions/arfiligol/askr/qdk.scss, styles.scss, light.scss]
+      dark: [default, _extensions/arfiligol/askr/qdk.scss, _extensions/arfiligol/askr/qdk-dark.scss, styles.scss, dark.scss]
 ```
 
+Use `scss:defaults` to change compiled Quarto styles and their derived CSS
+properties. All listed Sass defaults use `!default`; consumer assignments
+omit it. Quarto reads defaults in reverse theme-list order and rules in forward
+order. Put shared defaults in `styles.scss` and theme-specific defaults in
+`light.scss` / `dark.scss`; each variable must have only one consumer assignment
+per theme. A later file does not override an earlier unconditional Sass
+assignment because its defaults run first.
+
+For example `light.scss` contains `$body-bg: #f3f5f7;` and `dark.scss` contains
+`$body-bg: #20252b;`, each under `/*-- scss:defaults --*/`. Keep `$body-bg` out
+of the shared file in that arrangement. The shared `styles.scss` can contain:
+
 ```scss
+/*-- scss:defaults --*/
+$link-color: #2d5e85;
+$grid-body-width: 680px;
+$qdk-tab-size: .85rem;
+$qdk-tab-padding-y: .3rem;
+
 /*-- scss:rules --*/
-:root { --qdk-link: #2D5E85; }
+:root {
+  --qdk-callout-radius: 8px;
+  --qdk-table-cell-padding: .35rem .7rem;
+}
 ```
+
+CSS overrides affect rules that consume the property. Sass overrides also
+reach native Quarto rules compiled from that Sass variable. A component alias
+such as `--qdk-tab-active-border: var(--qdk-link)` follows changes to its global
+base unless the consumer overrides the component itself. CSS values must be
+valid for their target CSS property; Sass compilation reports invalid
+compile-time inputs through Quarto.
+
+## Global palette and layout
+
+Existing CSS names remain available. Their compile-time sources and exact
+light/dark defaults are:
+
+| CSS property | Sass source | Light | Dark |
+| --- | --- | --- | --- |
+| `--qdk-canvas` | `$body-bg` | `#faf8f8` | `#161618` |
+| `--qdk-text` | `$body-color` | `#4e4e4e` | `#d4d4d4` |
+| `--qdk-heading` | `$headings-color` | `#2b2b2b` | `#ebebec` |
+| `--qdk-muted` | `$toc-color` | `#b8b8b8` | `#646464` |
+| `--qdk-link`, `--qdk-focus` | `$link-color` | `#284b63` | `#7b97aa` |
+| `--qdk-border` | `$border-color` | `#e5e5e5` | `#393639` |
+| `--qdk-highlight` | `$code-bg` | `rgba(143,159,169,.15)` | same |
+| `--qdk-sidebar`, `--qdk-margin` | `$grid-sidebar-width`, `$grid-margin-width` | `264px` | same |
+| `--qdk-body` | `$grid-body-width` | `630px` | same |
+| `--qdk-gutter` | `$grid-column-gutter-width` | `26px` | same |
+| `--qdk-callout-note` | `$callout-color-note` | `#448aff` | same |
+| `--qdk-callout-tip` | `$callout-color-tip` | `#00bfa5` | same |
+| `--qdk-callout-important` | `$callout-color-important` | `#7a43b5` | same |
+| `--qdk-callout-warning` | `$callout-color-warning` | `#db8942` | same |
+| `--qdk-callout-caution` | `$callout-color-caution` | `#db4242` | same |
+
+Type sources default to Source Sans 3 for body text, Schibsted Grotesk for
+headings and IBM Plex Mono for code, with the installed platform fallbacks.
+`$font-size-root` is `18px`, `$line-height-base` is `1.6`,
+`$font-weight-base` is `400`, and `$headings-font-weight` is `700`.
+Heading Sass sizes `$h1-font-size` through `$h4-font-size` are
+`1.78rem`, `1.39rem`, `1.11rem`, and `1rem`.
+`$table-border-color` follows the listed theme border default;
+`$table-striped-bg` is `rgba(143,159,169,.15)`.
+`$code-block-bg` is `transparent` in light and `#1f1f22` in dark.
+`$callout-border-width` is `1px`.
+
+## Global and component properties
+
+For each row, the CSS name is `--qdk-` plus the token and the Sass default
+is `$qdk-` plus the same token. Values containing `var(...)` are live CSS
+aliases; values containing `$` derive from the Sass sources above.
+
+| Token | Default |
+| --- | --- |
+| `tertiary` | `#84a59d` |
+| `divider-content` | `rgba(43, 43, 43, .18)` |
+| `divider-layout` | `rgba(43, 43, 43, .08)` |
+| `mark` | `#fff23688` |
+| `space` | `1rem` |
+| `chrome` | `$font-size-root` |
+| `ui` | `1.15` |
+| `body-font` | `$font-family-sans-serif` |
+| `heading-font` | `$headings-font-family` |
+| `mono-font` | `$font-family-monospace` |
+| `body-size` | `1rem` |
+| `line-height` | `$line-height-base` |
+| `body-weight` | `$font-weight-base` |
+| `strong-weight` | `600` |
+| `heading-weight` | `$headings-font-weight` |
+| `link-hover` | `var(--qdk-tertiary)` |
+| `link-background` | `var(--qdk-highlight)` |
+| `inline-radius` | `var(--qdk-radius)` |
+| `focus-width` | `3px` |
+| `focus-offset` | `3px` |
+| `focus-radius` | `3px` |
+| `tab-font` | `var(--qdk-heading-font)` |
+| `tab-size` | `.9rem` |
+| `tab-weight` | `400` |
+| `tab-active-weight` | `600` |
+| `tab-line-height` | `1.25` |
+| `tab-padding-y` | `.35rem` |
+| `tab-padding-x` | `.8rem` |
+| `tab-gap` | `var(--qdk-space)` |
+| `tab-border-width` | `2px` |
+| `tab-color` | `var(--qdk-text)` |
+| `tab-active-color` | `var(--qdk-heading)` |
+| `tab-active-border` | `var(--qdk-link)` |
+| `tab-hover-color` | `var(--qdk-heading)` |
+| `tab-hover-border` | `var(--qdk-divider-layout)` |
+| `tab-background` | `transparent` |
+| `control-radius` | `var(--qdk-radius)` |
+| `control-size` | `31px` |
+| `control-color` | `var(--qdk-heading)` |
+| `control-border` | `var(--qdk-divider-layout)` |
+| `control-hover` | `var(--qdk-tertiary)` |
+| `nav-height` | `3.4rem` |
+| `nav-size` | `16px` |
+| `nav-brand-size` | `18px` |
+| `nav-font` | `var(--qdk-heading-font)` |
+| `nav-gap` | `.4rem` |
+| `version-size` | `16px` |
+| `version-weight` | `400` |
+| `version-padding` | `0 .45rem 0 .6rem` |
+| `version-gap` | `.35rem` |
+| `version-menu-padding` | `.35rem` |
+| `version-item-padding` | `.3rem .55rem` |
+| `version-active-background` | `var(--qdk-highlight)` |
+| `search-overlay` | `rgba(0, 0, 0, .32)` |
+| `search-radius` | `var(--qdk-control-radius)` |
+| `search-background` | `var(--qdk-canvas)` |
+| `search-color` | `var(--qdk-text)` |
+| `search-border` | `var(--qdk-divider-layout)` |
+| `callout-radius` | `var(--qdk-radius)` |
+| `callout-padding` | `var(--qdk-space)` |
+| `callout-header-padding` | `var(--qdk-space)` |
+| `callout-margin` | `var(--qdk-space)` |
+| `callout-tint` | `6.3%` |
+| `callout-border-tint` | `27%` |
+| `callout-border-width` | `$callout-border-width` |
+| `callout-title-weight` | `600` |
+| `callout-title-line-height` | `1.35` |
+| `callout-icon-size` | `20px` |
+| `code-size` | `.85rem` |
+| `code-inline-size` | `.9em` |
+| `code-radius` | `var(--qdk-radius)` |
+| `code-padding` | `1rem 2.5rem 1rem 1rem` |
+| `code-color` | `var(--qdk-heading)` |
+| `code-inline-color` | `var(--qdk-heading)` |
+| `code-background` | `$code-block-bg` |
+| `code-border` | `var(--qdk-border)` |
+| `code-copy-background` | `var(--qdk-code-background)` |
+| `code-copy-color` | `var(--qdk-text)` |
+| `code-copy-hover-background` | `var(--qdk-border)` |
+| `code-copy-hover-color` | `var(--qdk-heading)` |
+| `table-border` | `$table-border-color` |
+| `table-stripe` | `$table-striped-bg` |
+| `table-head-border` | `var(--qdk-muted)` |
+| `table-head-padding` | `.5rem` |
+| `table-cell-padding` | `.5rem` |
+| `table-head-line-height` | `2rem` |
+| `table-margin` | `var(--qdk-space)` |
+| `blockquote-color` | `var(--qdk-text)` |
+| `blockquote-border` | `var(--qdk-link)` |
+| `blockquote-border-width` | `3px` |
+| `blockquote-padding` | `var(--qdk-space)` |
+| `blockquote-margin` | `var(--qdk-space)` |
+| `radius` | `6px` |
+
+Dark overrides `divider-content` to `rgba(212,212,212,.24)`,
+`divider-layout` to `rgba(212,212,212,.10)`, and `mark` to `#b3aa0288`.
+Other component defaults are shared between themes and follow palette aliases.
+Dark `code-color` follows `var(--qdk-text)`; inline code keeps the heading color.
+Native Quarto tables use `.5rem` header and cell padding and a `1px` header
+border, with the existing muted header-border color. These defaults retain
+the observed native baseline: earlier Askr padding and `2px` header-width
+declarations were overridden by Bootstrap; the muted color already applied.
+The token rules now address native table
+cells directly; plain HTML tables consume the same defaults. The header
+border token controls color, while border width remains `1px`.
+`--qdk-callout-color` is the local resolved type color of each native callout;
+override a named type color to change all callouts of that type.
+
+## Responsive bases
+
+Public bases are never reassigned in viewport rules. Askr multiplies them
+by internal factors; `--_qdk-*` properties are implementation details.
+This preserves consumer bases at every width and retains the default geometry:
+
+| Viewport width (px) | Body | Sidebar / margin | Gutter | Root type | UI multiplier |
+| --- | --- | --- | --- | --- | --- |
+| below 630 | fits container | 264px | 26px | 16px | 1.02 |
+| 630–991.98 | fits container | 264px | 26px | 18px | 1.15 |
+| 992–1279.98 | 630px | 200px | 16px | 17px | 1.08 |
+| 1280–1439.98 | 630px | 240px | 22px | 17px | 1.08 |
+| 1440–1919.98 | 630px | 264px | 26px | 18px | 1.15 |
+| 1920–2559.98 | 693px | 290px | 29px | 20px | 1.27 |
+| 2560 and above | 756px | 320px | 31px | 22px | 1.4 |
+
+For example a `680px` body base becomes `748px` at 1920px (×1.1)
+and `816px` at 2560px (×1.2). Mobile content fits the available container.
+Callout horizontal/header padding uses ×.8 below 992px.
+Tab labels stay `.9rem` with `.35rem` vertical padding by default, scaling
+with the root type rather than being replaced by another tab size.
+
+## Rendered component specimen
+
+These native elements consume the same token rules as the gallery.
+
+::: {.panel-tabset}
+
+### First
+
+A [prose link](../components.qmd) keeps its highlight; tab controls use tab tokens.
+
+### Second
+
+The second pane uses native Quarto selection.
+
+:::
+
+::: {.callout-note}
+Callout color, padding and radius come from the documented tokens.
+:::
+
+> Blockquote border, spacing and text use the blockquote tokens.
+
+`inline_code`
+
+```text
+A code block uses the code size, frame and padding.
+```
+
+| Token surface | Owner |
+| --- | --- |
+| Presentation | Consumer style overrides |
+| Native interaction | Quarto |
 
 Reinstall a reviewed tag instead of editing `_extensions/arfiligol/askr`.

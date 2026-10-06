@@ -1,5 +1,133 @@
 # Candidate validation receipt
 
+## 0.5.0 engineering candidate — 2026-10-06
+
+Scope: PLAN's active 0.5.0 package, based on develop
+`efab6e77ba91a9d7b71dd2816a4e191769683e89`. Semantic state is CONVERGING;
+Human acceptance, promotion, tag and deployed-site observation are pending.
+These are observed technical results, not agent-created acceptance thresholds.
+
+### Inputs and actual operations
+
+Quarto 1.10.18 rendered the 101-page gallery with `quarto render --no-execute`.
+The paired tabsets in `components/figures.qmd` were operated in an actual
+browser at 1440 × 900 and 390 × 844, in light and dark modes. This package
+did not execute notebooks or scientific models. The figures page reports
+missing light/dark cell outputs under this non-executing render; no fresh
+scientific-output or full-gallery figure-completeness claim is made.
+
+An independent temporary website installed the candidate extension into
+`_extensions/arfiligol/askr`, with its own navigation, paired native backend
+tabsets, callouts, code, table, styles and external version manifest. It was
+rendered separately, then served at both a site root and a repository prefix.
+Its authored previous-version home is a routing specimen, not a fabricated
+historical release. Temporary inputs and screenshots remain outside this repo.
+
+### Grouped-tab state and keyboard behavior
+
+Mouse selection, ArrowLeft/ArrowRight and Home/End were operated in native
+tabs. Both groups settled on the same visible Palace/AEDT panels, active
+classes, `aria-selected` values and tab stops: active true/0, inactive false/-1.
+Reload restored the native persisted selection, and navigation away followed
+by browser Back restored matching content and attributes. Native Bootstrap
+keyboard activation does not invoke Quarto's click-only group synchronizer;
+the candidate routes that activation through the native click handler on the
+next animation frame. The immediate pre-frame state is not a second maintained
+selection state. Quarto continues to own group storage and panel selection.
+
+Gallery labels measured 16.2px at desktop and 14.4px at mobile, preserving
+0.9rem. Selected/unselected weights are 600/400; prose-link emphasis no longer
+leaks into the inactive controls. Default label block padding remains .35rem.
+Screenshots showed paired groups in both themes without horizontal document
+overflow at the observed mobile width.
+
+### Version paths and disclosure focus
+
+For the independent consumer, manifest `/` resolved to the deployment site
+root rather than origin root. The prefix route `/askr/nested/components.html`
+produced `/askr/previous/nested/components.html`; a root deployment produced
+`/previous/nested/components.html`. Query and fragment were preserved in
+corresponding-page links. Clicking the missing corresponding page received
+an actual 404 and navigated to the selected version home, `/askr/previous/`
+or `/previous/`. At the previous home, the disclosure identified the previous
+version and linked back to the current site home. No product path is hardcoded.
+
+Enter and Space opened the disclosure. Tab moved to its ordinary links;
+Shift-Tab returned to the trigger. Escape closed it and restored trigger
+focus. Tab out of the final link and clicking a tab outside closed the
+disclosure without moving focus back from the outside control. The links
+are not listbox options; current version uses `aria-current`.
+
+The gallery's custom 404 route was source-reviewed and rendered. Its automatic
+Pages-hosted error-document behavior still needs the authorized public-site
+observation after release; the temporary static server does not emulate Pages.
+
+### Token authority and independent consumer
+
+Consumer Sass body width of 680px produced a 680px main at 1440px and 748px
+at 1920px (the existing 1.1 responsive scale), while the public base stayed
+680px. At 390px the main fitted 338px and document width stayed 390px.
+Removing duplicate extension grid metadata made the Sass default authoritative.
+Quoted font-family lists compiled and computed as Source Sans 3, rather than
+an invalid unquoted family falling back to Times.
+
+Consumer tabs used .85rem labels/.3rem block padding: 15.3px/5.4px at desktop,
+13.6px/4.8px at mobile. Callout radius computed as the consumer's 8px. Table
+cell padding computed as .35rem/.7rem: 6.3px/12.6px at desktop and 5.6px/11.2px
+at mobile. Specific selectors were necessary to beat Quarto/Bootstrap cell
+padding. Default table padding and 1px header rule preserve the previously
+effective native values, and the header's existing muted color is retained.
+
+Consumer canvas and theme-color matched after native toggles: light #f3f5f7,
+dark #20252b. Stylesheet-load handling prevents the meta value from retaining
+the old palette while the alternate sheet loads. Search frame corners and
+dark copy-control declarations now consume their published component tokens;
+these two additional fixes were identified by independent source review.
+
+### Quarto compatibility evidence
+
+Candidate range: stable releases `>=1.9.38 <1.11`; CI baseline remains 1.10.18.
+Actually rendered and operated: stable 1.9.38 and 1.10.18, plus diagnostic
+prerelease 1.10.16. Isolated official macOS archives were used without changing
+the installed Quarto. SHA-256 matched the official release API:
+
+- 1.9.38: `47089a5020cfb41981ba0d4b46e110edfa608722aea45ef248e14efba6d6b18a`
+- 1.10.16: `3413aaa38f65862ea3af16ef7a0ce41539d89cc9386becdd9f2a3adcf77ada0e`
+
+At 1.9.38 and 1.10.16, three-page independent consumers rendered successfully.
+Browser observations covered grouped-keyboard selection, restored ARIA/tab
+stops after reload, disclosure, desktop/mobile widths and token overrides,
+and light/dark canvas/theme-color agreement. Browser Back was also operated
+on 1.10.16. These observations do not cover every intervening patch.
+
+Official source comparisons found native `tabsets.js`, `panel-tabset.lua` and
+Bootstrap 5.3.1 identical at inspected 1.9.38/1.10.0/1.10.18 boundaries.
+Relevant intervening changes included 1.10.4 secondary-sidebar logo handling,
+1.10.15 URL query/fragment matching, 1.10.16 Sass default parsing and 1.10.17
+Pandoc/Sass updates. The 1.10.18 render exercises the later compiler baseline.
+1.11 changes theme/navigation controls and is excluded pending investigation.
+No standing CI matrix, adapter framework or prerelease-support promise is added.
+Sources: [native tabs](https://github.com/quarto-dev/quarto-cli/blob/v1.10.18/src/resources/formats/html/tabsets/tabsets.js),
+[tabset markup](https://github.com/quarto-dev/quarto-cli/blob/v1.10.18/src/resources/filters/customnodes/panel-tabset.lua),
+[1.10 changes](https://github.com/quarto-dev/quarto-cli/blob/v1.10.18/news/changelog-1.10.md),
+[1.11 changes](https://github.com/quarto-dev/quarto-cli/blob/v1.11.5/news/changelog-1.11.md).
+
+### Review and limits
+
+Independent read-only review covered the reusable implementation, public
+interfaces and privacy boundaries. It identified copy-control/search-token
+inconsistencies; owner observations additionally identified font quoting,
+grid precedence, site-root and table specificity issues. All have been corrected.
+Final independent delta review found no remaining requirement-backed defects.
+It reviewed source/receipt correctness and privacy, not a duplicate browser run.
+Reviewed implementation SHA-256 identities: `theme-color.html`
+`e834378e207b2f0df667d9d4e9042e17e3fc4fd88bac17336ec6aa690fec3417`,
+`qdk.scss` `334de632781e7cb1b76a3467b2e6f95b64d788d9d791d99cbcce670970b54b82`,
+`qdk-dark.scss` `81ce9e5e4f1627f8843835d77b6dbc8a176f05248d0e8353ac656317861069c7`.
+Owner source/diff inspection and scoped non-executing renders also completed.
+No durable tests, consumer revisions, root pins, historical snapshot mutations,
+infrastructure changes or new logout feature are part of this package.
+
 ## 0.4.2 grouped-tabset update — 2026-10-06
 
 Quarto 1.10.18 rendered `components/figures.qmd` without execution. Native
