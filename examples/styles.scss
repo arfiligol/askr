@@ -1,3 +1,14 @@
 /* This belongs to a consumer; do not modify the installed Askr extension. */
+/* Shared values appear once per theme. Keep different light/dark $body-bg
+   assignments in separate light.scss/dark.scss defaults sections. */
+/*-- scss:defaults --*/
+$link-color: #2d5e85;
+$grid-body-width: 680px;
+$qdk-tab-size: .85rem;
+$qdk-tab-padding-y: .3rem;
+
 /*-- scss:rules --*/
-:root { --qdk-link: #2D5E85; }
+:root {
+  --qdk-callout-radius: 8px;
+  --qdk-table-cell-padding: .35rem .7rem;
+}

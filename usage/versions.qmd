@@ -2,61 +2,81 @@
 title: "Versioning Docs"
 ---
 
-Each version is one rendered site, kept in its own directory. The latest
-render is also copied to `/`. Older directories stay as they were.
+Each version is one rendered site, kept in its own directory. The current
+render is also copied to the deployment site root. Historical directories
+stay as they were. Paths below are relative to that site root, not the domain
+root: the same manifest works at `/` and a repository prefix such as `/askr/`.
 
 ```text
-/                         current release, 0.4.0
-/v0.3.0/                  the 0.3.0 site, kept as it was
-/askr-versions.json       the only version list
+/                         current release
+/v0.3.0/                  immutable 0.3.0 site
+/askr-versions.json       one version-list authority
 ```
 
-`/askr-versions.json`:
+Put `askr-versions.json` at the rendered site's root and include it in
+`project.resources`:
 
 ```json
 {
   "mode": "inline",
   "versions": [
-    {"label": "0.4.0", "root": "/", "latest": true},
+    {"label": "0.5.0", "root": "/", "latest": true},
     {"label": "0.3.0", "root": "/v0.3.0/"}
   ]
 }
 ```
 
-`inline` prints the version on a short title, as in `Askr  0.3`. `title` is
-for a long name: the header shows the name and a chevron, and the version
-number appears only in the menu. This gallery's long-name specimen is
-[Versioning Docs with a long title](/usage/versions.html?askr-version-mode=title).
+Askr locates the manifest from Quarto's page offset. Each `root` is a version
+directory relative to that deployment root; `/` selects the current site.
+Use `href` instead of `root` for a fixed destination. Relative or leading-slash
+hrefs are site-relative; absolute URLs keep their origin. Fixed destinations
+do not preserve the current page.
 
-Publishing a new release:
+`inline` prints the version beside a short title. `title` shows the title and
+chevron, with the number only in the menu. Try the
+[long-title specimen](versions.html?askr-version-mode=title). Its `longTitle`
+manifest entry is only a gallery specimen, not required consumer configuration.
 
-1. Render the tag you are freezing.
-2. Put that `_site` in `/v0.4/`.
-3. Copy the same files to `/`.
-4. Add `0.4` to `/askr-versions.json`.
+Existing consumers can still supply an inline
+`<script id="askr-versions" type="application/json">` when an external
+manifest is unavailable. Use one authority, not duplicated external and inline
+lists. This gallery uses only the external JSON.
 
-Leave `/v0.3.0/` untouched when a newer release is published. Its pages,
-Page List, and Areas stay the text of that tag. In this gallery, 0.3.0 still
-has Install. It does not have Usage.
+## Keyboard interaction
 
-The menu keeps the current path. From `/usage/versions.html`, choosing 0.3.0
-opens `/v0.3.0/usage/versions.html`. That page does not exist in 0.3.0.
+The selector is a disclosure, not a listbox. Tab to its button, then press
+Enter or Space to open it. Tab and Shift-Tab move through ordinary links;
+Enter follows one. Escape closes it and returns focus to the button. Tabbing
+away or clicking outside closes it without moving outside focus back.
+The current version link has `aria-current="true"`.
 
-Askr does not invent that missing page. The project adds a `404.qmd`. When the
-path contains a version directory, the page sends the reader to that version's
-home. This still works when the site is published under a repository prefix
-such as `/askr/`:
+## Corresponding pages and missing pages
 
-```html
-<script>
-var path = location.pathname;
-var version = path.match(/(\/v[^/]+)\//);
-if (version) location.replace(path.slice(0, version.index) + version[1] + "/");
-else location.replace("/");
-</script>
-```
+The menu retains the current page path, query and fragment when switching
+between `root` entries. From `/askr/usage/versions.html`, 0.3.0 points to
+`/askr/v0.3.0/usage/versions.html`, not `/v0.3.0/askr/usage/versions.html`.
 
-This gallery's menu is 0.4.0 and 0.3.0. Version 0.3.0 is only
-[its home](/v0.3.0/). Open this Versioning Docs page, then choose 0.3.0: that
-page is not in 0.3.0, so you land on the 0.3.0 home. `longTitle` in this
-gallery's JSON is only for the long-name specimen above. A project omits it.
+For an ordinary same-origin click, Askr checks the destination. A 404 sends
+the reader to that selected version's manifest root. Network errors retain
+the original destination, rather than inventing a page. Modified clicks
+(Cmd/Ctrl-click or a new tab) and external URLs retain browser link behavior;
+the host's error page owns those cases. Projects own their hosting error page.
+
+This gallery supplies `404.qmd`, deriving its deployment root from Quarto's
+rendered offset and matching the external manifest. Existing historical
+snapshots keep their original scripts and version lists: a new Askr install
+does not rewrite an old rendered site.
+
+Open this page and select 0.3.0. This page is absent from that snapshot, so
+the current selector takes you to its home. That historical gallery retains
+its original Install area rather than this site's Usage area.
+
+## Publishing
+
+1. Render the exact tag being frozen.
+2. Copy that rendered site into its version directory.
+3. Publish the current rendered site at the deployment root.
+4. Update the one version manifest.
+
+Keep historical directories unchanged. A version number is a source identity;
+it does not itself prove that deployment has finished.

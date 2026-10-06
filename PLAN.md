@@ -1,5 +1,18 @@
 # Askr release plan
 
+## 0.5.0 acceptance and delivery — 2026-10-06
+
+After direct preview iteration the Human confirmed the current candidate and
+requested publication ("可以餒！就先這樣。可以發佈了。"). This accepts the
+0.5.0 engineering and visual follow-ups below, including copyable display
+mathematics with original-sized Copy/Copied! feedback. State: ACCEPTED;
+automated-test stabilization is not assigned. Delivery endpoint: checkpoint
+develop, promote via PR to main, tag/release v0.5.0, observe existing CI/Pages,
+verify public routes and synchronize the durable child checkout. Existing
+historical v0.3.0 stays unchanged. No consumer changes or root pins.
+Earlier CONVERGING/pending statements below are historical candidate receipts
+superseded by this scope-bound acceptance, not additional active candidates.
+
 ## Goal and state
 
 This repository owns the `askr-html` native Quarto HTML extension and its local
@@ -11,6 +24,143 @@ acceptance; a version number, merge, or tag does not establish semantic
 stabilization or deployment.
 
 ## Ownership and interfaces
+
+### Active 0.5.0 engineering package (2026-10-06)
+
+Human authorized execution of this package. Owner/writer: Askr Lead in the
+registered local child checkout, `arfiligol/askr` on `develop`, starting at
+`efab6e77ba91a9d7b71dd2816a4e191769683e89`. State: CONVERGING / LOCAL CANDIDATE.
+No Cursor writer is active. Worker leases, when allocated, are disjoint.
+
+1. Restore grouped tabs' visual selection, content, ARIA selection and keyboard
+   tab stops to one native Quarto state. Quarto retains switching, grouping and
+   persistence; Askr synchronizes accessibility attributes from native active
+   classes, including initial load and page return. Preserve .9rem labels and
+   current spacing. If a narrow package fix is not viable, report evidence and
+   discuss Plan B rather than silently removing groups.
+2. Resolve version links relative to the deployment site root, separately from
+   version roots and page paths. Manifest `/` means the site root, including
+   repository-prefix deployments. Keep the corresponding page and missing-page
+   version-home behavior without hardcoded product paths. Use a disclosure
+   button and ordinary links, native Enter/Space and Tab/Shift-Tab, Escape with
+   trigger-focus restoration, and outside/focus-leave closing without stealing
+   outside focus.
+3. Exclude controls from prose-link styling. Publish global and component
+   design tokens (tabs, callouts, navigation/version/search, code, tables and
+   blockquotes) while preserving `askr-html` and existing `--qdk-*` names.
+   Sass owns compile-time defaults and derived CSS variables; theme-color reads
+   the actual canvas token. Consumer bases remain authoritative at responsive
+   sizes. Keep one external gallery version manifest; existing inline consumer
+   input remains supported. Document overrides and show real rendered examples.
+4. Investigate a Quarto compatibility range rather than locking one patch.
+   Keep 1.10.18 as reproducible CI baseline. Inspect native dependencies and
+   upstream changes, then observe range boundaries/relevant changed releases.
+   Report supported range separately from actually observed versions. No broad
+   unobserved 1.x claim, adapter framework or standing CI version matrix.
+
+Required observations: desktop/mobile light/dark grouped tabs via mouse and
+keyboard, state/content/ARIA agreement, reload and page return; root and
+repository-prefix version routes including history/missing pages; disclosure
+focus; a clean independent consumer with token overrides; and selected Quarto
+versions. Source and rendered DOM/browser observations support these claims,
+not a synthetic PASS label. Temporary probes and screenshots stay outside the
+repository. Record interpretation and exact inputs in `VALIDATION.md`. No
+durable test writes or general validation framework are authorized.
+
+Independent review covers the frozen reusable/public-interface candidate.
+Present the full candidate for Human semantic acceptance before 0.5.0
+develop-to-main promotion, tag and actual Pages/public-site verification.
+Do not modify consumers, root pins, infrastructure or private artifacts. The
+separately received logout-action design context is pending Human discussion
+and is not part of this package.
+
+Candidate implementation and the assigned browser observations are complete;
+see `VALIDATION.md` for actual inputs, outcomes and limits. The range candidate
+is stable Quarto `>=1.9.38 <1.11`, with 1.10.18 retained for CI. Public component
+tokens are documented in `usage/tokens.qmd`. Final independent delta review
+found no remaining requirement-backed defects. Human acceptance precedes
+publication; this is not a released 0.5.0 yet.
+
+#### Human acceptance packet: 0.5.0 engineering candidate
+
+Copyable display mathematics follow-up (2026-10-06): add a shared HTML
+component around native standalone display math. A render filter captures
+the same Pandoc Math source used for display, without delimiters. A nearby
+keyboard-accessible Copy LaTeX button reports clipboard success; clipboard
+denial reveals selectable source, never false success. Inline math and
+non-HTML outputs remain native. Inspect actual clipboard content and
+light/dark desktop/mobile preview. Local candidate only; no durable tests
+or publication. Askr owns the wrapper and copy interaction, not math layout.
+Human visual refinement: visible button label is Copy; accessible name
+remains Copy LaTeX. The subsequent request restores the original .8rem type
+and .25rem/.5rem padding, superseding the compact-size candidate.
+Human success-feedback refinement: successful copy changes the button to
+green-outline Copied! for two seconds, then transitions back to Copy.
+Repeated clicks restart the feedback duration. Errors retain the manual-copy
+disclosure; reduced-motion preference disables transitions. Observe both
+success and automatic restoration in the local preview.
+
+Marked-text follow-up (2026-10-06): retain native mark semantics and the
+existing mark background token; inherit paragraph text color and use a muted
+amber dark fill. Inspect Prose in light/dark desktop and mobile. Deliver local
+preview only; no tests, release or consumer changes.
+
+Callout preview follow-up (2026-10-06): compare headered icon/no-icon native
+callouts, normalize shell/header block padding and center icon/title/disclosure
+glyph. Preserve titleless padding, nested content and native collapse. Inspect
+actual default/minimal, expanded/collapsed, long-title and desktop/mobile
+light/dark render geometry; deliver local preview, no tests or release.
+The same Human follow-up requests separate unordered/ordered list displays,
+each with a hierarchical Structure example in components/prose.qmd. Inspect
+their actual three-level list markup and mobile containment, without changing
+native list behavior or introducing scientific results. The ordered specimen
+uses native numeric/alphabetic/numeric markers at successive levels, as
+requested. A further callout follow-up removes native iconless-header negative
+bottom margin so the shared icon-derived row also produces equal outer insets.
+
+Human preview follow-up (2026-10-06): refine tab-pane padding and label-to-pane
+gap, refine header spacing, and repair Areas disclosure placement. Owner is
+the same Askr Lead; affected paths are qdk.scss, token documentation and this
+receipt. Preserve label size, native selection/collapse, consumer interfaces
+and other candidate behavior. Observe desktop/mobile light/dark spacing and
+actual Areas/Pages open/close/outside-click behavior in the rendered browser.
+Inspect every header control (Pages, Search, version, theme and Areas), including
+its position and resulting disclosure. Header-height self-reference and the
+native Pages minimum-height override are implementation defects in this scope.
+No test writes, consumer/root-pin change or release is assigned by this
+follow-up. Deliver an updated local preview for Human review. Only this visual
+delta invalidates the prior spacing/header observation; other source receipts
+remain bound to their original identity.
+
+- Scope and behavior: grouped native tabs agree across content, selection,
+  ARIA and tab stops, including keyboard/reload/return. Version disclosure uses
+  ordinary links and predictable focus; routes remain deployment-root-relative.
+  Prose/control styling is separated. Global/component overrides have one
+  Sass compile authority and meaningful responsive consumer bases.
+- Public interfaces: existing `askr-html`, `--qdk-*` names and version manifest
+  fields remain; documented component tokens are added. Candidate Quarto range
+  is stable `>=1.9.38 <1.11`, with 1.10.18 as CI baseline. Global radius default
+  now actually controls component radii at the existing effective 6px value.
+- Ownership: Quarto owns tab selection/persistence, collapse and search;
+  Askr mirrors presentation/accessibility and owns tokens. Consumers own their
+  styles, content, manifest and hosting. Historical sites are unchanged.
+- Failure and edges: missing manifests keep the native brand (or existing
+  inline input); same-origin 404 links use the selected version home. Network
+  failure retains the original link; modified/external links stay browser-native.
+  Invalid Sass/CSS inputs use native compiler/browser behavior, not invented
+  replacement values. Native group persistence is unchanged.
+- Limits/exclusions: not every Quarto patch was exercised; prerelease support,
+  1.11 adapters, scientific output, new tests, consumer changes, root pins,
+  logout and infrastructure are excluded. A custom host error document remains
+  a consumer/hosting responsibility.
+- Completed evidence: actual desktop/mobile light/dark browser operations,
+  independent consumer and root/prefix routing observations, selected-version
+  renders/source investigation and independent review, detailed in VALIDATION.
+- Unresolved semantic decisions: none proposed by the implementation. Human
+  acceptance is pending; source candidate is not semantic acceptance.
+- Delivery: candidate checkpoint on develop, then after explicit acceptance
+  promote main/tag 0.5.0 and observe actual CI, Pages and public routes. The
+  Pages-hosted 404 receipt is intentionally pending that delivery stage.
 
 ### Current bounded typography adjustment
 

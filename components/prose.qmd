@@ -13,12 +13,44 @@ stay in the body face. A marked word is [kept visible]{.mark}.
 
 Markers use the tertiary color.
 
-- First unordered item
-- Second unordered item
-  - Nested item
+### Unordered list
 
-1. First ordered step
-2. Second ordered step
+Use bullets when the items do not need to be followed in sequence.
+
+#### Structure example
+
+- Documentation
+    - Overview
+        - Purpose and capabilities
+        - Supported workflows
+    - Tutorials
+        - Getting started
+        - Working with a model
+- Reference
+    - Configuration
+    - Public interfaces
+
+### Ordered list
+
+Use ordered markers when order matters. This structure alternates numbers,
+lowercase letters, and numbers again. Each nested list has its own sequence;
+authors choose the marker style with native Quarto Markdown.
+
+#### Structure example
+
+1. Prepare the model
+    a. Choose the layout
+        1. Identify the component
+        2. Assign its connections
+    b. Select the analysis
+2. Run the workflow
+    a. Review the inputs
+    b. Execute the selected backend
+3. Read the results
+    a. Inspect the report
+    b. Record the assumptions
+
+### Definition list
 
 Term
 : A definition stays in the same measure as the paragraph above it.

@@ -6,9 +6,19 @@ This page is not in this version.
 
 ```{=html}
 <script>
-var path = location.pathname;
-var version = path.match(/(\/v[^/]+)\//);
-if (version) location.replace(path.slice(0, version.index) + version[1] + "/");
-else location.replace(path.indexOf("/askr/") === 0 ? "/askr/" : "/");
+// Quarto renders an absolute deployment offset for a website's 404 page.
+var offset = document.querySelector('meta[name="quarto:offset"]');
+var siteRoot = new URL(offset.getAttribute("content"), location.href);
+fetch(new URL("askr-versions.json", siteRoot)).then(function (response) {
+  if (!response.ok) throw new Error("Version manifest unavailable");
+  return response.json();
+}).then(function (data) {
+  var roots = data.versions.filter(function (item) { return item.root; }).map(function (item) {
+    var relative = item.root.replace(/^\/+/, "");
+    return new URL(relative ? relative.replace(/\/?$/, "/") : "./", siteRoot);
+  }).sort(function (a, b) { return b.pathname.length - a.pathname.length; });
+  var target = roots.find(function (root) { return location.pathname.indexOf(root.pathname) === 0; });
+  location.replace((target || siteRoot).href);
+});
 </script>
 ```
