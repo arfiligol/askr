@@ -1,5 +1,82 @@
 # Candidate validation receipt
 
+## 0.6.0 publication package — 2026-10-06
+
+The Human authorized publishing the reviewed Logout/image-viewer candidate
+for NCUAS consumer testing. Feature implementation bytes and prior local
+browser/source-review receipts are unchanged; only release metadata, current
+version manifest, installation guidance and delivery records change. The new
+scopes remain CONVERGING. No new tests, root pins, consumer/infrastructure
+changes, real authentication verification, or physical touch coverage.
+Existing Pages CI and exact public-route observations are still required
+delivery evidence and will be recorded after execution, not inferred here.
+Release-metadata render completed: 103 pages, Quarto 1.10.18, `--no-execute`,
+exit 0; the known computational-output specimen warning remains. Exact reviewed
+feature hashes below are unchanged. Whitespace/diff inspection completed and
+only scoped source files are staged; generated site files are excluded.
+
+## Optional Logout and native image viewer — local candidate, 2026-10-06
+
+State: CONVERGING / LOCAL CANDIDATE, based on
+`283e4f8dfa7b8f63971ad184480bb7c79c2a2bb9`. No publication, version bump,
+root pin, consumer integration, infrastructure change, or durable test.
+The 103-page non-executing Gallery render completed on Quarto 1.10.18.
+The existing missing light/dark computational-output specimen warning remains;
+the new examples use an already-public static PNG and require no execution.
+
+Actual browser observations at 1440 × 900 and 390 × 844, light and dark:
+native image and target/src buttons open the original source in the same page;
+target retains the figure caption and src has no invented caption. Close and
+Escape return to the triggering image/button and the same reading area (one
+direct-image observation shifted approximately 2px after native layout unlock).
+Desktop native click-to-zoom and drag were operated; the enlarged image moved
+by 150px/90px. Mobile caption foreground and control SVG colors were corrected
+against the actual native mobile rules and viewed again. Viewport emulation is
+not a real touchscreen: pinch/swipe and mobile drag remain unobserved, not
+claimed verified. No independent zoom toolbar or image transformation exists.
+
+An independent temporary consumer in `/tmp/askr-viewer-consumer.dhURyQ`
+observed both inline button forms, relative image paths from `/v1/`, excluded
+images, normal linked-image navigation, and page-level `lightbox: false`.
+Excluded/disabled images did not open a viewer. A deliberately missing rendered
+asset produced a native empty/loading viewer, not a redirect or fabricated
+success; closing it returned focus to its button. Missing-image error messaging
+is native, not an additional Askr error UI. Captured screenshots and diagnostic
+logs stay in `/tmp/askr-viewer-observations.vD9y7l`, outside the repository.
+Desktop native gallery Next changed the current slide and caption to the
+second entry; close restored the original button. Native mobile previous/next
+controls are offscreen in favor of touch gestures; touch gallery navigation
+is therefore not claimed observed. Final Gallery console observations contained
+no errors or warnings.
+
+Logout absent/present was observed in the temporary consumer, never enabled in
+the public Gallery. Desktop and narrow mobile light/dark Header controls used
+matching geometry with no overlaps. The accessible name/tooltip and HTTPS URL
+were inspected; a keyboard-activated root-path link navigated the same tab to
+an explicitly non-authenticated observation page. From `/v1/` it still resolves
+at the domain root. This proves navigation only, not any Authentik logout.
+
+Invalid target, excluded target, mutually exclusive arguments, Lightbox-off
+conflict, and unsafe protocol-relative Logout destination each failed rendering.
+Valid non-HTML GFM output retained ordinary image/figure links; invalid shortcode
+arguments also failed non-HTML rendering. Review found that Quarto's Lua
+`error()` logger did not itself abort rendering: shortcode/config errors now
+use real assertions instead of silently omitted error markers. EPUB/non-browser
+HTML likewise uses ordinary links via the `html:js` distinction.
+
+Independent correctness/privacy review covered the frozen source candidate;
+its concrete non-HTML failure finding was corrected. Final read-only delta
+review confirmed that finding resolved and found no new concrete correctness
+or privacy defects. Reviewed SHA-256 identities: `image-view.lua`
+`af6bfd8f3c5e7860e5e7ca68eeef08a02935007837d49cbd05ba18d93ade050f`,
+`viewer-config.lua`
+`fd3343738727fa36e9710c560c802c55fa17d5b75b4272b40045dcab100488bb`,
+`qdk.scss` `89b68dd4ceae2eda0f297b3aad27d77cb0ae3b92457e29f46653b423033a0d5b`.
+Reviewer model/effort were unavailable; source review did not repeat owner
+browser observations or grant acceptance. Real Authentik logout, deployment configuration,
+NCUAS integration, physical touch gestures, and arbitrary-browser coverage are
+excluded or unobserved and must not be inferred from these receipts.
+
 ## 0.5.0 publication authorization — 2026-10-06
 
 The Human accepted the iterated candidate and requested publication. Release

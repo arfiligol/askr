@@ -20,7 +20,7 @@ Put `askr-versions.json` at the rendered site's root and include it in
 {
   "mode": "inline",
   "versions": [
-    {"label": "0.5.0", "root": "/", "latest": true},
+    {"label": "0.6.0", "root": "/", "latest": true},
     {"label": "0.3.0", "root": "/v0.3.0/"}
   ]
 }

@@ -64,6 +64,36 @@ directly:
 ![Bars with semantic markers](images/bars-semantic-markers.png)
 ```
 
+## Image viewer
+
+Click this independent figure to open Quarto's native viewer without leaving
+the page. Click again to zoom when the original image is larger than the
+displayed image; drag the enlarged image to inspect it. Escape closes it.
+
+![Bars with semantic markers, from the public Embla figure.](images/bars-semantic-markers.png){#fig-viewer}
+
+{{< askr-image-view target="fig-viewer" label="View this figure" >}}
+
+This button opens the same image and caption as the figure above. A button-only
+entry registers its own hidden native image:
+
+{{< askr-image-view src="images/bars-semantic-markers.png" label="View image" >}}
+
+### Excluded image
+
+This image deliberately has no floating viewer:
+
+![Excluded from Lightbox.](images/bars-semantic-markers.png){.nolightbox width=45%}
+
+### Image with a link
+
+The image below remains a normal navigation link to the figure Usage page.
+
+[![](images/bars-semantic-markers.png){fig-alt="Figure Usage" width=45%}](../usage/figures.qmd)
+
+See [Image viewer](../usage/image-viewer.qmd) for opt-outs, button syntax, and
+native grouped galleries.
+
 ## Theme toggle
 
 Quarto keeps two outputs from one cell and shows one of them. `body.quarto-dark` hides `.light-content`; `body.quarto-light` hides `.dark-content`. Askr's dark stylesheet is marked `data-mode="dark"`, so the header toggle adds and removes `quarto-dark` with the stylesheet.
