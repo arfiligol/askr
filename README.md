@@ -4,7 +4,7 @@ See [CHANGELOG](CHANGELOG.md) for published changes and the current Unreleased
 candidate. PR and GitHub Release summaries use the same entries.
 
 Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz
-remains the name of the visual theme. `0.7.0` is the current release, rendered
+remains the name of the visual theme. `0.8.0` is the current release, rendered
 with Quarto 1.10.18. Stable Quarto `>=1.9.38 <1.11` is supported. The public
 format is `askr-html`. Publication of the optional Logout and native image
 viewer was authorized on 2026-10-06 for consumer testing. Those new scopes
@@ -13,11 +13,11 @@ automated-test stabilization.
 
 ## Install
 
-Install the reviewed release tag `v0.7.0`. Quarto's GitHub installer accepts
+Install the reviewed release tag `v0.8.0`. Quarto's GitHub installer accepts
 branch and tag names, not commit SHA modifiers.
 
 ```bash
-quarto add arfiligol/askr@v0.7.0
+quarto add arfiligol/askr@v0.8.0
 ```
 
 ```yaml
@@ -44,8 +44,9 @@ without dollar delimiters. Successful copies briefly show Copied!; if clipboard
 access is unavailable, the selectable source is revealed. Inline math stays
 native. Formula display and copy source are derived from the same authored math.
 
-Native Quarto Lightbox is enabled by default. Image and optional
-`askr-image-view` button entries keep viewing in the article; native exclusions
+Askr's image viewer is enabled by default through Quarto's `lightbox` settings.
+Images and `askr-image-view` buttons open a floating zoom/pan/Fit viewer;
+`mode="inline"` provides those controls directly in the article. Native exclusions
 and page-level disablement remain available. Protected sites can configure
 `askr.logout.href` for an optional Header link; Askr does not manage sessions.
 See [Image viewer](usage/image-viewer.qmd) and

@@ -1,5 +1,34 @@
 # Askr release plan
 
+## 0.8.0 publication authorization — 2026-10-10
+
+Human authorized publication of the presented dual-mode viewer candidate.
+Publish the develop checkpoint through a develop-to-main PR, annotated v0.8.0
+tag and GitHub Release; complete the existing main/Pages workflows, observe the
+public viewer and synchronize the durable child checkout. Update version metadata,
+install instructions, Gallery selector and Changelog. Preserve prior runtime
+observations for unchanged implementation; freshly render release metadata and
+check the exact publication diff. No new tests, root pins, consumers or deployment
+configuration changes. Semantic state remains CONVERGING; publication permission
+does not claim the unobserved touch/no-JavaScript cases or stabilization.
+
+## Dual-mode image viewer — local candidate, 2026-10-10
+
+Askr Lead owns the extension, Figures and Usage. Implement the Human's dual-mode
+plan: SVG/PNG/JPEG, inline interaction and a shared modal engine, existing button
+syntax, Quarto image eligibility/paths/captions/groups, focus and state continuity.
+CONVERGING; LOCAL CANDIDATE only; no_test_writes. No commit, push, publication,
+consumer edits, infrastructure or root pins. Remove the active GLightbox runtime.
+Observe actual desktop/tablet/mobile light/dark rendering and operations,
+inline/modal state, galleries, keyboard/touch, failures and temporary consumer
+installation. Record the actual observation source and remaining limits in
+VALIDATION.md; source inspection alone does not prove interaction.
+
+Implementation and local preview are available. Actual mouse/keyboard/modal,
+responsive chrome, gallery/failure and resource-path observations are recorded.
+Actual touchscreen pinch and JavaScript-disabled browser observations remain
+incomplete; this candidate is not labeled fully validated or accepted.
+
 ## 0.7.0 publication authorization — 2026-10-09
 
 Human requested removal of Gallery's descriptive right-side Footer text and

@@ -66,18 +66,39 @@ directly:
 
 ## Image viewer
 
-Click this independent figure to open Quarto's native viewer without leaving
-the page. Click again to zoom when the original image is larger than the
-displayed image; drag the enlarged image to inspect it. Escape closes it.
+Click an independent figure or its button to open Askr's floating viewer.
+Use + / −, Fit, drag to pan or pinch to zoom. Escape returns to the article.
 
 ![Bars with semantic markers, from the public Embla figure.](images/bars-semantic-markers.png){#fig-viewer}
 
 {{< askr-image-view target="fig-viewer" label="View this figure" >}}
 
 This button opens the same image and caption as the figure above. A button-only
-entry registers its own hidden native image:
+entry registers its own hidden image source:
 
 {{< askr-image-view src="images/bars-semantic-markers.png" label="View image" >}}
+
+### Inline interaction
+
+This PNG can be inspected directly in the article. Expand it after zooming:
+the same camera state follows you into the floating viewer and back.
+
+![Bars and markers from Embla, displayed inline without a duplicate figure.](images/bars-semantic-markers.png){#fig-inline}
+
+{{< askr-image-view target="fig-inline" mode="inline" >}}
+
+### SVG interaction
+
+This existing Askr icon is vector artwork, not a scientific layout. Its
+geometry remains sharp when enlarged. Its camera is independent of the PNG.
+
+{{< askr-image-view src="../_extensions/askr/assets/icons/flame.svg" mode="inline" label="Askr flame icon" >}}
+
+### Gallery
+
+![Public Embla figure: PNG source.](images/bars-semantic-markers.png){group="viewer-formats"}
+
+![The same public figure encoded as JPEG; zoom does not add resolution.](images/bars-semantic-markers.jpg){group="viewer-formats"}
 
 ### Excluded image
 
@@ -92,7 +113,7 @@ The image below remains a normal navigation link to the figure Usage page.
 [![](images/bars-semantic-markers.png){fig-alt="Figure Usage" width=45%}](../usage/figures.qmd)
 
 See [Image viewer](../usage/image-viewer.qmd) for opt-outs, button syntax, and
-native grouped galleries.
+grouped galleries.
 
 ## Theme toggle
 
