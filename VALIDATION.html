@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1b8f72e40c3f8d84d9a67d0fa069bc1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-c8c70c31c7dae554679cdc2884b27c76.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-1b8f72e40c3f8d84d9a67d0fa069bc1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-213ae32e74feed21d5ba1b54c128d256.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-661f94b07d25ded2f87db462aa93cf55.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-213ae32e74feed21d5ba1b54c128d256.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -200,6 +200,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     var button = header && header.querySelector(".navbar-toggler");
     var brand = header && header.querySelector(".navbar-brand-container");
     if (!container || !area || !button || !brand) return;
+    var tools = container.querySelector('.quarto-navbar-tools');
+    var collapseTools = tools && area.contains(tools);
+    var authoredTools = tools ? Array.from(tools.children).filter(function (el) {
+      return !el.matches('.quarto-color-scheme-toggle, .quarto-reader-toggle, .askr-logout');
+    }) : [];
+    var panelTools;
+    if (collapseTools) {
+      container.appendChild(tools);
+      panelTools = document.createElement('div');
+      panelTools.className = 'askr-panel-tools';
+      area.appendChild(panelTools);
+    }
+    var mutations = new MutationObserver(schedule);
+    function observe() { mutations.observe(container, { childList: true, subtree: true, characterData: true }); }
     button.setAttribute("aria-label", "Areas");
     button.removeAttribute("role");
     button.title = "Areas";
@@ -207,6 +221,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     var compact;
     function update() {
       frame = null;
+      // Moving native nodes is presentation only, not a new navigation authority.
+      mutations.disconnect();
+      if (collapseTools) authoredTools.slice().reverse().forEach(function (el) { tools.insertBefore(el, tools.firstChild); });
+      if (tools) container.style.setProperty('--askr-tools-width', tools.getBoundingClientRect().width + 'px');
       var active = document.activeElement;
       var previous = compact;
       header.classList.add("askr-areas-measuring");
@@ -219,13 +237,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       var linksFit = !list || list.scrollWidth <= area.clientWidth;
       var areaRect = area.getBoundingClientRect();
       var brandRect = brand.getBoundingClientRect();
-      var controlsFit = Array.from(container.querySelectorAll("#quarto-search, .quarto-navbar-tools")).every(function (control) {
+      var controlsFit = Array.from(container.querySelectorAll(":scope > #quarto-search, :scope > .quarto-navbar-tools")).every(function (control) {
         var rect = control.getBoundingClientRect();
         return !rect.width || rect.right <= areaRect.left || rect.left >= areaRect.right;
       });
       compact = mobile || !titleFits || !linksFit || brandRect.right > areaRect.left || !controlsFit;
       header.classList.toggle("askr-areas-collapsed", compact);
       header.classList.remove("askr-areas-measuring");
+      if (compact && collapseTools) authoredTools.forEach(function (el) { panelTools.appendChild(el); });
+      if (tools) container.style.setProperty('--askr-tools-width', tools.getBoundingClientRect().width + 'px');
       if (mobile) {
         var left = 0;
         var right = container.getBoundingClientRect().right;
@@ -241,6 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         header.style.setProperty("--askr-brand-left", (left + gap) + "px");
         header.style.setProperty("--askr-brand-right", (container.getBoundingClientRect().right - right + gap) + "px");
       }
+      observe();
       if (previous !== undefined && previous !== compact) {
         // Complete any in-flight Bootstrap animation before resetting state.
         if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
@@ -261,7 +282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
     new ResizeObserver(schedule).observe(container);
     // Version and Logout entries are mounted after the original Header.
-    new MutationObserver(schedule).observe(container, { childList: true, subtree: true, characterData: true });
+    observe();
     window.addEventListener("resize", schedule);
     window.addEventListener("pageshow", schedule);
     if (document.fonts) {
@@ -699,10 +720,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Long list</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+              <div class="quarto-navbar-tools">
+    <a href="https://github.com/arfiligol/askr" title="GitHub repository" class="quarto-navigation-tool px-1" aria-label="GitHub repository"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -717,6 +739,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#candidate-validation-receipt" id="toc-candidate-validation-receipt" class="nav-link active" data-scroll-target="#candidate-validation-receipt">Candidate validation receipt</a>
   <ul class="collapse">
+  <li><a href="#publication-package-2026-10-09" id="toc-publication-package-2026-10-09" class="nav-link" data-scroll-target="#publication-package-2026-10-09">0.7.0 publication package — 2026-10-09</a></li>
+  <li><a href="#native-header-footer-links-local-candidate-2026-10-09" id="toc-native-header-footer-links-local-candidate-2026-10-09" class="nav-link" data-scroll-target="#native-header-footer-links-local-candidate-2026-10-09">Native Header / Footer links — local candidate, 2026-10-09</a>
+  <ul class="collapse">
+  <li><a href="#rendered-observations" id="toc-rendered-observations" class="nav-link" data-scroll-target="#rendered-observations">Rendered observations</a></li>
+  </ul></li>
   <li><a href="#publication-package-2026-10-06" id="toc-publication-package-2026-10-06" class="nav-link" data-scroll-target="#publication-package-2026-10-06">0.6.1 publication package — 2026-10-06</a></li>
   <li><a href="#adaptive-areas-requirejs-local-candidate-2026-10-06" id="toc-adaptive-areas-requirejs-local-candidate-2026-10-06" class="nav-link" data-scroll-target="#adaptive-areas-requirejs-local-candidate-2026-10-06">Adaptive Areas / RequireJS — local candidate, 2026-10-06</a>
   <ul class="collapse">
@@ -753,6 +780,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="candidate-validation-receipt" class="level1">
 <h1>Candidate validation receipt</h1>
+<section id="publication-package-2026-10-09" class="level2">
+<h2 class="anchored" data-anchor-id="publication-package-2026-10-09">0.7.0 publication package — 2026-10-09</h2>
+<p>Human authorized publication after removing Gallery’s descriptive right-side Footer text. Gallery configuration now leaves that region to the single Powered by Askr credit line; consumer-authored content is still preserved. Release metadata, install instructions, document selector and CHANGELOG identify 0.7.0. Prior local-candidate interaction evidence below remains historical, not a new execution; the styling implementation is unchanged. Fresh release renders, corrected Footer observation, exact-diff privacy and whitespace inspection, main/Release/Pages identity and public rendering are the delivery checks. No durable tests, root pins or consumer edits are assigned. The only runtime delta removes Quarto’s whitespace-only placeholder from an unauthored right region before appending credit, avoiding an empty extra line. Fresh Usage/index/release-document renders completed with Quarto 1.10.18. The local Footer shows only Powered by Askr 0.7.0 in its right region.</p>
+</section>
+<section id="native-header-footer-links-local-candidate-2026-10-09" class="level2">
+<h2 class="anchored" data-anchor-id="native-header-footer-links-local-candidate-2026-10-09">Native Header / Footer links — local candidate, 2026-10-09</h2>
+<p>Human-assigned scope: native link styling, package credit, Usage and local preview. Base <code>fff9ab142334f170fadac0fac9a6d2c3e20c1713</code> on develop; installed extension metadata remains 0.6.1. CONVERGING / LOCAL CANDIDATE. No commit, push, release, consumer edits, root pins or durable tests were performed.</p>
+<p>Quarto 1.10.18 rendered all 105 Gallery inputs with <code>--execute-daemon 0</code>, including Figures and Notebook Python output. Final styling and Usage were subsequently rendered again. Native installed-prefix extension copies were rendered in an outside-repository temporary consumer. Git whitespace and exact-diff inspection were performed; no private content or assets were added.</p>
+<section id="rendered-observations" class="level3">
+<h3 class="anchored" data-anchor-id="rendered-observations">Rendered observations</h3>
+<ul>
+<li>Desktop 1440px, tablet 768px and phone 390px were inspected in light/dark modes. Footer regions keep left / center / right order, wrap long labels and retain authored right-side build text above appended credit. Observed page widths did not exceed the viewport. Icons and labels align vertically.</li>
+<li>Gallery’s native icon-only Footer link exposes “GitHub repository”. Quarto 1.10.18 replaces a sibling icon when rendering Footer text; the documented icon-plus-label examples use decorative Bootstrap markup inside native text.</li>
+<li>Header tools-collapse true moves existing authored tool nodes into Areas; false keeps them in the Header. A long-title consumer with two authored tools and optional Logout retained usable controls at 390px; its title was ellipsized with its complete accessible name retained.</li>
+<li>In the long-title consumer, 1280px used Areas disclosure and 1360px used inline navigation. Resizing the open panel across that interval cleared expanded state and restored focus to a visible navigation link. These are observations, not fixed fit thresholds. Enter opens Areas; Escape closes it.</li>
+<li>Header GitHub, Footer GitHub and Maintenance links navigated to their configured public repository / README destinations. The version link reached the v0.6.1 Release. Keyboard focus on Footer links was visibly outlined.</li>
+<li>With the document selector showing 0.3.0 via its supported query parameter, credit still read 0.6.1 and linked to v0.6.1, matching installed metadata.</li>
+<li>No authored Footer plus credit enabled produced one credit-only Footer. Credit disabled preserved an existing authored Footer; with no authored Footer it created none. Authored content was not replaced.</li>
+</ul>
+<p>Limits: observations use Quarto 1.10.18, not a new cross-version certification. Native links remain author-owned; tools-collapse false requires an appropriately small tool set for the author’s narrowest viewport. Temporary Logout navigation is not evidence of authentication/session logout. No deployed-site claim is made.</p>
+</section>
+</section>
 <section id="publication-package-2026-10-06" class="level2">
 <h2 class="anchored" data-anchor-id="publication-package-2026-10-06">0.6.1 publication package — 2026-10-06</h2>
 <p>Human requested the complete release flow. Release metadata, README install tag, inline version manifest and CHANGELOG now identify 0.6.1. Core implementation bytes below are unchanged, so the recorded rendered interaction observations remain applicable; they are not relabeled as a new execution. Release-document renders and a fresh Figures render completed, including both Python3 cells. Exact-diff inspection found no newly included private URLs, images or consumer payloads; Git whitespace inspection completed. No durable tests were added. Develop checkpoint, main promotion, tag/Release and actual Pages observations are delivery obligations; no consumer or root pin is updated by this package.</p>
@@ -982,6 +1031,31 @@ document.addEventListener('click', async (event) => {
   if (document.readyState === 'complete') setup();
   else window.addEventListener('load', setup, {once: true});
 })();
+</script>
+<script>
+// Append credit without interpreting or replacing native navigation configuration.
+document.addEventListener('DOMContentLoaded', function () {
+  const credit = document.getElementById('askr-footer-credit');
+  if (!credit) return;
+  let footer = document.querySelector('footer.footer');
+  if (!footer) {
+    footer = document.createElement('footer');
+    footer.className = 'footer';
+    const row = document.createElement('div');
+    row.className = 'nav-footer';
+    footer.append(row);
+    document.body.append(footer);
+  }
+  let right = footer.querySelector('.nav-footer-right');
+  if (!right) {
+    right = document.createElement('div');
+    right.className = 'nav-footer-right';
+    footer.querySelector('.nav-footer').append(right);
+  }
+  // Quarto emits a nonbreaking-space placeholder for an unauthored region.
+  if (!right.childElementCount && !right.textContent.trim()) right.textContent = '';
+  right.append(credit.content.cloneNode(true));
+});
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1397,6 +1471,38 @@ document.addEventListener('click', async (event) => {
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/arfiligol/askr">
+      <i class="bi bi-github" role="img" aria-label="GitHub repository">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="./usage/add-askr.html">
+<p><i class="bi bi-book" aria-hidden="true"></i> Usage guide</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/arfiligol/askr/blob/main/README.md">
+<p><i class="bi bi-wrench" aria-hidden="true"></i> Maintenance guide</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.7.0" aria-label="Askr version 0.7.0">0.7.0</a></span></template>
 
 
 

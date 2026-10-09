@@ -47,9 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-1b8f72e40c3f8d84d9a67d0fa069bc1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-c8c70c31c7dae554679cdc2884b27c76.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-1b8f72e40c3f8d84d9a67d0fa069bc1d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-213ae32e74feed21d5ba1b54c128d256.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-661f94b07d25ded2f87db462aa93cf55.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-213ae32e74feed21d5ba1b54c128d256.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -165,6 +165,20 @@ ul.task-list li input[type="checkbox"] {
     var button = header && header.querySelector(".navbar-toggler");
     var brand = header && header.querySelector(".navbar-brand-container");
     if (!container || !area || !button || !brand) return;
+    var tools = container.querySelector('.quarto-navbar-tools');
+    var collapseTools = tools && area.contains(tools);
+    var authoredTools = tools ? Array.from(tools.children).filter(function (el) {
+      return !el.matches('.quarto-color-scheme-toggle, .quarto-reader-toggle, .askr-logout');
+    }) : [];
+    var panelTools;
+    if (collapseTools) {
+      container.appendChild(tools);
+      panelTools = document.createElement('div');
+      panelTools.className = 'askr-panel-tools';
+      area.appendChild(panelTools);
+    }
+    var mutations = new MutationObserver(schedule);
+    function observe() { mutations.observe(container, { childList: true, subtree: true, characterData: true }); }
     button.setAttribute("aria-label", "Areas");
     button.removeAttribute("role");
     button.title = "Areas";
@@ -172,6 +186,10 @@ ul.task-list li input[type="checkbox"] {
     var compact;
     function update() {
       frame = null;
+      // Moving native nodes is presentation only, not a new navigation authority.
+      mutations.disconnect();
+      if (collapseTools) authoredTools.slice().reverse().forEach(function (el) { tools.insertBefore(el, tools.firstChild); });
+      if (tools) container.style.setProperty('--askr-tools-width', tools.getBoundingClientRect().width + 'px');
       var active = document.activeElement;
       var previous = compact;
       header.classList.add("askr-areas-measuring");
@@ -184,13 +202,15 @@ ul.task-list li input[type="checkbox"] {
       var linksFit = !list || list.scrollWidth <= area.clientWidth;
       var areaRect = area.getBoundingClientRect();
       var brandRect = brand.getBoundingClientRect();
-      var controlsFit = Array.from(container.querySelectorAll("#quarto-search, .quarto-navbar-tools")).every(function (control) {
+      var controlsFit = Array.from(container.querySelectorAll(":scope > #quarto-search, :scope > .quarto-navbar-tools")).every(function (control) {
         var rect = control.getBoundingClientRect();
         return !rect.width || rect.right <= areaRect.left || rect.left >= areaRect.right;
       });
       compact = mobile || !titleFits || !linksFit || brandRect.right > areaRect.left || !controlsFit;
       header.classList.toggle("askr-areas-collapsed", compact);
       header.classList.remove("askr-areas-measuring");
+      if (compact && collapseTools) authoredTools.forEach(function (el) { panelTools.appendChild(el); });
+      if (tools) container.style.setProperty('--askr-tools-width', tools.getBoundingClientRect().width + 'px');
       if (mobile) {
         var left = 0;
         var right = container.getBoundingClientRect().right;
@@ -206,6 +226,7 @@ ul.task-list li input[type="checkbox"] {
         header.style.setProperty("--askr-brand-left", (left + gap) + "px");
         header.style.setProperty("--askr-brand-right", (container.getBoundingClientRect().right - right + gap) + "px");
       }
+      observe();
       if (previous !== undefined && previous !== compact) {
         // Complete any in-flight Bootstrap animation before resetting state.
         if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
@@ -226,7 +247,7 @@ ul.task-list li input[type="checkbox"] {
     }
     new ResizeObserver(schedule).observe(container);
     // Version and Logout entries are mounted after the original Header.
-    new MutationObserver(schedule).observe(container, { childList: true, subtree: true, characterData: true });
+    observe();
     window.addEventListener("resize", schedule);
     window.addEventListener("pageshow", schedule);
     if (document.fonts) {
@@ -664,10 +685,11 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Long list</span></a>
   </li>  
 </ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+              <div class="quarto-navbar-tools">
+    <a href="https://github.com/arfiligol/askr" title="GitHub repository" class="quarto-navigation-tool px-1" aria-label="GitHub repository"><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
+          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -682,6 +704,8 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#askr-release-plan" id="toc-askr-release-plan" class="nav-link active" data-scroll-target="#askr-release-plan">Askr release plan</a>
   <ul class="collapse">
+  <li><a href="#publication-authorization-2026-10-09" id="toc-publication-authorization-2026-10-09" class="nav-link" data-scroll-target="#publication-authorization-2026-10-09">0.7.0 publication authorization — 2026-10-09</a></li>
+  <li><a href="#native-header-footer-links-local-candidate-2026-10-09" id="toc-native-header-footer-links-local-candidate-2026-10-09" class="nav-link" data-scroll-target="#native-header-footer-links-local-candidate-2026-10-09">Native Header / Footer links — local candidate, 2026-10-09</a></li>
   <li><a href="#publication-authorization-2026-10-06" id="toc-publication-authorization-2026-10-06" class="nav-link" data-scroll-target="#publication-authorization-2026-10-06">0.6.1 publication authorization — 2026-10-06</a></li>
   <li><a href="#publication-authorization-2026-10-06-1" id="toc-publication-authorization-2026-10-06-1" class="nav-link" data-scroll-target="#publication-authorization-2026-10-06-1">0.6.0 publication authorization — 2026-10-06</a></li>
   <li><a href="#optional-logout-and-native-image-viewer-local-candidate-2026-10-06" id="toc-optional-logout-and-native-image-viewer-local-candidate-2026-10-06" class="nav-link" data-scroll-target="#optional-logout-and-native-image-viewer-local-candidate-2026-10-06">Optional logout and native image viewer — local candidate, 2026-10-06</a></li>
@@ -710,6 +734,14 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="askr-release-plan" class="level1">
 <h1>Askr release plan</h1>
+<section id="publication-authorization-2026-10-09" class="level2">
+<h2 class="anchored" data-anchor-id="publication-authorization-2026-10-09">0.7.0 publication authorization — 2026-10-09</h2>
+<p>Human requested removal of Gallery’s descriptive right-side Footer text and publication of the native Header / Footer link package. Keep one Powered by Askr credit line in Gallery; preserve consumer-authored Footer content. Complete the develop checkpoint, develop-to-main PR, annotated v0.7.0 tag, GitHub Release, existing Pages CI/deployment, public rendering observation and clean durable-checkout synchronization. Do not update consumers, root pins, infrastructure or durable tests. Use prior unchanged implementation observations; freshly render release metadata and inspect the corrected Footer in the local and published site. Publication supersedes only the prior local-only endpoint; no automated-test stabilization is assigned.</p>
+</section>
+<section id="native-header-footer-links-local-candidate-2026-10-09" class="level2">
+<h2 class="anchored" data-anchor-id="native-header-footer-links-local-candidate-2026-10-09">Native Header / Footer links — local candidate, 2026-10-09</h2>
+<p>Owner: Askr Lead; base fff9ab1 on develop, clean at intake. Implement the Human-assigned native navbar.tools and page-footer styling, responsive links and default opt-out Powered by Askr credit from installed extension metadata. Authors own all navigation content; no second link configuration, no automatic commit display, no consumer or root-pin changes. CONVERGING, local preview only; no commit, push, publication or durable tests. Reuse existing structure. Observe actual desktop/tablet/mobile light/dark rendering, long labels and Header fit transition, link destinations/keyboard/Areas controls, footer with and without authored content, credit disabled and metadata version provenance. Record render/runtime observations in Validation and changes in Unreleased.</p>
+</section>
 <section id="publication-authorization-2026-10-06" class="level2">
 <h2 class="anchored" data-anchor-id="publication-authorization-2026-10-06">0.6.1 publication authorization — 2026-10-06</h2>
 <p>Human requested the complete publication flow for the adaptive Areas and RequireJS repair candidate. Deliver a develop checkpoint, develop-to-main PR, v0.6.1 tag and GitHub Release using CHANGELOG, existing Pages CI/deployment, public-site observation and clean local synchronization. The prior local-only endpoint is superseded for this delivery. No root pins, consumer or deployment configuration changes, new tests or stabilization are assigned. Semantic scope remains CONVERGING; release authorization is not automated-test stabilization. Reuse the recorded unchanged core implementation observations; render changed release documentation, verify exact source/tag identities and observe actual CI and published HTML/runtime rather than infer deployment from Git.</p>
@@ -885,6 +917,31 @@ document.addEventListener('click', async (event) => {
   if (document.readyState === 'complete') setup();
   else window.addEventListener('load', setup, {once: true});
 })();
+</script>
+<script>
+// Append credit without interpreting or replacing native navigation configuration.
+document.addEventListener('DOMContentLoaded', function () {
+  const credit = document.getElementById('askr-footer-credit');
+  if (!credit) return;
+  let footer = document.querySelector('footer.footer');
+  if (!footer) {
+    footer = document.createElement('footer');
+    footer.className = 'footer';
+    const row = document.createElement('div');
+    row.className = 'nav-footer';
+    footer.append(row);
+    document.body.append(footer);
+  }
+  let right = footer.querySelector('.nav-footer-right');
+  if (!right) {
+    right = document.createElement('div');
+    right.className = 'nav-footer-right';
+    footer.querySelector('.nav-footer').append(right);
+  }
+  // Quarto emits a nonbreaking-space placeholder for an unauthored region.
+  if (!right.childElementCount && !right.textContent.trim()) right.textContent = '';
+  right.append(credit.content.cloneNode(true));
+});
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1300,6 +1357,38 @@ document.addEventListener('click', async (event) => {
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/arfiligol/askr">
+      <i class="bi bi-github" role="img" aria-label="GitHub repository">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="./usage/add-askr.html">
+<p><i class="bi bi-book" aria-hidden="true"></i> Usage guide</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/arfiligol/askr/blob/main/README.md">
+<p><i class="bi bi-wrench" aria-hidden="true"></i> Maintenance guide</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.7.0" aria-label="Askr version 0.7.0">0.7.0</a></span></template>
 
 
 
