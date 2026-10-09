@@ -1,5 +1,31 @@
 # Askr release plan
 
+## 0.7.0 publication authorization — 2026-10-09
+
+Human requested removal of Gallery's descriptive right-side Footer text and
+publication of the native Header / Footer link package. Keep one Powered by
+Askr credit line in Gallery; preserve consumer-authored Footer content.
+Complete the develop checkpoint, develop-to-main PR, annotated v0.7.0 tag,
+GitHub Release, existing Pages CI/deployment, public rendering observation
+and clean durable-checkout synchronization. Do not update consumers, root
+pins, infrastructure or durable tests. Use prior unchanged implementation
+observations; freshly render release metadata and inspect the corrected
+Footer in the local and published site. Publication supersedes only the
+prior local-only endpoint; no automated-test stabilization is assigned.
+
+## Native Header / Footer links — local candidate, 2026-10-09
+
+Owner: Askr Lead; base fff9ab1 on develop, clean at intake. Implement the
+Human-assigned native navbar.tools and page-footer styling, responsive links
+and default opt-out Powered by Askr credit from installed extension metadata.
+Authors own all navigation content; no second link configuration, no automatic
+commit display, no consumer or root-pin changes. CONVERGING, local preview only;
+no commit, push, publication or durable tests. Reuse existing structure.
+Observe actual desktop/tablet/mobile light/dark rendering, long labels and
+Header fit transition, link destinations/keyboard/Areas controls, footer with
+and without authored content, credit disabled and metadata version provenance.
+Record render/runtime observations in Validation and changes in Unreleased.
+
 ## 0.6.1 publication authorization — 2026-10-06
 
 Human requested the complete publication flow for the adaptive Areas and
