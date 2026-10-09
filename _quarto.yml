@@ -8,10 +8,26 @@ project:
 website:
   title: Askr
   site-url: https://arfiligol.github.io/askr/
+  page-footer:
+    left:
+      - icon: github
+        aria-label: GitHub repository
+        href: https://github.com/arfiligol/askr
+    center:
+      - text: '<i class="bi bi-book" aria-hidden="true"></i> Usage guide'
+        href: usage/add-askr.qmd
+      - text: '<i class="bi bi-wrench" aria-hidden="true"></i> Maintenance guide'
+        href: https://github.com/arfiligol/askr/blob/main/README.md
   search:
     location: navbar
     type: overlay
   navbar:
+    tools-collapse: true
+    tools:
+      - icon: github
+        href: https://github.com/arfiligol/askr
+        text: GitHub repository
+        aria-label: GitHub repository
     left:
       - href: index.qmd
         text: Gallery
@@ -85,6 +101,8 @@ website:
           href: usage/image-viewer.qmd
         - text: "Protected docs and logout"
           href: usage/protected-docs.qmd
+        - text: "Header and footer links"
+          href: usage/header-footer.qmd
     - id: long-list
       title: "Pages"
       style: docked

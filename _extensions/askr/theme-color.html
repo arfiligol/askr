@@ -87,6 +87,20 @@
     var button = header && header.querySelector(".navbar-toggler");
     var brand = header && header.querySelector(".navbar-brand-container");
     if (!container || !area || !button || !brand) return;
+    var tools = container.querySelector('.quarto-navbar-tools');
+    var collapseTools = tools && area.contains(tools);
+    var authoredTools = tools ? Array.from(tools.children).filter(function (el) {
+      return !el.matches('.quarto-color-scheme-toggle, .quarto-reader-toggle, .askr-logout');
+    }) : [];
+    var panelTools;
+    if (collapseTools) {
+      container.appendChild(tools);
+      panelTools = document.createElement('div');
+      panelTools.className = 'askr-panel-tools';
+      area.appendChild(panelTools);
+    }
+    var mutations = new MutationObserver(schedule);
+    function observe() { mutations.observe(container, { childList: true, subtree: true, characterData: true }); }
     button.setAttribute("aria-label", "Areas");
     button.removeAttribute("role");
     button.title = "Areas";
@@ -94,6 +108,10 @@
     var compact;
     function update() {
       frame = null;
+      // Moving native nodes is presentation only, not a new navigation authority.
+      mutations.disconnect();
+      if (collapseTools) authoredTools.slice().reverse().forEach(function (el) { tools.insertBefore(el, tools.firstChild); });
+      if (tools) container.style.setProperty('--askr-tools-width', tools.getBoundingClientRect().width + 'px');
       var active = document.activeElement;
       var previous = compact;
       header.classList.add("askr-areas-measuring");
@@ -106,13 +124,15 @@
       var linksFit = !list || list.scrollWidth <= area.clientWidth;
       var areaRect = area.getBoundingClientRect();
       var brandRect = brand.getBoundingClientRect();
-      var controlsFit = Array.from(container.querySelectorAll("#quarto-search, .quarto-navbar-tools")).every(function (control) {
+      var controlsFit = Array.from(container.querySelectorAll(":scope > #quarto-search, :scope > .quarto-navbar-tools")).every(function (control) {
         var rect = control.getBoundingClientRect();
         return !rect.width || rect.right <= areaRect.left || rect.left >= areaRect.right;
       });
       compact = mobile || !titleFits || !linksFit || brandRect.right > areaRect.left || !controlsFit;
       header.classList.toggle("askr-areas-collapsed", compact);
       header.classList.remove("askr-areas-measuring");
+      if (compact && collapseTools) authoredTools.forEach(function (el) { panelTools.appendChild(el); });
+      if (tools) container.style.setProperty('--askr-tools-width', tools.getBoundingClientRect().width + 'px');
       if (mobile) {
         var left = 0;
         var right = container.getBoundingClientRect().right;
@@ -128,6 +148,7 @@
         header.style.setProperty("--askr-brand-left", (left + gap) + "px");
         header.style.setProperty("--askr-brand-right", (container.getBoundingClientRect().right - right + gap) + "px");
       }
+      observe();
       if (previous !== undefined && previous !== compact) {
         // Complete any in-flight Bootstrap animation before resetting state.
         if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
@@ -148,7 +169,7 @@
     }
     new ResizeObserver(schedule).observe(container);
     // Version and Logout entries are mounted after the original Header.
-    new MutationObserver(schedule).observe(container, { childList: true, subtree: true, characterData: true });
+    observe();
     window.addEventListener("resize", schedule);
     window.addEventListener("pageshow", schedule);
     if (document.fonts) {

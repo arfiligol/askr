@@ -1,0 +1,73 @@
+---
+title: "Header and footer links"
+---
+
+Configure links with Quarto's native navigation options. Askr supplies their
+appearance, not a second link registry. The Header offers quick access; the
+Footer keeps project, community and maintenance links available after reading.
+
+## Native configuration
+
+```yaml
+website:
+  navbar:
+    tools-collapse: true
+    tools:
+      - icon: github
+        href: https://github.com/your-organization/your-project
+        text: GitHub repository
+        aria-label: GitHub repository
+  page-footer:
+    left:
+      - icon: github
+        aria-label: GitHub repository
+        href: https://github.com/your-organization/your-project
+      - text: '<i class="bi bi-chat-dots" aria-hidden="true"></i> Community'
+        href: https://community.example.org/
+    center:
+      - text: '<i class="bi bi-book" aria-hidden="true"></i> Maintenance guide'
+        href: maintenance.qmd
+      - text: '<i class="bi bi-people" aria-hidden="true"></i> Contributing'
+        href: contributing.qmd
+    right: "Your project's existing footer content"
+```
+
+Replace the example destinations with your own. GitHub appears twice because
+these are two native navigation locations; Askr does not synchronize URLs.
+Use [Bootstrap icon names](https://icons.getbootstrap.com/) and descriptive
+`text` / `aria-label` values. Icon-only Footer links require `aria-label`:
+Quarto attaches that name to their native icon. For unfamiliar community links,
+a short visible label makes the purpose clearer.
+Quarto 1.10.18's Footer text rendering replaces a sibling `icon` when both are
+configured, so these examples put decorative Bootstrap icons inside native
+`text` markup instead. `aria-hidden` leaves the visible label as the link name.
+
+With `tools-collapse: true`, authored tools move into the
+Areas panel when space is insufficient. Theme, Search and optional Logout stay
+available in the Header. `false` keeps tools in the Header; use a small set so
+they fit your narrowest viewport. Long Footer labels wrap rather than scroll.
+Links use Quarto's native `href`, `target` and `rel` behavior; Askr does not force
+new browser tabs. Existing links and build information remain authored content.
+
+## Powered by Askr
+
+The Footer's right section includes `Powered by Askr · version`. Askr links to
+its documentation; the version links to its GitHub Release. The installed
+extension's `_extension.yml` is the version authority, not `askr-versions.json`
+or your document's package version. Unreleased local edits still show their
+current package metadata version; this is not proof that those edits shipped.
+
+To omit this credit:
+
+```yaml
+askr:
+  footer:
+    credit: false
+```
+
+Askr appends its credit without replacing your right-side content. Without
+an authored Footer it creates a minimal credit-only Footer; with credit disabled
+it creates nothing. No commit hash is generated or removed by Askr.
+
+See [Quarto's navigation guide](https://quarto.org/docs/websites/website-navigation)
+for menus, footer regions and additional native options.

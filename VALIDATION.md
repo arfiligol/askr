@@ -1,5 +1,65 @@
 # Candidate validation receipt
 
+## 0.7.0 publication package — 2026-10-09
+
+Human authorized publication after removing Gallery's descriptive right-side
+Footer text. Gallery configuration now leaves that region to the single
+Powered by Askr credit line; consumer-authored content is still preserved.
+Release metadata, install instructions, document selector and CHANGELOG
+identify 0.7.0. Prior local-candidate interaction evidence below remains
+historical, not a new execution; the styling implementation is unchanged.
+Fresh release renders, corrected Footer observation, exact-diff privacy and
+whitespace inspection, main/Release/Pages identity and public rendering are
+the delivery checks. No durable tests, root pins or consumer edits are assigned.
+The only runtime delta removes Quarto's whitespace-only placeholder from an
+unauthored right region before appending credit, avoiding an empty extra line.
+Fresh Usage/index/release-document renders completed with Quarto 1.10.18.
+The local Footer shows only Powered by Askr 0.7.0 in its right region.
+
+## Native Header / Footer links — local candidate, 2026-10-09
+
+Human-assigned scope: native link styling, package credit, Usage and local
+preview. Base `fff9ab142334f170fadac0fac9a6d2c3e20c1713` on develop; installed
+extension metadata remains 0.6.1. CONVERGING / LOCAL CANDIDATE. No commit,
+push, release, consumer edits, root pins or durable tests were performed.
+
+Quarto 1.10.18 rendered all 105 Gallery inputs with `--execute-daemon 0`,
+including Figures and Notebook Python output. Final styling and Usage were
+subsequently rendered again. Native installed-prefix extension copies were
+rendered in an outside-repository temporary consumer. Git whitespace and
+exact-diff inspection were performed; no private content or assets were added.
+
+### Rendered observations
+
+- Desktop 1440px, tablet 768px and phone 390px were inspected in light/dark
+  modes. Footer regions keep left / center / right order, wrap long labels
+  and retain authored right-side build text above appended credit. Observed
+  page widths did not exceed the viewport. Icons and labels align vertically.
+- Gallery's native icon-only Footer link exposes “GitHub repository”. Quarto
+  1.10.18 replaces a sibling icon when rendering Footer text; the documented
+  icon-plus-label examples use decorative Bootstrap markup inside native text.
+- Header tools-collapse true moves existing authored tool nodes into Areas;
+  false keeps them in the Header. A long-title consumer with two authored
+  tools and optional Logout retained usable controls at 390px; its title
+  was ellipsized with its complete accessible name retained.
+- In the long-title consumer, 1280px used Areas disclosure and 1360px used
+  inline navigation. Resizing the open panel across that interval cleared
+  expanded state and restored focus to a visible navigation link. These are
+  observations, not fixed fit thresholds. Enter opens Areas; Escape closes it.
+- Header GitHub, Footer GitHub and Maintenance links navigated to their
+  configured public repository / README destinations. The version link reached
+  the v0.6.1 Release. Keyboard focus on Footer links was visibly outlined.
+- With the document selector showing 0.3.0 via its supported query parameter,
+  credit still read 0.6.1 and linked to v0.6.1, matching installed metadata.
+- No authored Footer plus credit enabled produced one credit-only Footer.
+  Credit disabled preserved an existing authored Footer; with no authored
+  Footer it created none. Authored content was not replaced.
+
+Limits: observations use Quarto 1.10.18, not a new cross-version certification.
+Native links remain author-owned; tools-collapse false requires an appropriately
+small tool set for the author's narrowest viewport. Temporary Logout navigation
+is not evidence of authentication/session logout. No deployed-site claim is made.
+
 ## 0.6.1 publication package — 2026-10-06
 
 Human requested the complete release flow. Release metadata, README install tag,

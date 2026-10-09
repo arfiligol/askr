@@ -2,7 +2,7 @@
   "mode": "inline",
   "longTitle": "Interferometric Purcell Filter",
   "versions": [
-    {"label": "0.6.1", "root": "/", "latest": true},
+    {"label": "0.7.0", "root": "/", "latest": true},
     {"label": "0.3.0", "root": "/v0.3.0/"}
   ]
 }

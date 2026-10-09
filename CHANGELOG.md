@@ -7,6 +7,18 @@ derive from these entries; an Unreleased entry is not a published release.
 
 No pending package changes.
 
+## 0.7.0 — 2026-10-09
+
+### Added
+
+- Native Header tools and Footer links receive coordinated icon controls,
+  light/dark colors and responsive spacing. Authors retain Quarto configuration.
+- Default opt-out Powered by Askr credit uses the installed extension version,
+  separate from document versions; existing Footer content is preserved.
+- Header and footer links Usage guidance, including accessible native icon links
+  and the credit opt-out. Gallery shows a single Powered by Askr credit line,
+  without additional descriptive right-side text.
+
 ## 0.6.1 — 2026-10-06
 
 ### Fixed

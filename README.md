@@ -4,7 +4,7 @@ See [CHANGELOG](CHANGELOG.md) for published changes and the current Unreleased
 candidate. PR and GitHub Release summaries use the same entries.
 
 Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz
-remains the name of the visual theme. `0.6.1` is the current release, rendered
+remains the name of the visual theme. `0.7.0` is the current release, rendered
 with Quarto 1.10.18. Stable Quarto `>=1.9.38 <1.11` is supported. The public
 format is `askr-html`. Publication of the optional Logout and native image
 viewer was authorized on 2026-10-06 for consumer testing. Those new scopes
@@ -13,11 +13,11 @@ automated-test stabilization.
 
 ## Install
 
-Install the reviewed release tag `v0.6.1`. Quarto's GitHub installer accepts
+Install the reviewed release tag `v0.7.0`. Quarto's GitHub installer accepts
 branch and tag names, not commit SHA modifiers.
 
 ```bash
-quarto add arfiligol/askr@v0.6.1
+quarto add arfiligol/askr@v0.7.0
 ```
 
 ```yaml
