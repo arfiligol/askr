@@ -82,9 +82,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-213ae32e74feed21d5ba1b54c128d256.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-661f94b07d25ded2f87db462aa93cf55.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-213ae32e74feed21d5ba1b54c128d256.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-14f5b097a5d6fb2c6f111dce26bb6eb6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
+<link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -793,7 +795,7 @@ document.addEventListener('click', async (event) => {
 });
 </script>
 <script>
-// Askr owns entries and focus restoration; Quarto owns the viewer and image state.
+// Logout is independent of image viewing and remains plain navigation.
 (() => {
   function setup() {
     const template = document.getElementById('askr-logout-config');
@@ -804,33 +806,6 @@ document.addEventListener('click', async (event) => {
       document.getElementById('quarto-header').classList.add('askr-has-logout');
     }
 
-    const buttons = document.querySelectorAll('.askr-image-view');
-    if (typeof lightboxQuarto === 'undefined') {
-      if (buttons.length) throw new Error('Askr image-view requires Quarto native Lightbox.');
-      return;
-    }
-    let entry = null;
-    function anchorFor(button) {
-      const target = document.getElementById(button.dataset.askrImageTarget);
-      return target?.closest('a.lightbox') || target?.querySelector('a.lightbox');
-    }
-    document.addEventListener('click', (event) => {
-      const button = event.target.closest('.askr-image-view');
-      if (button) {
-        const anchor = anchorFor(button);
-        if (!anchor) throw new Error('Askr image-view target has no native Lightbox entry.');
-        entry = button;
-        anchor.click();
-      } else {
-        const anchor = event.target.closest('a.lightbox');
-        // A button's synthetic anchor click must not replace the real trigger.
-        if (anchor && event.isTrusted) entry = anchor;
-      }
-    }, true);
-    lightboxQuarto.on('close', () => {
-      if (entry?.isConnected) entry.focus({preventScroll: true});
-      entry = null;
-    });
   }
   if (document.readyState === 'complete') setup();
   else window.addEventListener('load', setup, {once: true});
@@ -1306,7 +1281,8 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.7.0" aria-label="Askr version 0.7.0">0.7.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.8.0" aria-label="Askr version 0.8.0">0.8.0</a></span></template>
+<template id="askr-viewer-config" data-loop="true"></template>
 
 
 

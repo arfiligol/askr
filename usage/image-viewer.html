@@ -82,9 +82,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-213ae32e74feed21d5ba1b54c128d256.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-661f94b07d25ded2f87db462aa93cf55.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-213ae32e74feed21d5ba1b54c128d256.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-14f5b097a5d6fb2c6f111dce26bb6eb6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
+<link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -809,9 +811,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#images-and-opt-outs" id="toc-images-and-opt-outs" class="nav-link active" data-scroll-target="#images-and-opt-outs">Images and opt-outs</a></li>
-  <li><a href="#open-an-existing-figure-with-a-button" id="toc-open-an-existing-figure-with-a-button" class="nav-link" data-scroll-target="#open-an-existing-figure-with-a-button">Open an existing figure with a button</a></li>
-  <li><a href="#show-only-a-button" id="toc-show-only-a-button" class="nav-link" data-scroll-target="#show-only-a-button">Show only a button</a></li>
-  <li><a href="#galleries-and-viewing-controls" id="toc-galleries-and-viewing-controls" class="nav-link" data-scroll-target="#galleries-and-viewing-controls">Galleries and viewing controls</a></li>
+  <li><a href="#open-with-a-button" id="toc-open-with-a-button" class="nav-link" data-scroll-target="#open-with-a-button">Open with a button</a></li>
+  <li><a href="#inspect-inline-then-expand" id="toc-inspect-inline-then-expand" class="nav-link" data-scroll-target="#inspect-inline-then-expand">Inspect inline, then expand</a></li>
+  <li><a href="#controls-and-galleries" id="toc-controls-and-galleries" class="nav-link" data-scroll-target="#controls-and-galleries">Controls and galleries</a></li>
+  <li><a href="#limits-and-migration" id="toc-limits-and-migration" class="nav-link" data-scroll-target="#limits-and-migration">Limits and migration</a></li>
   </ul>
 </nav>
     </div>
@@ -838,37 +841,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><code>askr-html</code> enables Quarto’s native Lightbox automatically. Click an independent image or figure to see it in a floating viewer, including its caption, while remaining on the article. No separate image package or CDN is added.</p>
+<p>Askr supplies one interactive image viewer in two modes: inspect an image directly in the article, or open a floating viewer from an image or button. SVG, PNG and JPEG share the same pan-and-zoom controls. No image service, third-party viewer or CDN is required.</p>
 <section id="images-and-opt-outs" class="level2">
 <h2 class="anchored" data-anchor-id="images-and-opt-outs">Images and opt-outs</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Layout](images/layout.png)</span>{#fig-layout}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Inline images and images that already have a link keep Quarto’s normal treatment. Exclude an individual image with the native class:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Layout](images/layout.png)</span>{.nolightbox}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Disable automatic floating image viewing for a whole page in its YAML header:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lightbox</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Do not put <code>askr-image-view</code> buttons on a page with <code>lightbox: false</code>. Rendering reports that conflict rather than producing a button that cannot work.</p>
+<p>Independent figures and standalone images open the floating viewer by default:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Layout](images/layout.svg)</span>{#fig-layout}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Inline prose images and images with an existing navigation link keep their normal treatment. <code>.lightbox</code> explicitly enables an image; <code>.nolightbox</code> excludes it. <code>lightbox: false</code> disables interaction for the page. Do not use viewer shortcodes on a disabled page or target an excluded image. Rendering reports the conflict instead of producing unusable controls.</p>
 </section>
-<section id="open-an-existing-figure-with-a-button" class="level2">
-<h2 class="anchored" data-anchor-id="open-an-existing-figure-with-a-button">Open an existing figure with a button</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Layout](images/layout.png)</span>{#fig-layout}</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>{{&lt; askr-image-view target="fig-layout" label="View image" &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Use the ID without <code>#</code>. The button reuses the figure’s original image and caption. The target must exist on this page and be an independent Lightbox image, not an inline image, linked image, or <code>.nolightbox</code> exclusion. Invalid targets fail during rendering.</p>
+<section id="open-with-a-button" class="level2">
+<h2 class="anchored" data-anchor-id="open-with-a-button">Open with a button</h2>
+<p>Open an existing figure without duplicating its image or caption:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Layout](images/layout.png)</span>{#fig-layout}</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>{{&lt; askr-image-view target="fig-layout" label="View image" &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Or show only a button:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{{&lt; askr-image-view src="images/layout.png" label="View image" &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Specify exactly one of <code>target</code> or <code>src</code>. Targets use the figure ID without <code>#</code> and must identify a single eligible image on the page. <code>label</code> defaults to <code>View image</code>; the <code>src</code> form has no caption. Paths are relative to the document.</p>
 </section>
-<section id="show-only-a-button" class="level2">
-<h2 class="anchored" data-anchor-id="show-only-a-button">Show only a button</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>{{&lt; askr-image-view src="images/layout.png" label="View image" &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This registers a hidden native image and opens the same Quarto viewer. Image paths resolve relative to the document, just like a normal Markdown image. Specify exactly one of <code>target</code> or <code>src</code>; <code>label</code> defaults to <code>View image</code>. Only <code>target</code> reuses an existing caption. The button-only form has no caption.</p>
-<p>For non-HTML output, native images remain native images and the entries become ordinary image/figure links, not interactive browser buttons.</p>
+<section id="inspect-inline-then-expand" class="level2">
+<h2 class="anchored" data-anchor-id="inspect-inline-then-expand">Inspect inline, then expand</h2>
+<p>An inline viewer supplies controls directly in the article:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>{{&lt; askr-image-view src="images/layout.svg" mode="inline" label="Component layout" &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To convert an existing figure in place, preserving its caption:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Layout](images/layout.svg)</span>{#fig-layout}</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>{{&lt; askr-image-view target="fig-layout" mode="inline" &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The shortcode marks the existing figure for conversion; it does not display a second copy. Each figure can be converted once, with any number of buttons opening it. <code>mode</code> accepts <code>inline</code> or <code>button</code> (the default).</p>
+<p>Inline image areas are 420px high on desktop and 320px on narrow screens. Expand moves the same viewer into a floating window. Zoom and viewing center follow it; closing returns it to the article with the updated camera intact. Different inline viewers have independent state. No state is saved after leaving the page.</p>
 </section>
-<section id="galleries-and-viewing-controls" class="level2">
-<h2 class="anchored" data-anchor-id="galleries-and-viewing-controls">Galleries and viewing controls</h2>
-<p>Use Quarto’s native <code>group</code> image attribute for a gallery:</p>
+<section id="controls-and-galleries" class="level2">
+<h2 class="anchored" data-anchor-id="controls-and-galleries">Controls and galleries</h2>
+<ul>
+<li><strong>+ / −</strong> zoom by a factor of 1.25; <strong>Fit</strong> centers the whole image.</li>
+<li><strong>100%</strong> means Fit, not original pixel size. Zooming a raster image does not increase its resolution. SVG may itself contain raster content.</li>
+<li>Drag to pan. On touchscreens use one finger to pan and two to zoom.</li>
+<li>Focus the inline image area before wheel zoom; otherwise the article scrolls normally. Floating viewers always handle wheel zoom inside their image area.</li>
+<li>In the focused image area, <code>+</code> / <code>−</code> zoom, <code>0</code> fits, and arrows pan.</li>
+<li><strong>Expand</strong> opens an inline viewer; the floating toolbar has fullscreen (where the browser supports it) and close controls.</li>
+<li>Escape closes the floating viewer and restores focus and reading position. In browser fullscreen, Escape exits fullscreen first.</li>
+</ul>
+<p>Group ordinary images into a floating gallery with the existing attribute:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="al">![First layout](images/first.png)</span>{group="layouts"}</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="al">![Second layout](images/second.png)</span>{group="layouts"}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>In a gallery, use the previous/next controls or keyboard arrow keys. Close with the close control or Escape to return to the original reading position and focus entry. On a touchscreen, native swipe and pinch gestures are available. On a desktop, click an image to zoom when its source dimensions allow it, then drag the enlarged image; click again to restore its size. There is no additional zoom toolbar. Small source images do not become sharper by being enlarged, and failed image loads remain native viewer failures.</p>
-<p>Try the real <a href="../components/figures.html#image-viewer">Figures examples</a>. See <a href="https://quarto.org/docs/output-formats/html-lightbox-figures.html">Quarto Lightbox figures</a> for native options, captions, and computational-image settings.</p>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="al">![Second layout](images/second.jpg)</span>{group="layouts"}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use previous/next buttons to switch; each image starts at Fit. Galleries loop by default; <code>lightbox: {match: auto, loop: false}</code> disables looping. Expanding an inline viewer stays on that image rather than switching away from its state. Single-finger swipes pan; they do not change gallery images.</p>
+</section>
+<section id="limits-and-migration" class="level2">
+<h2 class="anchored" data-anchor-id="limits-and-migration">Limits and migration</h2>
+<p>This replaces Askr’s former GLightbox interface. Existing shortcode names, image eligibility, captions and groups remain. GLightbox-specific <code>effect</code>, <code>desc-position</code> and <code>css-class</code> settings are not supported; remove them before rendering. Description text is displayed as text, never executable HTML.</p>
+<p>Images retain their own colors in both themes. SVG is loaded as an image, not injected into the page. This is not a GDS viewer and has no layer selection, measurement or resolution enhancement. A failed load shows an error and Retry; closing and gallery navigation remain available.</p>
+<p>Without JavaScript, images and source links remain available without interactive controls. Non-HTML output retains ordinary images and image/figure links.</p>
+<p>Try the <a href="../components/figures.html#image-viewer">Figures examples</a>.</p>
 
 
 </section>
@@ -914,7 +937,7 @@ document.addEventListener('click', async (event) => {
 });
 </script>
 <script>
-// Askr owns entries and focus restoration; Quarto owns the viewer and image state.
+// Logout is independent of image viewing and remains plain navigation.
 (() => {
   function setup() {
     const template = document.getElementById('askr-logout-config');
@@ -925,33 +948,6 @@ document.addEventListener('click', async (event) => {
       document.getElementById('quarto-header').classList.add('askr-has-logout');
     }
 
-    const buttons = document.querySelectorAll('.askr-image-view');
-    if (typeof lightboxQuarto === 'undefined') {
-      if (buttons.length) throw new Error('Askr image-view requires Quarto native Lightbox.');
-      return;
-    }
-    let entry = null;
-    function anchorFor(button) {
-      const target = document.getElementById(button.dataset.askrImageTarget);
-      return target?.closest('a.lightbox') || target?.querySelector('a.lightbox');
-    }
-    document.addEventListener('click', (event) => {
-      const button = event.target.closest('.askr-image-view');
-      if (button) {
-        const anchor = anchorFor(button);
-        if (!anchor) throw new Error('Askr image-view target has no native Lightbox entry.');
-        entry = button;
-        anchor.click();
-      } else {
-        const anchor = event.target.closest('a.lightbox');
-        // A button's synthetic anchor click must not replace the real trigger.
-        if (anchor && event.isTrusted) entry = anchor;
-      }
-    }, true);
-    lightboxQuarto.on('close', () => {
-      if (entry?.isConnected) entry.focus({preventScroll: true});
-      entry = null;
-    });
   }
   if (document.readyState === 'complete') setup();
   else window.addEventListener('load', setup, {once: true});
@@ -1427,7 +1423,8 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.7.0" aria-label="Askr version 0.7.0">0.7.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.8.0" aria-label="Askr version 0.8.0">0.8.0</a></span></template>
+<template id="askr-viewer-config" data-loop="true"></template>
 
 
 
