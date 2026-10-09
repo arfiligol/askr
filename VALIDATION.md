@@ -1,5 +1,88 @@
 # Candidate validation receipt
 
+## 0.8.0 publication package — 2026-10-10
+
+Human authorized publication of the dual-mode viewer candidate below. Release
+metadata, install tag, selector and Changelog identify 0.8.0. The viewer runtime
+is unchanged by the publication package; prior interactive receipts remain prior
+observations, not a fresh execution. Fresh release renders, exact-diff inspection,
+Git whitespace, main/Release/Pages identity and public viewing are delivery
+obligations. The touchscreen, no-JavaScript and delayed-network observation
+limitations remain explicit. No durable tests, consumers or root pins are assigned.
+Semantic state CONVERGING; delivery endpoint published and child checkout synced.
+Fresh `quarto render --execute-daemon 0` completed all 105 inputs, including both
+Figures Python cells and Notebook output. Exact publication-diff and whitespace
+inspection found no private consumer content or new external viewer dependency.
+
+## Dual-mode image viewer — local candidate, 2026-10-10
+
+Human-assigned scope: replace the active GLightbox interface with one Askr
+camera engine, inline/modal entry points, Gallery/Usage and local preview.
+Base `b79fec30ff7b256ab07170c7c338b9e488d38fae`; package metadata remains
+0.7.0. CONVERGING / LOCAL CANDIDATE. No commit, push, release, consumer
+repository, root pins, infrastructure or durable tests were changed.
+
+Quarto 1.10.18 rendered Figures with both actual Python3 cells and rendered
+Image viewer Usage. The rendered Figures HTML and extension contain no
+GLightbox dependency or initialization. README, PLAN and Unreleased Changelog
+describe the replacement, rather than a second active viewer.
+
+### Observed behavior
+
+- In the in-app browser, PNG/JPEG images, an existing-figure button and a
+  source-only button opened the same modal interface without page navigation.
+  SVG loaded as an image (24 x 24 public Askr icon), not injected SVG markup.
+- Inline PNG zoomed to 125%, expanded at 125%, and returned at 156% after
+  another zoom. Its expand button regained focus. The independent SVG viewer
+  remained at 100%. Resizing retained relative Fit zoom; stage heights were
+  420px at desktop width and 320px at phone width.
+- Actual pointer drag moved the PNG by 80px horizontally and 40px vertically;
+  a wheel action over the focused stage changed zoom. Keyboard arrows panned,
+  Fit reset the camera, and modal close/Escape returned focus to the entry.
+- Fullscreen used the viewer section. First Escape exited fullscreen while
+  keeping the dialog open; second Escape closed it. Dragging out toward the
+  backdrop did not close the dialog; a separate backdrop click did.
+- Desktop 1280 x 900, tablet 768 x 1024 and phone 390 x 844 layouts were
+  inspected, including light/dark chrome. The phone modal kept its toolbar,
+  caption and close control within the viewport. PNG pixels stayed unchanged.
+- PNG/JPEG gallery navigation changed caption/source and reset Fit. A separate
+  consumer with loop disabled disabled navigation at its endpoints. Its missing
+  third image showed a readable failure and Retry, while Previous and Close
+  remained usable. Returning to JPEG loaded the matching source/caption.
+- Rapid Previous/Next actions ended on the selected JPEG, not an older load.
+  Gallery error/warning logs were empty; deliberate missing-image failures
+  were exercised only in the temporary consumer.
+- A nested version-directory consumer resolved relative PNG/SVG paths and
+  opened its target button. Whole-page lightbox false produced no interactive
+  anchors/viewers. Excluded and navigation images stayed static/linked.
+  Explicit-image settings without automatic matching preserved .lightbox and
+  source-only shortcode entry points.
+- Invalid target, disabled-page shortcode, duplicate inline target and explicit
+  unsupported effect each caused a render error. Non-HTML GFM output retained
+  the figure, a normal target link and a normal SVG image for inline src.
+
+### Installation evidence and remaining observations
+
+An outside-repository consumer installed the local extension with quarto add;
+its new JS/CSS and filters were copied by the extension installation. Local
+directory installation uses `_extensions/askr`, while the pre-existing font
+configuration expects the GitHub namespace `_extensions/arfiligol/askr`.
+The temporary checkout was staged under that expected namespace before
+rendering; this is not evidence of a published candidate install. The viewer's
+current runtime/filter copies were then aligned with the local source.
+
+Native touch/pinch on an actual touchscreen remains unobserved: viewport
+inspection and mouse drag are not substitutes. JavaScript-disabled browser
+operation was not exercised; emitted source links/static images and absence of
+server-rendered controls were inspected. Cache-speed navigation is not a
+deliberately delayed network race observation. No cross-version or arbitrary
+large-image performance claim is made. Captions/descriptions are displayed as
+text; image colors, resolution and scientific meaning are not altered.
+
+Preview: `http://127.0.0.1:4572/components/figures.html#inline-interaction`.
+Temporary consumer and diagnostic fixtures remain outside the repository.
+Screenshots were saved outside the repository for Human visual review.
+
 ## 0.7.0 publication package — 2026-10-09
 
 Human authorized publication after removing Gallery's descriptive right-side

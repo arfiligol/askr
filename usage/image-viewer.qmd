@@ -2,33 +2,28 @@
 title: "Image viewer"
 ---
 
-`askr-html` enables Quarto's native Lightbox automatically. Click an independent
-image or figure to see it in a floating viewer, including its caption, while
-remaining on the article. No separate image package or CDN is added.
+Askr supplies one interactive image viewer in two modes: inspect an image
+directly in the article, or open a floating viewer from an image or button.
+SVG, PNG and JPEG share the same pan-and-zoom controls. No image service,
+third-party viewer or CDN is required.
 
 ## Images and opt-outs
 
-```markdown
-![Layout](images/layout.png){#fig-layout}
-```
-
-Inline images and images that already have a link keep Quarto's normal
-treatment. Exclude an individual image with the native class:
+Independent figures and standalone images open the floating viewer by default:
 
 ```markdown
-![Layout](images/layout.png){.nolightbox}
+![Layout](images/layout.svg){#fig-layout}
 ```
 
-Disable automatic floating image viewing for a whole page in its YAML header:
+Inline prose images and images with an existing navigation link keep their
+normal treatment. `.lightbox` explicitly enables an image;
+`.nolightbox` excludes it. `lightbox: false` disables interaction for the page.
+Do not use viewer shortcodes on a disabled page or target an excluded image.
+Rendering reports the conflict instead of producing unusable controls.
 
-```yaml
-lightbox: false
-```
+## Open with a button
 
-Do not put `askr-image-view` buttons on a page with `lightbox: false`. Rendering
-reports that conflict rather than producing a button that cannot work.
-
-## Open an existing figure with a button
+Open an existing figure without duplicating its image or caption:
 
 ```markdown
 ![Layout](images/layout.png){#fig-layout}
@@ -36,43 +31,82 @@ reports that conflict rather than producing a button that cannot work.
 {{{< askr-image-view target="fig-layout" label="View image" >}}}
 ```
 
-Use the ID without `#`. The button reuses the figure's original image and
-caption. The target must exist on this page and be an independent Lightbox
-image, not an inline image, linked image, or `.nolightbox` exclusion. Invalid
-targets fail during rendering.
-
-## Show only a button
+Or show only a button:
 
 ```markdown
 {{{< askr-image-view src="images/layout.png" label="View image" >}}}
 ```
 
-This registers a hidden native image and opens the same Quarto viewer. Image
-paths resolve relative to the document, just like a normal Markdown image.
-Specify exactly one of `target` or `src`; `label` defaults to `View image`.
-Only `target` reuses an existing caption. The button-only form has no caption.
+Specify exactly one of `target` or `src`. Targets use the figure ID without `#`
+and must identify a single eligible image on the page. `label` defaults to
+`View image`; the `src` form has no caption. Paths are relative to the document.
 
-For non-HTML output, native images remain native images and the entries become
-ordinary image/figure links, not interactive browser buttons.
+## Inspect inline, then expand
 
-## Galleries and viewing controls
+An inline viewer supplies controls directly in the article:
 
-Use Quarto's native `group` image attribute for a gallery:
+```markdown
+{{{< askr-image-view src="images/layout.svg" mode="inline" label="Component layout" >}}}
+```
+
+To convert an existing figure in place, preserving its caption:
+
+```markdown
+![Layout](images/layout.svg){#fig-layout}
+
+{{{< askr-image-view target="fig-layout" mode="inline" >}}}
+```
+
+The shortcode marks the existing figure for conversion; it does not display a
+second copy. Each figure can be converted once, with any number of buttons
+opening it. `mode` accepts `inline` or `button` (the default).
+
+Inline image areas are 420px high on desktop and 320px on narrow screens.
+Expand moves the same viewer into a floating window. Zoom and viewing center
+follow it; closing returns it to the article with the updated camera intact.
+Different inline viewers have independent state. No state is saved after
+leaving the page.
+
+## Controls and galleries
+
+- **+ / −** zoom by a factor of 1.25; **Fit** centers the whole image.
+- **100%** means Fit, not original pixel size. Zooming a raster image does not
+  increase its resolution. SVG may itself contain raster content.
+- Drag to pan. On touchscreens use one finger to pan and two to zoom.
+- Focus the inline image area before wheel zoom; otherwise the article scrolls
+  normally. Floating viewers always handle wheel zoom inside their image area.
+- In the focused image area, `+` / `−` zoom, `0` fits, and arrows pan.
+- **Expand** opens an inline viewer; the floating toolbar has fullscreen
+  (where the browser supports it) and close controls.
+- Escape closes the floating viewer and restores focus and reading position.
+  In browser fullscreen, Escape exits fullscreen first.
+
+Group ordinary images into a floating gallery with the existing attribute:
 
 ```markdown
 ![First layout](images/first.png){group="layouts"}
 
-![Second layout](images/second.png){group="layouts"}
+![Second layout](images/second.jpg){group="layouts"}
 ```
 
-In a gallery, use the previous/next controls or keyboard arrow keys. Close
-with the close control or Escape to return to the original reading position
-and focus entry. On a touchscreen, native swipe and pinch gestures are
-available. On a desktop, click an image to zoom when its source dimensions
-allow it, then drag the enlarged image; click again to restore its size.
-There is no additional zoom toolbar. Small source images do not become sharper
-by being enlarged, and failed image loads remain native viewer failures.
+Use previous/next buttons to switch; each image starts at Fit. Galleries loop
+by default; `lightbox: {match: auto, loop: false}` disables looping. Expanding
+an inline viewer stays on that image rather than switching away from its state.
+Single-finger swipes pan; they do not change gallery images.
 
-Try the real [Figures examples](../components/figures.qmd#image-viewer). See
-[Quarto Lightbox figures](https://quarto.org/docs/output-formats/html-lightbox-figures.html)
-for native options, captions, and computational-image settings.
+## Limits and migration
+
+This replaces Askr's former GLightbox interface. Existing shortcode names,
+image eligibility, captions and groups remain. GLightbox-specific `effect`,
+`desc-position` and `css-class` settings are not supported; remove them before
+rendering. Description text is displayed as text, never executable HTML.
+
+Images retain their own colors in both themes. SVG is loaded as an image,
+not injected into the page. This is not a GDS viewer and has no layer selection,
+measurement or resolution enhancement. A failed load shows an error and Retry;
+closing and gallery navigation remain available.
+
+Without JavaScript, images and source links remain available without interactive
+controls. Non-HTML output retains ordinary images and image/figure links.
+
+Try the [Figures examples](../components/figures.qmd#image-viewer).

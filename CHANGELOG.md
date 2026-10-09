@@ -5,7 +5,26 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
-No pending package changes.
+No unreleased changes.
+
+## 0.8.0 — 2026-10-10
+
+### Changed
+
+- Askr's image viewer now has a shared inline/modal pan-and-zoom engine for
+  SVG, PNG and JPEG, with zoom controls, Fit, fullscreen and gallery navigation.
+- Existing image buttons remain supported; `mode="inline"` embeds interactive
+  controls and preserves the camera when expanded and returned to the article.
+- GLightbox runtime is replaced. Its effect, desc-position and css-class options
+  are not supported and explicit use is reported during rendering.
+
+### Compatibility and observation limits
+
+- Quarto 1.10.18 remains the release-render environment. `lightbox` eligibility,
+  exclusions, groups and the existing button syntax remain supported.
+- Native touchscreen pinch and JavaScript-disabled browser operation were not
+  exercised. Captions/descriptions are displayed as text. SVG is loaded as an
+  image, not parsed as layout geometry; zoom does not increase raster resolution.
 
 ## 0.7.0 — 2026-10-09
 
