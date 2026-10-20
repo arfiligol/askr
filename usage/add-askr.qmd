@@ -2,11 +2,11 @@
 title: "Add Askr"
 ---
 
-`0.6.0` is the current release. The public format is `askr-html`. Quiet Quartz
+`0.9.0` is the current release. The public format is `askr-html`. Quiet Quartz
 is the visual theme.
 
 ```bash
-quarto add arfiligol/askr@v0.6.0
+quarto add arfiligol/askr@v0.9.0 --no-prompt
 ```
 
 ```yaml
@@ -22,6 +22,8 @@ format:
     toc: true
     toc-title: Sections
     toc-location: right
+    respect-user-color-scheme: true
+    smooth-scroll: false
 ```
 
 The installed copy lives at `_extensions/arfiligol/askr`. Askr does not fetch
@@ -33,15 +35,38 @@ files inside `_extensions/arfiligol/askr`.
 
 ## Quarto compatibility
 
-Askr 0.6.0 retains support for stable Quarto releases in `>=1.9.38 <1.11`.
+Askr 0.9.0 retains support for stable Quarto releases in `>=1.9.38 <1.11`.
 Quarto 1.10.18 remains the reproducible gallery and CI baseline; consumers
 may use a stable release inside the supported range instead of that exact patch.
 Older tags retain their original requirements.
 
-The optional Logout and image-viewer additions in 0.6.0 were rendered and
-operated on 1.10.18; their observations do not cover every supported patch.
+Set `respect-user-color-scheme: true` to follow the reader's system preference.
+Set `smooth-scroll: false` for consumers using the RequireJS compatibility setup.
+These remain consumer-selected options; Askr's format defaults are unchanged.
+
+The optional Logout and image viewer retain their existing configuration.
 See [Protected docs and logout](protected-docs.qmd) and
 [Image viewer](image-viewer.qmd) for configuration and ownership boundaries.
+
+## Dense scientific pages
+
+Use site-level `askr.reading-width: wide` for a 780px body base; `normal` keeps
+630px. Both follow Askr's responsive scaling and preserve native width escapes.
+
+```yaml
+askr:
+  reading-width: wide
+  page-facts:
+    - {key: node-role, label: Role}
+    - {key: reader-task, label: Reader task}
+```
+
+Pages keep flat front matter such as `node-role: Concept` and
+`reader-task: "Distinguish the modes and their response."`. Askr places set
+values below the description and preserves native author/date metadata.
+Unset values produce no facts row. See [Tables](../components/tables.qmd),
+[Mathematics](../components/mathematics.qmd) and [Figures](figures.qmd) for
+table classes, three-level Copy settings and the wide-figure utility.
 
 Actual non-executing renders and browser observations cover stable 1.9.38
 and 1.10.18, plus 1.10.16 as a diagnostic prerelease across upstream Sass

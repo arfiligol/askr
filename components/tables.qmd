@@ -3,8 +3,9 @@ title: "Tables"
 subtitle: "Header and cell rules"
 ---
 
-The header rule is 2px in the muted token. Body cells use a 1px border in the
-content border token. A wide table scrolls in its own wrapper.
+The header rule is 1px in the decorative muted token. Body cells use a 1px
+content border. Each table, including a captionless pipe table, gets a labelled,
+keyboard-focusable horizontal scroll region. Wrapped headers use a 1.35 line height.
 
 | Component | Local behavior | Reader concern |
 | --- | --- | --- |
@@ -16,9 +17,23 @@ content border token. A wide table scrolls in its own wrapper.
 | --- | --- | --- | --- | --- | --- | --- |
 | Low | 4.2 GHz | open | floating | quarter wave | intrinsic | This last cell exists so the table, not the page, owns the horizontal scroll. |
 
-## Limits
+## Symbol and dense parameter tables
+
+Wrap a captionless pipe table in `.askr-symbol-table` for a narrow term column
+and a wide meaning column. On phones, the fixed layout wraps long tokens.
+Add `.askr-table-compact` for tighter padding and `.askr-table-numeric` for
+tabular numerals throughout the table. These classes also work on native tables.
+
+````markdown
+::: {.askr-symbol-table .askr-table-compact .askr-table-numeric}
+| Symbol | Meaning |
+| --- | --- |
+| $\omega_r$ | Resonator angular frequency, in radians per second. |
+:::
+````
+
+## Reading long tables
 
 The theme contains a wide table and an unbreakable path or SHA-256 inside a
 cell: the hash may wrap, and extra columns scroll inside the table wrapper.
-Do not write an essay in a cell. If a cell needs more than one sentence, move
-that text into the paragraph above the table.
+Keep long explanations in nearby prose so the table remains easy to compare.

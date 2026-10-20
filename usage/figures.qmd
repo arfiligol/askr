@@ -11,3 +11,21 @@ A cell can emit a light output and a dark output. Put the light output first:
 With `askr-html` and `theme-toggle`, the dark stylesheet carries
 `data-mode="dark"`, and the toggle adds `quarto-dark` to `body`. The
 [Figures](../components/figures.qmd) page renders a pair of swatches this way.
+
+## Wide figures and diagrams
+
+Wrap a figure or Mermaid block in `.askr-wide-figure` to keep its natural label
+size and scroll it inside a labelled, keyboard-focusable region. The drawing's
+own intrinsic width sets the scroll extent; no fixed consumer width is needed.
+Mermaid colors follow Askr's light and dark palettes.
+
+````markdown
+::: {.askr-wide-figure aria-label="Circuit signal path"}
+```{mermaid}
+flowchart LR
+  Input --> Resonator --> Output
+```
+:::
+````
+
+This utility keeps native Quarto figures, captions and cross references.

@@ -1,5 +1,104 @@
 # Candidate validation receipt
 
+## 0.9.0 Lead browser observations — 2026-10-21
+
+State: CONVERGING / LOCAL CANDIDATE. The Lead observed the rendered temporary
+consumer in Chromium at desktop, tablet and phone viewport sizes. The independent
+floating-sidebar input is `/tmp/askr-floating-090.gFJTQX`; it contains only one
+sidebar and its rendered body has the native `floating` class. Other cases use
+`/tmp/askr-reading-090.aPzO0O`. No durable tests, gallery fixtures, consumer
+repository, root pins or infrastructure changes are part of these observations.
+
+| Surface | Actual observation |
+| --- | --- |
+| Normal/wide measure | At 1440px, docked, absent and independently rendered floating sidebars each give 630px normal / 780px wide body measure |
+| Wide responsive scaling | At 1920px, the floating wide-profile body paragraph measures 858px; page width 1905px remains inside the viewport |
+| Native width escapes | Floating at 1440px: body-outset/page/screen-inset measure 787.59/1209.98/1373px normal, 937.59/1359.98/1373px wide |
+| Responsive wide layout | At 992px, body 513px with 200px sidebar and 200px TOC, without overlap; at 768px body 500px; at 390px body 323px and page 375px |
+| Phone tables | Symbol term/meaning columns measure 64/259px and long tokens wrap. An eight-column 526px table stays inside a 323px region |
+| Numeric table utility | Tabular numerals apply while author-selected alignment is preserved |
+| Keyboard table scroll | Actual ArrowRight changes region `scrollLeft` to 40px after animation; page horizontal scroll remains 0 |
+| Equation Copy | Enter copies original `x=\alpha+\beta` to the clipboard. Copied! returns to Copy; at phone size, button bottom 384.5px precedes equation-number top 387.48px |
+| Reader mode | Activating the toggle changes the native reader class and preserves the 780px body measure |
+| Page facts | Configured order, wrapping approximately 200-character value, native author and date are present |
+| Semantic blocks | All eight native environments retain their native content and receive styling: 3px theorem-like border, 2px proof border; title colors differ appropriately in light/dark |
+| Mermaid | Late-rendered SVG has viewBox/native width 896px, retains that width after a theme change and scrolls locally |
+| Console | No warnings or errors observed |
+
+The Lead measured these contrast ratios from actual computed colors:
+
+| Text surface | Light | Dark |
+| --- | --- | --- |
+| Muted text | 5.04:1 | 6.91:1 |
+| Link hover | 4.85:1 | 8.18:1 |
+| Note title | 5.74:1 | 9.05:1 |
+| Tip title | 5.25:1 | 9.48:1 |
+| Important title | 6.84:1 | 9.83:1 |
+| Warning title | 5.40:1 | 9.42:1 |
+| Caution title | 6.39:1 | 9.80:1 |
+
+The final compiled-token audit compared all 113 public `--qdk-*` properties
+in each theme with source expectations and found zero mismatches. Borders
+compile to `#e5e5e5` in light and `#393639` in dark.
+
+The final current-source compatibility matrix passed all eight renders across
+Quarto 1.10.18 and 1.10.19: each version rendered four normal-profile pages,
+four wide-profile pages, one independent floating normal page and one independent
+floating wide page. The full Gallery render on Quarto 1.10.18 completed all 105
+inputs, including both Figures Python cells and the Notebook Python cell.
+
+Final Sass SHA-256: `qdk.scss`
+`9724faa57ae241848b96018c00bd5c50a66ac67de2a4dac12faa033d7059b4ca`;
+`qdk-dark.scss`
+`d60c887126dbcd7d04ddfdcab792c779d8dea7c3bce1827573bb3b6d0d566f69`.
+Capture/config/runtime hashes remain those listed in the integration receipt
+below. A later change invalidates the corresponding source, rendering or runtime
+observation; these results do not claim a future publication or CI execution.
+
+Search retains native Quarto equation text. Askr's data-attribute source and
+runtime-created controls add no duplicate TeX or source-label text to the index.
+Browser observations cover Chromium viewport behavior; actual touch input,
+Safari and Firefox were not observed. Publication, CI and synchronization
+remain separate delivery work.
+
+## 0.9.0 reading integration — 2026-10-21
+
+State: CONVERGING / LOCAL CANDIDATE. This receipt covers the integration
+worker's scoped Quarto/source observations; the Lead records compiled-token,
+browser, compatibility and publication observations separately. No durable tests,
+new gallery fixtures, consumer or root changes were made.
+
+Input: temporary consumer `/tmp/askr-reading-090.aPzO0O`, copied extension under
+the installed `_extensions/arfiligol/askr` layout, Quarto 1.10.18. Its `index.qmd`
+contains labelled/unlabelled equations, display math in a tight-list `Plain`,
+wrapping-div/native-attribute exclusions, hostile literal page-fact text, native
+author/date, a captionless pipe table and Mermaid. Additional external pages
+provide normal/wide, docked/floating/absent-sidebars and reader-mode observations
+for the Lead; these are temporary inputs, not maintained product fixtures.
+
+| Observation | Result |
+| --- | --- |
+| Scoped `index.qmd` render | ✅ Rendered `_site/index.html`; native `@eq-label` resolves to Equation 1 and `eq-skip` remains Equation 2 |
+| Original-source capture | ✅ Three `data-askr-tex` attributes: labelled formula, unlabelled formula, tight-list display; native numbering tags are absent from captured source |
+| Per-equation exclusions | ✅ Wrapping `.no-math-copy` and trailing native equation `.no-math-copy` both omit copy-source attributes while retaining rendered equations |
+| Page facts | ✅ Configured order retained; literal `<script>…</script>` and `&` escaped in the facts template; native author/date remain in title HTML |
+| Search source | ✅ `search.json` contains no `LaTeX source`, copy controls or duplicate data-attribute payload; Quarto retains its native equation text |
+| Site/page opt-out render | ✅ `--profile copy-off` rendered six inputs; site-disabled index and flat page-disabled equation have no copy attributes; flat page-enabled equation has one |
+| Actual browser behavior / styling | ✅ Recorded in the Lead browser observations above, using the final candidate and independent floating-sidebar input |
+
+Source SHA-256 at execution: `math-copy.lua`
+`f243ee39d6b2795418390e53f675ab8c77052fff4e0ba4485a8c233fd49360ae`;
+`math-copy.html` `eef80d12320268417f06f8e567cedde0cd89c419ee990dc8b0623e61a58ef95c`;
+`reading.lua` `6d5738ec43bf6ee04c65304cf029d073ebac63650be337e8f9a16e86da9751d0`;
+`reading.js` `10373c297a467567d26bd82c2ed1ef58c0e4ed4edfaeb3fa22056e2a49a5fc1c`.
+Rendered index SHA-256:
+`a6a2e27224c60d3e4f4dbf7f5397b9d359346661d343506abc3db24667b033f3`;
+search SHA-256:
+`dbf9be1f416930669358e17051808659a333ffd8914c3af42d35f8a4f6ce9a40`.
+Changes to these capture/config/runtime files invalidate their associated
+observations. This scoped render used the pre-style-update Sass copy and does
+not establish candidate palette or grid behavior.
+
 ## 0.8.0 publication package — 2026-10-10
 
 Human authorized publication of the dual-mode viewer candidate below. Release

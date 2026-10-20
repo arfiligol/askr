@@ -7,6 +7,40 @@ derive from these entries; an Unreleased entry is not a published release.
 
 No unreleased changes.
 
+## 0.9.0 — 2026-10-21
+
+### Added
+
+- Site option `askr.reading-width: normal|wide` selects a consistent 630px or
+  780px body base across docked, floating and absent sidebars.
+- Accessible table scroll regions, `.askr-symbol-table`, `.askr-table-compact`
+  and `.askr-table-numeric`, including wrapping-div use with captionless tables.
+- Ordered `askr.page-facts` entries with `key` and `label`, reading flat scalar
+  page values beneath the title description while preserving native metadata.
+- `.askr-wide-figure` preserves intrinsic diagram size inside an accessible
+  scroll region, and Mermaid follows Askr's light/dark palette.
+- Calm treatments for native theorem-like blocks and proofs.
+
+### Changed
+
+- Display math Copy is compact and supports labelled equations and tight lists.
+  Source stays in data attributes; manual-copy text is created only after a
+  clipboard failure. Site `askr.math-copy`, flat page `askr-math-copy` and
+  per-equation `.no-math-copy` control availability.
+- Public border tokens use dedicated Askr Sass sources; text-grade muted colors,
+  callout titles, dark important/caution hues and link hover improve contrast.
+  Table headers use a 1px decorative rule and a 1.35 line height.
+- Documented consumer options `respect-user-color-scheme: true` and
+  `smooth-scroll: false`. Reader-toggle controls share Askr's control size,
+  border, radius, colors and hover treatment; spacing beside search accounts
+  for the reader toggle. Other P1 navigation, headings, native-element, CJK,
+  print, root-font, localization and cleanup work is deferred.
+- Kept the installation format, normal-width default, enabled math Copy, footer
+  credit and Quarto `>=1.9.38 <1.11`. Palette defaults changed as described above.
+  Sass border overrides now use `$qdk-border`, and muted text uses
+  `$qdk-muted-text`; public CSS property names remain available. Invalid
+  reading-width values or malformed page-facts configuration raise render errors.
+
 ## 0.8.0 — 2026-10-10
 
 ### Changed

@@ -7,6 +7,10 @@ the rendered page. Consumer styles belong after Askr; keep installed extension
 files unchanged. Native Quarto owns tab switching, collapse, navigation,
 search and copying; tokens change presentation.
 
+The reader toggle uses Askr's control size, border, radius, color and hover
+tokens. Askr reserves space beside search for that control, so consumers need
+no spacing override based on private `--_qdk-*` scale properties.
+
 ## Override in the consumer
 
 ```yaml
@@ -55,23 +59,28 @@ compile-time inputs through Quarto.
 Existing CSS names remain available. Their compile-time sources and exact
 light/dark defaults are:
 
+In 0.9.0, override `$qdk-border` for Askr borders and `$qdk-muted-text` for
+muted text. `$border-color` and `$toc-color` retain their native Quarto roles
+but no longer drive these two Askr properties. Public CSS names remain available.
+
 | CSS property | Sass source | Light | Dark |
 | --- | --- | --- | --- |
 | `--qdk-canvas` | `$body-bg` | `#faf8f8` | `#161618` |
 | `--qdk-text` | `$body-color` | `#4e4e4e` | `#d4d4d4` |
 | `--qdk-heading` | `$headings-color` | `#2b2b2b` | `#ebebec` |
-| `--qdk-muted` | `$toc-color` | `#b8b8b8` | `#646464` |
+| `--qdk-muted` | `$qdk-muted-text` | `#6b6b6b` | `#a0a0a0` |
+| `--qdk-muted-decoration` | `$qdk-muted-decoration` | `#b8b8b8` | `#646464` |
 | `--qdk-link`, `--qdk-focus` | `$link-color` | `#284b63` | `#7b97aa` |
-| `--qdk-border` | `$border-color` | `#e5e5e5` | `#393639` |
+| `--qdk-border` | `$qdk-border` | `#e5e5e5` | `#393639` |
 | `--qdk-highlight` | `$code-bg` | `rgba(143,159,169,.15)` | same |
 | `--qdk-sidebar`, `--qdk-margin` | `$grid-sidebar-width`, `$grid-margin-width` | `264px` | same |
 | `--qdk-body` | `$grid-body-width` | `630px` | same |
 | `--qdk-gutter` | `$grid-column-gutter-width` | `26px` | same |
 | `--qdk-callout-note` | `$callout-color-note` | `#448aff` | same |
 | `--qdk-callout-tip` | `$callout-color-tip` | `#00bfa5` | same |
-| `--qdk-callout-important` | `$callout-color-important` | `#7a43b5` | same |
+| `--qdk-callout-important` | `$callout-color-important` | `#7a43b5` | `#c69af0` |
 | `--qdk-callout-warning` | `$callout-color-warning` | `#db8942` | same |
-| `--qdk-callout-caution` | `$callout-color-caution` | `#db4242` | same |
+| `--qdk-callout-caution` | `$callout-color-caution` | `#db4242` | `#ff8f8f` |
 
 Type sources default to Source Sans 3 for body text, Schibsted Grotesk for
 headings and IBM Plex Mono for code, with the installed platform fallbacks.
@@ -97,7 +106,7 @@ aliases; values containing `$` derive from the Sass sources above.
 
 | Token | Default |
 | --- | --- |
-| `tertiary` | `#84a59d` |
+| `tertiary` | `#4f756b` (light), `#8fb7a8` (dark) |
 | `divider-content` | `rgba(43, 43, 43, .18)` |
 | `divider-layout` | `rgba(43, 43, 43, .08)` |
 | `mark` | `#fff23688` |
@@ -180,10 +189,10 @@ aliases; values containing `$` derive from the Sass sources above.
 | `code-copy-hover-color` | `var(--qdk-heading)` |
 | `table-border` | `$table-border-color` |
 | `table-stripe` | `$table-striped-bg` |
-| `table-head-border` | `var(--qdk-muted)` |
+| `table-head-border` | `var(--qdk-muted-decoration)` |
 | `table-head-padding` | `.5rem` |
 | `table-cell-padding` | `.5rem` |
-| `table-head-line-height` | `2rem` |
+| `table-head-line-height` | `1.35` |
 | `table-margin` | `var(--qdk-space)` |
 | `blockquote-color` | `var(--qdk-text)` |
 | `blockquote-border` | `var(--qdk-link)` |
@@ -193,16 +202,15 @@ aliases; values containing `$` derive from the Sass sources above.
 | `radius` | `6px` |
 
 Dark overrides `divider-content` to `rgba(212,212,212,.24)`,
-`divider-layout` to `rgba(212,212,212,.10)`, and `mark` to `#b3aa0288`.
+`divider-layout` to `rgba(212,212,212,.10)`, and `mark` to `#e5c76b33`.
 Other component defaults are shared between themes and follow palette aliases.
 Dark `code-color` follows `var(--qdk-text)`; inline code keeps the heading color.
-Native Quarto tables use `.5rem` header and cell padding and a `1px` header
-border, with the existing muted header-border color. These defaults retain
-the observed native baseline: earlier Askr padding and `2px` header-width
-declarations were overridden by Bootstrap; the muted color already applied.
-The token rules now address native table
-cells directly; plain HTML tables consume the same defaults. The header
-border token controls color, while border width remains `1px`.
+Native Quarto tables use `.5rem` header and cell padding and a `1px` decorative
+header border. Wrapped headers use the unitless `1.35` line height. The token
+rules address native and plain HTML table cells directly. Text-grade muted
+colors serve subtitles, metadata, labels and footers; decorative muted colors
+serve hairlines. Callout titles mix 72% body text color with 28% type hue, while
+icons and borders retain their saturated type color.
 `--qdk-callout-color` is the local resolved type color of each native callout;
 override a named type color to change all callouts of that type.
 
@@ -224,6 +232,10 @@ This preserves consumer bases at every width and retains the default geometry:
 
 For example a `680px` body base becomes `748px` at 1920px (×1.1)
 and `816px` at 2560px (×1.2). Mobile content fits the available container.
+Site option `askr.reading-width: wide` replaces the normal base with `780px`,
+giving `858px` at 1920px and `936px` at 2560px. Docked, floating and absent
+sidebars share the selected measure. Native width escapes and reader mode keep
+their Quarto behavior.
 Callout horizontal/header padding uses ×.8 below 992px.
 Tab labels stay `.9rem` with `.35rem` vertical padding by default, scaling
 with the root type rather than being replaced by another tab size.
