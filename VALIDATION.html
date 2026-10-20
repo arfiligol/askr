@@ -82,11 +82,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-14f5b097a5d6fb2c6f111dce26bb6eb6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b5a558ee1d1b5dcea91ca9cc94f79546.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -741,6 +742,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#candidate-validation-receipt" id="toc-candidate-validation-receipt" class="nav-link active" data-scroll-target="#candidate-validation-receipt">Candidate validation receipt</a>
   <ul class="collapse">
+  <li><a href="#lead-browser-observations-2026-10-21" id="toc-lead-browser-observations-2026-10-21" class="nav-link" data-scroll-target="#lead-browser-observations-2026-10-21">0.9.0 Lead browser observations — 2026-10-21</a></li>
+  <li><a href="#reading-integration-2026-10-21" id="toc-reading-integration-2026-10-21" class="nav-link" data-scroll-target="#reading-integration-2026-10-21">0.9.0 reading integration — 2026-10-21</a></li>
   <li><a href="#publication-package-2026-10-10" id="toc-publication-package-2026-10-10" class="nav-link" data-scroll-target="#publication-package-2026-10-10">0.8.0 publication package — 2026-10-10</a></li>
   <li><a href="#dual-mode-image-viewer-local-candidate-2026-10-10" id="toc-dual-mode-image-viewer-local-candidate-2026-10-10" class="nav-link" data-scroll-target="#dual-mode-image-viewer-local-candidate-2026-10-10">Dual-mode image viewer — local candidate, 2026-10-10</a>
   <ul class="collapse">
@@ -788,6 +791,175 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="candidate-validation-receipt" class="level1">
 <h1>Candidate validation receipt</h1>
+<section id="lead-browser-observations-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="lead-browser-observations-2026-10-21">0.9.0 Lead browser observations — 2026-10-21</h2>
+<p>State: CONVERGING / LOCAL CANDIDATE. The Lead observed the rendered temporary consumer in Chromium at desktop, tablet and phone viewport sizes. The independent floating-sidebar input is <code>/tmp/askr-floating-090.gFJTQX</code>; it contains only one sidebar and its rendered body has the native <code>floating</code> class. Other cases use <code>/tmp/askr-reading-090.aPzO0O</code>. No durable tests, gallery fixtures, consumer repository, root pins or infrastructure changes are part of these observations.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Surface</th>
+<th>Actual observation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Normal/wide measure</td>
+<td>At 1440px, docked, absent and independently rendered floating sidebars each give 630px normal / 780px wide body measure</td>
+</tr>
+<tr class="even">
+<td>Wide responsive scaling</td>
+<td>At 1920px, the floating wide-profile body paragraph measures 858px; page width 1905px remains inside the viewport</td>
+</tr>
+<tr class="odd">
+<td>Native width escapes</td>
+<td>Floating at 1440px: body-outset/page/screen-inset measure 787.59/1209.98/1373px normal, 937.59/1359.98/1373px wide</td>
+</tr>
+<tr class="even">
+<td>Responsive wide layout</td>
+<td>At 992px, body 513px with 200px sidebar and 200px TOC, without overlap; at 768px body 500px; at 390px body 323px and page 375px</td>
+</tr>
+<tr class="odd">
+<td>Phone tables</td>
+<td>Symbol term/meaning columns measure 64/259px and long tokens wrap. An eight-column 526px table stays inside a 323px region</td>
+</tr>
+<tr class="even">
+<td>Numeric table utility</td>
+<td>Tabular numerals apply while author-selected alignment is preserved</td>
+</tr>
+<tr class="odd">
+<td>Keyboard table scroll</td>
+<td>Actual ArrowRight changes region <code>scrollLeft</code> to 40px after animation; page horizontal scroll remains 0</td>
+</tr>
+<tr class="even">
+<td>Equation Copy</td>
+<td>Enter copies original <code>x=\alpha+\beta</code> to the clipboard. Copied! returns to Copy; at phone size, button bottom 384.5px precedes equation-number top 387.48px</td>
+</tr>
+<tr class="odd">
+<td>Reader mode</td>
+<td>Activating the toggle changes the native reader class and preserves the 780px body measure</td>
+</tr>
+<tr class="even">
+<td>Page facts</td>
+<td>Configured order, wrapping approximately 200-character value, native author and date are present</td>
+</tr>
+<tr class="odd">
+<td>Semantic blocks</td>
+<td>All eight native environments retain their native content and receive styling: 3px theorem-like border, 2px proof border; title colors differ appropriately in light/dark</td>
+</tr>
+<tr class="even">
+<td>Mermaid</td>
+<td>Late-rendered SVG has viewBox/native width 896px, retains that width after a theme change and scrolls locally</td>
+</tr>
+<tr class="odd">
+<td>Console</td>
+<td>No warnings or errors observed</td>
+</tr>
+</tbody>
+</table>
+<p>The Lead measured these contrast ratios from actual computed colors:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Text surface</th>
+<th>Light</th>
+<th>Dark</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Muted text</td>
+<td>5.04:1</td>
+<td>6.91:1</td>
+</tr>
+<tr class="even">
+<td>Link hover</td>
+<td>4.85:1</td>
+<td>8.18:1</td>
+</tr>
+<tr class="odd">
+<td>Note title</td>
+<td>5.74:1</td>
+<td>9.05:1</td>
+</tr>
+<tr class="even">
+<td>Tip title</td>
+<td>5.25:1</td>
+<td>9.48:1</td>
+</tr>
+<tr class="odd">
+<td>Important title</td>
+<td>6.84:1</td>
+<td>9.83:1</td>
+</tr>
+<tr class="even">
+<td>Warning title</td>
+<td>5.40:1</td>
+<td>9.42:1</td>
+</tr>
+<tr class="odd">
+<td>Caution title</td>
+<td>6.39:1</td>
+<td>9.80:1</td>
+</tr>
+</tbody>
+</table>
+<p>The final compiled-token audit compared all 113 public <code>--qdk-*</code> properties in each theme with source expectations and found zero mismatches. Borders compile to <code>#e5e5e5</code> in light and <code>#393639</code> in dark.</p>
+<p>The final current-source compatibility matrix passed all eight renders across Quarto 1.10.18 and 1.10.19: each version rendered four normal-profile pages, four wide-profile pages, one independent floating normal page and one independent floating wide page. The full Gallery render on Quarto 1.10.18 completed all 105 inputs, including both Figures Python cells and the Notebook Python cell.</p>
+<p>Final Sass SHA-256: <code>qdk.scss</code> <code>9724faa57ae241848b96018c00bd5c50a66ac67de2a4dac12faa033d7059b4ca</code>; <code>qdk-dark.scss</code> <code>d60c887126dbcd7d04ddfdcab792c779d8dea7c3bce1827573bb3b6d0d566f69</code>. Capture/config/runtime hashes remain those listed in the integration receipt below. A later change invalidates the corresponding source, rendering or runtime observation; these results do not claim a future publication or CI execution.</p>
+<p>Search retains native Quarto equation text. Askr’s data-attribute source and runtime-created controls add no duplicate TeX or source-label text to the index. Browser observations cover Chromium viewport behavior; actual touch input, Safari and Firefox were not observed. Publication, CI and synchronization remain separate delivery work.</p>
+</section>
+<section id="reading-integration-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="reading-integration-2026-10-21">0.9.0 reading integration — 2026-10-21</h2>
+<p>State: CONVERGING / LOCAL CANDIDATE. This receipt covers the integration worker’s scoped Quarto/source observations; the Lead records compiled-token, browser, compatibility and publication observations separately. No durable tests, new gallery fixtures, consumer or root changes were made.</p>
+<p>Input: temporary consumer <code>/tmp/askr-reading-090.aPzO0O</code>, copied extension under the installed <code>_extensions/arfiligol/askr</code> layout, Quarto 1.10.18. Its <code>index.qmd</code> contains labelled/unlabelled equations, display math in a tight-list <code>Plain</code>, wrapping-div/native-attribute exclusions, hostile literal page-fact text, native author/date, a captionless pipe table and Mermaid. Additional external pages provide normal/wide, docked/floating/absent-sidebars and reader-mode observations for the Lead; these are temporary inputs, not maintained product fixtures.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Observation</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Scoped <code>index.qmd</code> render</td>
+<td>✅ Rendered <code>_site/index.html</code>; native <code>@eq-label</code> resolves to Equation 1 and <code>eq-skip</code> remains Equation 2</td>
+</tr>
+<tr class="even">
+<td>Original-source capture</td>
+<td>✅ Three <code>data-askr-tex</code> attributes: labelled formula, unlabelled formula, tight-list display; native numbering tags are absent from captured source</td>
+</tr>
+<tr class="odd">
+<td>Per-equation exclusions</td>
+<td>✅ Wrapping <code>.no-math-copy</code> and trailing native equation <code>.no-math-copy</code> both omit copy-source attributes while retaining rendered equations</td>
+</tr>
+<tr class="even">
+<td>Page facts</td>
+<td>✅ Configured order retained; literal <code>&lt;script&gt;…&lt;/script&gt;</code> and <code>&amp;</code> escaped in the facts template; native author/date remain in title HTML</td>
+</tr>
+<tr class="odd">
+<td>Search source</td>
+<td>✅ <code>search.json</code> contains no <code>LaTeX source</code>, copy controls or duplicate data-attribute payload; Quarto retains its native equation text</td>
+</tr>
+<tr class="even">
+<td>Site/page opt-out render</td>
+<td>✅ <code>--profile copy-off</code> rendered six inputs; site-disabled index and flat page-disabled equation have no copy attributes; flat page-enabled equation has one</td>
+</tr>
+<tr class="odd">
+<td>Actual browser behavior / styling</td>
+<td>✅ Recorded in the Lead browser observations above, using the final candidate and independent floating-sidebar input</td>
+</tr>
+</tbody>
+</table>
+<p>Source SHA-256 at execution: <code>math-copy.lua</code> <code>f243ee39d6b2795418390e53f675ab8c77052fff4e0ba4485a8c233fd49360ae</code>; <code>math-copy.html</code> <code>eef80d12320268417f06f8e567cedde0cd89c419ee990dc8b0623e61a58ef95c</code>; <code>reading.lua</code> <code>6d5738ec43bf6ee04c65304cf029d073ebac63650be337e8f9a16e86da9751d0</code>; <code>reading.js</code> <code>10373c297a467567d26bd82c2ed1ef58c0e4ed4edfaeb3fa22056e2a49a5fc1c</code>. Rendered index SHA-256: <code>a6a2e27224c60d3e4f4dbf7f5397b9d359346661d343506abc3db24667b033f3</code>; search SHA-256: <code>dbf9be1f416930669358e17051808659a333ffd8914c3af42d35f8a4f6ce9a40</code>. Changes to these capture/config/runtime files invalidate their associated observations. This scoped render used the pre-style-update Sass copy and does not establish candidate palette or grid behavior.</p>
+</section>
 <section id="publication-package-2026-10-10" class="level2">
 <h2 class="anchored" data-anchor-id="publication-package-2026-10-10">0.8.0 publication package — 2026-10-10</h2>
 <p>Human authorized publication of the dual-mode viewer candidate below. Release metadata, install tag, selector and Changelog identify 0.8.0. The viewer runtime is unchanged by the publication package; prior interactive receipts remain prior observations, not a fresh execution. Fresh release renders, exact-diff inspection, Git whitespace, main/Release/Pages identity and public viewing are delivery obligations. The touchscreen, no-JavaScript and delayed-network observation limitations remain explicit. No durable tests, consumers or root pins are assigned. Semantic state CONVERGING; delivery endpoint published and child checkout synced. Fresh <code>quarto render --execute-daemon 0</code> completed all 105 inputs, including both Figures Python cells and Notebook output. Exact publication-diff and whitespace inspection found no private consumer content or new external viewer dependency.</p>
@@ -990,12 +1162,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 // The render filter owns source identity. This handler only transfers that
 // source on an explicit click and exposes it if clipboard access is denied.
 const askrMathCopyTimers = new WeakMap();
+function askrInitializeMathCopy() {
+  document.querySelectorAll('.askr-copyable-math').forEach(component => {
+    if (component.closest('.no-math-copy') || component.querySelector('.no-math-copy')) return;
+    const actions = document.createElement('div');
+    actions.className = 'askr-math-actions';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'askr-math-copy';
+    button.textContent = 'Copy';
+    button.setAttribute('aria-label', 'Copy LaTeX');
+    const status = document.createElement('span');
+    status.className = 'askr-math-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    actions.append(button, status);
+    component.prepend(actions);
+  });
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', askrInitializeMathCopy);
+else askrInitializeMathCopy();
 document.addEventListener('click', async (event) => {
   const button = event.target.closest('.askr-math-copy');
   if (!button) return;
   const component = button.closest('.askr-copyable-math');
-  const source = component.querySelector('.askr-math-source');
-  const textarea = source.querySelector('textarea');
   const status = component.querySelector('.askr-math-status');
   clearTimeout(askrMathCopyTimers.get(button));
   button.classList.remove('is-copied');
@@ -1004,7 +1194,7 @@ document.addEventListener('click', async (event) => {
   status.classList.remove('askr-math-status-success');
   status.textContent = '';
   try {
-    await navigator.clipboard.writeText(textarea.value);
+    await navigator.clipboard.writeText(component.dataset.askrTex);
     button.textContent = 'Copied!';
     button.classList.add('is-copied');
     status.classList.add('askr-math-status-success');
@@ -1016,7 +1206,19 @@ document.addEventListener('click', async (event) => {
       askrMathCopyTimers.delete(button);
     }, 2000));
   } catch {
-    source.hidden = false;
+    let source = component.querySelector('.askr-math-source');
+    if (!source) {
+      source = document.createElement('div');
+      source.className = 'askr-math-source';
+      const textarea = document.createElement('textarea');
+      textarea.readOnly = true;
+      textarea.spellcheck = false;
+      textarea.setAttribute('aria-label', 'LaTeX source');
+      textarea.value = component.dataset.askrTex;
+      source.append(textarea);
+      component.append(source);
+    }
+    const textarea = source.querySelector('textarea');
     textarea.focus();
     textarea.select();
     status.textContent = 'Copy unavailable. Select the source below to copy manually.';
@@ -1512,7 +1714,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.8.0" aria-label="Askr version 0.8.0">0.8.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.9.0" aria-label="Askr version 0.9.0">0.9.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 
 

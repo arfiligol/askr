@@ -47,11 +47,12 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-14f5b097a5d6fb2c6f111dce26bb6eb6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b5a558ee1d1b5dcea91ca9cc94f79546.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -707,23 +708,28 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#changelog" id="toc-changelog" class="nav-link active" data-scroll-target="#changelog">Changelog</a>
   <ul class="collapse">
   <li><a href="#unreleased" id="toc-unreleased" class="nav-link" data-scroll-target="#unreleased">Unreleased</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">0.8.0 — 2026-10-10</a>
-  <ul class="collapse">
-  <li><a href="#changed" id="toc-changed" class="nav-link" data-scroll-target="#changed">Changed</a></li>
-  <li><a href="#compatibility-and-observation-limits" id="toc-compatibility-and-observation-limits" class="nav-link" data-scroll-target="#compatibility-and-observation-limits">Compatibility and observation limits</a></li>
-  </ul></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">0.7.0 — 2026-10-09</a>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">0.9.0 — 2026-10-21</a>
   <ul class="collapse">
   <li><a href="#added" id="toc-added" class="nav-link" data-scroll-target="#added">Added</a></li>
+  <li><a href="#changed" id="toc-changed" class="nav-link" data-scroll-target="#changed">Changed</a></li>
   </ul></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">0.6.1 — 2026-10-06</a>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">0.8.0 — 2026-10-10</a>
+  <ul class="collapse">
+  <li><a href="#changed-1" id="toc-changed-1" class="nav-link" data-scroll-target="#changed-1">Changed</a></li>
+  <li><a href="#compatibility-and-observation-limits" id="toc-compatibility-and-observation-limits" class="nav-link" data-scroll-target="#compatibility-and-observation-limits">Compatibility and observation limits</a></li>
+  </ul></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">0.7.0 — 2026-10-09</a>
+  <ul class="collapse">
+  <li><a href="#added-1" id="toc-added-1" class="nav-link" data-scroll-target="#added-1">Added</a></li>
+  </ul></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">0.6.1 — 2026-10-06</a>
   <ul class="collapse">
   <li><a href="#fixed" id="toc-fixed" class="nav-link" data-scroll-target="#fixed">Fixed</a></li>
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
   </ul></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">0.6.0</a>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">0.6.0</a>
   <ul class="collapse">
-  <li><a href="#added-1" id="toc-added-1" class="nav-link" data-scroll-target="#added-1">Added</a></li>
+  <li><a href="#added-2" id="toc-added-2" class="nav-link" data-scroll-target="#added-2">Added</a></li>
   <li><a href="#limits" id="toc-limits" class="nav-link" data-scroll-target="#limits">Limits</a></li>
   </ul></li>
   </ul></li>
@@ -745,9 +751,31 @@ ul.task-list li input[type="checkbox"] {
 <p>No unreleased changes.</p>
 </section>
 <section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section">0.8.0 — 2026-10-10</h2>
+<h2 class="anchored" data-anchor-id="section">0.9.0 — 2026-10-21</h2>
+<section id="added" class="level3">
+<h3 class="anchored" data-anchor-id="added">Added</h3>
+<ul>
+<li>Site option <code>askr.reading-width: normal|wide</code> selects a consistent 630px or 780px body base across docked, floating and absent sidebars.</li>
+<li>Accessible table scroll regions, <code>.askr-symbol-table</code>, <code>.askr-table-compact</code> and <code>.askr-table-numeric</code>, including wrapping-div use with captionless tables.</li>
+<li>Ordered <code>askr.page-facts</code> entries with <code>key</code> and <code>label</code>, reading flat scalar page values beneath the title description while preserving native metadata.</li>
+<li><code>.askr-wide-figure</code> preserves intrinsic diagram size inside an accessible scroll region, and Mermaid follows Askr’s light/dark palette.</li>
+<li>Calm treatments for native theorem-like blocks and proofs.</li>
+</ul>
+</section>
 <section id="changed" class="level3">
 <h3 class="anchored" data-anchor-id="changed">Changed</h3>
+<ul>
+<li>Display math Copy is compact and supports labelled equations and tight lists. Source stays in data attributes; manual-copy text is created only after a clipboard failure. Site <code>askr.math-copy</code>, flat page <code>askr-math-copy</code> and per-equation <code>.no-math-copy</code> control availability.</li>
+<li>Public border tokens use dedicated Askr Sass sources; text-grade muted colors, callout titles, dark important/caution hues and link hover improve contrast. Table headers use a 1px decorative rule and a 1.35 line height.</li>
+<li>Documented consumer options <code>respect-user-color-scheme: true</code> and <code>smooth-scroll: false</code>. Reader-toggle controls share Askr’s control size, border, radius, colors and hover treatment; spacing beside search accounts for the reader toggle. Other P1 navigation, headings, native-element, CJK, print, root-font, localization and cleanup work is deferred.</li>
+<li>Kept the installation format, normal-width default, enabled math Copy, footer credit and Quarto <code>&gt;=1.9.38 &lt;1.11</code>. Palette defaults changed as described above. Sass border overrides now use <code>$qdk-border</code>, and muted text uses <code>$qdk-muted-text</code>; public CSS property names remain available. Invalid reading-width values or malformed page-facts configuration raise render errors.</li>
+</ul>
+</section>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1">0.8.0 — 2026-10-10</h2>
+<section id="changed-1" class="level3">
+<h3 class="anchored" data-anchor-id="changed-1">Changed</h3>
 <ul>
 <li>Askr’s image viewer now has a shared inline/modal pan-and-zoom engine for SVG, PNG and JPEG, with zoom controls, Fit, fullscreen and gallery navigation.</li>
 <li>Existing image buttons remain supported; <code>mode="inline"</code> embeds interactive controls and preserves the camera when expanded and returned to the article.</li>
@@ -762,10 +790,10 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1">0.7.0 — 2026-10-09</h2>
-<section id="added" class="level3">
-<h3 class="anchored" data-anchor-id="added">Added</h3>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2">0.7.0 — 2026-10-09</h2>
+<section id="added-1" class="level3">
+<h3 class="anchored" data-anchor-id="added-1">Added</h3>
 <ul>
 <li>Native Header tools and Footer links receive coordinated icon controls, light/dark colors and responsive spacing. Authors retain Quarto configuration.</li>
 <li>Default opt-out Powered by Askr credit uses the installed extension version, separate from document versions; existing Footer content is preserved.</li>
@@ -773,8 +801,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="section-2" class="level2">
-<h2 class="anchored" data-anchor-id="section-2">0.6.1 — 2026-10-06</h2>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3">0.6.1 — 2026-10-06</h2>
 <section id="fixed" class="level3">
 <h3 class="anchored" data-anchor-id="fixed">Fixed</h3>
 <ul>
@@ -790,10 +818,10 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="section-3" class="level2">
-<h2 class="anchored" data-anchor-id="section-3">0.6.0</h2>
-<section id="added-1" class="level3">
-<h3 class="anchored" data-anchor-id="added-1">Added</h3>
+<section id="section-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-4">0.6.0</h2>
+<section id="added-2" class="level3">
+<h3 class="anchored" data-anchor-id="added-2">Added</h3>
 <ul>
 <li>Optional Header Logout entry through <code>askr.logout.href</code> and <code>label</code>, with protected-documentation Usage guidance. Askr navigates to the configured destination; the identity provider owns sessions and logout scope.</li>
 <li>Quarto native image Lightbox by default, with <code>askr-image-view</code> buttons for existing figures or button-only image entries, plus Image viewer Usage.</li>
@@ -818,12 +846,30 @@ ul.task-list li input[type="checkbox"] {
 // The render filter owns source identity. This handler only transfers that
 // source on an explicit click and exposes it if clipboard access is denied.
 const askrMathCopyTimers = new WeakMap();
+function askrInitializeMathCopy() {
+  document.querySelectorAll('.askr-copyable-math').forEach(component => {
+    if (component.closest('.no-math-copy') || component.querySelector('.no-math-copy')) return;
+    const actions = document.createElement('div');
+    actions.className = 'askr-math-actions';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'askr-math-copy';
+    button.textContent = 'Copy';
+    button.setAttribute('aria-label', 'Copy LaTeX');
+    const status = document.createElement('span');
+    status.className = 'askr-math-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    actions.append(button, status);
+    component.prepend(actions);
+  });
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', askrInitializeMathCopy);
+else askrInitializeMathCopy();
 document.addEventListener('click', async (event) => {
   const button = event.target.closest('.askr-math-copy');
   if (!button) return;
   const component = button.closest('.askr-copyable-math');
-  const source = component.querySelector('.askr-math-source');
-  const textarea = source.querySelector('textarea');
   const status = component.querySelector('.askr-math-status');
   clearTimeout(askrMathCopyTimers.get(button));
   button.classList.remove('is-copied');
@@ -832,7 +878,7 @@ document.addEventListener('click', async (event) => {
   status.classList.remove('askr-math-status-success');
   status.textContent = '';
   try {
-    await navigator.clipboard.writeText(textarea.value);
+    await navigator.clipboard.writeText(component.dataset.askrTex);
     button.textContent = 'Copied!';
     button.classList.add('is-copied');
     status.classList.add('askr-math-status-success');
@@ -844,7 +890,19 @@ document.addEventListener('click', async (event) => {
       askrMathCopyTimers.delete(button);
     }, 2000));
   } catch {
-    source.hidden = false;
+    let source = component.querySelector('.askr-math-source');
+    if (!source) {
+      source = document.createElement('div');
+      source.className = 'askr-math-source';
+      const textarea = document.createElement('textarea');
+      textarea.readOnly = true;
+      textarea.spellcheck = false;
+      textarea.setAttribute('aria-label', 'LaTeX source');
+      textarea.value = component.dataset.askrTex;
+      source.append(textarea);
+      component.append(source);
+    }
+    const textarea = source.querySelector('textarea');
     textarea.focus();
     textarea.select();
     status.textContent = 'Copy unavailable. Select the source below to copy manually.';
@@ -1340,7 +1398,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.8.0" aria-label="Askr version 0.8.0">0.8.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.9.0" aria-label="Askr version 0.9.0">0.9.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 
 

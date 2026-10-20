@@ -82,11 +82,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-14f5b097a5d6fb2c6f111dce26bb6eb6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-b5a558ee1d1b5dcea91ca9cc94f79546.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -842,6 +843,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>Askr exposes Sass defaults for compilation and <code>--qdk-*</code> CSS properties for the rendered page. Consumer styles belong after Askr; keep installed extension files unchanged. Native Quarto owns tab switching, collapse, navigation, search and copying; tokens change presentation.</p>
+<p>The reader toggle uses Askr’s control size, border, radius, color and hover tokens. Askr reserves space beside search for that control, so consumers need no spacing override based on private <code>--_qdk-*</code> scale properties.</p>
 <section id="override-in-the-consumer" class="level2">
 <h2 class="anchored" data-anchor-id="override-in-the-consumer">Override in the consumer</h2>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
@@ -867,6 +869,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="global-palette-and-layout" class="level2">
 <h2 class="anchored" data-anchor-id="global-palette-and-layout">Global palette and layout</h2>
 <p>Existing CSS names remain available. Their compile-time sources and exact light/dark defaults are:</p>
+<p>In 0.9.0, override <code>$qdk-border</code> for Askr borders and <code>$qdk-muted-text</code> for muted text. <code>$border-color</code> and <code>$toc-color</code> retain their native Quarto roles but no longer drive these two Askr properties. Public CSS names remain available.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -903,75 +906,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td><code>--qdk-muted</code></td>
-<td><code>$toc-color</code></td>
+<td><code>$qdk-muted-text</code></td>
+<td><code>#6b6b6b</code></td>
+<td><code>#a0a0a0</code></td>
+</tr>
+<tr class="odd">
+<td><code>--qdk-muted-decoration</code></td>
+<td><code>$qdk-muted-decoration</code></td>
 <td><code>#b8b8b8</code></td>
 <td><code>#646464</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>--qdk-link</code>, <code>--qdk-focus</code></td>
 <td><code>$link-color</code></td>
 <td><code>#284b63</code></td>
 <td><code>#7b97aa</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>--qdk-border</code></td>
-<td><code>$border-color</code></td>
+<td><code>$qdk-border</code></td>
 <td><code>#e5e5e5</code></td>
 <td><code>#393639</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>--qdk-highlight</code></td>
 <td><code>$code-bg</code></td>
 <td><code>rgba(143,159,169,.15)</code></td>
 <td>same</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>--qdk-sidebar</code>, <code>--qdk-margin</code></td>
 <td><code>$grid-sidebar-width</code>, <code>$grid-margin-width</code></td>
 <td><code>264px</code></td>
 <td>same</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>--qdk-body</code></td>
 <td><code>$grid-body-width</code></td>
 <td><code>630px</code></td>
 <td>same</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>--qdk-gutter</code></td>
 <td><code>$grid-column-gutter-width</code></td>
 <td><code>26px</code></td>
 <td>same</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>--qdk-callout-note</code></td>
 <td><code>$callout-color-note</code></td>
 <td><code>#448aff</code></td>
 <td>same</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>--qdk-callout-tip</code></td>
 <td><code>$callout-color-tip</code></td>
 <td><code>#00bfa5</code></td>
 <td>same</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>--qdk-callout-important</code></td>
 <td><code>$callout-color-important</code></td>
 <td><code>#7a43b5</code></td>
-<td>same</td>
+<td><code>#c69af0</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>--qdk-callout-warning</code></td>
 <td><code>$callout-color-warning</code></td>
 <td><code>#db8942</code></td>
 <td>same</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>--qdk-callout-caution</code></td>
 <td><code>$callout-color-caution</code></td>
 <td><code>#db4242</code></td>
-<td>same</td>
+<td><code>#ff8f8f</code></td>
 </tr>
 </tbody>
 </table>
@@ -991,7 +1000,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td><code>tertiary</code></td>
-<td><code>#84a59d</code></td>
+<td><code>#4f756b</code> (light), <code>#8fb7a8</code> (dark)</td>
 </tr>
 <tr class="even">
 <td><code>divider-content</code></td>
@@ -1323,7 +1332,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td><code>table-head-border</code></td>
-<td><code>var(--qdk-muted)</code></td>
+<td><code>var(--qdk-muted-decoration)</code></td>
 </tr>
 <tr class="odd">
 <td><code>table-head-padding</code></td>
@@ -1335,7 +1344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td><code>table-head-line-height</code></td>
-<td><code>2rem</code></td>
+<td><code>1.35</code></td>
 </tr>
 <tr class="even">
 <td><code>table-margin</code></td>
@@ -1367,7 +1376,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>Dark overrides <code>divider-content</code> to <code>rgba(212,212,212,.24)</code>, <code>divider-layout</code> to <code>rgba(212,212,212,.10)</code>, and <code>mark</code> to <code>#b3aa0288</code>. Other component defaults are shared between themes and follow palette aliases. Dark <code>code-color</code> follows <code>var(--qdk-text)</code>; inline code keeps the heading color. Native Quarto tables use <code>.5rem</code> header and cell padding and a <code>1px</code> header border, with the existing muted header-border color. These defaults retain the observed native baseline: earlier Askr padding and <code>2px</code> header-width declarations were overridden by Bootstrap; the muted color already applied. The token rules now address native table cells directly; plain HTML tables consume the same defaults. The header border token controls color, while border width remains <code>1px</code>. <code>--qdk-callout-color</code> is the local resolved type color of each native callout; override a named type color to change all callouts of that type.</p>
+<p>Dark overrides <code>divider-content</code> to <code>rgba(212,212,212,.24)</code>, <code>divider-layout</code> to <code>rgba(212,212,212,.10)</code>, and <code>mark</code> to <code>#e5c76b33</code>. Other component defaults are shared between themes and follow palette aliases. Dark <code>code-color</code> follows <code>var(--qdk-text)</code>; inline code keeps the heading color. Native Quarto tables use <code>.5rem</code> header and cell padding and a <code>1px</code> decorative header border. Wrapped headers use the unitless <code>1.35</code> line height. The token rules address native and plain HTML table cells directly. Text-grade muted colors serve subtitles, metadata, labels and footers; decorative muted colors serve hairlines. Callout titles mix 72% body text color with 28% type hue, while icons and borders retain their saturated type color. <code>--qdk-callout-color</code> is the local resolved type color of each native callout; override a named type color to change all callouts of that type.</p>
 </section>
 <section id="responsive-bases" class="level2">
 <h2 class="anchored" data-anchor-id="responsive-bases">Responsive bases</h2>
@@ -1450,7 +1459,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>For example a <code>680px</code> body base becomes <code>748px</code> at 1920px (×1.1) and <code>816px</code> at 2560px (×1.2). Mobile content fits the available container. Callout horizontal/header padding uses ×.8 below 992px. Tab labels stay <code>.9rem</code> with <code>.35rem</code> vertical padding by default, scaling with the root type rather than being replaced by another tab size.</p>
+<p>For example a <code>680px</code> body base becomes <code>748px</code> at 1920px (×1.1) and <code>816px</code> at 2560px (×1.2). Mobile content fits the available container. Site option <code>askr.reading-width: wide</code> replaces the normal base with <code>780px</code>, giving <code>858px</code> at 1920px and <code>936px</code> at 2560px. Docked, floating and absent sidebars share the selected measure. Native width escapes and reader mode keep their Quarto behavior. Callout horizontal/header padding uses ×.8 below 992px. Tab labels stay <code>.9rem</code> with <code>.35rem</code> vertical padding by default, scaling with the root type rather than being replaced by another tab size.</p>
 </section>
 <section id="rendered-component-specimen" class="level2">
 <h2 class="anchored" data-anchor-id="rendered-component-specimen">Rendered component specimen</h2>
@@ -1512,12 +1521,30 @@ Note
 // The render filter owns source identity. This handler only transfers that
 // source on an explicit click and exposes it if clipboard access is denied.
 const askrMathCopyTimers = new WeakMap();
+function askrInitializeMathCopy() {
+  document.querySelectorAll('.askr-copyable-math').forEach(component => {
+    if (component.closest('.no-math-copy') || component.querySelector('.no-math-copy')) return;
+    const actions = document.createElement('div');
+    actions.className = 'askr-math-actions';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'askr-math-copy';
+    button.textContent = 'Copy';
+    button.setAttribute('aria-label', 'Copy LaTeX');
+    const status = document.createElement('span');
+    status.className = 'askr-math-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    actions.append(button, status);
+    component.prepend(actions);
+  });
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', askrInitializeMathCopy);
+else askrInitializeMathCopy();
 document.addEventListener('click', async (event) => {
   const button = event.target.closest('.askr-math-copy');
   if (!button) return;
   const component = button.closest('.askr-copyable-math');
-  const source = component.querySelector('.askr-math-source');
-  const textarea = source.querySelector('textarea');
   const status = component.querySelector('.askr-math-status');
   clearTimeout(askrMathCopyTimers.get(button));
   button.classList.remove('is-copied');
@@ -1526,7 +1553,7 @@ document.addEventListener('click', async (event) => {
   status.classList.remove('askr-math-status-success');
   status.textContent = '';
   try {
-    await navigator.clipboard.writeText(textarea.value);
+    await navigator.clipboard.writeText(component.dataset.askrTex);
     button.textContent = 'Copied!';
     button.classList.add('is-copied');
     status.classList.add('askr-math-status-success');
@@ -1538,7 +1565,19 @@ document.addEventListener('click', async (event) => {
       askrMathCopyTimers.delete(button);
     }, 2000));
   } catch {
-    source.hidden = false;
+    let source = component.querySelector('.askr-math-source');
+    if (!source) {
+      source = document.createElement('div');
+      source.className = 'askr-math-source';
+      const textarea = document.createElement('textarea');
+      textarea.readOnly = true;
+      textarea.spellcheck = false;
+      textarea.setAttribute('aria-label', 'LaTeX source');
+      textarea.value = component.dataset.askrTex;
+      source.append(textarea);
+      component.append(source);
+    }
+    const textarea = source.querySelector('textarea');
     textarea.focus();
     textarea.select();
     status.textContent = 'Copy unavailable. Select the source below to copy manually.';
@@ -2034,7 +2073,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.8.0" aria-label="Askr version 0.8.0">0.8.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.9.0" aria-label="Askr version 0.9.0">0.9.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 
 

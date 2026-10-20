@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -47,11 +82,12 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-14f5b097a5d6fb2c6f111dce26bb6eb6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-b5a558ee1d1b5dcea91ca9cc94f79546.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -781,7 +817,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Sections</h2>
    
   <ul>
-  <li><a href="#limits" id="toc-limits" class="nav-link active" data-scroll-target="#limits">Limits</a></li>
+  <li><a href="#symbol-and-dense-parameter-tables" id="toc-symbol-and-dense-parameter-tables" class="nav-link active" data-scroll-target="#symbol-and-dense-parameter-tables">Symbol and dense parameter tables</a></li>
+  <li><a href="#reading-long-tables" id="toc-reading-long-tables" class="nav-link" data-scroll-target="#reading-long-tables">Reading long tables</a></li>
   </ul>
 </nav>
     </div>
@@ -809,7 +846,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The header rule is 2px in the muted token. Body cells use a 1px border in the content border token. A wide table scrolls in its own wrapper.</p>
+<p>The header rule is 1px in the decorative muted token. Body cells use a 1px content border. Each table, including a captionless pipe table, gets a labelled, keyboard-focusable horizontal scroll region. Wrapped headers use a 1.35 line height.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -874,9 +911,18 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<section id="limits" class="level2">
-<h2 class="anchored" data-anchor-id="limits">Limits</h2>
-<p>The theme contains a wide table and an unbreakable path or SHA-256 inside a cell: the hash may wrap, and extra columns scroll inside the table wrapper. Do not write an essay in a cell. If a cell needs more than one sentence, move that text into the paragraph above the table.</p>
+<section id="symbol-and-dense-parameter-tables" class="level2">
+<h2 class="anchored" data-anchor-id="symbol-and-dense-parameter-tables">Symbol and dense parameter tables</h2>
+<p>Wrap a captionless pipe table in <code>.askr-symbol-table</code> for a narrow term column and a wide meaning column. On phones, the fixed layout wraps long tokens. Add <code>.askr-table-compact</code> for tighter padding and <code>.askr-table-numeric</code> for tabular numerals throughout the table. These classes also work on native tables.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>::: {.askr-symbol-table .askr-table-compact .askr-table-numeric}</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Symbol <span class="pp">|</span> Meaning <span class="pp">|</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">| ---</span> <span class="pp">| ---</span> <span class="pp">|</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> $\omega_r$ <span class="pp">|</span> Resonator angular frequency, in radians per second. <span class="pp">|</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="reading-long-tables" class="level2">
+<h2 class="anchored" data-anchor-id="reading-long-tables">Reading long tables</h2>
+<p>The theme contains a wide table and an unbreakable path or SHA-256 inside a cell: the hash may wrap, and extra columns scroll inside the table wrapper. Keep long explanations in nearby prose so the table remains easy to compare.</p>
 
 
 </section>
@@ -886,12 +932,30 @@ ul.task-list li input[type="checkbox"] {
 // The render filter owns source identity. This handler only transfers that
 // source on an explicit click and exposes it if clipboard access is denied.
 const askrMathCopyTimers = new WeakMap();
+function askrInitializeMathCopy() {
+  document.querySelectorAll('.askr-copyable-math').forEach(component => {
+    if (component.closest('.no-math-copy') || component.querySelector('.no-math-copy')) return;
+    const actions = document.createElement('div');
+    actions.className = 'askr-math-actions';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'askr-math-copy';
+    button.textContent = 'Copy';
+    button.setAttribute('aria-label', 'Copy LaTeX');
+    const status = document.createElement('span');
+    status.className = 'askr-math-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    actions.append(button, status);
+    component.prepend(actions);
+  });
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', askrInitializeMathCopy);
+else askrInitializeMathCopy();
 document.addEventListener('click', async (event) => {
   const button = event.target.closest('.askr-math-copy');
   if (!button) return;
   const component = button.closest('.askr-copyable-math');
-  const source = component.querySelector('.askr-math-source');
-  const textarea = source.querySelector('textarea');
   const status = component.querySelector('.askr-math-status');
   clearTimeout(askrMathCopyTimers.get(button));
   button.classList.remove('is-copied');
@@ -900,7 +964,7 @@ document.addEventListener('click', async (event) => {
   status.classList.remove('askr-math-status-success');
   status.textContent = '';
   try {
-    await navigator.clipboard.writeText(textarea.value);
+    await navigator.clipboard.writeText(component.dataset.askrTex);
     button.textContent = 'Copied!';
     button.classList.add('is-copied');
     status.classList.add('askr-math-status-success');
@@ -912,7 +976,19 @@ document.addEventListener('click', async (event) => {
       askrMathCopyTimers.delete(button);
     }, 2000));
   } catch {
-    source.hidden = false;
+    let source = component.querySelector('.askr-math-source');
+    if (!source) {
+      source = document.createElement('div');
+      source.className = 'askr-math-source';
+      const textarea = document.createElement('textarea');
+      textarea.readOnly = true;
+      textarea.spellcheck = false;
+      textarea.setAttribute('aria-label', 'LaTeX source');
+      textarea.value = component.dataset.askrTex;
+      source.append(textarea);
+      component.append(source);
+    }
+    const textarea = source.querySelector('textarea');
     textarea.focus();
     textarea.select();
     status.textContent = 'Copy unavailable. Select the source below to copy manually.';
@@ -1408,7 +1484,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.8.0" aria-label="Askr version 0.8.0">0.8.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.9.0" aria-label="Askr version 0.9.0">0.9.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 
 

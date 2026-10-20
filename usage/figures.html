@@ -82,11 +82,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-14f5b097a5d6fb2c6f111dce26bb6eb6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-b5a558ee1d1b5dcea91ca9cc94f79546.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -805,8 +806,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sections</h2>
+   
+  <ul>
+  <li><a href="#wide-figures-and-diagrams" id="toc-wide-figures-and-diagrams" class="nav-link active" data-scroll-target="#wide-figures-and-diagrams">Wide figures and diagrams</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -834,20 +841,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A cell can emit a light output and a dark output. Put the light output first:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| renderings: [light, dark]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>With <code>askr-html</code> and <code>theme-toggle</code>, the dark stylesheet carries <code>data-mode="dark"</code>, and the toggle adds <code>quarto-dark</code> to <code>body</code>. The <a href="../components/figures.html">Figures</a> page renders a pair of swatches this way.</p>
+<section id="wide-figures-and-diagrams" class="level2">
+<h2 class="anchored" data-anchor-id="wide-figures-and-diagrams">Wide figures and diagrams</h2>
+<p>Wrap a figure or Mermaid block in <code>.askr-wide-figure</code> to keep its natural label size and scroll it inside a labelled, keyboard-focusable region. The drawing’s own intrinsic width sets the scroll extent; no fixed consumer width is needed. Mermaid colors follow Askr’s light and dark palettes.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>::: {.askr-wide-figure aria-label="Circuit signal path"}</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  Input --&gt; Resonator --&gt; Output</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This utility keeps native Quarto figures, captions and cross references.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script>
 // The render filter owns source identity. This handler only transfers that
 // source on an explicit click and exposes it if clipboard access is denied.
 const askrMathCopyTimers = new WeakMap();
+function askrInitializeMathCopy() {
+  document.querySelectorAll('.askr-copyable-math').forEach(component => {
+    if (component.closest('.no-math-copy') || component.querySelector('.no-math-copy')) return;
+    const actions = document.createElement('div');
+    actions.className = 'askr-math-actions';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'askr-math-copy';
+    button.textContent = 'Copy';
+    button.setAttribute('aria-label', 'Copy LaTeX');
+    const status = document.createElement('span');
+    status.className = 'askr-math-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    actions.append(button, status);
+    component.prepend(actions);
+  });
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', askrInitializeMathCopy);
+else askrInitializeMathCopy();
 document.addEventListener('click', async (event) => {
   const button = event.target.closest('.askr-math-copy');
   if (!button) return;
   const component = button.closest('.askr-copyable-math');
-  const source = component.querySelector('.askr-math-source');
-  const textarea = source.querySelector('textarea');
   const status = component.querySelector('.askr-math-status');
   clearTimeout(askrMathCopyTimers.get(button));
   button.classList.remove('is-copied');
@@ -856,7 +892,7 @@ document.addEventListener('click', async (event) => {
   status.classList.remove('askr-math-status-success');
   status.textContent = '';
   try {
-    await navigator.clipboard.writeText(textarea.value);
+    await navigator.clipboard.writeText(component.dataset.askrTex);
     button.textContent = 'Copied!';
     button.classList.add('is-copied');
     status.classList.add('askr-math-status-success');
@@ -868,7 +904,19 @@ document.addEventListener('click', async (event) => {
       askrMathCopyTimers.delete(button);
     }, 2000));
   } catch {
-    source.hidden = false;
+    let source = component.querySelector('.askr-math-source');
+    if (!source) {
+      source = document.createElement('div');
+      source.className = 'askr-math-source';
+      const textarea = document.createElement('textarea');
+      textarea.readOnly = true;
+      textarea.spellcheck = false;
+      textarea.setAttribute('aria-label', 'LaTeX source');
+      textarea.value = component.dataset.askrTex;
+      source.append(textarea);
+      component.append(source);
+    }
+    const textarea = source.querySelector('textarea');
     textarea.focus();
     textarea.select();
     status.textContent = 'Copy unavailable. Select the source below to copy manually.';
@@ -1364,7 +1412,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.8.0" aria-label="Askr version 0.8.0">0.8.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.9.0" aria-label="Askr version 0.9.0">0.9.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 
 

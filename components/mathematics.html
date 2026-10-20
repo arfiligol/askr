@@ -26,6 +26,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -47,11 +82,12 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-14f5b097a5d6fb2c6f111dce26bb6eb6.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-0a559d2a863c9ce23e410d5cd183fff2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-b5a558ee1d1b5dcea91ca9cc94f79546.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -810,7 +846,9 @@ window.Quarto = {
     <h2 id="toc-title">Sections</h2>
    
   <ul>
-  <li><a href="#limits" id="toc-limits" class="nav-link active" data-scroll-target="#limits">Limits</a></li>
+  <li><a href="#copy-settings" id="toc-copy-settings" class="nav-link active" data-scroll-target="#copy-settings">Copy settings</a></li>
+  <li><a href="#native-semantic-blocks" id="toc-native-semantic-blocks" class="nav-link" data-scroll-target="#native-semantic-blocks">Native semantic blocks</a></li>
+  <li><a href="#limits" id="toc-limits" class="nav-link" data-scroll-target="#limits">Limits</a></li>
   </ul>
 </nav>
     </div>
@@ -838,26 +876,40 @@ window.Quarto = {
 </header>
 
 
-<p>Display mathematics may scroll locally. The page width stays the 630px measure. Copy copies the LaTeX formula source without its surrounding <code>$$</code> delimiters. If clipboard access is unavailable, selectable source appears below the formula.</p>
-<div class="askr-copyable-math">
-<div class="askr-math-actions"><button type="button" class="askr-math-copy" aria-label="Copy LaTeX">Copy</button><span class="askr-math-status" role="status" aria-live="polite"></span></div>
-<p><span class="math display">\[
+<p>Display mathematics may scroll locally. The normal body measure is 630px; the site-wide wide profile uses 780px. The compact Copy control appears on hover or keyboard focus and copies the source without its surrounding <code>$$</code> delimiters. If clipboard access is unavailable, selectable source appears below the formula.</p>
+<div class="askr-copyable-math" data-askr-tex="
 \omega_r = 2\pi f
-\]</span></p>
-<div class="askr-math-source" hidden=""><label>LaTeX source<textarea readonly="" aria-label="LaTeX source" spellcheck="false">
+">
+<p><span id="eq-frequency"><span class="math display">\[
 \omega_r = 2\pi f
-</textarea></label></div>
+\tag{1}\]</span></span></p>
 </div>
-<div class="askr-copyable-math">
-<div class="askr-math-actions"><button type="button" class="askr-math-copy" aria-label="Copy LaTeX">Copy</button><span class="askr-math-status" role="status" aria-live="polite"></span></div>
+<p>Native references such as <a href="#eq-frequency" class="quarto-xref">Equation&nbsp;1</a> keep their numbering and links.</p>
+<div class="askr-copyable-math" data-askr-tex="
+\mathcal{R}(x) = \sum_{k=1}^{n} \frac{\alpha_k\,\exp\left(-\frac{(x-\mu_k)^2}{2\sigma_k^2}\right)}{\sqrt{2\pi}\sigma_k} + \int_0^\infty \frac{\lambda^2 + \omega^2 + \eta^2}{(\lambda + \omega + \eta)^2}\,d\omega.
+">
 <p><span class="math display">\[
 \mathcal{R}(x) = \sum_{k=1}^{n} \frac{\alpha_k\,\exp\left(-\frac{(x-\mu_k)^2}{2\sigma_k^2}\right)}{\sqrt{2\pi}\sigma_k} + \int_0^\infty \frac{\lambda^2 + \omega^2 + \eta^2}{(\lambda + \omega + \eta)^2}\,d\omega.
 \]</span></p>
-<div class="askr-math-source" hidden=""><label>LaTeX source<textarea readonly="" aria-label="LaTeX source" spellcheck="false">
-\mathcal{R}(x) = \sum_{k=1}^{n} \frac{\alpha_k\,\exp\left(-\frac{(x-\mu_k)^2}{2\sigma_k^2}\right)}{\sqrt{2\pi}\sigma_k} + \int_0^\infty \frac{\lambda^2 + \omega^2 + \eta^2}{(\lambda + \omega + \eta)^2}\,d\omega.
-</textarea></label></div>
 </div>
 <p>Inline mathematics stays in the sentence, as in <span class="math inline">\(\omega_r = 2\pi f\)</span>.</p>
+<section id="copy-settings" class="level2">
+<h2 class="anchored" data-anchor-id="copy-settings">Copy settings</h2>
+<p>At site level in <code>_quarto.yml</code>, set <code>askr.math-copy: false</code> as a nested option:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">askr</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">math-copy</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A page uses the flat front-matter key <code>askr-math-copy: false</code>. A page value overrides the site setting; <code>askr-math-copy: true</code> enables it on that page. For one equation, use a wrapping div with <code>.no-math-copy</code>, or add that class to the native equation attributes (<code>$$ … $$ {#eq-name .no-math-copy}</code>). Display equations in tight lists also support Copy. The original source stays in a data attribute; the selectable fallback is created only after a denied copy. Search retains Quarto’s native equation text without an extra Askr source copy.</p>
+</section>
+<section id="native-semantic-blocks" class="level2">
+<h2 class="anchored" data-anchor-id="native-semantic-blocks">Native semantic blocks</h2>
+<p>Use Quarto’s native identifiers (<code>def-</code>, <code>thm-</code>, <code>prp-</code>, <code>lem-</code>, <code>cor-</code>, <code>rem-</code>, <code>exm-</code>) and <code>.proof</code> for numbered definitions, theorems, propositions, lemmas, corollaries, remarks, examples and proofs.</p>
+<div id="def-angular-frequency" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1 (Angular frequency)</strong></span> Angular frequency is <span class="math inline">\(\omega = 2\pi f\)</span> for frequency <span class="math inline">\(f\)</span>.</p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Proof</em>. </span>One cycle is <span class="math inline">\(2\pi\)</span> radians, so multiplying cycles per second by <span class="math inline">\(2\pi\)</span> gives radians per second.</p>
+</div>
+</section>
 <section id="limits" class="level2">
 <h2 class="anchored" data-anchor-id="limits">Limits</h2>
 <p>The theme contains a long display formula by scrolling inside the measure. Do not encode a sentence as display mathematics. Name the quantity in prose, and keep the formula to the relation.</p>
@@ -870,12 +922,30 @@ window.Quarto = {
 // The render filter owns source identity. This handler only transfers that
 // source on an explicit click and exposes it if clipboard access is denied.
 const askrMathCopyTimers = new WeakMap();
+function askrInitializeMathCopy() {
+  document.querySelectorAll('.askr-copyable-math').forEach(component => {
+    if (component.closest('.no-math-copy') || component.querySelector('.no-math-copy')) return;
+    const actions = document.createElement('div');
+    actions.className = 'askr-math-actions';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'askr-math-copy';
+    button.textContent = 'Copy';
+    button.setAttribute('aria-label', 'Copy LaTeX');
+    const status = document.createElement('span');
+    status.className = 'askr-math-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    actions.append(button, status);
+    component.prepend(actions);
+  });
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', askrInitializeMathCopy);
+else askrInitializeMathCopy();
 document.addEventListener('click', async (event) => {
   const button = event.target.closest('.askr-math-copy');
   if (!button) return;
   const component = button.closest('.askr-copyable-math');
-  const source = component.querySelector('.askr-math-source');
-  const textarea = source.querySelector('textarea');
   const status = component.querySelector('.askr-math-status');
   clearTimeout(askrMathCopyTimers.get(button));
   button.classList.remove('is-copied');
@@ -884,7 +954,7 @@ document.addEventListener('click', async (event) => {
   status.classList.remove('askr-math-status-success');
   status.textContent = '';
   try {
-    await navigator.clipboard.writeText(textarea.value);
+    await navigator.clipboard.writeText(component.dataset.askrTex);
     button.textContent = 'Copied!';
     button.classList.add('is-copied');
     status.classList.add('askr-math-status-success');
@@ -896,7 +966,19 @@ document.addEventListener('click', async (event) => {
       askrMathCopyTimers.delete(button);
     }, 2000));
   } catch {
-    source.hidden = false;
+    let source = component.querySelector('.askr-math-source');
+    if (!source) {
+      source = document.createElement('div');
+      source.className = 'askr-math-source';
+      const textarea = document.createElement('textarea');
+      textarea.readOnly = true;
+      textarea.spellcheck = false;
+      textarea.setAttribute('aria-label', 'LaTeX source');
+      textarea.value = component.dataset.askrTex;
+      source.append(textarea);
+      component.append(source);
+    }
+    const textarea = source.querySelector('textarea');
     textarea.focus();
     textarea.select();
     status.textContent = 'Copy unavailable. Select the source below to copy manually.';
@@ -1392,7 +1474,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.8.0" aria-label="Askr version 0.8.0">0.8.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.9.0" aria-label="Askr version 0.9.0">0.9.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 
 
