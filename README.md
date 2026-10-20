@@ -4,20 +4,18 @@ See [CHANGELOG](CHANGELOG.md) for published changes and the current Unreleased
 candidate. PR and GitHub Release summaries use the same entries.
 
 Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz
-remains the name of the visual theme. `0.8.0` is the current release, rendered
+remains the name of the visual theme. `0.9.0` is the current release, rendered
 with Quarto 1.10.18. Stable Quarto `>=1.9.38 <1.11` is supported. The public
-format is `askr-html`. Publication of the optional Logout and native image
-viewer was authorized on 2026-10-06 for consumer testing. Those new scopes
-remain CONVERGING; publication is not authentication verification or
-automated-test stabilization.
+format is `askr-html`. The 0.9.0 release adds reading support for dense scientific
+documentation. See [Validation](VALIDATION.md) for current observations.
 
 ## Install
 
-Install the reviewed release tag `v0.8.0`. Quarto's GitHub installer accepts
+Install release tag `v0.9.0`. Quarto's GitHub installer accepts
 branch and tag names, not commit SHA modifiers.
 
 ```bash
-quarto add arfiligol/askr@v0.8.0
+quarto add arfiligol/askr@v0.9.0 --no-prompt
 ```
 
 ```yaml
@@ -39,7 +37,7 @@ and callout shell onto Quarto's native navbar/sidebar/TOC and runtime. It does
 not introduce Quartz's additional callout families or aliases: that would need
 a separate public authoring syntax contract.
 
-Standalone display formulas include a Copy button for their original LaTeX
+Display formulas, including labelled equations and tight-list math, include a compact Copy control for their original LaTeX
 without dollar delimiters. Successful copies briefly show Copied!; if clipboard
 access is unavailable, the selectable source is revealed. Inline math stays
 native. Formula display and copy source are derived from the same authored math.
@@ -56,10 +54,52 @@ leaves Logout disabled.
 Askr is intended as a reusable design system for direct SCQ-repository
 adoption. The theme Sass variables `$grid-sidebar-width` and `$grid-margin-width`
 are 264px, `$grid-body-width` and `$grid-docked-body-width` are 630px, and
-`$grid-column-gutter-width` is 26px. The root font size is 18px. One docked
-track rule in `qdk.scss` uses those variables so the 630px measure stays centered between equal side
-columns; consumers retain Quarto's responsive layout, navigation, and runtime
-ownership.
+`$grid-column-gutter-width` is 26px. The root font size is 18px. The normal 630px
+measure applies to docked, floating and absent sidebars. Site option
+`askr.reading-width: wide` selects a 780px base with the same responsive factors.
+Native width escapes and reader mode remain available.
+
+## Scientific reading options
+
+Configure these options at site level in `_quarto.yml`:
+
+```yaml
+askr:
+  reading-width: wide # normal (default) or wide
+  math-copy: true     # true (default) or false
+  page-facts:
+    - {key: node-role, label: Role}
+    - {key: reader-task, label: Reader task}
+```
+
+Page facts use flat scalar front matter, for example `node-role: Concept` and
+`reader-task: "Compare the response of the coupled modes."`. Only set values
+appear, in configured order, below the description; native author/date metadata
+stays available. Long values wrap. Labels and values are rendered as text.
+
+| Interface | Effect |
+| --- | --- |
+| `.askr-symbol-table` | Narrow term column, wide meaning column; fixed wrapping layout on phones |
+| `.askr-table-compact` | Tighter table padding |
+| `.askr-table-numeric` | Tabular numerals throughout the table |
+| `askr-math-copy: false` | Flat page-level Copy opt-out; a page value overrides the site setting |
+| `.no-math-copy` | Per-equation opt-out on a wrapping div or native equation attributes |
+| `.askr-wide-figure` | Natural-size figure or Mermaid drawing in an accessible horizontal scroll region |
+
+Table classes work on wrapping divs, including captionless pipe tables.
+Every table receives a keyboard-focusable labelled scroll region. Copy source
+lives in a data attribute; only a denied clipboard request creates selectable
+source. See [Tables](components/tables.qmd), [Mathematics](components/mathematics.qmd)
+and [Figures](usage/figures.qmd) for usage.
+
+The normal width, enabled math Copy, installation format, footer credit and
+supported Quarto range retain their defaults. Override `$qdk-border` for Askr
+borders and `$qdk-muted-text` for muted text; the former `$border-color` and
+`$toc-color` sources now keep their native Quarto roles. Invalid
+`askr.reading-width` values or malformed page-fact configuration
+raise render errors. For system color preference, set
+`format.askr-html.respect-user-color-scheme: true`; for the existing RequireJS
+compatibility setup, set `format.askr-html.smooth-scroll: false`.
 
 ## Customize and update
 

@@ -3,19 +3,56 @@ title: "Mathematics"
 subtitle: "Display math stays inside the measure"
 ---
 
-Display mathematics may scroll locally. The page width stays the 630px measure.
-Copy copies the LaTeX formula source without its surrounding `$$` delimiters.
+Display mathematics may scroll locally. The normal body measure is 630px;
+the site-wide wide profile uses 780px. The compact Copy control appears on hover
+or keyboard focus and copies the source without its surrounding `$$` delimiters.
 If clipboard access is unavailable, selectable source appears below the formula.
 
 $$
 \omega_r = 2\pi f
-$$
+$$ {#eq-frequency}
+
+Native references such as @eq-frequency keep their numbering and links.
 
 $$
 \mathcal{R}(x) = \sum_{k=1}^{n} \frac{\alpha_k\,\exp\left(-\frac{(x-\mu_k)^2}{2\sigma_k^2}\right)}{\sqrt{2\pi}\sigma_k} + \int_0^\infty \frac{\lambda^2 + \omega^2 + \eta^2}{(\lambda + \omega + \eta)^2}\,d\omega.
 $$
 
 Inline mathematics stays in the sentence, as in $\omega_r = 2\pi f$.
+
+## Copy settings
+
+At site level in `_quarto.yml`, set `askr.math-copy: false` as a nested option:
+
+```yaml
+askr:
+  math-copy: false
+```
+
+A page uses the flat front-matter key `askr-math-copy: false`. A page value
+overrides the site setting; `askr-math-copy: true` enables it on that page.
+For one equation, use a wrapping div with `.no-math-copy`, or add that class
+to the native equation attributes (`$$ … $$ {#eq-name .no-math-copy}`).
+Display equations in tight lists also support Copy. The original source stays
+in a data attribute; the selectable fallback is created only after a denied copy.
+Search retains Quarto's native equation text without an extra Askr source copy.
+
+## Native semantic blocks
+
+Use Quarto's native identifiers (`def-`, `thm-`, `prp-`, `lem-`, `cor-`,
+`rem-`, `exm-`) and `.proof` for numbered definitions, theorems, propositions,
+lemmas, corollaries, remarks, examples and proofs.
+
+::: {#def-angular-frequency}
+## Angular frequency
+
+Angular frequency is $\omega = 2\pi f$ for frequency $f$.
+:::
+
+::: {.proof}
+One cycle is $2\pi$ radians, so multiplying cycles per second by $2\pi$
+gives radians per second.
+:::
 
 ## Limits
 

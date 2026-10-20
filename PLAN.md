@@ -1,5 +1,28 @@
 # Askr release plan
 
+## Current: 0.9.0 dense scientific reading — 2026-10-21
+
+Ship the Human-assigned P0 reading improvements: accessible scrolling tables,
+consistent normal/wide measure, compiled border tokens and contrast, compact
+search-clean equation copy, native semantic blocks, flat page facts, and natural
+wide figures. Askr Lead owns `quarto-design-kit/**`; consumers, root pins and the
+frozen `v0.3.0/` remain outside this package. Runtime assets stay local.
+
+Required observations are Quarto renders, a light/dark compiled public-token
+audit and actual browser reading/keyboard/copy/layout behavior, including scoped
+temporary probes outside the repository. Record results in `VALIDATION.md`.
+No durable tests, new gallery fixtures, CI workflows, scientific execution or
+optional SVG/Mermaid image-viewer extension are assigned.
+
+Delivery endpoint: develop checkpoint, reviewed main promotion, `v0.9.0` release,
+existing Pages publication, public observation and durable-child synchronization.
+The Lead retains Git/publication authority. Semantic state: CONVERGING;
+implementation and publication do not imply Human acceptance or stabilization.
+
+## Historical work packets
+
+The dated packets below are historical records, not additional current plans.
+
 ## 0.8.0 publication authorization — 2026-10-10
 
 Human authorized publication of the presented dual-mode viewer candidate.
