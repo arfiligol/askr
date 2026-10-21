@@ -122,6 +122,9 @@ The same order works for a Plotly figure: draw the light figure, then the dark f
 
 ## Diagram
 
+This simple, unwrapped Mermaid block stays native in the article and does not
+add viewer controls:
+
 ```{mermaid}
 flowchart LR
   Areas[Areas] --> Pages[Page List]
@@ -129,11 +132,47 @@ flowchart LR
   Article --> Sections[Section List]
 ```
 
-The diagram above is the figure sample. This gallery does not ship a photograph.
+This gallery does not ship a photograph.
+
+## Mermaid viewer {#mermaid-viewer}
+
+Wrap exactly one native Mermaid block in `.askr-mermaid-view` to add a
+`View diagram` button below the rendered graph. The graph remains in the
+article; the button opens its floating viewer. The wide flow below keeps its
+natural width in a keyboard-focusable horizontal scroll region.
+
+::: {.askr-wide-figure aria-label="Public documentation flow"}
+::: {.askr-mermaid-view view-label="View diagram"}
+```{mermaid}
+flowchart LR
+  subgraph author["Authoring"]
+    direction TB
+    source["Write one native<br/>Mermaid block"] --> wrapper["Add the optional<br/>viewer wrapper"]
+  end
+  subgraph build["Build and publish"]
+    direction TB
+    render["Quarto renders<br/>the HTML page"] --> publish["Publish the<br/>documentation"]
+  end
+  subgraph reader["Reading"]
+    direction TB
+    article["Diagram appears<br/>in the article"] --> open["Choose View diagram"] --> inspect["Zoom, pan or Fit<br/>in the floating viewer"] --> close["Close and return<br/>to the article"]
+  end
+  wrapper --> render
+  publish --> article
+```
+:::
+:::
+
+Use `View diagram` to open the rendered graph in the floating viewer. The
+adjacent `Mermaid source` disclosure below the graph expands the authored block
+on demand; its `Copy` button copies the source. See the
+[Mermaid viewer guide](../usage/image-viewer.qmd#mermaid-viewer) for controls
+and limits.
 
 ## Limits
 
-The theme contains columns, a tabset, and this diagram inside the article
-width. A figure wider than the measure, or one whose labels are unreadably
-small, should be redrawn. Do not shrink the type to force a poster into the
-column.
+The columns, tabset and simple diagram fit the article width. The wider flow
+uses `.askr-wide-figure` to keep its natural size and scroll horizontally. A
+floating viewer can zoom, but does not replace readable labels or logical
+grouping. Redraw a diagram if its labels or relationships remain hard to
+follow; do not shrink its text to force a poster into a column.

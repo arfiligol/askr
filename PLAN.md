@@ -1,6 +1,41 @@
 # Askr release plan
 
-## Current: Documentation version archive correction — 2026-10-21
+## Current: Native Mermaid modal — 2026-10-21
+
+Askr Lead owns the extension runtime and this candidate receipt. See the
+[Mermaid viewer guide](usage/image-viewer.qmd#mermaid-viewer) for the native
+authoring syntax. Opt in with one `.askr-mermaid-view` wrapper around exactly
+one Mermaid cell. The optional `view-label` defaults to `View diagram`. Keep
+Quarto's native diagram as the single rendered source. When its SVG is ready,
+add a button below it that opens the existing Askr modal camera. Add
+on-demand collapsible
+source and Copy controls, populated from the captured original cell source so
+the document has no duplicate static source text. Reject malformed wrappers,
+wrappers without exactly one Mermaid cell, and a wrapper when Lightbox is
+disabled. Non-HTML output remains native and unchanged.
+
+The prefilter validates the single native Mermaid cell and marks its wrapper.
+At `DOMContentLoaded`, Askr copies the native Mermaid source block's text into
+the wrapper data attribute before Quarto's window-load renderer replaces it
+with SVG; the native cell and renderer stay untouched. The browser waits for a
+real SVG within the wrapper before enabling the button; Mermaid-only pages use
+the same existing modal engine. Serialization must preserve computed
+colors/styles, foreignObject labels, local marker references and explicit
+viewBox dimensions. No Mermaid rerender, second engine, inline mode,
+dependency, CDN, consumer, root, durable test or CI change is assigned. The
+v0.11.0 release package also adds a frozen archive snapshot of the published
+v0.10.0 site; the docs writer owns that archive work.
+
+Render an isolated temporary HTML consumer with a wide graph, HTML labels and
+CJK text. Inspect that the native graph remains in place, the button appears
+only after an SVG is ready, Askr adds no second static source block or
+search-index entry, and the existing modal receives an SVG image. Native
+Quarto visibility and indexing remain unchanged. The Lead owns browser review.
+Human authorized publication of this additive Mermaid candidate as v0.11.0
+and its LCDH adoption. Delivery remains LOCAL CANDIDATE; the Lead owns Git and
+the main, tag, Pages and pristine-install release endpoint.
+
+## Previous: Documentation version archive correction — 2026-10-21
 
 Askr 0.10.0 is already released and published. This docs-only follow-up keeps
 the actual published 0.9.0 site as `v0.9.0/` and retains the frozen 0.3.0
@@ -18,10 +53,10 @@ snapshots remain unchanged. At the next release, preserve the actual 0.10.0
 site under `/v0.10.0/` before replacing the current root; do not create a
 second 0.10.0 entry while it is current.
 
-Historical sites are unmaintained. The archive build and documentation have
-been reviewed and rendered and are ready for the Docs PR; they are not yet
-published. The Lead retains Git, Pages and publication delivery authority.
-Semantic state: CONVERGING; delivery state: READY FOR DOCS PR.
+Historical sites are unmaintained. The docs-only archive correction is now
+published; see `VALIDATION.md` for its render, browser and Pages receipt. The
+Lead retains Git, Pages and publication delivery authority.
+Semantic state: CONVERGING; delivery state: PUBLISHED.
 
 ## Published: Askr 0.10.0 bilingual release — 2026-10-21
 
