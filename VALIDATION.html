@@ -742,6 +742,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#candidate-validation-receipt" id="toc-candidate-validation-receipt" class="nav-link active" data-scroll-target="#candidate-validation-receipt">Candidate validation receipt</a>
   <ul class="collapse">
+  <li><a href="#native-mermaid-modal-2026-10-21" id="toc-native-mermaid-modal-2026-10-21" class="nav-link" data-scroll-target="#native-mermaid-modal-2026-10-21">Native Mermaid modal — 2026-10-21</a></li>
   <li><a href="#documentation-version-archive-correction-2026-10-21" id="toc-documentation-version-archive-correction-2026-10-21" class="nav-link" data-scroll-target="#documentation-version-archive-correction-2026-10-21">Documentation version archive correction — 2026-10-21</a></li>
   <li><a href="#bilingual-publication-package-2026-10-21" id="toc-bilingual-publication-package-2026-10-21" class="nav-link" data-scroll-target="#bilingual-publication-package-2026-10-21">0.10.0 bilingual publication package — 2026-10-21</a></li>
   <li><a href="#prior-optional-header-language-selector-runtime-observations-2026-10-21" id="toc-prior-optional-header-language-selector-runtime-observations-2026-10-21" class="nav-link" data-scroll-target="#prior-optional-header-language-selector-runtime-observations-2026-10-21">Prior optional Header language selector runtime observations — 2026-10-21</a>
@@ -797,6 +798,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="candidate-validation-receipt" class="level1">
 <h1>Candidate validation receipt</h1>
+<section id="native-mermaid-modal-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="native-mermaid-modal-2026-10-21">Native Mermaid modal — 2026-10-21</h2>
+<p>Status: Human authorized this additive Mermaid candidate for v0.11.0 publication and LCDH adoption. Delivery remains LOCAL CANDIDATE; the Lead owns the pending main, tag, Pages and pristine-install release endpoint. Quarto 1.10.18 rendered the isolated consumer <code>/tmp/askr-mermaid-candidate.oHLMZj</code> with the extension under the installed <code>_extensions/arfiligol/askr</code> layout.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wide native graph</td>
+<td>✅ <code>index.qmd</code> rendered a wide Mermaid graph with HTML line breaks and CJK labels; the unwrapped native graph also rendered without Askr controls in static HTML</td>
+</tr>
+<tr class="even">
+<td>Actual wide input shape</td>
+<td>✅ <code>private-diagram.qmd</code> rendered the authorized source shape in the temporary consumer only; private source text is not part of this repository</td>
+</tr>
+<tr class="odd">
+<td>Native source handling</td>
+<td>✅ Static HTML retains Quarto’s native <code>&lt;pre class="mermaid mermaid-js"&gt;</code> inside the marked wrapper; Askr adds no static source copy, disclosure or viewer button. Runtime code captures that block at <code>DOMContentLoaded</code>, before Quarto’s window-load Mermaid renderer replaces it with SVG</td>
+</tr>
+<tr class="even">
+<td>Failure behavior</td>
+<td>✅ A malformed wrapper and a native wrapper with <code>lightbox: false</code> each failed the temporary render with the assigned error</td>
+</tr>
+<tr class="odd">
+<td>Modal viewer</td>
+<td>✅ In Chromium, the wide native graph stayed visible; the modal showed its labels and arrows at 481×97px, zoomed to 125%, panned by pointer drag, and Fit plus Escape restored focus to <code>View diagram</code>. Console warnings/errors were empty</td>
+</tr>
+<tr class="even">
+<td>Copy</td>
+<td>✅ After activating Copy, a trusted browser click read the clipboard and matched the captured source: 85 characters</td>
+</tr>
+<tr class="odd">
+<td>Dark-mode styling</td>
+<td>✅ The modal SVG retains the native graph’s authored colors; Askr does not recolor diagram styles</td>
+</tr>
+<tr class="even">
+<td>Targeted Gallery renders</td>
+<td>✅ Quarto 1.10.18 rendered English and Traditional Chinese Figures and Usage pages; the two existing small chart cells ran on both Figures pages. Existing Traditional Chinese warnings about native translations and path configuration were unrelated to Mermaid</td>
+</tr>
+<tr class="odd">
+<td>Wide-graph browser review</td>
+<td>✅ The public eight-node subgraph with HTML labels opened in the modal. Zoom changed from 100% to 156% on desktop and 244% at 390×844; Escape restored focus to the viewer button. Dark mode retained visible labels</td>
+</tr>
+<tr class="even">
+<td>Existing image viewer</td>
+<td>✅ The ordinary “View this figure” control continued to open the expected native image caption</td>
+</tr>
+<tr class="odd">
+<td>Local ZIP installation</td>
+<td>✅ Quarto 1.10.18 installed <code>/tmp/askr-mermaid-install-M46w8k/askr-local.zip</code> in an isolated consumer at <code>_extensions/askr</code>; the installed tree matched the source. Quarto’s local ZIP installer normalizes the folder name, so the same temporary copy was moved to <code>_extensions/arfiligol/askr</code>, the GitHub-install layout expected by bundled asset references. The minimal opt-in page then rendered, and its HTML contained the marked wrapper and native Mermaid block. The initial render before this temporary relocation could not resolve the namespaced font paths</td>
+</tr>
+<tr class="even">
+<td>Full project render</td>
+<td>✅ The first full render stopped at <code>PLAN.md</code> (103/106) because Quarto treated the fenced Mermaid example as executable code. Replacing it with a link to the canonical Usage example and inline API names fixed the document; <code>quarto render PLAN.md</code> passed. The Lead’s full Quarto 1.10.18 rerun exited 0 with 106 English and 27 Traditional Chinese pages; all three small cells executed in each site. Existing Traditional Chinese translation warnings remain known</td>
+</tr>
+<tr class="odd">
+<td>Frozen v0.10.0 archive</td>
+<td>✅ The 225-file source snapshot matches the docs-owner receipt at <code>bc16822</code>; rendered archive output differs from the source only at generated <code>askr-versions.json</code></td>
+</tr>
+<tr class="even">
+<td>Archive version selector</td>
+<td>✅ On the local archived Figures page, the header marks 0.10.0 current; the menu shows 0.11.0 Latest plus 0.10.0, 0.9.0 and 0.3.0. Selecting Latest reaches the v0.11.0 root in the local preview</td>
+</tr>
+</tbody>
+</table>
+<p>The candidate also preserves local SVG fragment references while serializing computed styles and explicit viewBox dimensions. JavaScript syntax validation passed with Node. No durable tests, dependencies or fixtures were added. Git, tag, Pages deployment and pristine-install verification remain pending Lead delivery.</p>
+</section>
 <section id="documentation-version-archive-correction-2026-10-21" class="level2">
 <h2 class="anchored" data-anchor-id="documentation-version-archive-correction-2026-10-21">Documentation version archive correction — 2026-10-21</h2>
 <p>Status: ✅ The full bilingual render, archive metadata generation and local archive browser review completed. No extension runtime or installed version changed.</p>
@@ -1977,7 +2053,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.10.0" aria-label="Askr version 0.10.0">0.10.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.11.0" aria-label="Askr version 0.11.0">0.11.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 

@@ -836,6 +836,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#theme-toggle" id="toc-theme-toggle" class="nav-link" data-scroll-target="#theme-toggle">Theme toggle</a></li>
   <li><a href="#diagram" id="toc-diagram" class="nav-link" data-scroll-target="#diagram">Diagram</a></li>
+  <li><a href="#mermaid-viewer" id="toc-mermaid-viewer" class="nav-link" data-scroll-target="#mermaid-viewer">Mermaid viewer</a></li>
   <li><a href="#limits" id="toc-limits" class="nav-link" data-scroll-target="#limits">Limits</a></li>
   </ul>
 </nav>
@@ -904,7 +905,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="image" class="level2">
 <h2 class="anchored" data-anchor-id="image">Image</h2>
 <p>Images in this document come from Embla. The chart below is its bars-and-markers figure, saved here as a static image. Quarto’s folded cell keeps the embed source behind Source and shows the image underneath.</p>
-<div id="2cc40e22" class="cell" data-execution_count="1">
+<div id="b802dc1a" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Source</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image</span>
@@ -913,7 +914,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 <figure class="figure">
-<p><a href="figures_files/figure-html/cell-2-output-1.png" class="askr-image-entry" data-askr-description="" data-askr-image-key="1" data-askr-gallery=""><img src="figures_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="figures_files/figure-html/cell-2-output-1.png" class="askr-image-entry" data-askr-gallery="" data-askr-image-key="1" data-askr-description=""><img src="figures_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -927,7 +928,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="fig-viewer" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-viewer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-description="" data-askr-image-key="2" data-askr-gallery=""><img src="images/bars-semantic-markers.png" class="img-fluid figure-img"></a>
+<a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-gallery="" data-askr-image-key="2" data-askr-description=""><img src="images/bars-semantic-markers.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-viewer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Bars with semantic markers, from the public Embla figure.
@@ -937,7 +938,7 @@ Figure&nbsp;1: Bars with semantic markers, from the public Embla figure.
 <a class="askr-image-view" data-askr-image-target="fig-viewer" href="images/bars-semantic-markers.png" aria-haspopup="dialog">View this figure</a>
 <p>This button opens the same image and caption as the figure above. A button-only entry registers its own hidden image source:</p>
 <div class="askr-image-source" aria-hidden="true">
-<p><a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-description="" data-askr-image-key="3" data-askr-gallery=""><img src="images/bars-semantic-markers.png" id="askr-image-entry-2" class="lightbox img-fluid"></a></p>
+<p><a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-gallery="" data-askr-image-key="3" data-askr-description=""><img src="images/bars-semantic-markers.png" id="askr-image-entry-2" class="lightbox img-fluid"></a></p>
 </div>
 <a class="askr-image-view" data-askr-image-target="askr-image-entry-2" href="images/bars-semantic-markers.png" aria-haspopup="dialog">View image</a>
 <section id="inline-interaction" class="level3">
@@ -946,7 +947,7 @@ Figure&nbsp;1: Bars with semantic markers, from the public Embla figure.
 <div id="fig-inline" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-inline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-description="" data-askr-image-key="4" data-askr-gallery=""><img src="images/bars-semantic-markers.png" class="img-fluid figure-img"></a>
+<a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-gallery="" data-askr-image-key="4" data-askr-description=""><img src="images/bars-semantic-markers.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Bars and markers from Embla, displayed inline without a duplicate figure.
@@ -959,7 +960,7 @@ Figure&nbsp;2: Bars and markers from Embla, displayed inline without a duplicate
 <h3 class="anchored" data-anchor-id="svg-interaction">SVG interaction</h3>
 <p>This existing Askr icon is vector artwork, not a scientific layout. Its geometry remains sharp when enlarged. Its camera is independent of the PNG.</p>
 <div class="askr-image-source askr-image-source-inline">
-<p><a href="../site_libs/quarto-contrib/quarto-project/askr/assets/icons/flame.svg" class="askr-image-entry" data-askr-description="" data-askr-image-key="5" data-askr-gallery=""><img src="../site_libs/quarto-contrib/quarto-project/askr/assets/icons/flame.svg" id="askr-image-entry-4" class="lightbox img-fluid"></a></p>
+<p><a href="../site_libs/quarto-contrib/quarto-project/askr/assets/icons/flame.svg" class="askr-image-entry" data-askr-gallery="" data-askr-image-key="5" data-askr-description=""><img src="../site_libs/quarto-contrib/quarto-project/askr/assets/icons/flame.svg" id="askr-image-entry-4" class="lightbox img-fluid"></a></p>
 </div>
 <span class="askr-inline-request" data-askr-image-target="askr-image-entry-4" data-label="Askr flame icon" hidden=""></span>
 </section>
@@ -967,13 +968,13 @@ Figure&nbsp;2: Bars and markers from Embla, displayed inline without a duplicate
 <h3 class="anchored" data-anchor-id="gallery">Gallery</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-description="" data-askr-image-key="6" data-askr-gallery="viewer-formats"><img src="images/bars-semantic-markers.png" class="img-fluid figure-img" data-group="viewer-formats"></a></p>
+<p><a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-gallery="viewer-formats" data-askr-image-key="6" data-askr-description=""><img src="images/bars-semantic-markers.png" class="img-fluid figure-img" data-group="viewer-formats"></a></p>
 <figcaption>Public Embla figure: PNG source.</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/bars-semantic-markers.jpg" class="askr-image-entry" data-askr-description="" data-askr-image-key="7" data-askr-gallery="viewer-formats"><img src="images/bars-semantic-markers.jpg" class="img-fluid figure-img" data-group="viewer-formats"></a></p>
+<p><a href="images/bars-semantic-markers.jpg" class="askr-image-entry" data-askr-gallery="viewer-formats" data-askr-image-key="7" data-askr-description=""><img src="images/bars-semantic-markers.jpg" class="img-fluid figure-img" data-group="viewer-formats"></a></p>
 <figcaption>The same public figure encoded as JPEG; zoom does not add resolution.</figcaption>
 </figure>
 </div>
@@ -999,7 +1000,7 @@ Figure&nbsp;2: Bars and markers from Embla, displayed inline without a duplicate
 <h2 class="anchored" data-anchor-id="theme-toggle">Theme toggle</h2>
 <p>Quarto keeps two outputs from one cell and shows one of them. <code>body.quarto-dark</code> hides <code>.light-content</code>; <code>body.quarto-light</code> hides <code>.dark-content</code>. Askr’s dark stylesheet is marked <code>data-mode="dark"</code>, so the header toggle adds and removes <code>quarto-dark</code> with the stylesheet.</p>
 <p>Emit the light output first, then the dark output:</p>
-<div id="45240809" class="cell" data-renderings="[&quot;light&quot;,&quot;dark&quot;]" data-execution_count="2">
+<div id="bbaf66f3" class="cell" data-renderings="[&quot;light&quot;,&quot;dark&quot;]" data-execution_count="2">
 <details class="code-fold">
 <summary>Source</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> HTML, display</span>
@@ -1023,6 +1024,7 @@ Figure&nbsp;2: Bars and markers from Embla, displayed inline without a duplicate
 </section>
 <section id="diagram" class="level2">
 <h2 class="anchored" data-anchor-id="diagram">Diagram</h2>
+<p>This simple, unwrapped Mermaid block stays native in the article and does not add viewer controls:</p>
 <div class="cell" data-layout-align="default">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  Areas[Areas] --&gt; Pages[Page List]</span>
@@ -1042,11 +1044,61 @@ Figure&nbsp;2: Bars and markers from Embla, displayed inline without a duplicate
 </div>
 </div>
 </div>
-<p>The diagram above is the figure sample. This gallery does not ship a photograph.</p>
+<p>This gallery does not ship a photograph.</p>
+</section>
+<section id="mermaid-viewer" class="level2">
+<h2 class="anchored" data-anchor-id="mermaid-viewer">Mermaid viewer</h2>
+<p>Wrap exactly one native Mermaid block in <code>.askr-mermaid-view</code> to add a <code>View diagram</code> button below the rendered graph. The graph remains in the article; the button opens its floating viewer. The wide flow below keeps its natural width in a keyboard-focusable horizontal scroll region.</p>
+<div class="askr-wide-figure" aria-label="Public documentation flow">
+<div class="askr-mermaid-view" data-view-label="View diagram" data-askr-mermaid-view="true" data-askr-mermaid-label="View diagram">
+<div class="cell" data-layout-align="default">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  subgraph author["Authoring"]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    direction TB</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    source["Write one native&lt;br/&gt;Mermaid block"] --&gt; wrapper["Add the optional&lt;br/&gt;viewer wrapper"]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  end</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  subgraph build["Build and publish"]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    direction TB</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    render["Quarto renders&lt;br/&gt;the HTML page"] --&gt; publish["Publish the&lt;br/&gt;documentation"]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  end</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  subgraph reader["Reading"]</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    direction TB</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    article["Diagram appears&lt;br/&gt;in the article"] --&gt; open["Choose View diagram"] --&gt; inspect["Zoom, pan or Fit&lt;br/&gt;in the floating viewer"] --&gt; close["Close and return&lt;br/&gt;to the article"]</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  end</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  wrapper --&gt; render</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  publish --&gt; article</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  subgraph author["Authoring"]
+    direction TB
+    source["Write one native&lt;br/&gt;Mermaid block"] --&gt; wrapper["Add the optional&lt;br/&gt;viewer wrapper"]
+  end
+  subgraph build["Build and publish"]
+    direction TB
+    render["Quarto renders&lt;br/&gt;the HTML page"] --&gt; publish["Publish the&lt;br/&gt;documentation"]
+  end
+  subgraph reader["Reading"]
+    direction TB
+    article["Diagram appears&lt;br/&gt;in the article"] --&gt; open["Choose View diagram"] --&gt; inspect["Zoom, pan or Fit&lt;br/&gt;in the floating viewer"] --&gt; close["Close and return&lt;br/&gt;to the article"]
+  end
+  wrapper --&gt; render
+  publish --&gt; article
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Use <code>View diagram</code> to open the rendered graph in the floating viewer. The adjacent <code>Mermaid source</code> disclosure below the graph expands the authored block on demand; its <code>Copy</code> button copies the source. See the <a href="../usage/image-viewer.html#mermaid-viewer">Mermaid viewer guide</a> for controls and limits.</p>
 </section>
 <section id="limits" class="level2">
 <h2 class="anchored" data-anchor-id="limits">Limits</h2>
-<p>The theme contains columns, a tabset, and this diagram inside the article width. A figure wider than the measure, or one whose labels are unreadably small, should be redrawn. Do not shrink the type to force a poster into the column.</p>
+<p>The columns, tabset and simple diagram fit the article width. The wider flow uses <code>.askr-wide-figure</code> to keep its natural size and scroll horizontally. A floating viewer can zoom, but does not replace readable labels or logical grouping. Redraw a diagram if its labels or relationships remain hard to follow; do not shrink its text to force a poster into a column.</p>
 
 
 </section>
@@ -1622,7 +1674,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.10.0" aria-label="Askr version 0.10.0">0.10.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.11.0" aria-label="Askr version 0.11.0">0.11.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="../zh-TW" hreflang="../zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 

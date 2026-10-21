@@ -852,16 +852,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>0.10.0</td>
+<td>0.11.0</td>
 <td><code>/</code></td>
-<td>目前發布版本</td>
+<td>目前版本</td>
 </tr>
 <tr class="even">
+<td>0.10.0</td>
+<td><code>/v0.10.0/</code></td>
+<td>實際發布之 0.10.0 網站的快照</td>
+</tr>
+<tr class="odd">
 <td>0.9.0</td>
 <td><code>/v0.9.0/</code></td>
 <td>實際發布之 0.9.0 網站的快照</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>0.3.0</td>
 <td><code>/v0.3.0/</code></td>
 <td>凍結的歷史網站</td>
@@ -872,11 +877,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"mode"</span><span class="fu">:</span> <span class="st">"inline"</span><span class="fu">,</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"versions"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.10.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/"</span><span class="fu">,</span> <span class="dt">"latest"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.9.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.9.0/"</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.3.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.3.0/"</span><span class="fu">}</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.11.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/"</span><span class="fu">,</span> <span class="dt">"latest"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.10.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.10.0/"</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.9.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.9.0/"</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.3.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.3.0/"</span><span class="fu">}</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
 <p>請將版本清單檔加入 <code>project.resources</code>。每個 <code>root</code> 都代表一個完整版本網站，路徑以該網站的部署根目錄為基準。版本選擇器由 Askr 提供；網站使用者需自行管理封存目錄與版本清單檔。圖集的根目錄建置輔助工具會為圖集自己的封存網站產生中繼資料。這是來源儲存庫的建置工具，不會隨 <code>quarto add</code> 安裝。</p>
 <p>若要指定固定目的地，請使用 <code>href</code>，而非 <code>root</code>。相對路徑與單斜線開頭的 <code>href</code> 都以網站為基準；絕對網址則保留原本的網域。固定目的地不會保留目前頁面的路徑。若版本選擇器的版本清單檔位於封存網站內，其 <code>root</code> 項目仍以該封存網站的根目錄為基準。圖集會從根目錄版本清單產生這些封存站專用的中繼資料。</p>
 <p><code>inline</code> 模式會在短標題旁顯示目前版本；<code>title</code> 模式則顯示標題與箭頭，並在選單中顯示版本號。可試用<a href="versions.html?askr-version-mode=title">長標題範例</a>。<code>longTitle</code> 為選填欄位，只在 <code>title</code> 模式使用。</p>
@@ -887,14 +893,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="歷史版本網站" class="level2">
 <h2 class="anchored" data-anchor-id="歷史版本網站">歷史版本網站</h2>
-<p>0.9.0 快照取自實際發布於 GitHub Pages 的網站。0.3.0 快照維持原樣。兩者都是歷史文件，不是目前使用指南的維護版本。</p>
-<p>目前的 0.10.0 版本選擇器在切換版本時會保留目前頁面的路徑、查詢參數與片段識別字。一般同源點擊會先檢查目的頁；若回應為 404，便開啟所選網站的首頁。若發生網路錯誤，則保留原目的頁。使用 Cmd／Ctrl 點擊或在新分頁開啟等特殊點擊，以及外部網址，都維持瀏覽器的原有行為；這些情況由網站主機顯示錯誤頁面。</p>
-<p>兩個封存版本都使用建置時產生的固定首頁連結。0.9.0 版本清單只有一個封存站內的 <code>root</code>，值為 <code>./</code>，用來標示目前版本；所有版本連結都會開啟各自設定的首頁。凍結版 0.3.0 的版本清單使用網域根目錄路徑與固定連結，讓 <code>/askr/</code> 前綴下的導覽正常運作。圖集的建置輔助工具會依根目錄版本清單產生封存版本的清單檔，不會改寫舊版 HTML。</p>
+<p>0.10.0 快照保留根目錄切換至 0.11.0 前，實際發布於 GitHub Pages 的網站。0.9.0 快照也取自實際發布的網站；0.3.0 快照維持原樣。這些都是歷史文件，不是目前使用指南的維護版本。</p>
+<p>目前的 0.11.0 版本選擇器在切換版本時會保留目前頁面的路徑、查詢參數與片段識別字。一般同源點擊會先檢查目的頁；若回應為 404，便開啟所選網站的首頁。若發生網路錯誤，則保留原目的頁。使用 Cmd／Ctrl 點擊或在新分頁開啟等特殊點擊，以及外部網址，都維持瀏覽器的原有行為；這些情況由網站主機顯示錯誤頁面。</p>
+<p>0.10.0 與 0.9.0 的版本清單都只有一個封存站內的 <code>root</code>，值為 <code>./</code>，用來標示目前版本；所有版本連結都會開啟各自設定的首頁。凍結版 0.3.0 的版本清單使用網域根目錄路徑與固定連結，讓 <code>/askr/</code> 前綴下的導覽正常運作。圖集的建置輔助工具會依根目錄版本清單產生封存版本的清單檔，不會改寫舊版 HTML。</p>
 <p>0.3.0 快照沒有本頁。選擇該版本時會前往其首頁，而不會開啟不存在的頁面。</p>
 </section>
 <section id="發布新版本" class="level2">
 <h2 class="anchored" data-anchor-id="發布新版本">發布新版本</h2>
-<p>替換目前網站根目錄前，請先將實際發布中的網站保留在對應的版本目錄。例如，下一版發布前，應先將 0.10.0 封存至 <code>/v0.10.0/</code>；接著才更新根目錄版本清單檔，列出新的目前版本並保留較舊版本。0.10.0 仍是目前版本時，不要在清單中重複新增另一筆 0.10.0。使用者需自行發布及管理所屬網站；圖集輔助工具只會準備這個儲存庫的封存中繼資料。</p>
+<p>替換目前網站根目錄前，請先將實際發布中的網站保留在對應的版本目錄。例如，下一版發布前，應先將 0.11.0 封存至 <code>/v0.11.0/</code>；接著才更新根目錄版本清單檔，列出新的目前版本並保留較舊版本。0.11.0 仍是目前版本時，不要在清單中重複新增另一筆 0.11.0。使用者需自行發布及管理所屬網站；圖集輔助工具只會準備這個儲存庫的封存中繼資料。</p>
 <p>圖集也提供<a href="versions.html?askr-version-mode=title">長標題範例</a>。其版本清單欄位 <code>longTitle</code> 為選填，不會影響版本導覽。</p>
 
 
@@ -1459,7 +1465,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.10.0" aria-label="Askr version 0.10.0">0.10.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.11.0" aria-label="Askr version 0.11.0">0.11.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: 繁體中文" title="Language: 繁體中文"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"></span></a></li><li><a class="dropdown-item active" aria-current="true" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li></ul></div></template>
 

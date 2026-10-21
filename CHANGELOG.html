@@ -707,37 +707,39 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#changelog" id="toc-changelog" class="nav-link active" data-scroll-target="#changelog">Changelog</a>
   <ul class="collapse">
-  <li><a href="#unreleased" id="toc-unreleased" class="nav-link" data-scroll-target="#unreleased">Unreleased</a>
+  <li><a href="#unreleased" id="toc-unreleased" class="nav-link" data-scroll-target="#unreleased">Unreleased</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">0.11.0 — 2026-10-21</a>
   <ul class="collapse">
+  <li><a href="#added" id="toc-added" class="nav-link" data-scroll-target="#added">Added</a></li>
   <li><a href="#fixed" id="toc-fixed" class="nav-link" data-scroll-target="#fixed">Fixed</a></li>
   <li><a href="#documentation" id="toc-documentation" class="nav-link" data-scroll-target="#documentation">Documentation</a></li>
   </ul></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">0.10.0 — 2026-10-21</a>
-  <ul class="collapse">
-  <li><a href="#added" id="toc-added" class="nav-link" data-scroll-target="#added">Added</a></li>
-  </ul></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">0.9.0 — 2026-10-21</a>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">0.10.0 — 2026-10-21</a>
   <ul class="collapse">
   <li><a href="#added-1" id="toc-added-1" class="nav-link" data-scroll-target="#added-1">Added</a></li>
+  </ul></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">0.9.0 — 2026-10-21</a>
+  <ul class="collapse">
+  <li><a href="#added-2" id="toc-added-2" class="nav-link" data-scroll-target="#added-2">Added</a></li>
   <li><a href="#changed" id="toc-changed" class="nav-link" data-scroll-target="#changed">Changed</a></li>
   </ul></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">0.8.0 — 2026-10-10</a>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">0.8.0 — 2026-10-10</a>
   <ul class="collapse">
   <li><a href="#changed-1" id="toc-changed-1" class="nav-link" data-scroll-target="#changed-1">Changed</a></li>
   <li><a href="#compatibility-and-observation-limits" id="toc-compatibility-and-observation-limits" class="nav-link" data-scroll-target="#compatibility-and-observation-limits">Compatibility and observation limits</a></li>
   </ul></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">0.7.0 — 2026-10-09</a>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">0.7.0 — 2026-10-09</a>
   <ul class="collapse">
-  <li><a href="#added-2" id="toc-added-2" class="nav-link" data-scroll-target="#added-2">Added</a></li>
+  <li><a href="#added-3" id="toc-added-3" class="nav-link" data-scroll-target="#added-3">Added</a></li>
   </ul></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">0.6.1 — 2026-10-06</a>
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">0.6.1 — 2026-10-06</a>
   <ul class="collapse">
   <li><a href="#fixed-1" id="toc-fixed-1" class="nav-link" data-scroll-target="#fixed-1">Fixed</a></li>
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
   </ul></li>
-  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">0.6.0</a>
+  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">0.6.0</a>
   <ul class="collapse">
-  <li><a href="#added-3" id="toc-added-3" class="nav-link" data-scroll-target="#added-3">Added</a></li>
+  <li><a href="#added-4" id="toc-added-4" class="nav-link" data-scroll-target="#added-4">Added</a></li>
   <li><a href="#limits" id="toc-limits" class="nav-link" data-scroll-target="#limits">Limits</a></li>
   </ul></li>
   </ul></li>
@@ -756,10 +758,19 @@ ul.task-list li input[type="checkbox"] {
 <p>User-visible package changes are recorded here. PR and GitHub Release summaries derive from these entries; an Unreleased entry is not a published release.</p>
 <section id="unreleased" class="level2">
 <h2 class="anchored" data-anchor-id="unreleased">Unreleased</h2>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section">0.11.0 — 2026-10-21</h2>
+<section id="added" class="level3">
+<h3 class="anchored" data-anchor-id="added">Added</h3>
+<ul>
+<li>Native Mermaid blocks can opt into the floating viewer, with zoom, pan, Fit, on-demand source disclosure and Copy from the authored block.</li>
+</ul>
+</section>
 <section id="fixed" class="level3">
 <h3 class="anchored" data-anchor-id="fixed">Fixed</h3>
 <ul>
-<li>The current docs selector lists the actual published 0.9.0 site and the frozen 0.3.0 site. A full render generates archive-specific manifests for the modern 0.9 selector and the legacy 0.3 selector.</li>
+<li>The current docs selector lists the actual published 0.10.0 and 0.9.0 sites and the frozen 0.3.0 site. A full render generates archive-specific manifests for the modern 0.10 and 0.9 selectors and the legacy 0.3 selector.</li>
 <li>The generated 0.3.0 manifest marks 0.3.0 as current and links to version homepages; the published 0.3.0 HTML and authored snapshot stay unchanged.</li>
 </ul>
 </section>
@@ -770,20 +781,20 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section">0.10.0 — 2026-10-21</h2>
-<section id="added" class="level3">
-<h3 class="anchored" data-anchor-id="added">Added</h3>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1">0.10.0 — 2026-10-21</h2>
+<section id="added-1" class="level3">
+<h3 class="anchored" data-anchor-id="added-1">Added</h3>
 <ul>
 <li>Optional site-level <code>askr.languages</code> adds a current-tab Header language selector, independent of Areas, with validated destinations and an explicit current-language marker. The selector is absent unless configured; existing navbar language links and all other defaults remain unchanged.</li>
 <li>The Gallery source now builds separate English and Traditional Chinese websites with their own navigation and search. Both use the optional selector to link their homepages, and both render the same three executable examples.</li>
 </ul>
 </section>
 </section>
-<section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1">0.9.0 — 2026-10-21</h2>
-<section id="added-1" class="level3">
-<h3 class="anchored" data-anchor-id="added-1">Added</h3>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2">0.9.0 — 2026-10-21</h2>
+<section id="added-2" class="level3">
+<h3 class="anchored" data-anchor-id="added-2">Added</h3>
 <ul>
 <li>Site option <code>askr.reading-width: normal|wide</code> selects a consistent 630px or 780px body base across docked, floating and absent sidebars.</li>
 <li>Accessible table scroll regions, <code>.askr-symbol-table</code>, <code>.askr-table-compact</code> and <code>.askr-table-numeric</code>, including wrapping-div use with captionless tables.</li>
@@ -802,8 +813,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="section-2" class="level2">
-<h2 class="anchored" data-anchor-id="section-2">0.8.0 — 2026-10-10</h2>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3">0.8.0 — 2026-10-10</h2>
 <section id="changed-1" class="level3">
 <h3 class="anchored" data-anchor-id="changed-1">Changed</h3>
 <ul>
@@ -820,10 +831,10 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="section-3" class="level2">
-<h2 class="anchored" data-anchor-id="section-3">0.7.0 — 2026-10-09</h2>
-<section id="added-2" class="level3">
-<h3 class="anchored" data-anchor-id="added-2">Added</h3>
+<section id="section-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-4">0.7.0 — 2026-10-09</h2>
+<section id="added-3" class="level3">
+<h3 class="anchored" data-anchor-id="added-3">Added</h3>
 <ul>
 <li>Native Header tools and Footer links receive coordinated icon controls, light/dark colors and responsive spacing. Authors retain Quarto configuration.</li>
 <li>Default opt-out Powered by Askr credit uses the installed extension version, separate from document versions; existing Footer content is preserved.</li>
@@ -831,8 +842,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="section-4" class="level2">
-<h2 class="anchored" data-anchor-id="section-4">0.6.1 — 2026-10-06</h2>
+<section id="section-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-5">0.6.1 — 2026-10-06</h2>
 <section id="fixed-1" class="level3">
 <h3 class="anchored" data-anchor-id="fixed-1">Fixed</h3>
 <ul>
@@ -848,10 +859,10 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="section-5" class="level2">
-<h2 class="anchored" data-anchor-id="section-5">0.6.0</h2>
-<section id="added-3" class="level3">
-<h3 class="anchored" data-anchor-id="added-3">Added</h3>
+<section id="section-6" class="level2">
+<h2 class="anchored" data-anchor-id="section-6">0.6.0</h2>
+<section id="added-4" class="level3">
+<h3 class="anchored" data-anchor-id="added-4">Added</h3>
 <ul>
 <li>Optional Header Logout entry through <code>askr.logout.href</code> and <code>label</code>, with protected-documentation Usage guidance. Askr navigates to the configured destination; the identity provider owns sessions and logout scope.</li>
 <li>Quarto native image Lightbox by default, with <code>askr-image-view</code> buttons for existing figures or button-only image entries, plus Image viewer Usage.</li>
@@ -1442,7 +1453,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.10.0" aria-label="Askr version 0.10.0">0.10.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.11.0" aria-label="Askr version 0.11.0">0.11.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 

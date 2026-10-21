@@ -821,6 +821,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#open-with-a-button" id="toc-open-with-a-button" class="nav-link" data-scroll-target="#open-with-a-button">Open with a button</a></li>
   <li><a href="#inspect-inline-then-expand" id="toc-inspect-inline-then-expand" class="nav-link" data-scroll-target="#inspect-inline-then-expand">Inspect inline, then expand</a></li>
   <li><a href="#controls-and-galleries" id="toc-controls-and-galleries" class="nav-link" data-scroll-target="#controls-and-galleries">Controls and galleries</a></li>
+  <li><a href="#mermaid-viewer" id="toc-mermaid-viewer" class="nav-link" data-scroll-target="#mermaid-viewer">Mermaid diagrams</a></li>
   <li><a href="#limits-and-migration" id="toc-limits-and-migration" class="nav-link" data-scroll-target="#limits-and-migration">Limits and migration</a></li>
   </ul>
 </nav>
@@ -848,12 +849,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Askr supplies one interactive image viewer in two modes: inspect an image directly in the article, or open a floating viewer from an image or button. SVG, PNG and JPEG share the same pan-and-zoom controls. No image service, third-party viewer or CDN is required.</p>
+<p>Askr supplies an interactive image viewer for images and an optional floating viewer for native Mermaid diagrams. Inspect an image directly in the article, or open a floating viewer from an image or button. SVG, PNG and JPEG share the same pan-and-zoom controls. No image service, third-party viewer or CDN is required.</p>
 <section id="images-and-opt-outs" class="level2">
 <h2 class="anchored" data-anchor-id="images-and-opt-outs">Images and opt-outs</h2>
 <p>Independent figures and standalone images open the floating viewer by default:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Layout](images/layout.svg)</span>{#fig-layout}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Inline prose images and images with an existing navigation link keep their normal treatment. <code>.lightbox</code> explicitly enables an image; <code>.nolightbox</code> excludes it. <code>lightbox: false</code> disables interaction for the page. Do not use viewer shortcodes on a disabled page or target an excluded image. Rendering reports the conflict instead of producing unusable controls.</p>
+<p>Inline prose images and images with an existing navigation link keep their normal treatment. <code>.lightbox</code> explicitly enables an image; <code>.nolightbox</code> excludes it. <code>lightbox: false</code> disables interaction for the page. Do not use viewer shortcodes or <code>.askr-mermaid-view</code> on a disabled page, or target an excluded image. Rendering reports the conflict instead of producing unusable controls.</p>
 </section>
 <section id="open-with-a-button" class="level2">
 <h2 class="anchored" data-anchor-id="open-with-a-button">Open with a button</h2>
@@ -893,12 +894,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="al">![Second layout](images/second.jpg)</span>{group="layouts"}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Use previous/next buttons to switch; each image starts at Fit. Galleries loop by default; <code>lightbox: {match: auto, loop: false}</code> disables looping. Expanding an inline viewer stays on that image rather than switching away from its state. Single-finger swipes pan; they do not change gallery images.</p>
 </section>
+<section id="mermaid-viewer" class="level2">
+<h2 class="anchored" data-anchor-id="mermaid-viewer">Mermaid diagrams</h2>
+<p>Unwrapped Mermaid blocks keep Quarto’s native rendering and have no Askr viewer controls. To add a floating viewer button below a diagram, wrap exactly one native Mermaid block:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>::: {.askr-mermaid-view view-label="View diagram"}</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  Reader --&gt; Diagram</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>view-label</code> is optional and defaults to <code>View diagram</code>. The floating viewer reuses the image viewer’s zoom, pan and Fit controls, plus fullscreen where available and close with focus restoration.</p>
+<p>The <code>Mermaid source</code> disclosure is adjacent to the viewer button below the graph. Open it to reveal the authored block; <code>Copy</code> copies that source with its original line breaks. Askr adds no second static source block or search-index entry. Quarto’s native Mermaid source visibility and indexing remain unchanged.</p>
+<p>Each wrapper contains one Mermaid block. Mermaid has no inline viewer mode.</p>
+<p>This works only with Quarto’s native Mermaid blocks in HTML output when the browser renders the diagram; image-rendered Mermaid (for example, when <code>mermaid-format</code> produces an image) fails with an incompatibility error during rendering. It is not a GDS viewer and does not promise image-quality enhancement. With JavaScript disabled, the page keeps Quarto’s native Mermaid behavior without Askr viewer controls.</p>
+</section>
 <section id="limits-and-migration" class="level2">
 <h2 class="anchored" data-anchor-id="limits-and-migration">Limits and migration</h2>
 <p>This replaces Askr’s former GLightbox interface. Existing shortcode names, image eligibility, captions and groups remain. GLightbox-specific <code>effect</code>, <code>desc-position</code> and <code>css-class</code> settings are not supported; remove them before rendering. Description text is displayed as text, never executable HTML.</p>
 <p>Images retain their own colors in both themes. SVG is loaded as an image, not injected into the page. This is not a GDS viewer and has no layer selection, measurement or resolution enhancement. A failed load shows an error and Retry; closing and gallery navigation remain available.</p>
 <p>Without JavaScript, images and source links remain available without interactive controls. Non-HTML output retains ordinary images and image/figure links.</p>
-<p>Try the <a href="../components/figures.html#image-viewer">Figures examples</a>.</p>
+<p>Try the <a href="../components/figures.html#mermaid-viewer">Figures examples</a>.</p>
 
 
 </section>
@@ -1474,7 +1489,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.10.0" aria-label="Askr version 0.10.0">0.10.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.11.0" aria-label="Askr version 0.11.0">0.11.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="../zh-TW" hreflang="../zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 

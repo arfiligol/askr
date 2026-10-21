@@ -857,16 +857,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>0.10.0</td>
+<td>0.11.0</td>
 <td><code>/</code></td>
-<td>Current published site</td>
+<td>Current site</td>
 </tr>
 <tr class="even">
+<td>0.10.0</td>
+<td><code>/v0.10.0/</code></td>
+<td>Snapshot of the actual published 0.10.0 site</td>
+</tr>
+<tr class="odd">
 <td>0.9.0</td>
 <td><code>/v0.9.0/</code></td>
 <td>Snapshot of the actual published 0.9.0 site</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>0.3.0</td>
 <td><code>/v0.3.0/</code></td>
 <td>Frozen historical site</td>
@@ -877,11 +882,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"mode"</span><span class="fu">:</span> <span class="st">"inline"</span><span class="fu">,</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"versions"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.10.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/"</span><span class="fu">,</span> <span class="dt">"latest"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.9.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.9.0/"</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.3.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.3.0/"</span><span class="fu">}</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.11.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/"</span><span class="fu">,</span> <span class="dt">"latest"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.10.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.10.0/"</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.9.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.9.0/"</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.3.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.3.0/"</span><span class="fu">}</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Include the manifest in <code>project.resources</code>. Each <code>root</code> identifies a complete version site relative to that site’s deployment root. The version selector is provided by Askr; consumers maintain their own archive directories and manifest. The Gallery’s root build helper generates metadata for its own archived sites. It is source-repository build tooling and is not installed by <code>quarto add</code>.</p>
 <p>Use <code>href</code> for a fixed destination instead of a <code>root</code>. Relative and single-slash <code>href</code> values are site-relative; absolute URLs keep their origin. Fixed destinations do not preserve the current page path. When a selector manifest lives inside an archive, its <code>root</code> entries are relative to that archive’s site root. The Gallery generates that archive-local metadata from the root version list.</p>
 <p><code>inline</code> shows the current version beside a short title. <code>title</code> shows the title and chevron, with the version number in the menu. Try the <a href="versions.html?askr-version-mode=title">long-title specimen</a>; <code>longTitle</code> is optional and used only in <code>title</code> mode.</p>
@@ -892,14 +898,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="archived-sites" class="level2">
 <h2 class="anchored" data-anchor-id="archived-sites">Archived sites</h2>
-<p>The 0.9.0 snapshot comes from the actual published Pages site. The 0.3.0 snapshot remains unchanged. Both archives are historical documentation, not maintained copies of the current Usage guide.</p>
-<p>The current 0.10.0 selector preserves the page path, query and fragment when switching to another version. For an ordinary same-origin click, it checks the destination; a 404 opens the selected site’s homepage. A network error retains the original destination. Modified clicks (Cmd/Ctrl-click or a new tab) and external URLs keep normal browser behavior, so the host’s error page owns those cases.</p>
-<p>Both archives use generated fixed homepage links. The 0.9.0 manifest has a single archive-local <code>root</code> for its current-version marker; all version links open their configured homepages. The frozen 0.3.0 manifest uses origin-root paths and fixed links so navigation works under <code>/askr/</code>. This Gallery’s build helper generates archive manifests from the root list without rewriting old HTML.</p>
+<p>The 0.10.0 snapshot preserves the actual published Pages site before the root moved to 0.11.0. The 0.9.0 snapshot also comes from the actual published site; the 0.3.0 snapshot remains unchanged. These archives are historical documentation, not maintained copies of the current Usage guide.</p>
+<p>The current 0.11.0 selector preserves the page path, query and fragment when switching to another version. For an ordinary same-origin click, it checks the destination; a 404 opens the selected site’s homepage. A network error retains the original destination. Modified clicks (Cmd/Ctrl-click or a new tab) and external URLs keep normal browser behavior, so the host’s error page owns those cases.</p>
+<p>The 0.10.0 and 0.9.0 manifests each have a single archive-local <code>root</code> for the current-version marker; all version links open their configured homepages. The frozen 0.3.0 manifest uses origin-root paths and fixed links so navigation works under <code>/askr/</code>. This Gallery’s build helper generates archive manifests from the root list without rewriting old HTML.</p>
 <p>This page is absent from the 0.3.0 snapshot. Selecting that version opens its homepage rather than a missing page.</p>
 </section>
 <section id="publishing-a-new-version" class="level2">
 <h2 class="anchored" data-anchor-id="publishing-a-new-version">Publishing a new version</h2>
-<p>Before replacing the current site root, preserve the actual published site under its release path. For example, the next release should first archive 0.10.0 as <code>/v0.10.0/</code>; only then should the root manifest name the new current release and retain the older entries. Do not add a second 0.10.0 entry while that release is still current. Consumers own this publishing step for their own sites; the Gallery helper only prepares this repository’s archive metadata.</p>
+<p>Before replacing the current site root, preserve the actual published site under its release path. For example, the next release should first archive 0.11.0 as <code>/v0.11.0/</code>; only then should the root manifest name the new current release and retain the older entries. Do not add a second 0.11.0 entry while that release is still current. Consumers own this publishing step for their own sites; the Gallery helper only prepares this repository’s archive metadata.</p>
 <p>The Gallery’s long-title specimen is available at <a href="versions.html?askr-version-mode=title"><code>versions.html?askr-version-mode=title</code></a>. Its <code>longTitle</code> manifest field is optional and does not affect version routing.</p>
 
 
@@ -1476,7 +1482,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.10.0" aria-label="Askr version 0.10.0">0.10.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.11.0" aria-label="Askr version 0.11.0">0.11.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="../zh-TW" hreflang="../zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 

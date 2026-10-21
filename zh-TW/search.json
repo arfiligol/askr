@@ -26,7 +26,7 @@
     "href": "usage/versions.html#歷史版本網站",
     "title": "文件版本",
     "section": "歷史版本網站",
-    "text": "歷史版本網站\n0.9.0 快照取自實際發布於 GitHub Pages 的網站。0.3.0 快照維持原樣。兩者都是歷史文件，不是目前使用指南的維護版本。\n目前的 0.10.0 版本選擇器在切換版本時會保留目前頁面的路徑、查詢參數與片段識別字。一般同源點擊會先檢查目的頁；若回應為 404，便開啟所選網站的首頁。若發生網路錯誤，則保留原目的頁。使用 Cmd／Ctrl 點擊或在新分頁開啟等特殊點擊，以及外部網址，都維持瀏覽器的原有行為；這些情況由網站主機顯示錯誤頁面。\n兩個封存版本都使用建置時產生的固定首頁連結。0.9.0 版本清單只有一個封存站內的 root，值為 ./，用來標示目前版本；所有版本連結都會開啟各自設定的首頁。凍結版 0.3.0 的版本清單使用網域根目錄路徑與固定連結，讓 /askr/ 前綴下的導覽正常運作。圖集的建置輔助工具會依根目錄版本清單產生封存版本的清單檔，不會改寫舊版 HTML。\n0.3.0 快照沒有本頁。選擇該版本時會前往其首頁，而不會開啟不存在的頁面。",
+    "text": "歷史版本網站\n0.10.0 快照保留根目錄切換至 0.11.0 前，實際發布於 GitHub Pages 的網站。0.9.0 快照也取自實際發布的網站；0.3.0 快照維持原樣。這些都是歷史文件，不是目前使用指南的維護版本。\n目前的 0.11.0 版本選擇器在切換版本時會保留目前頁面的路徑、查詢參數與片段識別字。一般同源點擊會先檢查目的頁；若回應為 404，便開啟所選網站的首頁。若發生網路錯誤，則保留原目的頁。使用 Cmd／Ctrl 點擊或在新分頁開啟等特殊點擊，以及外部網址，都維持瀏覽器的原有行為；這些情況由網站主機顯示錯誤頁面。\n0.10.0 與 0.9.0 的版本清單都只有一個封存站內的 root，值為 ./，用來標示目前版本；所有版本連結都會開啟各自設定的首頁。凍結版 0.3.0 的版本清單使用網域根目錄路徑與固定連結，讓 /askr/ 前綴下的導覽正常運作。圖集的建置輔助工具會依根目錄版本清單產生封存版本的清單檔，不會改寫舊版 HTML。\n0.3.0 快照沒有本頁。選擇該版本時會前往其首頁，而不會開啟不存在的頁面。",
     "crumbs": [
       "使用",
       "版本管理"
@@ -37,7 +37,7 @@
     "href": "usage/versions.html#發布新版本",
     "title": "文件版本",
     "section": "發布新版本",
-    "text": "發布新版本\n替換目前網站根目錄前，請先將實際發布中的網站保留在對應的版本目錄。例如，下一版發布前，應先將 0.10.0 封存至 /v0.10.0/；接著才更新根目錄版本清單檔，列出新的目前版本並保留較舊版本。0.10.0 仍是目前版本時，不要在清單中重複新增另一筆 0.10.0。使用者需自行發布及管理所屬網站；圖集輔助工具只會準備這個儲存庫的封存中繼資料。\n圖集也提供長標題範例。其版本清單欄位 longTitle 為選填，不會影響版本導覽。",
+    "text": "發布新版本\n替換目前網站根目錄前，請先將實際發布中的網站保留在對應的版本目錄。例如，下一版發布前，應先將 0.11.0 封存至 /v0.11.0/；接著才更新根目錄版本清單檔，列出新的目前版本並保留較舊版本。0.11.0 仍是目前版本時，不要在清單中重複新增另一筆 0.11.0。使用者需自行發布及管理所屬網站；圖集輔助工具只會準備這個儲存庫的封存中繼資料。\n圖集也提供長標題範例。其版本清單欄位 longTitle 為選填，不會影響版本導覽。",
     "crumbs": [
       "使用",
       "版本管理"
@@ -70,7 +70,7 @@
     "href": "usage/image-viewer.html",
     "title": "圖片檢視器",
     "section": "",
-    "text": "Askr 提供兩種互動式圖片檢視方式：直接在文章中檢視圖片，或從圖片與按鈕開啟浮動檢視器。SVG、PNG 與 JPEG 共用相同的平移與縮放控制項，不需圖片服務、第三方檢視器或 CDN。",
+    "text": "Askr 提供圖片互動檢視器，以及供原生 Mermaid 圖表選用的浮動檢視器。圖片可直接在文章中檢視，也可從圖片或按鈕開啟浮動檢視器。SVG、PNG 與 JPEG 共用相同的平移與縮放控制項，不需圖片服務、第三方檢視器或 CDN。",
     "crumbs": [
       "使用",
       "圖片檢視器"
@@ -81,7 +81,7 @@
     "href": "usage/image-viewer.html#圖片與排除方式",
     "title": "圖片檢視器",
     "section": "圖片與排除方式",
-    "text": "圖片與排除方式\n獨立圖形與單獨圖片預設會開啟浮動檢視器：\n![Layout](images/layout.svg){#fig-layout}\n內文中的圖片，以及已有導覽連結的圖片，仍維持原有呈現方式。.lightbox 可明確啟用圖片；.nolightbox 可排除圖片。lightbox: false 會停用整頁互動。停用檢視器的頁面不可使用檢視器 shortcode，也不可指定已排除的圖片。建置時若遇到衝突會回報錯誤，不會產生無法使用的控制項。",
+    "text": "圖片與排除方式\n獨立圖形與單獨圖片預設會開啟浮動檢視器：\n![Layout](images/layout.svg){#fig-layout}\n內文中的圖片，以及已有導覽連結的圖片，仍維持原有呈現方式。.lightbox 可明確啟用圖片；.nolightbox 可排除圖片。lightbox: false 會停用整頁互動。停用檢視器的頁面不可使用檢視器短碼或 .askr-mermaid-view，也不可指定已排除的圖片。建置時若遇到衝突會回報錯誤，不會產生無法使用的控制項。",
     "crumbs": [
       "使用",
       "圖片檢視器"
@@ -115,6 +115,17 @@
     "title": "圖片檢視器",
     "section": "控制項與圖集",
     "text": "控制項與圖集\n\n+ / − 以 1.25 倍縮放；Fit 會置中顯示整張圖片。\n100% 代表 Fit，不代表原始像素尺寸。放大點陣圖片不會增加解析度；SVG 本身也可能包含點陣內容。\n拖曳可平移。觸控螢幕上以一指平移、兩指縮放。\n使用滾輪縮放前，請先讓焦點停在行內圖片區域；否則頁面會照常捲動。浮動檢視器則會在圖片區域內處理滾輪縮放。\n焦點位於圖片區域時，+ / − 可縮放、0 可符合視窗，方向鍵可平移。\nExpand 會開啟行內檢視器；浮動工具列則提供全螢幕（視瀏覽器支援情況而定）與關閉控制項。\nEscape 會關閉浮動檢視器，並還原焦點與閱讀位置。在瀏覽器全螢幕模式中，Escape 會先離開全螢幕。\n\n使用既有屬性將一般圖片分組成浮動圖集：\n![First layout](images/first.png){group=\"layouts\"}\n\n![Second layout](images/second.jpg){group=\"layouts\"}\n使用上一張／下一張按鈕切換；每張圖片一開始都會 Fit。圖集預設會循環播放；設定 lightbox: {match: auto, loop: false} 可停用循環。展開行內檢視器時仍會停留在該圖片，不會切換並遺失原狀態。一指滑動用來平移，不會切換圖集圖片。",
+    "crumbs": [
+      "使用",
+      "圖片檢視器"
+    ]
+  },
+  {
+    "objectID": "usage/image-viewer.html#mermaid-viewer",
+    "href": "usage/image-viewer.html#mermaid-viewer",
+    "title": "圖片檢視器",
+    "section": "Mermaid 圖表",
+    "text": "Mermaid 圖表\n未加包裝的 Mermaid 區塊會保留 Quarto 原生呈現，不會有 Askr 檢視器控制項。若要在圖表下方加入浮動檢視器按鈕，請將單一原生 Mermaid 區塊包起來：\n::: {.askr-mermaid-view view-label=\"檢視圖表\"}\n```{mermaid}\nflowchart LR\n  Reader --&gt; Diagram\n```\n:::\nview-label 為選填，預設為 View diagram。浮動檢視器沿用圖片檢視器的縮放、平移與 Fit 控制項；支援的瀏覽器也可全螢幕，並會在關閉時還原焦點。\nMermaid source 摺疊區會與檢視器按鈕相鄰，出現在圖表下方。展開後可查看作者撰寫的區塊；按 Copy（複製）會保留原始換行並複製同一份來源。Askr 不會另外加入第二份靜態原始碼或索引項目；Quarto 原生 Mermaid 來源的顯示與索引方式維持不變。\n每個 .askr-mermaid-view 區塊只能包含一個 Mermaid 區塊。Mermaid 沒有行內檢視模式。\n此功能只支援 HTML 輸出中由瀏覽器繪製的 Quarto 原生 Mermaid；若 Mermaid 設定為輸出圖片（例如使用 mermaid-format），建置時會回報不相容錯誤。這不是 GDS 檢視器，也不承諾提升圖表品質。停用 JavaScript 時，Quarto 仍依原生 Mermaid 行為呈現，Askr 檢視器控制項不會出現。",
     "crumbs": [
       "使用",
       "圖片檢視器"
@@ -565,7 +576,18 @@
     "href": "components/figures.html#圖表",
     "title": "圖形與群組",
     "section": "圖表",
-    "text": "圖表\n\nflowchart LR\n  Areas[Areas] --&gt; Pages[Page List]\n  Pages --&gt; Article[Article]\n  Article --&gt; Sections[Section List]\n\n\n\n\nflowchart LR\n  Areas[Areas] --&gt; Pages[Page List]\n  Pages --&gt; Article[Article]\n  Article --&gt; Sections[Section List]\n\n\n\n\n\n\n上方圖表是圖形範例。本圖集不附照片。",
+    "text": "圖表\n下方未加包裝的簡單 Mermaid 區塊會維持原生文章呈現，不會新增檢視器控制項：\n\nflowchart LR\n  Areas[Areas] --&gt; Pages[Page List]\n  Pages --&gt; Article[Article]\n  Article --&gt; Sections[Section List]\n\n\n\n\nflowchart LR\n  Areas[Areas] --&gt; Pages[Page List]\n  Pages --&gt; Article[Article]\n  Article --&gt; Sections[Section List]\n\n\n\n\n\n\n本圖集不附照片。",
+    "crumbs": [
+      "元件",
+      "圖片與分組"
+    ]
+  },
+  {
+    "objectID": "components/figures.html#mermaid-viewer",
+    "href": "components/figures.html#mermaid-viewer",
+    "title": "圖形與群組",
+    "section": "Mermaid 檢視器",
+    "text": "Mermaid 檢視器\n將單一原生 Mermaid 區塊包在 .askr-mermaid-view 中，即可在繪製完成的圖表下方加入「檢視圖表」按鈕。圖表仍會顯示在文章中；按鈕則會開啟浮動檢視器。下方的寬幅流程圖以自然寬度顯示，並可在可由鍵盤聚焦的水平捲動區域內檢視。\n\n\n\nflowchart LR\n  subgraph author[\"編寫\"]\n    direction TB\n    source[\"撰寫原生&lt;br/&gt;Mermaid 區塊\"] --&gt; wrapper[\"加入選用的&lt;br/&gt;檢視器包裝\"]\n  end\n  subgraph build[\"建置與發布\"]\n    direction TB\n    render[\"Quarto 產生&lt;br/&gt;HTML 頁面\"] --&gt; publish[\"發布&lt;br/&gt;文件網站\"]\n  end\n  subgraph reader[\"閱讀\"]\n    direction TB\n    article[\"圖表顯示於&lt;br/&gt;文章中\"] --&gt; open[\"選擇「檢視圖表」\"] --&gt; inspect[\"在浮動檢視器中&lt;br/&gt;縮放、平移或 Fit\"] --&gt; close[\"關閉並返回&lt;br/&gt;文章\"]\n  end\n  wrapper --&gt; render\n  publish --&gt; article\n\n\n\n\nflowchart LR\n  subgraph author[\"編寫\"]\n    direction TB\n    source[\"撰寫原生&lt;br/&gt;Mermaid 區塊\"] --&gt; wrapper[\"加入選用的&lt;br/&gt;檢視器包裝\"]\n  end\n  subgraph build[\"建置與發布\"]\n    direction TB\n    render[\"Quarto 產生&lt;br/&gt;HTML 頁面\"] --&gt; publish[\"發布&lt;br/&gt;文件網站\"]\n  end\n  subgraph reader[\"閱讀\"]\n    direction TB\n    article[\"圖表顯示於&lt;br/&gt;文章中\"] --&gt; open[\"選擇「檢視圖表」\"] --&gt; inspect[\"在浮動檢視器中&lt;br/&gt;縮放、平移或 Fit\"] --&gt; close[\"關閉並返回&lt;br/&gt;文章\"]\n  end\n  wrapper --&gt; render\n  publish --&gt; article\n\n\n\n\n\n\n\n\n按「檢視圖表」可在浮動檢視器中開啟繪製後的圖表。圖表下方相鄰的 Mermaid source 摺疊區可按需展開作者原始區塊；其中的 Copy 按鈕會複製來源。控制方式與限制請見Mermaid 檢視器指南。",
     "crumbs": [
       "元件",
       "圖片與分組"
@@ -576,7 +598,7 @@
     "href": "components/figures.html#限制",
     "title": "圖形與群組",
     "section": "限制",
-    "text": "限制\n主題在文章寬度內包含欄、分頁組與此圖表。若圖形比閱讀欄寬，或標籤小到無法閱讀，應重新繪製；請勿為了把海報塞入欄中而縮小文字。",
+    "text": "限制\n欄、分頁組與簡單圖表都符合文章寬度。較寬的流程圖以 .askr-wide-figure 保留自然尺寸，並可水平捲動。浮動檢視器可縮放圖表，但不能取代清楚的標籤與合理的分組；若標籤或關係仍不易理解，請重新編排圖表，不要為了把海報塞入欄中而縮小文字。",
     "crumbs": [
       "元件",
       "圖片與分組"
@@ -773,7 +795,7 @@
     "href": "usage/add-askr.html",
     "title": "安裝 Askr",
     "section": "",
-    "text": "目前版本為 0.10.0，公開格式名稱為 askr-html，視覺主題為 Quiet Quartz。\n安裝後的擴充套件位於 _extensions/arfiligol/askr。Askr 不會從 CDN 載入字型、圖示或樣式。\n若要升級，請安裝較新的標籤版本，並重新建置專案。將更新後的 _extensions 複本提交至專案。請重新安裝經審查的標籤版本，不要直接編輯 _extensions/arfiligol/askr 內的檔案。",
+    "text": "目前版本為 0.11.0，公開格式名稱為 askr-html，視覺主題為 Quiet Quartz。\n安裝後的擴充套件位於 _extensions/arfiligol/askr。Askr 不會從 CDN 載入字型、圖示或樣式。\n若要升級，請安裝較新的標籤版本，並重新建置專案。將更新後的 _extensions 複本提交至專案。請重新安裝經審查的標籤版本，不要直接編輯 _extensions/arfiligol/askr 內的檔案。",
     "crumbs": [
       "使用",
       "安裝 Askr"
@@ -784,7 +806,7 @@
     "href": "usage/add-askr.html#quarto-相容性",
     "title": "安裝 Askr",
     "section": "Quarto 相容性",
-    "text": "Quarto 相容性\nAskr 0.10.0 支援穩定版 Quarto &gt;=1.9.38 &lt;1.11。Quarto 1.10.18 仍是可重現圖集與 CI 的基準；使用者可採用支援範圍內的其他穩定版本，不必固定使用該修補版本。較舊標籤版本仍保留其原有需求。\n設定 respect-user-color-scheme: true 可依照讀者的系統偏好選擇配色。若使用 RequireJS 相容設定，請設定 smooth-scroll: false。這些是由使用專案選擇的選項；Askr 格式預設值不變。\n選用的 Logout 與圖片檢視器仍保留原有設定方式。設定與權責範圍請見受保護文件與登出及圖片檢視器。",
+    "text": "Quarto 相容性\nAskr 0.11.0 支援穩定版 Quarto &gt;=1.9.38 &lt;1.11。Quarto 1.10.18 仍是可重現圖集與 CI 的基準；使用者可採用支援範圍內的其他穩定版本，不必固定使用該修補版本。較舊標籤版本仍保留其原有需求。\n設定 respect-user-color-scheme: true 可依照讀者的系統偏好選擇配色。若使用 RequireJS 相容設定，請設定 smooth-scroll: false。這些是由使用專案選擇的選項；Askr 格式預設值不變。\n選用的 Logout 與圖片檢視器仍保留原有設定方式。設定與權責範圍請見受保護文件與登出及圖片檢視器。",
     "crumbs": [
       "使用",
       "安裝 Askr"

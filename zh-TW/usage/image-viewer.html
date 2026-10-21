@@ -816,6 +816,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#使用按鈕開啟" id="toc-使用按鈕開啟" class="nav-link" data-scroll-target="#使用按鈕開啟">使用按鈕開啟</a></li>
   <li><a href="#先行內檢視再展開" id="toc-先行內檢視再展開" class="nav-link" data-scroll-target="#先行內檢視再展開">先行內檢視，再展開</a></li>
   <li><a href="#控制項與圖集" id="toc-控制項與圖集" class="nav-link" data-scroll-target="#控制項與圖集">控制項與圖集</a></li>
+  <li><a href="#mermaid-viewer" id="toc-mermaid-viewer" class="nav-link" data-scroll-target="#mermaid-viewer">Mermaid 圖表</a></li>
   <li><a href="#限制與遷移" id="toc-限制與遷移" class="nav-link" data-scroll-target="#限制與遷移">限制與遷移</a></li>
   </ul>
 </nav>
@@ -843,12 +844,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Askr 提供兩種互動式圖片檢視方式：直接在文章中檢視圖片，或從圖片與按鈕開啟浮動檢視器。SVG、PNG 與 JPEG 共用相同的平移與縮放控制項，不需圖片服務、第三方檢視器或 CDN。</p>
+<p>Askr 提供圖片互動檢視器，以及供原生 Mermaid 圖表選用的浮動檢視器。圖片可直接在文章中檢視，也可從圖片或按鈕開啟浮動檢視器。SVG、PNG 與 JPEG 共用相同的平移與縮放控制項，不需圖片服務、第三方檢視器或 CDN。</p>
 <section id="圖片與排除方式" class="level2">
 <h2 class="anchored" data-anchor-id="圖片與排除方式">圖片與排除方式</h2>
 <p>獨立圖形與單獨圖片預設會開啟浮動檢視器：</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Layout](images/layout.svg)</span>{#fig-layout}</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
-<p>內文中的圖片，以及已有導覽連結的圖片，仍維持原有呈現方式。<code>.lightbox</code> 可明確啟用圖片；<code>.nolightbox</code> 可排除圖片。<code>lightbox: false</code> 會停用整頁互動。停用檢視器的頁面不可使用檢視器 shortcode，也不可指定已排除的圖片。建置時若遇到衝突會回報錯誤，不會產生無法使用的控制項。</p>
+<p>內文中的圖片，以及已有導覽連結的圖片，仍維持原有呈現方式。<code>.lightbox</code> 可明確啟用圖片；<code>.nolightbox</code> 可排除圖片。<code>lightbox: false</code> 會停用整頁互動。停用檢視器的頁面不可使用檢視器短碼或 <code>.askr-mermaid-view</code>，也不可指定已排除的圖片。建置時若遇到衝突會回報錯誤，不會產生無法使用的控制項。</p>
 </section>
 <section id="使用按鈕開啟" class="level2">
 <h2 class="anchored" data-anchor-id="使用按鈕開啟">使用按鈕開啟</h2>
@@ -888,12 +889,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="al">![Second layout](images/second.jpg)</span>{group="layouts"}</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
 <p>使用上一張／下一張按鈕切換；每張圖片一開始都會 Fit。圖集預設會循環播放；設定 <code>lightbox: {match: auto, loop: false}</code> 可停用循環。展開行內檢視器時仍會停留在該圖片，不會切換並遺失原狀態。一指滑動用來平移，不會切換圖集圖片。</p>
 </section>
+<section id="mermaid-viewer" class="level2">
+<h2 class="anchored" data-anchor-id="mermaid-viewer">Mermaid 圖表</h2>
+<p>未加包裝的 Mermaid 區塊會保留 Quarto 原生呈現，不會有 Askr 檢視器控制項。若要在圖表下方加入浮動檢視器按鈕，請將單一原生 Mermaid 區塊包起來：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>::: {.askr-mermaid-view view-label="檢視圖表"}</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="in">```{mermaid}</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  Reader --&gt; Diagram</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>view-label</code> 為選填，預設為 <code>View diagram</code>。浮動檢視器沿用圖片檢視器的縮放、平移與 Fit 控制項；支援的瀏覽器也可全螢幕，並會在關閉時還原焦點。</p>
+<p><code>Mermaid source</code> 摺疊區會與檢視器按鈕相鄰，出現在圖表下方。展開後可查看作者撰寫的區塊；按 <code>Copy</code>（複製）會保留原始換行並複製同一份來源。Askr 不會另外加入第二份靜態原始碼或索引項目；Quarto 原生 Mermaid 來源的顯示與索引方式維持不變。</p>
+<p>每個 <code>.askr-mermaid-view</code> 區塊只能包含一個 Mermaid 區塊。Mermaid 沒有行內檢視模式。</p>
+<p>此功能只支援 HTML 輸出中由瀏覽器繪製的 Quarto 原生 Mermaid；若 Mermaid 設定為輸出圖片（例如使用 <code>mermaid-format</code>），建置時會回報不相容錯誤。這不是 GDS 檢視器，也不承諾提升圖表品質。停用 JavaScript 時，Quarto 仍依原生 Mermaid 行為呈現，Askr 檢視器控制項不會出現。</p>
+</section>
 <section id="限制與遷移" class="level2">
 <h2 class="anchored" data-anchor-id="限制與遷移">限制與遷移</h2>
 <p>此檢視器取代 Askr 先前使用的 GLightbox 介面。既有 shortcode 名稱、圖片資格、說明文字與分組方式都保留。GLightbox 專用的 <code>effect</code>、<code>desc-position</code> 與 <code>css-class</code> 設定不受支援，建置前請移除。描述文字只會以文字顯示，不會當作可執行 HTML。</p>
 <p>圖片在兩種主題中都會保留自身顏色。SVG 會以圖片載入，不會注入頁面。這不是 GDS 檢視器，沒有圖層選擇、量測或解析度增強功能。載入失敗時會顯示錯誤與 Retry；關閉檢視器及切換圖集仍可使用。</p>
 <p>若沒有 JavaScript，圖片與來源連結仍可使用，但不會顯示互動控制項。非 HTML 輸出仍保留一般圖片及圖片／圖形連結。</p>
-<p>試看<a href="../components/figures.html#image-viewer">圖形範例</a>。</p>
+<p>試看<a href="../components/figures.html#mermaid-viewer">圖形範例</a>。</p>
 
 
 </section>
@@ -1457,7 +1472,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.10.0" aria-label="Askr version 0.10.0">0.10.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.11.0" aria-label="Askr version 0.11.0">0.11.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: 繁體中文" title="Language: 繁體中文"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"></span></a></li><li><a class="dropdown-item active" aria-current="true" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li></ul></div></template>
 
