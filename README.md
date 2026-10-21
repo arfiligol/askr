@@ -145,3 +145,24 @@ gallery locally with `quarto render .`; it demonstrates
 article/navigation/TOC/mobile reading, native callouts, tables, code, formulas,
 and real saved notebook output. See [credits.qmd](credits.qmd),
 [THIRD_PARTY.md](THIRD_PARTY.md), and [ASSET_MANIFEST.md](ASSET_MANIFEST.md).
+
+## Maintainer planning and delivery
+
+When an external Pro proposal is supplied, assign one primary receiving Askr
+Lead per package and treat it as design input. Small fixes do not need Pro.
+Before the Lead updates the existing [execution plan](PLAN.md), verify the
+repository, branch, full commit SHA, relevant source and working-tree changes,
+package contracts, dependencies, and available capabilities. Use Plan Mode when
+substantial planning is needed; if unavailable, keep intake read-only until it
+is switched. Keep scope, owners, inputs, outputs, dependencies, authorized
+checks, failure handling, and Human decisions in the existing plan and
+[validation record](VALIDATION.md), not a parallel governance document.
+
+The original Git owner completes coherent work or an independently deliverable
+stage using existing checks, stages only exact paths, commits and pushes to
+`develop`, then reads back the remote branch and full SHA. Report the repository,
+branch, full SHA, paths, result, and anything pending; do not create empty
+commits or include another writer's work. Main promotion, merge, release, tag,
+deployment, root-pin changes, and resuming paused product work remain separately
+authorized. A remote push does not make source readable in ChatGPT; share only
+relevant source through an authorized excerpt or attachment.
