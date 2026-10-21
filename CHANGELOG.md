@@ -5,11 +5,18 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+## 0.11.0 — 2026-10-21
+
+### Added
+
+- Native Mermaid blocks can opt into the floating viewer, with zoom, pan, Fit,
+  on-demand source disclosure and Copy from the authored block.
+
 ### Fixed
 
-- The current docs selector lists the actual published 0.9.0 site and the
-  frozen 0.3.0 site. A full render generates archive-specific manifests for
-  the modern 0.9 selector and the legacy 0.3 selector.
+- The current docs selector lists the actual published 0.10.0 and 0.9.0 sites
+  and the frozen 0.3.0 site. A full render generates archive-specific manifests
+  for the modern 0.10 and 0.9 selectors and the legacy 0.3 selector.
 - The generated 0.3.0 manifest marks 0.3.0 as current and links to version
   homepages; the published 0.3.0 HTML and authored snapshot stay unchanged.
 

@@ -46,15 +46,16 @@ def write_manifest(path: Path, manifest: dict) -> None:
 def generate_archive_manifests(output: Path) -> None:
     source = version_manifest()
 
-    modern = copy.deepcopy(source)
-    for item in modern["versions"]:
-        root = relative_site_root("v0.9.0", item["root"])
-        item["href"] = root
-        if item["label"] == "0.9.0":
-            item["root"] = root
-        else:
-            item.pop("root", None)
-    write_manifest(output / "v0.9.0" / "askr-versions.json", modern)
+    for archive in ("v0.9.0", "v0.10.0"):
+        modern = copy.deepcopy(source)
+        for item in modern["versions"]:
+            root = relative_site_root(archive, item["root"])
+            item["href"] = root
+            if item["label"] == archive[1:]:
+                item["root"] = root
+            else:
+                item.pop("root", None)
+        write_manifest(output / archive / "askr-versions.json", modern)
 
     # The frozen 0.3 selector matches origin-root paths and resolves fixed hrefs
     # from the origin. Supply its repository prefix without changing its HTML.

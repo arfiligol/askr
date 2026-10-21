@@ -8,7 +8,8 @@ and unmaintained.
 
 | Site | Path | Status |
 | --- | --- | --- |
-| 0.10.0 | `/` | Current published site |
+| 0.11.0 | `/` | Current site |
+| 0.10.0 | `/v0.10.0/` | Snapshot of the actual published 0.10.0 site |
 | 0.9.0 | `/v0.9.0/` | Snapshot of the actual published 0.9.0 site |
 | 0.3.0 | `/v0.3.0/` | Frozen historical site |
 
@@ -20,7 +21,8 @@ single version-list source:
 {
   "mode": "inline",
   "versions": [
-    {"label": "0.10.0", "root": "/", "latest": true},
+    {"label": "0.11.0", "root": "/", "latest": true},
+    {"label": "0.10.0", "root": "/v0.10.0/"},
     {"label": "0.9.0", "root": "/v0.9.0/"},
     {"label": "0.3.0", "root": "/v0.3.0/"}
   ]
@@ -61,23 +63,23 @@ The current version link has `aria-current="true"`.
 
 ## Archived sites
 
-The 0.9.0 snapshot comes from the actual published Pages site. The 0.3.0
-snapshot remains unchanged. Both archives are historical documentation, not
-maintained copies of the current Usage guide.
+The 0.10.0 snapshot preserves the actual published Pages site before the root
+moved to 0.11.0. The 0.9.0 snapshot also comes from the actual published site;
+the 0.3.0 snapshot remains unchanged. These archives are historical
+documentation, not maintained copies of the current Usage guide.
 
-The current 0.10.0 selector preserves the page path, query and fragment when
+The current 0.11.0 selector preserves the page path, query and fragment when
 switching to another version. For an ordinary same-origin click, it checks the
 destination; a 404 opens the selected site's homepage. A network error retains
 the original destination. Modified clicks (Cmd/Ctrl-click or a new tab) and
 external URLs keep normal browser behavior, so the host's error page owns
 those cases.
 
-Both archives use generated fixed homepage links. The 0.9.0 manifest has a
-single archive-local `root` for its current-version marker; all version links
-open their configured homepages. The frozen 0.3.0 manifest uses origin-root
-paths and fixed links so navigation works under `/askr/`. This Gallery's build
-helper generates archive manifests from the root list without rewriting old
-HTML.
+The 0.10.0 and 0.9.0 manifests each have a single archive-local `root` for the
+current-version marker; all version links open their configured homepages. The
+frozen 0.3.0 manifest uses origin-root paths and fixed links so navigation
+works under `/askr/`. This Gallery's build helper generates archive manifests
+from the root list without rewriting old HTML.
 
 This page is absent from the 0.3.0 snapshot. Selecting that version opens its
 homepage rather than a missing page.
@@ -86,8 +88,8 @@ homepage rather than a missing page.
 
 Before replacing the current site root, preserve the actual published site
 under its release path. For example, the next release should first archive
-0.10.0 as `/v0.10.0/`; only then should the root manifest name the new current
-release and retain the older entries. Do not add a second 0.10.0 entry while
+0.11.0 as `/v0.11.0/`; only then should the root manifest name the new current
+release and retain the older entries. Do not add a second 0.11.0 entry while
 that release is still current. Consumers own this publishing step for their
 own sites; the Gallery helper only prepares this repository's archive metadata.
 

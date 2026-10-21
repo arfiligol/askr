@@ -1,5 +1,37 @@
 # Candidate validation receipt
 
+## Native Mermaid modal — 2026-10-21
+
+Status: Human authorized this additive Mermaid candidate for v0.11.0
+publication and LCDH adoption. Delivery remains LOCAL CANDIDATE; the Lead owns
+the pending main, tag, Pages and pristine-install release endpoint. Quarto
+1.10.18 rendered the isolated consumer
+`/tmp/askr-mermaid-candidate.oHLMZj` with the extension under the installed
+`_extensions/arfiligol/askr` layout.
+
+| Check | Result |
+| --- | --- |
+| Wide native graph | ✅ `index.qmd` rendered a wide Mermaid graph with HTML line breaks and CJK labels; the unwrapped native graph also rendered without Askr controls in static HTML |
+| Actual wide input shape | ✅ `private-diagram.qmd` rendered the authorized source shape in the temporary consumer only; private source text is not part of this repository |
+| Native source handling | ✅ Static HTML retains Quarto's native `<pre class="mermaid mermaid-js">` inside the marked wrapper; Askr adds no static source copy, disclosure or viewer button. Runtime code captures that block at `DOMContentLoaded`, before Quarto's window-load Mermaid renderer replaces it with SVG |
+| Failure behavior | ✅ A malformed wrapper and a native wrapper with `lightbox: false` each failed the temporary render with the assigned error |
+| Modal viewer | ✅ In Chromium, the wide native graph stayed visible; the modal showed its labels and arrows at 481×97px, zoomed to 125%, panned by pointer drag, and Fit plus Escape restored focus to `View diagram`. Console warnings/errors were empty |
+| Copy | ✅ After activating Copy, a trusted browser click read the clipboard and matched the captured source: 85 characters |
+| Dark-mode styling | ✅ The modal SVG retains the native graph's authored colors; Askr does not recolor diagram styles |
+| Targeted Gallery renders | ✅ Quarto 1.10.18 rendered English and Traditional Chinese Figures and Usage pages; the two existing small chart cells ran on both Figures pages. Existing Traditional Chinese warnings about native translations and path configuration were unrelated to Mermaid |
+| Wide-graph browser review | ✅ The public eight-node subgraph with HTML labels opened in the modal. Zoom changed from 100% to 156% on desktop and 244% at 390×844; Escape restored focus to the viewer button. Dark mode retained visible labels |
+| Existing image viewer | ✅ The ordinary “View this figure” control continued to open the expected native image caption |
+| Local ZIP installation | ✅ Quarto 1.10.18 installed `/tmp/askr-mermaid-install-M46w8k/askr-local.zip` in an isolated consumer at `_extensions/askr`; the installed tree matched the source. Quarto's local ZIP installer normalizes the folder name, so the same temporary copy was moved to `_extensions/arfiligol/askr`, the GitHub-install layout expected by bundled asset references. The minimal opt-in page then rendered, and its HTML contained the marked wrapper and native Mermaid block. The initial render before this temporary relocation could not resolve the namespaced font paths |
+| Full project render | ✅ The first full render stopped at `PLAN.md` (103/106) because Quarto treated the fenced Mermaid example as executable code. Replacing it with a link to the canonical Usage example and inline API names fixed the document; `quarto render PLAN.md` passed. The Lead's full Quarto 1.10.18 rerun exited 0 with 106 English and 27 Traditional Chinese pages; all three small cells executed in each site. Existing Traditional Chinese translation warnings remain known |
+| Frozen v0.10.0 archive | ✅ The 225-file source snapshot matches the docs-owner receipt at `bc16822`; rendered archive output differs from the source only at generated `askr-versions.json` |
+| Archive version selector | ✅ On the local archived Figures page, the header marks 0.10.0 current; the menu shows 0.11.0 Latest plus 0.10.0, 0.9.0 and 0.3.0. Selecting Latest reaches the v0.11.0 root in the local preview |
+
+The candidate also preserves local SVG fragment references while serializing
+computed styles and explicit viewBox dimensions. JavaScript syntax validation
+passed with Node. No durable tests, dependencies or fixtures were added. Git,
+tag, Pages deployment and pristine-install verification remain pending Lead
+delivery.
+
 ## Documentation version archive correction — 2026-10-21
 
 Status: ✅ The full bilingual render, archive metadata generation and local

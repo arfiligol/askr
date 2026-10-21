@@ -2,10 +2,11 @@
 title: "Image viewer"
 ---
 
-Askr supplies one interactive image viewer in two modes: inspect an image
-directly in the article, or open a floating viewer from an image or button.
-SVG, PNG and JPEG share the same pan-and-zoom controls. No image service,
-third-party viewer or CDN is required.
+Askr supplies an interactive image viewer for images and an optional floating
+viewer for native Mermaid diagrams. Inspect an image directly in the article,
+or open a floating viewer from an image or button. SVG, PNG and JPEG share the
+same pan-and-zoom controls. No image service, third-party viewer or CDN is
+required.
 
 ## Images and opt-outs
 
@@ -18,8 +19,9 @@ Independent figures and standalone images open the floating viewer by default:
 Inline prose images and images with an existing navigation link keep their
 normal treatment. `.lightbox` explicitly enables an image;
 `.nolightbox` excludes it. `lightbox: false` disables interaction for the page.
-Do not use viewer shortcodes on a disabled page or target an excluded image.
-Rendering reports the conflict instead of producing unusable controls.
+Do not use viewer shortcodes or `.askr-mermaid-view` on a disabled page, or
+target an excluded image. Rendering reports the conflict instead of producing
+unusable controls.
 
 ## Open with a button
 
@@ -94,6 +96,39 @@ by default; `lightbox: {match: auto, loop: false}` disables looping. Expanding
 an inline viewer stays on that image rather than switching away from its state.
 Single-finger swipes pan; they do not change gallery images.
 
+## Mermaid diagrams {#mermaid-viewer}
+
+Unwrapped Mermaid blocks keep Quarto's native rendering and have no Askr viewer
+controls. To add a floating viewer button below a diagram, wrap exactly one
+native Mermaid block:
+
+````markdown
+::: {.askr-mermaid-view view-label="View diagram"}
+```{mermaid}
+flowchart LR
+  Reader --> Diagram
+```
+:::
+````
+
+`view-label` is optional and defaults to `View diagram`. The floating viewer
+reuses the image viewer's zoom, pan and Fit controls, plus fullscreen where
+available and close with focus restoration.
+
+The `Mermaid source` disclosure is adjacent to the viewer button below the
+graph. Open it to reveal the authored block; `Copy` copies that source with its
+original line breaks. Askr adds no second static source block or search-index
+entry. Quarto's native Mermaid source visibility and indexing remain unchanged.
+
+Each wrapper contains one Mermaid block. Mermaid has no inline viewer mode.
+
+This works only with Quarto's native Mermaid blocks in HTML output when the
+browser renders the diagram; image-rendered Mermaid (for example, when
+`mermaid-format` produces an image) fails with an incompatibility error during
+rendering. It is not a GDS viewer and does not promise image-quality
+enhancement. With JavaScript disabled, the page keeps Quarto's native Mermaid
+behavior without Askr viewer controls.
+
 ## Limits and migration
 
 This replaces Askr's former GLightbox interface. Existing shortcode names,
@@ -109,4 +144,4 @@ closing and gallery navigation remain available.
 Without JavaScript, images and source links remain available without interactive
 controls. Non-HTML output retains ordinary images and image/figure links.
 
-Try the [Figures examples](../components/figures.qmd#image-viewer).
+Try the [Figures examples](../components/figures.qmd#mermaid-viewer).

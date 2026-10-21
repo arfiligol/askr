@@ -114,6 +114,8 @@ Plotly 圖形也適用相同順序：在 `#| renderings: [light, dark]` 下，�
 
 ## 圖表
 
+下方未加包裝的簡單 Mermaid 區塊會維持原生文章呈現，不會新增檢視器控制項：
+
 ```{mermaid}
 flowchart LR
   Areas[Areas] --> Pages[Page List]
@@ -121,8 +123,36 @@ flowchart LR
   Article --> Sections[Section List]
 ```
 
-上方圖表是圖形範例。本圖集不附照片。
+本圖集不附照片。
+
+## Mermaid 檢視器 {#mermaid-viewer}
+
+將單一原生 Mermaid 區塊包在 `.askr-mermaid-view` 中，即可在繪製完成的圖表下方加入「檢視圖表」按鈕。圖表仍會顯示在文章中；按鈕則會開啟浮動檢視器。下方的寬幅流程圖以自然寬度顯示，並可在可由鍵盤聚焦的水平捲動區域內檢視。
+
+::: {.askr-wide-figure aria-label="公開文件流程"}
+::: {.askr-mermaid-view view-label="檢視圖表"}
+```{mermaid}
+flowchart LR
+  subgraph author["編寫"]
+    direction TB
+    source["撰寫原生<br/>Mermaid 區塊"] --> wrapper["加入選用的<br/>檢視器包裝"]
+  end
+  subgraph build["建置與發布"]
+    direction TB
+    render["Quarto 產生<br/>HTML 頁面"] --> publish["發布<br/>文件網站"]
+  end
+  subgraph reader["閱讀"]
+    direction TB
+    article["圖表顯示於<br/>文章中"] --> open["選擇「檢視圖表」"] --> inspect["在浮動檢視器中<br/>縮放、平移或 Fit"] --> close["關閉並返回<br/>文章"]
+  end
+  wrapper --> render
+  publish --> article
+```
+:::
+:::
+
+按「檢視圖表」可在浮動檢視器中開啟繪製後的圖表。圖表下方相鄰的 `Mermaid source` 摺疊區可按需展開作者原始區塊；其中的 `Copy` 按鈕會複製來源。控制方式與限制請見[Mermaid 檢視器指南](../usage/image-viewer.qmd#mermaid-viewer)。
 
 ## 限制
 
-主題在文章寬度內包含欄、分頁組與此圖表。若圖形比閱讀欄寬，或標籤小到無法閱讀，應重新繪製；請勿為了把海報塞入欄中而縮小文字。
+欄、分頁組與簡單圖表都符合文章寬度。較寬的流程圖以 `.askr-wide-figure` 保留自然尺寸，並可水平捲動。浮動檢視器可縮放圖表，但不能取代清楚的標籤與合理的分組；若標籤或關係仍不易理解，請重新編排圖表，不要為了把海報塞入欄中而縮小文字。

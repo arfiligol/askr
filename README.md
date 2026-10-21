@@ -4,7 +4,7 @@ See [CHANGELOG](CHANGELOG.md) for published package changes. PR and GitHub
 Release summaries use the same entries.
 
 Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz
-remains the name of the visual theme. `0.10.0` is the current release, rendered
+remains the name of the visual theme. `0.11.0` is the current release, rendered
 with Quarto 1.10.18. Stable Quarto `>=1.9.38 <1.11` is supported. The public
 format is `askr-html`. The 0.10.0 release adds an optional Header language
 selector; the control is absent unless configured and does not change existing
@@ -12,11 +12,11 @@ defaults. See [Validation](VALIDATION.md) for observations and limits.
 
 ## Install
 
-Install release tag `v0.10.0`. Quarto's GitHub installer accepts
+Install release tag `v0.11.0`. Quarto's GitHub installer accepts
 branch and tag names, not commit SHA modifiers.
 
 ```bash
-quarto add arfiligol/askr@v0.10.0 --no-prompt
+quarto add arfiligol/askr@v0.11.0 --no-prompt
 ```
 
 ```yaml
@@ -52,11 +52,15 @@ See [Image viewer](usage/image-viewer.qmd) and
 [Protected docs and logout](usage/protected-docs.qmd). The public Gallery
 leaves Logout disabled.
 
-Configure `askr.languages` to add the optional Header language selector in
-`v0.10.0`. It follows the supplied links in the current tab and does not infer
-destinations or translate content. Existing navbar language links are
-preserved; remove duplicates from the native navbar after configuring Askr. See
-[Language selector](usage/languages.qmd).
+Native Mermaid blocks can opt into the same floating viewer, with source
+disclosure and Copy from the authored block. See the
+[Mermaid viewer guide](usage/image-viewer.qmd#mermaid-viewer).
+
+The optional Header language selector was introduced in 0.10.0. Configure
+`askr.languages` to add it; it follows supplied links in the current tab and
+does not infer destinations or translate content. Existing navbar language
+links are preserved; remove duplicates from the native navbar after configuring
+Askr. See [Language selector](usage/languages.qmd).
 
 The Gallery includes an English site and a Traditional Chinese edition at
 [`/zh-TW/`](https://arfiligol.github.io/askr/zh-TW/). They are separate Quarto
@@ -67,11 +71,11 @@ both sites. The ignored copies under `zh-TW/_extensions/askr/`,
 build inputs, not vendored sources; maintain the extension and shared assets in
 the root `_extensions/askr/` and `components/` directories.
 
-The documentation version menu lists the current 0.10.0 site, an actual
-published 0.9.0 snapshot and the frozen 0.3.0 snapshot. Archived documentation
-is historical and unmaintained. Before a future release replaces the site
-root, preserve the then-current published site under its versioned path; the
-build generates selector manifests for each archive's runtime.
+The documentation version menu lists the current 0.11.0 site, the actual
+published 0.10.0 and 0.9.0 snapshots, and the frozen 0.3.0 snapshot. Archived
+documentation is historical and unmaintained. Before a future release replaces
+the site root, preserve the then-current published site under its versioned
+path; the build generates selector manifests for each archive's runtime.
 
 Askr is intended as a reusable design system for direct SCQ-repository
 adoption. The theme Sass variables `$grid-sidebar-width` and `$grid-margin-width`

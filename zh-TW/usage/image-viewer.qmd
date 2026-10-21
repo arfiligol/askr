@@ -2,7 +2,7 @@
 title: "圖片檢視器"
 ---
 
-Askr 提供兩種互動式圖片檢視方式：直接在文章中檢視圖片，或從圖片與按鈕開啟浮動檢視器。SVG、PNG 與 JPEG 共用相同的平移與縮放控制項，不需圖片服務、第三方檢視器或 CDN。
+Askr 提供圖片互動檢視器，以及供原生 Mermaid 圖表選用的浮動檢視器。圖片可直接在文章中檢視，也可從圖片或按鈕開啟浮動檢視器。SVG、PNG 與 JPEG 共用相同的平移與縮放控制項，不需圖片服務、第三方檢視器或 CDN。
 
 ## 圖片與排除方式
 
@@ -12,7 +12,7 @@ Askr 提供兩種互動式圖片檢視方式：直接在文章中檢視圖片，
 ![Layout](images/layout.svg){#fig-layout}
 ```
 
-內文中的圖片，以及已有導覽連結的圖片，仍維持原有呈現方式。`.lightbox` 可明確啟用圖片；`.nolightbox` 可排除圖片。`lightbox: false` 會停用整頁互動。停用檢視器的頁面不可使用檢視器 shortcode，也不可指定已排除的圖片。建置時若遇到衝突會回報錯誤，不會產生無法使用的控制項。
+內文中的圖片，以及已有導覽連結的圖片，仍維持原有呈現方式。`.lightbox` 可明確啟用圖片；`.nolightbox` 可排除圖片。`lightbox: false` 會停用整頁互動。停用檢視器的頁面不可使用檢視器短碼或 `.askr-mermaid-view`，也不可指定已排除的圖片。建置時若遇到衝突會回報錯誤，不會產生無法使用的控制項。
 
 ## 使用按鈕開啟
 
@@ -72,6 +72,27 @@ Shortcode 會標記既有圖形以供轉換，不會另外顯示一份副本。�
 
 使用上一張／下一張按鈕切換；每張圖片一開始都會 Fit。圖集預設會循環播放；設定 `lightbox: {match: auto, loop: false}` 可停用循環。展開行內檢視器時仍會停留在該圖片，不會切換並遺失原狀態。一指滑動用來平移，不會切換圖集圖片。
 
+## Mermaid 圖表 {#mermaid-viewer}
+
+未加包裝的 Mermaid 區塊會保留 Quarto 原生呈現，不會有 Askr 檢視器控制項。若要在圖表下方加入浮動檢視器按鈕，請將單一原生 Mermaid 區塊包起來：
+
+````markdown
+::: {.askr-mermaid-view view-label="檢視圖表"}
+```{mermaid}
+flowchart LR
+  Reader --> Diagram
+```
+:::
+````
+
+`view-label` 為選填，預設為 `View diagram`。浮動檢視器沿用圖片檢視器的縮放、平移與 Fit 控制項；支援的瀏覽器也可全螢幕，並會在關閉時還原焦點。
+
+`Mermaid source` 摺疊區會與檢視器按鈕相鄰，出現在圖表下方。展開後可查看作者撰寫的區塊；按 `Copy`（複製）會保留原始換行並複製同一份來源。Askr 不會另外加入第二份靜態原始碼或索引項目；Quarto 原生 Mermaid 來源的顯示與索引方式維持不變。
+
+每個 `.askr-mermaid-view` 區塊只能包含一個 Mermaid 區塊。Mermaid 沒有行內檢視模式。
+
+此功能只支援 HTML 輸出中由瀏覽器繪製的 Quarto 原生 Mermaid；若 Mermaid 設定為輸出圖片（例如使用 `mermaid-format`），建置時會回報不相容錯誤。這不是 GDS 檢視器，也不承諾提升圖表品質。停用 JavaScript 時，Quarto 仍依原生 Mermaid 行為呈現，Askr 檢視器控制項不會出現。
+
 ## 限制與遷移
 
 此檢視器取代 Askr 先前使用的 GLightbox 介面。既有 shortcode 名稱、圖片資格、說明文字與分組方式都保留。GLightbox 專用的 `effect`、`desc-position` 與 `css-class` 設定不受支援，建置前請移除。描述文字只會以文字顯示，不會當作可執行 HTML。
@@ -80,4 +101,4 @@ Shortcode 會標記既有圖形以供轉換，不會另外顯示一份副本。�
 
 若沒有 JavaScript，圖片與來源連結仍可使用，但不會顯示互動控制項。非 HTML 輸出仍保留一般圖片及圖片／圖形連結。
 
-試看[圖形範例](../components/figures.qmd#image-viewer)。
+試看[圖形範例](../components/figures.qmd#mermaid-viewer)。
