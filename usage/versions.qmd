@@ -1,82 +1,96 @@
 ---
-title: "Versioning Docs"
+title: "Documentation Versions"
 ---
 
-Each version is one rendered site, kept in its own directory. The current
-render is also copied to the deployment site root. Historical directories
-stay as they were. Paths below are relative to that site root, not the domain
-root: the same manifest works at `/` and a repository prefix such as `/askr/`.
+The documentation site keeps each actual release in a versioned directory.
+The current release stays at the site root; older directories are historical
+and unmaintained.
 
-```text
-/                         current release `0.10.0`
-/v0.3.0/                  immutable 0.3.0 site
-/askr-versions.json       one version-list authority
-```
+| Site | Path | Status |
+| --- | --- | --- |
+| 0.10.0 | `/` | Current published site |
+| 0.9.0 | `/v0.9.0/` | Snapshot of the actual published 0.9.0 site |
+| 0.3.0 | `/v0.3.0/` | Frozen historical site |
 
-Put `askr-versions.json` at the rendered site's root and include it in
-`project.resources`:
+These paths are relative to the deployed site, so the same list works under a
+repository prefix such as `/askr/`. Askr's root `askr-versions.json` is the
+single version-list source:
 
 ```json
 {
   "mode": "inline",
   "versions": [
     {"label": "0.10.0", "root": "/", "latest": true},
+    {"label": "0.9.0", "root": "/v0.9.0/"},
     {"label": "0.3.0", "root": "/v0.3.0/"}
   ]
 }
 ```
 
-Askr locates the manifest from Quarto's page offset. Each `root` is a version
-directory relative to that deployment root; `/` selects the current site.
-Use `href` instead of `root` for a fixed destination. Relative or leading-slash
-hrefs are site-relative; absolute URLs keep their origin. Fixed destinations
-do not preserve the current page.
+Include the manifest in `project.resources`. Each `root` identifies a complete
+version site relative to that site's deployment root. The version selector is
+provided by Askr; consumers maintain their own archive directories and
+manifest. The Gallery's root build helper generates metadata for its own
+archived sites. It is source-repository build tooling and is not installed by
+`quarto add`.
 
-`inline` prints the version beside a short title. `title` shows the title and
-chevron, with the number only in the menu. Try the
-[long-title specimen](versions.html?askr-version-mode=title). Its `longTitle`
-manifest entry is only a gallery specimen, not required consumer configuration.
+Use `href` for a fixed destination instead of a `root`. Relative and
+single-slash `href` values are site-relative; absolute URLs keep their origin.
+Fixed destinations do not preserve the current page path. When a selector
+manifest lives inside an archive, its `root` entries are relative to that
+archive's site root. The Gallery generates that archive-local metadata from
+the root version list.
 
-Existing consumers can still supply an inline
-`<script id="askr-versions" type="application/json">` when an external
-manifest is unavailable. Use one authority, not duplicated external and inline
-lists. This gallery uses only the external JSON.
+`inline` shows the current version beside a short title. `title` shows the
+title and chevron, with the version number in the menu. Try the
+[long-title specimen](versions.html?askr-version-mode=title); `longTitle` is
+optional and used only in `title` mode.
+
+An inline `<script id="askr-versions" type="application/json">` can provide
+the list when a fetched manifest is unavailable. Choose one source rather than
+duplicating an external manifest and inline list. This Gallery uses the
+external JSON.
 
 ## Keyboard interaction
 
-The selector is a disclosure, not a listbox. Tab to its button, then press
-Enter or Space to open it. Tab and Shift-Tab move through ordinary links;
-Enter follows one. Escape closes it and returns focus to the button. Tabbing
-away or clicking outside closes it without moving outside focus back.
+The selector is a disclosure with ordinary links, not a listbox. Tab to its
+button and press Enter or Space to open it. Tab and Shift-Tab move among the
+links; Enter follows one. Escape closes the menu and returns focus to the
+button. Tabbing away or clicking outside closes it without moving focus back.
 The current version link has `aria-current="true"`.
 
-## Corresponding pages and missing pages
+## Archived sites
 
-The menu retains the current page path, query and fragment when switching
-between `root` entries. From `/askr/usage/versions.html`, 0.3.0 points to
-`/askr/v0.3.0/usage/versions.html`, not `/v0.3.0/askr/usage/versions.html`.
+The 0.9.0 snapshot comes from the actual published Pages site. The 0.3.0
+snapshot remains unchanged. Both archives are historical documentation, not
+maintained copies of the current Usage guide.
 
-For an ordinary same-origin click, Askr checks the destination. A 404 sends
-the reader to that selected version's manifest root. Network errors retain
-the original destination, rather than inventing a page. Modified clicks
-(Cmd/Ctrl-click or a new tab) and external URLs retain browser link behavior;
-the host's error page owns those cases. Projects own their hosting error page.
+The current 0.10.0 selector preserves the page path, query and fragment when
+switching to another version. For an ordinary same-origin click, it checks the
+destination; a 404 opens the selected site's homepage. A network error retains
+the original destination. Modified clicks (Cmd/Ctrl-click or a new tab) and
+external URLs keep normal browser behavior, so the host's error page owns
+those cases.
 
-This gallery supplies `404.qmd`, deriving its deployment root from Quarto's
-rendered offset and matching the external manifest. Existing historical
-snapshots keep their original scripts and version lists: a new Askr install
-does not rewrite an old rendered site.
+Both archives use generated fixed homepage links. The 0.9.0 manifest has a
+single archive-local `root` for its current-version marker; all version links
+open their configured homepages. The frozen 0.3.0 manifest uses origin-root
+paths and fixed links so navigation works under `/askr/`. This Gallery's build
+helper generates archive manifests from the root list without rewriting old
+HTML.
 
-Open this page and select 0.3.0. This page is absent from that snapshot, so
-the current selector takes you to its home. That historical gallery retains
-its original Install area rather than this site's Usage area.
+This page is absent from the 0.3.0 snapshot. Selecting that version opens its
+homepage rather than a missing page.
 
-## Publishing
+## Publishing a new version
 
-1. Render the exact tag being frozen.
-2. Copy that rendered site into its version directory.
-3. Publish the current rendered site at the deployment root.
-4. Update the one version manifest.
+Before replacing the current site root, preserve the actual published site
+under its release path. For example, the next release should first archive
+0.10.0 as `/v0.10.0/`; only then should the root manifest name the new current
+release and retain the older entries. Do not add a second 0.10.0 entry while
+that release is still current. Consumers own this publishing step for their
+own sites; the Gallery helper only prepares this repository's archive metadata.
 
-Keep historical directories unchanged. A version number is a source identity;
-it does not itself prove that deployment has finished.
+The Gallery's long-title specimen is available at
+[`versions.html?askr-version-mode=title`](versions.html?askr-version-mode=title).
+Its `longTitle` manifest field is optional and does not affect version routing.

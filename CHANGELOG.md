@@ -5,7 +5,18 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
-No unreleased changes.
+### Fixed
+
+- The current docs selector lists the actual published 0.9.0 site and the
+  frozen 0.3.0 site. A full render generates archive-specific manifests for
+  the modern 0.9 selector and the legacy 0.3 selector.
+- The generated 0.3.0 manifest marks 0.3.0 as current and links to version
+  homepages; the published 0.3.0 HTML and authored snapshot stay unchanged.
+
+### Documentation
+
+- Documented the archived versions as historical, unmaintained sites and the
+  next-release step for preserving the then-current published site.
 
 ## 0.10.0 — 2026-10-21
 

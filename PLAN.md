@@ -1,6 +1,29 @@
 # Askr release plan
 
-## Current: Askr 0.10.0 bilingual publication package — 2026-10-21
+## Current: Documentation version archive correction — 2026-10-21
+
+Askr 0.10.0 is already released and published. This docs-only follow-up keeps
+the actual published 0.9.0 site as `v0.9.0/` and retains the frozen 0.3.0
+snapshot. The root `askr-versions.json` remains the version-list authority:
+0.10.0 is current, followed by 0.9.0 and 0.3.0. No extension runtime,
+installed version or public option changes.
+
+The `v0.9.0/` source snapshot comes from the actual Pages tree at
+`32b83b78756c09dbcf7fd378996cd1170cfdbc48`; the full root render publishes
+that directory and generates compatible selector manifests. The 0.9.0
+manifest uses one root relative to its own site directory for current-version
+matching and fixed homepage links for navigation; the frozen 0.3.0 manifest
+uses its `/askr/` origin prefix and fixed version-home links. Both HTML
+snapshots remain unchanged. At the next release, preserve the actual 0.10.0
+site under `/v0.10.0/` before replacing the current root; do not create a
+second 0.10.0 entry while it is current.
+
+Historical sites are unmaintained. The archive build and documentation have
+been reviewed and rendered and are ready for the Docs PR; they are not yet
+published. The Lead retains Git, Pages and publication delivery authority.
+Semantic state: CONVERGING; delivery state: READY FOR DOCS PR.
+
+## Published: Askr 0.10.0 bilingual release — 2026-10-21
 
 The Human authorized publication of Askr 0.10.0 and its later LCDH adoption.
 This package adds the optional Header language selector and an actual bilingual
@@ -44,15 +67,11 @@ Chinese pages, and all three shared cells executed in both. The 27 Chinese pages
 have no broken static links; the English and Chinese search indexes contain 211
 and 89 entries. The Lead also observed desktop language navigation, four
 separate page sidebars, Chinese-only search results and the Figures viewer.
-Detailed observations are in `VALIDATION.md`. The Lead retains Git delivery,
-PR, tag, release, Pages observation and durable-child sync; no publication or
-CI result is claimed here.
+Detailed observations are in `VALIDATION.md`. The 0.10.0 release, Pages
+deployment and installation handoff are complete.
 
-Semantic state: CONVERGING. Delivery endpoint: Human-authorized 0.10.0
-publication package, followed by a `develop` checkpoint, PR to `main`,
-`v0.10.0` tag and GitHub Release, existing Pages workflow, public-site
-observation, install/source-manifest review and durable-child synchronization.
-Build, review, publication and LCDH adoption remain separate delivery steps.
+Semantic state: CONVERGING. Delivery state: published as `v0.10.0`; the later
+documentation archive correction is a separate package.
 
 ## Historical work packets
 

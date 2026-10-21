@@ -1,11 +1,25 @@
 # Candidate validation receipt
 
+## Documentation version archive correction — 2026-10-21
+
+Status: ✅ The full bilingual render, archive metadata generation and local
+archive browser review completed. No extension runtime or installed version
+changed.
+
+| Check | Result |
+| --- | --- |
+| 0.9.0 source identity | ✅ The 154-file root snapshot matches Pages tree `32b83b78756c09dbcf7fd378996cd1170cfdbc48`; the prior nested 0.3.0 payload is represented separately at top-level `v0.3.0/`. |
+| Frozen 0.3.0 selector | ✅ Generated output manifest gives each version an `/askr/` origin-root path and a fixed homepage `href`; the frozen HTML and source manifest remain unchanged. Lead observed the archive header mark 0.3.0 as current and its Latest link reach the actual 0.10.0 root. |
+| 0.9.0 selector | ✅ Generated manifest uses only `./` as a `root` for its current-version marker; fixed archive-relative homepage `href`s route to `/askr/`, `/askr/v0.9.0/` and `/askr/v0.3.0/`. The selector's raw root-length sorting cannot prefer the 0.10.0 parent root. |
+| Rendered archive outputs | ✅ Quarto 1.10.18 rendered 106 English and 27 Traditional Chinese pages; all three shared cells executed in both sites. Each archive output differs from its source snapshot only at `askr-versions.json`. |
+| Search and routes | ✅ Candidate indexes contain 212 English and 88 Chinese entries, without archive or opposite-language routes. |
+| Archive navigation | ✅ On a local `/askr/` mount, the nested 0.3.0 Figures page marks 0.3.0 current and Latest reaches the actual 0.10.0 root. The nested 0.9.0 Figures page marks 0.9.0 current; its 0.3.0 link reaches the 0.3.0 homepage. From current Usage, selecting 0.9.0 for a page absent in that archive falls back to the 0.9.0 homepage. At 390×844 in dark mode, the v0.3.0 selector shows 0.3.0 current, 0.10.0 Latest and readable 0.9.0 without horizontal overflow; selecting 0.9.0 reaches its actual home with header 0.9.0. |
+
 ## 0.10.0 bilingual publication package — 2026-10-21
 
-Status: ✅ Corrected bilingual candidate rendered and observed; Human-authorized
-publication is still pending. Quarto 1.10.18 rendered both sites from the root
-build. Publication, Pages execution, public-site observation and LCDH adoption
-remain pending.
+Status: ✅ Published as v0.10.0. Quarto 1.10.18 rendered both sites from the
+root build; the release, Pages deployment and installation handoff are
+complete. This receipt retains the candidate render and browser observations.
 
 | Observation | Result |
 | --- | --- |
@@ -14,14 +28,13 @@ remain pending.
 | Search indexes | ✅ 211 English and 89 Chinese entries; the English index has no Chinese-route links; `標題列語言選擇器` appears zero times in English and once in Chinese |
 | Bilingual browser behavior | ✅ Lead observed English-to-Chinese language navigation, four distinct Pages sidebars, two Chinese search results on the Chinese site, and the Figures image/button viewer with close-focus restoration. All images loaded; browser console warnings/errors were empty. |
 | Phone browser behavior | ✅ At 390×844 on the Chinese homepage, switched to dark mode, opened Language without overflow, and selected English to reach the actual English root with `Language: English`; console log was empty. |
-| Publication delivery | ⏳ PR, tag, GitHub Release, Pages execution, public-site observation and LCDH adoption remain pending |
+| Publication delivery | ✅ v0.10.0 release and Pages deployment completed; Pages tree commit `1593ff6fe067656d29fb322dbd72fcba0c9f5645`; main workflow `39580828917` and Pages workflow `39581100819` succeeded; installation handoff complete |
 
 The first render exposed project-relative rewriting of root-prefixed Markdown
 and sidebar destinations. Those cross-site links were made explicit, then the
 full build and static-link inspection were repeated. Quarto emitted its native
 `zh-TW` Abstract translation warnings; the site used Quarto's native Chinese UI
-without a global Pandoc translation override. No CI or deployment result is
-claimed.
+without a global Pandoc translation override.
 
 The selector runtime observations below came from the earlier independent
 temporary consumer and remain separate from these bilingual Gallery results.

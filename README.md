@@ -67,6 +67,12 @@ both sites. The ignored copies under `zh-TW/_extensions/askr/`,
 build inputs, not vendored sources; maintain the extension and shared assets in
 the root `_extensions/askr/` and `components/` directories.
 
+The documentation version menu lists the current 0.10.0 site, an actual
+published 0.9.0 snapshot and the frozen 0.3.0 snapshot. Archived documentation
+is historical and unmaintained. Before a future release replaces the site
+root, preserve the then-current published site under its versioned path; the
+build generates selector manifests for each archive's runtime.
+
 Askr is intended as a reusable design system for direct SCQ-repository
 adoption. The theme Sass variables `$grid-sidebar-width` and `$grid-margin-width`
 are 264px, `$grid-body-width` and `$grid-docked-body-width` are 630px, and
