@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Versioning Docs – Askr</title>
+<title>Documentation Versions – Askr</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-32dc181353f585f90c74d3cf0d332302.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-f75962ce83ff07a96f40c04b292c7f16.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-32dc181353f585f90c74d3cf0d332302.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-c82ec3957060ae5c5f98c6cdcc0a89b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-b2d96ee2b23f31201489ab777cb3e1f2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-c82ec3957060ae5c5f98c6cdcc0a89b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -818,8 +818,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#keyboard-interaction" id="toc-keyboard-interaction" class="nav-link active" data-scroll-target="#keyboard-interaction">Keyboard interaction</a></li>
-  <li><a href="#corresponding-pages-and-missing-pages" id="toc-corresponding-pages-and-missing-pages" class="nav-link" data-scroll-target="#corresponding-pages-and-missing-pages">Corresponding pages and missing pages</a></li>
-  <li><a href="#publishing" id="toc-publishing" class="nav-link" data-scroll-target="#publishing">Publishing</a></li>
+  <li><a href="#archived-sites" id="toc-archived-sites" class="nav-link" data-scroll-target="#archived-sites">Archived sites</a></li>
+  <li><a href="#publishing-a-new-version" id="toc-publishing-a-new-version" class="nav-link" data-scroll-target="#publishing-a-new-version">Publishing a new version</a></li>
   </ul>
 </nav>
     </div>
@@ -829,7 +829,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Versioning Docs</h1>
+<h1 class="title">Documentation Versions</h1>
 </div>
 
 
@@ -846,41 +846,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Each version is one rendered site, kept in its own directory. The current render is also copied to the deployment site root. Historical directories stay as they were. Paths below are relative to that site root, not the domain root: the same manifest works at <code>/</code> and a repository prefix such as <code>/askr/</code>.</p>
-<pre class="text"><code>/                         current release `0.10.0`
-/v0.3.0/                  immutable 0.3.0 site
-/askr-versions.json       one version-list authority</code></pre>
-<p>Put <code>askr-versions.json</code> at the rendered site’s root and include it in <code>project.resources</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"mode"</span><span class="fu">:</span> <span class="st">"inline"</span><span class="fu">,</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"versions"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.10.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/"</span><span class="fu">,</span> <span class="dt">"latest"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.3.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.3.0/"</span><span class="fu">}</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Askr locates the manifest from Quarto’s page offset. Each <code>root</code> is a version directory relative to that deployment root; <code>/</code> selects the current site. Use <code>href</code> instead of <code>root</code> for a fixed destination. Relative or leading-slash hrefs are site-relative; absolute URLs keep their origin. Fixed destinations do not preserve the current page.</p>
-<p><code>inline</code> prints the version beside a short title. <code>title</code> shows the title and chevron, with the number only in the menu. Try the <a href="versions.html?askr-version-mode=title">long-title specimen</a>. Its <code>longTitle</code> manifest entry is only a gallery specimen, not required consumer configuration.</p>
-<p>Existing consumers can still supply an inline <code>&lt;script id="askr-versions" type="application/json"&gt;</code> when an external manifest is unavailable. Use one authority, not duplicated external and inline lists. This gallery uses only the external JSON.</p>
+<p>The documentation site keeps each actual release in a versioned directory. The current release stays at the site root; older directories are historical and unmaintained.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Site</th>
+<th>Path</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.10.0</td>
+<td><code>/</code></td>
+<td>Current published site</td>
+</tr>
+<tr class="even">
+<td>0.9.0</td>
+<td><code>/v0.9.0/</code></td>
+<td>Snapshot of the actual published 0.9.0 site</td>
+</tr>
+<tr class="odd">
+<td>0.3.0</td>
+<td><code>/v0.3.0/</code></td>
+<td>Frozen historical site</td>
+</tr>
+</tbody>
+</table>
+<p>These paths are relative to the deployed site, so the same list works under a repository prefix such as <code>/askr/</code>. Askr’s root <code>askr-versions.json</code> is the single version-list source:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"mode"</span><span class="fu">:</span> <span class="st">"inline"</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"versions"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.10.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/"</span><span class="fu">,</span> <span class="dt">"latest"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.9.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.9.0/"</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.3.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.3.0/"</span><span class="fu">}</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Include the manifest in <code>project.resources</code>. Each <code>root</code> identifies a complete version site relative to that site’s deployment root. The version selector is provided by Askr; consumers maintain their own archive directories and manifest. The Gallery’s root build helper generates metadata for its own archived sites. It is source-repository build tooling and is not installed by <code>quarto add</code>.</p>
+<p>Use <code>href</code> for a fixed destination instead of a <code>root</code>. Relative and single-slash <code>href</code> values are site-relative; absolute URLs keep their origin. Fixed destinations do not preserve the current page path. When a selector manifest lives inside an archive, its <code>root</code> entries are relative to that archive’s site root. The Gallery generates that archive-local metadata from the root version list.</p>
+<p><code>inline</code> shows the current version beside a short title. <code>title</code> shows the title and chevron, with the version number in the menu. Try the <a href="versions.html?askr-version-mode=title">long-title specimen</a>; <code>longTitle</code> is optional and used only in <code>title</code> mode.</p>
+<p>An inline <code>&lt;script id="askr-versions" type="application/json"&gt;</code> can provide the list when a fetched manifest is unavailable. Choose one source rather than duplicating an external manifest and inline list. This Gallery uses the external JSON.</p>
 <section id="keyboard-interaction" class="level2">
 <h2 class="anchored" data-anchor-id="keyboard-interaction">Keyboard interaction</h2>
-<p>The selector is a disclosure, not a listbox. Tab to its button, then press Enter or Space to open it. Tab and Shift-Tab move through ordinary links; Enter follows one. Escape closes it and returns focus to the button. Tabbing away or clicking outside closes it without moving outside focus back. The current version link has <code>aria-current="true"</code>.</p>
+<p>The selector is a disclosure with ordinary links, not a listbox. Tab to its button and press Enter or Space to open it. Tab and Shift-Tab move among the links; Enter follows one. Escape closes the menu and returns focus to the button. Tabbing away or clicking outside closes it without moving focus back. The current version link has <code>aria-current="true"</code>.</p>
 </section>
-<section id="corresponding-pages-and-missing-pages" class="level2">
-<h2 class="anchored" data-anchor-id="corresponding-pages-and-missing-pages">Corresponding pages and missing pages</h2>
-<p>The menu retains the current page path, query and fragment when switching between <code>root</code> entries. From <code>/askr/usage/versions.html</code>, 0.3.0 points to <code>/askr/v0.3.0/usage/versions.html</code>, not <code>/v0.3.0/askr/usage/versions.html</code>.</p>
-<p>For an ordinary same-origin click, Askr checks the destination. A 404 sends the reader to that selected version’s manifest root. Network errors retain the original destination, rather than inventing a page. Modified clicks (Cmd/Ctrl-click or a new tab) and external URLs retain browser link behavior; the host’s error page owns those cases. Projects own their hosting error page.</p>
-<p>This gallery supplies <code>404.qmd</code>, deriving its deployment root from Quarto’s rendered offset and matching the external manifest. Existing historical snapshots keep their original scripts and version lists: a new Askr install does not rewrite an old rendered site.</p>
-<p>Open this page and select 0.3.0. This page is absent from that snapshot, so the current selector takes you to its home. That historical gallery retains its original Install area rather than this site’s Usage area.</p>
+<section id="archived-sites" class="level2">
+<h2 class="anchored" data-anchor-id="archived-sites">Archived sites</h2>
+<p>The 0.9.0 snapshot comes from the actual published Pages site. The 0.3.0 snapshot remains unchanged. Both archives are historical documentation, not maintained copies of the current Usage guide.</p>
+<p>The current 0.10.0 selector preserves the page path, query and fragment when switching to another version. For an ordinary same-origin click, it checks the destination; a 404 opens the selected site’s homepage. A network error retains the original destination. Modified clicks (Cmd/Ctrl-click or a new tab) and external URLs keep normal browser behavior, so the host’s error page owns those cases.</p>
+<p>Both archives use generated fixed homepage links. The 0.9.0 manifest has a single archive-local <code>root</code> for its current-version marker; all version links open their configured homepages. The frozen 0.3.0 manifest uses origin-root paths and fixed links so navigation works under <code>/askr/</code>. This Gallery’s build helper generates archive manifests from the root list without rewriting old HTML.</p>
+<p>This page is absent from the 0.3.0 snapshot. Selecting that version opens its homepage rather than a missing page.</p>
 </section>
-<section id="publishing" class="level2">
-<h2 class="anchored" data-anchor-id="publishing">Publishing</h2>
-<ol type="1">
-<li>Render the exact tag being frozen.</li>
-<li>Copy that rendered site into its version directory.</li>
-<li>Publish the current rendered site at the deployment root.</li>
-<li>Update the one version manifest.</li>
-</ol>
-<p>Keep historical directories unchanged. A version number is a source identity; it does not itself prove that deployment has finished.</p>
+<section id="publishing-a-new-version" class="level2">
+<h2 class="anchored" data-anchor-id="publishing-a-new-version">Publishing a new version</h2>
+<p>Before replacing the current site root, preserve the actual published site under its release path. For example, the next release should first archive 0.10.0 as <code>/v0.10.0/</code>; only then should the root manifest name the new current release and retain the older entries. Do not add a second 0.10.0 entry while that release is still current. Consumers own this publishing step for their own sites; the Gallery helper only prepares this repository’s archive metadata.</p>
+<p>The Gallery’s long-title specimen is available at <a href="versions.html?askr-version-mode=title"><code>versions.html?askr-version-mode=title</code></a>. Its <code>longTitle</code> manifest field is optional and does not affect version routing.</p>
 
 
 </section>

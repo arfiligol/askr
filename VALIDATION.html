@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-32dc181353f585f90c74d3cf0d332302.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-f75962ce83ff07a96f40c04b292c7f16.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-32dc181353f585f90c74d3cf0d332302.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-c82ec3957060ae5c5f98c6cdcc0a89b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b2d96ee2b23f31201489ab777cb3e1f2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-c82ec3957060ae5c5f98c6cdcc0a89b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -742,6 +742,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#candidate-validation-receipt" id="toc-candidate-validation-receipt" class="nav-link active" data-scroll-target="#candidate-validation-receipt">Candidate validation receipt</a>
   <ul class="collapse">
+  <li><a href="#documentation-version-archive-correction-2026-10-21" id="toc-documentation-version-archive-correction-2026-10-21" class="nav-link" data-scroll-target="#documentation-version-archive-correction-2026-10-21">Documentation version archive correction — 2026-10-21</a></li>
   <li><a href="#bilingual-publication-package-2026-10-21" id="toc-bilingual-publication-package-2026-10-21" class="nav-link" data-scroll-target="#bilingual-publication-package-2026-10-21">0.10.0 bilingual publication package — 2026-10-21</a></li>
   <li><a href="#prior-optional-header-language-selector-runtime-observations-2026-10-21" id="toc-prior-optional-header-language-selector-runtime-observations-2026-10-21" class="nav-link" data-scroll-target="#prior-optional-header-language-selector-runtime-observations-2026-10-21">Prior optional Header language selector runtime observations — 2026-10-21</a>
   <ul class="collapse">
@@ -796,9 +797,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="candidate-validation-receipt" class="level1">
 <h1>Candidate validation receipt</h1>
+<section id="documentation-version-archive-correction-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="documentation-version-archive-correction-2026-10-21">Documentation version archive correction — 2026-10-21</h2>
+<p>Status: ✅ The full bilingual render, archive metadata generation and local archive browser review completed. No extension runtime or installed version changed.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.9.0 source identity</td>
+<td>✅ The 154-file root snapshot matches Pages tree <code>32b83b78756c09dbcf7fd378996cd1170cfdbc48</code>; the prior nested 0.3.0 payload is represented separately at top-level <code>v0.3.0/</code>.</td>
+</tr>
+<tr class="even">
+<td>Frozen 0.3.0 selector</td>
+<td>✅ Generated output manifest gives each version an <code>/askr/</code> origin-root path and a fixed homepage <code>href</code>; the frozen HTML and source manifest remain unchanged. Lead observed the archive header mark 0.3.0 as current and its Latest link reach the actual 0.10.0 root.</td>
+</tr>
+<tr class="odd">
+<td>0.9.0 selector</td>
+<td>✅ Generated manifest uses only <code>./</code> as a <code>root</code> for its current-version marker; fixed archive-relative homepage <code>href</code>s route to <code>/askr/</code>, <code>/askr/v0.9.0/</code> and <code>/askr/v0.3.0/</code>. The selector’s raw root-length sorting cannot prefer the 0.10.0 parent root.</td>
+</tr>
+<tr class="even">
+<td>Rendered archive outputs</td>
+<td>✅ Quarto 1.10.18 rendered 106 English and 27 Traditional Chinese pages; all three shared cells executed in both sites. Each archive output differs from its source snapshot only at <code>askr-versions.json</code>.</td>
+</tr>
+<tr class="odd">
+<td>Search and routes</td>
+<td>✅ Candidate indexes contain 212 English and 88 Chinese entries, without archive or opposite-language routes.</td>
+</tr>
+<tr class="even">
+<td>Archive navigation</td>
+<td>✅ On a local <code>/askr/</code> mount, the nested 0.3.0 Figures page marks 0.3.0 current and Latest reaches the actual 0.10.0 root. The nested 0.9.0 Figures page marks 0.9.0 current; its 0.3.0 link reaches the 0.3.0 homepage. From current Usage, selecting 0.9.0 for a page absent in that archive falls back to the 0.9.0 homepage. At 390×844 in dark mode, the v0.3.0 selector shows 0.3.0 current, 0.10.0 Latest and readable 0.9.0 without horizontal overflow; selecting 0.9.0 reaches its actual home with header 0.9.0.</td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="bilingual-publication-package-2026-10-21" class="level2">
 <h2 class="anchored" data-anchor-id="bilingual-publication-package-2026-10-21">0.10.0 bilingual publication package — 2026-10-21</h2>
-<p>Status: ✅ Corrected bilingual candidate rendered and observed; Human-authorized publication is still pending. Quarto 1.10.18 rendered both sites from the root build. Publication, Pages execution, public-site observation and LCDH adoption remain pending.</p>
+<p>Status: ✅ Published as v0.10.0. Quarto 1.10.18 rendered both sites from the root build; the release, Pages deployment and installation handoff are complete. This receipt retains the candidate render and browser observations.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -833,11 +876,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td>Publication delivery</td>
-<td>⏳ PR, tag, GitHub Release, Pages execution, public-site observation and LCDH adoption remain pending</td>
+<td>✅ v0.10.0 release and Pages deployment completed; Pages tree commit <code>1593ff6fe067656d29fb322dbd72fcba0c9f5645</code>; main workflow <code>39580828917</code> and Pages workflow <code>39581100819</code> succeeded; installation handoff complete</td>
 </tr>
 </tbody>
 </table>
-<p>The first render exposed project-relative rewriting of root-prefixed Markdown and sidebar destinations. Those cross-site links were made explicit, then the full build and static-link inspection were repeated. Quarto emitted its native <code>zh-TW</code> Abstract translation warnings; the site used Quarto’s native Chinese UI without a global Pandoc translation override. No CI or deployment result is claimed.</p>
+<p>The first render exposed project-relative rewriting of root-prefixed Markdown and sidebar destinations. Those cross-site links were made explicit, then the full build and static-link inspection were repeated. Quarto emitted its native <code>zh-TW</code> Abstract translation warnings; the site used Quarto’s native Chinese UI without a global Pandoc translation override.</p>
 <p>The selector runtime observations below came from the earlier independent temporary consumer and remain separate from these bilingual Gallery results.</p>
 </section>
 <section id="prior-optional-header-language-selector-runtime-observations-2026-10-21" class="level2">

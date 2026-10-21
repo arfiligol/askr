@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>文件版本管理 – Askr</title>
+<title>文件版本 – Askr</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-32dc181353f585f90c74d3cf0d332302.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-f75962ce83ff07a96f40c04b292c7f16.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-32dc181353f585f90c74d3cf0d332302.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-c82ec3957060ae5c5f98c6cdcc0a89b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-b2d96ee2b23f31201489ab777cb3e1f2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-c82ec3957060ae5c5f98c6cdcc0a89b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -813,8 +813,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#鍵盤操作" id="toc-鍵盤操作" class="nav-link active" data-scroll-target="#鍵盤操作">鍵盤操作</a></li>
-  <li><a href="#對應頁面與缺少的頁面" id="toc-對應頁面與缺少的頁面" class="nav-link" data-scroll-target="#對應頁面與缺少的頁面">對應頁面與缺少的頁面</a></li>
-  <li><a href="#發布版本" id="toc-發布版本" class="nav-link" data-scroll-target="#發布版本">發布版本</a></li>
+  <li><a href="#歷史版本網站" id="toc-歷史版本網站" class="nav-link" data-scroll-target="#歷史版本網站">歷史版本網站</a></li>
+  <li><a href="#發布新版本" id="toc-發布新版本" class="nav-link" data-scroll-target="#發布新版本">發布新版本</a></li>
   </ul>
 </nav>
     </div>
@@ -824,7 +824,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">文件版本管理</h1>
+<h1 class="title">文件版本</h1>
 </div>
 
 
@@ -841,41 +841,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>每個版本都是獨立建置的網站，放在自己的目錄中。目前版本也會複製到部署網站根目錄；歷史目錄則保持原樣。以下路徑都以該網站根目錄為基準，不以網域根目錄為基準，因此同一份 manifest 可用於 <code>/</code>，也可用於 <code>/askr/</code> 這類 repository 前綴。</p>
-<pre class="text"><code>/                         current release `0.10.0`
-/v0.3.0/                  immutable 0.3.0 site
-/askr-versions.json       one version-list authority</code></pre>
-<p>將 <code>askr-versions.json</code> 放在建置網站的根目錄，並加入 <code>project.resources</code>：</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"mode"</span><span class="fu">:</span> <span class="st">"inline"</span><span class="fu">,</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"versions"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.10.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/"</span><span class="fu">,</span> <span class="dt">"latest"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.3.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.3.0/"</span><span class="fu">}</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Askr 會依 Quarto 頁面偏移量尋找 manifest。每個 <code>root</code> 都是相對於部署根目錄的版本資料夾；<code>/</code> 代表目前網站。固定目的地可改用 <code>href</code>。相對路徑或以斜線開頭的 href 都相對於網站；絕對網址則保留自己的 origin。固定目的地不會保留目前頁面位置。</p>
-<p><code>inline</code> 會將版本號顯示在短標題旁；<code>title</code> 會顯示標題與箭頭，版本號只出現在選單中。可試看<a href="versions.html?askr-version-mode=title">長標題範例</a>。其 manifest 項目 <code>longTitle</code> 只是圖集範例，並非使用者設定的必要欄位。</p>
-<p>若無法使用外部 manifest，既有使用者仍可在頁面中直接提供 <code>&lt;script id="askr-versions" type="application/json"&gt;</code>。請只使用一個資料來源，不要重複維護外部與內嵌清單。本圖集只使用外部 JSON。</p>
+<p>文件網站會將每個實際發布版本保存在各自的版本目錄中。目前版本維持在網站根目錄；舊目錄則是歷史版本，不再維護。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>網站版本</th>
+<th>路徑</th>
+<th>狀態</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.10.0</td>
+<td><code>/</code></td>
+<td>目前發布版本</td>
+</tr>
+<tr class="even">
+<td>0.9.0</td>
+<td><code>/v0.9.0/</code></td>
+<td>實際發布之 0.9.0 網站的快照</td>
+</tr>
+<tr class="odd">
+<td>0.3.0</td>
+<td><code>/v0.3.0/</code></td>
+<td>凍結的歷史網站</td>
+</tr>
+</tbody>
+</table>
+<p>這些路徑以部署網站為基準，因此同一份清單也能用在 <code>/askr/</code> 這類儲存庫前綴下。根目錄的 <code>askr-versions.json</code> 是唯一的版本清單來源：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"mode"</span><span class="fu">:</span> <span class="st">"inline"</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"versions"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.10.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/"</span><span class="fu">,</span> <span class="dt">"latest"</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.9.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.9.0/"</span><span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.3.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.3.0/"</span><span class="fu">}</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
+<p>請將版本清單檔加入 <code>project.resources</code>。每個 <code>root</code> 都代表一個完整版本網站，路徑以該網站的部署根目錄為基準。版本選擇器由 Askr 提供；網站使用者需自行管理封存目錄與版本清單檔。圖集的根目錄建置輔助工具會為圖集自己的封存網站產生中繼資料。這是來源儲存庫的建置工具，不會隨 <code>quarto add</code> 安裝。</p>
+<p>若要指定固定目的地，請使用 <code>href</code>，而非 <code>root</code>。相對路徑與單斜線開頭的 <code>href</code> 都以網站為基準；絕對網址則保留原本的網域。固定目的地不會保留目前頁面的路徑。若版本選擇器的版本清單檔位於封存網站內，其 <code>root</code> 項目仍以該封存網站的根目錄為基準。圖集會從根目錄版本清單產生這些封存站專用的中繼資料。</p>
+<p><code>inline</code> 模式會在短標題旁顯示目前版本；<code>title</code> 模式則顯示標題與箭頭，並在選單中顯示版本號。可試用<a href="versions.html?askr-version-mode=title">長標題範例</a>。<code>longTitle</code> 為選填欄位，只在 <code>title</code> 模式使用。</p>
+<p>若無法取得外部版本清單檔，可在頁面中加入 <code>&lt;script id="askr-versions" type="application/json"&gt;</code> 作為內嵌 JSON 清單。請選擇一種來源，不要同時維護外部檔案與內嵌清單。此圖集使用外部 JSON。</p>
 <section id="鍵盤操作" class="level2">
 <h2 class="anchored" data-anchor-id="鍵盤操作">鍵盤操作</h2>
-<p>選擇器是展開／收合控制項，不是清單方塊。按 Tab 將焦點移至按鈕，再按 Enter 或 Space 開啟。Tab 與 Shift-Tab 會在一般連結間移動；Enter 可開啟連結。Escape 會關閉選單並將焦點移回按鈕。使用 Tab 移出選單或點擊外部時，選單會關閉，但不會將外部焦點移回選單。<code>aria-current="true"</code> 會標示目前版本連結。</p>
+<p>版本選擇器是可展開的控制項，內容是一般連結，不是清單方塊。按 Tab 移至按鈕，再按 Enter 或空白鍵開啟選單。按 Tab 或 Shift-Tab 可在連結間移動；按 Enter 開啟連結。按 Escape 關閉選單並將焦點移回按鈕。移出焦點或按一下選單外部也會關閉選單，但不會將焦點移回按鈕。目前版本連結會有 <code>aria-current="true"</code> 標記。</p>
 </section>
-<section id="對應頁面與缺少的頁面" class="level2">
-<h2 class="anchored" data-anchor-id="對應頁面與缺少的頁面">對應頁面與缺少的頁面</h2>
-<p>在不同 <code>root</code> 之間切換時，選單會保留目前頁面的路徑、查詢參數與片段識別字。從 <code>/askr/usage/versions.html</code> 切換至 0.3.0 時，目的地是 <code>/askr/v0.3.0/usage/versions.html</code>，而不是 <code>/v0.3.0/askr/usage/versions.html</code>。</p>
-<p>一般的同源點擊會由 Askr 檢查目的地。若收到 404，讀者會前往所選版本的 manifest 根目錄。網路錯誤時會保留原目的地，不會推測其他頁面。修改過的點擊（Cmd/Ctrl-點擊或開新分頁）與外部網址仍依瀏覽器連結行為處理；這些情況由主機的錯誤頁面負責。各專案應管理自己的主機錯誤頁面。</p>
-<p>本圖集提供 <code>404.qmd</code>，依 Quarto 建置後的偏移量推算部署根目錄，並與外部 manifest 相符。既有歷史快照仍保留原本的腳本與版本清單；安裝新版 Askr 不會改寫舊的建置網站。</p>
-<p>開啟本頁並選擇 0.3.0。由於該快照沒有這個頁面，目前選擇器會帶你前往該版本首頁。歷史圖集仍保留原本的 Install Area，不會改成此網站的 Usage Area。</p>
+<section id="歷史版本網站" class="level2">
+<h2 class="anchored" data-anchor-id="歷史版本網站">歷史版本網站</h2>
+<p>0.9.0 快照取自實際發布於 GitHub Pages 的網站。0.3.0 快照維持原樣。兩者都是歷史文件，不是目前使用指南的維護版本。</p>
+<p>目前的 0.10.0 版本選擇器在切換版本時會保留目前頁面的路徑、查詢參數與片段識別字。一般同源點擊會先檢查目的頁；若回應為 404，便開啟所選網站的首頁。若發生網路錯誤，則保留原目的頁。使用 Cmd／Ctrl 點擊或在新分頁開啟等特殊點擊，以及外部網址，都維持瀏覽器的原有行為；這些情況由網站主機顯示錯誤頁面。</p>
+<p>兩個封存版本都使用建置時產生的固定首頁連結。0.9.0 版本清單只有一個封存站內的 <code>root</code>，值為 <code>./</code>，用來標示目前版本；所有版本連結都會開啟各自設定的首頁。凍結版 0.3.0 的版本清單使用網域根目錄路徑與固定連結，讓 <code>/askr/</code> 前綴下的導覽正常運作。圖集的建置輔助工具會依根目錄版本清單產生封存版本的清單檔，不會改寫舊版 HTML。</p>
+<p>0.3.0 快照沒有本頁。選擇該版本時會前往其首頁，而不會開啟不存在的頁面。</p>
 </section>
-<section id="發布版本" class="level2">
-<h2 class="anchored" data-anchor-id="發布版本">發布版本</h2>
-<ol type="1">
-<li>建置要封存的確切標籤版本。</li>
-<li>將該版本的建置網站複製到版本目錄。</li>
-<li>將目前版本建置網站發布至部署根目錄。</li>
-<li>更新唯一的版本 manifest。</li>
-</ol>
-<p>歷史目錄應維持不變。版本號代表來源身分，本身不表示部署已完成。</p>
+<section id="發布新版本" class="level2">
+<h2 class="anchored" data-anchor-id="發布新版本">發布新版本</h2>
+<p>替換目前網站根目錄前，請先將實際發布中的網站保留在對應的版本目錄。例如，下一版發布前，應先將 0.10.0 封存至 <code>/v0.10.0/</code>；接著才更新根目錄版本清單檔，列出新的目前版本並保留較舊版本。0.10.0 仍是目前版本時，不要在清單中重複新增另一筆 0.10.0。使用者需自行發布及管理所屬網站；圖集輔助工具只會準備這個儲存庫的封存中繼資料。</p>
+<p>圖集也提供<a href="versions.html?askr-version-mode=title">長標題範例</a>。其版本清單欄位 <code>longTitle</code> 為選填，不會影響版本導覽。</p>
 
 
 </section>
