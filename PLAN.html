@@ -47,9 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b5a558ee1d1b5dcea91ca9cc94f79546.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-32dc181353f585f90c74d3cf0d332302.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-f75962ce83ff07a96f40c04b292c7f16.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-32dc181353f585f90c74d3cf0d332302.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -171,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
     var tools = container.querySelector('.quarto-navbar-tools');
     var collapseTools = tools && area.contains(tools);
     var authoredTools = tools ? Array.from(tools.children).filter(function (el) {
-      return !el.matches('.quarto-color-scheme-toggle, .quarto-reader-toggle, .askr-logout');
+      return !el.matches('.quarto-color-scheme-toggle, .quarto-reader-toggle, .askr-logout, .askr-language-selector');
     }) : [];
     var panelTools;
     if (collapseTools) {
@@ -707,8 +707,10 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#askr-release-plan" id="toc-askr-release-plan" class="nav-link active" data-scroll-target="#askr-release-plan">Askr release plan</a>
   <ul class="collapse">
-  <li><a href="#current-0.9.0-dense-scientific-reading-2026-10-21" id="toc-current-0.9.0-dense-scientific-reading-2026-10-21" class="nav-link" data-scroll-target="#current-0.9.0-dense-scientific-reading-2026-10-21">Current: 0.9.0 dense scientific reading — 2026-10-21</a></li>
+  <li><a href="#current-askr-0.10.0-bilingual-publication-package-2026-10-21" id="toc-current-askr-0.10.0-bilingual-publication-package-2026-10-21" class="nav-link" data-scroll-target="#current-askr-0.10.0-bilingual-publication-package-2026-10-21">Current: Askr 0.10.0 bilingual publication package — 2026-10-21</a></li>
   <li><a href="#historical-work-packets" id="toc-historical-work-packets" class="nav-link" data-scroll-target="#historical-work-packets">Historical work packets</a></li>
+  <li><a href="#historical-local-candidate-packet-optional-header-language-selector-2026-10-21" id="toc-historical-local-candidate-packet-optional-header-language-selector-2026-10-21" class="nav-link" data-scroll-target="#historical-local-candidate-packet-optional-header-language-selector-2026-10-21">Historical local-candidate packet — Optional Header language selector — 2026-10-21</a></li>
+  <li><a href="#dense-scientific-reading-2026-10-21" id="toc-dense-scientific-reading-2026-10-21" class="nav-link" data-scroll-target="#dense-scientific-reading-2026-10-21">0.9.0 dense scientific reading — 2026-10-21</a></li>
   <li><a href="#publication-authorization-2026-10-10" id="toc-publication-authorization-2026-10-10" class="nav-link" data-scroll-target="#publication-authorization-2026-10-10">0.8.0 publication authorization — 2026-10-10</a></li>
   <li><a href="#dual-mode-image-viewer-local-candidate-2026-10-10" id="toc-dual-mode-image-viewer-local-candidate-2026-10-10" class="nav-link" data-scroll-target="#dual-mode-image-viewer-local-candidate-2026-10-10">Dual-mode image viewer — local candidate, 2026-10-10</a></li>
   <li><a href="#publication-authorization-2026-10-09" id="toc-publication-authorization-2026-10-09" class="nav-link" data-scroll-target="#publication-authorization-2026-10-09">0.7.0 publication authorization — 2026-10-09</a></li>
@@ -741,15 +743,28 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="askr-release-plan" class="level1">
 <h1>Askr release plan</h1>
-<section id="current-0.9.0-dense-scientific-reading-2026-10-21" class="level2">
-<h2 class="anchored" data-anchor-id="current-0.9.0-dense-scientific-reading-2026-10-21">Current: 0.9.0 dense scientific reading — 2026-10-21</h2>
-<p>Ship the Human-assigned P0 reading improvements: accessible scrolling tables, consistent normal/wide measure, compiled border tokens and contrast, compact search-clean equation copy, native semantic blocks, flat page facts, and natural wide figures. Askr Lead owns <code>quarto-design-kit/**</code>; consumers, root pins and the frozen <code>v0.3.0/</code> remain outside this package. Runtime assets stay local.</p>
-<p>Required observations are Quarto renders, a light/dark compiled public-token audit and actual browser reading/keyboard/copy/layout behavior, including scoped temporary probes outside the repository. Record results in <code>VALIDATION.md</code>. No durable tests, new gallery fixtures, CI workflows, scientific execution or optional SVG/Mermaid image-viewer extension are assigned.</p>
-<p>Delivery endpoint: develop checkpoint, reviewed main promotion, <code>v0.9.0</code> release, existing Pages publication, public observation and durable-child synchronization. The Lead retains Git/publication authority. Semantic state: CONVERGING; implementation and publication do not imply Human acceptance or stabilization.</p>
+<section id="current-askr-0.10.0-bilingual-publication-package-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="current-askr-0.10.0-bilingual-publication-package-2026-10-21">Current: Askr 0.10.0 bilingual publication package — 2026-10-21</h2>
+<p>The Human authorized publication of Askr 0.10.0 and its later LCDH adoption. This package adds the optional Header language selector and an actual bilingual Gallery. English remains at the existing site root; a separate Traditional Chinese Quarto website is built under <code>/zh-TW/</code>, with its own navigation and search. Each site’s <code>askr.languages.current</code> is explicit, and both selector entries link to the two site homepages.</p>
+<p>The root Quarto project excludes <code>zh-TW/</code> from its own render. On a full site render, its post-render helper stages the current Askr extension and shared image/bibliography assets into ignored generated paths, then renders the child website into <code>_site/zh-TW/</code>. The three executable examples shared by both sites live once in <code>_includes/</code>; translated documents include those same cells instead of owning copies of executable code.</p>
+<p>Implement the site-level <code>askr.languages</code> option in Askr’s Header. Its <code>current</code> code must match exactly one entry in <code>items</code>; provide at least two entries, each with a unique nonempty scalar <code>code</code>, nonempty scalar <code>label</code>, and an HTTPS absolute URL or domain-root <code>/path</code> <code>href</code>. Reject protocol-relative and whitespace-containing destinations, and escape every configured string.</p>
+<p>Place a square language icon beside the existing Header tools. Give it the accessible name and tooltip <code>Language: &lt;current label&gt;</code>; keep it available on narrow screens independently of Areas and reserve its measured width in the Header layout. The menu uses Askr’s light/dark tokens. Each normal link uses its configured <code>href</code> in the current tab, with <code>lang</code>, <code>hreflang</code>, and a visible current marker plus <code>aria-current</code>. Omit the control when the option is absent; JavaScript-disabled output contains no dead button. Askr does not infer destinations, persist language choices, translate content, or alter search. Existing author-provided navbar language links remain in place; guidance tells authors to remove duplicates after configuring Askr.</p>
+<p>Askr owns the extension, Usage docs and bilingual Gallery build. The public Gallery is configured for its own English and Traditional Chinese homepages; consumer repositories, root pins and the frozen <code>v0.3.0/</code> remain outside this package. <code>v0.3.0/</code> remains the historical English snapshot.</p>
+<p>The corrected full root/child render passed with 106 English and 27 Traditional Chinese pages, and all three shared cells executed in both. The 27 Chinese pages have no broken static links; the English and Chinese search indexes contain 211 and 89 entries. The Lead also observed desktop language navigation, four separate page sidebars, Chinese-only search results and the Figures viewer. Detailed observations are in <code>VALIDATION.md</code>. The Lead retains Git delivery, PR, tag, release, Pages observation and durable-child sync; no publication or CI result is claimed here.</p>
+<p>Semantic state: CONVERGING. Delivery endpoint: Human-authorized 0.10.0 publication package, followed by a <code>develop</code> checkpoint, PR to <code>main</code>, <code>v0.10.0</code> tag and GitHub Release, existing Pages workflow, public-site observation, install/source-manifest review and durable-child synchronization. Build, review, publication and LCDH adoption remain separate delivery steps.</p>
 </section>
 <section id="historical-work-packets" class="level2">
 <h2 class="anchored" data-anchor-id="historical-work-packets">Historical work packets</h2>
-<p>The dated packets below are historical records, not additional current plans.</p>
+</section>
+<section id="historical-local-candidate-packet-optional-header-language-selector-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="historical-local-candidate-packet-optional-header-language-selector-2026-10-21">Historical local-candidate packet — Optional Header language selector — 2026-10-21</h2>
+<p>The earlier local-candidate packet preceded the Human’s publication authorization and the bilingual Gallery assignment. Its feature contract and temporary-consumer observations remain historical context; its local-only endpoint and publication restrictions are superseded by the current package above.</p>
+</section>
+<section id="dense-scientific-reading-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="dense-scientific-reading-2026-10-21">0.9.0 dense scientific reading — 2026-10-21</h2>
+<p>Ship the Human-assigned P0 reading improvements: accessible scrolling tables, consistent normal/wide measure, compiled border tokens and contrast, compact search-clean equation copy, native semantic blocks, flat page facts, and natural wide figures. Askr Lead owns <code>quarto-design-kit/**</code>; consumers, root pins and the frozen <code>v0.3.0/</code> remain outside this package. Runtime assets stay local.</p>
+<p>Required observations are Quarto renders, a light/dark compiled public-token audit and actual browser reading/keyboard/copy/layout behavior, including scoped temporary probes outside the repository. Record results in <code>VALIDATION.md</code>. No durable tests, new gallery fixtures, CI workflows, scientific execution or optional SVG/Mermaid image-viewer extension are assigned.</p>
+<p>Delivery endpoint: develop checkpoint, reviewed main promotion, <code>v0.9.0</code> release, existing Pages publication, public observation and durable-child synchronization. The Lead retains Git/publication authority. Semantic state: CONVERGING; implementation and publication do not imply Human acceptance or stabilization.</p>
 </section>
 <section id="publication-authorization-2026-10-10" class="level2">
 <h2 class="anchored" data-anchor-id="publication-authorization-2026-10-10">0.8.0 publication authorization — 2026-10-10</h2>
@@ -971,6 +986,20 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!right.childElementCount && !right.textContent.trim()) right.textContent = '';
   right.append(credit.content.cloneNode(true));
 });
+</script>
+<script>
+(() => {
+  function mount() {
+    const template = document.getElementById('askr-language-config');
+    if (!template) return;
+    const tools = document.querySelector('#quarto-header .quarto-navbar-tools');
+    if (!tools) throw new Error('Askr language selector requires a website Header with navbar tools.');
+    tools.append(template.content.cloneNode(true));
+    document.getElementById('quarto-header').classList.add('askr-has-language');
+  }
+  if (document.readyState === 'complete') mount();
+  else window.addEventListener('load', mount, {once: true});
+})();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1417,8 +1446,9 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.9.0" aria-label="Askr version 0.9.0">0.9.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.10.0" aria-label="Askr version 0.10.0">0.10.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
+<template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 
 
 

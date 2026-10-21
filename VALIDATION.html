@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b5a558ee1d1b5dcea91ca9cc94f79546.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-32dc181353f585f90c74d3cf0d332302.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-f75962ce83ff07a96f40c04b292c7f16.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-32dc181353f585f90c74d3cf0d332302.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     var tools = container.querySelector('.quarto-navbar-tools');
     var collapseTools = tools && area.contains(tools);
     var authoredTools = tools ? Array.from(tools.children).filter(function (el) {
-      return !el.matches('.quarto-color-scheme-toggle, .quarto-reader-toggle, .askr-logout');
+      return !el.matches('.quarto-color-scheme-toggle, .quarto-reader-toggle, .askr-logout, .askr-language-selector');
     }) : [];
     var panelTools;
     if (collapseTools) {
@@ -742,6 +742,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#candidate-validation-receipt" id="toc-candidate-validation-receipt" class="nav-link active" data-scroll-target="#candidate-validation-receipt">Candidate validation receipt</a>
   <ul class="collapse">
+  <li><a href="#bilingual-publication-package-2026-10-21" id="toc-bilingual-publication-package-2026-10-21" class="nav-link" data-scroll-target="#bilingual-publication-package-2026-10-21">0.10.0 bilingual publication package — 2026-10-21</a></li>
+  <li><a href="#prior-optional-header-language-selector-runtime-observations-2026-10-21" id="toc-prior-optional-header-language-selector-runtime-observations-2026-10-21" class="nav-link" data-scroll-target="#prior-optional-header-language-selector-runtime-observations-2026-10-21">Prior optional Header language selector runtime observations — 2026-10-21</a>
+  <ul class="collapse">
+  <li><a href="#lead-browser-observations-quarto-1.10.18-chromium-2026-10-21" id="toc-lead-browser-observations-quarto-1.10.18-chromium-2026-10-21" class="nav-link" data-scroll-target="#lead-browser-observations-quarto-1.10.18-chromium-2026-10-21">Lead browser observations — Quarto 1.10.18, Chromium, 2026-10-21</a></li>
+  </ul></li>
   <li><a href="#lead-browser-observations-2026-10-21" id="toc-lead-browser-observations-2026-10-21" class="nav-link" data-scroll-target="#lead-browser-observations-2026-10-21">0.9.0 Lead browser observations — 2026-10-21</a></li>
   <li><a href="#reading-integration-2026-10-21" id="toc-reading-integration-2026-10-21" class="nav-link" data-scroll-target="#reading-integration-2026-10-21">0.9.0 reading integration — 2026-10-21</a></li>
   <li><a href="#publication-package-2026-10-10" id="toc-publication-package-2026-10-10" class="nav-link" data-scroll-target="#publication-package-2026-10-10">0.8.0 publication package — 2026-10-10</a></li>
@@ -791,6 +796,207 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="candidate-validation-receipt" class="level1">
 <h1>Candidate validation receipt</h1>
+<section id="bilingual-publication-package-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="bilingual-publication-package-2026-10-21">0.10.0 bilingual publication package — 2026-10-21</h2>
+<p>Status: ✅ Corrected bilingual candidate rendered and observed; Human-authorized publication is still pending. Quarto 1.10.18 rendered both sites from the root build. Publication, Pages execution, public-site observation and LCDH adoption remain pending.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Observation</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Corrected full root/child render</td>
+<td>✅ 106 English and 27 Traditional Chinese pages rendered; each site executed all three shared cells</td>
+</tr>
+<tr class="even">
+<td>Static links</td>
+<td>✅ All 27 Chinese pages have zero broken links after cross-site destinations were made explicit</td>
+</tr>
+<tr class="odd">
+<td>Search indexes</td>
+<td>✅ 211 English and 89 Chinese entries; the English index has no Chinese-route links; <code>標題列語言選擇器</code> appears zero times in English and once in Chinese</td>
+</tr>
+<tr class="even">
+<td>Bilingual browser behavior</td>
+<td>✅ Lead observed English-to-Chinese language navigation, four distinct Pages sidebars, two Chinese search results on the Chinese site, and the Figures image/button viewer with close-focus restoration. All images loaded; browser console warnings/errors were empty.</td>
+</tr>
+<tr class="odd">
+<td>Phone browser behavior</td>
+<td>✅ At 390×844 on the Chinese homepage, switched to dark mode, opened Language without overflow, and selected English to reach the actual English root with <code>Language: English</code>; console log was empty.</td>
+</tr>
+<tr class="even">
+<td>Publication delivery</td>
+<td>⏳ PR, tag, GitHub Release, Pages execution, public-site observation and LCDH adoption remain pending</td>
+</tr>
+</tbody>
+</table>
+<p>The first render exposed project-relative rewriting of root-prefixed Markdown and sidebar destinations. Those cross-site links were made explicit, then the full build and static-link inspection were repeated. Quarto emitted its native <code>zh-TW</code> Abstract translation warnings; the site used Quarto’s native Chinese UI without a global Pandoc translation override. No CI or deployment result is claimed.</p>
+<p>The selector runtime observations below came from the earlier independent temporary consumer and remain separate from these bilingual Gallery results.</p>
+</section>
+<section id="prior-optional-header-language-selector-runtime-observations-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="prior-optional-header-language-selector-runtime-observations-2026-10-21">Prior optional Header language selector runtime observations — 2026-10-21</h2>
+<p>State at observation: CONVERGING / LOCAL CANDIDATE. Quarto 1.10.18 rendered the Usage page <code>usage/languages.qmd</code> and the independent consumer <code>/tmp/askr-language-selector.7erYU7</code>. The Lead observed the configured consumer in Chromium at desktop and phone sizes; acceptance and publication remain separate outcomes.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Observation</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Usage page</td>
+<td>✅ <code>quarto render usage/languages.qmd</code> rendered <code>_site/usage/languages.html</code></td>
+</tr>
+<tr class="even">
+<td>Unconfigured consumer</td>
+<td>✅ Rendered all three local pages; generated HTML contains no <code>askr-language-config</code> template or language button, while retaining Search, theme and Areas controls</td>
+</tr>
+<tr class="odd">
+<td>Configured consumer</td>
+<td>✅ <code>quarto render --profile configured</code> rendered all three local routes into <code>_site</code>; the generated inert template contains the square language trigger, accessible name/title, two current-tab links with <code>lang</code>/<code>hreflang</code>, and a current marker with <code>aria-current="true"</code></td>
+</tr>
+<tr class="even">
+<td>Relative-host rejection</td>
+<td>✅ <code>--profile invalid-relative</code> failed during rendering for <code>//other.example.org/en/</code></td>
+</tr>
+<tr class="odd">
+<td>Unsafe-scheme rejection</td>
+<td>✅ <code>--profile invalid-unsafe</code> failed during rendering for <code>javascript:alert(1)</code></td>
+</tr>
+<tr class="even">
+<td>Escaping probe</td>
+<td>✅ <code>--profile escaped</code> rendered to <code>_site-escaped</code>; labels and URL query ampersands are HTML-escaped, and the script-like label is emitted as text</td>
+</tr>
+<tr class="odd">
+<td>Browser behavior</td>
+<td>✅ Lead observed configured 1440×900 light and 390×844 light/dark layouts, menu navigation, keyboard/focus, outside close, Areas independence, Search/Pages controls and resize while open</td>
+</tr>
+</tbody>
+</table>
+<p>The temporary consumer has actual local Chinese and English routes at <code>/zh-TW/</code> and <code>/en/</code>, plus a native Pages sidebar, Guide/Reference navbar, Search and theme toggle. Quarto emitted its existing <code>zh-TW</code> Abstract translation warnings; all valid renders completed. Invalid destination cases failed at the Askr render-time validator as intended.</p>
+<section id="lead-browser-observations-quarto-1.10.18-chromium-2026-10-21" class="level3">
+<h3 class="anchored" data-anchor-id="lead-browser-observations-quarto-1.10.18-chromium-2026-10-21">Lead browser observations — Quarto 1.10.18, Chromium, 2026-10-21</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Surface</th>
+<th>Actual observation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Header fit</td>
+<td>Page and viewport widths are 1440/1440px and 390/390px. The language trigger is square and matches the theme control (35.65px desktop, 31.62px phone). The phone menu remains within the viewport at x=147.98–339.98px; trigger bounds are x=308.37–339.98px.</td>
+</tr>
+<tr class="even">
+<td>Placement</td>
+<td>The selector remains in <code>.quarto-navbar-tools</code>, outside <code>#navbarCollapse</code>; current-language text/check marker and <code>aria-current</code> are present in the menu.</td>
+</tr>
+<tr class="odd">
+<td>Menu keyboard</td>
+<td>ArrowDown focuses the first item; a second ArrowDown focuses English. Enter navigates to the actual <code>/en/</code> page. Escape closes the menu and restores focus to <code>#askr-language-toggle</code>.</td>
+</tr>
+<tr class="even">
+<td>Link navigation</td>
+<td>An ordinary click on 繁體中文 navigates to the actual <code>/zh-TW/</code> page. Links use normal current-tab navigation.</td>
+</tr>
+<tr class="odd">
+<td>Outside close and theme</td>
+<td>Clicking the theme control closes the menu and switches to dark mode.</td>
+</tr>
+<tr class="even">
+<td>Areas</td>
+<td>Opening Areas then selecting Language closes Areas, clears its glass overlay and opens the language menu; after animation, Areas remains closed.</td>
+</tr>
+<tr class="odd">
+<td>Search and Pages</td>
+<td>Search opens and Cancel closes it. The Pages toggle changes <code>aria-expanded</code> between <code>true</code> and <code>false</code>.</td>
+</tr>
+<tr class="even">
+<td>Resize while open</td>
+<td>Resizing from 390px to 1440px leaves the menu usable and within bounds; Areas is closed and its overlay is clear.</td>
+</tr>
+<tr class="odd">
+<td>Page and console</td>
+<td>The consumer shows its actual page content without an overlay; no console warnings or errors were observed. The unconfigured profile had no Language control.</td>
+</tr>
+</tbody>
+</table>
+<p>Screenshots: <code>/tmp/askr-language-desktop-light.png</code> and <code>/tmp/askr-language-phone-dark.png</code>. The consumer deliberately keeps <code>current: zh-TW</code> while visiting <code>/en/</code>; Askr does not infer the current language from the URL. Authors set <code>current</code> for each language project’s pages. Physical touch, Safari, Firefox and a JavaScript-disabled browser were not observed.</p>
+<p>Pre-publication candidate source SHA-256 values, recorded during that render:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Path</th>
+<th>SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>_extensions/askr/_extension.yml</code></td>
+<td><code>26f787f47ecbb52f5cc25281e2d0583f81a4920f88d5a143477ba649069c9019</code></td>
+</tr>
+<tr class="even">
+<td><code>_extensions/askr/language-config.lua</code></td>
+<td><code>b055d913629ae8b046fe906cf2ffd21589000d56194c20d0440f2f744f1f09fb</code></td>
+</tr>
+<tr class="odd">
+<td><code>_extensions/askr/language-controls.html</code></td>
+<td><code>faa052b213794c3846c8acf3ac1afe4a6cb33092a7612d02a12542ea23ced7ec</code></td>
+</tr>
+<tr class="even">
+<td><code>_extensions/askr/theme-color.html</code></td>
+<td><code>9ae287033486f47e922dad3ed6bf9740107d4b7a4a6a71c3699b764506ef7cad</code></td>
+</tr>
+<tr class="odd">
+<td><code>_extensions/askr/qdk.scss</code></td>
+<td><code>0cc4dc4d7310be7a1a6fd47c7520dcc24d89c85141e25529c35237e890036c70</code></td>
+</tr>
+<tr class="even">
+<td><code>usage/languages.qmd</code></td>
+<td><code>b528e8297a82cb121833c92968bfde24633e34e9d42c359f3fa467f94c31eaf7</code></td>
+</tr>
+<tr class="odd">
+<td><code>README.md</code></td>
+<td><code>0dfac4ab6197a2ec75f663123bba5f0e9d4e72a37f42b0adfc1ac3c850bc3a6c</code></td>
+</tr>
+<tr class="even">
+<td><code>CHANGELOG.md</code></td>
+<td><code>2592b3c56f35333cf590cd3141e725f38001bcea162866df885253d6d2cebff6</code></td>
+</tr>
+<tr class="odd">
+<td><code>PLAN.md</code></td>
+<td><code>0ae597a4b826830fcf31e159ca96fbba536a8b244ad5cb82312016b12211237b</code></td>
+</tr>
+<tr class="even">
+<td><code>_quarto.yml</code></td>
+<td><code>6064b49827550718d98bcbf7ec0e5551fcc8d9c4349bdfc5bbb8d22df2160e0a</code></td>
+</tr>
+</tbody>
+</table>
+<p>These results cover the scoped source renders and Chromium observations above. They predate the bilingual-site build and later publication authorization; they do not establish the current root/child build, CI, deployment or LCDH adoption.</p>
+</section>
+</section>
 <section id="lead-browser-observations-2026-10-21" class="level2">
 <h2 class="anchored" data-anchor-id="lead-browser-observations-2026-10-21">0.9.0 Lead browser observations — 2026-10-21</h2>
 <p>State: CONVERGING / LOCAL CANDIDATE. The Lead observed the rendered temporary consumer in Chromium at desktop, tablet and phone viewport sizes. The independent floating-sidebar input is <code>/tmp/askr-floating-090.gFJTQX</code>; it contains only one sidebar and its rendered body has the native <code>floating</code> class. Other cases use <code>/tmp/askr-reading-090.aPzO0O</code>. No durable tests, gallery fixtures, consumer repository, root pins or infrastructure changes are part of these observations.</p>
@@ -1269,6 +1475,20 @@ document.addEventListener('DOMContentLoaded', function () {
   right.append(credit.content.cloneNode(true));
 });
 </script>
+<script>
+(() => {
+  function mount() {
+    const template = document.getElementById('askr-language-config');
+    if (!template) return;
+    const tools = document.querySelector('#quarto-header .quarto-navbar-tools');
+    if (!tools) throw new Error('Askr language selector requires a website Header with navbar tools.');
+    tools.append(template.content.cloneNode(true));
+    document.getElementById('quarto-header').classList.add('askr-has-language');
+  }
+  if (document.readyState === 'complete') mount();
+  else window.addEventListener('load', mount, {once: true});
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -1714,8 +1934,9 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.9.0" aria-label="Askr version 0.9.0">0.9.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.10.0" aria-label="Askr version 0.10.0">0.10.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
+<template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 
 
 

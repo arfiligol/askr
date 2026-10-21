@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-b5a558ee1d1b5dcea91ca9cc94f79546.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-9c369c174910e637ece9ee9bba9fbfcc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-32dc181353f585f90c74d3cf0d332302.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-f75962ce83ff07a96f40c04b292c7f16.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-32dc181353f585f90c74d3cf0d332302.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -206,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     var tools = container.querySelector('.quarto-navbar-tools');
     var collapseTools = tools && area.contains(tools);
     var authoredTools = tools ? Array.from(tools.children).filter(function (el) {
-      return !el.matches('.quarto-color-scheme-toggle, .quarto-reader-toggle, .askr-logout');
+      return !el.matches('.quarto-color-scheme-toggle, .quarto-reader-toggle, .askr-logout, .askr-language-selector');
     }) : [];
     var panelTools;
     if (collapseTools) {
@@ -904,7 +904,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="image" class="level2">
 <h2 class="anchored" data-anchor-id="image">Image</h2>
 <p>Images in this document come from Embla. The chart below is its bars-and-markers figure, saved here as a static image. Quarto’s folded cell keeps the embed source behind Source and shows the image underneath.</p>
-<div id="f665b7f5" class="cell" data-execution_count="1">
+<div id="6bdea94e" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Source</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image</span>
@@ -913,7 +913,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 <figure class="figure">
-<p><a href="figures_files/figure-html/cell-2-output-1.png" class="askr-image-entry" data-askr-gallery="" data-askr-description="" data-askr-image-key="1"><img src="figures_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="figures_files/figure-html/cell-2-output-1.png" class="askr-image-entry" data-askr-description="" data-askr-image-key="1" data-askr-gallery=""><img src="figures_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -927,7 +927,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="fig-viewer" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-viewer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-gallery="" data-askr-description="" data-askr-image-key="2"><img src="images/bars-semantic-markers.png" class="img-fluid figure-img"></a>
+<a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-description="" data-askr-image-key="2" data-askr-gallery=""><img src="images/bars-semantic-markers.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-viewer-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Bars with semantic markers, from the public Embla figure.
@@ -937,7 +937,7 @@ Figure&nbsp;1: Bars with semantic markers, from the public Embla figure.
 <a class="askr-image-view" data-askr-image-target="fig-viewer" href="images/bars-semantic-markers.png" aria-haspopup="dialog">View this figure</a>
 <p>This button opens the same image and caption as the figure above. A button-only entry registers its own hidden image source:</p>
 <div class="askr-image-source" aria-hidden="true">
-<p><a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-gallery="" data-askr-description="" data-askr-image-key="3"><img src="images/bars-semantic-markers.png" id="askr-image-entry-2" class="lightbox img-fluid"></a></p>
+<p><a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-description="" data-askr-image-key="3" data-askr-gallery=""><img src="images/bars-semantic-markers.png" id="askr-image-entry-2" class="lightbox img-fluid"></a></p>
 </div>
 <a class="askr-image-view" data-askr-image-target="askr-image-entry-2" href="images/bars-semantic-markers.png" aria-haspopup="dialog">View image</a>
 <section id="inline-interaction" class="level3">
@@ -946,7 +946,7 @@ Figure&nbsp;1: Bars with semantic markers, from the public Embla figure.
 <div id="fig-inline" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-inline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-gallery="" data-askr-description="" data-askr-image-key="4"><img src="images/bars-semantic-markers.png" class="img-fluid figure-img"></a>
+<a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-description="" data-askr-image-key="4" data-askr-gallery=""><img src="images/bars-semantic-markers.png" class="img-fluid figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-inline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Bars and markers from Embla, displayed inline without a duplicate figure.
@@ -959,7 +959,7 @@ Figure&nbsp;2: Bars and markers from Embla, displayed inline without a duplicate
 <h3 class="anchored" data-anchor-id="svg-interaction">SVG interaction</h3>
 <p>This existing Askr icon is vector artwork, not a scientific layout. Its geometry remains sharp when enlarged. Its camera is independent of the PNG.</p>
 <div class="askr-image-source askr-image-source-inline">
-<p><a href="../site_libs/quarto-contrib/quarto-project/askr/assets/icons/flame.svg" class="askr-image-entry" data-askr-gallery="" data-askr-description="" data-askr-image-key="5"><img src="../site_libs/quarto-contrib/quarto-project/askr/assets/icons/flame.svg" id="askr-image-entry-4" class="lightbox img-fluid"></a></p>
+<p><a href="../site_libs/quarto-contrib/quarto-project/askr/assets/icons/flame.svg" class="askr-image-entry" data-askr-description="" data-askr-image-key="5" data-askr-gallery=""><img src="../site_libs/quarto-contrib/quarto-project/askr/assets/icons/flame.svg" id="askr-image-entry-4" class="lightbox img-fluid"></a></p>
 </div>
 <span class="askr-inline-request" data-askr-image-target="askr-image-entry-4" data-label="Askr flame icon" hidden=""></span>
 </section>
@@ -967,13 +967,13 @@ Figure&nbsp;2: Bars and markers from Embla, displayed inline without a duplicate
 <h3 class="anchored" data-anchor-id="gallery">Gallery</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-gallery="viewer-formats" data-askr-description="" data-askr-image-key="6"><img src="images/bars-semantic-markers.png" class="img-fluid figure-img" data-group="viewer-formats"></a></p>
+<p><a href="images/bars-semantic-markers.png" class="askr-image-entry" data-askr-description="" data-askr-image-key="6" data-askr-gallery="viewer-formats"><img src="images/bars-semantic-markers.png" class="img-fluid figure-img" data-group="viewer-formats"></a></p>
 <figcaption>Public Embla figure: PNG source.</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/bars-semantic-markers.jpg" class="askr-image-entry" data-askr-gallery="viewer-formats" data-askr-description="" data-askr-image-key="7"><img src="images/bars-semantic-markers.jpg" class="img-fluid figure-img" data-group="viewer-formats"></a></p>
+<p><a href="images/bars-semantic-markers.jpg" class="askr-image-entry" data-askr-description="" data-askr-image-key="7" data-askr-gallery="viewer-formats"><img src="images/bars-semantic-markers.jpg" class="img-fluid figure-img" data-group="viewer-formats"></a></p>
 <figcaption>The same public figure encoded as JPEG; zoom does not add resolution.</figcaption>
 </figure>
 </div>
@@ -999,7 +999,7 @@ Figure&nbsp;2: Bars and markers from Embla, displayed inline without a duplicate
 <h2 class="anchored" data-anchor-id="theme-toggle">Theme toggle</h2>
 <p>Quarto keeps two outputs from one cell and shows one of them. <code>body.quarto-dark</code> hides <code>.light-content</code>; <code>body.quarto-light</code> hides <code>.dark-content</code>. Askr’s dark stylesheet is marked <code>data-mode="dark"</code>, so the header toggle adds and removes <code>quarto-dark</code> with the stylesheet.</p>
 <p>Emit the light output first, then the dark output:</p>
-<div id="3d582109" class="cell" data-renderings="[&quot;light&quot;,&quot;dark&quot;]" data-execution_count="2">
+<div id="60f93dd0" class="cell" data-renderings="[&quot;light&quot;,&quot;dark&quot;]" data-execution_count="2">
 <details class="code-fold">
 <summary>Source</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> HTML, display</span>
@@ -1162,6 +1162,20 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!right.childElementCount && !right.textContent.trim()) right.textContent = '';
   right.append(credit.content.cloneNode(true));
 });
+</script>
+<script>
+(() => {
+  function mount() {
+    const template = document.getElementById('askr-language-config');
+    if (!template) return;
+    const tools = document.querySelector('#quarto-header .quarto-navbar-tools');
+    if (!tools) throw new Error('Askr language selector requires a website Header with navbar tools.');
+    tools.append(template.content.cloneNode(true));
+    document.getElementById('quarto-header').classList.add('askr-has-language');
+  }
+  if (document.readyState === 'complete') mount();
+  else window.addEventListener('load', mount, {once: true});
+})();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1608,8 +1622,9 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.9.0" aria-label="Askr version 0.9.0">0.9.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.10.0" aria-label="Askr version 0.10.0">0.10.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
+<template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="../zh-TW" hreflang="../zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 
 
 
