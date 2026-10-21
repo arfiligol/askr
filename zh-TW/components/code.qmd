@@ -1,0 +1,25 @@
+---
+title: "程式碼"
+subtitle: "行內程式碼與圍欄區塊"
+---
+
+行內程式碼會在醒目提示底色上使用 IBM Plex Mono。圍欄區塊採透明填色、1px 邊框與 5px 圓角，並保留足夠內距，避免複製控制項遮住第一行。複製功能仍使用 Quarto 原生控制項。長行會在區塊內捲動，不會撐寬整頁。
+
+行內範例為 `askr-html`。
+
+```python
+def describe_reading_surface(theme: str, width: int) -> str:
+    return f"{theme} surface at {width}px retains local overflow boundaries"
+
+long_line = "qdk keeps this intentionally long source line in a local preformatted scroll area rather than allowing it to widen the whole page beyond the reader viewport"
+print(describe_reading_surface("dark", 360), long_line)
+```
+
+```{.python filename="reading.py"}
+def quiet(width: int) -> str:
+    return f"measure {width}px"
+```
+
+## 限制
+
+主題會讓長行在圍欄區塊內捲動。請勿為了限制閱讀欄寬度而把段落包進程式碼圍欄：內文應放在文章中，圍欄則用來呈現原始碼。

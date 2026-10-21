@@ -1,5 +1,95 @@
 # Candidate validation receipt
 
+## 0.10.0 bilingual publication package — 2026-10-21
+
+Status: ✅ Corrected bilingual candidate rendered and observed; Human-authorized
+publication is still pending. Quarto 1.10.18 rendered both sites from the root
+build. Publication, Pages execution, public-site observation and LCDH adoption
+remain pending.
+
+| Observation | Result |
+| --- | --- |
+| Corrected full root/child render | ✅ 106 English and 27 Traditional Chinese pages rendered; each site executed all three shared cells |
+| Static links | ✅ All 27 Chinese pages have zero broken links after cross-site destinations were made explicit |
+| Search indexes | ✅ 211 English and 89 Chinese entries; the English index has no Chinese-route links; `標題列語言選擇器` appears zero times in English and once in Chinese |
+| Bilingual browser behavior | ✅ Lead observed English-to-Chinese language navigation, four distinct Pages sidebars, two Chinese search results on the Chinese site, and the Figures image/button viewer with close-focus restoration. All images loaded; browser console warnings/errors were empty. |
+| Phone browser behavior | ✅ At 390×844 on the Chinese homepage, switched to dark mode, opened Language without overflow, and selected English to reach the actual English root with `Language: English`; console log was empty. |
+| Publication delivery | ⏳ PR, tag, GitHub Release, Pages execution, public-site observation and LCDH adoption remain pending |
+
+The first render exposed project-relative rewriting of root-prefixed Markdown
+and sidebar destinations. Those cross-site links were made explicit, then the
+full build and static-link inspection were repeated. Quarto emitted its native
+`zh-TW` Abstract translation warnings; the site used Quarto's native Chinese UI
+without a global Pandoc translation override. No CI or deployment result is
+claimed.
+
+The selector runtime observations below came from the earlier independent
+temporary consumer and remain separate from these bilingual Gallery results.
+
+## Prior optional Header language selector runtime observations — 2026-10-21
+
+State at observation: CONVERGING / LOCAL CANDIDATE. Quarto 1.10.18 rendered the Usage page
+`usage/languages.qmd` and the independent consumer
+`/tmp/askr-language-selector.7erYU7`. The Lead observed the configured
+consumer in Chromium at desktop and phone sizes; acceptance and publication
+remain separate outcomes.
+
+| Observation | Result |
+| --- | --- |
+| Usage page | ✅ `quarto render usage/languages.qmd` rendered `_site/usage/languages.html` |
+| Unconfigured consumer | ✅ Rendered all three local pages; generated HTML contains no `askr-language-config` template or language button, while retaining Search, theme and Areas controls |
+| Configured consumer | ✅ `quarto render --profile configured` rendered all three local routes into `_site`; the generated inert template contains the square language trigger, accessible name/title, two current-tab links with `lang`/`hreflang`, and a current marker with `aria-current="true"` |
+| Relative-host rejection | ✅ `--profile invalid-relative` failed during rendering for `//other.example.org/en/` |
+| Unsafe-scheme rejection | ✅ `--profile invalid-unsafe` failed during rendering for `javascript:alert(1)` |
+| Escaping probe | ✅ `--profile escaped` rendered to `_site-escaped`; labels and URL query ampersands are HTML-escaped, and the script-like label is emitted as text |
+| Browser behavior | ✅ Lead observed configured 1440×900 light and 390×844 light/dark layouts, menu navigation, keyboard/focus, outside close, Areas independence, Search/Pages controls and resize while open |
+
+The temporary consumer has actual local Chinese and English routes at
+`/zh-TW/` and `/en/`, plus a native Pages sidebar, Guide/Reference navbar,
+Search and theme toggle. Quarto emitted its existing `zh-TW` Abstract
+translation warnings; all valid renders completed. Invalid destination cases
+failed at the Askr render-time validator as intended.
+
+### Lead browser observations — Quarto 1.10.18, Chromium, 2026-10-21
+
+| Surface | Actual observation |
+| --- | --- |
+| Header fit | Page and viewport widths are 1440/1440px and 390/390px. The language trigger is square and matches the theme control (35.65px desktop, 31.62px phone). The phone menu remains within the viewport at x=147.98–339.98px; trigger bounds are x=308.37–339.98px. |
+| Placement | The selector remains in `.quarto-navbar-tools`, outside `#navbarCollapse`; current-language text/check marker and `aria-current` are present in the menu. |
+| Menu keyboard | ArrowDown focuses the first item; a second ArrowDown focuses English. Enter navigates to the actual `/en/` page. Escape closes the menu and restores focus to `#askr-language-toggle`. |
+| Link navigation | An ordinary click on 繁體中文 navigates to the actual `/zh-TW/` page. Links use normal current-tab navigation. |
+| Outside close and theme | Clicking the theme control closes the menu and switches to dark mode. |
+| Areas | Opening Areas then selecting Language closes Areas, clears its glass overlay and opens the language menu; after animation, Areas remains closed. |
+| Search and Pages | Search opens and Cancel closes it. The Pages toggle changes `aria-expanded` between `true` and `false`. |
+| Resize while open | Resizing from 390px to 1440px leaves the menu usable and within bounds; Areas is closed and its overlay is clear. |
+| Page and console | The consumer shows its actual page content without an overlay; no console warnings or errors were observed. The unconfigured profile had no Language control. |
+
+Screenshots: `/tmp/askr-language-desktop-light.png` and
+`/tmp/askr-language-phone-dark.png`. The consumer deliberately keeps
+`current: zh-TW` while visiting `/en/`; Askr does not infer the current language
+from the URL. Authors set `current` for each language project's pages.
+Physical touch, Safari, Firefox and a JavaScript-disabled browser were not
+observed.
+
+Pre-publication candidate source SHA-256 values, recorded during that render:
+
+| Path | SHA-256 |
+| --- | --- |
+| `_extensions/askr/_extension.yml` | `26f787f47ecbb52f5cc25281e2d0583f81a4920f88d5a143477ba649069c9019` |
+| `_extensions/askr/language-config.lua` | `b055d913629ae8b046fe906cf2ffd21589000d56194c20d0440f2f744f1f09fb` |
+| `_extensions/askr/language-controls.html` | `faa052b213794c3846c8acf3ac1afe4a6cb33092a7612d02a12542ea23ced7ec` |
+| `_extensions/askr/theme-color.html` | `9ae287033486f47e922dad3ed6bf9740107d4b7a4a6a71c3699b764506ef7cad` |
+| `_extensions/askr/qdk.scss` | `0cc4dc4d7310be7a1a6fd47c7520dcc24d89c85141e25529c35237e890036c70` |
+| `usage/languages.qmd` | `b528e8297a82cb121833c92968bfde24633e34e9d42c359f3fa467f94c31eaf7` |
+| `README.md` | `0dfac4ab6197a2ec75f663123bba5f0e9d4e72a37f42b0adfc1ac3c850bc3a6c` |
+| `CHANGELOG.md` | `2592b3c56f35333cf590cd3141e725f38001bcea162866df885253d6d2cebff6` |
+| `PLAN.md` | `0ae597a4b826830fcf31e159ca96fbba536a8b244ad5cb82312016b12211237b` |
+| `_quarto.yml` | `6064b49827550718d98bcbf7ec0e5551fcc8d9c4349bdfc5bbb8d22df2160e0a` |
+
+These results cover the scoped source renders and Chromium observations above.
+They predate the bilingual-site build and later publication authorization; they
+do not establish the current root/child build, CI, deployment or LCDH adoption.
+
 ## 0.9.0 Lead browser observations — 2026-10-21
 
 State: CONVERGING / LOCAL CANDIDATE. The Lead observed the rendered temporary

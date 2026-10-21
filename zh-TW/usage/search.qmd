@@ -1,0 +1,24 @@
+---
+title: "搜尋"
+---
+
+搜尋會讀取目前版本的索引。Askr 不會新增第二份索引，也不會跨版本搜尋。
+
+```yaml
+website:
+  search:
+    location: navbar
+    type: overlay
+```
+
+在 1280px 以上，按鈕會位於右側，緊鄰主題切換按鈕左方，標題列維持單行。低於此寬度時，搜尋會移到左側。
+
+建置每個定版網站時，請讓 `site-url` 包含該版本的目錄，確保 `search.json` 與搜尋結果連結都留在該目錄：
+
+```yaml
+# the render that is published to /v0.2/
+website:
+  site-url: https://example.github.io/project/v0.2/
+```
+
+複製到 `/` 的目前版本網站應使用不含版本目錄的網站根網址。從 v0.2 頁面搜尋時，只會讀取 `/v0.2/search.json`。版本資料夾與版本選單的設定請見[文件版本管理](versions.qmd)。

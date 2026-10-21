@@ -1,0 +1,14 @@
+```{python}
+#| renderings: [light, dark]
+#| code-fold: true
+#| code-summary: "Source"
+from IPython.display import HTML, display
+
+def swatch(background, foreground, label):
+    display(HTML(
+        f'<p style="margin:0;padding:1rem 1.25rem;background:{background};color:{foreground}">{label}</p>'
+    ))
+
+swatch("#faf8f8", "#2b2b2b", "Light rendering")
+swatch("#161618", "#ebebec", "Dark rendering")
+```

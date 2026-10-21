@@ -1,0 +1,9 @@
+---
+title: "提示框範例"
+---
+
+本頁是 Gallery 中用來展示收合式提示框的章節。標題列不會因此多出一個項目。
+
+::: {.callout-tip title="Section callout" collapse="true"}
+請從 Gallery 左側清單開啟此提示框。Components 有自己的清單，因此這個項目不會出現在其中。
+:::

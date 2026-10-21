@@ -2,11 +2,11 @@
 title: "Add Askr"
 ---
 
-`0.9.0` is the current release. The public format is `askr-html`. Quiet Quartz
+`0.10.0` is the current release. The public format is `askr-html`. Quiet Quartz
 is the visual theme.
 
 ```bash
-quarto add arfiligol/askr@v0.9.0 --no-prompt
+quarto add arfiligol/askr@v0.10.0 --no-prompt
 ```
 
 ```yaml
@@ -35,7 +35,7 @@ files inside `_extensions/arfiligol/askr`.
 
 ## Quarto compatibility
 
-Askr 0.9.0 retains support for stable Quarto releases in `>=1.9.38 <1.11`.
+Askr 0.10.0 retains support for stable Quarto releases in `>=1.9.38 <1.11`.
 Quarto 1.10.18 remains the reproducible gallery and CI baseline; consumers
 may use a stable release inside the supported range instead of that exact patch.
 Older tags retain their original requirements.
@@ -47,6 +47,30 @@ These remain consumer-selected options; Askr's format defaults are unchanged.
 The optional Logout and image viewer retain their existing configuration.
 See [Protected docs and logout](protected-docs.qmd) and
 [Image viewer](image-viewer.qmd) for configuration and ownership boundaries.
+
+## Optional language selector
+
+Askr 0.10.0 adds an optional Header language selector. It is absent unless
+`askr.languages` is configured; all other defaults remain unchanged. Each
+language project sets its own `current` code. Askr follows configured links and
+does not infer a language from the URL or translate pages.
+
+```yaml
+askr:
+  languages:
+    current: en
+    items:
+      - code: en
+        label: English
+        href: https://example.github.io/project/en/
+      - code: zh-TW
+        label: 繁體中文
+        href: https://example.github.io/project/
+```
+
+Each entry needs a unique nonempty code, nonempty label and HTTPS URL or
+domain-root path. See [Language selector](languages.qmd) for validation,
+accessibility and menu behavior.
 
 ## Dense scientific pages
 

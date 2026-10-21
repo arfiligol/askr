@@ -1,0 +1,222 @@
+---
+title: "樣式變數"
+---
+
+Askr 提供編譯時使用的 Sass 預設值，以及供建置後頁面使用的 `--qdk-*` CSS 屬性。使用者樣式應放在 Askr 之後；請勿修改已安裝的擴充套件檔案。分頁切換、收合、導覽、搜尋與複製仍由 Quarto 原生功能負責；樣式變數只改變呈現方式。
+
+讀者主題切換按鈕會使用 Askr 的控制項尺寸、邊框、圓角、顏色與游標移入樣式。Askr 會在搜尋旁預留該控制項的空間，因此使用者不必依賴內部的 `--_qdk-*` 縮放屬性另外調整間距。
+
+## 在使用專案中覆寫
+
+```yaml
+format:
+  askr-html:
+    theme:
+      light: [default, _extensions/arfiligol/askr/qdk.scss, styles.scss, light.scss]
+      dark: [default, _extensions/arfiligol/askr/qdk.scss, _extensions/arfiligol/askr/qdk-dark.scss, styles.scss, dark.scss]
+```
+
+使用 `scss:defaults` 可變更編譯後的 Quarto 樣式及其衍生 CSS 屬性。下表中的 Sass 預設值皆使用 `!default`；使用者指派值時不需加上它。Quarto 會以反向順序讀取主題清單中的預設值，再依正向順序套用規則。共用預設值放在 `styles.scss`，各主題專用的預設值放在 `light.scss` / `dark.scss`；同一主題中的每個變數只能指派一次。較後面的檔案不會覆寫較前面的無條件 Sass 指派，因為預設值會先執行。
+
+例如，`light.scss` 可包含 `$body-bg: #f3f5f7;`，`dark.scss` 可包含 `$body-bg: #20252b;`，並都放在 `/*-- scss:defaults --*/` 區段中。使用這種配置時，不要在共用檔案中設定 `$body-bg`。共用的 `styles.scss` 可包含：
+
+```scss
+/*-- scss:defaults --*/
+$link-color: #2d5e85;
+$grid-body-width: 680px;
+$qdk-tab-size: .85rem;
+$qdk-tab-padding-y: .3rem;
+
+/*-- scss:rules --*/
+:root {
+  --qdk-callout-radius: 8px;
+  --qdk-table-cell-padding: .35rem .7rem;
+}
+```
+
+CSS 覆寫會影響使用該屬性的規則；Sass 覆寫也會影響由該 Sass 變數編譯而成的 Quarto 原生規則。像 `--qdk-tab-active-border: var(--qdk-link)` 這類元件別名，會跟著全域基礎值變化，除非使用者另行覆寫該元件。CSS 值必須符合目標屬性的語法；若編譯期輸入無效，Quarto 會在編譯時回報。
+
+## 全域調色盤與版面
+
+既有 CSS 名稱仍可使用。它們在編譯時的來源，以及淺色／深色主題的確切預設值如下：
+
+在 0.9.0 中，Askr 邊框請覆寫 `$qdk-border`，柔和文字請覆寫 `$qdk-muted-text`。`$border-color` 與 `$toc-color` 仍保留 Quarto 原生用途，但不再控制這兩個 Askr 屬性。公開 CSS 名稱仍可使用。
+
+| CSS 屬性 | Sass 來源 | 淺色 | 深色 |
+| --- | --- | --- | --- |
+| `--qdk-canvas` | `$body-bg` | `#faf8f8` | `#161618` |
+| `--qdk-text` | `$body-color` | `#4e4e4e` | `#d4d4d4` |
+| `--qdk-heading` | `$headings-color` | `#2b2b2b` | `#ebebec` |
+| `--qdk-muted` | `$qdk-muted-text` | `#6b6b6b` | `#a0a0a0` |
+| `--qdk-muted-decoration` | `$qdk-muted-decoration` | `#b8b8b8` | `#646464` |
+| `--qdk-link`, `--qdk-focus` | `$link-color` | `#284b63` | `#7b97aa` |
+| `--qdk-border` | `$qdk-border` | `#e5e5e5` | `#393639` |
+| `--qdk-highlight` | `$code-bg` | `rgba(143,159,169,.15)` | same |
+| `--qdk-sidebar`, `--qdk-margin` | `$grid-sidebar-width`, `$grid-margin-width` | `264px` | same |
+| `--qdk-body` | `$grid-body-width` | `630px` | same |
+| `--qdk-gutter` | `$grid-column-gutter-width` | `26px` | same |
+| `--qdk-callout-note` | `$callout-color-note` | `#448aff` | same |
+| `--qdk-callout-tip` | `$callout-color-tip` | `#00bfa5` | same |
+| `--qdk-callout-important` | `$callout-color-important` | `#7a43b5` | `#c69af0` |
+| `--qdk-callout-warning` | `$callout-color-warning` | `#db8942` | same |
+| `--qdk-callout-caution` | `$callout-color-caution` | `#db4242` | `#ff8f8f` |
+
+字型來源預設為 Source Sans 3 內文、Schibsted Grotesk 標題，以及 IBM Plex Mono 程式碼，並採用已安裝平台的後備字型。`$font-size-root` 為 `18px`，`$line-height-base` 為 `1.6`，`$font-weight-base` 為 `400`，`$headings-font-weight` 為 `700`。標題 Sass 字級 `$h1-font-size` 至 `$h4-font-size` 依序為 `1.78rem`、`1.39rem`、`1.11rem` 與 `1rem`。`$table-border-color` 沿用表中列出的主題邊框預設值；`$table-striped-bg` 為 `rgba(143,159,169,.15)`。淺色模式下 `$code-block-bg` 為 `transparent`，深色模式下則為 `#1f1f22`。`$callout-border-width` 為 `1px`。
+
+## 全域與元件屬性
+
+有標題的提示框會共用相同的區塊內縮與最小標題列高度，無論是否顯示圖示都一樣。圖示、標題與展開符號會在該列垂直置中；多行標題會自然增加列高。沒有標題的提示框則保留原生本文內縮。
+
+下表每列的 CSS 名稱是 `--qdk-` 加上變數名稱；Sass 預設名稱則是 `$qdk-` 加上相同變數名稱。值中含 `var(...)` 的項目是即時 CSS 別名；含 `$` 的項目則取自上方 Sass 來源。
+
+| 變數 | 預設值 |
+| --- | --- |
+| `tertiary` | 淺色 `#4f756b`，深色 `#8fb7a8` |
+| `divider-content` | `rgba(43, 43, 43, .18)` |
+| `divider-layout` | `rgba(43, 43, 43, .08)` |
+| `mark` | `#fff23688` |
+| `space` | `1rem` |
+| `chrome` | `$font-size-root` |
+| `ui` | `1.15` |
+| `body-font` | `$font-family-sans-serif` |
+| `heading-font` | `$headings-font-family` |
+| `mono-font` | `$font-family-monospace` |
+| `body-size` | `1rem` |
+| `line-height` | `$line-height-base` |
+| `body-weight` | `$font-weight-base` |
+| `strong-weight` | `600` |
+| `heading-weight` | `$headings-font-weight` |
+| `link-hover` | `var(--qdk-tertiary)` |
+| `link-background` | `var(--qdk-highlight)` |
+| `inline-radius` | `var(--qdk-radius)` |
+| `focus-width` | `3px` |
+| `focus-offset` | `3px` |
+| `focus-radius` | `3px` |
+| `tab-font` | `var(--qdk-heading-font)` |
+| `tab-size` | `.9rem` |
+| `tab-weight` | `400` |
+| `tab-active-weight` | `600` |
+| `tab-line-height` | `1.25` |
+| `tab-padding-y` | `.35rem` |
+| `tab-padding-x` | `.8rem` |
+| `tab-gap` | `.5rem` |
+| `tab-content-padding` | `.65rem .8rem` |
+| `tab-border-width` | `2px` |
+| `tab-color` | `var(--qdk-text)` |
+| `tab-active-color` | `var(--qdk-heading)` |
+| `tab-active-border` | `var(--qdk-link)` |
+| `tab-hover-color` | `var(--qdk-heading)` |
+| `tab-hover-border` | `var(--qdk-divider-layout)` |
+| `tab-background` | `transparent` |
+| `control-radius` | `var(--qdk-radius)` |
+| `control-size` | `31px` |
+| `control-color` | `var(--qdk-heading)` |
+| `control-border` | `var(--qdk-divider-layout)` |
+| `control-hover` | `var(--qdk-tertiary)` |
+| `nav-height` | `3.4rem` |
+| `nav-size` | `16px` |
+| `nav-brand-size` | `18px` |
+| `nav-font` | `var(--qdk-heading-font)` |
+| `nav-gap` | `.4rem` |
+| `version-size` | `16px` |
+| `version-weight` | `400` |
+| `version-padding` | `0 .45rem 0 .6rem` |
+| `version-gap` | `.35rem` |
+| `version-menu-padding` | `.35rem` |
+| `version-item-padding` | `.3rem .55rem` |
+| `version-active-background` | `var(--qdk-highlight)` |
+| `search-overlay` | `rgba(0, 0, 0, .32)` |
+| `search-radius` | `var(--qdk-control-radius)` |
+| `search-background` | `var(--qdk-canvas)` |
+| `search-color` | `var(--qdk-text)` |
+| `search-border` | `var(--qdk-divider-layout)` |
+| `callout-radius` | `var(--qdk-radius)` |
+| `callout-padding` | `var(--qdk-space)` |
+| `callout-header-padding` | `var(--qdk-space)` |
+| `callout-margin` | `var(--qdk-space)` |
+| `callout-tint` | `6.3%` |
+| `callout-border-tint` | `27%` |
+| `callout-border-width` | `$callout-border-width` |
+| `callout-title-weight` | `600` |
+| `callout-title-line-height` | `1.35` |
+| `callout-icon-size` | `20px` |
+| `code-size` | `.85rem` |
+| `code-inline-size` | `.9em` |
+| `code-radius` | `var(--qdk-radius)` |
+| `code-padding` | `1rem 2.5rem 1rem 1rem` |
+| `code-color` | `var(--qdk-heading)` |
+| `code-inline-color` | `var(--qdk-heading)` |
+| `code-background` | `$code-block-bg` |
+| `code-border` | `var(--qdk-border)` |
+| `code-copy-background` | `var(--qdk-code-background)` |
+| `code-copy-color` | `var(--qdk-text)` |
+| `code-copy-hover-background` | `var(--qdk-border)` |
+| `code-copy-hover-color` | `var(--qdk-heading)` |
+| `table-border` | `$table-border-color` |
+| `table-stripe` | `$table-striped-bg` |
+| `table-head-border` | `var(--qdk-muted-decoration)` |
+| `table-head-padding` | `.5rem` |
+| `table-cell-padding` | `.5rem` |
+| `table-head-line-height` | `1.35` |
+| `table-margin` | `var(--qdk-space)` |
+| `blockquote-color` | `var(--qdk-text)` |
+| `blockquote-border` | `var(--qdk-link)` |
+| `blockquote-border-width` | `3px` |
+| `blockquote-padding` | `var(--qdk-space)` |
+| `blockquote-margin` | `var(--qdk-space)` |
+| `radius` | `6px` |
+
+深色模式會將 `divider-content` 覆寫為 `rgba(212,212,212,.24)`，將 `divider-layout` 覆寫為 `rgba(212,212,212,.10)`，並將 `mark` 覆寫為 `#e5c76b33`。其他元件預設值在兩種主題間共用，並跟隨調色盤別名。深色模式的 `code-color` 會跟隨 `var(--qdk-text)`；行內程式碼仍使用標題色。Quarto 原生表格的表頭與儲存格內距為 `.5rem`，裝飾性表頭邊框為 `1px`。會換行的表頭使用無單位 `1.35` 行高。樣式變數規則會直接作用於 Quarto 原生與一般 HTML 表格儲存格。文字用途的柔和色彩用於副標題、中繼資料、標籤與頁尾；裝飾用途的柔和色彩用於細線。提示框標題由 72% 本文色與 28% 類型色混合；圖示與邊框則保留飽和的類型色。`--qdk-callout-color` 是每種原生提示框各自解析出的類型色；覆寫某一類型的具名色彩即可變更該類所有提示框。
+
+## 自適應基準
+
+公開基準不會在視窗規則中重新指派。Askr 會乘上內部倍率；`--_qdk-*` 屬性屬於實作細節。這能在各種寬度保留使用者設定的基準，以及預設版面幾何：
+
+| 視窗寬度（px） | 內文 | 側欄／邊界 | 欄間距 | 根字級 | UI 倍率 |
+| --- | --- | --- | --- | --- | --- |
+| 小於 630 | 符合容器寬度 | 264px | 26px | 16px | 1.02 |
+| 630–991.98 | 符合容器寬度 | 264px | 26px | 18px | 1.15 |
+| 992–1279.98 | 630px | 200px | 16px | 17px | 1.08 |
+| 1280–1439.98 | 630px | 240px | 22px | 17px | 1.08 |
+| 1440–1919.98 | 630px | 264px | 26px | 18px | 1.15 |
+| 1920–2559.98 | 693px | 290px | 29px | 20px | 1.27 |
+| 2560 以上 | 756px | 320px | 31px | 22px | 1.4 |
+
+例如，`680px` 內文基準在 1920px 視窗寬度會變成 `748px`（×1.1），在 2560px 時則變成 `816px`（×1.2）。行動版內容會符合可用容器寬度。網站選項 `askr.reading-width: wide` 會將一般基準換成 `780px`，因此在 1920px 時為 `858px`，在 2560px 時為 `936px`。固定、浮動或不存在的側欄都會使用選定的閱讀欄寬度。Quarto 原生寬度擴展與閱讀模式仍保有原有行為。
+
+低於 992px 時，提示框水平內距與標題內距會使用 ×.8。分頁標籤預設維持 `.9rem` 字級與 `.35rem` 垂直內距，隨根字級縮放，不會被另一組分頁尺寸取代。
+
+## 建置後的元件範例
+
+下列原生元件會使用與圖集相同的樣式變數規則。
+
+::: {.panel-tabset}
+
+### 第一頁
+
+[內文連結](../components.qmd)仍會保留醒目底色；分頁控制項使用分頁樣式變數。
+
+### 第二頁
+
+第二個分頁仍使用 Quarto 原生選取行為。
+
+:::
+
+::: {.callout-note}
+提示框顏色、內距與圓角都取自文件列出的樣式變數。
+:::
+
+> 引文邊框、間距與文字使用引文樣式變數。
+
+`inline_code`
+
+```text
+A code block uses the code size, frame and padding.
+```
+
+| 樣式變數範圍 | 負責者 |
+| --- | --- |
+| 呈現方式 | 使用者樣式覆寫 |
+| 原生互動 | Quarto |
+
+若要更新版本，請重新安裝經審查的標籤版本，不要直接編輯 `_extensions/arfiligol/askr`。

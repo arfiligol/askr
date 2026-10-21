@@ -50,12 +50,7 @@ Images in this document come from Embla. The chart below is
 its bars-and-markers figure, saved here as a static image. Quarto's folded
 cell keeps the embed source behind Source and shows the image underneath.
 
-```{python}
-#| code-fold: true
-#| code-summary: "Source"
-from IPython.display import Image
-Image("images/bars-semantic-markers.png")
-```
+{{< include ../_includes/_figures-image-cell.qmd >}}
 
 A page that only needs the picture, without a source disclosure, embeds it
 directly:
@@ -121,20 +116,7 @@ Quarto keeps two outputs from one cell and shows one of them. `body.quarto-dark`
 
 Emit the light output first, then the dark output:
 
-```{python}
-#| renderings: [light, dark]
-#| code-fold: true
-#| code-summary: "Source"
-from IPython.display import HTML, display
-
-def swatch(background, foreground, label):
-    display(HTML(
-        f'<p style="margin:0;padding:1rem 1.25rem;background:{background};color:{foreground}">{label}</p>'
-    ))
-
-swatch("#faf8f8", "#2b2b2b", "Light rendering")
-swatch("#161618", "#ebebec", "Dark rendering")
-```
+{{< include ../_includes/_figures-theme-toggle-cell.qmd >}}
 
 The same order works for a Plotly figure: draw the light figure, then the dark figure, under `#| renderings: [light, dark]`. The figure colors are baked into each output. The toggle does not recolor a single picture.
 

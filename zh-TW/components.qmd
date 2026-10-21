@@ -1,0 +1,22 @@
+---
+title: "元件"
+---
+
+Askr 會調整 Quarto 原生文章元件的樣式，不會新增撰寫語法。以下每頁介紹一類元件，方便在進一步修改前檢視目前的呈現方式。
+
+## 已調整
+
+- [標題](components/headings.qmd)。第二層標題不再自動畫出 Quarto 底線；分隔線改由明確的 `---` 表示。
+- [內文](components/prose.qmd)。文章連結、醒目文字、清單標記、引文與內容分隔線。
+- [提示框](components/callouts.qmd)。五種原生類型及其外框、圖示與展開箭頭。
+- [程式碼](components/code.qmd)。行內程式碼、圍欄程式碼區塊與本機溢位處理。
+- [表格](components/tables.qmd)。表頭與儲存格的分隔線。
+- [數學公式](components/mathematics.qmd)。展示公式會在內容寬度內捲動。
+- [參考文獻](components/references.qmd)。文中引用與參考文獻清單。
+
+## 保留 Quarto 原有呈現方式
+
+- [圖形與群組](components/figures.qmd)。欄、分頁、圖表，以及一張來自 Embla 的圖片。群組仍使用 Quarto 原有呈現方式；圖片使用 Quarto 摺疊的 Source。
+- [已儲存的 Notebook 輸出](notebook-output.qmd)。實際執行過的儲存格，與圍欄程式碼區塊不同。
+
+網站外框，例如區域、頁面清單與置中閱讀欄，請見[版面](gallery/layout.qmd)。

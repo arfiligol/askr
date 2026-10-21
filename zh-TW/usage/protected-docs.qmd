@@ -1,0 +1,36 @@
+---
+title: "受保護文件與登出"
+---
+
+Askr 可選擇在標題列顯示 Logout 圖示。它只是一個導覽項目：**登出範圍由 Authentik 與部署設定決定**。公開文件不需要此項目，因此這個公開圖集將它停用。
+
+## 設定項目
+
+在受保護網站的 `_quarto.yml` 中：
+
+```yaml
+askr:
+  logout:
+    href: "https://docs.example.org/outpost.goauthentik.io/sign_out"
+    label: "Logout"
+```
+
+設定 `logout` 時必須提供 `href`。它可使用絕對 HTTPS 網址，或目前網域上以 `/` 開頭的路徑。例如 `/outpost.goauthentik.io/sign_out` 即使從 `/v1.0/` 中的文件開啟，仍會從網域根目錄開始。協定相對網址 `//host` 與其他 URL scheme 都不接受。Askr 沒有預設登出端點。`label` 預設為 `Logout`，並作為圖示的無障礙名稱與提示文字。
+
+此項目是在目前分頁開啟的一般連結。Askr 不會讀取帳戶、刪除 Cookie、呼叫驗證 API，也不會回報登出成功。若要隱藏控制項，請完全移除 `logout` 設定。
+
+## 選擇正確的 Authentik 目的地
+
+若使用 Proxy 或**單一應用程式的 Forward Auth**，outpost 登出路徑會由受保護應用程式的主機提供。若使用**網域層級的 Forward Auth**，則應使用供應商設定的驗證網址主機。因此，同網域路徑不能取代驗證主機上的網址。請向部署負責人確認目的地；上方範例網域僅供說明，並非已設定的服務。
+
+[Authentik Proxy Provider 登出文件](https://docs.goauthentik.io/add-secure-apps/providers/proxy/#log-out)說明 `/outpost.goauthentik.io/sign_out`。Outpost 登出會使該 outpost 內的使用者工作階段失效，影響範圍可能超過這個文件網站，因此不能視為「僅登出本站」。
+
+## 三種不同範圍
+
+| 動作 | 效果由何者控制 |
+| --- | --- |
+| Outpost 登出 | Proxy Provider／outpost 會讓其工作階段失效。若 Authentik 登入仍有效，使用者可能不需重新輸入憑證就能再次通過驗證。 |
+| Authentik 工作階段登出 | 設定為以 [User Logout stage](https://docs.goauthentik.io/add-secure-apps/flows-stages/stages/user_logout/) 結束的登出流程，會結束目前 Authentik 工作階段。請使用部署中實際的流程網址，不要自行建立 Askr 端點。 |
+| Single Logout（SLO） | [Authentik 的 SLO 設定](https://docs.goauthentik.io/add-secure-apps/providers/single-logout/)決定是否將登出傳遞至參與的應用程式。實際支援與供應商設定都會影響結果；這不代表每個應用程式都一定會登出。 |
+
+Askr 可以連到選定目的地，但不能選擇或強制執行上述登出範圍。NPM 規則、Authentik 流程、存取政策、實際登出與重新驗證檢查都由部署負責人管理。成功開啟網址並不能證明任何工作階段已結束。

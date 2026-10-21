@@ -7,6 +7,18 @@ derive from these entries; an Unreleased entry is not a published release.
 
 No unreleased changes.
 
+## 0.10.0 — 2026-10-21
+
+### Added
+
+- Optional site-level `askr.languages` adds a current-tab Header language
+  selector, independent of Areas, with validated destinations and an explicit
+  current-language marker. The selector is absent unless configured; existing
+  navbar language links and all other defaults remain unchanged.
+- The Gallery source now builds separate English and Traditional Chinese
+  websites with their own navigation and search. Both use the optional selector
+  to link their homepages, and both render the same three executable examples.
+
 ## 0.9.0 — 2026-10-21
 
 ### Added

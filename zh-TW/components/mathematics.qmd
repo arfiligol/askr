@@ -1,0 +1,47 @@
+---
+title: "數學公式"
+subtitle: "展示公式維持在閱讀欄內"
+---
+
+展示公式可在局部區域捲動。一般內文閱讀欄寬為 630px；全站 `wide` 寬版設定的閱讀欄寬為 780px。精簡的 Copy（複製）控制項會在游標移入或鍵盤焦點停留時出現，並複製不含外層 `$$` 分隔符號的公式原始碼。若無法使用剪貼簿，公式下方會出現可選取的原始碼。
+
+$$
+\omega_r = 2\pi f
+$$ {#eq-frequency}
+
+像 @eq-frequency 這類原生參照仍會保留編號與連結。
+
+$$
+\mathcal{R}(x) = \sum_{k=1}^{n} \frac{\alpha_k\,\exp\left(-\frac{(x-\mu_k)^2}{2\sigma_k^2}\right)}{\sqrt{2\pi}\sigma_k} + \int_0^\infty \frac{\lambda^2 + \omega^2 + \eta^2}{(\lambda + \omega + \eta)^2}\,d\omega.
+$$
+
+行內數學公式留在句子中，例如 $\omega_r = 2\pi f$。
+
+## 複製設定
+
+在 `_quarto.yml` 的網站層級設定中，使用巢狀選項 `askr.math-copy: false`：
+
+```yaml
+askr:
+  math-copy: false
+```
+
+單一頁面使用扁平的 front matter 鍵 `askr-math-copy: false`。頁面值會覆寫網站設定；`askr-math-copy: true` 則會在該頁啟用此功能。若只要停用單一公式的複製功能，可用 `.no-math-copy` 包住公式的 div，或將此類別加到原生公式屬性（`$$ … $$ {#eq-name .no-math-copy}`）。緊密清單中的展示公式也支援複製。原始碼會保留在資料屬性中；只有在複製遭拒時才會建立可選取的後備文字。搜尋仍保留 Quarto 原生公式文字，不會額外加入 Askr 公式原始碼副本。
+
+## 原生語意區塊
+
+若要建立有編號的定義、定理、命題、引理、推論、備註、範例與證明，請使用 Quarto 原生識別字（`def-`、`thm-`、`prp-`、`lem-`、`cor-`、`rem-`、`exm-`）及 `.proof`。
+
+::: {#def-angular-frequency}
+## 角頻率
+
+頻率為 $f$ 時，角頻率為 $\omega = 2\pi f$。
+:::
+
+::: {.proof}
+一個週期是 $2\pi$ 弧度，因此將每秒週期數乘以 $2\pi$，即可得到每秒弧度數。
+:::
+
+## 限制
+
+主題會讓長展示公式在閱讀欄內捲動。請勿把句子編成展示公式；應以文字說明物理量，並讓公式只表達關係。
