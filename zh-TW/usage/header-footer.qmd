@@ -1,0 +1,53 @@
+---
+title: "標題列與頁尾連結"
+---
+
+請使用 Quarto 原生導覽選項設定連結。Askr 負責外觀，不會另建連結清單。標題列提供快速入口；頁尾則讓讀者閱讀完畢後仍可前往專案、社群與維護資源。
+
+## 原生設定
+
+```yaml
+website:
+  navbar:
+    tools-collapse: true
+    tools:
+      - icon: github
+        href: https://github.com/your-organization/your-project
+        text: GitHub repository
+        aria-label: GitHub repository
+  page-footer:
+    left:
+      - icon: github
+        aria-label: GitHub repository
+        href: https://github.com/your-organization/your-project
+      - text: '<i class="bi bi-chat-dots" aria-hidden="true"></i> Community'
+        href: https://community.example.org/
+    center:
+      - text: '<i class="bi bi-book" aria-hidden="true"></i> Maintenance guide'
+        href: maintenance.qmd
+      - text: '<i class="bi bi-people" aria-hidden="true"></i> Contributing'
+        href: contributing.qmd
+    right: "Your project's existing footer content"
+```
+
+請將範例目的地替換為自己的連結。GitHub 會出現兩次，因為它們位於兩個不同的原生導覽區域；Askr 不會同步網址。圖示請使用 [Bootstrap 圖示名稱](https://icons.getbootstrap.com/)，並為 `text` / `aria-label` 提供描述性文字。只有圖示的頁尾連結必須設定 `aria-label`：Quarto 會將該名稱套用至原生圖示。若社群連結不易辨識，請加上簡短的可見標籤，讓用途更清楚。
+
+Quarto 1.10.18 的頁尾文字呈現方式會在同時設定時以 `icon` 取代相鄰文字，因此這些範例將裝飾性 Bootstrap 圖示放入原生 `text` 標記。`aria-hidden` 會讓可見標籤成為連結名稱。
+
+設定 `tools-collapse: true` 時，空間不足的已撰寫工具會移到 Areas 面板。主題、Search 與選用的 Logout 仍留在標題列。設定為 `false` 時，工具會留在標題列；請控制數量，確保最窄的視窗也能容納。較長的頁尾標籤會換行，不會變成捲動列。連結仍依 Quarto 原生 `href`、`target` 與 `rel` 行為運作；Askr 不會強制在新分頁開啟。既有連結與建置資訊仍由作者設定。
+
+## Powered by Askr
+
+頁尾右側會包含 `Powered by Askr · version`。Askr 會將 Powered by Askr 連到文件網站，並將版本連到 GitHub Release。安裝的擴充套件 `_extension.yml` 才是版本依據，並非 `askr-versions.json` 或文件所用的套件版本。尚未發布的本機修改仍會顯示目前套件中繼資料的版本；這不能證明修改已發布。
+
+若要隱藏此致謝：
+
+```yaml
+askr:
+  footer:
+    credit: false
+```
+
+Askr 會附加致謝文字，不會取代右側原有內容。若作者沒有設定頁尾，Askr 會建立只含致謝文字的簡易頁尾；若停用致謝，則不會建立頁尾。Askr 不會產生或移除提交雜湊值。
+
+選單、頁尾區域與其他原生選項請見 [Quarto 導覽指南](https://quarto.org/docs/websites/website-navigation)。

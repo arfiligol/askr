@@ -1,0 +1,6 @@
+```{python}
+#| code-fold: true
+#| code-summary: "Source"
+from IPython.display import Image
+Image("images/bars-semantic-markers.png")
+```

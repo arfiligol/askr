@@ -1,0 +1,26 @@
+---
+title: "跟隨主題切換的圖形"
+---
+
+儲存格可以同時產生淺色與深色輸出。請先輸出淺色內容：
+
+```python
+#| renderings: [light, dark]
+```
+
+搭配 `askr-html` 與 `theme-toggle` 時，深色樣式表會帶有 `data-mode="dark"`，而切換按鈕會在 `body` 上加入 `quarto-dark`。[圖形與群組](../components/figures.qmd)頁面以此方式顯示一組雙色樣本。
+
+## 寬圖與圖表
+
+將圖形或 Mermaid 區塊包在 `.askr-wide-figure` 中，可保留標籤的自然大小，並在具名且可用鍵盤聚焦的區域內捲動。捲動範圍由圖形本身的內在寬度決定，不需指定固定的使用者寬度。Mermaid 顏色會依 Askr 的明亮與深色調色盤變化。
+
+````markdown
+::: {.askr-wide-figure aria-label="Circuit signal path"}
+```{mermaid}
+flowchart LR
+  Input --> Resonator --> Output
+```
+:::
+````
+
+此工具保留 Quarto 原生圖形、標題與交互參照。

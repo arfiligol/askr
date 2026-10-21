@@ -1,0 +1,5 @@
+```{python}
+values = [3, 5, 8]
+total = sum(values)
+print(f"Saved notebook output: {values} -> {total}")
+```

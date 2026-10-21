@@ -1,0 +1,44 @@
+---
+title: "Areas、Page List 與 Sections"
+---
+
+這是三種不同的清單。Area 用來選擇要開啟的 Page List；Page List 用來選擇頁面；Sections 則列出該頁的標題。
+
+桌面版只會在網站標題、導覽與標題列控制項都容納得下時，才會將 Areas 顯示為行內項目；否則 Areas 按鈕會在面板中開啟相同導覽清單。此行為也會因應較長標籤與窄視窗，不需使用者設定斷點。Pages 仍依照自己的行動版側欄行為呈現。網站標題很長時，畫面上可能會縮短顯示，但無障礙名稱仍保留完整文字。
+
+| 角色 | 顯示位置 | 項目內容 |
+| --- | --- | --- |
+| Areas | 標題列 | 每個頁面群組各一項 |
+| Page List | 左欄，標題為 Pages | 目前 Area 中的頁面 |
+| Sections | 右欄，標題為 Sections | 無需手動設定；Quarto 會列出目前頁面的標題 |
+
+```yaml
+website:
+  navbar:
+    left:
+      - href: index.qmd
+        text: Guide
+      - href: reference.qmd
+        text: Reference
+  sidebar:
+    - title: Pages
+      style: docked
+      contents:
+        - text: Overview
+          href: index.qmd
+        - text: Measure
+          href: guide/measure.qmd
+    - title: Pages
+      style: docked
+      contents:
+        - text: Overview
+          href: reference.qmd
+        - text: API
+          href: reference/api.qmd
+```
+
+開啟 Guide 會顯示第一份 Page List；開啟 Reference 則會顯示第二份。設定 `toc-title: Sections` 與 `toc-location: right`，即可顯示右欄。標題只屬於 Sections，不應放在 Page List，也不應另設為 Area。
+
+同一個 Area 中的頁面應有共同用途。Usage 就是這類分組：安裝 Askr、本頁、文件版本管理與搜尋各自負責不同工作，因此分成不同頁面。
+
+本圖集的 Areas 為 Gallery、Components、Usage、Credits 與 Long list。此分組方式請見[版面](../gallery/layout.qmd)。

@@ -1,0 +1,140 @@
+project:
+  type: website
+  output-dir: ../_site/zh-TW
+  render:
+    - "*.qmd"
+    - "components/*.qmd"
+    - "gallery/*.qmd"
+    - "usage/*.qmd"
+
+lang: zh-TW
+
+website:
+  title: Askr
+  site-url: https://arfiligol.github.io/askr/zh-TW/
+  search:
+    location: navbar
+    type: overlay
+  page-footer:
+    center:
+      - text: Maintenance guide (English)
+        href: https://github.com/arfiligol/askr/blob/main/README.md
+  navbar:
+    tools-collapse: true
+    left:
+      - text: 展示
+        href: index.qmd
+      - text: 元件
+        href: components.qmd
+      - text: 使用
+        href: usage/add-askr.qmd
+      - text: 致謝
+        href: credits.qmd
+  sidebar:
+    - id: gallery
+      title: 頁面
+      style: docked
+      collapse-level: 2
+      contents:
+        - text: 總覽
+          href: index.qmd
+        - section: 展示
+          contents:
+            - text: 版面
+              href: gallery/layout.qmd
+            - text: 節奏
+              href: gallery/rhythm.qmd
+            - text: 提示區塊
+              href: gallery/callout.qmd
+            - text: 中日韓文字
+              href: gallery/cjk.qmd
+            - text: 長清單
+              href: gallery/long-list.qmd
+    - id: components
+      title: 頁面
+      style: docked
+      collapse-level: 2
+      contents:
+        - text: 元件總覽
+          href: components.qmd
+        - section: 元件
+          contents:
+            - text: 標題
+              href: components/headings.qmd
+            - text: 正文
+              href: components/prose.qmd
+            - text: 提示區塊
+              href: components/callouts.qmd
+            - text: 程式碼
+              href: components/code.qmd
+            - text: 表格
+              href: components/tables.qmd
+            - text: 數學
+              href: components/mathematics.qmd
+            - text: 參考文獻
+              href: components/references.qmd
+            - text: 圖片與分組
+              href: components/figures.qmd
+        - text: 儲存的 Notebook 輸出
+          href: notebook-output.qmd
+    - id: usage
+      title: 頁面
+      style: docked
+      collapse-level: 2
+      contents:
+        - text: 安裝 Askr
+          href: usage/add-askr.qmd
+        - text: Areas、頁面清單與章節
+          href: usage/navigation.qmd
+        - text: 版本管理
+          href: usage/versions.qmd
+        - text: 搜尋
+          href: usage/search.qmd
+        - text: 樣式變數
+          href: usage/tokens.qmd
+        - text: 隨章節切換的圖片
+          href: usage/figures.qmd
+        - text: 圖片檢視器
+          href: usage/image-viewer.qmd
+        - text: 受保護文件與登出
+          href: usage/protected-docs.qmd
+        - text: 頁首與頁尾連結
+          href: usage/header-footer.qmd
+        - text: 語言選擇器
+          href: usage/languages.qmd
+    - id: credits
+      title: 頁面
+      style: docked
+      collapse-level: 2
+      contents:
+        - text: 致謝
+          href: credits.qmd
+        - section: 英文原文
+          contents:
+            - text: 第三方通知
+              href: https://arfiligol.github.io/askr/THIRD_PARTY.html
+            - text: 資產清單
+              href: https://arfiligol.github.io/askr/ASSET_MANIFEST.html
+
+askr:
+  languages:
+    current: zh-TW
+    items:
+      - code: en
+        label: English
+        href: /askr/
+      - code: zh-TW
+        label: 繁體中文
+        href: /askr/zh-TW/
+
+format:
+  askr-html:
+    theme:
+      light: [default, _extensions/askr/qdk.scss, ../gallery-assets.scss]
+      dark: [default, _extensions/askr/qdk.scss, _extensions/askr/qdk-dark.scss, ../gallery-assets.scss]
+    toc: true
+    toc-title: 當頁章節
+    toc-location: right
+    code-copy: true
+    code-overflow: wrap
+    smooth-scroll: false

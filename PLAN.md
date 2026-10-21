@@ -1,6 +1,70 @@
 # Askr release plan
 
-## Current: 0.9.0 dense scientific reading — 2026-10-21
+## Current: Askr 0.10.0 bilingual publication package — 2026-10-21
+
+The Human authorized publication of Askr 0.10.0 and its later LCDH adoption.
+This package adds the optional Header language selector and an actual bilingual
+Gallery. English remains at the existing site root; a separate Traditional
+Chinese Quarto website is built under `/zh-TW/`, with its own navigation and
+search. Each site's `askr.languages.current` is explicit, and both selector
+entries link to the two site homepages.
+
+The root Quarto project excludes `zh-TW/` from its own render. On a full site
+render, its post-render helper stages the current Askr extension and shared
+image/bibliography assets into ignored generated paths, then renders the child
+website into `_site/zh-TW/`. The three executable examples shared by both sites
+live once in `_includes/`; translated documents include those same cells
+instead of owning copies of executable code.
+
+Implement the site-level `askr.languages` option in Askr's Header. Its
+`current` code must match exactly one entry in `items`; provide at least two
+entries, each with a unique nonempty scalar `code`, nonempty scalar `label`,
+and an HTTPS absolute URL or domain-root `/path` `href`. Reject
+protocol-relative and whitespace-containing destinations, and escape every
+configured string.
+
+Place a square language icon beside the existing Header tools. Give it the
+accessible name and tooltip `Language: <current label>`; keep it available on
+narrow screens independently of Areas and reserve its measured width in the
+Header layout. The menu uses Askr's light/dark tokens. Each normal link uses its
+configured `href` in the current tab, with `lang`, `hreflang`, and a visible
+current marker plus `aria-current`. Omit the control when the option is absent;
+JavaScript-disabled output contains no dead button. Askr does not infer
+destinations, persist language choices, translate content, or alter search.
+Existing author-provided navbar language links remain in place; guidance tells
+authors to remove duplicates after configuring Askr.
+
+Askr owns the extension, Usage docs and bilingual Gallery build. The public
+Gallery is configured for its own English and Traditional Chinese homepages;
+consumer repositories, root pins and the frozen `v0.3.0/` remain outside this
+package. `v0.3.0/` remains the historical English snapshot.
+
+The corrected full root/child render passed with 106 English and 27 Traditional
+Chinese pages, and all three shared cells executed in both. The 27 Chinese pages
+have no broken static links; the English and Chinese search indexes contain 211
+and 89 entries. The Lead also observed desktop language navigation, four
+separate page sidebars, Chinese-only search results and the Figures viewer.
+Detailed observations are in `VALIDATION.md`. The Lead retains Git delivery,
+PR, tag, release, Pages observation and durable-child sync; no publication or
+CI result is claimed here.
+
+Semantic state: CONVERGING. Delivery endpoint: Human-authorized 0.10.0
+publication package, followed by a `develop` checkpoint, PR to `main`,
+`v0.10.0` tag and GitHub Release, existing Pages workflow, public-site
+observation, install/source-manifest review and durable-child synchronization.
+Build, review, publication and LCDH adoption remain separate delivery steps.
+
+## Historical work packets
+
+## Historical local-candidate packet — Optional Header language selector — 2026-10-21
+
+The earlier local-candidate packet preceded the Human's publication
+authorization and the bilingual Gallery assignment. Its feature contract and
+temporary-consumer observations remain historical context; its local-only
+endpoint and publication restrictions are superseded by the current package
+above.
+
+## 0.9.0 dense scientific reading — 2026-10-21
 
 Ship the Human-assigned P0 reading improvements: accessible scrolling tables,
 consistent normal/wide measure, compiled border tokens and contrast, compact
@@ -18,10 +82,6 @@ Delivery endpoint: develop checkpoint, reviewed main promotion, `v0.9.0` release
 existing Pages publication, public observation and durable-child synchronization.
 The Lead retains Git/publication authority. Semantic state: CONVERGING;
 implementation and publication do not imply Human acceptance or stabilization.
-
-## Historical work packets
-
-The dated packets below are historical records, not additional current plans.
 
 ## 0.8.0 publication authorization — 2026-10-10
 

@@ -1,0 +1,62 @@
+---
+title: "提示框"
+subtitle: "五種原生類型"
+---
+
+擴充套件將 Quarto 原生類型對應至固定的視覺意義：note 使用柔和藍色與資訊圖示，tip 使用藍綠色與火焰圖示，important 使用薰衣草紫與警示圓形圖示，warning 使用琥珀色與三角形警示圖示，caution 使用珊瑚色與八角形警示圖示。圖示是本機隨附的 Lucide SVG，透過 CSS 遮罩呈現，不需新增執行環境。
+
+在 Quarto DOM 容許的範圍內，外框、標題、語意化透明邊框與填色、5px 圓角、圖示和箭頭都盡量貼近 Quartz 的提示框範例。Quarto 的五種原生類型、收合行為與巢狀提示框就是目前的介面；此處不另行創造 Quartz 的其他類型與別名。
+
+## 五種提示框
+
+::: {.callout-note title="說明"}
+使用說明提示提供背景資訊，但不打斷主要脈絡。
+:::
+
+::: {.callout-tip title="提示"}
+使用提示提供實用做法。無論巢狀深度為何，圖示都維持火焰。
+:::
+
+::: {.callout-important title="重要"}
+使用重要提示標示會影響讀者決策的資訊。
+:::
+
+::: {.callout-warning title="警告"}
+若讀者應先檢查某個條件再繼續，請使用警告。
+:::
+
+::: {.callout-caution title="注意"}
+若有具體風險，且其後果應持續清楚可見，請使用注意提示。
+:::
+
+## 邊界案例
+
+::: {.callout-note title="這段刻意較長的原生自訂標題，在窄版手機上會自然換行，而不會改變提示框類型"}
+較長的自訂標題仍屬於原生標題列。
+:::
+
+::: {.callout-tip title="" icon=false appearance="simple"}
+這是原生的無標題、無圖示簡潔提示框，語意類型仍是 tip。
+:::
+
+::: {.callout-warning title="已收合的原生警告" collapse="true"}
+可透過 Quarto 原生展開控制查看本文。Askr 只替換箭頭圖樣，並讓控制項與標題置中對齊。
+:::
+
+::: {.callout-caution title="已展開的原生注意提示" collapse="false" appearance="minimal"}
+minimal 外觀仍由 Quarto 選擇呈現方式，Askr 只套用至受支援的提示框 DOM 色彩。
+:::
+
+## 巢狀提示框
+
+::: {.callout-tip title="先協助讀者掌握方向"}
+藍綠色的外層提供實用導讀。
+
+::: {.callout-important title="保留決策界線"}
+薰衣草紫的內層承載重要條件，不會沿用外層的藍綠色。
+:::
+:::
+
+## 限制
+
+主題在頁面不變寬的情況下，容納較長的原生標題與巢狀提示框。請勿在單一提示框中放入表格、圖形與多段文字；將這些內容移到文章本文，讓提示框只負責呈現警告。

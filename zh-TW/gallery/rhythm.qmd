@@ -1,0 +1,9 @@
+---
+title: "閱讀節奏"
+---
+
+本頁是 Gallery 內的一個章節，會列在左側清單，不會出現在標題列。
+
+標題列會保留 Gallery、Components、Usage 與 Credits。左側清單只列出 Gallery 中的閱讀範例。
+
+段落使用 Source Sans 3。閱讀欄維持與概覽頁相同的 630px 寬度，讓章節頁與上層頁面共享一致的閱讀寬度。

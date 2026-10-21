@@ -1,0 +1,83 @@
+---
+title: "圖片檢視器"
+---
+
+Askr 提供兩種互動式圖片檢視方式：直接在文章中檢視圖片，或從圖片與按鈕開啟浮動檢視器。SVG、PNG 與 JPEG 共用相同的平移與縮放控制項，不需圖片服務、第三方檢視器或 CDN。
+
+## 圖片與排除方式
+
+獨立圖形與單獨圖片預設會開啟浮動檢視器：
+
+```markdown
+![Layout](images/layout.svg){#fig-layout}
+```
+
+內文中的圖片，以及已有導覽連結的圖片，仍維持原有呈現方式。`.lightbox` 可明確啟用圖片；`.nolightbox` 可排除圖片。`lightbox: false` 會停用整頁互動。停用檢視器的頁面不可使用檢視器 shortcode，也不可指定已排除的圖片。建置時若遇到衝突會回報錯誤，不會產生無法使用的控制項。
+
+## 使用按鈕開啟
+
+若要開啟既有圖形，不必重複加入圖片或說明文字：
+
+```markdown
+![Layout](images/layout.png){#fig-layout}
+
+{{{< askr-image-view target="fig-layout" label="View image" >}}}
+```
+
+也可以只顯示按鈕：
+
+```markdown
+{{{< askr-image-view src="images/layout.png" label="View image" >}}}
+```
+
+`target` 與 `src` 必須擇一指定。Target 使用不含 `#` 的圖形 ID，且必須指向頁面中唯一且符合資格的圖片。`label` 預設為 `View image`；使用 `src` 時不會有圖片說明文字。路徑以文件位置為準。
+
+## 先行內檢視，再展開
+
+行內檢視器會直接在文章中提供控制項：
+
+```markdown
+{{{< askr-image-view src="images/layout.svg" mode="inline" label="Component layout" >}}}
+```
+
+若要就地轉換既有圖形並保留說明文字：
+
+```markdown
+![Layout](images/layout.svg){#fig-layout}
+
+{{{< askr-image-view target="fig-layout" mode="inline" >}}}
+```
+
+Shortcode 會標記既有圖形以供轉換，不會另外顯示一份副本。每張圖形只能轉換一次，但可由多個按鈕開啟。`mode` 可設為 `inline` 或 `button`，預設為 `button`。
+
+桌面版的行內圖片區域高度為 420px，窄螢幕為 320px。展開會將同一個檢視器移至浮動視窗，縮放與檢視中心也會跟著移動；關閉後會返回文章，並保留更新後的檢視狀態。不同的行內檢視器有各自獨立的狀態。離開頁面後不會儲存狀態。
+
+## 控制項與圖集
+
+- **+ / −** 以 1.25 倍縮放；**Fit** 會置中顯示整張圖片。
+- **100%** 代表 Fit，不代表原始像素尺寸。放大點陣圖片不會增加解析度；SVG 本身也可能包含點陣內容。
+- 拖曳可平移。觸控螢幕上以一指平移、兩指縮放。
+- 使用滾輪縮放前，請先讓焦點停在行內圖片區域；否則頁面會照常捲動。浮動檢視器則會在圖片區域內處理滾輪縮放。
+- 焦點位於圖片區域時，`+` / `−` 可縮放、`0` 可符合視窗，方向鍵可平移。
+- **Expand** 會開啟行內檢視器；浮動工具列則提供全螢幕（視瀏覽器支援情況而定）與關閉控制項。
+- Escape 會關閉浮動檢視器，並還原焦點與閱讀位置。在瀏覽器全螢幕模式中，Escape 會先離開全螢幕。
+
+使用既有屬性將一般圖片分組成浮動圖集：
+
+```markdown
+![First layout](images/first.png){group="layouts"}
+
+![Second layout](images/second.jpg){group="layouts"}
+```
+
+使用上一張／下一張按鈕切換；每張圖片一開始都會 Fit。圖集預設會循環播放；設定 `lightbox: {match: auto, loop: false}` 可停用循環。展開行內檢視器時仍會停留在該圖片，不會切換並遺失原狀態。一指滑動用來平移，不會切換圖集圖片。
+
+## 限制與遷移
+
+此檢視器取代 Askr 先前使用的 GLightbox 介面。既有 shortcode 名稱、圖片資格、說明文字與分組方式都保留。GLightbox 專用的 `effect`、`desc-position` 與 `css-class` 設定不受支援，建置前請移除。描述文字只會以文字顯示，不會當作可執行 HTML。
+
+圖片在兩種主題中都會保留自身顏色。SVG 會以圖片載入，不會注入頁面。這不是 GDS 檢視器，沒有圖層選擇、量測或解析度增強功能。載入失敗時會顯示錯誤與 Retry；關閉檢視器及切換圖集仍可使用。
+
+若沒有 JavaScript，圖片與來源連結仍可使用，但不會顯示互動控制項。非 HTML 輸出仍保留一般圖片及圖片／圖形連結。
+
+試看[圖形範例](../components/figures.qmd#image-viewer)。

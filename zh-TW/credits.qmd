@@ -1,0 +1,11 @@
+---
+title: "致謝與出處"
+---
+
+Askr 的視覺設計大量參考 Quartz，並將選定的樣式概念改編至 Quarto；實際參考來源與修改紀錄列於第三方來源清單。
+
+Quartz 提供設計參考，並非執行環境相依套件。Schibsted Grotesk、Source Sans 3 與 IBM Plex Mono 依各自的 SIL Open Font License 在本機隨附。內文刻意使用指定版本的 Source Sans 3，作為 Source Sans Pro 的後繼改編字型；標題與導覽介面則使用 Schibsted Grotesk。Lucide 圖示依 ISC 授權在本機隨附，並附上衍生自 Feather 的 MIT 授權聲明。Askr 自身原始碼採 MIT 授權，但不取代任何第三方授權條款。
+
+- [第三方來源清單（原文）](https://arfiligol.github.io/askr/THIRD_PARTY.html)
+- [隨附資產清單（原文）](https://arfiligol.github.io/askr/ASSET_MANIFEST.html)
+- [Askr MIT 授權（原文）](https://arfiligol.github.io/askr/LICENSE)

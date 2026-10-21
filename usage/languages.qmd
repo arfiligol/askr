@@ -1,0 +1,64 @@
+---
+title: "Language selector"
+---
+
+Askr 0.10.0 adds an optional site language selector through `askr.languages`.
+Askr places the current-tab links in a Header control beside the theme and other
+tools. The control stays in the Header on narrow screens, independently of
+Areas. With no configuration, Askr adds no language control and all other
+defaults remain unchanged.
+
+## Configure languages
+
+Set `current` to the code for this language project's pages. Each entry
+provides a unique `code`, display `label` and exact destination `href`:
+
+```yaml
+askr:
+  languages:
+    current: zh-TW
+    items:
+      - code: zh-TW
+        label: 繁體中文
+        href: https://docs.example.org/
+      - code: en
+        label: English
+        href: https://docs.example.org/en/
+```
+
+Provide at least two entries. Codes and labels must be nonempty scalar values,
+and codes must be unique. Each `href` must be an absolute HTTPS URL or a
+domain-root path such as `/en/`; protocol-relative paths such as `//other.org`
+and destinations containing whitespace are rejected during rendering.
+Set `current` explicitly in each language project's configuration; Askr does
+not infer it from the current URL.
+
+## Bilingual Gallery example
+
+The English site remains at `/askr/`, and its Traditional Chinese edition is a
+separate Quarto project at `/askr/zh-TW/`. Each site has its own navigation and
+search. The root project sets `current: en`; the Chinese project sets
+`current: zh-TW`. Selecting a language opens its configured homepage, not an
+automatically paired page in the other language.
+
+Run `quarto render` from the repository root to build both sites. The build
+stages the shared Askr extension, images and bibliography for the child project;
+the three executable examples live once in root `_includes/` and are included
+by both sites. For a local preview, serve the output under the `/askr/` path or
+configure local selector destinations; the published domain-root links do not
+match a prefix-less preview URL.
+
+Askr puts the configured `href` on a normal link, so the browser opens it in the
+current tab. It uses each code as both `lang` and `hreflang`, and marks the
+current item visually and with `aria-current`. The button shows the accessible
+name and tooltip `Language: <current label>`; the current language is also
+visible in the menu.
+
+Askr does not guess URLs, pair translated pages, remember language choices,
+change search, or translate content. If your native navbar already contains
+language links, remove those duplicates after configuring the Askr selector;
+Askr leaves authored navbar tools in place.
+
+The selector uses Quarto's bundled Bootstrap dropdown behavior for keyboard
+navigation, Escape and outside-click dismissal. Without JavaScript, the
+configuration stays inert and no button is shown.

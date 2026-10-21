@@ -8,7 +8,7 @@ stay as they were. Paths below are relative to that site root, not the domain
 root: the same manifest works at `/` and a repository prefix such as `/askr/`.
 
 ```text
-/                         current release
+/                         current release `0.10.0`
 /v0.3.0/                  immutable 0.3.0 site
 /askr-versions.json       one version-list authority
 ```
@@ -20,7 +20,7 @@ Put `askr-versions.json` at the rendered site's root and include it in
 {
   "mode": "inline",
   "versions": [
-    {"label": "0.9.0", "root": "/", "latest": true},
+    {"label": "0.10.0", "root": "/", "latest": true},
     {"label": "0.3.0", "root": "/v0.3.0/"}
   ]
 }

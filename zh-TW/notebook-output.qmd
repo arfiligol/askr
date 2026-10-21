@@ -1,0 +1,16 @@
+---
+title: "已儲存的 Notebook 輸出"
+jupyter: python3
+execute:
+  enabled: true
+---
+
+此頁會在文件網站建置時執行一個簡短的公開算術範例。同一項計算也收錄在[此版本的 Notebook 原始檔（英文）](https://github.com/arfiligol/askr/blob/v0.10.0/notebooks/simple-output.ipynb)；該檔案的輸出來自在本機執行這個 Notebook。
+
+{{< include ../_includes/_notebook-output-cell.qmd >}}
+
+輸出刻意保持簡單：它展示 Notebook 式輸出區域確實可用，但不載入科學運算工作負載，也不會要求使用者執行 Notebook。
+
+## 限制
+
+主題會在文章寬度內顯示簡短列印結果。若儲存格會輸出寬表格或多頁診斷內容，應將其儲存為獨立產物，再於頁面摘要，而不是整份貼上。

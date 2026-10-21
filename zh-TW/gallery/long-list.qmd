@@ -1,0 +1,9 @@
+---
+title: "長清單"
+---
+
+此 Area 用來檢視較長的巢狀 Page List。請在窄視窗中開啟 Page List 按鈕並捲動查看。
+
+各群組會維持展開，讓清單長度清楚可見；較深層的項目會縮排顯示。
+
+此頁清單中的導覽示範沿用英文原文，例如 [Quarter wave 01（原文）](https://arfiligol.github.io/askr/gallery/long-list/g1-s1-01.html)。

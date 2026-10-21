@@ -1,0 +1,75 @@
+---
+title: "安裝 Askr"
+---
+
+目前版本為 `0.10.0`，公開格式名稱為 `askr-html`，視覺主題為 Quiet Quartz。
+
+```bash
+quarto add arfiligol/askr@v0.10.0 --no-prompt
+```
+
+```yaml
+project:
+  type: website
+
+website:
+  title: Project Name
+  site-url: https://example.github.io/project/
+
+format:
+  askr-html:
+    toc: true
+    toc-title: Sections
+    toc-location: right
+    respect-user-color-scheme: true
+    smooth-scroll: false
+```
+
+安裝後的擴充套件位於 `_extensions/arfiligol/askr`。Askr 不會從 CDN 載入字型、圖示或樣式。
+
+若要升級，請安裝較新的標籤版本，並重新建置專案。將更新後的 `_extensions` 複本提交至專案。請重新安裝經審查的標籤版本，不要直接編輯 `_extensions/arfiligol/askr` 內的檔案。
+
+## Quarto 相容性
+
+Askr 0.10.0 支援穩定版 Quarto `>=1.9.38 <1.11`。Quarto 1.10.18 仍是可重現圖集與 CI 的基準；使用者可採用支援範圍內的其他穩定版本，不必固定使用該修補版本。較舊標籤版本仍保留其原有需求。
+
+設定 `respect-user-color-scheme: true` 可依照讀者的系統偏好選擇配色。若使用 RequireJS 相容設定，請設定 `smooth-scroll: false`。這些是由使用專案選擇的選項；Askr 格式預設值不變。
+
+選用的 Logout 與圖片檢視器仍保留原有設定方式。設定與權責範圍請見[受保護文件與登出](protected-docs.qmd)及[圖片檢視器](image-viewer.qmd)。
+
+## 選用語言選擇器
+
+Askr 0.10.0 新增選用的標題列語言選擇器。除非設定 `askr.languages`，否則不會顯示；其他預設值都不變。每個語言專案都必須明確設定自己的 `current` 語言代碼。Askr 只會依設定提供連結，不會從網址推測語言，也不會翻譯頁面。
+
+```yaml
+askr:
+  languages:
+    current: en
+    items:
+      - code: en
+        label: English
+        href: https://example.github.io/project/en/
+      - code: zh-TW
+        label: 繁體中文
+        href: https://example.github.io/project/
+```
+
+每個項目都需要不重複的非空代碼、非空標籤，以及 HTTPS 網址或網域根目錄路徑。驗證、無障礙支援與選單行為請見[語言選擇器](languages.qmd)。
+
+## 密集的科學文件
+
+若要使用 780px 的內文基準寬度，請在網站層級設定 `askr.reading-width: wide`；`normal` 則維持 630px。兩者都會依 Askr 的自適應規則縮放，並保留 Quarto 原生的寬度擴展方式。
+
+```yaml
+askr:
+  reading-width: wide
+  page-facts:
+    - {key: node-role, label: Role}
+    - {key: reader-task, label: Reader task}
+```
+
+頁面可在 front matter 使用扁平欄位，例如 `node-role: Concept` 與 `reader-task: "Distinguish the modes and their response."`。Askr 會將已設定的資料放在描述下方，並保留原生作者與日期資訊。未設定的欄位不會形成資訊列。表格類別、三層 Copy 設定與寬圖工具，請見[表格](../components/tables.qmd)、[數學公式](../components/mathematics.qmd)與[圖形](figures.qmd)。
+
+不執行程式的文件建置與瀏覽器觀察涵蓋穩定版 1.9.38、1.10.18，也以 1.10.16 作為上游 Sass 變更的診斷預先版本。這不代表已檢查所有中間修補版本，也不表示支援預先版本。檢查範圍內，Quarto 原生分組分頁執行環境、Bootstrap 分頁實作與 Askr 使用的分頁標記都未變。確切輸入、發現與限制記錄於[驗證收據（原文）](https://arfiligol.github.io/askr/VALIDATION.html)。
+
+擴大支援範圍前，請先檢查 Quarto 原生分頁、主題切換、導覽與搜尋，以及格線標記的上游變更，再用預定版本建置並操作受影響的 Askr 元件。此候選版本不支援 Quarto 1.11，因為該版本變更了導覽與主題控制標記；支援它需要另行調查，不應建立多版本轉接框架。

@@ -1,0 +1,32 @@
+---
+title: "語言選擇器"
+---
+
+Askr 0.10.0 透過 `askr.languages` 新增選用的網站語言選擇器。Askr 會在標題列中，將目前語言的連結放在主題與其他工具旁。窄螢幕上，控制項仍留在標題列，與 Areas 分開配置。未設定時不會顯示語言控制項，其他預設值也不變。
+
+## 設定語言
+
+請為每個語言專案明確設定 `current`，並為各語言提供不重複的 `code`、顯示用 `label` 與明確目的地 `href`。以下是 Askr 雙專案示範中繁體中文網站的設定：
+
+```yaml
+askr:
+  languages:
+    current: zh-TW
+    items:
+      - code: en
+        label: English
+        href: /askr/
+      - code: zh-TW
+        label: 繁體中文
+        href: /askr/zh-TW/
+```
+
+英文網站也使用相同的兩個項目，但需將 `current` 明確設為 `en`。兩個獨立網站分別使用 `/askr/` 與 `/askr/zh-TW/` 網域根目錄路徑；選擇語言會前往該專案設定的網站根目錄，不會自動配對目前頁面。
+
+至少要設定兩個項目。代碼與標籤必須是非空純量值，代碼不得重複。每個 `href` 都必須是絕對 HTTPS 網址或 `/en/` 這類網域根目錄路徑。建置時會拒絕以 `//` 開頭的協定相對路徑，以及含空白的目的地。每個語言專案都必須明確設定 `current`；Askr 不會從目前網址推測語言。
+
+Askr 會將設定的 `href` 放在一般連結上，因此瀏覽器會在目前分頁開啟目的地。每個代碼會同時用作 `lang` 與 `hreflang`，並以視覺樣式和 `aria-current` 標示目前項目。按鈕會顯示無障礙名稱與 `Language: <current label>` 提示文字；選單也會顯示目前語言。
+
+Askr 不會推測網址、自動配對翻譯頁面、記住語言選擇、改變搜尋範圍或翻譯內容。若原生 navbar 已有語言連結，設定 Askr 選擇器後請移除重複項目；Askr 會保留作者設定的 navbar 工具。
+
+鍵盤導覽、Escape 與點擊外部以關閉選單，使用 Quarto 隨附的 Bootstrap 下拉選單行為。若沒有 JavaScript，設定仍不會啟用，也不會顯示按鈕。
