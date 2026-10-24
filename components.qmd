@@ -2,9 +2,9 @@
 title: "Components"
 ---
 
-Askr restyles native Quarto article components. It does not add new
-authoring syntax. Each page below is one family, so the current treatment can
-be reviewed before any further change.
+Most pages show how Askr styles native Quarto article components. The Cards
+page documents one opt-in authoring pattern built from Quarto's native fenced
+divs. Each page below focuses on one family or pattern.
 
 ## Already changed
 
@@ -14,6 +14,8 @@ be reviewed before any further change.
   blockquotes, and the content divider.
 - [Callouts](components/callouts.qmd). The five native types, their shell,
   icons, and disclosure chevron.
+- [Cards](components/cards.qmd). A CSS-only nested fenced-div pattern with a
+  real heading and one title link.
 - [Code](components/code.qmd). Inline code, fenced blocks, and local overflow.
 - [Tables](components/tables.qmd). Header and cell rules.
 - [Mathematics](components/mathematics.qmd). Display math scrolls inside the

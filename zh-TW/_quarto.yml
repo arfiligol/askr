@@ -65,6 +65,8 @@ website:
               href: components/prose.qmd
             - text: 提示區塊
               href: components/callouts.qmd
+            - text: 卡片
+              href: components/cards.qmd
             - text: 程式碼
               href: components/code.qmd
             - text: 表格

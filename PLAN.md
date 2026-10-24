@@ -1,5 +1,44 @@
 # Askr release plan
 
+## Native Card authoring helper — local candidate — 2026-10-25
+
+Document and demonstrate a reusable Card pattern built from Quarto's native
+fenced divs. The current candidate interface uses `.askr-card`,
+`.askr-card-body`, and `.askr-card-title`. Its heading link is the primary
+navigation; the shell has no click handler, and links in the body retain their
+own native destinations. `.unlisted` excludes the real heading from the page
+table of contents without changing its author-chosen level.
+
+The English and Traditional Chinese guides provide the exact authoring source,
+a minimal migration from the old course-card classes, and two vertical Gallery
+examples linked to existing Usage pages. Their short and long CJK titles make
+wrapping visible; the cards contain no scientific examples or results. Inputs
+are the requested linked-heading behavior, existing theme tokens, and those
+Usage pages. The stylesheet implementation must use existing tokens and remain
+CSS-only; its rules are a dependency owned separately from this documentation
+package.
+
+Scope includes the Card rules in `_extensions/askr/qdk.scss` under its separate
+stylesheet owner, plus the two Cards pages, their navigation entries, links
+from the component overviews and README, and this package documentation. This
+documentation work package does not edit the stylesheet. Keep the published
+v0.11.0 package and metadata unchanged. Do not change consumer repositories,
+root pins, JavaScript, dependencies, or release state. Semantic state:
+CONVERGING. Delivery endpoint: the original Git owner completes an exact-path
+`develop` checkpoint and remote readback after the Lead's checks; release, tag,
+deployment, merge, and root-pin changes are not included.
+
+The Lead owns the checks: render the two Cards pages without executing content,
+then render an independent consumer using the installed-layout stylesheet.
+Inspect desktop and mobile layouts in light and dark themes, title wrapping,
+heading and link semantics, keyboard focus, the title-only click target, page
+overflow, and exclusion of card headings from the table of contents. Add no new
+tests and execute no notebooks or scientific content.
+
+If the markup cannot retain native heading and link behavior, return the issue
+for direction instead of adding JavaScript or making the full card clickable.
+Visual acceptance and inclusion in a future release remain separate decisions.
+
 ## Current: Native Mermaid modal — 2026-10-21
 
 Askr Lead owns the extension runtime and this candidate receipt. See the

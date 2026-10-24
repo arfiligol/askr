@@ -82,6 +82,8 @@ website:
           href: components/prose.qmd
         - text: "Callouts"
           href: components/callouts.qmd
+        - text: "Cards"
+          href: components/cards.qmd
         - text: "Code"
           href: components/code.qmd
         - text: "Tables"

@@ -116,7 +116,8 @@ Table classes work on wrapping divs, including captionless pipe tables.
 Every table receives a keyboard-focusable labelled scroll region. Copy source
 lives in a data attribute; only a denied clipboard request creates selectable
 source. See [Tables](components/tables.qmd), [Mathematics](components/mathematics.qmd)
-and [Figures](usage/figures.qmd) for usage.
+and [Figures](usage/figures.qmd) for usage. The native fenced-div pattern is
+documented in [Cards](components/cards.qmd).
 
 The normal width, enabled math Copy, installation format, footer credit and
 supported Quarto range retain their defaults. Override `$qdk-border` for Askr

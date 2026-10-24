@@ -5,6 +5,11 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+### Added
+
+- Add the CSS-only native Card component, with a linked-heading fenced-div
+  pattern, bilingual guide, and Gallery examples.
+
 ## 0.11.0 — 2026-10-21
 
 ### Added
