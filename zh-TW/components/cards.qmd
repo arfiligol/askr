@@ -46,20 +46,22 @@ Askr 卡片使用 Quarto 原生的 fenced div（圍欄式區塊）語法。卡�
 :::
 ::::
 
-## 從既有標記遷移
+## 遷移既有課程卡片
 
-將舊有卡片類別改成下列專屬類別。請移除通用的 Bootstrap `card` 與
-`card-body` 類別，不要沿用在新標記中。
+Askr v0.12.0 新增卡片元件。請在使用中的 Quarto 專案安裝此版本：
 
-| 既有類別 | 卡片類別 |
+```bash
+quarto add arfiligol/askr@v0.12.0 --no-prompt
+```
+
+只替換下列舊卡片類別，保留標題文字、標題層級、連結目的地與說明內容；
+同時移除 Bootstrap 通用的 `card` 與 `card-body` 類別。
+
+| 既有類別 | Askr 卡片類別 |
 | --- | --- |
 | `.card.course-card` | `.askr-card` |
 | `.card-body` | `.askr-card-body` |
 | `.course-card-title` | `.askr-card-title` |
 
-標題應維持真正的標題與連結。卡片外框沒有點擊處理；卡片本文本身不是連結、按鈕或展開區塊，但其中的連結仍是各自獨立的原生連結。
-
-## 版本狀態
-
-卡片功能目前仍是 `develop` 分支上的未發布候選，v0.11.0 與更早版本都不包含此功能。
-請等到含卡片功能的版本發布後再更新使用中的專案；更新時只移除本機 `.course-card` 樣式，保留其他 CSS。
+更新標記後，只移除本機針對舊課程卡片類別的 CSS 規則，保留其他專案樣式。
+新撰寫的卡片則使用上方 fenced div 語法。

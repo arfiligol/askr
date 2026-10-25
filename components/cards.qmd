@@ -49,24 +49,25 @@ Review how Areas, the Page List, and the active page's Sections work together.
 :::
 ::::
 
-## Migrate existing markup
+## Migrate existing course cards
 
-Replace the legacy card classes with the namespaced classes below. Remove the
-generic Bootstrap `card` and `card-body` classes rather than carrying them into
-the new markup.
+Askr v0.12.0 introduces the Card component. Install this release in the
+consumer project:
 
-| Existing class | Card helper class |
+```bash
+quarto add arfiligol/askr@v0.12.0 --no-prompt
+```
+
+Rename only the old card classes as shown. Preserve heading text, heading
+level, link target, and description content. Remove Bootstrap's generic
+`card` and `card-body` classes along with the old names.
+
+| Existing class | Askr Card class |
 | --- | --- |
 | `.card.course-card` | `.askr-card` |
 | `.card-body` | `.askr-card-body` |
 | `.course-card-title` | `.askr-card-title` |
 
-Keep the title as a real heading and link. The shell has no click handler; the
-body is not itself a link, button, or disclosure, while links inside it remain
-independent native links.
-
-## Availability
-
-Card status: ⏳ Unreleased on `develop`; not included in v0.11.0 or earlier.
-Upgrade a consumer only after a Card-capable release is available. Then remove
-only the local `.course-card` rules and retain unrelated CSS.
+After renaming the markup, remove only local CSS rules for the old course-card
+classes and retain unrelated consumer styles. Use the fenced-div pattern above
+for newly authored Cards.

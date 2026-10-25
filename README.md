@@ -3,20 +3,21 @@
 See [CHANGELOG](CHANGELOG.md) for published package changes. PR and GitHub
 Release summaries use the same entries.
 
-Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz
-remains the name of the visual theme. `0.11.0` is the current release, rendered
-with Quarto 1.10.18. Stable Quarto `>=1.9.38 <1.11` is supported. The public
-format is `askr-html`. The 0.10.0 release adds an optional Header language
+Askr is the reading page: measure, type, citations, callouts, and Cards. Quiet
+Quartz remains the name of the visual theme. `0.12.0` is the current release,
+rendered with Quarto 1.10.18. Stable Quarto `>=1.9.38 <1.11` is supported. The
+public format is `askr-html`. The 0.10.0 release adds an optional Header language
 selector; the control is absent unless configured and does not change existing
-defaults. See [Validation](VALIDATION.md) for observations and limits.
+defaults. Version 0.12.0 adds the CSS-only native Card component; see the
+[Cards guide](components/cards.qmd) and [Validation](VALIDATION.md).
 
 ## Install
 
-Install release tag `v0.11.0`. Quarto's GitHub installer accepts
+Install release tag `v0.12.0`. Quarto's GitHub installer accepts
 branch and tag names, not commit SHA modifiers.
 
 ```bash
-quarto add arfiligol/askr@v0.11.0 --no-prompt
+quarto add arfiligol/askr@v0.12.0 --no-prompt
 ```
 
 ```yaml
@@ -71,11 +72,12 @@ both sites. The ignored copies under `zh-TW/_extensions/askr/`,
 build inputs, not vendored sources; maintain the extension and shared assets in
 the root `_extensions/askr/` and `components/` directories.
 
-The documentation version menu lists the current 0.11.0 site, the actual
-published 0.10.0 and 0.9.0 snapshots, and the frozen 0.3.0 snapshot. Archived
-documentation is historical and unmaintained. Before a future release replaces
-the site root, preserve the then-current published site under its versioned
-path; the build generates selector manifests for each archive's runtime.
+The documentation version menu lists the current 0.12.0 site, the actual
+published 0.11.0, 0.10.0 and 0.9.0 snapshots, and the frozen 0.3.0 snapshot.
+Archived documentation is historical and unmaintained. Before a future release
+replaces the site root, preserve the then-current published site under its
+versioned path; the build generates selector manifests for each archive's
+runtime.
 
 Askr is intended as a reusable design system for direct SCQ-repository
 adoption. The theme Sass variables `$grid-sidebar-width` and `$grid-margin-width`
@@ -117,7 +119,10 @@ Every table receives a keyboard-focusable labelled scroll region. Copy source
 lives in a data attribute; only a denied clipboard request creates selectable
 source. See [Tables](components/tables.qmd), [Mathematics](components/mathematics.qmd)
 and [Figures](usage/figures.qmd) for usage. The native fenced-div pattern is
-documented in [Cards](components/cards.qmd).
+documented in [Cards](components/cards.qmd). To migrate existing course cards,
+rename their wrappers and title to the classes in that guide, preserve content,
+heading level and destinations, then remove only the local course-card CSS
+rules. Keep unrelated consumer styles.
 
 The normal width, enabled math Copy, installation format, footer credit and
 supported Quarto range retain their defaults. Override `$qdk-border` for Askr
