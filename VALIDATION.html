@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c82ec3957060ae5c5f98c6cdcc0a89b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b2d96ee2b23f31201489ab777cb3e1f2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-c82ec3957060ae5c5f98c6cdcc0a89b9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-cd677eef3d4da3fa900171bb2fbfca49.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-19ddd21cbed2324fd348ca244fef22a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-cd677eef3d4da3fa900171bb2fbfca49.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -742,6 +742,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#candidate-validation-receipt" id="toc-candidate-validation-receipt" class="nav-link active" data-scroll-target="#candidate-validation-receipt">Candidate validation receipt</a>
   <ul class="collapse">
+  <li><a href="#native-card-component-v0.12.0-release-candidate-2026-10-25" id="toc-native-card-component-v0.12.0-release-candidate-2026-10-25" class="nav-link" data-scroll-target="#native-card-component-v0.12.0-release-candidate-2026-10-25">Native Card component — v0.12.0 release candidate — 2026-10-25</a></li>
   <li><a href="#native-mermaid-modal-2026-10-21" id="toc-native-mermaid-modal-2026-10-21" class="nav-link" data-scroll-target="#native-mermaid-modal-2026-10-21">Native Mermaid modal — 2026-10-21</a></li>
   <li><a href="#documentation-version-archive-correction-2026-10-21" id="toc-documentation-version-archive-correction-2026-10-21" class="nav-link" data-scroll-target="#documentation-version-archive-correction-2026-10-21">Documentation version archive correction — 2026-10-21</a></li>
   <li><a href="#bilingual-publication-package-2026-10-21" id="toc-bilingual-publication-package-2026-10-21" class="nav-link" data-scroll-target="#bilingual-publication-package-2026-10-21">0.10.0 bilingual publication package — 2026-10-21</a></li>
@@ -798,6 +799,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="candidate-validation-receipt" class="level1">
 <h1>Candidate validation receipt</h1>
+<section id="native-card-component-v0.12.0-release-candidate-2026-10-25" class="level2">
+<h2 class="anchored" data-anchor-id="native-card-component-v0.12.0-release-candidate-2026-10-25">Native Card component — v0.12.0 release candidate — 2026-10-25</h2>
+<p>Semantic state: CONVERGING. Delivery state: CANDIDATE; the Human-authorized v0.12.0 release endpoint is not complete. ✅ The Lead completed the Card-only source/consumer renders, Chromium review, and full bilingual site render. The published v0.11.0 package remains unchanged; the previous Copy follow-up is not included in this release.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Full release render</td>
+<td>✅ Quarto 1.10.18 rendered exact staged tree <code>54c88d895ba09961c1854a3974e99c69cbe21875</code>, exported to <code>/tmp/askr-v012-release.fhPRES</code>; <code>quarto render</code> exited 0 with 107 English and 28 Traditional Chinese inputs. The existing two figure cells and one arithmetic cell ran in each language; no solver or model science ran. Known <code>zh-TW</code> translation warnings and the local Jupyter transport warning remained; no new failure.</td>
+</tr>
+<tr class="even">
+<td>Card-only source render</td>
+<td>✅ Quarto 1.10.18 rendered the English and Traditional Chinese Cards pages plus their linked Usage pages with <code>--no-execute</code>; exit 0. The Card-only source was exported to <code>/tmp/askr-cards-candidate.YE3RxS</code>, excluding the previous Copy WIP. Quarto emitted the known <code>Could not load translations zh-TW/Abstract</code> warning.</td>
+</tr>
+<tr class="odd">
+<td>Installed-layout consumer render</td>
+<td>✅ A prospective Card-only tree was copied to <code>_extensions/arfiligol/askr</code> in <code>/tmp/askr-cards-consumer.acFLjq</code>; Quarto rendered its two pages with <code>--no-execute</code>; exit 0. This used the installed folder layout and does not record <code>quarto add</code> or a released package.</td>
+</tr>
+<tr class="even">
+<td>v0.11.0 archive source</td>
+<td>✅ The snapshot came from the actual published Pages tree <code>6f2d18f69143aa8de635f9cb9f40f7b4c2375ea9</code>; all 226 file blobs match byte-for-byte, including existing generated whitespace. Nested v0.10.0, v0.9.0, and v0.3.0 archives were excluded. The Lead retained archive bytes; the authored release diff check passed without normalizing the snapshot.</td>
+</tr>
+<tr class="odd">
+<td>Browser layouts</td>
+<td>✅ Chromium review at 1280×720 and 390×844 in light and dark themes. Browser console warnings and errors were empty. At 390px, page <code>scrollWidth</code> was 375px; cards were 323px wide with 321px scroll width and 16px padding; the title font size was 17.6px.</td>
+</tr>
+<tr class="even">
+<td>Typography and spacing</td>
+<td>✅ H3 and H4 retained weight 700; card headings were absent from the page TOC. Desktop body padding measured 21.25px × 25.5px (1.25rem × 1.5rem); title font size was 21.25px. Heading color was rgb(43, 43, 43) in light mode and rgb(235, 235, 236) in dark mode. The last paragraph margin was 0; spacing between multiple paragraphs remained.</td>
+</tr>
+<tr class="odd">
+<td>Keyboard and navigation</td>
+<td>✅ Tab reached the card title with a visible focus outline and offset; Enter navigated to <code>destination.html</code>. An independent body link navigated to <code>destination.html#details</code>. On the Chinese Gallery page, Enter on the long title opened <code>zh-TW/usage/navigation.html</code>; Back returned to the card page. Short and long titles remained visible.</td>
+</tr>
+<tr class="even">
+<td>Review artifact</td>
+<td>✅ <a href="http://127.0.0.1:4601/zh-TW/components/cards.html#展示範例">Chinese Cards preview</a>. Screenshots: <code>/tmp/askr-cards-gallery-light.png</code> and <code>/tmp/askr-cards-mobile-dark.png</code>.</td>
+</tr>
+<tr class="odd">
+<td>Release checks</td>
+<td>⏳ Main PR/CI, installation validation from the v0.12.0 release tag, Pages publication, and deployment/readback remain with the Lead.</td>
+</tr>
+<tr class="even">
+<td>Not run in this scope</td>
+<td>⚠️ Physical-touch, Safari and Firefox review; notebook/scientific execution; and new tests.</td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="native-mermaid-modal-2026-10-21" class="level2">
 <h2 class="anchored" data-anchor-id="native-mermaid-modal-2026-10-21">Native Mermaid modal — 2026-10-21</h2>
 <p>Status: Human authorized this additive Mermaid candidate for v0.11.0 publication and LCDH adoption. Delivery remains LOCAL CANDIDATE; the Lead owns the pending main, tag, Pages and pristine-install release endpoint. Quarto 1.10.18 rendered the isolated consumer <code>/tmp/askr-mermaid-candidate.oHLMZj</code> with the extension under the installed <code>_extensions/arfiligol/askr</code> layout.</p>
@@ -2053,7 +2108,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.11.0" aria-label="Askr version 0.11.0">0.11.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.12.0" aria-label="Askr version 0.12.0">0.12.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 

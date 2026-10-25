@@ -418,39 +418,6 @@
     ]
   },
   {
-    "objectID": "components.html",
-    "href": "components.html",
-    "title": "元件",
-    "section": "",
-    "text": "Askr 會調整 Quarto 原生文章元件的樣式，不會新增撰寫語法。以下每頁介紹一類元件，方便在進一步修改前檢視目前的呈現方式。",
-    "crumbs": [
-      "元件",
-      "元件總覽"
-    ]
-  },
-  {
-    "objectID": "components.html#已調整",
-    "href": "components.html#已調整",
-    "title": "元件",
-    "section": "已調整",
-    "text": "已調整\n\n標題。第二層標題不再自動畫出 Quarto 底線；分隔線改由明確的 --- 表示。\n內文。文章連結、醒目文字、清單標記、引文與內容分隔線。\n提示框。五種原生類型及其外框、圖示與展開箭頭。\n程式碼。行內程式碼、圍欄程式碼區塊與本機溢位處理。\n表格。表頭與儲存格的分隔線。\n數學公式。展示公式會在內容寬度內捲動。\n參考文獻。文中引用與參考文獻清單。",
-    "crumbs": [
-      "元件",
-      "元件總覽"
-    ]
-  },
-  {
-    "objectID": "components.html#保留-quarto-原有呈現方式",
-    "href": "components.html#保留-quarto-原有呈現方式",
-    "title": "元件",
-    "section": "保留 Quarto 原有呈現方式",
-    "text": "保留 Quarto 原有呈現方式\n\n圖形與群組。欄、分頁、圖表，以及一張來自 Embla 的圖片。群組仍使用 Quarto 原有呈現方式；圖片使用 Quarto 摺疊的 Source。\n已儲存的 Notebook 輸出。實際執行過的儲存格，與圍欄程式碼區塊不同。\n\n網站外框，例如區域、頁面清單與置中閱讀欄，請見版面。",
-    "crumbs": [
-      "元件",
-      "元件總覽"
-    ]
-  },
-  {
     "objectID": "components/callouts.html",
     "href": "components/callouts.html",
     "title": "提示框",
@@ -503,6 +470,83 @@
     "crumbs": [
       "元件",
       "提示區塊"
+    ]
+  },
+  {
+    "objectID": "components.html",
+    "href": "components.html",
+    "title": "元件",
+    "section": "",
+    "text": "多數頁面介紹 Askr 如何調整 Quarto 原生文章元件的樣式；「卡片」頁則說明一種以 Quarto 原生區塊語法撰寫的選用格式。以下每頁聚焦於一類元件或寫法。",
+    "crumbs": [
+      "元件",
+      "元件總覽"
+    ]
+  },
+  {
+    "objectID": "components.html#已調整",
+    "href": "components.html#已調整",
+    "title": "元件",
+    "section": "已調整",
+    "text": "已調整\n\n標題。第二層標題不再自動畫出 Quarto 底線；分隔線改由明確的 --- 表示。\n內文。文章連結、醒目文字、清單標記、引文與內容分隔線。\n提示框。五種原生類型及其外框、圖示與展開箭頭。\n卡片。以巢狀 fenced div 組成卡片，保留真正的標題與單一標題連結，且不需 JavaScript。\n程式碼。行內程式碼、圍欄程式碼區塊與本機溢位處理。\n表格。表頭與儲存格的分隔線。\n數學公式。展示公式會在內容寬度內捲動。\n參考文獻。文中引用與參考文獻清單。",
+    "crumbs": [
+      "元件",
+      "元件總覽"
+    ]
+  },
+  {
+    "objectID": "components.html#保留-quarto-原有呈現方式",
+    "href": "components.html#保留-quarto-原有呈現方式",
+    "title": "元件",
+    "section": "保留 Quarto 原有呈現方式",
+    "text": "保留 Quarto 原有呈現方式\n\n圖形與群組。欄、分頁、圖表，以及一張來自 Embla 的圖片。群組仍使用 Quarto 原有呈現方式；圖片使用 Quarto 摺疊的 Source。\n已儲存的 Notebook 輸出。實際執行過的儲存格，與圍欄程式碼區塊不同。\n\n網站外框，例如區域、頁面清單與置中閱讀欄，請見版面。",
+    "crumbs": [
+      "元件",
+      "元件總覽"
+    ]
+  },
+  {
+    "objectID": "components/cards.html",
+    "href": "components/cards.html",
+    "title": "卡片",
+    "section": "",
+    "text": "Askr 卡片使用 Quarto 原生的 fenced div（圍欄式區塊）語法。卡片外框沒有點擊處理， 標題連結是卡片的主要導覽方式；若在本文加入其他連結，仍會使用各自的原生目的地。",
+    "crumbs": [
+      "元件",
+      "卡片"
+    ]
+  },
+  {
+    "objectID": "components/cards.html#撰寫語法",
+    "href": "components/cards.html#撰寫語法",
+    "title": "卡片",
+    "section": "撰寫語法",
+    "text": "撰寫語法\n請依照頁面章節結構選擇標題層級。.unlisted 會讓這個實際標題不列入頁面目錄； 標題連結仍保有原生連結行為。\n:::: {.askr-card}\n::: {.askr-card-body}\n### [標題](target.qmd) {.askr-card-title .unlisted}\n\n簡短的補充段落。\n:::\n::::\n外層 .askr-card 呈現卡片外框，.askr-card-body 群組卡片內容， .askr-card-title 則設定作者選定的標題樣式。此寫法不使用 JavaScript， 也不會讓整張卡片都成為連結。",
+    "crumbs": [
+      "元件",
+      "卡片"
+    ]
+  },
+  {
+    "objectID": "components/cards.html#展示範例",
+    "href": "components/cards.html#展示範例",
+    "title": "卡片",
+    "section": "展示範例",
+    "text": "展示範例\n以下兩張卡片連至既有的使用指南。較長的繁體中文標題可用來檢視中日韓文字在卡片內的換行情形。\n\n\n安裝 Askr\n在 Quarto 專案安裝 Askr，並設定所需的網站選項。\n\n\n\n\n用 Areas、頁面清單與 Sections 整理網站導覽\n了解導覽區域、頁面清單與目前頁面的章節如何搭配運作。",
+    "crumbs": [
+      "元件",
+      "卡片"
+    ]
+  },
+  {
+    "objectID": "components/cards.html#遷移既有課程卡片",
+    "href": "components/cards.html#遷移既有課程卡片",
+    "title": "卡片",
+    "section": "遷移既有課程卡片",
+    "text": "遷移既有課程卡片\nAskr v0.12.0 新增卡片元件。請在使用中的 Quarto 專案安裝此版本：\nquarto add arfiligol/askr@v0.12.0 --no-prompt\n只替換下列舊卡片類別，保留標題文字、標題層級、連結目的地與說明內容； 同時移除 Bootstrap 通用的 card 與 card-body 類別。\n\n\n\n既有類別\nAskr 卡片類別\n\n\n\n\n.card.course-card\n.askr-card\n\n\n.card-body\n.askr-card-body\n\n\n.course-card-title\n.askr-card-title\n\n\n\n更新標記後，只移除本機針對舊課程卡片類別的 CSS 規則，保留其他專案樣式。 新撰寫的卡片則使用上方 fenced div 語法。",
+    "crumbs": [
+      "元件",
+      "卡片"
     ]
   },
   {
