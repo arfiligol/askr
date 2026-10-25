@@ -1,0 +1,73 @@
+---
+title: "Cards"
+subtitle: "A native fenced-div pattern"
+description: "Build a vertical card from Quarto fenced divs, with an ordinary linked heading."
+---
+
+Askr cards use nested Quarto fenced divs. The shell has no click handler, and
+the heading link supplies the card's primary navigation. Any links authored in
+the body keep their own native destinations.
+
+## Authoring syntax
+
+Choose a heading level that fits the surrounding page outline. The `.unlisted`
+class keeps the real heading out of the page table of contents; the title link
+retains native link behavior.
+
+````markdown
+:::: {.askr-card}
+::: {.askr-card-body}
+### [Title](target.qmd) {.askr-card-title .unlisted}
+
+Short supporting paragraph.
+:::
+::::
+````
+
+The outer `.askr-card` draws the card shell. `.askr-card-body` groups its
+content, and `.askr-card-title` styles the author-chosen heading. No JavaScript
+or whole-card link is involved.
+
+## Gallery examples
+
+These two cards link to existing Usage pages. The longer Traditional Chinese
+heading demonstrates how CJK text wraps inside a card.
+
+:::: {.askr-card}
+::: {.askr-card-body}
+### [安裝 Askr](../usage/add-askr.qmd) {.askr-card-title .unlisted}
+
+Install Askr in a Quarto project and configure the site options you need.
+:::
+::::
+
+:::: {.askr-card}
+::: {.askr-card-body}
+### [用 Areas、頁面清單與 Sections 整理網站導覽](../usage/navigation.qmd) {.askr-card-title .unlisted}
+
+Review how Areas, the Page List, and the active page's Sections work together.
+:::
+::::
+
+## Migrate existing course cards
+
+Askr v0.12.0 introduces the Card component. Install this release in the
+consumer project:
+
+```bash
+quarto add arfiligol/askr@v0.12.0 --no-prompt
+```
+
+Rename only the old card classes as shown. Preserve heading text, heading
+level, link target, and description content. Remove Bootstrap's generic
+`card` and `card-body` classes along with the old names.
+
+| Existing class | Askr Card class |
+| --- | --- |
+| `.card.course-card` | `.askr-card` |
+| `.card-body` | `.askr-card-body` |
+| `.course-card-title` | `.askr-card-title` |
+
+After renaming the markup, remove only local CSS rules for the old course-card
+classes and retain unrelated consumer styles. Use the fenced-div pattern above
+for newly authored Cards.

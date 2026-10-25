@@ -3,20 +3,21 @@
 See [CHANGELOG](CHANGELOG.md) for published package changes. PR and GitHub
 Release summaries use the same entries.
 
-Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz
-remains the name of the visual theme. `0.11.0` is the current release, rendered
-with Quarto 1.10.18. Stable Quarto `>=1.9.38 <1.11` is supported. The public
-format is `askr-html`. The 0.10.0 release adds an optional Header language
+Askr is the reading page: measure, type, citations, callouts, and Cards. Quiet
+Quartz remains the name of the visual theme. `0.12.0` is the current release,
+rendered with Quarto 1.10.18. Stable Quarto `>=1.9.38 <1.11` is supported. The
+public format is `askr-html`. The 0.10.0 release adds an optional Header language
 selector; the control is absent unless configured and does not change existing
-defaults. See [Validation](VALIDATION.md) for observations and limits.
+defaults. Version 0.12.0 adds the CSS-only native Card component; see the
+[Cards guide](components/cards.qmd) and [Validation](VALIDATION.md).
 
 ## Install
 
-Install release tag `v0.11.0`. Quarto's GitHub installer accepts
+Install release tag `v0.12.0`. Quarto's GitHub installer accepts
 branch and tag names, not commit SHA modifiers.
 
 ```bash
-quarto add arfiligol/askr@v0.11.0 --no-prompt
+quarto add arfiligol/askr@v0.12.0 --no-prompt
 ```
 
 ```yaml
@@ -71,11 +72,12 @@ both sites. The ignored copies under `zh-TW/_extensions/askr/`,
 build inputs, not vendored sources; maintain the extension and shared assets in
 the root `_extensions/askr/` and `components/` directories.
 
-The documentation version menu lists the current 0.11.0 site, the actual
-published 0.10.0 and 0.9.0 snapshots, and the frozen 0.3.0 snapshot. Archived
-documentation is historical and unmaintained. Before a future release replaces
-the site root, preserve the then-current published site under its versioned
-path; the build generates selector manifests for each archive's runtime.
+The documentation version menu lists the current 0.12.0 site, the actual
+published 0.11.0, 0.10.0 and 0.9.0 snapshots, and the frozen 0.3.0 snapshot.
+Archived documentation is historical and unmaintained. Before a future release
+replaces the site root, preserve the then-current published site under its
+versioned path; the build generates selector manifests for each archive's
+runtime.
 
 Askr is intended as a reusable design system for direct SCQ-repository
 adoption. The theme Sass variables `$grid-sidebar-width` and `$grid-margin-width`
@@ -116,7 +118,11 @@ Table classes work on wrapping divs, including captionless pipe tables.
 Every table receives a keyboard-focusable labelled scroll region. Copy source
 lives in a data attribute; only a denied clipboard request creates selectable
 source. See [Tables](components/tables.qmd), [Mathematics](components/mathematics.qmd)
-and [Figures](usage/figures.qmd) for usage.
+and [Figures](usage/figures.qmd) for usage. The native fenced-div pattern is
+documented in [Cards](components/cards.qmd). To migrate existing course cards,
+rename their wrappers and title to the classes in that guide, preserve content,
+heading level and destinations, then remove only the local course-card CSS
+rules. Keep unrelated consumer styles.
 
 The normal width, enabled math Copy, installation format, footer credit and
 supported Quarto range retain their defaults. Override `$qdk-border` for Askr
@@ -145,3 +151,24 @@ gallery locally with `quarto render .`; it demonstrates
 article/navigation/TOC/mobile reading, native callouts, tables, code, formulas,
 and real saved notebook output. See [credits.qmd](credits.qmd),
 [THIRD_PARTY.md](THIRD_PARTY.md), and [ASSET_MANIFEST.md](ASSET_MANIFEST.md).
+
+## Maintainer planning and delivery
+
+When an external Pro proposal is supplied, assign one primary receiving Askr
+Lead per package and treat it as design input. Small fixes do not need Pro.
+Before the Lead updates the existing [execution plan](PLAN.md), verify the
+repository, branch, full commit SHA, relevant source and working-tree changes,
+package contracts, dependencies, and available capabilities. Use Plan Mode when
+substantial planning is needed; if unavailable, keep intake read-only until it
+is switched. Keep scope, owners, inputs, outputs, dependencies, authorized
+checks, failure handling, and Human decisions in the existing plan and
+[validation record](VALIDATION.md), not a parallel governance document.
+
+The original Git owner completes coherent work or an independently deliverable
+stage using existing checks, stages only exact paths, commits and pushes to
+`develop`, then reads back the remote branch and full SHA. Report the repository,
+branch, full SHA, paths, result, and anything pending; do not create empty
+commits or include another writer's work. Main promotion, merge, release, tag,
+deployment, root-pin changes, and resuming paused product work remain separately
+authorized. A remote push does not make source readable in ChatGPT; share only
+relevant source through an authorized excerpt or attachment.

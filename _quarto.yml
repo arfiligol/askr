@@ -16,6 +16,7 @@ project:
     - v0.3.0
     - v0.9.0
     - v0.10.0
+    - v0.11.0
 
 lang: en
 
@@ -82,6 +83,8 @@ website:
           href: components/prose.qmd
         - text: "Callouts"
           href: components/callouts.qmd
+        - text: "Cards"
+          href: components/cards.qmd
         - text: "Code"
           href: components/code.qmd
         - text: "Tables"

@@ -2,13 +2,14 @@
 title: "元件"
 ---
 
-Askr 會調整 Quarto 原生文章元件的樣式，不會新增撰寫語法。以下每頁介紹一類元件，方便在進一步修改前檢視目前的呈現方式。
+多數頁面介紹 Askr 如何調整 Quarto 原生文章元件的樣式；「卡片」頁則說明一種以 Quarto 原生區塊語法撰寫的選用格式。以下每頁聚焦於一類元件或寫法。
 
 ## 已調整
 
 - [標題](components/headings.qmd)。第二層標題不再自動畫出 Quarto 底線；分隔線改由明確的 `---` 表示。
 - [內文](components/prose.qmd)。文章連結、醒目文字、清單標記、引文與內容分隔線。
 - [提示框](components/callouts.qmd)。五種原生類型及其外框、圖示與展開箭頭。
+- [卡片](components/cards.qmd)。以巢狀 fenced div 組成卡片，保留真正的標題與單一標題連結，且不需 JavaScript。
 - [程式碼](components/code.qmd)。行內程式碼、圍欄程式碼區塊與本機溢位處理。
 - [表格](components/tables.qmd)。表頭與儲存格的分隔線。
 - [數學公式](components/mathematics.qmd)。展示公式會在內容寬度內捲動。

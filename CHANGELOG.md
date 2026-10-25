@@ -5,6 +5,15 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+## 0.12.0 — 2026-10-25
+
+### Added
+
+- Add the CSS-only native Card component using `.askr-card`,
+  `.askr-card-body`, and `.askr-card-title` on nested Quarto fenced divs. The
+  heading link is primary navigation; the shell has no click handler, and body
+  links retain their native destinations.
+
 ## 0.11.0 — 2026-10-21
 
 ### Added

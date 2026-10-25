@@ -1,0 +1,67 @@
+---
+title: "卡片"
+subtitle: "Quarto 原生區塊寫法"
+description: "以 Quarto 原生區塊語法建立直向卡片，並保留一般連結標題。"
+---
+
+Askr 卡片使用 Quarto 原生的 fenced div（圍欄式區塊）語法。卡片外框沒有點擊處理，
+標題連結是卡片的主要導覽方式；若在本文加入其他連結，仍會使用各自的原生目的地。
+
+## 撰寫語法
+
+請依照頁面章節結構選擇標題層級。`.unlisted` 會讓這個實際標題不列入頁面目錄；
+標題連結仍保有原生連結行為。
+
+````markdown
+:::: {.askr-card}
+::: {.askr-card-body}
+### [標題](target.qmd) {.askr-card-title .unlisted}
+
+簡短的補充段落。
+:::
+::::
+````
+
+外層 `.askr-card` 呈現卡片外框，`.askr-card-body` 群組卡片內容，
+`.askr-card-title` 則設定作者選定的標題樣式。此寫法不使用 JavaScript，
+也不會讓整張卡片都成為連結。
+
+## 展示範例
+
+以下兩張卡片連至既有的使用指南。較長的繁體中文標題可用來檢視中日韓文字在卡片內的換行情形。
+
+:::: {.askr-card}
+::: {.askr-card-body}
+### [安裝 Askr](../usage/add-askr.qmd) {.askr-card-title .unlisted}
+
+在 Quarto 專案安裝 Askr，並設定所需的網站選項。
+:::
+::::
+
+:::: {.askr-card}
+::: {.askr-card-body}
+### [用 Areas、頁面清單與 Sections 整理網站導覽](../usage/navigation.qmd) {.askr-card-title .unlisted}
+
+了解導覽區域、頁面清單與目前頁面的章節如何搭配運作。
+:::
+::::
+
+## 遷移既有課程卡片
+
+Askr v0.12.0 新增卡片元件。請在使用中的 Quarto 專案安裝此版本：
+
+```bash
+quarto add arfiligol/askr@v0.12.0 --no-prompt
+```
+
+只替換下列舊卡片類別，保留標題文字、標題層級、連結目的地與說明內容；
+同時移除 Bootstrap 通用的 `card` 與 `card-body` 類別。
+
+| 既有類別 | Askr 卡片類別 |
+| --- | --- |
+| `.card.course-card` | `.askr-card` |
+| `.card-body` | `.askr-card-body` |
+| `.course-card-title` | `.askr-card-title` |
+
+更新標記後，只移除本機針對舊課程卡片類別的 CSS 規則，保留其他專案樣式。
+新撰寫的卡片則使用上方 fenced div 語法。

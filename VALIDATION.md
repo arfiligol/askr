@@ -1,5 +1,26 @@
 # Candidate validation receipt
 
+## Native Card component — v0.12.0 release candidate — 2026-10-25
+
+Semantic state: CONVERGING. Delivery state: CANDIDATE; the Human-authorized
+v0.12.0 release endpoint is not complete. ✅ The Lead completed the Card-only
+source/consumer renders, Chromium review, and full bilingual site render. The
+published v0.11.0 package remains unchanged; the previous Copy follow-up is not
+included in this release.
+
+| Check | Result |
+| --- | --- |
+| Full release render | ✅ Quarto 1.10.18 rendered exact staged tree `54c88d895ba09961c1854a3974e99c69cbe21875`, exported to `/tmp/askr-v012-release.fhPRES`; `quarto render` exited 0 with 107 English and 28 Traditional Chinese inputs. The existing two figure cells and one arithmetic cell ran in each language; no solver or model science ran. Known `zh-TW` translation warnings and the local Jupyter transport warning remained; no new failure. |
+| Card-only source render | ✅ Quarto 1.10.18 rendered the English and Traditional Chinese Cards pages plus their linked Usage pages with `--no-execute`; exit 0. The Card-only source was exported to `/tmp/askr-cards-candidate.YE3RxS`, excluding the previous Copy WIP. Quarto emitted the known `Could not load translations zh-TW/Abstract` warning. |
+| Installed-layout consumer render | ✅ A prospective Card-only tree was copied to `_extensions/arfiligol/askr` in `/tmp/askr-cards-consumer.acFLjq`; Quarto rendered its two pages with `--no-execute`; exit 0. This used the installed folder layout and does not record `quarto add` or a released package. |
+| v0.11.0 archive source | ✅ The snapshot came from the actual published Pages tree `6f2d18f69143aa8de635f9cb9f40f7b4c2375ea9`; all 226 file blobs match byte-for-byte, including existing generated whitespace. Nested v0.10.0, v0.9.0, and v0.3.0 archives were excluded. The Lead retained archive bytes; the authored release diff check passed without normalizing the snapshot. |
+| Browser layouts | ✅ Chromium review at 1280×720 and 390×844 in light and dark themes. Browser console warnings and errors were empty. At 390px, page `scrollWidth` was 375px; cards were 323px wide with 321px scroll width and 16px padding; the title font size was 17.6px. |
+| Typography and spacing | ✅ H3 and H4 retained weight 700; card headings were absent from the page TOC. Desktop body padding measured 21.25px × 25.5px (1.25rem × 1.5rem); title font size was 21.25px. Heading color was rgb(43, 43, 43) in light mode and rgb(235, 235, 236) in dark mode. The last paragraph margin was 0; spacing between multiple paragraphs remained. |
+| Keyboard and navigation | ✅ Tab reached the card title with a visible focus outline and offset; Enter navigated to `destination.html`. An independent body link navigated to `destination.html#details`. On the Chinese Gallery page, Enter on the long title opened `zh-TW/usage/navigation.html`; Back returned to the card page. Short and long titles remained visible. |
+| Review artifact | ✅ [Chinese Cards preview](http://127.0.0.1:4601/zh-TW/components/cards.html#展示範例). Screenshots: `/tmp/askr-cards-gallery-light.png` and `/tmp/askr-cards-mobile-dark.png`. |
+| Release checks | ⏳ Main PR/CI, installation validation from the v0.12.0 release tag, Pages publication, and deployment/readback remain with the Lead. |
+| Not run in this scope | ⚠️ Physical-touch, Safari and Firefox review; notebook/scientific execution; and new tests. |
+
 ## Native Mermaid modal — 2026-10-21
 
 Status: Human authorized this additive Mermaid candidate for v0.11.0
