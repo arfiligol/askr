@@ -3,9 +3,13 @@
   "longTitle": "Interferometric Purcell Filter",
   "versions": [
     {
-      "label": "0.13.0",
+      "label": "0.13.1",
       "latest": true,
       "href": "../"
+    },
+    {
+      "label": "0.13.0",
+      "href": "../v0.13.0/"
     },
     {
       "label": "0.12.1",
