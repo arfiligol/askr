@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-efb902b7a6cc858bbcdea2c82d71e0b8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-a7f410ce759530d0edb86a5a31c5fb4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-efb902b7a6cc858bbcdea2c82d71e0b8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-94be6e28aa0a1dbebd500fb20d3d6625.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-3136bb5d3238eaf34047985a78e99f1a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-94be6e28aa0a1dbebd500fb20d3d6625.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -796,11 +796,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Sections</h2>
    
   <ul>
-  <li><a href="#candidate-validation-receipt" id="toc-candidate-validation-receipt" class="nav-link active" data-scroll-target="#candidate-validation-receipt">Candidate validation receipt</a>
+  <li><a href="#candidate-and-release-validation-receipts" id="toc-candidate-and-release-validation-receipts" class="nav-link active" data-scroll-target="#candidate-and-release-validation-receipts">Candidate and release validation receipts</a>
   <ul class="collapse">
+  <li><a href="#askr-v0.13.0-viewers-and-shared-copy-release-candidate-2026-10-27" id="toc-askr-v0.13.0-viewers-and-shared-copy-release-candidate-2026-10-27" class="nav-link" data-scroll-target="#askr-v0.13.0-viewers-and-shared-copy-release-candidate-2026-10-27">Askr v0.13.0 — viewers and shared Copy release candidate — 2026-10-27</a></li>
   <li><a href="#native-announcement-support-v0.12.1-release-candidate-2026-10-26" id="toc-native-announcement-support-v0.12.1-release-candidate-2026-10-26" class="nav-link" data-scroll-target="#native-announcement-support-v0.12.1-release-candidate-2026-10-26">Native announcement support — v0.12.1 release candidate — 2026-10-26</a></li>
   <li><a href="#native-card-component-v0.12.0-release-candidate-2026-10-25" id="toc-native-card-component-v0.12.0-release-candidate-2026-10-25" class="nav-link" data-scroll-target="#native-card-component-v0.12.0-release-candidate-2026-10-25">Native Card component — v0.12.0 release candidate — 2026-10-25</a></li>
-  <li><a href="#native-mermaid-modal-2026-10-21" id="toc-native-mermaid-modal-2026-10-21" class="nav-link" data-scroll-target="#native-mermaid-modal-2026-10-21">Native Mermaid modal — 2026-10-21</a></li>
+  <li><a href="#shared-text-copy-feedback-local-candidate-2026-10-21" id="toc-shared-text-copy-feedback-local-candidate-2026-10-21" class="nav-link" data-scroll-target="#shared-text-copy-feedback-local-candidate-2026-10-21">Shared text-copy feedback — local candidate — 2026-10-21</a></li>
+  <li><a href="#askr-v0.11.0-mermaid-viewer-published-2026-10-21" id="toc-askr-v0.11.0-mermaid-viewer-published-2026-10-21" class="nav-link" data-scroll-target="#askr-v0.11.0-mermaid-viewer-published-2026-10-21">Askr v0.11.0 Mermaid viewer — published 2026-10-21</a></li>
   <li><a href="#documentation-version-archive-correction-2026-10-21" id="toc-documentation-version-archive-correction-2026-10-21" class="nav-link" data-scroll-target="#documentation-version-archive-correction-2026-10-21">Documentation version archive correction — 2026-10-21</a></li>
   <li><a href="#bilingual-publication-package-2026-10-21" id="toc-bilingual-publication-package-2026-10-21" class="nav-link" data-scroll-target="#bilingual-publication-package-2026-10-21">0.10.0 bilingual publication package — 2026-10-21</a></li>
   <li><a href="#prior-optional-header-language-selector-runtime-observations-2026-10-21" id="toc-prior-optional-header-language-selector-runtime-observations-2026-10-21" class="nav-link" data-scroll-target="#prior-optional-header-language-selector-runtime-observations-2026-10-21">Prior optional Header language selector runtime observations — 2026-10-21</a>
@@ -854,8 +856,94 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="candidate-validation-receipt" class="level1">
-<h1>Candidate validation receipt</h1>
+<section id="candidate-and-release-validation-receipts" class="level1">
+<h1>Candidate and release validation receipts</h1>
+<section id="askr-v0.13.0-viewers-and-shared-copy-release-candidate-2026-10-27" class="level2">
+<h2 class="anchored" data-anchor-id="askr-v0.13.0-viewers-and-shared-copy-release-candidate-2026-10-27">Askr v0.13.0 — viewers and shared Copy release candidate — 2026-10-27</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Release authorization</td>
+<td>✅ The Human authorized v0.13.0 with the Viewer scope and shared text Copy controls on 2026-10-27.</td>
+</tr>
+<tr class="even">
+<td>Exact release render</td>
+<td>✅ Tree <code>6dfe8c7213409ee9bea8d1fefb37a1ebff5d2d73</code>, exported to <code>/var/folders/_1/cyvvhpp52r99jn06g5sfdpmm0000gn/T/askr-v0130-release.4yr49s56</code>, passed default <code>quarto render</code> with 110 English and 31 Traditional Chinese inputs. Existing public demonstration cells executed; no solver ran. Only known Traditional Chinese translation warnings remained.</td>
+</tr>
+<tr class="odd">
+<td>Combined Copy payloads</td>
+<td>✅ In a temporary installed-namespace consumer, real clipboard contents matched plain CJK code; annotated code copied <code>x = 1\nprint(x)</code> without its marker and retained the first source line; keyboard Enter copied original TeX including newlines; Mermaid matched its source. The Traditional Chinese Gallery Mermaid source matched all 441 characters.</td>
+</tr>
+<tr class="even">
+<td>Copy feedback and exclusions</td>
+<td>✅ Code, math and Mermaid each displayed <code>Copy</code> → <code>Copied!</code> → <code>Copy</code>. Native <code>.code-copy-button</code> count was zero; a disabled code/math-copy page had zero buttons. Injected clipboard denial produced selectable math source and an explicit failure message.</td>
+</tr>
+<tr class="odd">
+<td>Copy theme and mobile</td>
+<td>✅ Light success color was rgb(79, 117, 107), dark rgb(143, 183, 168). At 390px, client width and scroll width were both 375px; button right edge was 338.4px. Screenshots: <code>/tmp/askr-v0130-copy-desktop.png</code> and <code>/tmp/askr-v0130-copy-mobile-dark.png</code>.</td>
+</tr>
+<tr class="even">
+<td>v0.12.1 archive</td>
+<td>✅ The Lead preserved 229 files (23,192,132 bytes) from actual published <code>origin/gh-pages</code> source <code>04c6b651f064e64b9c002eb0f63b0e7b78fe5d7b</code>, excluding nested archives and <code>.nojekyll</code>. Source and output hashes matched for all 229 files except the intentionally generated output version-selector manifest; the source snapshot remains unchanged.</td>
+</tr>
+<tr class="odd">
+<td>Release delivery</td>
+<td>⏳ Lead: main CI, fresh tag installation and public-site verification.</td>
+</tr>
+<tr class="even">
+<td>Fixture identity and license</td>
+<td>✅ Official NPM <code>plotly.js-basic-dist-min@3.1.0</code> reports MIT. The generator verifies the pinned archive SHA-512 and script SHA-256; the upstream license is retained.</td>
+</tr>
+<tr class="odd">
+<td>Bilingual render</td>
+<td>✅ Non-executing renders passed for 110 English and 31 Traditional Chinese inputs.</td>
+</tr>
+<tr class="even">
+<td>Chart controls</td>
+<td>✅ The Lead observed real Plotly hover values, changed axes with Zoom in, dragged using Pan, and used Reset axes. Inline and floating chart states remained independent.</td>
+</tr>
+<tr class="odd">
+<td>Simplified chart toolbar</td>
+<td>✅ The Lead opened the modal and observed only Open source and Close in its toolbar. Escape inside the iframe and the Close control both returned focus to Expand.</td>
+</tr>
+<tr class="even">
+<td>Viewers sidebar hierarchy</td>
+<td>✅ On the English Components homepage, Viewers was collapsed by default and opened to its two children; Chart viewer retained its original URL and active marker. On the Traditional Chinese Chart page, 檢視器 was expanded and 元件 collapsed; 檢視器 could be closed and reopened while retaining the active page marker. Full non-executing renders passed again for 110 English and 31 Traditional Chinese inputs, with existing calculations unexecuted. Screenshot: <code>/tmp/askr-viewers-hierarchy.png</code>.</td>
+</tr>
+<tr class="odd">
+<td>Floating window and keyboard</td>
+<td>✅ Opening focused Close; closing the window or pressing Escape inside the iframe returned focus to Expand and removed the modal iframe. At 390×844, the dialog width and document client width both measured 375px without right-side clipping.</td>
+</tr>
+<tr class="even">
+<td>Failure and recovery</td>
+<td>✅ An actual missing HTML response displayed a readable failure message and Retry. After the temporary HTML was restored, both inline and modal Retry loaded it successfully.</td>
+</tr>
+<tr class="odd">
+<td>Static image regression</td>
+<td>✅ The new static Component page retained 125% zoom when expanded. Fit restored 100%; closing returned focus to Expand.</td>
+</tr>
+<tr class="even">
+<td>Installation and formats</td>
+<td>✅ The source worker checked a fresh temporary installed-extension layout, relative HTML resources, invalid settings and non-HTML output. The Plotly runtime remains Gallery content, outside the extension.</td>
+</tr>
+<tr class="odd">
+<td>Theme review</td>
+<td>✅ Desktop dark and mobile light screenshots showed readable frame/control contrast while the chart retained its authored light background. The mobile view fit inside the 375px client width without clipping. Screenshots: <code>/tmp/askr-chart-desktop-dark.png</code> and <code>/tmp/askr-chart-mobile-light.png</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ Touch gestures and the code <code>execCommand</code> clipboard fallback were not independently exercised.</p>
+</section>
 <section id="native-announcement-support-v0.12.1-release-candidate-2026-10-26" class="level2">
 <h2 class="anchored" data-anchor-id="native-announcement-support-v0.12.1-release-candidate-2026-10-26">Native announcement support — v0.12.1 release candidate — 2026-10-26</h2>
 <p>✅ 2026-10-26: Quarto 1.10.18 rendered a clean published v0.12.0 tree plus the announcement changes, and the Lead inspected Chromium at desktop, tablet and mobile sizes in light and dark themes. The Human authorized the v0.12.1 release on 2026-10-26.</p>
@@ -973,9 +1061,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="native-mermaid-modal-2026-10-21" class="level2">
-<h2 class="anchored" data-anchor-id="native-mermaid-modal-2026-10-21">Native Mermaid modal — 2026-10-21</h2>
-<p>Status: Human authorized this additive Mermaid candidate for v0.11.0 publication and LCDH adoption. Delivery remains LOCAL CANDIDATE; the Lead owns the pending main, tag, Pages and pristine-install release endpoint. Quarto 1.10.18 rendered the isolated consumer <code>/tmp/askr-mermaid-candidate.oHLMZj</code> with the extension under the installed <code>_extensions/arfiligol/askr</code> layout.</p>
+<section id="shared-text-copy-feedback-local-candidate-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="shared-text-copy-feedback-local-candidate-2026-10-21">Shared text-copy feedback — local candidate — 2026-10-21</h2>
+<p>Status: ✅ The Lead completed the local browser review at <a href="http://127.0.0.1:4599/askr/zh-TW/components/figures.html#mermaid-viewer" class="uri">http://127.0.0.1:4599/askr/zh-TW/components/figures.html#mermaid-viewer</a>. These observations cover the 2026-10-21 local candidate. The Human included that Copy behavior in the v0.13.0 release scope on 2026-10-27; the combined candidate review and publication remain pending above.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Clipboard content</td>
+<td>✅ Browser clipboard matched plain code containing CJK and a long first line; annotated code kept the first target line and omitted its annotation marker/explanation; keyboard Enter copied raw dataset TeX including newlines; Mermaid copied its source exactly. The Chinese Gallery Mermaid sample’s 441-character clipboard matched its source metadata.</td>
+</tr>
+<tr class="even">
+<td>Shared success state</td>
+<td>✅ Math, Mermaid and native code buttons each changed from <code>Copy</code> to <code>Copied!</code> with a green outline, then were back to <code>Copy</code> after a 2.3-second observation wait. This records the observed reset, not an exact timer threshold or repeated-cycle timing.</td>
+</tr>
+<tr class="odd">
+<td>Theme</td>
+<td>✅ The success border/text measured rgb(143, 183, 168) in dark mode and rgb(79, 117, 107) in light mode.</td>
+</tr>
+<tr class="even">
+<td>Mobile layout</td>
+<td>✅ At 390×844, page <code>scrollWidth</code> was 375px; all Copy buttons stayed inside the viewport. The Mermaid source button remained at the code frame’s upper right.</td>
+</tr>
+<tr class="odd">
+<td>Native control replacement</td>
+<td>✅ The rendered page contained zero <code>.code-copy-button</code> controls and zero native code-copy tooltips.</td>
+</tr>
+<tr class="even">
+<td>Disabled controls</td>
+<td>✅ With <code>code-copy: false</code> and <code>askr-math-copy: false</code>, no shared or native code-copy buttons appeared.</td>
+</tr>
+<tr class="odd">
+<td>Full bilingual render</td>
+<td>✅ Quarto exited 0 with 106 English and 27 Traditional Chinese inputs; existing computational cells ran.</td>
+</tr>
+<tr class="even">
+<td>Diff formatting</td>
+<td>✅ <code>git diff --check</code> passed.</td>
+</tr>
+<tr class="odd">
+<td>Prior Mermaid placement</td>
+<td>✅ Before the shared feedback change, the Chinese Gallery Figures page’s browser clipboard returned 441 characters matching the visible source on desktop and at 390×844. The 323px frame kept Copy inside above the first code line; the source scrolled horizontally by 375px while Copy stayed visible at the right. There was no page horizontal overflow; the desktop frame was 628px. Console warnings/errors were empty. Screenshots: <code>/tmp/askr-copy-inside-desktop.png</code> and <code>/tmp/askr-copy-inside-mobile.png</code>. This receipt covers the earlier placement and payload, not the new shared success state.</td>
+</tr>
+</tbody>
+</table>
+<p>The strict timeout boundary, repeated timer-cycle timing and legacy <code>execCommand</code> clipboard fallback were not verified.</p>
+</section>
+<section id="askr-v0.11.0-mermaid-viewer-published-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="askr-v0.11.0-mermaid-viewer-published-2026-10-21">Askr v0.11.0 Mermaid viewer — published 2026-10-21</h2>
+<p>Status: ✅ Published as <a href="https://github.com/arfiligol/askr/releases/tag/v0.11.0">v0.11.0</a>. The observations below record that release’s viewer and source-copy layout; the later shared text-copy feedback is recorded in the separate candidate above. Quarto 1.10.18 rendered the isolated consumer <code>/tmp/askr-mermaid-candidate.oHLMZj</code> with the extension under the installed <code>_extensions/arfiligol/askr</code> layout.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1046,7 +1189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>The candidate also preserves local SVG fragment references while serializing computed styles and explicit viewBox dimensions. JavaScript syntax validation passed with Node. No durable tests, dependencies or fixtures were added. Git, tag, Pages deployment and pristine-install verification remain pending Lead delivery.</p>
+<p>The published v0.11.0 implementation also preserves local SVG fragment references while serializing computed styles and explicit viewBox dimensions. JavaScript syntax validation passed with Node. No durable tests, dependencies or fixtures were added. The shared text-copy follow-up is separate from this release; the Lead’s browser review is recorded above.</p>
 </section>
 <section id="documentation-version-archive-correction-2026-10-21" class="level2">
 <h2 class="anchored" data-anchor-id="documentation-version-archive-correction-2026-10-21">Documentation version archive correction — 2026-10-21</h2>
@@ -1659,53 +1802,181 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </main> <!-- /main -->
 <script>
-// The render filter owns source identity. This handler only transfers that
-// source on an explicit click and exposes it if clipboard access is denied.
-const askrMathCopyTimers = new WeakMap();
-function askrInitializeMathCopy() {
-  document.querySelectorAll('.askr-copyable-math').forEach(component => {
-    if (component.closest('.no-math-copy') || component.querySelector('.no-math-copy')) return;
-    const actions = document.createElement('div');
-    actions.className = 'askr-math-actions';
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'askr-math-copy';
+(() => {
+  'use strict';
+
+  const timers = new WeakMap();
+  const attempts = new WeakMap();
+
+  function statusFor(button) {
+    if (button.dataset.askrCopyKind === 'math') {
+      return button.closest('.askr-copyable-math')?.querySelector(':scope > .askr-copy-status') || null;
+    }
+    const local = button.parentElement?.querySelector('.askr-copy-status');
+    if (local) return local;
+    const following = button.parentElement?.nextElementSibling;
+    return following?.classList.contains('askr-copy-status') ? following : null;
+  }
+
+  function begin(button) {
+    clearTimeout(timers.get(button));
+    timers.delete(button);
+    const attempt = (attempts.get(button) || 0) + 1;
+    attempts.set(button, attempt);
     button.textContent = 'Copy';
-    button.setAttribute('aria-label', 'Copy LaTeX');
-    const status = document.createElement('span');
-    status.className = 'askr-math-status';
-    status.setAttribute('role', 'status');
-    status.setAttribute('aria-live', 'polite');
-    actions.append(button, status);
-    component.prepend(actions);
-  });
-}
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', askrInitializeMathCopy);
-else askrInitializeMathCopy();
-document.addEventListener('click', async (event) => {
-  const button = event.target.closest('.askr-math-copy');
-  if (!button) return;
-  const component = button.closest('.askr-copyable-math');
-  const status = component.querySelector('.askr-math-status');
-  clearTimeout(askrMathCopyTimers.get(button));
-  button.classList.remove('is-copied');
-  button.textContent = 'Copy';
-  button.disabled = true;
-  status.classList.remove('askr-math-status-success');
-  status.textContent = '';
-  try {
-    await navigator.clipboard.writeText(component.dataset.askrTex);
+    button.classList.remove('is-copied');
+    button.setAttribute('aria-label', button.dataset.askrCopyLabel);
+    const status = statusFor(button);
+    if (status) {
+      status.classList.remove('askr-copy-status-success', 'askr-copy-status-error');
+      status.textContent = '';
+    }
+    return attempt;
+  }
+
+  function succeed(button, attempt) {
+    if (attempts.get(button) !== attempt) return;
     button.textContent = 'Copied!';
     button.classList.add('is-copied');
-    status.classList.add('askr-math-status-success');
-    status.textContent = 'Copied';
-    askrMathCopyTimers.set(button, setTimeout(() => {
+    button.setAttribute('aria-label', `${button.dataset.askrCopyLabel} copied`);
+    const status = statusFor(button);
+    if (status) {
+      status.classList.add('askr-copy-status-success');
+      status.textContent = 'Copied to clipboard.';
+    }
+    timers.set(button, window.setTimeout(() => {
+      if (attempts.get(button) !== attempt) return;
       button.textContent = 'Copy';
       button.classList.remove('is-copied');
-      status.textContent = '';
-      askrMathCopyTimers.delete(button);
+      button.setAttribute('aria-label', button.dataset.askrCopyLabel);
+      if (status) {
+        status.classList.remove('askr-copy-status-success');
+        status.textContent = '';
+      }
+      timers.delete(button);
     }, 2000));
-  } catch {
+  }
+
+  function fail(button, attempt) {
+    if (attempts.get(button) !== attempt) return;
+    const status = statusFor(button);
+    if (status) {
+      status.classList.add('askr-copy-status-error');
+      const messages = {
+        code: 'Copy failed. Select the code above and copy it manually.',
+        math: 'Copy failed. Select the LaTeX source below and copy it manually.',
+        mermaid: 'Copy failed. Select the Mermaid source below and copy it manually.'
+      };
+      status.textContent = messages[button.dataset.askrCopyKind];
+    }
+  }
+
+  function codeText(button) {
+    const original = button.closest('.code-copy-outer-scaffold');
+    if (!original) throw new Error('The code block source is unavailable.');
+    const scaffold = original.cloneNode(true);
+    const code = scaffold.querySelector('code');
+    if (!code) throw new Error('The code block source is unavailable.');
+    for (const child of [...code.children]) {
+      const classes = [...child.classList];
+      if (classes.some(name => name.startsWith('code-annotation-') && name !== 'code-annotation-target')) child.remove();
+    }
+    return code.innerText;
+  }
+
+  function sourceFor(button) {
+    const kind = button.dataset.askrCopyKind;
+    if (kind === 'math') return button.closest('.askr-copyable-math')?.dataset.askrTex;
+    if (kind === 'mermaid') return button.closest('.askr-mermaid-view')?.dataset.askrMermaidSource;
+    if (kind === 'code') return codeText(button);
+    throw new Error('This copy control has no source.');
+  }
+
+  function legacyCodeCopy(text, button) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.readOnly = true;
+    textarea.tabIndex = -1;
+    textarea.setAttribute('aria-hidden', 'true');
+    textarea.style.position = 'fixed';
+    textarea.style.insetInlineStart = '-9999px';
+    document.body.append(textarea);
+    textarea.select();
+    let copied = false;
+    try { copied = document.execCommand('copy'); } catch (_) {}
+    textarea.remove();
+    button.focus({preventScroll:true});
+    if (!copied) throw new Error('The browser did not copy the code.');
+  }
+
+  async function copy(button) {
+    const attempt = begin(button);
+    let text;
+    try {
+      text = sourceFor(button);
+      if (typeof text !== 'string') throw new Error('The source is unavailable.');
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard access is unavailable.');
+      await navigator.clipboard.writeText(text);
+      succeed(button, attempt);
+    } catch (_) {
+      if (attempts.get(button) !== attempt) return;
+      if (button.dataset.askrCopyKind === 'code' && typeof text === 'string') {
+        try {
+          legacyCodeCopy(text, button);
+          succeed(button, attempt);
+          return;
+        } catch (_) {}
+      }
+      if (button.dataset.askrCopyKind === 'math') exposeMathSource(button);
+      fail(button, attempt);
+    }
+  }
+
+  function createButton(kind, label) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = `askr-copy-button askr-copy-${kind}`;
+    button.dataset.askrCopyKind = kind;
+    button.dataset.askrCopyLabel = label;
+    button.textContent = 'Copy';
+    button.setAttribute('aria-label', label);
+    return button;
+  }
+
+  function createStatus() {
+    const status = document.createElement('span');
+    status.className = 'askr-copy-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    return status;
+  }
+
+  function initializeMathCopy() {
+    document.querySelectorAll('.askr-copyable-math').forEach(component => {
+      if (component.closest('.no-math-copy') || component.querySelector('.no-math-copy') || component.querySelector(':scope > .askr-math-actions')) return;
+      const actions = document.createElement('div');
+      actions.className = 'askr-math-actions';
+      const button = createButton('math', 'Copy LaTeX');
+      const status = createStatus();
+      actions.append(button);
+      component.prepend(actions);
+      component.append(status);
+    });
+  }
+
+  function replaceNativeCodeButtons() {
+    document.querySelectorAll('.code-copy-outer-scaffold > .code-copy-button').forEach(nativeButton => {
+      const scaffold = nativeButton.parentElement;
+      const button = createButton('code', 'Copy code');
+      nativeButton.replaceWith(button);
+      scaffold.classList.add('askr-has-copy-control');
+      scaffold.after(createStatus());
+    });
+  }
+
+  function exposeMathSource(button) {
+    const component = button.closest('.askr-copyable-math');
+    if (!component) return;
     let source = component.querySelector('.askr-math-source');
     if (!source) {
       source = document.createElement('div');
@@ -1721,11 +1992,26 @@ document.addEventListener('click', async (event) => {
     const textarea = source.querySelector('textarea');
     textarea.focus();
     textarea.select();
-    status.textContent = 'Copy unavailable. Select the source below to copy manually.';
-  } finally {
-    button.disabled = false;
   }
-});
+
+  function initialize() {
+    if (document.documentElement.dataset.askrCopyBound) return;
+    document.documentElement.dataset.askrCopyBound = 'true';
+    replaceNativeCodeButtons();
+    initializeMathCopy();
+    document.addEventListener('click', event => {
+      if (!(event.target instanceof Element)) return;
+      const button = event.target.closest('.askr-copy-button');
+      if (button) void copy(button);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialize, {once:true});
+  } else {
+    initialize();
+  }
+})();
 </script>
 <script>
 // Logout is independent of image viewing and remains plain navigation.
@@ -2228,7 +2514,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.12.1" aria-label="Askr version 0.12.1">0.12.1</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.0" aria-label="Askr version 0.13.0">0.13.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 

@@ -47,9 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="/askr/site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="/askr/site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="/askr/site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="/askr/site_libs/bootstrap/bootstrap-efb902b7a6cc858bbcdea2c82d71e0b8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="/askr/site_libs/bootstrap/bootstrap-dark-a7f410ce759530d0edb86a5a31c5fb4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="/askr/site_libs/bootstrap/bootstrap-efb902b7a6cc858bbcdea2c82d71e0b8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="/askr/site_libs/bootstrap/bootstrap-94be6e28aa0a1dbebd500fb20d3d6625.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="/askr/site_libs/bootstrap/bootstrap-dark-3136bb5d3238eaf34047985a78e99f1a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="/askr/site_libs/bootstrap/bootstrap-94be6e28aa0a1dbebd500fb20d3d6625.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="/askr/site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="/askr/site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="/askr/site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -804,53 +804,181 @@ fetch(new URL("askr-versions.json", siteRoot)).then(function (response) {
 
 </main> <!-- /main -->
 <script>
-// The render filter owns source identity. This handler only transfers that
-// source on an explicit click and exposes it if clipboard access is denied.
-const askrMathCopyTimers = new WeakMap();
-function askrInitializeMathCopy() {
-  document.querySelectorAll('.askr-copyable-math').forEach(component => {
-    if (component.closest('.no-math-copy') || component.querySelector('.no-math-copy')) return;
-    const actions = document.createElement('div');
-    actions.className = 'askr-math-actions';
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'askr-math-copy';
+(() => {
+  'use strict';
+
+  const timers = new WeakMap();
+  const attempts = new WeakMap();
+
+  function statusFor(button) {
+    if (button.dataset.askrCopyKind === 'math') {
+      return button.closest('.askr-copyable-math')?.querySelector(':scope > .askr-copy-status') || null;
+    }
+    const local = button.parentElement?.querySelector('.askr-copy-status');
+    if (local) return local;
+    const following = button.parentElement?.nextElementSibling;
+    return following?.classList.contains('askr-copy-status') ? following : null;
+  }
+
+  function begin(button) {
+    clearTimeout(timers.get(button));
+    timers.delete(button);
+    const attempt = (attempts.get(button) || 0) + 1;
+    attempts.set(button, attempt);
     button.textContent = 'Copy';
-    button.setAttribute('aria-label', 'Copy LaTeX');
-    const status = document.createElement('span');
-    status.className = 'askr-math-status';
-    status.setAttribute('role', 'status');
-    status.setAttribute('aria-live', 'polite');
-    actions.append(button, status);
-    component.prepend(actions);
-  });
-}
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', askrInitializeMathCopy);
-else askrInitializeMathCopy();
-document.addEventListener('click', async (event) => {
-  const button = event.target.closest('.askr-math-copy');
-  if (!button) return;
-  const component = button.closest('.askr-copyable-math');
-  const status = component.querySelector('.askr-math-status');
-  clearTimeout(askrMathCopyTimers.get(button));
-  button.classList.remove('is-copied');
-  button.textContent = 'Copy';
-  button.disabled = true;
-  status.classList.remove('askr-math-status-success');
-  status.textContent = '';
-  try {
-    await navigator.clipboard.writeText(component.dataset.askrTex);
+    button.classList.remove('is-copied');
+    button.setAttribute('aria-label', button.dataset.askrCopyLabel);
+    const status = statusFor(button);
+    if (status) {
+      status.classList.remove('askr-copy-status-success', 'askr-copy-status-error');
+      status.textContent = '';
+    }
+    return attempt;
+  }
+
+  function succeed(button, attempt) {
+    if (attempts.get(button) !== attempt) return;
     button.textContent = 'Copied!';
     button.classList.add('is-copied');
-    status.classList.add('askr-math-status-success');
-    status.textContent = 'Copied';
-    askrMathCopyTimers.set(button, setTimeout(() => {
+    button.setAttribute('aria-label', `${button.dataset.askrCopyLabel} copied`);
+    const status = statusFor(button);
+    if (status) {
+      status.classList.add('askr-copy-status-success');
+      status.textContent = 'Copied to clipboard.';
+    }
+    timers.set(button, window.setTimeout(() => {
+      if (attempts.get(button) !== attempt) return;
       button.textContent = 'Copy';
       button.classList.remove('is-copied');
-      status.textContent = '';
-      askrMathCopyTimers.delete(button);
+      button.setAttribute('aria-label', button.dataset.askrCopyLabel);
+      if (status) {
+        status.classList.remove('askr-copy-status-success');
+        status.textContent = '';
+      }
+      timers.delete(button);
     }, 2000));
-  } catch {
+  }
+
+  function fail(button, attempt) {
+    if (attempts.get(button) !== attempt) return;
+    const status = statusFor(button);
+    if (status) {
+      status.classList.add('askr-copy-status-error');
+      const messages = {
+        code: 'Copy failed. Select the code above and copy it manually.',
+        math: 'Copy failed. Select the LaTeX source below and copy it manually.',
+        mermaid: 'Copy failed. Select the Mermaid source below and copy it manually.'
+      };
+      status.textContent = messages[button.dataset.askrCopyKind];
+    }
+  }
+
+  function codeText(button) {
+    const original = button.closest('.code-copy-outer-scaffold');
+    if (!original) throw new Error('The code block source is unavailable.');
+    const scaffold = original.cloneNode(true);
+    const code = scaffold.querySelector('code');
+    if (!code) throw new Error('The code block source is unavailable.');
+    for (const child of [...code.children]) {
+      const classes = [...child.classList];
+      if (classes.some(name => name.startsWith('code-annotation-') && name !== 'code-annotation-target')) child.remove();
+    }
+    return code.innerText;
+  }
+
+  function sourceFor(button) {
+    const kind = button.dataset.askrCopyKind;
+    if (kind === 'math') return button.closest('.askr-copyable-math')?.dataset.askrTex;
+    if (kind === 'mermaid') return button.closest('.askr-mermaid-view')?.dataset.askrMermaidSource;
+    if (kind === 'code') return codeText(button);
+    throw new Error('This copy control has no source.');
+  }
+
+  function legacyCodeCopy(text, button) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.readOnly = true;
+    textarea.tabIndex = -1;
+    textarea.setAttribute('aria-hidden', 'true');
+    textarea.style.position = 'fixed';
+    textarea.style.insetInlineStart = '-9999px';
+    document.body.append(textarea);
+    textarea.select();
+    let copied = false;
+    try { copied = document.execCommand('copy'); } catch (_) {}
+    textarea.remove();
+    button.focus({preventScroll:true});
+    if (!copied) throw new Error('The browser did not copy the code.');
+  }
+
+  async function copy(button) {
+    const attempt = begin(button);
+    let text;
+    try {
+      text = sourceFor(button);
+      if (typeof text !== 'string') throw new Error('The source is unavailable.');
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard access is unavailable.');
+      await navigator.clipboard.writeText(text);
+      succeed(button, attempt);
+    } catch (_) {
+      if (attempts.get(button) !== attempt) return;
+      if (button.dataset.askrCopyKind === 'code' && typeof text === 'string') {
+        try {
+          legacyCodeCopy(text, button);
+          succeed(button, attempt);
+          return;
+        } catch (_) {}
+      }
+      if (button.dataset.askrCopyKind === 'math') exposeMathSource(button);
+      fail(button, attempt);
+    }
+  }
+
+  function createButton(kind, label) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = `askr-copy-button askr-copy-${kind}`;
+    button.dataset.askrCopyKind = kind;
+    button.dataset.askrCopyLabel = label;
+    button.textContent = 'Copy';
+    button.setAttribute('aria-label', label);
+    return button;
+  }
+
+  function createStatus() {
+    const status = document.createElement('span');
+    status.className = 'askr-copy-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    return status;
+  }
+
+  function initializeMathCopy() {
+    document.querySelectorAll('.askr-copyable-math').forEach(component => {
+      if (component.closest('.no-math-copy') || component.querySelector('.no-math-copy') || component.querySelector(':scope > .askr-math-actions')) return;
+      const actions = document.createElement('div');
+      actions.className = 'askr-math-actions';
+      const button = createButton('math', 'Copy LaTeX');
+      const status = createStatus();
+      actions.append(button);
+      component.prepend(actions);
+      component.append(status);
+    });
+  }
+
+  function replaceNativeCodeButtons() {
+    document.querySelectorAll('.code-copy-outer-scaffold > .code-copy-button').forEach(nativeButton => {
+      const scaffold = nativeButton.parentElement;
+      const button = createButton('code', 'Copy code');
+      nativeButton.replaceWith(button);
+      scaffold.classList.add('askr-has-copy-control');
+      scaffold.after(createStatus());
+    });
+  }
+
+  function exposeMathSource(button) {
+    const component = button.closest('.askr-copyable-math');
+    if (!component) return;
     let source = component.querySelector('.askr-math-source');
     if (!source) {
       source = document.createElement('div');
@@ -866,11 +994,26 @@ document.addEventListener('click', async (event) => {
     const textarea = source.querySelector('textarea');
     textarea.focus();
     textarea.select();
-    status.textContent = 'Copy unavailable. Select the source below to copy manually.';
-  } finally {
-    button.disabled = false;
   }
-});
+
+  function initialize() {
+    if (document.documentElement.dataset.askrCopyBound) return;
+    document.documentElement.dataset.askrCopyBound = 'true';
+    replaceNativeCodeButtons();
+    initializeMathCopy();
+    document.addEventListener('click', event => {
+      if (!(event.target instanceof Element)) return;
+      const button = event.target.closest('.askr-copy-button');
+      if (button) void copy(button);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialize, {once:true});
+  } else {
+    initialize();
+  }
+})();
 </script>
 <script>
 // Logout is independent of image viewing and remains plain navigation.
@@ -1373,7 +1516,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.12.1" aria-label="Askr version 0.12.1">0.12.1</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.0" aria-label="Askr version 0.13.0">0.13.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 
