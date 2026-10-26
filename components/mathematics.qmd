@@ -7,6 +7,8 @@ Display mathematics may scroll locally. The normal body measure is 630px;
 the site-wide wide profile uses 780px. The compact Copy control appears on hover
 or keyboard focus and copies the source without its surrounding `$$` delimiters.
 If clipboard access is unavailable, selectable source appears below the formula.
+After a successful copy, the button itself shows `Copied!` with a green outline
+for about two seconds, then returns to `Copy`.
 
 $$
 \omega_r = 2\pi f

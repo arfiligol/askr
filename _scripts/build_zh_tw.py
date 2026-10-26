@@ -46,7 +46,7 @@ def write_manifest(path: Path, manifest: dict) -> None:
 def generate_archive_manifests(output: Path) -> None:
     source = version_manifest()
 
-    for archive in ("v0.9.0", "v0.10.0", "v0.11.0", "v0.12.0"):
+    for archive in ("v0.9.0", "v0.10.0", "v0.11.0", "v0.12.0", "v0.12.1"):
         modern = copy.deepcopy(source)
         for item in modern["versions"]:
             root = relative_site_root(archive, item["root"])

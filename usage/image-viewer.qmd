@@ -120,9 +120,12 @@ reuses the image viewer's zoom, pan and Fit controls, plus fullscreen where
 available and close with focus restoration.
 
 The `Mermaid source` disclosure is adjacent to the viewer button below the
-graph. Open it to reveal the authored block; `Copy` copies that source with its
-original line breaks. Askr adds no second static source block or search-index
-entry. Quarto's native Mermaid source visibility and indexing remain unchanged.
+graph. Open it to reveal the authored block in a scrollable code frame; its
+text `Copy` button sits at the frame's upper right and preserves the original
+line breaks. After a successful copy, the button itself shows `Copied!` with a
+green outline for about two seconds, then returns to `Copy`. Askr adds no
+second static source block or search-index entry. Quarto's native Mermaid
+source visibility and indexing remain unchanged.
 
 Each wrapper contains one Mermaid block. Mermaid has no inline viewer mode.
 

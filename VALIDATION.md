@@ -1,9 +1,16 @@
-# Candidate validation receipt
+# Candidate and release validation receipts
 
-## Dedicated image and chart viewers — local candidate — 2026-10-26
+## Askr v0.13.0 — viewers and shared Copy release candidate — 2026-10-27
 
 | Check | Result |
 | --- | --- |
+| Release authorization | ✅ The Human authorized v0.13.0 with the Viewer scope and shared text Copy controls on 2026-10-27. |
+| Exact release render | ✅ Tree `6dfe8c7213409ee9bea8d1fefb37a1ebff5d2d73`, exported to `/var/folders/_1/cyvvhpp52r99jn06g5sfdpmm0000gn/T/askr-v0130-release.4yr49s56`, passed default `quarto render` with 110 English and 31 Traditional Chinese inputs. Existing public demonstration cells executed; no solver ran. Only known Traditional Chinese translation warnings remained. |
+| Combined Copy payloads | ✅ In a temporary installed-namespace consumer, real clipboard contents matched plain CJK code; annotated code copied `x = 1\nprint(x)` without its marker and retained the first source line; keyboard Enter copied original TeX including newlines; Mermaid matched its source. The Traditional Chinese Gallery Mermaid source matched all 441 characters. |
+| Copy feedback and exclusions | ✅ Code, math and Mermaid each displayed `Copy` → `Copied!` → `Copy`. Native `.code-copy-button` count was zero; a disabled code/math-copy page had zero buttons. Injected clipboard denial produced selectable math source and an explicit failure message. |
+| Copy theme and mobile | ✅ Light success color was rgb(79, 117, 107), dark rgb(143, 183, 168). At 390px, client width and scroll width were both 375px; button right edge was 338.4px. Screenshots: `/tmp/askr-v0130-copy-desktop.png` and `/tmp/askr-v0130-copy-mobile-dark.png`. |
+| v0.12.1 archive | ✅ The Lead preserved 229 files (23,192,132 bytes) from actual published `origin/gh-pages` source `04c6b651f064e64b9c002eb0f63b0e7b78fe5d7b`, excluding nested archives and `.nojekyll`. Source and output hashes matched for all 229 files except the intentionally generated output version-selector manifest; the source snapshot remains unchanged. |
+| Release delivery | ⏳ Lead: main CI, fresh tag installation and public-site verification. |
 | Fixture identity and license | ✅ Official NPM `plotly.js-basic-dist-min@3.1.0` reports MIT. The generator verifies the pinned archive SHA-512 and script SHA-256; the upstream license is retained. |
 | Bilingual render | ✅ Non-executing renders passed for 110 English and 31 Traditional Chinese inputs. |
 | Chart controls | ✅ The Lead observed real Plotly hover values, changed axes with Zoom in, dragged using Pan, and used Reset axes. Inline and floating chart states remained independent. |
@@ -15,7 +22,7 @@
 | Installation and formats | ✅ The source worker checked a fresh temporary installed-extension layout, relative HTML resources, invalid settings and non-HTML output. The Plotly runtime remains Gallery content, outside the extension. |
 | Theme review | ✅ Desktop dark and mobile light screenshots showed readable frame/control contrast while the chart retained its authored light background. The mobile view fit inside the 375px client width without clipping. Screenshots: `/tmp/askr-chart-desktop-dark.png` and `/tmp/askr-chart-mobile-light.png`. |
 
-⚠️ Touch gestures were not exercised.
+⚠️ Touch gestures and the code `execCommand` clipboard fallback were not independently exercised.
 
 ## Native announcement support — v0.12.1 release candidate — 2026-10-26
 
@@ -43,7 +50,6 @@ release on 2026-10-26.
 `v0.12.1` tag installation. Publication remains pending; local checks above
 cover the announcement and Header scope without the separate Copy changes.
 
-
 ## Native Card component — v0.12.0 release candidate — 2026-10-25
 
 Semantic state: CONVERGING. Delivery state: CANDIDATE; the Human-authorized
@@ -65,12 +71,35 @@ included in this release.
 | Release checks | ⏳ Main PR/CI, installation validation from the v0.12.0 release tag, Pages publication, and deployment/readback remain with the Lead. |
 | Not run in this scope | ⚠️ Physical-touch, Safari and Firefox review; notebook/scientific execution; and new tests. |
 
-## Native Mermaid modal — 2026-10-21
+## Shared text-copy feedback — local candidate — 2026-10-21
 
-Status: Human authorized this additive Mermaid candidate for v0.11.0
-publication and LCDH adoption. Delivery remains LOCAL CANDIDATE; the Lead owns
-the pending main, tag, Pages and pristine-install release endpoint. Quarto
-1.10.18 rendered the isolated consumer
+Status: ✅ The Lead completed the local browser review at
+<http://127.0.0.1:4599/askr/zh-TW/components/figures.html#mermaid-viewer>.
+These observations cover the 2026-10-21 local candidate. The Human included
+that Copy behavior in the v0.13.0 release scope on 2026-10-27; the combined
+candidate review and publication remain pending above.
+
+| Check | Result |
+| --- | --- |
+| Clipboard content | ✅ Browser clipboard matched plain code containing CJK and a long first line; annotated code kept the first target line and omitted its annotation marker/explanation; keyboard Enter copied raw dataset TeX including newlines; Mermaid copied its source exactly. The Chinese Gallery Mermaid sample's 441-character clipboard matched its source metadata. |
+| Shared success state | ✅ Math, Mermaid and native code buttons each changed from `Copy` to `Copied!` with a green outline, then were back to `Copy` after a 2.3-second observation wait. This records the observed reset, not an exact timer threshold or repeated-cycle timing. |
+| Theme | ✅ The success border/text measured rgb(143, 183, 168) in dark mode and rgb(79, 117, 107) in light mode. |
+| Mobile layout | ✅ At 390×844, page `scrollWidth` was 375px; all Copy buttons stayed inside the viewport. The Mermaid source button remained at the code frame's upper right. |
+| Native control replacement | ✅ The rendered page contained zero `.code-copy-button` controls and zero native code-copy tooltips. |
+| Disabled controls | ✅ With `code-copy: false` and `askr-math-copy: false`, no shared or native code-copy buttons appeared. |
+| Full bilingual render | ✅ Quarto exited 0 with 106 English and 27 Traditional Chinese inputs; existing computational cells ran. |
+| Diff formatting | ✅ `git diff --check` passed. |
+| Prior Mermaid placement | ✅ Before the shared feedback change, the Chinese Gallery Figures page's browser clipboard returned 441 characters matching the visible source on desktop and at 390×844. The 323px frame kept Copy inside above the first code line; the source scrolled horizontally by 375px while Copy stayed visible at the right. There was no page horizontal overflow; the desktop frame was 628px. Console warnings/errors were empty. Screenshots: `/tmp/askr-copy-inside-desktop.png` and `/tmp/askr-copy-inside-mobile.png`. This receipt covers the earlier placement and payload, not the new shared success state. |
+
+The strict timeout boundary, repeated timer-cycle timing and legacy
+`execCommand` clipboard fallback were not verified.
+
+## Askr v0.11.0 Mermaid viewer — published 2026-10-21
+
+Status: ✅ Published as [v0.11.0](https://github.com/arfiligol/askr/releases/tag/v0.11.0).
+The observations below record that release's viewer and source-copy layout; the
+later shared text-copy feedback is recorded in the separate candidate above.
+Quarto 1.10.18 rendered the isolated consumer
 `/tmp/askr-mermaid-candidate.oHLMZj` with the extension under the installed
 `_extensions/arfiligol/askr` layout.
 
@@ -91,11 +120,11 @@ the pending main, tag, Pages and pristine-install release endpoint. Quarto
 | Frozen v0.10.0 archive | ✅ The 225-file source snapshot matches the docs-owner receipt at `bc16822`; rendered archive output differs from the source only at generated `askr-versions.json` |
 | Archive version selector | ✅ On the local archived Figures page, the header marks 0.10.0 current; the menu shows 0.11.0 Latest plus 0.10.0, 0.9.0 and 0.3.0. Selecting Latest reaches the v0.11.0 root in the local preview |
 
-The candidate also preserves local SVG fragment references while serializing
-computed styles and explicit viewBox dimensions. JavaScript syntax validation
-passed with Node. No durable tests, dependencies or fixtures were added. Git,
-tag, Pages deployment and pristine-install verification remain pending Lead
-delivery.
+The published v0.11.0 implementation also preserves local SVG fragment
+references while serializing computed styles and explicit viewBox dimensions.
+JavaScript syntax validation passed with Node. No durable tests, dependencies
+or fixtures were added. The shared text-copy follow-up is separate from this
+release; the Lead's browser review is recorded above.
 
 ## Documentation version archive correction — 2026-10-21
 

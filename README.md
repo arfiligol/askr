@@ -4,7 +4,7 @@ See [CHANGELOG](CHANGELOG.md) for published package changes. PR and GitHub
 Release summaries use the same entries.
 
 Askr is the reading page: measure, type, citations, callouts, and Cards. Quiet
-Quartz remains the name of the visual theme. `0.12.1` is the current release,
+Quartz remains the name of the visual theme. `0.13.0` is the current release,
 rendered with Quarto 1.10.18. Stable Quarto `>=1.9.38 <1.11` is supported. The
 public format is `askr-html`. The 0.10.0 release adds an optional Header language
 selector; the control is absent unless configured and does not change existing
@@ -13,14 +13,18 @@ defaults. Version 0.12.0 adds the CSS-only native Card component; see the
 0.12.1 supports native site announcements with theme-aware appearance and
 accessible dismissal, corrects their mobile Pages layout, and unifies Header
 control transitions; see [Announcements](usage/announcements.qmd).
+Version 0.13.0 adds a trusted-local-HTML Chart viewer and dedicated bilingual
+Image/Chart demonstrations, and unifies text Copy feedback across code, math
+and Mermaid. See [Chart viewer](usage/chart-viewer.qmd) and
+[Components](components.qmd).
 
 ## Install
 
-Install release tag `v0.12.1`. Quarto's GitHub installer accepts
+Install release tag `v0.13.0`. Quarto's GitHub installer accepts
 branch and tag names, not commit SHA modifiers.
 
 ```bash
-quarto add arfiligol/askr@v0.12.1 --no-prompt
+quarto add arfiligol/askr@v0.13.0 --no-prompt
 ```
 
 ```yaml
@@ -75,8 +79,9 @@ both sites. The ignored copies under `zh-TW/_extensions/askr/`,
 build inputs, not vendored sources; maintain the extension and shared assets in
 the root `_extensions/askr/` and `components/` directories.
 
-The documentation version menu lists the current 0.12.1 site, the actual
-published 0.12.0, 0.11.0, 0.10.0 and 0.9.0 snapshots, and the frozen 0.3.0 snapshot.
+The documentation version menu lists the current 0.13.0 site, the actual
+published 0.12.1, 0.12.0, 0.11.0, 0.10.0 and 0.9.0 snapshots, and the frozen
+0.3.0 snapshot.
 Archived documentation is historical and unmaintained. Before a future release
 replaces the site root, preserve the then-current published site under its
 versioned path; the build generates selector manifests for each archive's

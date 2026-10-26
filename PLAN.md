@@ -1,6 +1,6 @@
 # Askr release plan
 
-## Dedicated image and chart viewers — local candidate — 2026-10-26
+## Askr v0.13.0 — viewers and shared Copy release candidate — 2026-10-27
 
 Give static images and interactive HTML charts separate Component pages in
 English and Traditional Chinese. Move the image-viewer examples out of Figures
@@ -24,9 +24,22 @@ interaction, chart controls, independent frame state, keyboard closing, failure
 recovery and static-image state continuity were checked. See [Validation](VALIDATION.md).
 ✅ The light/dark visual review is complete.
 ✅ The simplified floating toolbar and keyboard return behavior were rechecked.
-⏳ Lead: inspect the native Viewers sidebar grouping, collapse and current-page
-identification in both languages.
-⏳ Human: inspect the local preview. No release is assigned or published.
+✅ The native bilingual Viewers sidebar grouping and current-page identification
+were checked. The Human authorized this scope and the shared text Copy controls
+for the v0.13.0 release on 2026-10-27.
+
+Copy uses one text button on code, display math and Mermaid source: `Copy`
+changes to `Copied!` with a green outline, then returns after about two seconds.
+Retain Quarto code-copy availability and existing math exclusions. The source
+worker integrated the previously authored Copy changes, and the Lead verified
+the combined exact release candidate before promotion.
+
+✅ The v0.12.1 snapshot preserves the actual published Pages tree; the current
+selector and version guides now describe v0.13.0 with that archive retained.
+✅ 2026-10-27: the exact combined release tree passed the default bilingual
+render, real clipboard checks, Copy feedback/reset and archive identity checks.
+⏳ Lead: complete promotion, main CI, tag installation and public-site verification.
+The release remains pending; consumer adoption stays with consumer owners.
 
 ## Native announcement support — v0.12.1 release candidate — 2026-10-26
 
@@ -52,7 +65,6 @@ the actual published v0.12.0 documentation as a versioned snapshot.
 ⏳ Lead: complete promotion, main CI, GitHub Release, Pages deployment and a
 fresh tag installation before marking publication complete. Consumer adoption
 remains with each consumer owner.
-
 
 ## Native Card component — v0.12.0 release candidate — 2026-10-25
 
@@ -94,62 +106,50 @@ If the markup cannot retain native heading and link behavior, return the issue
 for direction instead of adding JavaScript or making the full card clickable.
 Visual acceptance and completed publication remain separate outcomes.
 
-## Current: Native Mermaid modal — 2026-10-21
+## Shared text-copy feedback — included in v0.13.0 release scope
 
-Askr Lead owns the extension runtime and this candidate receipt. See the
-[Mermaid viewer guide](usage/image-viewer.qmd#mermaid-viewer) for the native
-authoring syntax. Opt in with one `.askr-mermaid-view` wrapper around exactly
-one Mermaid cell. The optional `view-label` defaults to `View diagram`. Keep
-Quarto's native diagram as the single rendered source. When its SVG is ready,
-add a button below it that opens the existing Askr modal camera. Add
-on-demand collapsible
-source and Copy controls, populated from the captured original cell source so
-the document has no duplicate static source text. Reject malformed wrappers,
-wrappers without exactly one Mermaid cell, and a wrapper when Lightbox is
-disabled. Non-HTML output remains native and unchanged.
+This local follow-up applies one text-copy interaction to displayed-math
+source, Mermaid source and native code blocks. Keep the text button labelled
+`Copy`; after a successful copy, change that same button to `Copied!` with a
+green outline for about two seconds, then restore `Copy`. Use the same success
+state and animation across all three surfaces. Replace the native code-copy
+icon and tooltip while retaining Quarto's `code-copy` availability setting.
 
-The prefilter validates the single native Mermaid cell and marks its wrapper.
-At `DOMContentLoaded`, Askr copies the native Mermaid source block's text into
-the wrapper data attribute before Quarto's window-load renderer replaces it
-with SVG; the native cell and renderer stay untouched. The browser waits for a
-real SVG within the wrapper before enabling the button; Mermaid-only pages use
-the same existing modal engine. Serialization must preserve computed
-colors/styles, foreignObject labels, local marker references and explicit
-viewBox dimensions. No Mermaid rerender, second engine, inline mode,
-dependency, CDN, consumer, root, durable test or CI change is assigned. The
-v0.11.0 release package also adds a frozen archive snapshot of the published
-v0.10.0 site; the docs writer owns that archive work.
+The source worker owns runtime integration; the Lead reviews the combined
+candidate and verifies clipboard payload, success/reset and readable controls
+in light/dark desktop/mobile layouts. The Human authorized delivery with the
+v0.13.0 viewers release on 2026-10-27. Earlier review outcomes remain in
+`VALIDATION.md`; publication is recorded only after the release checks pass.
 
-Render an isolated temporary HTML consumer with a wide graph, HTML labels and
-CJK text. Inspect that the native graph remains in place, the button appears
-only after an SVG is ready, Askr adds no second static source block or
-search-index entry, and the existing modal receives an SVG image. Native
-Quarto visibility and indexing remain unchanged. The Lead owns browser review.
-Human authorized publication of this additive Mermaid candidate as v0.11.0
-and its LCDH adoption. Delivery remains LOCAL CANDIDATE; the Lead owns Git and
-the main, tag, Pages and pristine-install release endpoint.
+## Previous: Askr 0.11.0 Mermaid viewer — published 2026-10-21
+
+The Mermaid viewer and the v0.10.0 site snapshot shipped in the published
+[v0.11.0 GitHub Release](https://github.com/arfiligol/askr/releases/tag/v0.11.0).
+The tag and release remain unchanged. The viewer uses one opt-in wrapper around
+a native Mermaid cell and the existing Askr modal; its source and browser
+observations are recorded in `VALIDATION.md` and the
+[Mermaid viewer guide](usage/image-viewer.qmd#mermaid-viewer). The current
+shared-copy follow-up does not amend that published package.
 
 ## Previous: Documentation version archive correction — 2026-10-21
 
-Askr 0.10.0 is already released and published. This docs-only follow-up keeps
-the actual published 0.9.0 site as `v0.9.0/` and retains the frozen 0.3.0
-snapshot. The root `askr-versions.json` remains the version-list authority:
-0.10.0 is current, followed by 0.9.0 and 0.3.0. No extension runtime,
-installed version or public option changes.
-
-The `v0.9.0/` source snapshot comes from the actual Pages tree at
+At the time of the docs-only archive correction, 0.10.0 was the current
+published site. The correction kept the actual published 0.9.0 site as
+`v0.9.0/`, retained the frozen 0.3.0 snapshot and left the extension runtime,
+installed version and public options unchanged. The `v0.9.0/` source snapshot
+comes from the actual Pages tree at
 `32b83b78756c09dbcf7fd378996cd1170cfdbc48`; the full root render publishes
 that directory and generates compatible selector manifests. The 0.9.0
 manifest uses one root relative to its own site directory for current-version
 matching and fixed homepage links for navigation; the frozen 0.3.0 manifest
 uses its `/askr/` origin prefix and fixed version-home links. Both HTML
-snapshots remain unchanged. At the next release, preserve the actual 0.10.0
-site under `/v0.10.0/` before replacing the current root; do not create a
-second 0.10.0 entry while it is current.
+snapshots remain unchanged. The published 0.11.0 package preserved the actual
+0.10.0 site under `/v0.10.0/` before replacing the current root; it did not
+add a second 0.10.0 entry.
 
-Historical sites are unmaintained. The docs-only archive correction is now
-published; see `VALIDATION.md` for its render, browser and Pages receipt. The
-Lead retains Git, Pages and publication delivery authority.
+Historical sites are unmaintained. The docs-only archive correction shipped
+with v0.11.0; see `VALIDATION.md` for its render, browser and Pages receipt.
+The Lead retains Git, Pages and publication delivery authority.
 Semantic state: CONVERGING; delivery state: PUBLISHED.
 
 ## Published: Askr 0.10.0 bilingual release — 2026-10-21
