@@ -1,5 +1,32 @@
 # Candidate validation receipt
 
+## Native announcement support — v0.12.1 release candidate — 2026-10-26
+
+✅ 2026-10-26: Quarto 1.10.18 rendered a clean published v0.12.0 tree plus the
+announcement changes, and the Lead inspected Chromium at desktop, tablet and
+mobile sizes in light and dark themes. The Human authorized the v0.12.1
+release on 2026-10-26.
+
+| Check | Result |
+| --- | --- |
+| Full v0.12.1 release render | ✅ Default `quarto render` exited 0 for the exact staged tree `1f62f924ca643296044786916e9d1beafbe6ad90`, exported to `/var/folders/_1/cyvvhpp52r99jn06g5sfdpmm0000gn/T/askr-v0121-release.o1ewblev`: 108 English and 29 Traditional Chinese inputs. The existing two Gallery figure cells and one arithmetic cell ran in each language; no solver ran. Only the known Traditional Chinese translation and local Jupyter warnings remained. |
+| Independent consumer | ✅ Four installed-namespace fixtures, each with two pages, rendered with `--no-execute`: long Chinese above-navbar notice with icon; long English below-navbar notice with dismissal; text-only dismissible notice; and no announcement. |
+| Bilingual Gallery | ✅ Non-executing render passed for 108 English and 29 Traditional Chinese inputs. The temporary staging initially omitted shared bibliography/image files; staging was corrected to match the existing build helper, then the render passed. No scientific computation ran. |
+| Original overlap and correction | ✅ The original mobile Pages button occupied y=11–43px while the announcement occupied y=0–41px. With the corrected 81px wrapped notice, Pages starts at y=92.6px, the header is 135.6px high, and body padding is 136px. |
+| Responsive layout | ✅ Desktop 1440×900 and the default approximately 1280px viewport, tablet 768×1024, and mobile 390×844 were inspected in light/dark themes. At 390px, document scroll width was 375px with no horizontal overflow. The below-navbar fixture kept Pages at y=11.4px; the no-announcement fixture retained the same position. |
+| Navigation and offsets | ✅ Pages/sidebar opened and closed; Areas opened below the full header at y=135.6px and Escape left no residual overlay. Native anchor offset tracked the 105.5px header at 105px, and the destination heading remained visible after scrolling. |
+| Dismissal and keyboard | ✅ Enter and Space dismissed the notice and returned focus to the navbar brand. Header height then measured 54.4px with 54px body padding; reload retained native dismissal. The text-only notice's close control had a visible 3px focus outline. |
+| Header transitions | ✅ Computed styles confirmed 0.15s ease-in-out color, background, border and shadow transitions on Pages, Areas, Search, version, theme, language, GitHub and Logout controls, plus the announcement surface. Language opened and closed with Escape at 390px; scroll width remained 375px. The reduced-motion media rule was checked in source; the operating-system setting was not changed. |
+| Search icon transition | ✅ Real-pointer hover reproduced the dark-theme mismatch before the fix: control rgb(143, 183, 168), SVG rgb(235, 235, 236). After the fix, control/icon/SVG matched at rgb(235, 235, 236) normally and rgb(143, 183, 168) on dark hover; light hover matched at rgb(79, 117, 107), including mobile 390px with 375px scroll width. The visible color transition is 150ms ease-in-out. Search opened its native overlay, `公告` returned four results, and Escape closed it; native focus then rested on the body. English/Chinese guides rendered with `--no-execute`, and console warnings/errors were empty. Screenshots: `/tmp/askr-search-hover-dark.png` and `/tmp/askr-search-hover-light.png`. |
+| Refined-theme recheck | ✅ The root guide, Traditional Chinese guide and above-navbar Chinese fixture rendered successfully after the Header transition refinement. The notice changed from a dark tinted surface with foreground 212 to a light tinted surface with foreground 78 when the theme changed. Earlier full-render results remain applicable to unchanged content. |
+| Browser console | ✅ No warnings or errors in the fixtures or the Traditional Chinese guide. |
+| Preview and screenshots | ✅ [Traditional Chinese preview](http://127.0.0.1:4611/zh-TW/usage/announcements.html) and [English preview](http://127.0.0.1:4611/usage/announcements.html). Screenshots: `/tmp/askr-announcement-gallery-desktop-light.png` and `/tmp/askr-announcement-after-mobile-dark.png`. |
+
+⏳ Lead: complete main CI, the GitHub Release, Pages deployment and a fresh
+`v0.12.1` tag installation. Publication remains pending; local checks above
+cover the announcement and Header scope without the separate Copy changes.
+
+
 ## Native Card component — v0.12.0 release candidate — 2026-10-25
 
 Semantic state: CONVERGING. Delivery state: CANDIDATE; the Human-authorized

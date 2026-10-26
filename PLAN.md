@@ -1,5 +1,31 @@
 # Askr release plan
 
+## Native announcement support — v0.12.1 release candidate — 2026-10-26
+
+Use Quarto's existing `website.announcement` as Askr's supported site-wide
+notice. Askr owns its wrapping, semantic colors and accessible close control;
+authors keep the native content, icon, type, position and dismissal settings.
+For persistent development-version warnings, the guide recommends a warning
+notice with dismissal disabled. The Gallery demonstrates the same notice in
+English and Traditional Chinese using public example text.
+
+The mobile overlap came from the Pages control occupying the top of the header
+while an above-navbar announcement occupied that same space. The implementation
+keeps Pages aligned with the navbar after wrapping, dismissal and viewport
+changes, while the native header controls article, sidebar and anchor offsets.
+Header controls share 150ms ease-in-out color, background, border and shadow
+transitions; reduced-motion preferences disable these transitions.
+
+✅ 2026-10-26: local implementation, Lead browser checks and the full bilingual
+release render are complete;
+see [Validation](VALIDATION.md#native-announcement-support--v0121-release-candidate--2026-10-26).
+The Human authorized release of this scope as v0.12.1 on 2026-10-26. Retain
+the actual published v0.12.0 documentation as a versioned snapshot.
+⏳ Lead: complete promotion, main CI, GitHub Release, Pages deployment and a
+fresh tag installation before marking publication complete. Consumer adoption
+remains with each consumer owner.
+
+
 ## Native Card component — v0.12.0 release candidate — 2026-10-25
 
 The Human authorized the v0.12.0 release endpoint for the Card component. The

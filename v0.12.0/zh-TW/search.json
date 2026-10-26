@@ -1,0 +1,1046 @@
+[
+  {
+    "objectID": "usage/versions.html",
+    "href": "usage/versions.html",
+    "title": "文件版本",
+    "section": "",
+    "text": "文件網站會將每個實際發布版本保存在各自的版本目錄中。目前版本維持在網站根目錄；舊目錄則是歷史版本，不再維護。\n這些路徑以部署網站為基準，因此同一份清單也能用在 /askr/ 這類儲存庫前綴下。根目錄的 askr-versions.json 是唯一的版本清單來源：\n請將版本清單檔加入 project.resources。每個 root 都代表一個完整版本網站，路徑以該網站的部署根目錄為基準。版本選擇器由 Askr 提供；網站使用者需自行管理封存目錄與版本清單檔。圖集的根目錄建置輔助工具會為圖集自己的封存網站產生中繼資料。這是來源儲存庫的建置工具，不會隨 quarto add 安裝。\n若要指定固定目的地，請使用 href，而非 root。相對路徑與單斜線開頭的 href 都以網站為基準；絕對網址則保留原本的網域。固定目的地不會保留目前頁面的路徑。若版本選擇器的版本清單檔位於封存網站內，其 root 項目仍以該封存網站的根目錄為基準。圖集會從根目錄版本清單產生這些封存站專用的中繼資料。\ninline 模式會在短標題旁顯示目前版本；title 模式則顯示標題與箭頭，並在選單中顯示版本號。可試用長標題範例。longTitle 為選填欄位，只在 title 模式使用。\n若無法取得外部版本清單檔，可在頁面中加入 &lt;script id=\"askr-versions\" type=\"application/json\"&gt; 作為內嵌 JSON 清單。請選擇一種來源，不要同時維護外部檔案與內嵌清單。此圖集使用外部 JSON。",
+    "crumbs": [
+      "使用",
+      "版本管理"
+    ]
+  },
+  {
+    "objectID": "usage/versions.html#鍵盤操作",
+    "href": "usage/versions.html#鍵盤操作",
+    "title": "文件版本",
+    "section": "鍵盤操作",
+    "text": "鍵盤操作\n版本選擇器是可展開的控制項，內容是一般連結，不是清單方塊。按 Tab 移至按鈕，再按 Enter 或空白鍵開啟選單。按 Tab 或 Shift-Tab 可在連結間移動；按 Enter 開啟連結。按 Escape 關閉選單並將焦點移回按鈕。移出焦點或按一下選單外部也會關閉選單，但不會將焦點移回按鈕。目前版本連結會有 aria-current=\"true\" 標記。",
+    "crumbs": [
+      "使用",
+      "版本管理"
+    ]
+  },
+  {
+    "objectID": "usage/versions.html#歷史版本網站",
+    "href": "usage/versions.html#歷史版本網站",
+    "title": "文件版本",
+    "section": "歷史版本網站",
+    "text": "歷史版本網站\n0.10.0 快照保留根目錄切換至 0.11.0 前，實際發布於 GitHub Pages 的網站。0.9.0 快照也取自實際發布的網站；0.3.0 快照維持原樣。這些都是歷史文件，不是目前使用指南的維護版本。\n目前的 0.11.0 版本選擇器在切換版本時會保留目前頁面的路徑、查詢參數與片段識別字。一般同源點擊會先檢查目的頁；若回應為 404，便開啟所選網站的首頁。若發生網路錯誤，則保留原目的頁。使用 Cmd／Ctrl 點擊或在新分頁開啟等特殊點擊，以及外部網址，都維持瀏覽器的原有行為；這些情況由網站主機顯示錯誤頁面。\n0.10.0 與 0.9.0 的版本清單都只有一個封存站內的 root，值為 ./，用來標示目前版本；所有版本連結都會開啟各自設定的首頁。凍結版 0.3.0 的版本清單使用網域根目錄路徑與固定連結，讓 /askr/ 前綴下的導覽正常運作。圖集的建置輔助工具會依根目錄版本清單產生封存版本的清單檔，不會改寫舊版 HTML。\n0.3.0 快照沒有本頁。選擇該版本時會前往其首頁，而不會開啟不存在的頁面。",
+    "crumbs": [
+      "使用",
+      "版本管理"
+    ]
+  },
+  {
+    "objectID": "usage/versions.html#發布新版本",
+    "href": "usage/versions.html#發布新版本",
+    "title": "文件版本",
+    "section": "發布新版本",
+    "text": "發布新版本\n替換目前網站根目錄前，請先將實際發布中的網站保留在對應的版本目錄。例如，下一版發布前，應先將 0.11.0 封存至 /v0.11.0/；接著才更新根目錄版本清單檔，列出新的目前版本並保留較舊版本。0.11.0 仍是目前版本時，不要在清單中重複新增另一筆 0.11.0。使用者需自行發布及管理所屬網站；圖集輔助工具只會準備這個儲存庫的封存中繼資料。\n圖集也提供長標題範例。其版本清單欄位 longTitle 為選填，不會影響版本導覽。",
+    "crumbs": [
+      "使用",
+      "版本管理"
+    ]
+  },
+  {
+    "objectID": "usage/search.html",
+    "href": "usage/search.html",
+    "title": "搜尋",
+    "section": "",
+    "text": "搜尋會讀取目前版本的索引。Askr 不會新增第二份索引，也不會跨版本搜尋。\nwebsite:\n  search:\n    location: navbar\n    type: overlay\n在 1280px 以上，按鈕會位於右側，緊鄰主題切換按鈕左方，標題列維持單行。低於此寬度時，搜尋會移到左側。\n建置每個定版網站時，請讓 site-url 包含該版本的目錄，確保 search.json 與搜尋結果連結都留在該目錄：\n# the render that is published to /v0.2/\nwebsite:\n  site-url: https://example.github.io/project/v0.2/\n複製到 / 的目前版本網站應使用不含版本目錄的網站根網址。從 v0.2 頁面搜尋時，只會讀取 /v0.2/search.json。版本資料夾與版本選單的設定請見文件版本管理。",
+    "crumbs": [
+      "使用",
+      "搜尋"
+    ]
+  },
+  {
+    "objectID": "usage/navigation.html",
+    "href": "usage/navigation.html",
+    "title": "Areas、Page List 與 Sections",
+    "section": "",
+    "text": "這是三種不同的清單。Area 用來選擇要開啟的 Page List；Page List 用來選擇頁面；Sections 則列出該頁的標題。\n桌面版只會在網站標題、導覽與標題列控制項都容納得下時，才會將 Areas 顯示為行內項目；否則 Areas 按鈕會在面板中開啟相同導覽清單。此行為也會因應較長標籤與窄視窗，不需使用者設定斷點。Pages 仍依照自己的行動版側欄行為呈現。網站標題很長時，畫面上可能會縮短顯示，但無障礙名稱仍保留完整文字。\n\n\n\n\n\n\n\n\n角色\n顯示位置\n項目內容\n\n\n\n\nAreas\n標題列\n每個頁面群組各一項\n\n\nPage List\n左欄，標題為 Pages\n目前 Area 中的頁面\n\n\nSections\n右欄，標題為 Sections\n無需手動設定；Quarto 會列出目前頁面的標題\n\n\n\nwebsite:\n  navbar:\n    left:\n      - href: index.qmd\n        text: Guide\n      - href: reference.qmd\n        text: Reference\n  sidebar:\n    - title: Pages\n      style: docked\n      contents:\n        - text: Overview\n          href: index.qmd\n        - text: Measure\n          href: guide/measure.qmd\n    - title: Pages\n      style: docked\n      contents:\n        - text: Overview\n          href: reference.qmd\n        - text: API\n          href: reference/api.qmd\n開啟 Guide 會顯示第一份 Page List；開啟 Reference 則會顯示第二份。設定 toc-title: Sections 與 toc-location: right，即可顯示右欄。標題只屬於 Sections，不應放在 Page List，也不應另設為 Area。\n同一個 Area 中的頁面應有共同用途。Usage 就是這類分組：安裝 Askr、本頁、文件版本管理與搜尋各自負責不同工作，因此分成不同頁面。\n本圖集的 Areas 為 Gallery、Components、Usage、Credits 與 Long list。此分組方式請見版面。",
+    "crumbs": [
+      "使用",
+      "Areas、頁面清單與章節"
+    ]
+  },
+  {
+    "objectID": "usage/image-viewer.html",
+    "href": "usage/image-viewer.html",
+    "title": "圖片檢視器",
+    "section": "",
+    "text": "Askr 提供圖片互動檢視器，以及供原生 Mermaid 圖表選用的浮動檢視器。圖片可直接在文章中檢視，也可從圖片或按鈕開啟浮動檢視器。SVG、PNG 與 JPEG 共用相同的平移與縮放控制項，不需圖片服務、第三方檢視器或 CDN。",
+    "crumbs": [
+      "使用",
+      "圖片檢視器"
+    ]
+  },
+  {
+    "objectID": "usage/image-viewer.html#圖片與排除方式",
+    "href": "usage/image-viewer.html#圖片與排除方式",
+    "title": "圖片檢視器",
+    "section": "圖片與排除方式",
+    "text": "圖片與排除方式\n獨立圖形與單獨圖片預設會開啟浮動檢視器：\n![Layout](images/layout.svg){#fig-layout}\n內文中的圖片，以及已有導覽連結的圖片，仍維持原有呈現方式。.lightbox 可明確啟用圖片；.nolightbox 可排除圖片。lightbox: false 會停用整頁互動。停用檢視器的頁面不可使用檢視器短碼或 .askr-mermaid-view，也不可指定已排除的圖片。建置時若遇到衝突會回報錯誤，不會產生無法使用的控制項。",
+    "crumbs": [
+      "使用",
+      "圖片檢視器"
+    ]
+  },
+  {
+    "objectID": "usage/image-viewer.html#使用按鈕開啟",
+    "href": "usage/image-viewer.html#使用按鈕開啟",
+    "title": "圖片檢視器",
+    "section": "使用按鈕開啟",
+    "text": "使用按鈕開啟\n若要開啟既有圖形，不必重複加入圖片或說明文字：\n![Layout](images/layout.png){#fig-layout}\n\n{{&lt; askr-image-view target=\"fig-layout\" label=\"View image\" &gt;}}\n也可以只顯示按鈕：\n{{&lt; askr-image-view src=\"images/layout.png\" label=\"View image\" &gt;}}\ntarget 與 src 必須擇一指定。Target 使用不含 # 的圖形 ID，且必須指向頁面中唯一且符合資格的圖片。label 預設為 View image；使用 src 時不會有圖片說明文字。路徑以文件位置為準。",
+    "crumbs": [
+      "使用",
+      "圖片檢視器"
+    ]
+  },
+  {
+    "objectID": "usage/image-viewer.html#先行內檢視再展開",
+    "href": "usage/image-viewer.html#先行內檢視再展開",
+    "title": "圖片檢視器",
+    "section": "先行內檢視，再展開",
+    "text": "先行內檢視，再展開\n行內檢視器會直接在文章中提供控制項：\n{{&lt; askr-image-view src=\"images/layout.svg\" mode=\"inline\" label=\"Component layout\" &gt;}}\n若要就地轉換既有圖形並保留說明文字：\n![Layout](images/layout.svg){#fig-layout}\n\n{{&lt; askr-image-view target=\"fig-layout\" mode=\"inline\" &gt;}}\nShortcode 會標記既有圖形以供轉換，不會另外顯示一份副本。每張圖形只能轉換一次，但可由多個按鈕開啟。mode 可設為 inline 或 button，預設為 button。\n桌面版的行內圖片區域高度為 420px，窄螢幕為 320px。展開會將同一個檢視器移至浮動視窗，縮放與檢視中心也會跟著移動；關閉後會返回文章，並保留更新後的檢視狀態。不同的行內檢視器有各自獨立的狀態。離開頁面後不會儲存狀態。",
+    "crumbs": [
+      "使用",
+      "圖片檢視器"
+    ]
+  },
+  {
+    "objectID": "usage/image-viewer.html#控制項與圖集",
+    "href": "usage/image-viewer.html#控制項與圖集",
+    "title": "圖片檢視器",
+    "section": "控制項與圖集",
+    "text": "控制項與圖集\n\n+ / − 以 1.25 倍縮放；Fit 會置中顯示整張圖片。\n100% 代表 Fit，不代表原始像素尺寸。放大點陣圖片不會增加解析度；SVG 本身也可能包含點陣內容。\n拖曳可平移。觸控螢幕上以一指平移、兩指縮放。\n使用滾輪縮放前，請先讓焦點停在行內圖片區域；否則頁面會照常捲動。浮動檢視器則會在圖片區域內處理滾輪縮放。\n焦點位於圖片區域時，+ / − 可縮放、0 可符合視窗，方向鍵可平移。\nExpand 會開啟行內檢視器；浮動工具列則提供全螢幕（視瀏覽器支援情況而定）與關閉控制項。\nEscape 會關閉浮動檢視器，並還原焦點與閱讀位置。在瀏覽器全螢幕模式中，Escape 會先離開全螢幕。\n\n使用既有屬性將一般圖片分組成浮動圖集：\n![First layout](images/first.png){group=\"layouts\"}\n\n![Second layout](images/second.jpg){group=\"layouts\"}\n使用上一張／下一張按鈕切換；每張圖片一開始都會 Fit。圖集預設會循環播放；設定 lightbox: {match: auto, loop: false} 可停用循環。展開行內檢視器時仍會停留在該圖片，不會切換並遺失原狀態。一指滑動用來平移，不會切換圖集圖片。",
+    "crumbs": [
+      "使用",
+      "圖片檢視器"
+    ]
+  },
+  {
+    "objectID": "usage/image-viewer.html#mermaid-viewer",
+    "href": "usage/image-viewer.html#mermaid-viewer",
+    "title": "圖片檢視器",
+    "section": "Mermaid 圖表",
+    "text": "Mermaid 圖表\n未加包裝的 Mermaid 區塊會保留 Quarto 原生呈現，不會有 Askr 檢視器控制項。若要在圖表下方加入浮動檢視器按鈕，請將單一原生 Mermaid 區塊包起來：\n::: {.askr-mermaid-view view-label=\"檢視圖表\"}\n```{mermaid}\nflowchart LR\n  Reader --&gt; Diagram\n```\n:::\nview-label 為選填，預設為 View diagram。浮動檢視器沿用圖片檢視器的縮放、平移與 Fit 控制項；支援的瀏覽器也可全螢幕，並會在關閉時還原焦點。\nMermaid source 摺疊區會與檢視器按鈕相鄰，出現在圖表下方。展開後可查看作者撰寫的區塊；按 Copy（複製）會保留原始換行並複製同一份來源。Askr 不會另外加入第二份靜態原始碼或索引項目；Quarto 原生 Mermaid 來源的顯示與索引方式維持不變。\n每個 .askr-mermaid-view 區塊只能包含一個 Mermaid 區塊。Mermaid 沒有行內檢視模式。\n此功能只支援 HTML 輸出中由瀏覽器繪製的 Quarto 原生 Mermaid；若 Mermaid 設定為輸出圖片（例如使用 mermaid-format），建置時會回報不相容錯誤。這不是 GDS 檢視器，也不承諾提升圖表品質。停用 JavaScript 時，Quarto 仍依原生 Mermaid 行為呈現，Askr 檢視器控制項不會出現。",
+    "crumbs": [
+      "使用",
+      "圖片檢視器"
+    ]
+  },
+  {
+    "objectID": "usage/image-viewer.html#限制與遷移",
+    "href": "usage/image-viewer.html#限制與遷移",
+    "title": "圖片檢視器",
+    "section": "限制與遷移",
+    "text": "限制與遷移\n此檢視器取代 Askr 先前使用的 GLightbox 介面。既有 shortcode 名稱、圖片資格、說明文字與分組方式都保留。GLightbox 專用的 effect、desc-position 與 css-class 設定不受支援，建置前請移除。描述文字只會以文字顯示，不會當作可執行 HTML。\n圖片在兩種主題中都會保留自身顏色。SVG 會以圖片載入，不會注入頁面。這不是 GDS 檢視器，沒有圖層選擇、量測或解析度增強功能。載入失敗時會顯示錯誤與 Retry；關閉檢視器及切換圖集仍可使用。\n若沒有 JavaScript，圖片與來源連結仍可使用，但不會顯示互動控制項。非 HTML 輸出仍保留一般圖片及圖片／圖形連結。\n試看圖形範例。",
+    "crumbs": [
+      "使用",
+      "圖片檢視器"
+    ]
+  },
+  {
+    "objectID": "usage/figures.html",
+    "href": "usage/figures.html",
+    "title": "跟隨主題切換的圖形",
+    "section": "",
+    "text": "儲存格可以同時產生淺色與深色輸出。請先輸出淺色內容：\n搭配 askr-html 與 theme-toggle 時，深色樣式表會帶有 data-mode=\"dark\"，而切換按鈕會在 body 上加入 quarto-dark。圖形與群組頁面以此方式顯示一組雙色樣本。",
+    "crumbs": [
+      "使用",
+      "隨章節切換的圖片"
+    ]
+  },
+  {
+    "objectID": "usage/figures.html#寬圖與圖表",
+    "href": "usage/figures.html#寬圖與圖表",
+    "title": "跟隨主題切換的圖形",
+    "section": "寬圖與圖表",
+    "text": "寬圖與圖表\n將圖形或 Mermaid 區塊包在 .askr-wide-figure 中，可保留標籤的自然大小，並在具名且可用鍵盤聚焦的區域內捲動。捲動範圍由圖形本身的內在寬度決定，不需指定固定的使用者寬度。Mermaid 顏色會依 Askr 的明亮與深色調色盤變化。\n::: {.askr-wide-figure aria-label=\"Circuit signal path\"}\n```{mermaid}\nflowchart LR\n  Input --&gt; Resonator --&gt; Output\n```\n:::\n此工具保留 Quarto 原生圖形、標題與交互參照。",
+    "crumbs": [
+      "使用",
+      "隨章節切換的圖片"
+    ]
+  },
+  {
+    "objectID": "notebook-output.html",
+    "href": "notebook-output.html",
+    "title": "已儲存的 Notebook 輸出",
+    "section": "",
+    "text": "此頁會在文件網站建置時執行一個簡短的公開算術範例。同一項計算也收錄在此版本的 Notebook 原始檔（英文）；該檔案的輸出來自在本機執行這個 Notebook。\nvalues = [3, 5, 8]\ntotal = sum(values)\nprint(f\"Saved notebook output: {values} -&gt; {total}\")\n\nSaved notebook output: [3, 5, 8] -&gt; 16\n輸出刻意保持簡單：它展示 Notebook 式輸出區域確實可用，但不載入科學運算工作負載，也不會要求使用者執行 Notebook。",
+    "crumbs": [
+      "元件",
+      "儲存的 Notebook 輸出"
+    ]
+  },
+  {
+    "objectID": "notebook-output.html#限制",
+    "href": "notebook-output.html#限制",
+    "title": "已儲存的 Notebook 輸出",
+    "section": "限制",
+    "text": "限制\n主題會在文章寬度內顯示簡短列印結果。若儲存格會輸出寬表格或多頁診斷內容，應將其儲存為獨立產物，再於頁面摘要，而不是整份貼上。",
+    "crumbs": [
+      "元件",
+      "儲存的 Notebook 輸出"
+    ]
+  },
+  {
+    "objectID": "gallery/rhythm.html",
+    "href": "gallery/rhythm.html",
+    "title": "閱讀節奏",
+    "section": "",
+    "text": "本頁是 Gallery 內的一個章節，會列在左側清單，不會出現在標題列。\n標題列會保留 Gallery、Components、Usage 與 Credits。左側清單只列出 Gallery 中的閱讀範例。\n段落使用 Source Sans 3。閱讀欄維持與概覽頁相同的 630px 寬度，讓章節頁與上層頁面共享一致的閱讀寬度。",
+    "crumbs": [
+      "展示",
+      "節奏"
+    ]
+  },
+  {
+    "objectID": "gallery/layout.html",
+    "href": "gallery/layout.html",
+    "title": "版面",
+    "section": "",
+    "text": "此網站由 Askr 說明自身。以下名稱代表這些頁面使用的三種導覽角色。",
+    "crumbs": [
+      "展示",
+      "版面"
+    ]
+  },
+  {
+    "objectID": "gallery/layout.html#areas",
+    "href": "gallery/layout.html#areas",
+    "title": "版面",
+    "section": "Areas",
+    "text": "Areas\n標題列項目是 Areas：Gallery、Components、Usage、Credits 與 Long list。選擇一個 Area 會切換 Page List。Area 不是頁面內的標題，也不會在左側重複列成同一批頁面。",
+    "crumbs": [
+      "展示",
+      "版面"
+    ]
+  },
+  {
+    "objectID": "gallery/layout.html#page-list",
+    "href": "gallery/layout.html#page-list",
+    "title": "版面",
+    "section": "Page List",
+    "text": "Page List\n左欄標題為 Pages。每個項目都是目前 Area 中的一個獨立頁面。Gallery 的清單列出此概覽的同層頁面，也包含本頁。\nComponents 會列出自己的頁面，例如已儲存的 Notebook 輸出。\n單一頁面內的標題不會列在這裡。",
+    "crumbs": [
+      "展示",
+      "版面"
+    ]
+  },
+  {
+    "objectID": "gallery/layout.html#section-list",
+    "href": "gallery/layout.html#section-list",
+    "title": "版面",
+    "section": "Section List",
+    "text": "Section List\n右欄標題為 Sections，只列出目前頁面的章節標題。本頁的 Areas、Page List、Section List、閱讀欄與 RWD 都會列在右側。",
+    "crumbs": [
+      "展示",
+      "版面"
+    ]
+  },
+  {
+    "objectID": "gallery/layout.html#閱讀欄",
+    "href": "gallery/layout.html#閱讀欄",
+    "title": "版面",
+    "section": "閱讀欄",
+    "text": "閱讀欄\n寬螢幕桌面上，文章會置中顯示。版面參考是觀看距離約 50cm 的 14 吋筆記型電腦：18px 字體、630px 欄寬，每行約 70 個字元。距離較遠的螢幕需要放大字級，才能維持相同視角。閱讀欄會隨字級放大，因此每行不會變短。低於 630px 時，文章會使用整個視窗寬度。",
+    "crumbs": [
+      "展示",
+      "版面"
+    ]
+  },
+  {
+    "objectID": "gallery/layout.html#響應式版面rwd",
+    "href": "gallery/layout.html#響應式版面rwd",
+    "title": "版面",
+    "section": "響應式版面（RWD）",
+    "text": "響應式版面（RWD）\n內容字級是文章與其標題的大小；UI 字級則是其他項目的大小，包括 Area 連結、左右側欄文字與圖示。兩種比例會各自變化。\n\n\n\n\n\n\n\n\n\n\n\n\n\n視窗寬度\n內容字級\nUI 倍率\nArea 連結\n側欄文字\n文章\n側欄\n欄間距\n\n\n\n\n992–1439\n17px\n1.08\n17px\n14px\n630px\n1280px 前為 200px，其後為 240px\n先為 16px，其後為 22px\n\n\n1440–1919\n18px\n1.15\n18px\n15px\n630px\n264px\n26px\n\n\n1920–2559\n20px\n1.27\n20px\n17px\n693px\n290px\n29px\n\n\n2560 以上\n22px\n1.4\n22px\n19px\n756px\n320px\n31px\n\n\n\n1440–1919px 是 14 吋筆記型電腦的參考範圍，內容維持 18px；此時 UI 倍率為 1.15，因此 Area 連結為 18px，圖示也依相同比例調整。更寬的範圍會依觀看距離分別調整內容與介面。這些範圍依版面寬度而定：縮放後寬度為 1920px 的 4K 螢幕會使用 1920 範圍；相同寬度的 16:9 與 16:10 螢幕則使用相同範圍。",
+    "crumbs": [
+      "展示",
+      "版面"
+    ]
+  },
+  {
+    "objectID": "gallery/callout.html",
+    "href": "gallery/callout.html",
+    "title": "提示框範例",
+    "section": "",
+    "text": "本頁是 Gallery 中用來展示收合式提示框的章節。標題列不會因此多出一個項目。\n\n\n\n\n\n\n提示Section callout\n\n\n\n\n\n請從 Gallery 左側清單開啟此提示框。Components 有自己的清單，因此這個項目不會出現在其中。",
+    "crumbs": [
+      "展示",
+      "提示區塊"
+    ]
+  },
+  {
+    "objectID": "components/tables.html",
+    "href": "components/tables.html",
+    "title": "表格",
+    "section": "",
+    "text": "表頭分隔線使用裝飾性柔和色彩，寬度為 1px；本文儲存格則使用 1px 內容邊框。每個表格（包含沒有標題的 pipe table）都會加入具名且可用鍵盤聚焦的水平捲動區域。會換行的表頭使用 1.35 行高。",
+    "crumbs": [
+      "元件",
+      "表格"
+    ]
+  },
+  {
+    "objectID": "components/tables.html#符號表與密集參數表",
+    "href": "components/tables.html#符號表與密集參數表",
+    "title": "表格",
+    "section": "符號表與密集參數表",
+    "text": "符號表與密集參數表\n將沒有標題的 pipe table 包在 .askr-symbol-table 中，即可使用較窄的術語欄與較寬的說明欄。在手機上，固定版面會讓長詞自動換行。加入 .askr-table-compact 可縮小內距；加入 .askr-table-numeric 則會讓整個表格使用等寬數字。這些類別也適用於原生表格。\n::: {.askr-symbol-table .askr-table-compact .askr-table-numeric}\n| Symbol | Meaning |\n| --- | --- |\n| $\\omega_r$ | Resonator angular frequency, in radians per second. |\n:::",
+    "crumbs": [
+      "元件",
+      "表格"
+    ]
+  },
+  {
+    "objectID": "components/tables.html#閱讀長表格",
+    "href": "components/tables.html#閱讀長表格",
+    "title": "表格",
+    "section": "閱讀長表格",
+    "text": "閱讀長表格\n主題包含寬表格，以及儲存格內無法斷行的路徑或 SHA-256 值：雜湊值可能會換行，額外欄位則在表格容器內捲動。較長的說明請放在附近的內文，讓表格仍便於比較。",
+    "crumbs": [
+      "元件",
+      "表格"
+    ]
+  },
+  {
+    "objectID": "components/prose.html",
+    "href": "components/prose.html",
+    "title": "內文",
+    "section": "",
+    "text": "文章連結使用字重 600，不加底線。段落中的連結會帶有低調的醒目底色；游標移入時，顏色會從連結色轉為第三層色彩。\n句子中有一個醒目連結。粗體與強調沿用內文字型。標記文字則以底色凸顯。",
+    "crumbs": [
+      "元件",
+      "正文"
+    ]
+  },
+  {
+    "objectID": "components/prose.html#清單",
+    "href": "components/prose.html#清單",
+    "title": "內文",
+    "section": "清單",
+    "text": "清單\n項目符號使用第三層色彩。\n\n無序清單\n若項目不需依序處理，請使用項目符號。\n\n結構範例\n\n文件\n\n概覽\n\n目的與功能\n支援的工作流程\n\n教學\n\n快速入門\n使用模型\n\n\n參考資料\n\n設定\n公開介面\n\n\n\n\n\n有序清單\n順序重要時，請使用有序標記。此結構依序交替使用數字、小寫英文字母，再回到數字。每個巢狀清單都有自己的順序；作者可透過 Quarto 原生 Markdown 選擇標記樣式。\n\n結構範例\n\n準備模型\n\n選擇版圖\n\n識別元件\n指派連接\n\n選擇分析方法\n\n執行工作流程\n\n檢視輸入\n執行選定的後端\n\n閱讀結果\n\n檢查報告\n記錄假設\n\n\n\n\n\n定義清單\n\n術語\n\n定義會與上方段落維持在相同的閱讀欄內。",
+    "crumbs": [
+      "元件",
+      "正文"
+    ]
+  },
+  {
+    "objectID": "components/prose.html#引文",
+    "href": "components/prose.html#引文",
+    "title": "內文",
+    "section": "引文",
+    "text": "引文\n\n引文左側的線寬為 3px，使用連結色。文字則維持內文色，不會變成淡化的旁註。",
+    "crumbs": [
+      "元件",
+      "正文"
+    ]
+  },
+  {
+    "objectID": "components/prose.html#分隔線",
+    "href": "components/prose.html#分隔線",
+    "title": "內文",
+    "section": "分隔線",
+    "text": "分隔線\n標題不會自帶這條線；作者可用 --- 明確加入。\n\n此線寬為 1px，使用內容分隔線色彩，並以完整不透明度顯示。",
+    "crumbs": [
+      "元件",
+      "正文"
+    ]
+  },
+  {
+    "objectID": "components/prose.html#限制",
+    "href": "components/prose.html#限制",
+    "title": "內文",
+    "section": "限制",
+    "text": "限制\n主題包含段落中的連結，以及閱讀欄內的巢狀清單。若段落被當作標題使用，或清單項目其實是完整章節，應改寫為標題加上簡短段落。",
+    "crumbs": [
+      "元件",
+      "正文"
+    ]
+  },
+  {
+    "objectID": "components/headings.html",
+    "href": "components/headings.html",
+    "title": "標題",
+    "section": "",
+    "text": "Quarto 文章主題會在 h2 下方畫線。Askr 會移除這條線，包括錨點標題的偽元素，並清除多餘內距。標題仍使用字重 700、字距緊密的 Schibsted Grotesk。上方頁面標題是第一層標題範例。",
+    "crumbs": [
+      "元件",
+      "標題"
+    ]
+  },
+  {
+    "objectID": "components/headings.html#第二層標題沒有底線",
+    "href": "components/headings.html#第二層標題沒有底線",
+    "title": "標題",
+    "section": "第二層標題沒有底線",
+    "text": "第二層標題沒有底線\n此標題展示了這項變更：下方沒有邊框，也不會預留邊框空間。\n\n第三層標題\n用於章節中的步驟。\n\n第四層標題\n用於較小的段落區隔。第五與第六層標題沿用此字級。\n\n第五層標題\n\n第六層標題\n閱讀段落間的分隔是一般主題分隔線，不是標題底線。\n\n這條線是內容分隔線，並不附屬於標題。",
+    "crumbs": [
+      "元件",
+      "標題"
+    ]
+  },
+  {
+    "objectID": "components/headings.html#限制",
+    "href": "components/headings.html#限制",
+    "title": "標題",
+    "section": "限制",
+    "text": "限制\n主題包含一個會在閱讀欄內換成兩行的標題。若標題實際上是段落，應拆開處理：標題保持簡短，說明則放入本文。",
+    "crumbs": [
+      "元件",
+      "標題"
+    ]
+  },
+  {
+    "objectID": "components/code.html",
+    "href": "components/code.html",
+    "title": "程式碼",
+    "section": "",
+    "text": "行內程式碼會在醒目提示底色上使用 IBM Plex Mono。圍欄區塊採透明填色、1px 邊框與 5px 圓角，並保留足夠內距，避免複製控制項遮住第一行。複製功能仍使用 Quarto 原生控制項。長行會在區塊內捲動，不會撐寬整頁。\n行內範例為 askr-html。",
+    "crumbs": [
+      "元件",
+      "程式碼"
+    ]
+  },
+  {
+    "objectID": "components/code.html#限制",
+    "href": "components/code.html#限制",
+    "title": "程式碼",
+    "section": "限制",
+    "text": "限制\n主題會讓長行在圍欄區塊內捲動。請勿為了限制閱讀欄寬度而把段落包進程式碼圍欄：內文應放在文章中，圍欄則用來呈現原始碼。",
+    "crumbs": [
+      "元件",
+      "程式碼"
+    ]
+  },
+  {
+    "objectID": "components/callouts.html",
+    "href": "components/callouts.html",
+    "title": "提示框",
+    "section": "",
+    "text": "擴充套件將 Quarto 原生類型對應至固定的視覺意義：note 使用柔和藍色與資訊圖示，tip 使用藍綠色與火焰圖示，important 使用薰衣草紫與警示圓形圖示，warning 使用琥珀色與三角形警示圖示，caution 使用珊瑚色與八角形警示圖示。圖示是本機隨附的 Lucide SVG，透過 CSS 遮罩呈現，不需新增執行環境。\n在 Quarto DOM 容許的範圍內，外框、標題、語意化透明邊框與填色、5px 圓角、圖示和箭頭都盡量貼近 Quartz 的提示框範例。Quarto 的五種原生類型、收合行為與巢狀提示框就是目前的介面；此處不另行創造 Quartz 的其他類型與別名。",
+    "crumbs": [
+      "元件",
+      "提示區塊"
+    ]
+  },
+  {
+    "objectID": "components/callouts.html#五種提示框",
+    "href": "components/callouts.html#五種提示框",
+    "title": "提示框",
+    "section": "五種提示框",
+    "text": "五種提示框\n\n\n\n\n\n\n註釋說明\n\n\n\n使用說明提示提供背景資訊，但不打斷主要脈絡。\n\n\n\n\n\n\n\n\n提示提示\n\n\n\n使用提示提供實用做法。無論巢狀深度為何，圖示都維持火焰。\n\n\n\n\n\n\n\n\n重要重要\n\n\n\n使用重要提示標示會影響讀者決策的資訊。\n\n\n\n\n\n\n\n\n警告警告\n\n\n\n若讀者應先檢查某個條件再繼續，請使用警告。\n\n\n\n\n\n\n\n\n注意注意\n\n\n\n若有具體風險，且其後果應持續清楚可見，請使用注意提示。",
+    "crumbs": [
+      "元件",
+      "提示區塊"
+    ]
+  },
+  {
+    "objectID": "components/callouts.html#邊界案例",
+    "href": "components/callouts.html#邊界案例",
+    "title": "提示框",
+    "section": "邊界案例",
+    "text": "邊界案例\n\n\n\n\n\n\n註釋這段刻意較長的原生自訂標題，在窄版手機上會自然換行，而不會改變提示框類型\n\n\n\n較長的自訂標題仍屬於原生標題列。\n\n\n\n\n\n\n\n\n這是原生的無標題、無圖示簡潔提示框，語意類型仍是 tip。\n\n\n\n\n\n\n\n\n\n警告已收合的原生警告\n\n\n\n\n\n可透過 Quarto 原生展開控制查看本文。Askr 只替換箭頭圖樣，並讓控制項與標題置中對齊。\n\n\n\n\n\n\n\n\n\n注意已展開的原生注意提示\n\n\n\n\n\nminimal 外觀仍由 Quarto 選擇呈現方式，Askr 只套用至受支援的提示框 DOM 色彩。",
+    "crumbs": [
+      "元件",
+      "提示區塊"
+    ]
+  },
+  {
+    "objectID": "components/callouts.html#巢狀提示框",
+    "href": "components/callouts.html#巢狀提示框",
+    "title": "提示框",
+    "section": "巢狀提示框",
+    "text": "巢狀提示框\n\n\n\n\n\n\n提示先協助讀者掌握方向\n\n\n\n藍綠色的外層提供實用導讀。\n\n\n\n\n\n\n重要保留決策界線\n\n\n\n薰衣草紫的內層承載重要條件，不會沿用外層的藍綠色。",
+    "crumbs": [
+      "元件",
+      "提示區塊"
+    ]
+  },
+  {
+    "objectID": "components/callouts.html#限制",
+    "href": "components/callouts.html#限制",
+    "title": "提示框",
+    "section": "限制",
+    "text": "限制\n主題在頁面不變寬的情況下，容納較長的原生標題與巢狀提示框。請勿在單一提示框中放入表格、圖形與多段文字；將這些內容移到文章本文，讓提示框只負責呈現警告。",
+    "crumbs": [
+      "元件",
+      "提示區塊"
+    ]
+  },
+  {
+    "objectID": "components.html",
+    "href": "components.html",
+    "title": "元件",
+    "section": "",
+    "text": "多數頁面介紹 Askr 如何調整 Quarto 原生文章元件的樣式；「卡片」頁則說明一種以 Quarto 原生區塊語法撰寫的選用格式。以下每頁聚焦於一類元件或寫法。",
+    "crumbs": [
+      "元件",
+      "元件總覽"
+    ]
+  },
+  {
+    "objectID": "components.html#已調整",
+    "href": "components.html#已調整",
+    "title": "元件",
+    "section": "已調整",
+    "text": "已調整\n\n標題。第二層標題不再自動畫出 Quarto 底線；分隔線改由明確的 --- 表示。\n內文。文章連結、醒目文字、清單標記、引文與內容分隔線。\n提示框。五種原生類型及其外框、圖示與展開箭頭。\n卡片。以巢狀 fenced div 組成卡片，保留真正的標題與單一標題連結，且不需 JavaScript。\n程式碼。行內程式碼、圍欄程式碼區塊與本機溢位處理。\n表格。表頭與儲存格的分隔線。\n數學公式。展示公式會在內容寬度內捲動。\n參考文獻。文中引用與參考文獻清單。",
+    "crumbs": [
+      "元件",
+      "元件總覽"
+    ]
+  },
+  {
+    "objectID": "components.html#保留-quarto-原有呈現方式",
+    "href": "components.html#保留-quarto-原有呈現方式",
+    "title": "元件",
+    "section": "保留 Quarto 原有呈現方式",
+    "text": "保留 Quarto 原有呈現方式\n\n圖形與群組。欄、分頁、圖表，以及一張來自 Embla 的圖片。群組仍使用 Quarto 原有呈現方式；圖片使用 Quarto 摺疊的 Source。\n已儲存的 Notebook 輸出。實際執行過的儲存格，與圍欄程式碼區塊不同。\n\n網站外框，例如區域、頁面清單與置中閱讀欄，請見版面。",
+    "crumbs": [
+      "元件",
+      "元件總覽"
+    ]
+  },
+  {
+    "objectID": "components/cards.html",
+    "href": "components/cards.html",
+    "title": "卡片",
+    "section": "",
+    "text": "Askr 卡片使用 Quarto 原生的 fenced div（圍欄式區塊）語法。卡片外框沒有點擊處理， 標題連結是卡片的主要導覽方式；若在本文加入其他連結，仍會使用各自的原生目的地。",
+    "crumbs": [
+      "元件",
+      "卡片"
+    ]
+  },
+  {
+    "objectID": "components/cards.html#撰寫語法",
+    "href": "components/cards.html#撰寫語法",
+    "title": "卡片",
+    "section": "撰寫語法",
+    "text": "撰寫語法\n請依照頁面章節結構選擇標題層級。.unlisted 會讓這個實際標題不列入頁面目錄； 標題連結仍保有原生連結行為。\n:::: {.askr-card}\n::: {.askr-card-body}\n### [標題](target.qmd) {.askr-card-title .unlisted}\n\n簡短的補充段落。\n:::\n::::\n外層 .askr-card 呈現卡片外框，.askr-card-body 群組卡片內容， .askr-card-title 則設定作者選定的標題樣式。此寫法不使用 JavaScript， 也不會讓整張卡片都成為連結。",
+    "crumbs": [
+      "元件",
+      "卡片"
+    ]
+  },
+  {
+    "objectID": "components/cards.html#展示範例",
+    "href": "components/cards.html#展示範例",
+    "title": "卡片",
+    "section": "展示範例",
+    "text": "展示範例\n以下兩張卡片連至既有的使用指南。較長的繁體中文標題可用來檢視中日韓文字在卡片內的換行情形。\n\n\n安裝 Askr\n在 Quarto 專案安裝 Askr，並設定所需的網站選項。\n\n\n\n\n用 Areas、頁面清單與 Sections 整理網站導覽\n了解導覽區域、頁面清單與目前頁面的章節如何搭配運作。",
+    "crumbs": [
+      "元件",
+      "卡片"
+    ]
+  },
+  {
+    "objectID": "components/cards.html#遷移既有課程卡片",
+    "href": "components/cards.html#遷移既有課程卡片",
+    "title": "卡片",
+    "section": "遷移既有課程卡片",
+    "text": "遷移既有課程卡片\nAskr v0.12.0 新增卡片元件。請在使用中的 Quarto 專案安裝此版本：\nquarto add arfiligol/askr@v0.12.0 --no-prompt\n只替換下列舊卡片類別，保留標題文字、標題層級、連結目的地與說明內容； 同時移除 Bootstrap 通用的 card 與 card-body 類別。\n\n\n\n既有類別\nAskr 卡片類別\n\n\n\n\n.card.course-card\n.askr-card\n\n\n.card-body\n.askr-card-body\n\n\n.course-card-title\n.askr-card-title\n\n\n\n更新標記後，只移除本機針對舊課程卡片類別的 CSS 規則，保留其他專案樣式。 新撰寫的卡片則使用上方 fenced div 語法。",
+    "crumbs": [
+      "元件",
+      "卡片"
+    ]
+  },
+  {
+    "objectID": "components/figures.html",
+    "href": "components/figures.html",
+    "title": "圖形與群組",
+    "section": "",
+    "text": "欄與圖片仍由 Quarto 排版；Askr 會調整分組分頁的樣式。",
+    "crumbs": [
+      "元件",
+      "圖片與分組"
+    ]
+  },
+  {
+    "objectID": "components/figures.html#欄",
+    "href": "components/figures.html#欄",
+    "title": "圖形與群組",
+    "section": "欄",
+    "text": "欄\n\n\n左欄占閱讀欄的一半。\n\n右欄占另一半。窄螢幕會將兩欄上下堆疊。",
+    "crumbs": [
+      "元件",
+      "圖片與分組"
+    ]
+  },
+  {
+    "objectID": "components/figures.html#分頁組",
+    "href": "components/figures.html#分頁組",
+    "title": "圖形與群組",
+    "section": "分頁組",
+    "text": "分頁組\n這兩組分頁會同步切換。在其中一組選擇 Palace 或 AEDT，另一組也會選取相同項目。下方文章不會被包在第二張卡片中。\n\nPalaceAEDT\n\n\nPalace 使用共用版圖與自己的靜電輸入資料。\n\n\nAEDT Q3D 使用相同版圖與自己的輸入綁定。\n\n\n\n\nPalaceAEDT\n\n\n特徵模態結果取自 Palace 執行結果。\n\n\n特徵模態結果取自 HFSS 執行結果。",
+    "crumbs": [
+      "元件",
+      "圖片與分組"
+    ]
+  },
+  {
+    "objectID": "components/figures.html#圖片",
+    "href": "components/figures.html#圖片",
+    "title": "圖形與群組",
+    "section": "圖片",
+    "text": "圖片\n本文件中的圖片來自 Embla。下方圖表是該專案的長條與標記圖，並以靜態圖片儲存於此。Quarto 折疊儲存格中的來源會收在 Source 後方，圖片則顯示於下方。\n\n\nSource\nfrom IPython.display import Image\nImage(\"images/bars-semantic-markers.png\")\n\n\n\n\n\n\n\n\n\n若頁面只需顯示圖片、不需公開來源，可直接嵌入：\n![Bars with semantic markers](images/bars-semantic-markers.png)",
+    "crumbs": [
+      "元件",
+      "圖片與分組"
+    ]
+  },
+  {
+    "objectID": "components/figures.html#image-viewer",
+    "href": "components/figures.html#image-viewer",
+    "title": "圖形與群組",
+    "section": "圖片檢視器",
+    "text": "圖片檢視器\n點選獨立圖形或其按鈕，即可開啟 Askr 浮動檢視器。使用 + / −、Fit、拖曳平移或雙指縮放。按 Escape 可返回文章。\n\n\n\n\n\n\n圖 1: Embla 公開圖形，包含語意標記。\n\n\n\n檢視此圖\n此按鈕會開啟與上方圖形相同的圖片與說明文字。只有按鈕的項目會自行註冊隱藏的圖片來源：\n\n\n\n檢視圖片\n\n行內互動\n這張 PNG 可直接在文章內檢視。縮放後再展開：相同的檢視狀態會隨圖片移至浮動檢視器，返回時也會保留。\n\n\n\n\n\n\n圖 2: Embla 的長條與標記圖，直接顯示於本文，沒有重複圖形。\n\n\n\n\n\n\nSVG 互動\n此既有 Askr 圖示是向量圖稿，不是科學版圖。放大時幾何邊緣仍清晰，且其檢視狀態與 PNG 分開。\n\n\n\n\n\n\n圖集\n\n\n\nEmbla 公開圖形：PNG 來源。\n\n\n\n\n\n同一公開圖形的 JPEG 編碼；縮放不會增加解析度。\n\n\n\n\n排除的圖片\n這張圖片不會開啟浮動檢視器：\n\n\n\n已排除 Lightbox。\n\n\n\n\n帶連結的圖片\n下方圖片仍是一般導覽連結，會前往圖形使用指南。\n\n請見圖片檢視器，了解排除方式、按鈕語法與分組圖集。",
+    "crumbs": [
+      "元件",
+      "圖片與分組"
+    ]
+  },
+  {
+    "objectID": "components/figures.html#主題切換",
+    "href": "components/figures.html#主題切換",
+    "title": "圖形與群組",
+    "section": "主題切換",
+    "text": "主題切換\nQuarto 會從同一個儲存格產生兩份輸出，並顯示其中一份。body.quarto-dark 會隱藏 .light-content；body.quarto-light 會隱藏 .dark-content。Askr 的深色樣式表以 data-mode=\"dark\" 標示，因此標題列的切換按鈕會隨樣式表加入或移除 quarto-dark。\n先輸出淺色內容，再輸出深色內容：\n\n\nSource\nfrom IPython.display import HTML, display\n\ndef swatch(background, foreground, label):\n    display(HTML(\n        f'&lt;p style=\"margin:0;padding:1rem 1.25rem;background:{background};color:{foreground}\"&gt;{label}&lt;/p&gt;'\n    ))\n\nswatch(\"#faf8f8\", \"#2b2b2b\", \"Light rendering\")\nswatch(\"#161618\", \"#ebebec\", \"Dark rendering\")\n\n\nLight rendering\n\n\nDark rendering\n\n\nPlotly 圖形也適用相同順序：在 #| renderings: [light, dark] 下，先繪製淺色圖，再繪製深色圖。每份輸出的圖形顏色會固定下來；切換按鈕不會重新替單張圖片著色。",
+    "crumbs": [
+      "元件",
+      "圖片與分組"
+    ]
+  },
+  {
+    "objectID": "components/figures.html#圖表",
+    "href": "components/figures.html#圖表",
+    "title": "圖形與群組",
+    "section": "圖表",
+    "text": "圖表\n下方未加包裝的簡單 Mermaid 區塊會維持原生文章呈現，不會新增檢視器控制項：\n\nflowchart LR\n  Areas[Areas] --&gt; Pages[Page List]\n  Pages --&gt; Article[Article]\n  Article --&gt; Sections[Section List]\n\n\n\n\nflowchart LR\n  Areas[Areas] --&gt; Pages[Page List]\n  Pages --&gt; Article[Article]\n  Article --&gt; Sections[Section List]\n\n\n\n\n\n\n本圖集不附照片。",
+    "crumbs": [
+      "元件",
+      "圖片與分組"
+    ]
+  },
+  {
+    "objectID": "components/figures.html#mermaid-viewer",
+    "href": "components/figures.html#mermaid-viewer",
+    "title": "圖形與群組",
+    "section": "Mermaid 檢視器",
+    "text": "Mermaid 檢視器\n將單一原生 Mermaid 區塊包在 .askr-mermaid-view 中，即可在繪製完成的圖表下方加入「檢視圖表」按鈕。圖表仍會顯示在文章中；按鈕則會開啟浮動檢視器。下方的寬幅流程圖以自然寬度顯示，並可在可由鍵盤聚焦的水平捲動區域內檢視。\n\n\n\nflowchart LR\n  subgraph author[\"編寫\"]\n    direction TB\n    source[\"撰寫原生&lt;br/&gt;Mermaid 區塊\"] --&gt; wrapper[\"加入選用的&lt;br/&gt;檢視器包裝\"]\n  end\n  subgraph build[\"建置與發布\"]\n    direction TB\n    render[\"Quarto 產生&lt;br/&gt;HTML 頁面\"] --&gt; publish[\"發布&lt;br/&gt;文件網站\"]\n  end\n  subgraph reader[\"閱讀\"]\n    direction TB\n    article[\"圖表顯示於&lt;br/&gt;文章中\"] --&gt; open[\"選擇「檢視圖表」\"] --&gt; inspect[\"在浮動檢視器中&lt;br/&gt;縮放、平移或 Fit\"] --&gt; close[\"關閉並返回&lt;br/&gt;文章\"]\n  end\n  wrapper --&gt; render\n  publish --&gt; article\n\n\n\n\nflowchart LR\n  subgraph author[\"編寫\"]\n    direction TB\n    source[\"撰寫原生&lt;br/&gt;Mermaid 區塊\"] --&gt; wrapper[\"加入選用的&lt;br/&gt;檢視器包裝\"]\n  end\n  subgraph build[\"建置與發布\"]\n    direction TB\n    render[\"Quarto 產生&lt;br/&gt;HTML 頁面\"] --&gt; publish[\"發布&lt;br/&gt;文件網站\"]\n  end\n  subgraph reader[\"閱讀\"]\n    direction TB\n    article[\"圖表顯示於&lt;br/&gt;文章中\"] --&gt; open[\"選擇「檢視圖表」\"] --&gt; inspect[\"在浮動檢視器中&lt;br/&gt;縮放、平移或 Fit\"] --&gt; close[\"關閉並返回&lt;br/&gt;文章\"]\n  end\n  wrapper --&gt; render\n  publish --&gt; article\n\n\n\n\n\n\n\n\n按「檢視圖表」可在浮動檢視器中開啟繪製後的圖表。圖表下方相鄰的 Mermaid source 摺疊區可按需展開作者原始區塊；其中的 Copy 按鈕會複製來源。控制方式與限制請見Mermaid 檢視器指南。",
+    "crumbs": [
+      "元件",
+      "圖片與分組"
+    ]
+  },
+  {
+    "objectID": "components/figures.html#限制",
+    "href": "components/figures.html#限制",
+    "title": "圖形與群組",
+    "section": "限制",
+    "text": "限制\n欄、分頁組與簡單圖表都符合文章寬度。較寬的流程圖以 .askr-wide-figure 保留自然尺寸，並可水平捲動。浮動檢視器可縮放圖表，但不能取代清楚的標籤與合理的分組；若標籤或關係仍不易理解，請重新編排圖表，不要為了把海報塞入欄中而縮小文字。",
+    "crumbs": [
+      "元件",
+      "圖片與分組"
+    ]
+  },
+  {
+    "objectID": "components/mathematics.html",
+    "href": "components/mathematics.html",
+    "title": "數學公式",
+    "section": "",
+    "text": "展示公式可在局部區域捲動。一般內文閱讀欄寬為 630px；全站 wide 寬版設定的閱讀欄寬為 780px。精簡的 Copy（複製）控制項會在游標移入或鍵盤焦點停留時出現，並複製不含外層 $$ 分隔符號的公式原始碼。若無法使用剪貼簿，公式下方會出現可選取的原始碼。\n像 方程式 1 這類原生參照仍會保留編號與連結。\n行內數學公式留在句子中，例如 \\(\\omega_r = 2\\pi f\\)。",
+    "crumbs": [
+      "元件",
+      "數學"
+    ]
+  },
+  {
+    "objectID": "components/mathematics.html#複製設定",
+    "href": "components/mathematics.html#複製設定",
+    "title": "數學公式",
+    "section": "複製設定",
+    "text": "複製設定\n在 _quarto.yml 的網站層級設定中，使用巢狀選項 askr.math-copy: false：\naskr:\n  math-copy: false\n單一頁面使用扁平的 front matter 鍵 askr-math-copy: false。頁面值會覆寫網站設定；askr-math-copy: true 則會在該頁啟用此功能。若只要停用單一公式的複製功能，可用 .no-math-copy 包住公式的 div，或將此類別加到原生公式屬性（$$ … $$ {#eq-name .no-math-copy}）。緊密清單中的展示公式也支援複製。原始碼會保留在資料屬性中；只有在複製遭拒時才會建立可選取的後備文字。搜尋仍保留 Quarto 原生公式文字，不會額外加入 Askr 公式原始碼副本。",
+    "crumbs": [
+      "元件",
+      "數學"
+    ]
+  },
+  {
+    "objectID": "components/mathematics.html#原生語意區塊",
+    "href": "components/mathematics.html#原生語意區塊",
+    "title": "數學公式",
+    "section": "原生語意區塊",
+    "text": "原生語意區塊\n若要建立有編號的定義、定理、命題、引理、推論、備註、範例與證明，請使用 Quarto 原生識別字（def-、thm-、prp-、lem-、cor-、rem-、exm-）及 .proof。\n\n定義 1 (角頻率) 頻率為 \\(f\\) 時，角頻率為 \\(\\omega = 2\\pi f\\)。\n\n\n證明. 一個週期是 \\(2\\pi\\) 弧度，因此將每秒週期數乘以 \\(2\\pi\\)，即可得到每秒弧度數。",
+    "crumbs": [
+      "元件",
+      "數學"
+    ]
+  },
+  {
+    "objectID": "components/mathematics.html#限制",
+    "href": "components/mathematics.html#限制",
+    "title": "數學公式",
+    "section": "限制",
+    "text": "限制\n主題會讓長展示公式在閱讀欄內捲動。請勿把句子編成展示公式；應以文字說明物理量，並讓公式只表達關係。",
+    "crumbs": [
+      "元件",
+      "數學"
+    ]
+  },
+  {
+    "objectID": "components/references.html",
+    "href": "components/references.html",
+    "title": "參考文獻",
+    "section": "",
+    "text": "知識節點頁面會在句子中標示主張的出處，並在文末列出完整資料。本範例使用 Quarto 引用語法。這不是科學論文，也不介紹 SCQ 主題。\n文獻回顧應有所選擇，而不是列出讀過的所有資料 (Pautasso 2013年)。產生結果的軟體也應有可引用的識別資料 (Smith 等 2016年)。句子可以提及兩個來源，不必改成方括號清單。\n閱讀欄仍由設定字體的工具決定。Knuth 的 TeXbook 定義本頁沿用的方框模型 (Knuth 1984年)；Lamport 的手冊提供多數科學頁面仍採用的文件語法 (Lamport 1994年)；Bringhurst 則指出主題設計不應自行扭曲的排版原則 (Bringhurst 2004年)。\n設定 link-citations 後，Quarto 會將 @key 與 [@key] 轉成連結 (Posit 2026年)。Pandoc 會建立清單與回鏈 (MacFarlane 2026年)。長篇標題應留在清單中，不要放進章節標題：此處引用了出版格式手冊，完整書名會列在下方 (The University of Chicago Press 2017年)。",
+    "crumbs": [
+      "元件",
+      "參考文獻"
+    ]
+  },
+  {
+    "objectID": "components/references.html#限制",
+    "href": "components/references.html#限制",
+    "title": "參考文獻",
+    "section": "限制",
+    "text": "限制\n主題允許長識別字、DOI 或網址自動換行，讓它們留在閱讀欄內；參考文獻清單的凸排樣式則不會改動。\n請在句子中放入少量引用，不要每個子句都堆疊來源。清單應放在頁尾；章節標題應說明主張，不應承載整份參考文獻。",
+    "crumbs": [
+      "元件",
+      "參考文獻"
+    ]
+  },
+  {
+    "objectID": "credits.html",
+    "href": "credits.html",
+    "title": "致謝與出處",
+    "section": "",
+    "text": "Askr 的視覺設計大量參考 Quartz，並將選定的樣式概念改編至 Quarto；實際參考來源與修改紀錄列於第三方來源清單。\nQuartz 提供設計參考，並非執行環境相依套件。Schibsted Grotesk、Source Sans 3 與 IBM Plex Mono 依各自的 SIL Open Font License 在本機隨附。內文刻意使用指定版本的 Source Sans 3，作為 Source Sans Pro 的後繼改編字型；標題與導覽介面則使用 Schibsted Grotesk。Lucide 圖示依 ISC 授權在本機隨附，並附上衍生自 Feather 的 MIT 授權聲明。Askr 自身原始碼採 MIT 授權，但不取代任何第三方授權條款。\n\n第三方來源清單（原文）\n隨附資產清單（原文）\nAskr MIT 授權（原文）",
+    "crumbs": [
+      "致謝"
+    ]
+  },
+  {
+    "objectID": "gallery/cjk.html",
+    "href": "gallery/cjk.html",
+    "title": "中日韓文字範例",
+    "section": "",
+    "text": "內文使用 Source Sans 3，並依本機後備字型顯示中日韓文字。本頁用來檢查這項後備設定，並保留中英文混排範例，供檢視各種元件中的字型與閱讀層級。",
+    "crumbs": [
+      "展示",
+      "中日韓文字"
+    ]
+  },
+  {
+    "objectID": "gallery/cjk.html#標題與段落",
+    "href": "gallery/cjk.html#標題與段落",
+    "title": "中日韓文字範例",
+    "section": "標題與段落",
+    "text": "標題與段落\n\n安靜的標題\n文件的設計系統應協助讀者辨識重點，而不是搶走內容本身的注意力。標題、段落與註解使用同一組 token，明亮與深色模式仍保留同樣的閱讀層級。",
+    "crumbs": [
+      "展示",
+      "中日韓文字"
+    ]
+  },
+  {
+    "objectID": "gallery/cjk.html#連結清單與引文",
+    "href": "gallery/cjk.html#連結清單與引文",
+    "title": "中日韓文字範例",
+    "section": "連結、清單與引文",
+    "text": "連結、清單與引文\n閱讀節奏的說明見版面。\n\n段落保持可讀的行距\n連結使用細的強調色\n清單記號不搶過正文\n\n\n這段文字用來檢查中文排版。其他樣本文字仍保留英文。",
+    "crumbs": [
+      "展示",
+      "中日韓文字"
+    ]
+  },
+  {
+    "objectID": "gallery/cjk.html#提示框",
+    "href": "gallery/cjk.html#提示框",
+    "title": "中日韓文字範例",
+    "section": "提示框",
+    "text": "提示框\n\n\n\n\n\n\n註釋Note\n\n\n\n註記提供上下文，不打斷主要閱讀。\n\n\n\n\n\n\n\n\n提示Tip\n\n\n\n提示用來指出一個有幫助的做法。\n\n\n\n\n\n\n\n\n重要Important\n\n\n\n重要用來標出讀者需要決定的事。\n\n\n\n\n\n\n\n\n警告Warning\n\n\n\n警告表示繼續之前應先檢查一個條件。\n\n\n\n\n\n\n\n\n注意Caution\n\n\n\n注意表示一個應保持可見的具體風險。",
+    "crumbs": [
+      "展示",
+      "中日韓文字"
+    ]
+  },
+  {
+    "objectID": "gallery/cjk.html#程式碼與表格",
+    "href": "gallery/cjk.html#程式碼與表格",
+    "title": "中日韓文字範例",
+    "section": "程式碼與表格",
+    "text": "程式碼與表格\n窄螢幕上，行內程式 閱讀寬度 仍留在句子裡。\n\n\n\n元件\n檢查項目\n\n\n\n\n標題\n字重與行距\n\n\n表格\n儲存格內換行",
+    "crumbs": [
+      "展示",
+      "中日韓文字"
+    ]
+  },
+  {
+    "objectID": "gallery/long-list.html",
+    "href": "gallery/long-list.html",
+    "title": "長清單",
+    "section": "",
+    "text": "此 Area 用來檢視較長的巢狀 Page List。請在窄視窗中開啟 Page List 按鈕並捲動查看。\n各群組會維持展開，讓清單長度清楚可見；較深層的項目會縮排顯示。\n此頁清單中的導覽示範沿用英文原文，例如 Quarter wave 01（原文）。",
+    "crumbs": [
+      "展示",
+      "長清單"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Askr",
+    "section": "",
+    "text": "Askr 是用來閱讀文件的主題：涵蓋版面尺度、字體、引用與提示框。它是供完整長篇閱讀使用的本機 askr-html 擴充套件。Quarto 原有的導覽、目錄、提示框收合、語法醒目提示、數學公式與程式執行功能都會保留，Askr 只提供克制的字體與面板樣式。這套視覺主題仍名為 Quiet Quartz。此網站如何安排區域、頁面清單與章節清單，請見版面。",
+    "crumbs": [
+      "展示",
+      "總覽"
+    ]
+  },
+  {
+    "objectID": "index.html#閱讀節奏",
+    "href": "index.html#閱讀節奏",
+    "title": "Askr",
+    "section": "閱讀節奏",
+    "text": "閱讀節奏\n內文使用 Source Sans 3，程式碼使用 IBM Plex Mono，中文與日文等文字則依本機系統後備字型順序顯示。細緻的藍綠色連結與薰衣草紫引用線刻意比文件本身更低調。\n\n\n\n\n\n\n註釋Quarto 原生功能，不是替代執行環境\n\n\n\nAskr 只負責呈現；各使用專案仍負責網站結構、Notebook 執行、數學內容、檢視器整合、存取控制與資料。",
+    "crumbs": [
+      "展示",
+      "總覽"
+    ]
+  },
+  {
+    "objectID": "index.html#行動版提示框檢視目標",
+    "href": "index.html#行動版提示框檢視目標",
+    "title": "Askr",
+    "section": "行動版提示框檢視目標",
+    "text": "行動版提示框檢視目標\n本節刻意保持精簡，適合窄螢幕閱讀。請在行動版寬度檢視標題列、圖示、巢狀面板、鍵盤焦點與本機水平溢位邊界。固定錨點為 #mobile-callout-inspection-target。\n\n\n\n\n\n\n提示無論巢狀深度為何，提示都維持藍綠色\n\n\n\n\n\n請在桌面與行動裝置上展開這個 Quarto 原生收合提示框。決定藍綠色的是提示類型，而非巢狀深度。\n\n\n\n\n\n\n重要巢狀的薰衣草紫重要提示\n\n\n\n這則重要提示在藍綠色提示框內仍維持薰衣草紫。句子刻意寫得較長，展示窄螢幕閱讀時如何自然換行，而不會造成整頁水平溢位。",
+    "crumbs": [
+      "展示",
+      "總覽"
+    ]
+  },
+  {
+    "objectID": "index.html#閱讀範例",
+    "href": "index.html#閱讀範例",
+    "title": "Askr",
+    "section": "閱讀範例",
+    "text": "閱讀範例\n\n讓頁面保持清爽\n文件設計系統應讓密集的證據更容易閱讀，不必要求每位作者都成為前端專家。重要的閱讀單位不是主視覺橫幅，而是一段文字、一格來源、一則審慎的註記，以及它們之間留白。\n內文的 CJK 後備字型請見CJK 範例。\n作者可在元件了解撰寫方式與邊界案例，再到使用指南了解專案如何設定 Askr。",
+    "crumbs": [
+      "展示",
+      "總覽"
+    ]
+  },
+  {
+    "objectID": "usage/add-askr.html",
+    "href": "usage/add-askr.html",
+    "title": "安裝 Askr",
+    "section": "",
+    "text": "目前版本為 0.11.0，公開格式名稱為 askr-html，視覺主題為 Quiet Quartz。\n安裝後的擴充套件位於 _extensions/arfiligol/askr。Askr 不會從 CDN 載入字型、圖示或樣式。\n若要升級，請安裝較新的標籤版本，並重新建置專案。將更新後的 _extensions 複本提交至專案。請重新安裝經審查的標籤版本，不要直接編輯 _extensions/arfiligol/askr 內的檔案。",
+    "crumbs": [
+      "使用",
+      "安裝 Askr"
+    ]
+  },
+  {
+    "objectID": "usage/add-askr.html#quarto-相容性",
+    "href": "usage/add-askr.html#quarto-相容性",
+    "title": "安裝 Askr",
+    "section": "Quarto 相容性",
+    "text": "Quarto 相容性\nAskr 0.11.0 支援穩定版 Quarto &gt;=1.9.38 &lt;1.11。Quarto 1.10.18 仍是可重現圖集與 CI 的基準；使用者可採用支援範圍內的其他穩定版本，不必固定使用該修補版本。較舊標籤版本仍保留其原有需求。\n設定 respect-user-color-scheme: true 可依照讀者的系統偏好選擇配色。若使用 RequireJS 相容設定，請設定 smooth-scroll: false。這些是由使用專案選擇的選項；Askr 格式預設值不變。\n選用的 Logout 與圖片檢視器仍保留原有設定方式。設定與權責範圍請見受保護文件與登出及圖片檢視器。",
+    "crumbs": [
+      "使用",
+      "安裝 Askr"
+    ]
+  },
+  {
+    "objectID": "usage/add-askr.html#選用語言選擇器",
+    "href": "usage/add-askr.html#選用語言選擇器",
+    "title": "安裝 Askr",
+    "section": "選用語言選擇器",
+    "text": "選用語言選擇器\nAskr 0.10.0 新增選用的標題列語言選擇器。除非設定 askr.languages，否則不會顯示；其他預設值都不變。每個語言專案都必須明確設定自己的 current 語言代碼。Askr 只會依設定提供連結，不會從網址推測語言，也不會翻譯頁面。\naskr:\n  languages:\n    current: en\n    items:\n      - code: en\n        label: English\n        href: https://example.github.io/project/en/\n      - code: zh-TW\n        label: 繁體中文\n        href: https://example.github.io/project/\n每個項目都需要不重複的非空代碼、非空標籤，以及 HTTPS 網址或網域根目錄路徑。驗證、無障礙支援與選單行為請見語言選擇器。",
+    "crumbs": [
+      "使用",
+      "安裝 Askr"
+    ]
+  },
+  {
+    "objectID": "usage/add-askr.html#密集的科學文件",
+    "href": "usage/add-askr.html#密集的科學文件",
+    "title": "安裝 Askr",
+    "section": "密集的科學文件",
+    "text": "密集的科學文件\n若要使用 780px 的內文基準寬度，請在網站層級設定 askr.reading-width: wide；normal 則維持 630px。兩者都會依 Askr 的自適應規則縮放，並保留 Quarto 原生的寬度擴展方式。\naskr:\n  reading-width: wide\n  page-facts:\n    - {key: node-role, label: Role}\n    - {key: reader-task, label: Reader task}\n頁面可在 front matter 使用扁平欄位，例如 node-role: Concept 與 reader-task: \"Distinguish the modes and their response.\"。Askr 會將已設定的資料放在描述下方，並保留原生作者與日期資訊。未設定的欄位不會形成資訊列。表格類別、三層 Copy 設定與寬圖工具，請見表格、數學公式與圖形。\n不執行程式的文件建置與瀏覽器觀察涵蓋穩定版 1.9.38、1.10.18，也以 1.10.16 作為上游 Sass 變更的診斷預先版本。這不代表已檢查所有中間修補版本，也不表示支援預先版本。檢查範圍內，Quarto 原生分組分頁執行環境、Bootstrap 分頁實作與 Askr 使用的分頁標記都未變。確切輸入、發現與限制記錄於驗證收據（原文）。\n擴大支援範圍前，請先檢查 Quarto 原生分頁、主題切換、導覽與搜尋，以及格線標記的上游變更，再用預定版本建置並操作受影響的 Askr 元件。此候選版本不支援 Quarto 1.11，因為該版本變更了導覽與主題控制標記；支援它需要另行調查，不應建立多版本轉接框架。",
+    "crumbs": [
+      "使用",
+      "安裝 Askr"
+    ]
+  },
+  {
+    "objectID": "usage/header-footer.html",
+    "href": "usage/header-footer.html",
+    "title": "標題列與頁尾連結",
+    "section": "",
+    "text": "請使用 Quarto 原生導覽選項設定連結。Askr 負責外觀，不會另建連結清單。標題列提供快速入口；頁尾則讓讀者閱讀完畢後仍可前往專案、社群與維護資源。",
+    "crumbs": [
+      "使用",
+      "頁首與頁尾連結"
+    ]
+  },
+  {
+    "objectID": "usage/header-footer.html#原生設定",
+    "href": "usage/header-footer.html#原生設定",
+    "title": "標題列與頁尾連結",
+    "section": "原生設定",
+    "text": "原生設定\nwebsite:\n  navbar:\n    tools-collapse: true\n    tools:\n      - icon: github\n        href: https://github.com/your-organization/your-project\n        text: GitHub repository\n        aria-label: GitHub repository\n  page-footer:\n    left:\n      - icon: github\n        aria-label: GitHub repository\n        href: https://github.com/your-organization/your-project\n      - text: '&lt;i class=\"bi bi-chat-dots\" aria-hidden=\"true\"&gt;&lt;/i&gt; Community'\n        href: https://community.example.org/\n    center:\n      - text: '&lt;i class=\"bi bi-book\" aria-hidden=\"true\"&gt;&lt;/i&gt; Maintenance guide'\n        href: maintenance.qmd\n      - text: '&lt;i class=\"bi bi-people\" aria-hidden=\"true\"&gt;&lt;/i&gt; Contributing'\n        href: contributing.qmd\n    right: \"Your project's existing footer content\"\n請將範例目的地替換為自己的連結。GitHub 會出現兩次，因為它們位於兩個不同的原生導覽區域；Askr 不會同步網址。圖示請使用 Bootstrap 圖示名稱，並為 text / aria-label 提供描述性文字。只有圖示的頁尾連結必須設定 aria-label：Quarto 會將該名稱套用至原生圖示。若社群連結不易辨識，請加上簡短的可見標籤，讓用途更清楚。\nQuarto 1.10.18 的頁尾文字呈現方式會在同時設定時以 icon 取代相鄰文字，因此這些範例將裝飾性 Bootstrap 圖示放入原生 text 標記。aria-hidden 會讓可見標籤成為連結名稱。\n設定 tools-collapse: true 時，空間不足的已撰寫工具會移到 Areas 面板。主題、Search 與選用的 Logout 仍留在標題列。設定為 false 時，工具會留在標題列；請控制數量，確保最窄的視窗也能容納。較長的頁尾標籤會換行，不會變成捲動列。連結仍依 Quarto 原生 href、target 與 rel 行為運作；Askr 不會強制在新分頁開啟。既有連結與建置資訊仍由作者設定。",
+    "crumbs": [
+      "使用",
+      "頁首與頁尾連結"
+    ]
+  },
+  {
+    "objectID": "usage/header-footer.html#powered-by-askr",
+    "href": "usage/header-footer.html#powered-by-askr",
+    "title": "標題列與頁尾連結",
+    "section": "Powered by Askr",
+    "text": "Powered by Askr\n頁尾右側會包含 Powered by Askr · version。Askr 會將 Powered by Askr 連到文件網站，並將版本連到 GitHub Release。安裝的擴充套件 _extension.yml 才是版本依據，並非 askr-versions.json 或文件所用的套件版本。尚未發布的本機修改仍會顯示目前套件中繼資料的版本；這不能證明修改已發布。\n若要隱藏此致謝：\naskr:\n  footer:\n    credit: false\nAskr 會附加致謝文字，不會取代右側原有內容。若作者沒有設定頁尾，Askr 會建立只含致謝文字的簡易頁尾；若停用致謝，則不會建立頁尾。Askr 不會產生或移除提交雜湊值。\n選單、頁尾區域與其他原生選項請見 Quarto 導覽指南。",
+    "crumbs": [
+      "使用",
+      "頁首與頁尾連結"
+    ]
+  },
+  {
+    "objectID": "usage/languages.html",
+    "href": "usage/languages.html",
+    "title": "語言選擇器",
+    "section": "",
+    "text": "Askr 0.10.0 透過 askr.languages 新增選用的網站語言選擇器。Askr 會在標題列中，將目前語言的連結放在主題與其他工具旁。窄螢幕上，控制項仍留在標題列，與 Areas 分開配置。未設定時不會顯示語言控制項，其他預設值也不變。",
+    "crumbs": [
+      "使用",
+      "語言選擇器"
+    ]
+  },
+  {
+    "objectID": "usage/languages.html#設定語言",
+    "href": "usage/languages.html#設定語言",
+    "title": "語言選擇器",
+    "section": "設定語言",
+    "text": "設定語言\n請為每個語言專案明確設定 current，並為各語言提供不重複的 code、顯示用 label 與明確目的地 href。以下是 Askr 雙專案示範中繁體中文網站的設定：\naskr:\n  languages:\n    current: zh-TW\n    items:\n      - code: en\n        label: English\n        href: /askr/\n      - code: zh-TW\n        label: 繁體中文\n        href: /askr/zh-TW/\n英文網站也使用相同的兩個項目，但需將 current 明確設為 en。兩個獨立網站分別使用 /askr/ 與 /askr/zh-TW/ 網域根目錄路徑；選擇語言會前往該專案設定的網站根目錄，不會自動配對目前頁面。\n至少要設定兩個項目。代碼與標籤必須是非空純量值，代碼不得重複。每個 href 都必須是絕對 HTTPS 網址或 /en/ 這類網域根目錄路徑。建置時會拒絕以 // 開頭的協定相對路徑，以及含空白的目的地。每個語言專案都必須明確設定 current；Askr 不會從目前網址推測語言。\nAskr 會將設定的 href 放在一般連結上，因此瀏覽器會在目前分頁開啟目的地。每個代碼會同時用作 lang 與 hreflang，並以視覺樣式和 aria-current 標示目前項目。按鈕會顯示無障礙名稱與 Language: &lt;current label&gt; 提示文字；選單也會顯示目前語言。\nAskr 不會推測網址、自動配對翻譯頁面、記住語言選擇、改變搜尋範圍或翻譯內容。若原生 navbar 已有語言連結，設定 Askr 選擇器後請移除重複項目；Askr 會保留作者設定的 navbar 工具。\n鍵盤導覽、Escape 與點擊外部以關閉選單，使用 Quarto 隨附的 Bootstrap 下拉選單行為。若沒有 JavaScript，設定仍不會啟用，也不會顯示按鈕。",
+    "crumbs": [
+      "使用",
+      "語言選擇器"
+    ]
+  },
+  {
+    "objectID": "usage/protected-docs.html",
+    "href": "usage/protected-docs.html",
+    "title": "受保護文件與登出",
+    "section": "",
+    "text": "Askr 可選擇在標題列顯示 Logout 圖示。它只是一個導覽項目：登出範圍由 Authentik 與部署設定決定。公開文件不需要此項目，因此這個公開圖集將它停用。",
+    "crumbs": [
+      "使用",
+      "受保護文件與登出"
+    ]
+  },
+  {
+    "objectID": "usage/protected-docs.html#設定項目",
+    "href": "usage/protected-docs.html#設定項目",
+    "title": "受保護文件與登出",
+    "section": "設定項目",
+    "text": "設定項目\n在受保護網站的 _quarto.yml 中：\naskr:\n  logout:\n    href: \"https://docs.example.org/outpost.goauthentik.io/sign_out\"\n    label: \"Logout\"\n設定 logout 時必須提供 href。它可使用絕對 HTTPS 網址，或目前網域上以 / 開頭的路徑。例如 /outpost.goauthentik.io/sign_out 即使從 /v1.0/ 中的文件開啟，仍會從網域根目錄開始。協定相對網址 //host 與其他 URL scheme 都不接受。Askr 沒有預設登出端點。label 預設為 Logout，並作為圖示的無障礙名稱與提示文字。\n此項目是在目前分頁開啟的一般連結。Askr 不會讀取帳戶、刪除 Cookie、呼叫驗證 API，也不會回報登出成功。若要隱藏控制項，請完全移除 logout 設定。",
+    "crumbs": [
+      "使用",
+      "受保護文件與登出"
+    ]
+  },
+  {
+    "objectID": "usage/protected-docs.html#選擇正確的-authentik-目的地",
+    "href": "usage/protected-docs.html#選擇正確的-authentik-目的地",
+    "title": "受保護文件與登出",
+    "section": "選擇正確的 Authentik 目的地",
+    "text": "選擇正確的 Authentik 目的地\n若使用 Proxy 或單一應用程式的 Forward Auth，outpost 登出路徑會由受保護應用程式的主機提供。若使用網域層級的 Forward Auth，則應使用供應商設定的驗證網址主機。因此，同網域路徑不能取代驗證主機上的網址。請向部署負責人確認目的地；上方範例網域僅供說明，並非已設定的服務。\nAuthentik Proxy Provider 登出文件說明 /outpost.goauthentik.io/sign_out。Outpost 登出會使該 outpost 內的使用者工作階段失效，影響範圍可能超過這個文件網站，因此不能視為「僅登出本站」。",
+    "crumbs": [
+      "使用",
+      "受保護文件與登出"
+    ]
+  },
+  {
+    "objectID": "usage/protected-docs.html#三種不同範圍",
+    "href": "usage/protected-docs.html#三種不同範圍",
+    "title": "受保護文件與登出",
+    "section": "三種不同範圍",
+    "text": "三種不同範圍\n\n\n\n動作\n效果由何者控制\n\n\n\n\nOutpost 登出\nProxy Provider／outpost 會讓其工作階段失效。若 Authentik 登入仍有效，使用者可能不需重新輸入憑證就能再次通過驗證。\n\n\nAuthentik 工作階段登出\n設定為以 User Logout stage 結束的登出流程，會結束目前 Authentik 工作階段。請使用部署中實際的流程網址，不要自行建立 Askr 端點。\n\n\nSingle Logout（SLO）\nAuthentik 的 SLO 設定決定是否將登出傳遞至參與的應用程式。實際支援與供應商設定都會影響結果；這不代表每個應用程式都一定會登出。\n\n\n\nAskr 可以連到選定目的地，但不能選擇或強制執行上述登出範圍。NPM 規則、Authentik 流程、存取政策、實際登出與重新驗證檢查都由部署負責人管理。成功開啟網址並不能證明任何工作階段已結束。",
+    "crumbs": [
+      "使用",
+      "受保護文件與登出"
+    ]
+  },
+  {
+    "objectID": "usage/tokens.html",
+    "href": "usage/tokens.html",
+    "title": "樣式變數",
+    "section": "",
+    "text": "Askr 提供編譯時使用的 Sass 預設值，以及供建置後頁面使用的 --qdk-* CSS 屬性。使用者樣式應放在 Askr 之後；請勿修改已安裝的擴充套件檔案。分頁切換、收合、導覽、搜尋與複製仍由 Quarto 原生功能負責；樣式變數只改變呈現方式。\n讀者主題切換按鈕會使用 Askr 的控制項尺寸、邊框、圓角、顏色與游標移入樣式。Askr 會在搜尋旁預留該控制項的空間，因此使用者不必依賴內部的 --_qdk-* 縮放屬性另外調整間距。",
+    "crumbs": [
+      "使用",
+      "樣式變數"
+    ]
+  },
+  {
+    "objectID": "usage/tokens.html#在使用專案中覆寫",
+    "href": "usage/tokens.html#在使用專案中覆寫",
+    "title": "樣式變數",
+    "section": "在使用專案中覆寫",
+    "text": "在使用專案中覆寫\nformat:\n  askr-html:\n    theme:\n      light: [default, _extensions/arfiligol/askr/qdk.scss, styles.scss, light.scss]\n      dark: [default, _extensions/arfiligol/askr/qdk.scss, _extensions/arfiligol/askr/qdk-dark.scss, styles.scss, dark.scss]\n使用 scss:defaults 可變更編譯後的 Quarto 樣式及其衍生 CSS 屬性。下表中的 Sass 預設值皆使用 !default；使用者指派值時不需加上它。Quarto 會以反向順序讀取主題清單中的預設值，再依正向順序套用規則。共用預設值放在 styles.scss，各主題專用的預設值放在 light.scss / dark.scss；同一主題中的每個變數只能指派一次。較後面的檔案不會覆寫較前面的無條件 Sass 指派，因為預設值會先執行。\n例如，light.scss 可包含 $body-bg: #f3f5f7;，dark.scss 可包含 $body-bg: #20252b;，並都放在 /*-- scss:defaults --*/ 區段中。使用這種配置時，不要在共用檔案中設定 $body-bg。共用的 styles.scss 可包含：\n/*-- scss:defaults --*/\n$link-color: #2d5e85;\n$grid-body-width: 680px;\n$qdk-tab-size: .85rem;\n$qdk-tab-padding-y: .3rem;\n\n/*-- scss:rules --*/\n:root {\n  --qdk-callout-radius: 8px;\n  --qdk-table-cell-padding: .35rem .7rem;\n}\nCSS 覆寫會影響使用該屬性的規則；Sass 覆寫也會影響由該 Sass 變數編譯而成的 Quarto 原生規則。像 --qdk-tab-active-border: var(--qdk-link) 這類元件別名，會跟著全域基礎值變化，除非使用者另行覆寫該元件。CSS 值必須符合目標屬性的語法；若編譯期輸入無效，Quarto 會在編譯時回報。",
+    "crumbs": [
+      "使用",
+      "樣式變數"
+    ]
+  },
+  {
+    "objectID": "usage/tokens.html#全域調色盤與版面",
+    "href": "usage/tokens.html#全域調色盤與版面",
+    "title": "樣式變數",
+    "section": "全域調色盤與版面",
+    "text": "全域調色盤與版面\n既有 CSS 名稱仍可使用。它們在編譯時的來源，以及淺色／深色主題的確切預設值如下：\n在 0.9.0 中，Askr 邊框請覆寫 $qdk-border，柔和文字請覆寫 $qdk-muted-text。$border-color 與 $toc-color 仍保留 Quarto 原生用途，但不再控制這兩個 Askr 屬性。公開 CSS 名稱仍可使用。\n\n\n\n\n\n\n\n\n\nCSS 屬性\nSass 來源\n淺色\n深色\n\n\n\n\n--qdk-canvas\n$body-bg\n#faf8f8\n#161618\n\n\n--qdk-text\n$body-color\n#4e4e4e\n#d4d4d4\n\n\n--qdk-heading\n$headings-color\n#2b2b2b\n#ebebec\n\n\n--qdk-muted\n$qdk-muted-text\n#6b6b6b\n#a0a0a0\n\n\n--qdk-muted-decoration\n$qdk-muted-decoration\n#b8b8b8\n#646464\n\n\n--qdk-link, --qdk-focus\n$link-color\n#284b63\n#7b97aa\n\n\n--qdk-border\n$qdk-border\n#e5e5e5\n#393639\n\n\n--qdk-highlight\n$code-bg\nrgba(143,159,169,.15)\nsame\n\n\n--qdk-sidebar, --qdk-margin\n$grid-sidebar-width, $grid-margin-width\n264px\nsame\n\n\n--qdk-body\n$grid-body-width\n630px\nsame\n\n\n--qdk-gutter\n$grid-column-gutter-width\n26px\nsame\n\n\n--qdk-callout-note\n$callout-color-note\n#448aff\nsame\n\n\n--qdk-callout-tip\n$callout-color-tip\n#00bfa5\nsame\n\n\n--qdk-callout-important\n$callout-color-important\n#7a43b5\n#c69af0\n\n\n--qdk-callout-warning\n$callout-color-warning\n#db8942\nsame\n\n\n--qdk-callout-caution\n$callout-color-caution\n#db4242\n#ff8f8f\n\n\n\n字型來源預設為 Source Sans 3 內文、Schibsted Grotesk 標題，以及 IBM Plex Mono 程式碼，並採用已安裝平台的後備字型。$font-size-root 為 18px，$line-height-base 為 1.6，$font-weight-base 為 400，$headings-font-weight 為 700。標題 Sass 字級 $h1-font-size 至 $h4-font-size 依序為 1.78rem、1.39rem、1.11rem 與 1rem。$table-border-color 沿用表中列出的主題邊框預設值；$table-striped-bg 為 rgba(143,159,169,.15)。淺色模式下 $code-block-bg 為 transparent，深色模式下則為 #1f1f22。$callout-border-width 為 1px。",
+    "crumbs": [
+      "使用",
+      "樣式變數"
+    ]
+  },
+  {
+    "objectID": "usage/tokens.html#全域與元件屬性",
+    "href": "usage/tokens.html#全域與元件屬性",
+    "title": "樣式變數",
+    "section": "全域與元件屬性",
+    "text": "全域與元件屬性\n有標題的提示框會共用相同的區塊內縮與最小標題列高度，無論是否顯示圖示都一樣。圖示、標題與展開符號會在該列垂直置中；多行標題會自然增加列高。沒有標題的提示框則保留原生本文內縮。\n下表每列的 CSS 名稱是 --qdk- 加上變數名稱；Sass 預設名稱則是 $qdk- 加上相同變數名稱。值中含 var(...) 的項目是即時 CSS 別名；含 $ 的項目則取自上方 Sass 來源。\n\n\n\n變數\n預設值\n\n\n\n\ntertiary\n淺色 #4f756b，深色 #8fb7a8\n\n\ndivider-content\nrgba(43, 43, 43, .18)\n\n\ndivider-layout\nrgba(43, 43, 43, .08)\n\n\nmark\n#fff23688\n\n\nspace\n1rem\n\n\nchrome\n$font-size-root\n\n\nui\n1.15\n\n\nbody-font\n$font-family-sans-serif\n\n\nheading-font\n$headings-font-family\n\n\nmono-font\n$font-family-monospace\n\n\nbody-size\n1rem\n\n\nline-height\n$line-height-base\n\n\nbody-weight\n$font-weight-base\n\n\nstrong-weight\n600\n\n\nheading-weight\n$headings-font-weight\n\n\nlink-hover\nvar(--qdk-tertiary)\n\n\nlink-background\nvar(--qdk-highlight)\n\n\ninline-radius\nvar(--qdk-radius)\n\n\nfocus-width\n3px\n\n\nfocus-offset\n3px\n\n\nfocus-radius\n3px\n\n\ntab-font\nvar(--qdk-heading-font)\n\n\ntab-size\n.9rem\n\n\ntab-weight\n400\n\n\ntab-active-weight\n600\n\n\ntab-line-height\n1.25\n\n\ntab-padding-y\n.35rem\n\n\ntab-padding-x\n.8rem\n\n\ntab-gap\n.5rem\n\n\ntab-content-padding\n.65rem .8rem\n\n\ntab-border-width\n2px\n\n\ntab-color\nvar(--qdk-text)\n\n\ntab-active-color\nvar(--qdk-heading)\n\n\ntab-active-border\nvar(--qdk-link)\n\n\ntab-hover-color\nvar(--qdk-heading)\n\n\ntab-hover-border\nvar(--qdk-divider-layout)\n\n\ntab-background\ntransparent\n\n\ncontrol-radius\nvar(--qdk-radius)\n\n\ncontrol-size\n31px\n\n\ncontrol-color\nvar(--qdk-heading)\n\n\ncontrol-border\nvar(--qdk-divider-layout)\n\n\ncontrol-hover\nvar(--qdk-tertiary)\n\n\nnav-height\n3.4rem\n\n\nnav-size\n16px\n\n\nnav-brand-size\n18px\n\n\nnav-font\nvar(--qdk-heading-font)\n\n\nnav-gap\n.4rem\n\n\nversion-size\n16px\n\n\nversion-weight\n400\n\n\nversion-padding\n0 .45rem 0 .6rem\n\n\nversion-gap\n.35rem\n\n\nversion-menu-padding\n.35rem\n\n\nversion-item-padding\n.3rem .55rem\n\n\nversion-active-background\nvar(--qdk-highlight)\n\n\nsearch-overlay\nrgba(0, 0, 0, .32)\n\n\nsearch-radius\nvar(--qdk-control-radius)\n\n\nsearch-background\nvar(--qdk-canvas)\n\n\nsearch-color\nvar(--qdk-text)\n\n\nsearch-border\nvar(--qdk-divider-layout)\n\n\ncallout-radius\nvar(--qdk-radius)\n\n\ncallout-padding\nvar(--qdk-space)\n\n\ncallout-header-padding\nvar(--qdk-space)\n\n\ncallout-margin\nvar(--qdk-space)\n\n\ncallout-tint\n6.3%\n\n\ncallout-border-tint\n27%\n\n\ncallout-border-width\n$callout-border-width\n\n\ncallout-title-weight\n600\n\n\ncallout-title-line-height\n1.35\n\n\ncallout-icon-size\n20px\n\n\ncode-size\n.85rem\n\n\ncode-inline-size\n.9em\n\n\ncode-radius\nvar(--qdk-radius)\n\n\ncode-padding\n1rem 2.5rem 1rem 1rem\n\n\ncode-color\nvar(--qdk-heading)\n\n\ncode-inline-color\nvar(--qdk-heading)\n\n\ncode-background\n$code-block-bg\n\n\ncode-border\nvar(--qdk-border)\n\n\ncode-copy-background\nvar(--qdk-code-background)\n\n\ncode-copy-color\nvar(--qdk-text)\n\n\ncode-copy-hover-background\nvar(--qdk-border)\n\n\ncode-copy-hover-color\nvar(--qdk-heading)\n\n\ntable-border\n$table-border-color\n\n\ntable-stripe\n$table-striped-bg\n\n\ntable-head-border\nvar(--qdk-muted-decoration)\n\n\ntable-head-padding\n.5rem\n\n\ntable-cell-padding\n.5rem\n\n\ntable-head-line-height\n1.35\n\n\ntable-margin\nvar(--qdk-space)\n\n\nblockquote-color\nvar(--qdk-text)\n\n\nblockquote-border\nvar(--qdk-link)\n\n\nblockquote-border-width\n3px\n\n\nblockquote-padding\nvar(--qdk-space)\n\n\nblockquote-margin\nvar(--qdk-space)\n\n\nradius\n6px\n\n\n\n深色模式會將 divider-content 覆寫為 rgba(212,212,212,.24)，將 divider-layout 覆寫為 rgba(212,212,212,.10)，並將 mark 覆寫為 #e5c76b33。其他元件預設值在兩種主題間共用，並跟隨調色盤別名。深色模式的 code-color 會跟隨 var(--qdk-text)；行內程式碼仍使用標題色。Quarto 原生表格的表頭與儲存格內距為 .5rem，裝飾性表頭邊框為 1px。會換行的表頭使用無單位 1.35 行高。樣式變數規則會直接作用於 Quarto 原生與一般 HTML 表格儲存格。文字用途的柔和色彩用於副標題、中繼資料、標籤與頁尾；裝飾用途的柔和色彩用於細線。提示框標題由 72% 本文色與 28% 類型色混合；圖示與邊框則保留飽和的類型色。--qdk-callout-color 是每種原生提示框各自解析出的類型色；覆寫某一類型的具名色彩即可變更該類所有提示框。",
+    "crumbs": [
+      "使用",
+      "樣式變數"
+    ]
+  },
+  {
+    "objectID": "usage/tokens.html#自適應基準",
+    "href": "usage/tokens.html#自適應基準",
+    "title": "樣式變數",
+    "section": "自適應基準",
+    "text": "自適應基準\n公開基準不會在視窗規則中重新指派。Askr 會乘上內部倍率；--_qdk-* 屬性屬於實作細節。這能在各種寬度保留使用者設定的基準，以及預設版面幾何：\n\n\n\n視窗寬度（px）\n內文\n側欄／邊界\n欄間距\n根字級\nUI 倍率\n\n\n\n\n小於 630\n符合容器寬度\n264px\n26px\n16px\n1.02\n\n\n630–991.98\n符合容器寬度\n264px\n26px\n18px\n1.15\n\n\n992–1279.98\n630px\n200px\n16px\n17px\n1.08\n\n\n1280–1439.98\n630px\n240px\n22px\n17px\n1.08\n\n\n1440–1919.98\n630px\n264px\n26px\n18px\n1.15\n\n\n1920–2559.98\n693px\n290px\n29px\n20px\n1.27\n\n\n2560 以上\n756px\n320px\n31px\n22px\n1.4\n\n\n\n例如，680px 內文基準在 1920px 視窗寬度會變成 748px（×1.1），在 2560px 時則變成 816px（×1.2）。行動版內容會符合可用容器寬度。網站選項 askr.reading-width: wide 會將一般基準換成 780px，因此在 1920px 時為 858px，在 2560px 時為 936px。固定、浮動或不存在的側欄都會使用選定的閱讀欄寬度。Quarto 原生寬度擴展與閱讀模式仍保有原有行為。\n低於 992px 時，提示框水平內距與標題內距會使用 ×.8。分頁標籤預設維持 .9rem 字級與 .35rem 垂直內距，隨根字級縮放，不會被另一組分頁尺寸取代。",
+    "crumbs": [
+      "使用",
+      "樣式變數"
+    ]
+  },
+  {
+    "objectID": "usage/tokens.html#建置後的元件範例",
+    "href": "usage/tokens.html#建置後的元件範例",
+    "title": "樣式變數",
+    "section": "建置後的元件範例",
+    "text": "建置後的元件範例\n下列原生元件會使用與圖集相同的樣式變數規則。\n\n第一頁第二頁\n\n\n內文連結仍會保留醒目底色；分頁控制項使用分頁樣式變數。\n\n\n第二個分頁仍使用 Quarto 原生選取行為。\n\n\n\n\n\n\n\n\n\n註釋\n\n\n\n提示框顏色、內距與圓角都取自文件列出的樣式變數。\n\n\n\n引文邊框、間距與文字使用引文樣式變數。\n\ninline_code\nA code block uses the code size, frame and padding.\n\n\n\n樣式變數範圍\n負責者\n\n\n\n\n呈現方式\n使用者樣式覆寫\n\n\n原生互動\nQuarto\n\n\n\n若要更新版本，請重新安裝經審查的標籤版本，不要直接編輯 _extensions/arfiligol/askr。",
+    "crumbs": [
+      "使用",
+      "樣式變數"
+    ]
+  }
+]
