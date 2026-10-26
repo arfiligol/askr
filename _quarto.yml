@@ -75,8 +75,6 @@ website:
           href: gallery/rhythm.qmd
         - text: "Callout target"
           href: gallery/callout.qmd
-        - text: "CJK specimen"
-          href: gallery/cjk.qmd
     - id: components
       title: "Pages"
       style: docked

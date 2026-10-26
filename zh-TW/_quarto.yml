@@ -52,8 +52,6 @@ website:
               href: gallery/rhythm.qmd
             - text: 提示區塊
               href: gallery/callout.qmd
-            - text: 中日韓文字
-              href: gallery/cjk.qmd
             - text: 長清單
               href: gallery/long-list.qmd
     - id: components
