@@ -1,0 +1,68 @@
+---
+title: "Announcements"
+---
+
+Use an announcement for a short message that applies to the whole documentation
+site, such as a development-version warning or a temporary service notice.
+Configure Quarto's native `website.announcement`; Askr supplies the layout,
+colors and accessible controls.
+
+The bar at the top of this Gallery is a demonstration notice. It does not
+describe a pending Askr release.
+
+## Configure a notice
+
+```yaml
+website:
+  announcement:
+    content: "Development documentation — this version has not been released."
+    icon: info-circle
+    type: warning
+    dismissable: false
+    position: above-navbar
+```
+
+Choose `warning` for a development-version notice. Keep `dismissable: false`
+when the message must remain visible throughout reading. For a temporary
+notice readers may acknowledge, use `dismissable: true`; its close button works
+with the keyboard. Quarto remembers dismissal in that browser for the current
+announcement.
+
+The text can contain Markdown links and wraps on narrow screens. `icon` is an
+optional [Bootstrap icon name](https://icons.getbootstrap.com/); omit it for a
+text-only notice. `position: below-navbar` places the same bar beneath the
+navigation. Askr keeps the Pages control in the navigation row in either
+position, including when the announcement wraps onto several lines.
+
+## Languages and version context
+
+Put the translated message in each language site's `_quarto.yml`. For example,
+the Traditional Chinese site can use:
+
+```yaml
+website:
+  announcement:
+    content: "開發版文件：此版本尚未正式發佈。"
+    icon: info-circle
+    type: warning
+    dismissable: false
+    position: above-navbar
+```
+
+Use the same intent in each translation. The author or documentation build
+chooses the message for each published version; Askr does not infer package
+release status from the version selector. Remove `website.announcement` when
+there is no site-wide notice.
+
+## Appearance and behavior
+
+Askr uses a quiet tinted surface, a semantic accent and visible link and focus
+styles in both themes. The notice follows the site's light/dark selection.
+The icon, text and optional close control occupy separate
+spaces; long text can wrap without covering navigation controls. The native
+header continues to account for the bar when positioning the article, sidebars
+and page anchors.
+
+Use this configuration without adding consumer CSS or JavaScript. The available
+`type`, `icon`, `position` and `dismissable` settings remain Quarto's native
+options; see the [Quarto announcement guide](https://quarto.org/docs/websites/website-tools.html#announcement-bar).

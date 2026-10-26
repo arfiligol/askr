@@ -10,6 +10,12 @@ project:
 lang: zh-TW
 
 website:
+  announcement:
+    content: "展示公告：這是預覽文件，功能可能在正式發佈前調整。"
+    icon: info-circle
+    type: warning
+    dismissable: false
+    position: above-navbar
   title: Askr
   site-url: https://arfiligol.github.io/askr/zh-TW/
   search:
@@ -88,6 +94,8 @@ website:
           href: usage/add-askr.qmd
         - text: Areas、頁面清單與章節
           href: usage/navigation.qmd
+        - text: 公告列
+          href: usage/announcements.qmd
         - text: 版本管理
           href: usage/versions.qmd
         - text: 搜尋

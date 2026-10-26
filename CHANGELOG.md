@@ -5,6 +5,16 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+### Announcement support
+
+- Style Quarto's native site-wide announcement bar with wrapping content,
+  theme-aware colors and an accessible close control. Keep the mobile Pages
+  button aligned with the navbar when an announcement appears above it.
+- Add English and Traditional Chinese announcement guides and a bilingual
+  Gallery demonstration using the native `website.announcement` settings.
+- Give Header controls consistent 150ms ease-in-out color, background, border
+  and shadow transitions, disabled when reduced motion is requested.
+
 ## 0.12.0 — 2026-10-25
 
 ### Added

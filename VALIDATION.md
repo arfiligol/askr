@@ -1,5 +1,28 @@
 # Candidate validation receipt
 
+## Native announcement support — local candidate — 2026-10-26
+
+✅ 2026-10-26: Quarto 1.10.18 rendered a clean published v0.12.0 tree plus the
+announcement changes, and the Lead inspected Chromium at desktop, tablet and
+mobile sizes in light and dark themes. ⏳ Human: inspect the local preview.
+
+| Check | Result |
+| --- | --- |
+| Independent consumer | ✅ Four installed-namespace fixtures, each with two pages, rendered with `--no-execute`: long Chinese above-navbar notice with icon; long English below-navbar notice with dismissal; text-only dismissible notice; and no announcement. |
+| Bilingual Gallery | ✅ Non-executing render passed for 108 English and 29 Traditional Chinese inputs. The temporary staging initially omitted shared bibliography/image files; staging was corrected to match the existing build helper, then the render passed. No scientific computation ran. |
+| Original overlap and correction | ✅ The original mobile Pages button occupied y=11–43px while the announcement occupied y=0–41px. With the corrected 81px wrapped notice, Pages starts at y=92.6px, the header is 135.6px high, and body padding is 136px. |
+| Responsive layout | ✅ Desktop 1440×900 and the default approximately 1280px viewport, tablet 768×1024, and mobile 390×844 were inspected in light/dark themes. At 390px, document scroll width was 375px with no horizontal overflow. The below-navbar fixture kept Pages at y=11.4px; the no-announcement fixture retained the same position. |
+| Navigation and offsets | ✅ Pages/sidebar opened and closed; Areas opened below the full header at y=135.6px and Escape left no residual overlay. Native anchor offset tracked the 105.5px header at 105px, and the destination heading remained visible after scrolling. |
+| Dismissal and keyboard | ✅ Enter and Space dismissed the notice and returned focus to the navbar brand. Header height then measured 54.4px with 54px body padding; reload retained native dismissal. The text-only notice's close control had a visible 3px focus outline. |
+| Header transitions | ✅ Computed styles confirmed 0.15s ease-in-out color, background, border and shadow transitions on Pages, Areas, Search, version, theme, language, GitHub and Logout controls, plus the announcement surface. Language opened and closed with Escape at 390px; scroll width remained 375px. The reduced-motion media rule was checked in source; the operating-system setting was not changed. |
+| Refined-theme recheck | ✅ The root guide, Traditional Chinese guide and above-navbar Chinese fixture rendered successfully after the Header transition refinement. The notice changed from a dark tinted surface with foreground 212 to a light tinted surface with foreground 78 when the theme changed. Earlier full-render results remain applicable to unchanged content. |
+| Browser console | ✅ No warnings or errors in the fixtures or the Traditional Chinese guide. |
+| Preview and screenshots | ✅ [Traditional Chinese preview](http://127.0.0.1:4611/zh-TW/usage/announcements.html) and [English preview](http://127.0.0.1:4611/usage/announcements.html). Screenshots: `/tmp/askr-announcement-gallery-desktop-light.png` and `/tmp/askr-announcement-after-mobile-dark.png`. |
+
+The candidate is available for Human visual inspection. No release version is
+assigned, and the scope has not been published or applied to a consumer site.
+
+
 ## Native Card component — v0.12.0 release candidate — 2026-10-25
 
 Semantic state: CONVERGING. Delivery state: CANDIDATE; the Human-authorized

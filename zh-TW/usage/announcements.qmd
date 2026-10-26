@@ -1,0 +1,45 @@
+---
+title: "公告列"
+---
+
+公告列適合呈現整個文件站都需要知道的短訊息，例如開發版提醒或暫時的服務通知。使用 Quarto 原生的 `website.announcement` 設定，Askr 負責版面、配色與可及性控制項。
+
+本展示網站頂端的公告是元件示範，不代表 Askr 正在準備新版本發佈。
+
+## 設定公告
+
+```yaml
+website:
+  announcement:
+    content: "開發版文件：此版本尚未正式發佈。"
+    icon: info-circle
+    type: warning
+    dismissable: false
+    position: above-navbar
+```
+
+開發版提醒適合使用 `warning`。需要在閱讀期間持續顯示的訊息，設定 `dismissable: false`；讀者可以確認後關閉的暫時通知，則設定 `dismissable: true`。關閉按鈕支援鍵盤操作，Quarto 會在該瀏覽器記住目前公告的關閉狀態。
+
+文字可包含 Markdown 連結，並會隨窄畫面換行。`icon` 使用 [Bootstrap 圖示名稱](https://icons.getbootstrap.com/)，省略此欄位即可顯示純文字公告。設定 `position: below-navbar` 可將公告放在導覽列下方。無論公告放在上方或下方，甚至換成多行文字，Askr 都會讓 Pages 控制項留在導覽列中。
+
+## 語言與版本
+
+在各語言網站的 `_quarto.yml` 填入對應文字。例如英文網站可設定：
+
+```yaml
+website:
+  announcement:
+    content: "Development documentation — this version has not been released."
+    icon: info-circle
+    type: warning
+    dismissable: false
+    position: above-navbar
+```
+
+各語言的訊息應表達相同用途。每個公開版本的公告由作者或文件建置流程決定；Askr 不會依版本選擇器推斷套件是否已正式發佈。沒有全站通知時，移除 `website.announcement` 即可。
+
+## 外觀與操作
+
+Askr 在亮暗模式使用淡色底、語義重點色，以及清楚的連結與焦點樣式。公告會隨網站的亮暗模式切換配色。圖示、文字與選用的關閉按鈕各自保留空間，長文字換行時也不會蓋住導覽控制項。原生標頭會計入公告高度，調整正文、側欄與頁內錨點的位置。
+
+直接使用上述設定即可，不需在文件站另加 CSS 或 JavaScript。`type`、`icon`、`position` 與 `dismissable` 都沿用 Quarto 原生選項，詳見 [Quarto 公告列指南](https://quarto.org/docs/websites/website-tools.html#announcement-bar)。

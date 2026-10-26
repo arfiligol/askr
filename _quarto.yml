@@ -21,6 +21,12 @@ project:
 lang: en
 
 website:
+  announcement:
+    content: "Gallery demo: preview documentation — features may change before release."
+    icon: info-circle
+    type: warning
+    dismissable: false
+    position: above-navbar
   title: Askr
   site-url: https://arfiligol.github.io/askr/
   page-footer:
@@ -106,6 +112,8 @@ website:
           href: usage/add-askr.qmd
         - text: "Areas, the Page List, and Sections"
           href: usage/navigation.qmd
+        - text: "Announcements"
+          href: usage/announcements.qmd
         - text: "Versioning Docs"
           href: usage/versions.qmd
         - text: "Search"
