@@ -100,6 +100,10 @@ website:
           href: components/references.qmd
         - text: "Figures and groups"
           href: components/figures.qmd
+        - text: "Image viewer"
+          href: components/image-viewer.qmd
+        - text: "Chart viewer"
+          href: components/chart-viewer.qmd
         - text: "Saved notebook output"
           href: notebook-output.qmd
     - id: usage
@@ -123,6 +127,8 @@ website:
           href: usage/figures.qmd
         - text: "Image viewer"
           href: usage/image-viewer.qmd
+        - text: "Chart viewer"
+          href: usage/chart-viewer.qmd
         - text: "Protected docs and logout"
           href: usage/protected-docs.qmd
         - text: "Header and footer links"

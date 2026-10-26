@@ -1,0 +1,37 @@
+---
+title: "Chart viewer"
+subtitle: "An interactive mathematical illustration"
+---
+
+Inspect the sine curve using the chart's own controls: hover for values, drag a
+rectangle to zoom, choose Pan to move, and use Reset axes to return. Expand
+opens the interactive HTML in a floating window. Askr provides the frame and
+window controls; Plotly draws and operates this example.
+
+## Inline chart
+
+The curve is a public mathematical illustration of $y = \sin(x)$, not a solver
+result. Its data, Plotly JavaScript and author-selected colors are contained in
+one local HTML file. It makes no runtime CDN request.
+
+{{< askr-chart-view src="images/plotly-example.html" label="Inspect the sine curve" >}}
+
+The chart's light background and blue line are deliberate author choices.
+Changing the Askr theme changes the surrounding controls, while the chart keeps
+those colors. The floating chart is a separate view: it begins with its own
+axes, and its zoom does not replace the inline chart's state.
+
+## Button-only entry
+
+A page can offer a larger view without placing another chart in the article:
+
+{{< askr-chart-view src="images/plotly-example.html" mode="button" label="Open interactive chart" >}}
+
+Close the window or press Escape to return to reading. The chart's own toolbar
+supplies its zoom, pan and reset commands; this window has no second set of
+Askr image controls.
+
+See the [Chart viewer guide](../usage/chart-viewer.qmd) for authoring and trusted
+HTML requirements, or [Image viewer](image-viewer.qmd) for static pictures.
+The example's [HTML source](images/plotly-example.html) and
+[Plotly MIT license](images/plotly-example.LICENSE.txt) are included locally.

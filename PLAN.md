@@ -1,5 +1,25 @@
 # Askr release plan
 
+## Dedicated image and chart viewers — local candidate — 2026-10-26
+
+Give static images and interactive HTML charts separate Component pages in
+English and Traditional Chinese. Move the image-viewer examples out of Figures
+while keeping the existing `#image-viewer` section as a link to the new page.
+The image viewer retains Askr zoom, pan and Fit. The chart viewer embeds trusted
+local HTML with its own chart controls and offers an inline frame or a
+button-only floating entry through `askr-chart-view`.
+
+The chart frame follows the Askr theme; the embedded chart retains its authored
+colors. Inline and floating frames have independent state. The public demo is
+a self-contained Plotly 3.1.0 sine curve with a retained MIT license and pinned
+rebuild script. Plotly is bundled only in that Gallery HTML, not the extension.
+
+✅ 2026-10-26: non-executing English/Traditional Chinese renders, desktop/mobile
+interaction, chart controls, independent frame state, keyboard closing, failure
+recovery and static-image state continuity were checked. See [Validation](VALIDATION.md).
+✅ The light/dark visual review is complete.
+⏳ Human: inspect the local preview. No release is assigned or published.
+
 ## Native announcement support — v0.12.1 release candidate — 2026-10-26
 
 Use Quarto's existing `website.announcement` as Askr's supported site-wide

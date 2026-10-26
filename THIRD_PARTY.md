@@ -19,3 +19,21 @@ licenses. Original license texts are also packaged in `_extensions/askr/licenses
 Quartz is MIT licensed. Schibsted Grotesk, Source Sans 3 and IBM Plex Mono are
 SIL Open Font License assets. Lucide is ISC licensed and includes Feather-derived MIT
 notices. See the packaged notices for their complete terms.
+
+## Gallery-only interactive chart fixture
+
+`components/images/plotly-example.html` is an authored mathematical sine-curve
+demonstration with Plotly.js basic 3.1.0 embedded for offline use. The HTML and
+its runtime are Gallery assets, not files installed in the Askr extension.
+The upstream MIT license is retained without modification at
+`components/images/plotly-example.LICENSE.txt`.
+
+| Material | Source and identity | SHA-256 | Modification |
+| --- | --- | --- | --- |
+| Plotly.js basic minified 3.1.0 | Official NPM [`plotly.js-basic-dist-min@3.1.0`](https://registry.npmjs.org/plotly.js-basic-dist-min/3.1.0), `package/plotly-basic.min.js`; upstream [`plotly/plotly.js`](https://github.com/plotly/plotly.js/tree/v3.1.0) | `80d756297ee4b5e701cee4e5c88aa52ec822c3ed84fd23bda6e20b03d10492a6` | Embedded in the standalone demo HTML; no separate plotting library or CDN is added to the extension. |
+| Plotly MIT license | Same NPM release, `package/LICENSE` | `8c45d9eaf50c2f72dd9c7ab9ef440788ba58a3538484b5c51c1f17d5128752e7` | Unmodified. |
+
+Rebuild the fixture with `python3 _scripts/build_chart_demo.py`. The generator
+fetches that exact official NPM archive, verifies its pinned SHA-512 integrity
+and the script SHA-256 above, then writes the HTML and license. It computes
+only the illustrative $y = \sin(x)$ data; it does not run a simulation.

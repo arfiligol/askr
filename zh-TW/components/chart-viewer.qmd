@@ -1,0 +1,24 @@
+---
+title: "互動圖表檢視器"
+subtitle: "可互動的數學示意圖"
+---
+
+使用圖表本身的控制項探索正弦曲線：將游標移至曲線查看數值，拖曳矩形區域放大，選擇 Pan 平移，或使用 Reset axes 回復座標範圍。「展開」會在浮動視窗開啟互動 HTML。Askr 提供外框與視窗控制項，Plotly 則負責繪圖與圖表操作。
+
+## 正文中的圖表
+
+這是 $y = \sin(x)$ 的公開數學示意圖。資料、Plotly JavaScript 與作者指定的配色都包含在同一個本地 HTML 檔案中，載入後不需要向 CDN 請求資源。
+
+{{< askr-chart-view src="images/plotly-example.html" label="探索正弦曲線" >}}
+
+圖表的淺色底與藍線是作者的配色。切換 Askr 主題時，周圍控制項會跟著切換，圖表則保留這些顏色。浮動圖表是獨立的檢視，會以自己的座標範圍開始操作；其中的縮放不會取代正文圖表的狀態。
+
+## 只有按鈕的入口
+
+若只想提供較大的檢視入口，可在正文放置按鈕：
+
+{{< askr-chart-view src="images/plotly-example.html" mode="button" label="開啟互動圖表" >}}
+
+關閉視窗或按 Escape 即可返回閱讀。縮放、平移與重設都由圖表原有工具列提供，浮動視窗不會再加入一組 Askr 圖片控制項。
+
+撰寫方式與可信任 HTML 的要求請見[圖表檢視器指南](../usage/chart-viewer.qmd)；靜態圖片請見[圖片檢視器](image-viewer.qmd)。本地也附上範例的 [HTML 來源](images/plotly-example.html)與 [Plotly MIT 授權](images/plotly-example.LICENSE.txt)。

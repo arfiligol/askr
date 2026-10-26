@@ -81,6 +81,10 @@ website:
               href: components/references.qmd
             - text: 圖片與分組
               href: components/figures.qmd
+            - text: 靜態圖片檢視器
+              href: components/image-viewer.qmd
+            - text: 互動圖表檢視器
+              href: components/chart-viewer.qmd
         - text: 儲存的 Notebook 輸出
           href: notebook-output.qmd
     - id: usage
@@ -104,6 +108,8 @@ website:
           href: usage/figures.qmd
         - text: 圖片檢視器
           href: usage/image-viewer.qmd
+        - text: 圖表檢視器
+          href: usage/chart-viewer.qmd
         - text: 受保護文件與登出
           href: usage/protected-docs.qmd
         - text: 頁首與頁尾連結

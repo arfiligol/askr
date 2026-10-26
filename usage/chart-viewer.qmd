@@ -1,0 +1,70 @@
+---
+title: "Chart viewer"
+---
+
+Use `askr-chart-view` for an interactive chart exported as a trusted local HTML
+file. It displays the chart in the article or opens it from a button, with an
+optional floating view. The chart keeps its own hover, zoom, pan and reset
+controls. See the [working mathematical example](../components/chart-viewer.qmd).
+
+## Embed a chart
+
+Export the chart as a self-contained HTML file with its required JavaScript
+included, then reference it relative to the `.qmd` document:
+
+```markdown
+{{{< askr-chart-view src="images/chart.html" label="Inspect the chart" >}}}
+```
+
+`mode="inline"` is the default. The frame fits the article width and includes
+an Expand control. For an entry that only opens a floating window:
+
+```markdown
+{{{< askr-chart-view src="images/chart.html" mode="button" label="Open chart" >}}}
+```
+
+`src` identifies the local `.html` file; remote URLs are not accepted. `label`
+names the chart or button so readers can distinguish multiple entries, and
+defaults to `View chart`. Use `inline` or `button` for `mode`.
+
+If the Askr viewer script is unavailable, the inline frame and source link
+remain available; a button-only entry remains a link to the HTML. Chart
+interaction still requires the export's own JavaScript. Non-HTML outputs link
+to that source file.
+
+Serve the rendered site over HTTP(S), using Quarto preview or a local static
+server, to enable the floating viewer. Opening the page through `file://` keeps
+the native inline frame and source-link behavior. Only the HTML file is copied
+automatically; for exports with companion scripts or data, declare those files
+in native `project.resources`, or use a self-contained export.
+
+## Choose the content
+
+| Delivered content | Component |
+| --- | --- |
+| Static SVG, PNG or JPEG | [Image viewer](image-viewer.qmd) supplies image zoom, pan and Fit. |
+| Interactive HTML chart | Chart viewer keeps the chart's own interaction. |
+| Native Mermaid diagram | The [Mermaid viewer](image-viewer.qmd#mermaid-viewer) opens its rendered diagram with image controls. |
+
+Askr supplies an iframe and floating-window shell. It does not install Plotly
+or another plotting engine into the theme. Authors produce the HTML using
+their chosen chart tool and include its runtime resources. The Gallery's sine
+curve bundles Plotly only inside its demonstration file; it is not an Askr
+extension dependency.
+
+## Trust, theme and state
+
+Use HTML you authored or reviewed. The chart runs scripts as a same-origin
+part of your site, so treat it as active website content. Inspect the file and
+its resource requests before publishing; an external script or data request in
+that HTML remains the author's responsibility.
+
+The frame and window controls follow the Askr light/dark theme. The chart
+retains the colors and labels selected by its author. Prepare any alternative
+chart theme in the chart itself rather than expecting Askr to recolor it.
+
+The inline and floating frames have independent state. Opening the floating
+view loads its own chart; closing it leaves the inline view's current state in
+place. No shared zoom, selection or data state is promised. Use the chart's own
+controls to inspect data, then close the floating window or press Escape to
+return to the article.

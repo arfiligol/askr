@@ -1,5 +1,22 @@
 # Candidate validation receipt
 
+## Dedicated image and chart viewers — local candidate — 2026-10-26
+
+| Check | Result |
+| --- | --- |
+| Fixture identity and license | ✅ Official NPM `plotly.js-basic-dist-min@3.1.0` reports MIT. The generator verifies the pinned archive SHA-512 and script SHA-256; the upstream license is retained. |
+| Bilingual render | ✅ Non-executing renders passed for 110 English and 31 Traditional Chinese inputs. |
+| Chart controls | ✅ The Lead observed real Plotly hover values, changed axes with Zoom in, dragged using Pan, and used Reset axes. Inline and floating chart states remained independent. |
+| Floating window and keyboard | ✅ Opening focused Close; closing the window or pressing Escape inside the iframe returned focus to Expand and removed the modal iframe. At 390×844, the dialog width and document client width both measured 375px without right-side clipping. |
+| Failure and recovery | ✅ An actual missing HTML response displayed a readable failure message and Retry. After the temporary HTML was restored, both inline and modal Retry loaded it successfully. |
+| Static image regression | ✅ The new static Component page retained 125% zoom when expanded. Fit restored 100%; closing returned focus to Expand. |
+| Installation and formats | ✅ The source worker checked a fresh temporary installed-extension layout, relative HTML resources, invalid settings and non-HTML output. The Plotly runtime remains Gallery content, outside the extension. |
+| Theme review | ✅ Desktop dark and mobile light screenshots showed readable frame/control contrast while the chart retained its authored light background. The mobile view fit inside the 375px client width without clipping. Screenshots: `/tmp/askr-chart-desktop-dark.png` and `/tmp/askr-chart-mobile-light.png`. |
+
+⚠️ Fullscreen success and touch gestures remain unverified: the in-app browser
+rejected fullscreen, where the failure message appeared and the chart remained
+usable; touch gestures were not exercised.
+
 ## Native announcement support — v0.12.1 release candidate — 2026-10-26
 
 ✅ 2026-10-26: Quarto 1.10.18 rendered a clean published v0.12.0 tree plus the

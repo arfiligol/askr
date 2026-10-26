@@ -8,6 +8,10 @@ or open a floating viewer from an image or button. SVG, PNG and JPEG share the
 same pan-and-zoom controls. No image service, third-party viewer or CDN is
 required.
 
+See the [dedicated Image viewer demonstration](../components/image-viewer.qmd)
+for static images. For interactive HTML with its own chart controls, use the
+[Chart viewer](chart-viewer.qmd).
+
 ## Images and opt-outs
 
 Independent figures and standalone images open the floating viewer by default:
