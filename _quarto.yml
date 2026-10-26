@@ -18,6 +18,7 @@ project:
     - v0.10.0
     - v0.11.0
     - v0.12.0
+    - v0.12.1
 
 lang: en
 
@@ -75,12 +76,10 @@ website:
           href: gallery/rhythm.qmd
         - text: "Callout target"
           href: gallery/callout.qmd
-        - text: "CJK specimen"
-          href: gallery/cjk.qmd
     - id: components
       title: "Pages"
       style: docked
-      collapse-level: 2
+      collapse-level: 1
       contents:
         - text: "Overview"
           href: components.qmd
@@ -102,6 +101,12 @@ website:
           href: components/references.qmd
         - text: "Figures and groups"
           href: components/figures.qmd
+        - section: "Viewers"
+          contents:
+            - text: "Image viewer"
+              href: components/image-viewer.qmd
+            - text: "Chart viewer"
+              href: components/chart-viewer.qmd
         - text: "Saved notebook output"
           href: notebook-output.qmd
     - id: usage
@@ -125,6 +130,8 @@ website:
           href: usage/figures.qmd
         - text: "Image viewer"
           href: usage/image-viewer.qmd
+        - text: "Chart viewer"
+          href: usage/chart-viewer.qmd
         - text: "Protected docs and logout"
           href: usage/protected-docs.qmd
         - text: "Header and footer links"

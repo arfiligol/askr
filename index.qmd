@@ -50,7 +50,9 @@ asking every author to become a frontend specialist. The useful unit is not a
 hero banner but a paragraph, a source cell, a careful note, and the space
 between them.
 
-CJK fallback for body text is on the [CJK specimen](gallery/cjk.qmd) page.
+The English and Traditional Chinese editions demonstrate typography throughout
+the documentation. See [Language selector](usage/languages.qmd) to configure
+the same bilingual structure for your site.
 
 See [Components](components.qmd) for authoring source and edge cases, then
 [Usage](usage/add-askr.qmd) for how a project sets up Askr.

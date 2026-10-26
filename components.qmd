@@ -23,6 +23,11 @@ divs. Each page below focuses on one family or pattern.
 - [References](components/references.qmd). In-text citations and the reference
   list.
 
+- [Image viewer](components/image-viewer.qmd). Static SVG, PNG and JPEG with
+  image zoom, pan and Fit, inline or in a floating window.
+- [Chart viewer](components/chart-viewer.qmd). An interactive HTML chart with its
+  own hover, zoom, pan and reset controls, inline or in a floating window.
+
 ## Still Quarto's own presentation
 
 - [Figures and groups](components/figures.qmd). Columns, tabsets, diagrams,

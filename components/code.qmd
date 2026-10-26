@@ -5,8 +5,11 @@ subtitle: "Inline code and fenced blocks"
 
 Inline code uses IBM Plex Mono on the highlight token. Fenced blocks keep a
 transparent fill, a 1px border, and a 5px radius, with padding that leaves
-the copy control clear of the first line. Copy stays Quarto's control.
-Long lines scroll inside the block instead of widening the page.
+the copy control clear of the first line. Quarto supplies the source and the
+`code-copy` availability setting; Askr uses its shared text `Copy` button
+instead of Quarto's icon-and-tooltip control. After a successful copy, the
+button shows `Copied!` with a green outline for about two seconds, then returns
+to `Copy`. Long lines scroll inside the block instead of widening the page.
 
 An inline sample is `askr-html`.
 

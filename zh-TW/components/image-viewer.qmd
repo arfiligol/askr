@@ -1,0 +1,54 @@
+---
+title: "靜態圖片檢視器"
+subtitle: "SVG、PNG 與 JPEG 圖片"
+---
+
+在正文或浮動視窗檢視靜態 SVG、PNG 與 JPEG。Askr 提供圖片縮放、平移與 Fit 控制項。
+
+點選獨立圖形或其按鈕，即可開啟 Askr 浮動檢視器。使用 + / −、Fit、拖曳平移或雙指縮放。按 Escape 可返回文章。
+
+![Embla 公開圖形，包含語意標記。](images/bars-semantic-markers.png){#fig-viewer}
+
+{{< askr-image-view target="fig-viewer" label="檢視此圖" >}}
+
+此按鈕會開啟與上方圖形相同的圖片與說明文字。只有按鈕的項目會自行註冊隱藏的圖片來源：
+
+{{< askr-image-view src="images/bars-semantic-markers.png" label="檢視圖片" >}}
+
+## 行內互動
+
+這張 PNG 可直接在文章內檢視。縮放後再展開：相同的檢視狀態會隨圖片移至浮動檢視器，返回時也會保留。
+
+![Embla 的長條與標記圖，直接顯示於本文，沒有重複圖形。](images/bars-semantic-markers.png){#fig-inline}
+
+{{< askr-image-view target="fig-inline" mode="inline" label="檢視圖片" >}}
+
+## SVG 互動
+
+此既有 Askr 圖示是向量圖稿，不是科學版圖。放大時幾何邊緣仍清晰，且其檢視狀態與 PNG 分開。
+
+{{< askr-image-view src="../../_extensions/askr/assets/icons/flame.svg" mode="inline" label="Askr 火焰圖示" >}}
+
+## 圖集
+
+![Embla 公開圖形：PNG 來源。](images/bars-semantic-markers.png){group="viewer-formats"}
+
+![同一公開圖形的 JPEG 編碼；縮放不會增加解析度。](images/bars-semantic-markers.jpg){group="viewer-formats"}
+
+## 排除的圖片
+
+這張圖片不會開啟浮動檢視器：
+
+![已排除 Lightbox。](images/bars-semantic-markers.png){.nolightbox width=45%}
+
+## 帶連結的圖片
+
+下方圖片仍是一般導覽連結，會前往圖形使用指南。
+
+[![](images/bars-semantic-markers.png){fig-alt="Figure Usage" width=45%}](../usage/figures.qmd)
+
+請見[圖片檢視器](../usage/image-viewer.qmd)，了解排除方式、按鈕語法與分組圖集。
+
+## 選擇檢視器
+
+交付內容是靜態圖片時，使用圖片檢視器。匯出為 HTML 的互動圖表則可透過[圖表檢視器](chart-viewer.qmd)保留原有的資料提示、縮放與平移控制。撰寫方式請見[圖片檢視器指南](../usage/image-viewer.qmd)。

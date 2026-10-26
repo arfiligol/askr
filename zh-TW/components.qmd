@@ -15,6 +15,9 @@ title: "元件"
 - [數學公式](components/mathematics.qmd)。展示公式會在內容寬度內捲動。
 - [參考文獻](components/references.qmd)。文中引用與參考文獻清單。
 
+- [靜態圖片檢視器](components/image-viewer.qmd)。靜態 SVG、PNG 與 JPEG，可在正文或浮動視窗中縮放、平移與 Fit。
+- [互動圖表檢視器](components/chart-viewer.qmd)。互動 HTML 圖表，可在正文或浮動視窗中保留原有的資料提示、縮放、平移與重設控制項。
+
 ## 保留 Quarto 原有呈現方式
 
 - [圖形與群組](components/figures.qmd)。欄、分頁、圖表，以及一張來自 Embla 的圖片。群組仍使用 Quarto 原有呈現方式；圖片使用 Quarto 摺疊的 Source。
