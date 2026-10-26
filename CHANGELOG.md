@@ -5,6 +5,14 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+## 0.13.1 — 2026-10-27
+
+### Fixed
+
+- Remove the extra top space added by shared Copy controls in native code
+  blocks, including displayed Mermaid source, while retaining the text button
+  and copy feedback.
+
 ## 0.13.0 — 2026-10-27
 
 ### Added

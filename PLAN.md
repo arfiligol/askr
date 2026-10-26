@@ -1,5 +1,19 @@
 # Askr release plan
 
+## Askr v0.13.1 — Copy source spacing hotfix — 2026-10-27
+
+Remove the shared Copy control's extra top padding from native code blocks,
+including displayed Mermaid source. Keep the text Copy button, success/reset
+behavior and existing source content. Preserve the actual published v0.13.0 site as a
+historical snapshot before replacing the root site.
+
+✅ The actual published v0.13.0 site is preserved as a 241-file snapshot; the
+manifest, build resources and bilingual version guides retain it under `/v0.13.0/`.
+The Human authorized this hotfix release. ✅ Lead review, exact-candidate
+release render, archive identity, source spacing and Copy placement checks are
+complete. ⏳ Lead: complete promotion, main CI, tag installation and public-site
+review.
+
 ## Askr v0.13.0 — viewers and shared Copy release candidate — 2026-10-27
 
 Give static images and interactive HTML charts separate Component pages in
