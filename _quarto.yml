@@ -13,6 +13,7 @@ project:
   post-render: python3 _scripts/build_zh_tw.py
   resources:
     - askr-versions.json
+    - LICENSE
     - v0.3.0
     - v0.9.0
     - v0.10.0
@@ -42,6 +43,10 @@ website:
         href: usage/add-askr.qmd
       - text: '<i class="bi bi-wrench" aria-hidden="true"></i> Maintenance guide'
         href: https://github.com/arfiligol/askr/blob/main/README.md
+      - text: '<i class="bi bi-file-earmark-text" aria-hidden="true"></i> License'
+        href: license.qmd
+      - text: '<i class="bi bi-journal-text" aria-hidden="true"></i> Third-party notices'
+        href: THIRD_PARTY.md
   search:
     location: navbar
     type: overlay

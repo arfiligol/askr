@@ -29,6 +29,10 @@ website:
         href: maintenance.qmd
       - text: '<i class="bi bi-people" aria-hidden="true"></i> Contributing'
         href: contributing.qmd
+      - text: '<i class="bi bi-file-earmark-text" aria-hidden="true"></i> License'
+        href: license.qmd
+      - text: '<i class="bi bi-journal-text" aria-hidden="true"></i> Third-party notices'
+        href: THIRD_PARTY.md
     right: "Your project's existing footer content"
 ```
 
@@ -48,6 +52,70 @@ available in the Header. `false` keeps tools in the Header; use a small set so
 they fit your narrowest viewport. Long Footer labels wrap rather than scroll.
 Links use Quarto's native `href`, `target` and `rel` behavior; Askr does not force
 new browser tabs. Existing links and build information remain authored content.
+
+## Project license and third-party notices
+
+Use ordinary `page-footer` items for your project's license and third-party
+notices, alongside its existing project and contribution links. Choose labels
+and destinations that match the documents you publish. Askr does not infer
+those documents or select a license for a consumer project. The Gallery links
+to Askr's own MIT license and asset notices; those are not the license terms
+for a site that installs Askr.
+
+Make `license.qmd` a reading page that includes the canonical license file,
+rather than copying the legal text into a second source:
+
+```markdown
+---
+title: "License"
+---
+
+The following is this project's canonical license.
+
+{{{< include LICENSE >}}}
+```
+
+Footer `href` values in `_quarto.yml` are relative to that Quarto project.
+`license.qmd` and `THIRD_PARTY.md` link to their rendered `license.html` and
+`THIRD_PARTY.html`; include both sources in the project's render inputs.
+Quarto adjusts links for deep pages, so `usage/header-footer.html` links back
+to `../license.html` and `../THIRD_PARTY.html`. Project-relative paths also
+retain deployment prefixes such as `/docs/` and version directories such as
+`/v1.2/`, without baking those directories into each link.
+
+An optional raw `LICENSE` link can offer the original file for download. The
+host's content type and response headers determine whether it opens or
+downloads, so use the rendered page as the reading entry. If you offer that
+raw-file link, include the file in project resources:
+
+```yaml
+project:
+  resources:
+    - LICENSE
+```
+
+For separate language projects, each language can have its own reading page
+while including the same canonical file. For example, `zh-TW/license.qmd`
+uses `{{{< include ../LICENSE >}}}` and explains that the legal text remains in
+its original language. Its footer can link to that page and a shared notices
+page at the parent site root:
+
+```yaml
+website:
+  page-footer:
+    center:
+      - text: 授權條款
+        href: license.qmd
+      - text: 第三方聲明（英文）
+        href: ../THIRD_PARTY.html
+```
+
+The parent project renders `THIRD_PARTY.md`. Quarto adjusts the relative paths
+again for deeper translated pages. If each language has its own authored
+notices, point each project to its own sources instead. Full HTTPS destinations
+are also valid when the authoritative document is hosted elsewhere. Existing
+GitHub, contribution and maintenance links and the appended Powered by Askr
+credit keep their own roles.
 
 ## Powered by Askr
 

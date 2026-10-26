@@ -22,9 +22,17 @@ website:
     location: navbar
     type: overlay
   page-footer:
+    left:
+      - icon: github
+        aria-label: GitHub 原始碼
+        href: https://github.com/arfiligol/askr
     center:
       - text: Maintenance guide (English)
         href: https://github.com/arfiligol/askr/blob/main/README.md
+      - text: '<i class="bi bi-file-earmark-text" aria-hidden="true"></i> 授權條款'
+        href: license.qmd
+      - text: '<i class="bi bi-journal-text" aria-hidden="true"></i> 第三方聲明（英文）'
+        href: ../THIRD_PARTY.html
   navbar:
     tools-collapse: true
     left:
