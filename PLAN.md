@@ -8,6 +8,11 @@ while keeping the existing `#image-viewer` section as a link to the new page.
 The image viewer retains Askr zoom, pan and Fit. The chart viewer embeds trusted
 local HTML with its own chart controls and offers an inline frame or a
 button-only floating entry through `askr-chart-view`.
+The floating toolbar contains Open source and Close; chart operations stay
+inside the exported chart.
+The Components sidebar groups both viewer pages under a native top-level
+Viewers section (檢視器 in Traditional Chinese). The section collapses by
+default and opens for the current page; page URLs remain unchanged.
 
 The chart frame follows the Askr theme; the embedded chart retains its authored
 colors. Inline and floating frames have independent state. The public demo is
@@ -18,6 +23,9 @@ rebuild script. Plotly is bundled only in that Gallery HTML, not the extension.
 interaction, chart controls, independent frame state, keyboard closing, failure
 recovery and static-image state continuity were checked. See [Validation](VALIDATION.md).
 ✅ The light/dark visual review is complete.
+✅ The simplified floating toolbar and keyboard return behavior were rechecked.
+⏳ Lead: inspect the native Viewers sidebar grouping, collapse and current-page
+identification in both languages.
 ⏳ Human: inspect the local preview. No release is assigned or published.
 
 ## Native announcement support — v0.12.1 release candidate — 2026-10-26

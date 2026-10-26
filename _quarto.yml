@@ -78,7 +78,7 @@ website:
     - id: components
       title: "Pages"
       style: docked
-      collapse-level: 2
+      collapse-level: 1
       contents:
         - text: "Overview"
           href: components.qmd
@@ -100,10 +100,12 @@ website:
           href: components/references.qmd
         - text: "Figures and groups"
           href: components/figures.qmd
-        - text: "Image viewer"
-          href: components/image-viewer.qmd
-        - text: "Chart viewer"
-          href: components/chart-viewer.qmd
+        - section: "Viewers"
+          contents:
+            - text: "Image viewer"
+              href: components/image-viewer.qmd
+            - text: "Chart viewer"
+              href: components/chart-viewer.qmd
         - text: "Saved notebook output"
           href: notebook-output.qmd
     - id: usage

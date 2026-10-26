@@ -3,15 +3,15 @@
   'use strict';
   const chinese = /^zh(?:-|$)/i.test(document.documentElement.lang);
   const words = chinese ? {
-    expand: '展開圖表', close: '關閉', fullscreen: '全螢幕', exitFullscreen: '退出全螢幕',
+    expand: '展開圖表', close: '關閉',
     loading: '正在載入圖表文件…', failed: '無法載入圖表文件。請重試，或開啟原始圖表查看。',
-    retry: '重試', source: '開啟原始圖表', fullscreenFailed: '無法切換全螢幕。你仍可在目前視窗操作圖表。', unavailable: '這個瀏覽器無法開啟浮動檢視，請使用原始圖表連結。'
+    retry: '重試', source: '開啟原始圖表', unavailable: '這個瀏覽器無法開啟浮動檢視，請使用原始圖表連結。'
   } : {
-    expand: 'Expand chart', close: 'Close', fullscreen: 'Fullscreen', exitFullscreen: 'Exit fullscreen',
+    expand: 'Expand chart', close: 'Close',
     loading: 'Loading chart document…', failed: 'Could not load the chart document. Retry or open the source chart.',
-    retry: 'Retry', source: 'Open source chart', fullscreenFailed: 'Fullscreen could not be changed. You can still use the chart in this window.', unavailable: 'This browser cannot open a floating viewer. Use the source chart link.'
+    retry: 'Retry', source: 'Open source chart', unavailable: 'This browser cannot open a floating viewer. Use the source chart link.'
   };
-  let dialog, title, stage, status, source, fullscreen, closeControl, current;
+  let dialog, title, stage, status, source, closeControl, current;
 
   function button(text, action, className) {
     const control = document.createElement('button');
@@ -34,8 +34,7 @@
   }
   function escapeViewer(event) {
     event.preventDefault();
-    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
-    else closeViewer();
+    closeViewer();
   }
   function watchFrame(frame, region, url, retry, alive) {
     let disposed = false, verified = null, documentLoaded = false, hookedDocument;
@@ -97,20 +96,6 @@
     title = document.createElement('h2'); title.id = 'askr-chart-dialog-title'; title.className = 'askr-chart-dialog-title';
     source = document.createElement('a'); source.className = 'askr-chart-source'; source.textContent = words.source;
     toolbar.append(title, source);
-    if (document.fullscreenEnabled && dialog.requestFullscreen) {
-      fullscreen = button(words.fullscreen, () => {
-        const request = document.fullscreenElement ? document.exitFullscreen() : dialog.requestFullscreen();
-        request.catch(() => {
-          if (!dialog.open) return;
-          showStatus(status, words.fullscreenFailed);
-          if (fullscreen) fullscreen.focus();
-        });
-      });
-      toolbar.append(fullscreen);
-      document.addEventListener('fullscreenchange', () => {
-        fullscreen.textContent = document.fullscreenElement ? words.exitFullscreen : words.fullscreen;
-      });
-    }
     closeControl = button(words.close, closeViewer);
     toolbar.append(closeControl);
     status = statusRegion(); stage = document.createElement('div'); stage.className = 'askr-chart-frame-wrap';
@@ -141,9 +126,8 @@
   }
   function closeViewer() {
     if (!dialog || !dialog.open) return;
-    if (document.fullscreenElement) {
-      document.exitFullscreen().catch(() => {}).finally(() => { dialog.close(); cleanup(); });
-    } else { dialog.close(); cleanup(); }
+    dialog.close();
+    cleanup();
   }
   function loadModal(entry) {
     if (entry.dispose) entry.dispose();

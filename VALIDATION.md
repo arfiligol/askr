@@ -7,15 +7,15 @@
 | Fixture identity and license | ✅ Official NPM `plotly.js-basic-dist-min@3.1.0` reports MIT. The generator verifies the pinned archive SHA-512 and script SHA-256; the upstream license is retained. |
 | Bilingual render | ✅ Non-executing renders passed for 110 English and 31 Traditional Chinese inputs. |
 | Chart controls | ✅ The Lead observed real Plotly hover values, changed axes with Zoom in, dragged using Pan, and used Reset axes. Inline and floating chart states remained independent. |
+| Simplified chart toolbar | ✅ The Lead opened the modal and observed only Open source and Close in its toolbar. Escape inside the iframe and the Close control both returned focus to Expand. |
+| Viewers sidebar hierarchy | ✅ On the English Components homepage, Viewers was collapsed by default and opened to its two children; Chart viewer retained its original URL and active marker. On the Traditional Chinese Chart page, 檢視器 was expanded and 元件 collapsed; 檢視器 could be closed and reopened while retaining the active page marker. Full non-executing renders passed again for 110 English and 31 Traditional Chinese inputs, with existing calculations unexecuted. Screenshot: `/tmp/askr-viewers-hierarchy.png`. |
 | Floating window and keyboard | ✅ Opening focused Close; closing the window or pressing Escape inside the iframe returned focus to Expand and removed the modal iframe. At 390×844, the dialog width and document client width both measured 375px without right-side clipping. |
 | Failure and recovery | ✅ An actual missing HTML response displayed a readable failure message and Retry. After the temporary HTML was restored, both inline and modal Retry loaded it successfully. |
 | Static image regression | ✅ The new static Component page retained 125% zoom when expanded. Fit restored 100%; closing returned focus to Expand. |
 | Installation and formats | ✅ The source worker checked a fresh temporary installed-extension layout, relative HTML resources, invalid settings and non-HTML output. The Plotly runtime remains Gallery content, outside the extension. |
 | Theme review | ✅ Desktop dark and mobile light screenshots showed readable frame/control contrast while the chart retained its authored light background. The mobile view fit inside the 375px client width without clipping. Screenshots: `/tmp/askr-chart-desktop-dark.png` and `/tmp/askr-chart-mobile-light.png`. |
 
-⚠️ Fullscreen success and touch gestures remain unverified: the in-app browser
-rejected fullscreen, where the failure message appeared and the chart remained
-usable; touch gestures were not exercised.
+⚠️ Touch gestures were not exercised.
 
 ## Native announcement support — v0.12.1 release candidate — 2026-10-26
 

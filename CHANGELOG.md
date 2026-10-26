@@ -10,9 +10,12 @@ derive from these entries; an Unreleased entry is not a published release.
 - Add `askr-chart-view` for trusted local interactive HTML, inline or through a
   button opening a floating window. Charts keep their own controls and colors;
   the Askr frame follows the site theme. Inline and floating states are independent.
+  The floating toolbar provides Open source and Close.
 - Give static images and interactive charts separate bilingual Component pages,
   retaining a link at the existing Figures image-viewer section. The chart demo
   is an offline Plotly sine curve with an explicit MIT license.
+- Group the two viewer pages under a native top-level Viewers sidebar section,
+  with unchanged page URLs and automatic expansion for the current page.
 
 ## 0.12.1 — 2026-10-26
 

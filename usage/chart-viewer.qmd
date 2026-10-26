@@ -63,6 +63,8 @@ The frame and window controls follow the Askr light/dark theme. The chart
 retains the colors and labels selected by its author. Prepare any alternative
 chart theme in the chart itself rather than expecting Askr to recolor it.
 
+The floating toolbar contains Open source and Close.
+
 The inline and floating frames have independent state. Opening the floating
 view loads its own chart; closing it leaves the inline view's current state in
 place. No shared zoom, selection or data state is promised. Use the chart's own

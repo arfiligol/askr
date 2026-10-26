@@ -56,7 +56,6 @@
 .askr-chart-dialog-title { font: inherit; font-weight: 600; margin: 0 auto 0 0; min-inline-size: 0; overflow-wrap: anywhere; }
 .askr-chart-dialog .askr-chart-frame-wrap { flex: 1; min-block-size: 0; }
 .askr-chart-dialog .askr-chart-frame { block-size: 100%; }
-.askr-chart-dialog:fullscreen { inline-size: 100vw; max-inline-size: none; block-size: 100dvh; max-block-size: none; border: 0; border-radius: 0; }
 @media (max-width: 575.98px) {
   .askr-chart-frame { block-size: 320px; }
   .askr-chart-dialog { inline-size: 100%; max-inline-size: 100%; block-size: 100dvh; max-block-size: 100dvh; border-radius: 0; }
