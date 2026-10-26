@@ -1,5 +1,16 @@
 # Candidate and release validation receipts
 
+## Askr v0.13.1 — Copy source spacing hotfix — 2026-10-27
+
+| Check | Result |
+| --- | --- |
+| Authorization | ✅ The Human authorized a v0.13.1 spacing hotfix with a preserved v0.13.0 documentation snapshot. |
+| Exact release render | ✅ Tree `cda42f4298b5e36673f7ee735bef63a53062b49b` passed the default clean render: 110 English and 31 Traditional Chinese inputs; log `/tmp/askr-v0131-render.log`. |
+| Source spacing and Copy | ✅ On the VPN-served Gallery at 896×984, all five native code blocks had equal 18px top/bottom padding and their right edges remained at 481px, before the Copy button at 509px. The old 3rem rule measured 51px at 1280px without a leading source newline. Temporary consumer padding was 17px on desktop and 16px at mobile 390px; page client/scroll widths both measured 390px. Long code scrolled inside its 248px viewport over 2537px content. Code showed `Copy` → `Copied!` → `Copy`. Screenshots: `/tmp/askr-v0131-gallery-after.png` and `/tmp/askr-v0131-spacing-mobile.png`. |
+| Product diff review | ✅ The Lead reviewed only the stylesheet correction and extension version metadata; JavaScript and copy-source payloads were unchanged. |
+| v0.13.0 archive | ✅ The Lead preserved 241 files (26,363,129 bytes) from actual published Pages source `af627893692ffb4093eafe5664ecd8f367dee81d`, excluding nested archives and `.nojekyll`. All source hashes matched; output differed only in the generated version-selector manifest. |
+| Release delivery | ⏳ Lead: main CI, fresh tag installation and public-site verification. |
+
 ## Askr v0.13.0 — viewers and shared Copy release candidate — 2026-10-27
 
 | Check | Result |

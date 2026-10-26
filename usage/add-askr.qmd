@@ -2,11 +2,11 @@
 title: "Add Askr"
 ---
 
-`0.13.0` is the current release. The public format is `askr-html`. Quiet Quartz
+`0.13.1` is the current release. The public format is `askr-html`. Quiet Quartz
 is the visual theme.
 
 ```bash
-quarto add arfiligol/askr@v0.13.0 --no-prompt
+quarto add arfiligol/askr@v0.13.1 --no-prompt
 ```
 
 ```yaml
@@ -35,7 +35,7 @@ files inside `_extensions/arfiligol/askr`.
 
 ## Quarto compatibility
 
-Askr 0.13.0 retains support for stable Quarto releases in `>=1.9.38 <1.11`.
+Askr 0.13.1 retains support for stable Quarto releases in `>=1.9.38 <1.11`.
 Quarto 1.10.18 remains the reproducible gallery and CI baseline; consumers
 may use a stable release inside the supported range instead of that exact patch.
 Older tags retain their original requirements.
