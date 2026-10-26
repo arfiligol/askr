@@ -1201,6 +1201,11 @@ section.askr-card-title { font-size: inherit; margin: 0; }
 }
 
 /* Shared header control transitions */
+// Icon wrappers inherit the control color so its transition reaches the SVG.
+#quarto-header #quarto-search.type-overlay .aa-DetachedSearchButtonIcon,
+#quarto-header #quarto-search.type-overlay .aa-Form :is(.aa-InputWrapperPrefix, .aa-SubmitButton, .aa-Label, .aa-LoadingIndicator) {
+  color: inherit;
+}
 #quarto-header :is(.quarto-btn-toggle, .navbar-toggler, .quarto-navigation-tool, .quarto-color-scheme-toggle, .askr-version-button, .askr-language-toggle, .askr-logout, .nav-link),
 #quarto-header #quarto-search :is(.aa-DetachedSearchButton, .aa-Form),
 #quarto-announcement,

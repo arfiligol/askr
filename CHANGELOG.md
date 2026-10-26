@@ -13,7 +13,8 @@ derive from these entries; an Unreleased entry is not a published release.
 - Add English and Traditional Chinese announcement guides and a bilingual
   Gallery demonstration using the native `website.announcement` settings.
 - Give Header controls consistent 150ms ease-in-out color, background, border
-  and shadow transitions, disabled when reduced motion is requested.
+  and shadow transitions, disabled when reduced motion is requested. The Search
+  icon inherits the control color so its visible glyph follows the transition.
 
 ## 0.12.0 — 2026-10-25
 
