@@ -1,0 +1,2079 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-TW" xml:lang="zh-TW"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>樣式變數 – Askr</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-079a207a29a081ff57bef15430bac181.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-cd677eef3d4da3fa900171bb2fbfca49.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-19ddd21cbed2324fd348ca244fef22a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-cd677eef3d4da3fa900171bb2fbfca49.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
+<link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
+<script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "沒有結果",
+    "search-matching-documents-text": "符合的文件",
+    "search-copy-link-title": "複製搜尋連結",
+    "search-hide-matches-text": "隱藏其他符合的結果",
+    "search-more-match-text": "更多符合結果",
+    "search-more-matches-text": "更多符合結果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "送出",
+    "search-label": "搜尋"
+  }
+}</script>
+<meta name="theme-color" content="#faf8f8">
+<script>
+(function () {
+  function paint() {
+    var link = document.querySelector("link#quarto-bootstrap.quarto-color-alternate");
+    var on = link && link.getAttribute("rel") === "stylesheet";
+    var meta = document.querySelector('meta[name="theme-color"]');
+    var canvas = getComputedStyle(document.documentElement).getPropertyValue("--qdk-canvas").trim();
+    if (meta && canvas) meta.setAttribute("content", canvas);
+    document.documentElement.style.colorScheme = on ? "dark" : "light";
+  }
+  function hook() {
+    requestAnimationFrame(paint);
+    // A newly enabled alternate sheet may finish loading after the rel change.
+    document.querySelectorAll('link.quarto-color-scheme').forEach(function (sheet) {
+      sheet.addEventListener("load", paint);
+    });
+    new MutationObserver(function () { requestAnimationFrame(paint); }).observe(document.body, {
+      attributes: true, attributeFilter: ["class"]
+    });
+    var link = document.querySelector("link#quarto-bootstrap.quarto-color-alternate");
+    if (link) new MutationObserver(function () { requestAnimationFrame(paint); }).observe(link, { attributes: true, attributeFilter: ["rel"] });
+    var orig = window.quartoToggleColorScheme;
+    if (!orig || orig.__qdk) return;
+    window.quartoToggleColorScheme = function () {
+      var result = orig.apply(this, arguments);
+      requestAnimationFrame(paint);
+      return result;
+    };
+    window.quartoToggleColorScheme.__qdk = true;
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", hook);
+  else hook();
+
+  // Quarto owns group selection and persistence. Its grouped-tab runtime updates
+  // active classes; mirror those classes into attributes, never a second state.
+  function groupedTabs() {
+    document.querySelectorAll('.panel-tabset[data-group]').forEach(function (tabset) {
+      if (tabset.dataset.askrTabsBound) return;
+      tabset.dataset.askrTabsBound = "true";
+      var tabs = Array.from(tabset.querySelectorAll(':scope > [role="tablist"] [role="tab"]'));
+      // Persisted group choices may activate a tab that Bootstrap did not
+      // initialize on load. Initialize every native Tab once for keyboard use.
+      if (window.bootstrap) tabs.forEach(function (tab) {
+        window.bootstrap.Tab.getOrCreateInstance(tab);
+      });
+      function sync() {
+        tabs.forEach(function (tab) {
+          var selected = tab.classList.contains("active");
+          tab.setAttribute("aria-selected", selected ? "true" : "false");
+          tab.setAttribute("tabindex", selected ? "0" : "-1");
+        });
+      }
+      var observer = new MutationObserver(sync);
+      tabs.forEach(function (tab) {
+        observer.observe(tab, { attributes: true, attributeFilter: ["class"] });
+      });
+      // Bootstrap keyboard activation is not a click. After it selects/focuses
+      // a tab, route that native activation through Quarto's group click handler;
+      // no group or storage logic is duplicated here.
+      tabset.addEventListener("keydown", function (event) {
+        if (!tabs.includes(event.target) || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
+        requestAnimationFrame(function () {
+          var selected = document.activeElement;
+          if (tabs.includes(selected) && selected.classList.contains("active")) selected.click();
+        });
+      }, true);
+      sync();
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", groupedTabs);
+  else groupedTabs();
+  window.addEventListener("pageshow", groupedTabs);
+
+  function hideShown(selector) {
+    document.querySelectorAll(selector).forEach(function (el) {
+      if (!el.classList.contains("show") || !window.bootstrap) return;
+      window.bootstrap.Collapse.getOrCreateInstance(el, { toggle: false }).hide();
+    });
+  }
+  // Measure the existing inline layout, not a second navigation tree. Quarto /
+  // Bootstrap remain the owners of disclosure state and navigation links.
+  function adaptiveAreas() {
+    var header = document.querySelector("#quarto-header");
+    var container = header && header.querySelector(".navbar-container");
+    var area = header && header.querySelector("#navbarCollapse");
+    var button = header && header.querySelector(".navbar-toggler");
+    var brand = header && header.querySelector(".navbar-brand-container");
+    if (!container || !area || !button || !brand) return;
+    var tools = container.querySelector('.quarto-navbar-tools');
+    var collapseTools = tools && area.contains(tools);
+    var authoredTools = tools ? Array.from(tools.children).filter(function (el) {
+      return !el.matches('.quarto-color-scheme-toggle, .quarto-reader-toggle, .askr-logout, .askr-language-selector');
+    }) : [];
+    var panelTools;
+    if (collapseTools) {
+      container.appendChild(tools);
+      panelTools = document.createElement('div');
+      panelTools.className = 'askr-panel-tools';
+      area.appendChild(panelTools);
+    }
+    var mutations = new MutationObserver(schedule);
+    function observe() { mutations.observe(container, { childList: true, subtree: true, characterData: true }); }
+    button.setAttribute("aria-label", "Areas");
+    button.removeAttribute("role");
+    button.title = "Areas";
+    var frame;
+    var compact;
+    function update() {
+      frame = null;
+      // Moving native nodes is presentation only, not a new navigation authority.
+      mutations.disconnect();
+      if (collapseTools) authoredTools.slice().reverse().forEach(function (el) { tools.insertBefore(el, tools.firstChild); });
+      if (tools) container.style.setProperty('--askr-tools-width', tools.getBoundingClientRect().width + 'px');
+      var active = document.activeElement;
+      var previous = compact;
+      header.classList.add("askr-areas-measuring");
+      header.classList.remove("askr-areas-collapsed");
+      var mobile = window.matchMedia("(max-width: 991.98px)").matches;
+      var list = area.querySelector(".navbar-nav");
+      var title = brand.querySelector(".askr-version-title") || brand.querySelector(".navbar-title");
+      if (title) title.title = title.textContent.trim();
+      var titleFits = !title || title.scrollWidth <= title.clientWidth;
+      var linksFit = !list || list.scrollWidth <= area.clientWidth;
+      var areaRect = area.getBoundingClientRect();
+      var brandRect = brand.getBoundingClientRect();
+      var controlsFit = Array.from(container.querySelectorAll(":scope > #quarto-search, :scope > .quarto-navbar-tools")).every(function (control) {
+        var rect = control.getBoundingClientRect();
+        return !rect.width || rect.right <= areaRect.left || rect.left >= areaRect.right;
+      });
+      compact = mobile || !titleFits || !linksFit || brandRect.right > areaRect.left || !controlsFit;
+      header.classList.toggle("askr-areas-collapsed", compact);
+      header.classList.remove("askr-areas-measuring");
+      if (compact && collapseTools) authoredTools.forEach(function (el) { panelTools.appendChild(el); });
+      if (tools) container.style.setProperty('--askr-tools-width', tools.getBoundingClientRect().width + 'px');
+      if (mobile) {
+        var left = 0;
+        var right = container.getBoundingClientRect().right;
+        var gap = parseFloat(getComputedStyle(header.querySelector(".quarto-navbar-tools") || container).columnGap) || 0;
+        header.querySelectorAll(".quarto-btn-toggle, #quarto-search").forEach(function (control) {
+          var rect = control.getBoundingClientRect();
+          if (rect.width && getComputedStyle(control).display !== "none") left = Math.max(left, rect.right);
+        });
+        header.querySelectorAll(".quarto-navbar-tools, .navbar-toggler").forEach(function (control) {
+          var rect = control.getBoundingClientRect();
+          if (rect.width) right = Math.min(right, rect.left);
+        });
+        header.style.setProperty("--askr-brand-left", (left + gap) + "px");
+        header.style.setProperty("--askr-brand-right", (container.getBoundingClientRect().right - right + gap) + "px");
+      }
+      observe();
+      if (previous !== undefined && previous !== compact) {
+        // Complete any in-flight Bootstrap animation before resetting state.
+        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
+        hideShown("#navbarCollapse.show");
+        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
+        area.classList.remove("qdk-open");
+        document.querySelector("#qdk-area-glass").classList.remove("qdk-glass-in");
+        button.setAttribute("aria-expanded", "false");
+        if (compact && area.contains(active)) button.focus();
+        else if (!compact && active === button) {
+          var link = area.querySelector("a.nav-link");
+          if (link) link.focus();
+        }
+      }
+    }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+    new ResizeObserver(schedule).observe(container);
+    // Version and Logout entries are mounted after the original Header.
+    observe();
+    window.addEventListener("resize", schedule);
+    window.addEventListener("pageshow", schedule);
+    if (document.fonts) {
+      document.fonts.ready.then(schedule);
+      document.fonts.addEventListener("loadingdone", schedule);
+    }
+    schedule();
+  }
+  function menus() {
+    if (!document.querySelector("#qdk-area-glass")) {
+      var glass = document.createElement("div");
+      glass.id = "qdk-area-glass";
+      glass.style.position = "fixed";
+      glass.style.inset = "0";
+      document.body.appendChild(glass);
+    }
+    var area = document.querySelector("#navbarCollapse");
+    var pages = document.querySelector("#quarto-sidebar");
+    var areaGlass = document.querySelector("#qdk-area-glass");
+    var pagesGlass = document.querySelector("#quarto-sidebar-glass");
+    if (area) {
+      area.addEventListener("show.bs.collapse", function (event) {
+        if (event.target !== area) return;
+        area.classList.add("qdk-open");
+        areaGlass.classList.add("qdk-glass-in");
+      });
+      area.addEventListener("hide.bs.collapse", function (event) {
+        if (event.target !== area) return;
+        area.classList.remove("qdk-open");
+        areaGlass.classList.remove("qdk-glass-in");
+        var header = document.querySelector("#quarto-header");
+        if (header.classList.contains("headroom--frozen") && !(pages && pages.classList.contains("qdk-open")) && window.quartoToggleHeadroom) window.quartoToggleHeadroom();
+      });
+    }
+    if (pages && pagesGlass) {
+      pages.addEventListener("show.bs.collapse", function (event) {
+        if (event.target !== pages) return;
+        pages.classList.add("qdk-open");
+        pagesGlass.classList.add("qdk-glass-in");
+      });
+      pages.addEventListener("hide.bs.collapse", function (event) {
+        if (event.target !== pages) return;
+        pages.classList.remove("qdk-open");
+        pagesGlass.classList.remove("qdk-glass-in");
+      });
+      pages.addEventListener("click", function (event) {
+        if (event.target.closest("a, button, .sidebar-item-toggle")) return;
+        hideShown(".quarto-sidebar-collapse-item.show");
+      });
+    }
+    var areaButton = document.querySelector("#quarto-header .navbar-toggler");
+    var pagesButton = document.querySelector("#quarto-header .quarto-btn-toggle");
+    if (areaButton) areaButton.addEventListener("click", function () {
+      hideShown(".quarto-sidebar-collapse-item.show");
+    });
+    if (area) area.addEventListener("click", function (event) {
+      if (event.target.closest("a.nav-link") && document.querySelector("#quarto-header.askr-areas-collapsed")) hideShown("#navbarCollapse.show");
+    });
+    if (pagesButton) pagesButton.addEventListener("click", function () {
+      hideShown("#navbarCollapse.show");
+    });
+    document.addEventListener("click", function (event) {
+      var area = document.querySelector("#navbarCollapse");
+      if (!area || !area.classList.contains("show")) return;
+      if (area.contains(event.target) || (areaButton && areaButton.contains(event.target))) return;
+      hideShown("#navbarCollapse.show");
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && area && area.classList.contains("show")) {
+        event.preventDefault();
+        hideShown("#navbarCollapse.show");
+        areaButton.focus();
+      }
+    });
+    versions(hideShown);
+    adaptiveAreas();
+  }
+  function versions(hideShown) {
+    var brand = document.querySelector("#quarto-header .navbar-brand");
+    var slot = document.querySelector("#quarto-header .navbar-brand-container");
+    if (!brand || !slot || slot.querySelector(".askr-version")) return;
+    var offset = document.querySelector('meta[name="quarto:offset"]');
+    var manifest = new URL((offset ? offset.getAttribute("content") : "./") + "askr-versions.json", location.href);
+    fetch(manifest.href).then(function (response) {
+      if (!response.ok) throw new Error("missing");
+      return response.json();
+    }).then(function (data) {
+      mountVersions(data, hideShown, brand, slot, new URL("./", manifest));
+    }).catch(function () {
+      var dataEl = document.getElementById("askr-versions");
+      if (!dataEl) return;
+      try { mountVersions(JSON.parse(dataEl.textContent), hideShown, brand, slot, new URL("./", manifest)); } catch (error) { return; }
+    });
+  }
+  function mountVersions(data, hideShown, brand, slot, siteRoot) {
+    if (!data.versions || !data.versions.length || slot.querySelector(".askr-version")) return;
+    var params = new URLSearchParams(location.search);
+    var mode = params.get("askr-version-mode") === "title" ? "title" : (data.mode === "title" ? "title" : "inline");
+    var title = brand.textContent.trim();
+    if (params.get("askr-version-mode") === "title" && data.longTitle) title = data.longTitle;
+    // Manifest roots are relative to the deployed site, not the origin. Quarto's
+    // offset locates that site even from a nested page under a repository prefix.
+    function versionRoot(item) {
+      var root = item.root || "/";
+      var relative = root.replace(/^\/+/, "");
+      return new URL(relative ? relative.replace(/\/?$/, "/") : "./", siteRoot);
+    }
+    function pathMatches(root) {
+      var path = location.pathname;
+      var normalized = root.pathname;
+      return path === normalized.slice(0, -1) || path.indexOf(normalized) === 0;
+    }
+    function itemHref(item) {
+      if (item.href) {
+        var fixed = new URL(item.href.replace(/^\/(?!\/)/, ""), siteRoot);
+        if (params.get("askr-version-mode")) fixed.searchParams.set("askr-version-mode", params.get("askr-version-mode"));
+        return fixed.href;
+      }
+      var path = location.pathname;
+      var bases = data.versions.filter(function (version) { return version.root; })
+        .sort(function (a, b) { return versionRoot(b).pathname.length - versionRoot(a).pathname.length; });
+      var from = bases.filter(function (version) { return pathMatches(versionRoot(version)); })[0];
+      var fromRoot = from ? versionRoot(from) : siteRoot;
+      var rest = path.slice(fromRoot.pathname.length);
+      var target = new URL(rest, versionRoot(item));
+      target.search = location.search;
+      target.hash = location.hash;
+      return target.href;
+    }
+    var current = data.versions.filter(function (item) { return item.label === params.get("askr-version"); })[0];
+    if (!current) {
+      var rooted = data.versions.filter(function (item) { return item.root && pathMatches(versionRoot(item)); })
+        .sort(function (a, b) { return b.root.length - a.root.length; });
+      current = rooted[0] || data.versions.filter(function (item) { return item.latest; })[0] || data.versions[0];
+    }
+    var root = document.createElement("div");
+    root.className = "askr-version";
+    root.dataset.mode = mode;
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "askr-version-button";
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "askr-version-links");
+    var titleSpan = document.createElement("span");
+    titleSpan.className = "askr-version-title";
+    titleSpan.textContent = title;
+    button.appendChild(titleSpan);
+    if (mode === "inline") {
+      var number = document.createElement("span");
+      number.className = "askr-version-number";
+      number.textContent = current.label;
+      button.appendChild(number);
+    }
+    var chevron = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    chevron.setAttribute("class", "askr-version-chevron");
+    chevron.setAttribute("viewBox", "0 0 16 16");
+    chevron.setAttribute("aria-hidden", "true");
+    var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", "M4 6l4 4 4-4");
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "currentColor");
+    path.setAttribute("stroke-width", "1.6");
+    path.setAttribute("stroke-linecap", "round");
+    path.setAttribute("stroke-linejoin", "round");
+    chevron.appendChild(path);
+    button.appendChild(chevron);
+    var menu = document.createElement("div");
+    menu.className = "askr-version-menu";
+    menu.hidden = true;
+    menu.id = "askr-version-links";
+    data.versions.forEach(function (item) {
+      var link = document.createElement("a");
+      link.href = itemHref(item);
+      link.dataset.versionHome = versionRoot(item).href;
+      if (item.label === current.label) link.setAttribute("aria-current", "true");
+      var label = document.createElement("span");
+      label.textContent = item.label;
+      link.appendChild(label);
+      if (item.latest) {
+        var latest = document.createElement("span");
+        latest.className = "askr-version-latest";
+        latest.textContent = "Latest";
+        link.appendChild(latest);
+      }
+      menu.appendChild(link);
+    });
+    function setOpen(open) {
+      if (open) hideShown(".quarto-sidebar-collapse-item.show, #navbarCollapse.show");
+      menu.hidden = !open;
+      button.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    button.addEventListener("click", function (event) {
+      event.stopPropagation();
+      setOpen(menu.hidden);
+    });
+    document.addEventListener("click", function (event) {
+      if (!root.contains(event.target)) setOpen(false);
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !menu.hidden) {
+        event.preventDefault();
+        setOpen(false);
+        button.focus();
+      }
+    });
+    root.addEventListener("focusout", function (event) {
+      if (!root.contains(event.relatedTarget)) setOpen(false);
+    });
+    root.appendChild(button);
+    root.appendChild(menu);
+    slot.appendChild(root);
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest && event.target.closest(".askr-version-menu a");
+      if (!link || !root.contains(link)) return;
+      var href = link.getAttribute("href");
+      if (!href) return;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.origin !== location.origin) return;
+      event.preventDefault();
+      fetch(href).then(function (response) {
+        if (response.status !== 404) {
+          location.assign(href);
+          return;
+        }
+        location.assign(link.dataset.versionHome);
+      }).catch(function () {
+        location.assign(href);
+      });
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", menus);
+  else menus();
+})();
+</script>
+
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Askr</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜尋"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="切換導航列" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">展示</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../components.html"> 
+<span class="menu-text">元件</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../usage/add-askr.html" aria-current="page"> 
+<span class="menu-text">使用</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../credits.html"> 
+<span class="menu-text">致謝</span></a>
+  </li>  
+</ul>
+              <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切換深色模式"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../usage/tokens.html">樣式變數</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/add-askr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">安裝 Askr</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/navigation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Areas、頁面清單與章節</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/versions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">版本管理</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/search.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">搜尋</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/tokens.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">樣式變數</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/figures.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">隨章節切換的圖片</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/image-viewer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">圖片檢視器</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/protected-docs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">受保護文件與登出</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/header-footer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">頁首與頁尾連結</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../usage/languages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">語言選擇器</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">當頁章節</h2>
+   
+  <ul>
+  <li><a href="#在使用專案中覆寫" id="toc-在使用專案中覆寫" class="nav-link active" data-scroll-target="#在使用專案中覆寫">在使用專案中覆寫</a></li>
+  <li><a href="#全域調色盤與版面" id="toc-全域調色盤與版面" class="nav-link" data-scroll-target="#全域調色盤與版面">全域調色盤與版面</a></li>
+  <li><a href="#全域與元件屬性" id="toc-全域與元件屬性" class="nav-link" data-scroll-target="#全域與元件屬性">全域與元件屬性</a></li>
+  <li><a href="#自適應基準" id="toc-自適應基準" class="nav-link" data-scroll-target="#自適應基準">自適應基準</a></li>
+  <li><a href="#建置後的元件範例" id="toc-建置後的元件範例" class="nav-link" data-scroll-target="#建置後的元件範例">建置後的元件範例</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">樣式變數</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Askr 提供編譯時使用的 Sass 預設值，以及供建置後頁面使用的 <code>--qdk-*</code> CSS 屬性。使用者樣式應放在 Askr 之後；請勿修改已安裝的擴充套件檔案。分頁切換、收合、導覽、搜尋與複製仍由 Quarto 原生功能負責；樣式變數只改變呈現方式。</p>
+<p>讀者主題切換按鈕會使用 Askr 的控制項尺寸、邊框、圓角、顏色與游標移入樣式。Askr 會在搜尋旁預留該控制項的空間，因此使用者不必依賴內部的 <code>--_qdk-*</code> 縮放屬性另外調整間距。</p>
+<section id="在使用專案中覆寫" class="level2">
+<h2 class="anchored" data-anchor-id="在使用專案中覆寫">在使用專案中覆寫</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">askr-html</span><span class="kw">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">light</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">default</span><span class="kw">,</span><span class="at"> _extensions/arfiligol/askr/qdk.scss</span><span class="kw">,</span><span class="at"> styles.scss</span><span class="kw">,</span><span class="at"> light.scss</span><span class="kw">]</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">dark</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">default</span><span class="kw">,</span><span class="at"> _extensions/arfiligol/askr/qdk.scss</span><span class="kw">,</span><span class="at"> _extensions/arfiligol/askr/qdk-dark.scss</span><span class="kw">,</span><span class="at"> styles.scss</span><span class="kw">,</span><span class="at"> dark.scss</span><span class="kw">]</span></span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
+<p>使用 <code>scss:defaults</code> 可變更編譯後的 Quarto 樣式及其衍生 CSS 屬性。下表中的 Sass 預設值皆使用 <code>!default</code>；使用者指派值時不需加上它。Quarto 會以反向順序讀取主題清單中的預設值，再依正向順序套用規則。共用預設值放在 <code>styles.scss</code>，各主題專用的預設值放在 <code>light.scss</code> / <code>dark.scss</code>；同一主題中的每個變數只能指派一次。較後面的檔案不會覆寫較前面的無條件 Sass 指派，因為預設值會先執行。</p>
+<p>例如，<code>light.scss</code> 可包含 <code>$body-bg: #f3f5f7;</code>，<code>dark.scss</code> 可包含 <code>$body-bg: #20252b;</code>，並都放在 <code>/*-- scss:defaults --*/</code> 區段中。使用這種配置時，不要在共用檔案中設定 <code>$body-bg</code>。共用的 <code>styles.scss</code> 可包含：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode scss code-with-copy"><code class="sourceCode scss"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*-- scss:defaults --*/</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">$link-color</span>: <span class="cn">#2d5e85</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">$grid-body-width</span>: <span class="dv">680</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">$qdk-tab-size</span>: <span class="dv">.85</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="va">$qdk-tab-padding-y</span>: <span class="dv">.3</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">/*-- scss:rules --*/</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="va">--qdk-callout-radius</span>: <span class="dv">8</span><span class="dt">px</span><span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="va">--qdk-table-cell-padding</span>: <span class="dv">.35</span><span class="dt">rem</span> <span class="dv">.7</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
+<p>CSS 覆寫會影響使用該屬性的規則；Sass 覆寫也會影響由該 Sass 變數編譯而成的 Quarto 原生規則。像 <code>--qdk-tab-active-border: var(--qdk-link)</code> 這類元件別名，會跟著全域基礎值變化，除非使用者另行覆寫該元件。CSS 值必須符合目標屬性的語法；若編譯期輸入無效，Quarto 會在編譯時回報。</p>
+</section>
+<section id="全域調色盤與版面" class="level2">
+<h2 class="anchored" data-anchor-id="全域調色盤與版面">全域調色盤與版面</h2>
+<p>既有 CSS 名稱仍可使用。它們在編譯時的來源，以及淺色／深色主題的確切預設值如下：</p>
+<p>在 0.9.0 中，Askr 邊框請覆寫 <code>$qdk-border</code>，柔和文字請覆寫 <code>$qdk-muted-text</code>。<code>$border-color</code> 與 <code>$toc-color</code> 仍保留 Quarto 原生用途，但不再控制這兩個 Askr 屬性。公開 CSS 名稱仍可使用。</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>CSS 屬性</th>
+<th>Sass 來源</th>
+<th>淺色</th>
+<th>深色</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>--qdk-canvas</code></td>
+<td><code>$body-bg</code></td>
+<td><code>#faf8f8</code></td>
+<td><code>#161618</code></td>
+</tr>
+<tr class="even">
+<td><code>--qdk-text</code></td>
+<td><code>$body-color</code></td>
+<td><code>#4e4e4e</code></td>
+<td><code>#d4d4d4</code></td>
+</tr>
+<tr class="odd">
+<td><code>--qdk-heading</code></td>
+<td><code>$headings-color</code></td>
+<td><code>#2b2b2b</code></td>
+<td><code>#ebebec</code></td>
+</tr>
+<tr class="even">
+<td><code>--qdk-muted</code></td>
+<td><code>$qdk-muted-text</code></td>
+<td><code>#6b6b6b</code></td>
+<td><code>#a0a0a0</code></td>
+</tr>
+<tr class="odd">
+<td><code>--qdk-muted-decoration</code></td>
+<td><code>$qdk-muted-decoration</code></td>
+<td><code>#b8b8b8</code></td>
+<td><code>#646464</code></td>
+</tr>
+<tr class="even">
+<td><code>--qdk-link</code>, <code>--qdk-focus</code></td>
+<td><code>$link-color</code></td>
+<td><code>#284b63</code></td>
+<td><code>#7b97aa</code></td>
+</tr>
+<tr class="odd">
+<td><code>--qdk-border</code></td>
+<td><code>$qdk-border</code></td>
+<td><code>#e5e5e5</code></td>
+<td><code>#393639</code></td>
+</tr>
+<tr class="even">
+<td><code>--qdk-highlight</code></td>
+<td><code>$code-bg</code></td>
+<td><code>rgba(143,159,169,.15)</code></td>
+<td>same</td>
+</tr>
+<tr class="odd">
+<td><code>--qdk-sidebar</code>, <code>--qdk-margin</code></td>
+<td><code>$grid-sidebar-width</code>, <code>$grid-margin-width</code></td>
+<td><code>264px</code></td>
+<td>same</td>
+</tr>
+<tr class="even">
+<td><code>--qdk-body</code></td>
+<td><code>$grid-body-width</code></td>
+<td><code>630px</code></td>
+<td>same</td>
+</tr>
+<tr class="odd">
+<td><code>--qdk-gutter</code></td>
+<td><code>$grid-column-gutter-width</code></td>
+<td><code>26px</code></td>
+<td>same</td>
+</tr>
+<tr class="even">
+<td><code>--qdk-callout-note</code></td>
+<td><code>$callout-color-note</code></td>
+<td><code>#448aff</code></td>
+<td>same</td>
+</tr>
+<tr class="odd">
+<td><code>--qdk-callout-tip</code></td>
+<td><code>$callout-color-tip</code></td>
+<td><code>#00bfa5</code></td>
+<td>same</td>
+</tr>
+<tr class="even">
+<td><code>--qdk-callout-important</code></td>
+<td><code>$callout-color-important</code></td>
+<td><code>#7a43b5</code></td>
+<td><code>#c69af0</code></td>
+</tr>
+<tr class="odd">
+<td><code>--qdk-callout-warning</code></td>
+<td><code>$callout-color-warning</code></td>
+<td><code>#db8942</code></td>
+<td>same</td>
+</tr>
+<tr class="even">
+<td><code>--qdk-callout-caution</code></td>
+<td><code>$callout-color-caution</code></td>
+<td><code>#db4242</code></td>
+<td><code>#ff8f8f</code></td>
+</tr>
+</tbody>
+</table>
+<p>字型來源預設為 Source Sans 3 內文、Schibsted Grotesk 標題，以及 IBM Plex Mono 程式碼，並採用已安裝平台的後備字型。<code>$font-size-root</code> 為 <code>18px</code>，<code>$line-height-base</code> 為 <code>1.6</code>，<code>$font-weight-base</code> 為 <code>400</code>，<code>$headings-font-weight</code> 為 <code>700</code>。標題 Sass 字級 <code>$h1-font-size</code> 至 <code>$h4-font-size</code> 依序為 <code>1.78rem</code>、<code>1.39rem</code>、<code>1.11rem</code> 與 <code>1rem</code>。<code>$table-border-color</code> 沿用表中列出的主題邊框預設值；<code>$table-striped-bg</code> 為 <code>rgba(143,159,169,.15)</code>。淺色模式下 <code>$code-block-bg</code> 為 <code>transparent</code>，深色模式下則為 <code>#1f1f22</code>。<code>$callout-border-width</code> 為 <code>1px</code>。</p>
+</section>
+<section id="全域與元件屬性" class="level2">
+<h2 class="anchored" data-anchor-id="全域與元件屬性">全域與元件屬性</h2>
+<p>有標題的提示框會共用相同的區塊內縮與最小標題列高度，無論是否顯示圖示都一樣。圖示、標題與展開符號會在該列垂直置中；多行標題會自然增加列高。沒有標題的提示框則保留原生本文內縮。</p>
+<p>下表每列的 CSS 名稱是 <code>--qdk-</code> 加上變數名稱；Sass 預設名稱則是 <code>$qdk-</code> 加上相同變數名稱。值中含 <code>var(...)</code> 的項目是即時 CSS 別名；含 <code>$</code> 的項目則取自上方 Sass 來源。</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>變數</th>
+<th>預設值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>tertiary</code></td>
+<td>淺色 <code>#4f756b</code>，深色 <code>#8fb7a8</code></td>
+</tr>
+<tr class="even">
+<td><code>divider-content</code></td>
+<td><code>rgba(43, 43, 43, .18)</code></td>
+</tr>
+<tr class="odd">
+<td><code>divider-layout</code></td>
+<td><code>rgba(43, 43, 43, .08)</code></td>
+</tr>
+<tr class="even">
+<td><code>mark</code></td>
+<td><code>#fff23688</code></td>
+</tr>
+<tr class="odd">
+<td><code>space</code></td>
+<td><code>1rem</code></td>
+</tr>
+<tr class="even">
+<td><code>chrome</code></td>
+<td><code>$font-size-root</code></td>
+</tr>
+<tr class="odd">
+<td><code>ui</code></td>
+<td><code>1.15</code></td>
+</tr>
+<tr class="even">
+<td><code>body-font</code></td>
+<td><code>$font-family-sans-serif</code></td>
+</tr>
+<tr class="odd">
+<td><code>heading-font</code></td>
+<td><code>$headings-font-family</code></td>
+</tr>
+<tr class="even">
+<td><code>mono-font</code></td>
+<td><code>$font-family-monospace</code></td>
+</tr>
+<tr class="odd">
+<td><code>body-size</code></td>
+<td><code>1rem</code></td>
+</tr>
+<tr class="even">
+<td><code>line-height</code></td>
+<td><code>$line-height-base</code></td>
+</tr>
+<tr class="odd">
+<td><code>body-weight</code></td>
+<td><code>$font-weight-base</code></td>
+</tr>
+<tr class="even">
+<td><code>strong-weight</code></td>
+<td><code>600</code></td>
+</tr>
+<tr class="odd">
+<td><code>heading-weight</code></td>
+<td><code>$headings-font-weight</code></td>
+</tr>
+<tr class="even">
+<td><code>link-hover</code></td>
+<td><code>var(--qdk-tertiary)</code></td>
+</tr>
+<tr class="odd">
+<td><code>link-background</code></td>
+<td><code>var(--qdk-highlight)</code></td>
+</tr>
+<tr class="even">
+<td><code>inline-radius</code></td>
+<td><code>var(--qdk-radius)</code></td>
+</tr>
+<tr class="odd">
+<td><code>focus-width</code></td>
+<td><code>3px</code></td>
+</tr>
+<tr class="even">
+<td><code>focus-offset</code></td>
+<td><code>3px</code></td>
+</tr>
+<tr class="odd">
+<td><code>focus-radius</code></td>
+<td><code>3px</code></td>
+</tr>
+<tr class="even">
+<td><code>tab-font</code></td>
+<td><code>var(--qdk-heading-font)</code></td>
+</tr>
+<tr class="odd">
+<td><code>tab-size</code></td>
+<td><code>.9rem</code></td>
+</tr>
+<tr class="even">
+<td><code>tab-weight</code></td>
+<td><code>400</code></td>
+</tr>
+<tr class="odd">
+<td><code>tab-active-weight</code></td>
+<td><code>600</code></td>
+</tr>
+<tr class="even">
+<td><code>tab-line-height</code></td>
+<td><code>1.25</code></td>
+</tr>
+<tr class="odd">
+<td><code>tab-padding-y</code></td>
+<td><code>.35rem</code></td>
+</tr>
+<tr class="even">
+<td><code>tab-padding-x</code></td>
+<td><code>.8rem</code></td>
+</tr>
+<tr class="odd">
+<td><code>tab-gap</code></td>
+<td><code>.5rem</code></td>
+</tr>
+<tr class="even">
+<td><code>tab-content-padding</code></td>
+<td><code>.65rem .8rem</code></td>
+</tr>
+<tr class="odd">
+<td><code>tab-border-width</code></td>
+<td><code>2px</code></td>
+</tr>
+<tr class="even">
+<td><code>tab-color</code></td>
+<td><code>var(--qdk-text)</code></td>
+</tr>
+<tr class="odd">
+<td><code>tab-active-color</code></td>
+<td><code>var(--qdk-heading)</code></td>
+</tr>
+<tr class="even">
+<td><code>tab-active-border</code></td>
+<td><code>var(--qdk-link)</code></td>
+</tr>
+<tr class="odd">
+<td><code>tab-hover-color</code></td>
+<td><code>var(--qdk-heading)</code></td>
+</tr>
+<tr class="even">
+<td><code>tab-hover-border</code></td>
+<td><code>var(--qdk-divider-layout)</code></td>
+</tr>
+<tr class="odd">
+<td><code>tab-background</code></td>
+<td><code>transparent</code></td>
+</tr>
+<tr class="even">
+<td><code>control-radius</code></td>
+<td><code>var(--qdk-radius)</code></td>
+</tr>
+<tr class="odd">
+<td><code>control-size</code></td>
+<td><code>31px</code></td>
+</tr>
+<tr class="even">
+<td><code>control-color</code></td>
+<td><code>var(--qdk-heading)</code></td>
+</tr>
+<tr class="odd">
+<td><code>control-border</code></td>
+<td><code>var(--qdk-divider-layout)</code></td>
+</tr>
+<tr class="even">
+<td><code>control-hover</code></td>
+<td><code>var(--qdk-tertiary)</code></td>
+</tr>
+<tr class="odd">
+<td><code>nav-height</code></td>
+<td><code>3.4rem</code></td>
+</tr>
+<tr class="even">
+<td><code>nav-size</code></td>
+<td><code>16px</code></td>
+</tr>
+<tr class="odd">
+<td><code>nav-brand-size</code></td>
+<td><code>18px</code></td>
+</tr>
+<tr class="even">
+<td><code>nav-font</code></td>
+<td><code>var(--qdk-heading-font)</code></td>
+</tr>
+<tr class="odd">
+<td><code>nav-gap</code></td>
+<td><code>.4rem</code></td>
+</tr>
+<tr class="even">
+<td><code>version-size</code></td>
+<td><code>16px</code></td>
+</tr>
+<tr class="odd">
+<td><code>version-weight</code></td>
+<td><code>400</code></td>
+</tr>
+<tr class="even">
+<td><code>version-padding</code></td>
+<td><code>0 .45rem 0 .6rem</code></td>
+</tr>
+<tr class="odd">
+<td><code>version-gap</code></td>
+<td><code>.35rem</code></td>
+</tr>
+<tr class="even">
+<td><code>version-menu-padding</code></td>
+<td><code>.35rem</code></td>
+</tr>
+<tr class="odd">
+<td><code>version-item-padding</code></td>
+<td><code>.3rem .55rem</code></td>
+</tr>
+<tr class="even">
+<td><code>version-active-background</code></td>
+<td><code>var(--qdk-highlight)</code></td>
+</tr>
+<tr class="odd">
+<td><code>search-overlay</code></td>
+<td><code>rgba(0, 0, 0, .32)</code></td>
+</tr>
+<tr class="even">
+<td><code>search-radius</code></td>
+<td><code>var(--qdk-control-radius)</code></td>
+</tr>
+<tr class="odd">
+<td><code>search-background</code></td>
+<td><code>var(--qdk-canvas)</code></td>
+</tr>
+<tr class="even">
+<td><code>search-color</code></td>
+<td><code>var(--qdk-text)</code></td>
+</tr>
+<tr class="odd">
+<td><code>search-border</code></td>
+<td><code>var(--qdk-divider-layout)</code></td>
+</tr>
+<tr class="even">
+<td><code>callout-radius</code></td>
+<td><code>var(--qdk-radius)</code></td>
+</tr>
+<tr class="odd">
+<td><code>callout-padding</code></td>
+<td><code>var(--qdk-space)</code></td>
+</tr>
+<tr class="even">
+<td><code>callout-header-padding</code></td>
+<td><code>var(--qdk-space)</code></td>
+</tr>
+<tr class="odd">
+<td><code>callout-margin</code></td>
+<td><code>var(--qdk-space)</code></td>
+</tr>
+<tr class="even">
+<td><code>callout-tint</code></td>
+<td><code>6.3%</code></td>
+</tr>
+<tr class="odd">
+<td><code>callout-border-tint</code></td>
+<td><code>27%</code></td>
+</tr>
+<tr class="even">
+<td><code>callout-border-width</code></td>
+<td><code>$callout-border-width</code></td>
+</tr>
+<tr class="odd">
+<td><code>callout-title-weight</code></td>
+<td><code>600</code></td>
+</tr>
+<tr class="even">
+<td><code>callout-title-line-height</code></td>
+<td><code>1.35</code></td>
+</tr>
+<tr class="odd">
+<td><code>callout-icon-size</code></td>
+<td><code>20px</code></td>
+</tr>
+<tr class="even">
+<td><code>code-size</code></td>
+<td><code>.85rem</code></td>
+</tr>
+<tr class="odd">
+<td><code>code-inline-size</code></td>
+<td><code>.9em</code></td>
+</tr>
+<tr class="even">
+<td><code>code-radius</code></td>
+<td><code>var(--qdk-radius)</code></td>
+</tr>
+<tr class="odd">
+<td><code>code-padding</code></td>
+<td><code>1rem 2.5rem 1rem 1rem</code></td>
+</tr>
+<tr class="even">
+<td><code>code-color</code></td>
+<td><code>var(--qdk-heading)</code></td>
+</tr>
+<tr class="odd">
+<td><code>code-inline-color</code></td>
+<td><code>var(--qdk-heading)</code></td>
+</tr>
+<tr class="even">
+<td><code>code-background</code></td>
+<td><code>$code-block-bg</code></td>
+</tr>
+<tr class="odd">
+<td><code>code-border</code></td>
+<td><code>var(--qdk-border)</code></td>
+</tr>
+<tr class="even">
+<td><code>code-copy-background</code></td>
+<td><code>var(--qdk-code-background)</code></td>
+</tr>
+<tr class="odd">
+<td><code>code-copy-color</code></td>
+<td><code>var(--qdk-text)</code></td>
+</tr>
+<tr class="even">
+<td><code>code-copy-hover-background</code></td>
+<td><code>var(--qdk-border)</code></td>
+</tr>
+<tr class="odd">
+<td><code>code-copy-hover-color</code></td>
+<td><code>var(--qdk-heading)</code></td>
+</tr>
+<tr class="even">
+<td><code>table-border</code></td>
+<td><code>$table-border-color</code></td>
+</tr>
+<tr class="odd">
+<td><code>table-stripe</code></td>
+<td><code>$table-striped-bg</code></td>
+</tr>
+<tr class="even">
+<td><code>table-head-border</code></td>
+<td><code>var(--qdk-muted-decoration)</code></td>
+</tr>
+<tr class="odd">
+<td><code>table-head-padding</code></td>
+<td><code>.5rem</code></td>
+</tr>
+<tr class="even">
+<td><code>table-cell-padding</code></td>
+<td><code>.5rem</code></td>
+</tr>
+<tr class="odd">
+<td><code>table-head-line-height</code></td>
+<td><code>1.35</code></td>
+</tr>
+<tr class="even">
+<td><code>table-margin</code></td>
+<td><code>var(--qdk-space)</code></td>
+</tr>
+<tr class="odd">
+<td><code>blockquote-color</code></td>
+<td><code>var(--qdk-text)</code></td>
+</tr>
+<tr class="even">
+<td><code>blockquote-border</code></td>
+<td><code>var(--qdk-link)</code></td>
+</tr>
+<tr class="odd">
+<td><code>blockquote-border-width</code></td>
+<td><code>3px</code></td>
+</tr>
+<tr class="even">
+<td><code>blockquote-padding</code></td>
+<td><code>var(--qdk-space)</code></td>
+</tr>
+<tr class="odd">
+<td><code>blockquote-margin</code></td>
+<td><code>var(--qdk-space)</code></td>
+</tr>
+<tr class="even">
+<td><code>radius</code></td>
+<td><code>6px</code></td>
+</tr>
+</tbody>
+</table>
+<p>深色模式會將 <code>divider-content</code> 覆寫為 <code>rgba(212,212,212,.24)</code>，將 <code>divider-layout</code> 覆寫為 <code>rgba(212,212,212,.10)</code>，並將 <code>mark</code> 覆寫為 <code>#e5c76b33</code>。其他元件預設值在兩種主題間共用，並跟隨調色盤別名。深色模式的 <code>code-color</code> 會跟隨 <code>var(--qdk-text)</code>；行內程式碼仍使用標題色。Quarto 原生表格的表頭與儲存格內距為 <code>.5rem</code>，裝飾性表頭邊框為 <code>1px</code>。會換行的表頭使用無單位 <code>1.35</code> 行高。樣式變數規則會直接作用於 Quarto 原生與一般 HTML 表格儲存格。文字用途的柔和色彩用於副標題、中繼資料、標籤與頁尾；裝飾用途的柔和色彩用於細線。提示框標題由 72% 本文色與 28% 類型色混合；圖示與邊框則保留飽和的類型色。<code>--qdk-callout-color</code> 是每種原生提示框各自解析出的類型色；覆寫某一類型的具名色彩即可變更該類所有提示框。</p>
+</section>
+<section id="自適應基準" class="level2">
+<h2 class="anchored" data-anchor-id="自適應基準">自適應基準</h2>
+<p>公開基準不會在視窗規則中重新指派。Askr 會乘上內部倍率；<code>--_qdk-*</code> 屬性屬於實作細節。這能在各種寬度保留使用者設定的基準，以及預設版面幾何：</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>視窗寬度（px）</th>
+<th>內文</th>
+<th>側欄／邊界</th>
+<th>欄間距</th>
+<th>根字級</th>
+<th>UI 倍率</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>小於 630</td>
+<td>符合容器寬度</td>
+<td>264px</td>
+<td>26px</td>
+<td>16px</td>
+<td>1.02</td>
+</tr>
+<tr class="even">
+<td>630–991.98</td>
+<td>符合容器寬度</td>
+<td>264px</td>
+<td>26px</td>
+<td>18px</td>
+<td>1.15</td>
+</tr>
+<tr class="odd">
+<td>992–1279.98</td>
+<td>630px</td>
+<td>200px</td>
+<td>16px</td>
+<td>17px</td>
+<td>1.08</td>
+</tr>
+<tr class="even">
+<td>1280–1439.98</td>
+<td>630px</td>
+<td>240px</td>
+<td>22px</td>
+<td>17px</td>
+<td>1.08</td>
+</tr>
+<tr class="odd">
+<td>1440–1919.98</td>
+<td>630px</td>
+<td>264px</td>
+<td>26px</td>
+<td>18px</td>
+<td>1.15</td>
+</tr>
+<tr class="even">
+<td>1920–2559.98</td>
+<td>693px</td>
+<td>290px</td>
+<td>29px</td>
+<td>20px</td>
+<td>1.27</td>
+</tr>
+<tr class="odd">
+<td>2560 以上</td>
+<td>756px</td>
+<td>320px</td>
+<td>31px</td>
+<td>22px</td>
+<td>1.4</td>
+</tr>
+</tbody>
+</table>
+<p>例如，<code>680px</code> 內文基準在 1920px 視窗寬度會變成 <code>748px</code>（×1.1），在 2560px 時則變成 <code>816px</code>（×1.2）。行動版內容會符合可用容器寬度。網站選項 <code>askr.reading-width: wide</code> 會將一般基準換成 <code>780px</code>，因此在 1920px 時為 <code>858px</code>，在 2560px 時為 <code>936px</code>。固定、浮動或不存在的側欄都會使用選定的閱讀欄寬度。Quarto 原生寬度擴展與閱讀模式仍保有原有行為。</p>
+<p>低於 992px 時，提示框水平內距與標題內距會使用 ×.8。分頁標籤預設維持 <code>.9rem</code> 字級與 <code>.35rem</code> 垂直內距，隨根字級縮放，不會被另一組分頁尺寸取代。</p>
+</section>
+<section id="建置後的元件範例" class="level2">
+<h2 class="anchored" data-anchor-id="建置後的元件範例">建置後的元件範例</h2>
+<p>下列原生元件會使用與圖集相同的樣式變數規則。</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">第一頁</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">第二頁</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><a href="../components.html">內文連結</a>仍會保留醒目底色；分頁控制項使用分頁樣式變數。</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>第二個分頁仍使用 Quarto 原生選取行為。</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+註釋
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>提示框顏色、內距與圓角都取自文件列出的樣式變數。</p>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>引文邊框、間距與文字使用引文樣式變數。</p>
+</blockquote>
+<p><code>inline_code</code></p>
+<pre class="text"><code>A code block uses the code size, frame and padding.</code></pre>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>樣式變數範圍</th>
+<th>負責者</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>呈現方式</td>
+<td>使用者樣式覆寫</td>
+</tr>
+<tr class="even">
+<td>原生互動</td>
+<td>Quarto</td>
+</tr>
+</tbody>
+</table>
+<p>若要更新版本，請重新安裝經審查的標籤版本，不要直接編輯 <code>_extensions/arfiligol/askr</code>。</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+// The render filter owns source identity. This handler only transfers that
+// source on an explicit click and exposes it if clipboard access is denied.
+const askrMathCopyTimers = new WeakMap();
+function askrInitializeMathCopy() {
+  document.querySelectorAll('.askr-copyable-math').forEach(component => {
+    if (component.closest('.no-math-copy') || component.querySelector('.no-math-copy')) return;
+    const actions = document.createElement('div');
+    actions.className = 'askr-math-actions';
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'askr-math-copy';
+    button.textContent = 'Copy';
+    button.setAttribute('aria-label', 'Copy LaTeX');
+    const status = document.createElement('span');
+    status.className = 'askr-math-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    actions.append(button, status);
+    component.prepend(actions);
+  });
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', askrInitializeMathCopy);
+else askrInitializeMathCopy();
+document.addEventListener('click', async (event) => {
+  const button = event.target.closest('.askr-math-copy');
+  if (!button) return;
+  const component = button.closest('.askr-copyable-math');
+  const status = component.querySelector('.askr-math-status');
+  clearTimeout(askrMathCopyTimers.get(button));
+  button.classList.remove('is-copied');
+  button.textContent = 'Copy';
+  button.disabled = true;
+  status.classList.remove('askr-math-status-success');
+  status.textContent = '';
+  try {
+    await navigator.clipboard.writeText(component.dataset.askrTex);
+    button.textContent = 'Copied!';
+    button.classList.add('is-copied');
+    status.classList.add('askr-math-status-success');
+    status.textContent = 'Copied';
+    askrMathCopyTimers.set(button, setTimeout(() => {
+      button.textContent = 'Copy';
+      button.classList.remove('is-copied');
+      status.textContent = '';
+      askrMathCopyTimers.delete(button);
+    }, 2000));
+  } catch {
+    let source = component.querySelector('.askr-math-source');
+    if (!source) {
+      source = document.createElement('div');
+      source.className = 'askr-math-source';
+      const textarea = document.createElement('textarea');
+      textarea.readOnly = true;
+      textarea.spellcheck = false;
+      textarea.setAttribute('aria-label', 'LaTeX source');
+      textarea.value = component.dataset.askrTex;
+      source.append(textarea);
+      component.append(source);
+    }
+    const textarea = source.querySelector('textarea');
+    textarea.focus();
+    textarea.select();
+    status.textContent = 'Copy unavailable. Select the source below to copy manually.';
+  } finally {
+    button.disabled = false;
+  }
+});
+</script>
+<script>
+// Logout is independent of image viewing and remains plain navigation.
+(() => {
+  function setup() {
+    const template = document.getElementById('askr-logout-config');
+    if (template) {
+      const tools = document.querySelector('#quarto-header .quarto-navbar-tools');
+      if (!tools) throw new Error('Askr Logout requires a website Header with navbar tools.');
+      tools.append(template.content.cloneNode(true));
+      document.getElementById('quarto-header').classList.add('askr-has-logout');
+    }
+
+  }
+  if (document.readyState === 'complete') setup();
+  else window.addEventListener('load', setup, {once: true});
+})();
+</script>
+<script>
+// Append credit without interpreting or replacing native navigation configuration.
+document.addEventListener('DOMContentLoaded', function () {
+  const credit = document.getElementById('askr-footer-credit');
+  if (!credit) return;
+  let footer = document.querySelector('footer.footer');
+  if (!footer) {
+    footer = document.createElement('footer');
+    footer.className = 'footer';
+    const row = document.createElement('div');
+    row.className = 'nav-footer';
+    footer.append(row);
+    document.body.append(footer);
+  }
+  let right = footer.querySelector('.nav-footer-right');
+  if (!right) {
+    right = document.createElement('div');
+    right.className = 'nav-footer-right';
+    footer.querySelector('.nav-footer').append(right);
+  }
+  // Quarto emits a nonbreaking-space placeholder for an unauthored region.
+  if (!right.childElementCount && !right.textContent.trim()) right.textContent = '';
+  right.append(credit.content.cloneNode(true));
+});
+</script>
+<script>
+(() => {
+  function mount() {
+    const template = document.getElementById('askr-language-config');
+    if (!template) return;
+    const tools = document.querySelector('#quarto-header .quarto-navbar-tools');
+    if (!tools) throw new Error('Askr language selector requires a website Header with navbar tools.');
+    tools.append(template.content.cloneNode(true));
+    document.getElementById('quarto-header').classList.add('askr-has-language');
+  }
+  if (document.readyState === 'complete') mount();
+  else window.addEventListener('load', mount, {once: true});
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已複製");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已複製");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/arfiligol\.github\.io\/askr\/zh-TW\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/arfiligol/askr/blob/main/README.md">
+<p>Maintenance guide (English)</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.12.0" aria-label="Askr version 0.12.0">0.12.0</a></span></template>
+<template id="askr-viewer-config" data-loop="true"></template>
+<template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: 繁體中文" title="Language: 繁體中文"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"></span></a></li><li><a class="dropdown-item active" aria-current="true" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li></ul></div></template>
+
+
+
+
+</body></html>

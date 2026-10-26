@@ -1,13 +1,15 @@
 # Candidate validation receipt
 
-## Native announcement support — local candidate — 2026-10-26
+## Native announcement support — v0.12.1 release candidate — 2026-10-26
 
 ✅ 2026-10-26: Quarto 1.10.18 rendered a clean published v0.12.0 tree plus the
 announcement changes, and the Lead inspected Chromium at desktop, tablet and
-mobile sizes in light and dark themes. ⏳ Human: inspect the local preview.
+mobile sizes in light and dark themes. The Human authorized the v0.12.1
+release on 2026-10-26.
 
 | Check | Result |
 | --- | --- |
+| Full v0.12.1 release render | ✅ Default `quarto render` exited 0 for the exact staged tree `1f62f924ca643296044786916e9d1beafbe6ad90`, exported to `/var/folders/_1/cyvvhpp52r99jn06g5sfdpmm0000gn/T/askr-v0121-release.o1ewblev`: 108 English and 29 Traditional Chinese inputs. The existing two Gallery figure cells and one arithmetic cell ran in each language; no solver ran. Only the known Traditional Chinese translation and local Jupyter warnings remained. |
 | Independent consumer | ✅ Four installed-namespace fixtures, each with two pages, rendered with `--no-execute`: long Chinese above-navbar notice with icon; long English below-navbar notice with dismissal; text-only dismissible notice; and no announcement. |
 | Bilingual Gallery | ✅ Non-executing render passed for 108 English and 29 Traditional Chinese inputs. The temporary staging initially omitted shared bibliography/image files; staging was corrected to match the existing build helper, then the render passed. No scientific computation ran. |
 | Original overlap and correction | ✅ The original mobile Pages button occupied y=11–43px while the announcement occupied y=0–41px. With the corrected 81px wrapped notice, Pages starts at y=92.6px, the header is 135.6px high, and body padding is 136px. |
@@ -20,8 +22,9 @@ mobile sizes in light and dark themes. ⏳ Human: inspect the local preview.
 | Browser console | ✅ No warnings or errors in the fixtures or the Traditional Chinese guide. |
 | Preview and screenshots | ✅ [Traditional Chinese preview](http://127.0.0.1:4611/zh-TW/usage/announcements.html) and [English preview](http://127.0.0.1:4611/usage/announcements.html). Screenshots: `/tmp/askr-announcement-gallery-desktop-light.png` and `/tmp/askr-announcement-after-mobile-dark.png`. |
 
-The candidate is available for Human visual inspection. No release version is
-assigned, and the scope has not been published or applied to a consumer site.
+⏳ Lead: complete main CI, the GitHub Release, Pages deployment and a fresh
+`v0.12.1` tag installation. Publication remains pending; local checks above
+cover the announcement and Header scope without the separate Copy changes.
 
 
 ## Native Card component — v0.12.0 release candidate — 2026-10-25
