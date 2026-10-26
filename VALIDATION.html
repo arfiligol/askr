@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-cd677eef3d4da3fa900171bb2fbfca49.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-19ddd21cbed2324fd348ca244fef22a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-cd677eef3d4da3fa900171bb2fbfca49.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-efb902b7a6cc858bbcdea2c82d71e0b8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-a7f410ce759530d0edb86a5a31c5fb4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-efb902b7a6cc858bbcdea2c82d71e0b8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -187,6 +187,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", groupedTabs);
   else groupedTabs();
   window.addEventListener("pageshow", groupedTabs);
+
+  // Quarto owns announcement content, persistence, and document/sidebar offsets.
+  // Keep Askr's overlaid Pages control and Areas panel aligned to that header.
+  function announcements() {
+    var header = document.getElementById("quarto-header");
+    if (!header) return;
+    var navbar = header.querySelector(":scope > .navbar");
+    var frame;
+    function update() {
+      frame = null;
+      var bounds = header.getBoundingClientRect();
+      var top = navbar ? navbar.getBoundingClientRect().top - bounds.top : 0;
+      header.style.setProperty("--askr-navbar-top", top + "px");
+      header.style.setProperty("--askr-header-height", bounds.height + "px");
+    }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+    if (window.ResizeObserver) new ResizeObserver(schedule).observe(header);
+    window.addEventListener("resize", schedule);
+    window.addEventListener("pageshow", schedule);
+    update();
+    var announcement = document.getElementById("quarto-announcement");
+    if (!announcement) return;
+    var chinese = /^zh(?:-|$)/i.test(document.documentElement.lang);
+    announcement.setAttribute("role", "region");
+    announcement.setAttribute("aria-label", chinese ? "網站公告" : "Site announcement");
+    var icon = announcement.querySelector(".quarto-announcement-icon");
+    if (icon) icon.setAttribute("aria-hidden", "true");
+    var action = announcement.querySelector(".quarto-announcement-action");
+    if (!action || action.closest("button")) return;
+    var close = document.createElement("button");
+    close.type = "button";
+    close.className = "askr-announcement-close";
+    close.setAttribute("aria-label", chinese ? "關閉公告" : "Close announcement");
+    close.title = close.getAttribute("aria-label");
+    action.setAttribute("aria-hidden", "true");
+    action.before(close);
+    close.appendChild(action);
+    close.addEventListener("click", function (event) {
+      var returnFocus = document.activeElement === close;
+      // Keep the original node: Quarto binds its click handler to this icon.
+      if (event.target !== action) action.click();
+      if (returnFocus && !announcement.isConnected) {
+        var entry = Array.from(header.querySelectorAll("a[href], button")).find(function (control) {
+          return !control.disabled && control.getClientRects().length && getComputedStyle(control).visibility !== "hidden";
+        });
+        if (entry) entry.focus();
+      }
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", announcements);
+  else announcements();
 
   function hideShown(selector) {
     document.querySelectorAll(selector).forEach(function (el) {
@@ -689,6 +742,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <div id="quarto-announcement" data-announcement-id="f275954ab84ec6dd0941e1d5340b810a" class="alert alert-warning hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Gallery demo: preview documentation — features may change before release.</p>
+</div></div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -742,6 +798,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#candidate-validation-receipt" id="toc-candidate-validation-receipt" class="nav-link active" data-scroll-target="#candidate-validation-receipt">Candidate validation receipt</a>
   <ul class="collapse">
+  <li><a href="#native-announcement-support-v0.12.1-release-candidate-2026-10-26" id="toc-native-announcement-support-v0.12.1-release-candidate-2026-10-26" class="nav-link" data-scroll-target="#native-announcement-support-v0.12.1-release-candidate-2026-10-26">Native announcement support — v0.12.1 release candidate — 2026-10-26</a></li>
   <li><a href="#native-card-component-v0.12.0-release-candidate-2026-10-25" id="toc-native-card-component-v0.12.0-release-candidate-2026-10-25" class="nav-link" data-scroll-target="#native-card-component-v0.12.0-release-candidate-2026-10-25">Native Card component — v0.12.0 release candidate — 2026-10-25</a></li>
   <li><a href="#native-mermaid-modal-2026-10-21" id="toc-native-mermaid-modal-2026-10-21" class="nav-link" data-scroll-target="#native-mermaid-modal-2026-10-21">Native Mermaid modal — 2026-10-21</a></li>
   <li><a href="#documentation-version-archive-correction-2026-10-21" id="toc-documentation-version-archive-correction-2026-10-21" class="nav-link" data-scroll-target="#documentation-version-archive-correction-2026-10-21">Documentation version archive correction — 2026-10-21</a></li>
@@ -799,6 +856,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="candidate-validation-receipt" class="level1">
 <h1>Candidate validation receipt</h1>
+<section id="native-announcement-support-v0.12.1-release-candidate-2026-10-26" class="level2">
+<h2 class="anchored" data-anchor-id="native-announcement-support-v0.12.1-release-candidate-2026-10-26">Native announcement support — v0.12.1 release candidate — 2026-10-26</h2>
+<p>✅ 2026-10-26: Quarto 1.10.18 rendered a clean published v0.12.0 tree plus the announcement changes, and the Lead inspected Chromium at desktop, tablet and mobile sizes in light and dark themes. The Human authorized the v0.12.1 release on 2026-10-26.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Full v0.12.1 release render</td>
+<td>✅ Default <code>quarto render</code> exited 0 for the exact staged tree <code>1f62f924ca643296044786916e9d1beafbe6ad90</code>, exported to <code>/var/folders/_1/cyvvhpp52r99jn06g5sfdpmm0000gn/T/askr-v0121-release.o1ewblev</code>: 108 English and 29 Traditional Chinese inputs. The existing two Gallery figure cells and one arithmetic cell ran in each language; no solver ran. Only the known Traditional Chinese translation and local Jupyter warnings remained.</td>
+</tr>
+<tr class="even">
+<td>Independent consumer</td>
+<td>✅ Four installed-namespace fixtures, each with two pages, rendered with <code>--no-execute</code>: long Chinese above-navbar notice with icon; long English below-navbar notice with dismissal; text-only dismissible notice; and no announcement.</td>
+</tr>
+<tr class="odd">
+<td>Bilingual Gallery</td>
+<td>✅ Non-executing render passed for 108 English and 29 Traditional Chinese inputs. The temporary staging initially omitted shared bibliography/image files; staging was corrected to match the existing build helper, then the render passed. No scientific computation ran.</td>
+</tr>
+<tr class="even">
+<td>Original overlap and correction</td>
+<td>✅ The original mobile Pages button occupied y=11–43px while the announcement occupied y=0–41px. With the corrected 81px wrapped notice, Pages starts at y=92.6px, the header is 135.6px high, and body padding is 136px.</td>
+</tr>
+<tr class="odd">
+<td>Responsive layout</td>
+<td>✅ Desktop 1440×900 and the default approximately 1280px viewport, tablet 768×1024, and mobile 390×844 were inspected in light/dark themes. At 390px, document scroll width was 375px with no horizontal overflow. The below-navbar fixture kept Pages at y=11.4px; the no-announcement fixture retained the same position.</td>
+</tr>
+<tr class="even">
+<td>Navigation and offsets</td>
+<td>✅ Pages/sidebar opened and closed; Areas opened below the full header at y=135.6px and Escape left no residual overlay. Native anchor offset tracked the 105.5px header at 105px, and the destination heading remained visible after scrolling.</td>
+</tr>
+<tr class="odd">
+<td>Dismissal and keyboard</td>
+<td>✅ Enter and Space dismissed the notice and returned focus to the navbar brand. Header height then measured 54.4px with 54px body padding; reload retained native dismissal. The text-only notice’s close control had a visible 3px focus outline.</td>
+</tr>
+<tr class="even">
+<td>Header transitions</td>
+<td>✅ Computed styles confirmed 0.15s ease-in-out color, background, border and shadow transitions on Pages, Areas, Search, version, theme, language, GitHub and Logout controls, plus the announcement surface. Language opened and closed with Escape at 390px; scroll width remained 375px. The reduced-motion media rule was checked in source; the operating-system setting was not changed.</td>
+</tr>
+<tr class="odd">
+<td>Search icon transition</td>
+<td>✅ Real-pointer hover reproduced the dark-theme mismatch before the fix: control rgb(143, 183, 168), SVG rgb(235, 235, 236). After the fix, control/icon/SVG matched at rgb(235, 235, 236) normally and rgb(143, 183, 168) on dark hover; light hover matched at rgb(79, 117, 107), including mobile 390px with 375px scroll width. The visible color transition is 150ms ease-in-out. Search opened its native overlay, <code>公告</code> returned four results, and Escape closed it; native focus then rested on the body. English/Chinese guides rendered with <code>--no-execute</code>, and console warnings/errors were empty. Screenshots: <code>/tmp/askr-search-hover-dark.png</code> and <code>/tmp/askr-search-hover-light.png</code>.</td>
+</tr>
+<tr class="even">
+<td>Refined-theme recheck</td>
+<td>✅ The root guide, Traditional Chinese guide and above-navbar Chinese fixture rendered successfully after the Header transition refinement. The notice changed from a dark tinted surface with foreground 212 to a light tinted surface with foreground 78 when the theme changed. Earlier full-render results remain applicable to unchanged content.</td>
+</tr>
+<tr class="odd">
+<td>Browser console</td>
+<td>✅ No warnings or errors in the fixtures or the Traditional Chinese guide.</td>
+</tr>
+<tr class="even">
+<td>Preview and screenshots</td>
+<td>✅ <a href="http://127.0.0.1:4611/zh-TW/usage/announcements.html">Traditional Chinese preview</a> and <a href="http://127.0.0.1:4611/usage/announcements.html">English preview</a>. Screenshots: <code>/tmp/askr-announcement-gallery-desktop-light.png</code> and <code>/tmp/askr-announcement-after-mobile-dark.png</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>⏳ Lead: complete main CI, the GitHub Release, Pages deployment and a fresh <code>v0.12.1</code> tag installation. Publication remains pending; local checks above cover the announcement and Header scope without the separate Copy changes.</p>
+</section>
 <section id="native-card-component-v0.12.0-release-candidate-2026-10-25" class="level2">
 <h2 class="anchored" data-anchor-id="native-card-component-v0.12.0-release-candidate-2026-10-25">Native Card component — v0.12.0 release candidate — 2026-10-25</h2>
 <p>Semantic state: CONVERGING. Delivery state: CANDIDATE; the Human-authorized v0.12.0 release endpoint is not complete. ✅ The Lead completed the Card-only source/consumer renders, Chromium review, and full bilingual site render. The published v0.11.0 package remains unchanged; the previous Copy follow-up is not included in this release.</p>
@@ -2108,7 +2228,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.12.0" aria-label="Askr version 0.12.0">0.12.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.12.1" aria-label="Askr version 0.12.1">0.12.1</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 

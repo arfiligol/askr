@@ -47,9 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-cd677eef3d4da3fa900171bb2fbfca49.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-19ddd21cbed2324fd348ca244fef22a2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-cd677eef3d4da3fa900171bb2fbfca49.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-efb902b7a6cc858bbcdea2c82d71e0b8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-a7f410ce759530d0edb86a5a31c5fb4e.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-efb902b7a6cc858bbcdea2c82d71e0b8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -152,6 +152,59 @@ ul.task-list li input[type="checkbox"] {
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", groupedTabs);
   else groupedTabs();
   window.addEventListener("pageshow", groupedTabs);
+
+  // Quarto owns announcement content, persistence, and document/sidebar offsets.
+  // Keep Askr's overlaid Pages control and Areas panel aligned to that header.
+  function announcements() {
+    var header = document.getElementById("quarto-header");
+    if (!header) return;
+    var navbar = header.querySelector(":scope > .navbar");
+    var frame;
+    function update() {
+      frame = null;
+      var bounds = header.getBoundingClientRect();
+      var top = navbar ? navbar.getBoundingClientRect().top - bounds.top : 0;
+      header.style.setProperty("--askr-navbar-top", top + "px");
+      header.style.setProperty("--askr-header-height", bounds.height + "px");
+    }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+    if (window.ResizeObserver) new ResizeObserver(schedule).observe(header);
+    window.addEventListener("resize", schedule);
+    window.addEventListener("pageshow", schedule);
+    update();
+    var announcement = document.getElementById("quarto-announcement");
+    if (!announcement) return;
+    var chinese = /^zh(?:-|$)/i.test(document.documentElement.lang);
+    announcement.setAttribute("role", "region");
+    announcement.setAttribute("aria-label", chinese ? "網站公告" : "Site announcement");
+    var icon = announcement.querySelector(".quarto-announcement-icon");
+    if (icon) icon.setAttribute("aria-hidden", "true");
+    var action = announcement.querySelector(".quarto-announcement-action");
+    if (!action || action.closest("button")) return;
+    var close = document.createElement("button");
+    close.type = "button";
+    close.className = "askr-announcement-close";
+    close.setAttribute("aria-label", chinese ? "關閉公告" : "Close announcement");
+    close.title = close.getAttribute("aria-label");
+    action.setAttribute("aria-hidden", "true");
+    action.before(close);
+    close.appendChild(action);
+    close.addEventListener("click", function (event) {
+      var returnFocus = document.activeElement === close;
+      // Keep the original node: Quarto binds its click handler to this icon.
+      if (event.target !== action) action.click();
+      if (returnFocus && !announcement.isConnected) {
+        var entry = Array.from(header.querySelectorAll("a[href], button")).find(function (control) {
+          return !control.disabled && control.getClientRects().length && getComputedStyle(control).visibility !== "hidden";
+        });
+        if (entry) entry.focus();
+      }
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", announcements);
+  else announcements();
 
   function hideShown(selector) {
     document.querySelectorAll(selector).forEach(function (el) {
@@ -654,6 +707,9 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
+    <div id="quarto-announcement" data-announcement-id="f275954ab84ec6dd0941e1d5340b810a" class="alert alert-warning hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Gallery demo: preview documentation — features may change before release.</p>
+</div></div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -1446,7 +1502,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.12.0" aria-label="Askr version 0.12.0">0.12.0</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.12.1" aria-label="Askr version 0.12.1">0.12.1</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="../zh-TW" hreflang="../zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 
