@@ -2,10 +2,10 @@
 title: "安裝 Askr"
 ---
 
-目前版本為 `0.11.0`，公開格式名稱為 `askr-html`，視覺主題為 Quiet Quartz。
+目前版本為 `0.12.1`，公開格式名稱為 `askr-html`，視覺主題為 Quiet Quartz。
 
 ```bash
-quarto add arfiligol/askr@v0.11.0 --no-prompt
+quarto add arfiligol/askr@v0.12.1 --no-prompt
 ```
 
 ```yaml
@@ -31,7 +31,7 @@ format:
 
 ## Quarto 相容性
 
-Askr 0.11.0 支援穩定版 Quarto `>=1.9.38 <1.11`。Quarto 1.10.18 仍是可重現圖集與 CI 的基準；使用者可採用支援範圍內的其他穩定版本，不必固定使用該修補版本。較舊標籤版本仍保留其原有需求。
+Askr 0.12.1 支援穩定版 Quarto `>=1.9.38 <1.11`。Quarto 1.10.18 仍是可重現圖集與 CI 的基準；使用者可採用支援範圍內的其他穩定版本，不必固定使用該修補版本。較舊標籤版本仍保留其原有需求。
 
 設定 `respect-user-color-scheme: true` 可依照讀者的系統偏好選擇配色。若使用 RequireJS 相容設定，請設定 `smooth-scroll: false`。這些是由使用專案選擇的選項；Askr 格式預設值不變。
 
