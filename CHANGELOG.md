@@ -5,6 +5,11 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+### Changed
+
+- Style Quarto filename headers inside one shared code frame, with wrapping
+  filenames, source-local scrolling, and the existing Copy control.
+
 ## 0.13.1 — 2026-10-27
 
 ### Fixed

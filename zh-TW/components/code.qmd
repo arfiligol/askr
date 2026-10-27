@@ -3,7 +3,11 @@ title: "程式碼"
 subtitle: "行內程式碼與圍欄區塊"
 ---
 
-行內程式碼會在醒目提示底色上使用 IBM Plex Mono。圍欄區塊採透明填色、1px 邊框與 5px 圓角，並保留足夠內距，避免複製控制項遮住第一行。程式碼來源與 `code-copy` 是否啟用仍由 Quarto 提供；Askr 改用共用的文字 `Copy` 按鈕，取代 Quarto 原本帶圖示與工具提示的控制項。複製成功後，按鈕本身會顯示 `Copied!` 並加上綠色外框，約兩秒後恢復為 `Copy`。長行會在區塊內捲動，不會撐寬整頁。
+行內程式碼會在醒目提示底色上使用 IBM Plex Mono。圍欄區塊以透明填色、1px 外框與 5px 圓角呈現，並保留足夠內距，避免 `Copy` 按鈕遮住第一行。檔名區塊會在同一外框內加上淡色標題列。
+
+程式碼來源與 `code-copy` 是否啟用仍由 Quarto 提供；Askr 改用共用的文字 `Copy` 按鈕，取代 Quarto 原本帶圖示與工具提示的控制項。複製成功後，按鈕本身會顯示 `Copied!` 並加上綠色外框，約兩秒後恢復為 `Copy`。
+
+設為捲動的區塊會讓長行留在區塊內，不會撐寬整頁。
 
 行內範例為 `askr-html`。
 
@@ -20,6 +24,20 @@ def quiet(width: int) -> str:
     return f"measure {width}px"
 ```
 
+## 提示區塊中的檔名
+
+原生檔名可標示程式碼內容，不必另外套一層卡片。長路徑會在程式碼區域內捲動；窄畫面上的檔名則可換行。
+
+::: {.callout-note title="輸出路徑範例" collapse="false"}
+以下通用路徑用來展示報告清單，不對應實際檔案系統。
+
+```{.default filename="reports/example-run/output-manifest.txt" .code-overflow-scroll}
+layout: /work/projects/example-study/runs/reference-model/exports/geometry/component-layout.svg
+results: /work/projects/example-study/runs/reference-model/analysis/frequency-sweep/results.csv
+report: /work/projects/example-study/runs/reference-model/reports/summary/index.html
+```
+:::
+
 ## 限制
 
-主題會讓長行在圍欄區塊內捲動。請勿為了限制閱讀欄寬度而把段落包進程式碼圍欄：內文應放在文章中，圍欄則用來呈現原始碼。
+檔名範例會讓長行在可捲動區塊內顯示。請勿為了限制閱讀欄寬度而把段落包進程式碼圍欄：內文應放在文章中，圍欄則用來呈現原始碼。
