@@ -24,6 +24,16 @@ Inline mathematics stays in the sentence, as in $\omega_r = 2\pi f$.
 
 ## Copy settings
 
+::: {.callout-warning title="Copy in HTTP previews"}
+Use an HTTPS site when checking Copy on mobile Safari. An HTTP preview at a
+LAN or VPN address is not a secure context, even over a VPN, so Safari does
+not expose the standard clipboard API. Copy may therefore fail on these
+previews; select the LaTeX source shown below the formula and copy it manually.
+
+Check Copy again on the HTTPS site. Browser permissions can still prevent
+clipboard access. See [WebKit's clipboard security requirements](https://webkit.org/blog/10855/async-clipboard-api/#security-and-privacy).
+:::
+
 At site level in `_quarto.yml`, set `askr.math-copy: false` as a nested option:
 
 ```yaml
