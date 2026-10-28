@@ -5,6 +5,14 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+## 0.13.3 — 2026-10-28
+
+### Changed
+
+- Highlight the current Page List link with a theme-aware row tint and
+  semibold label.
+- Preserve the actual published 0.13.2 documentation site under `/v0.13.2/`.
+
 ## 0.13.2 — 2026-10-28
 
 ### Added

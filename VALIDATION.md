@@ -1,9 +1,25 @@
 # Candidate and release validation receipts
 
-## Askr v0.13.2 — accepted design and release documentation — 2026-10-28
+## Askr v0.13.3 — Page List current-page highlight — 2026-10-28
 
-Semantic state: ACCEPTED. Delivery state: CANDIDATE; the v0.13.2 tag and
-publication are pending.
+Semantic state: ACCEPTED. Delivery state: CANDIDATE. The Human authorized
+publication of the accepted Page List highlight.
+
+| Check | Result |
+| --- | --- |
+| Human scope | ✅ Highlight only the current Page List item with a theme-aware tint and semibold label. |
+| v0.13.2 archive source | ✅ Published Pages commit `ccac30acfab164ff2f8ba4db9be7efef7d5beb1a`. |
+| Archive contents | ✅ 244 files, 26,612,518 bytes copied to `v0.13.2/`; `.nojekyll` and nested version directories excluded, matching prior archive layout. |
+| Archive SHA-256 manifest | ✅ `7bd39706a24f6385ec9dd0704e4929970bb6279e37a3940d5a1d4636c2001b67`; path list: `/tmp/askr-v0132-archive-paths.txt`. |
+| Archive identity | ✅ All 244 archived files match the published source bytes exactly. |
+| Default full-site render | ✅ Passed for 111 English and 32 Traditional Chinese inputs; log: `/tmp/askr-v0133-render.log`. |
+| Light/dark Page List | ✅ The Versions page showed the current item with weight 600, no box shadow, and a 10% link tint in both themes. Screenshots: `/tmp/askr-docs-tint-light.png` and `/tmp/askr-docs-tint-dark.png`. |
+| Mobile Page List | ✅ Existing review confirmed the native current-page state and 48px row height. |
+| Remaining release checks | ⏳ Lead: main CI, fresh consumer installation from the released tag, and publication. |
+
+## Askr v0.13.2 — filename code frames and release documentation — 2026-10-28
+
+Semantic state: ACCEPTED. Delivery state: PUBLISHED.
 
 | Check | Result |
 | --- | --- |
@@ -12,7 +28,10 @@ publication are pending.
 | Light desktop page | ✅ Lead served the candidate at [http://10.20.0.2:4614](http://10.20.0.2:4614). At 1280×720, the English Code page had no console errors; document client and scroll widths were both 1265px at `innerWidth` 1280px. Screenshot: `/tmp/askr-v0132-desktop-light.png`. |
 | Documentation sources | ✅ The native footer guide and bilingual HTML License pages are present from `0beff39`; Safari HTTP-preview clipboard guidance is present from `85708df`. Copy runtime behavior is unchanged. |
 | v0.13.1 archive | ✅ Root verified 241 files (26,374,137 bytes) from deployed `gh-pages` commit `bff50282f12d71dfb9ebaa34f8c6979160230452`; hashes match. |
-| Release checks | ⏳ Lead: default full render and existing CI, fresh native installation from the v0.13.2 tag, and public-site review. The tag does not yet exist. |
+| Gallery render | ✅ Clean render completed for 111 English and 32 Traditional Chinese inputs. |
+| Publish workflow | ✅ Main Publish run 40632894264 succeeded at `46e01384169b40b4c583ea7501331e12f51cc0ab`; Pages run 40633143930 deployed `ccac30acfab164ff2f8ba4db9be7efef7d5beb1a`. |
+| Fresh install | ✅ `quarto add arfiligol/askr@v0.13.2 --no-prompt` installed 43 extension files byte-identical to the tag; consumer render passed. |
+| Public site | ✅ English and Traditional Chinese Code and License pages returned HTTP 200. Root, `/v0.13.1/` and `/v0.3.0/` manifests identified 0.13.2 as latest. Actual Copy feedback and the single code frame were confirmed. |
 
 ## Askr v0.13.1 — Copy source spacing hotfix — 2026-10-27
 
