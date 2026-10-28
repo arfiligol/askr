@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8ef357017f12775fe8c228605fec87c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-b3e5a26fc8f2068b49c0c63c9230facb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-8ef357017f12775fe8c228605fec87c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-6e87a31393c6f91a58601bf2bd54a356.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -902,7 +902,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Sections</h2>
    
   <ul>
-  <li><a href="#limits" id="toc-limits" class="nav-link active" data-scroll-target="#limits">Limits</a></li>
+  <li><a href="#filename-inside-a-callout" id="toc-filename-inside-a-callout" class="nav-link active" data-scroll-target="#filename-inside-a-callout">Filename inside a callout</a></li>
+  <li><a href="#limits" id="toc-limits" class="nav-link" data-scroll-target="#limits">Limits</a></li>
   </ul>
 </nav>
     </div>
@@ -930,7 +931,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Inline code uses IBM Plex Mono on the highlight token. Fenced blocks keep a transparent fill, a 1px border, and a 5px radius, with padding that leaves the copy control clear of the first line. Quarto supplies the source and the <code>code-copy</code> availability setting; Askr uses its shared text <code>Copy</code> button instead of Quarto’s icon-and-tooltip control. After a successful copy, the button shows <code>Copied!</code> with a green outline for about two seconds, then returns to <code>Copy</code>. Long lines scroll inside the block instead of widening the page.</p>
+<p>Inline code uses IBM Plex Mono on the highlight token. Fenced blocks use a transparent fill within a 1px frame with a 5px radius. Padding keeps the copy control clear of the first line.</p>
+<p>Filename blocks add a softly tinted header inside the same frame. Quarto supplies the source and the <code>code-copy</code> availability setting; Askr uses its shared text <code>Copy</code> button instead of Quarto’s icon-and-tooltip control.</p>
+<p>After a successful copy, the button shows <code>Copied!</code> with a green outline for about two seconds, then returns to <code>Copy</code>. Long lines in scroll-enabled blocks stay inside the block instead of widening the page.</p>
 <p>An inline sample is <code>askr-html</code>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> describe_reading_surface(theme: <span class="bu">str</span>, width: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>theme<span class="sc">}</span><span class="ss"> surface at </span><span class="sc">{</span>width<span class="sc">}</span><span class="ss">px retains local overflow boundaries"</span></span>
@@ -944,9 +947,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="reading.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quiet(width: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"measure </span><span class="sc">{</span>width<span class="sc">}</span><span class="ss">px"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<section id="filename-inside-a-callout" class="level2">
+<h2 class="anchored" data-anchor-id="filename-inside-a-callout">Filename inside a callout</h2>
+<p>A native filename labels the block without adding another card. Long paths scroll within the code area; the filename can wrap on a narrow screen.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Example output paths">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Example output paths
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>These generic paths illustrate a report manifest, not a live filesystem.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>reports/example-run/output-manifest.txt</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="reports/example-run/output-manifest.txt"><pre class="sourceCode default code-overflow-scroll code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>layout: /work/projects/example-study/runs/reference-model/exports/geometry/component-layout.svg</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>results: /work/projects/example-study/runs/reference-model/analysis/frequency-sweep/results.csv</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>report: /work/projects/example-study/runs/reference-model/reports/summary/index.html</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="limits" class="level2">
 <h2 class="anchored" data-anchor-id="limits">Limits</h2>
-<p>The theme contains a long source line by scrolling inside the fenced block. Do not wrap a paragraph in a code fence to force a measure; prose belongs in the article, and a fence is for source.</p>
+<p>The filename example keeps a long source line inside its scrollable block. Do not wrap a paragraph in a code fence to force a measure; prose belongs in the article, and a fence is for source.</p>
 
 
 </section>
@@ -1658,6 +1689,16 @@ document.addEventListener('DOMContentLoaded', function () {
 <p><i class="bi bi-wrench" aria-hidden="true"></i> Maintenance guide</p>
 </a>
   </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../license.html">
+<p><i class="bi bi-file-earmark-text" aria-hidden="true"></i> License</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../THIRD_PARTY.html">
+<p><i class="bi bi-journal-text" aria-hidden="true"></i> Third-party notices</p>
+</a>
+  </li>  
 </ul>
     </div>
     <div class="nav-footer-right">
@@ -1665,7 +1706,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.1" aria-label="Askr version 0.13.1">0.13.1</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.2" aria-label="Askr version 0.13.2">0.13.2</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="../zh-TW" hreflang="../zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 

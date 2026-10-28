@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8ef357017f12775fe8c228605fec87c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-b3e5a26fc8f2068b49c0c63c9230facb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-8ef357017f12775fe8c228605fec87c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-6e87a31393c6f91a58601bf2bd54a356.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -986,6 +986,20 @@ window.Quarto = {
 <p>行內數學公式留在句子中，例如 <span class="math inline">\(\omega_r = 2\pi f\)</span>。</p>
 <section id="複製設定" class="level2">
 <h2 class="anchored" data-anchor-id="複製設定">複製設定</h2>
+<div class="callout callout-style-default callout-warning callout-titled" title="HTTP 預覽的複製限制">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">警告</span>HTTP 預覽的複製限制
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>使用手機 Safari 檢查 Copy 時，請在 HTTPS 網站上操作。以區域網路或 VPN 位址開啟的 HTTP 預覽不屬於安全環境；即使已連線 VPN，Safari 仍不開放標準剪貼簿 API，因此可能無法自動複製。此時可選取公式下方顯示的 LaTeX 原始碼，手動複製。</p>
+<p>請在 HTTPS 網站上再次確認 Copy；瀏覽器權限仍可能阻擋剪貼簿存取。詳見 <a href="https://webkit.org/blog/10855/async-clipboard-api/#security-and-privacy">WebKit 的剪貼簿安全限制</a>。</p>
+</div>
+</div>
 <p>在 <code>_quarto.yml</code> 的網站層級設定中，使用巢狀選項 <code>askr.math-copy: false</code>：</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">askr</span><span class="kw">:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">math-copy</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1694,13 +1708,30 @@ document.addEventListener('DOMContentLoaded', function () {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/arfiligol/askr">
+      <i class="bi bi-github" role="img" aria-label="GitHub 原始碼">
+</i> 
+    </a>
+  </li>  
+</ul>
     </div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
     <a class="nav-link" href="https://github.com/arfiligol/askr/blob/main/README.md">
 <p>Maintenance guide (English)</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../license.html">
+<p><i class="bi bi-file-earmark-text" aria-hidden="true"></i> 授權條款</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../THIRD_PARTY.html">
+<p><i class="bi bi-journal-text" aria-hidden="true"></i> 第三方聲明（英文）</p>
 </a>
   </li>  
 </ul>
@@ -1710,7 +1741,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.1" aria-label="Askr version 0.13.1">0.13.1</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.2" aria-label="Askr version 0.13.2">0.13.2</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: 繁體中文" title="Language: 繁體中文"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"></span></a></li><li><a class="dropdown-item active" aria-current="true" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li></ul></div></template>
 

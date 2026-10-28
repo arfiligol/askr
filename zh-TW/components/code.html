@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8ef357017f12775fe8c228605fec87c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-b3e5a26fc8f2068b49c0c63c9230facb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-8ef357017f12775fe8c228605fec87c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-6e87a31393c6f91a58601bf2bd54a356.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -908,7 +908,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">當頁章節</h2>
    
   <ul>
-  <li><a href="#限制" id="toc-限制" class="nav-link active" data-scroll-target="#限制">限制</a></li>
+  <li><a href="#提示區塊中的檔名" id="toc-提示區塊中的檔名" class="nav-link active" data-scroll-target="#提示區塊中的檔名">提示區塊中的檔名</a></li>
+  <li><a href="#限制" id="toc-限制" class="nav-link" data-scroll-target="#限制">限制</a></li>
   </ul>
 </nav>
     </div>
@@ -936,7 +937,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>行內程式碼會在醒目提示底色上使用 IBM Plex Mono。圍欄區塊採透明填色、1px 邊框與 5px 圓角，並保留足夠內距，避免複製控制項遮住第一行。程式碼來源與 <code>code-copy</code> 是否啟用仍由 Quarto 提供；Askr 改用共用的文字 <code>Copy</code> 按鈕，取代 Quarto 原本帶圖示與工具提示的控制項。複製成功後，按鈕本身會顯示 <code>Copied!</code> 並加上綠色外框，約兩秒後恢復為 <code>Copy</code>。長行會在區塊內捲動，不會撐寬整頁。</p>
+<p>行內程式碼會在醒目提示底色上使用 IBM Plex Mono。圍欄區塊以透明填色、1px 外框與 5px 圓角呈現，並保留足夠內距，避免 <code>Copy</code> 按鈕遮住第一行。檔名區塊會在同一外框內加上淡色標題列。</p>
+<p>程式碼來源與 <code>code-copy</code> 是否啟用仍由 Quarto 提供；Askr 改用共用的文字 <code>Copy</code> 按鈕，取代 Quarto 原本帶圖示與工具提示的控制項。複製成功後，按鈕本身會顯示 <code>Copied!</code> 並加上綠色外框，約兩秒後恢復為 <code>Copy</code>。</p>
+<p>設為捲動的區塊會讓長行留在區塊內，不會撐寬整頁。</p>
 <p>行內範例為 <code>askr-html</code>。</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> describe_reading_surface(theme: <span class="bu">str</span>, width: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"</span><span class="sc">{</span>theme<span class="sc">}</span><span class="ss"> surface at </span><span class="sc">{</span>width<span class="sc">}</span><span class="ss">px retains local overflow boundaries"</span></span>
@@ -950,9 +953,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="reading.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quiet(width: <span class="bu">int</span>) <span class="op">-&gt;</span> <span class="bu">str</span>:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="ss">f"measure </span><span class="sc">{</span>width<span class="sc">}</span><span class="ss">px"</span></span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<section id="提示區塊中的檔名" class="level2">
+<h2 class="anchored" data-anchor-id="提示區塊中的檔名">提示區塊中的檔名</h2>
+<p>原生檔名可標示程式碼內容，不必另外套一層卡片。長路徑會在程式碼區域內捲動；窄畫面上的檔名則可換行。</p>
+<div class="callout callout-style-default callout-note callout-titled" title="輸出路徑範例">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="true" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">註釋</span>輸出路徑範例
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse show">
+<div class="callout-body-container callout-body">
+<p>以下通用路徑用來展示報告清單，不對應實際檔案系統。</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>reports/example-run/output-manifest.txt</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="reports/example-run/output-manifest.txt"><pre class="sourceCode default code-overflow-scroll code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>layout: /work/projects/example-study/runs/reference-model/exports/geometry/component-layout.svg</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>results: /work/projects/example-study/runs/reference-model/analysis/frequency-sweep/results.csv</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>report: /work/projects/example-study/runs/reference-model/reports/summary/index.html</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="限制" class="level2">
 <h2 class="anchored" data-anchor-id="限制">限制</h2>
-<p>主題會讓長行在圍欄區塊內捲動。請勿為了限制閱讀欄寬度而把段落包進程式碼圍欄：內文應放在文章中，圍欄則用來呈現原始碼。</p>
+<p>檔名範例會讓長行在可捲動區塊內顯示。請勿為了限制閱讀欄寬度而把段落包進程式碼圍欄：內文應放在文章中，圍欄則用來呈現原始碼。</p>
 
 
 </section>
@@ -1643,13 +1674,30 @@ document.addEventListener('DOMContentLoaded', function () {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-      &nbsp;
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/arfiligol/askr">
+      <i class="bi bi-github" role="img" aria-label="GitHub 原始碼">
+</i> 
+    </a>
+  </li>  
+</ul>
     </div>   
     <div class="nav-footer-center">
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
     <a class="nav-link" href="https://github.com/arfiligol/askr/blob/main/README.md">
 <p>Maintenance guide (English)</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../license.html">
+<p><i class="bi bi-file-earmark-text" aria-hidden="true"></i> 授權條款</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../../THIRD_PARTY.html">
+<p><i class="bi bi-journal-text" aria-hidden="true"></i> 第三方聲明（英文）</p>
 </a>
   </li>  
 </ul>
@@ -1659,7 +1707,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.1" aria-label="Askr version 0.13.1">0.13.1</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.2" aria-label="Askr version 0.13.2">0.13.2</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: 繁體中文" title="Language: 繁體中文"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"></span></a></li><li><a class="dropdown-item active" aria-current="true" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li></ul></div></template>
 

@@ -3,10 +3,15 @@
   "longTitle": "Interferometric Purcell Filter",
   "versions": [
     {
-      "label": "0.13.1",
+      "label": "0.13.2",
       "root": "/askr/",
       "latest": true,
       "href": "/askr/"
+    },
+    {
+      "label": "0.13.1",
+      "root": "/askr/v0.13.1/",
+      "href": "/askr/v0.13.1/"
     },
     {
       "label": "0.13.0",

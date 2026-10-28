@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8ef357017f12775fe8c228605fec87c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-b3e5a26fc8f2068b49c0c63c9230facb.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-8ef357017f12775fe8c228605fec87c1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-6e87a31393c6f91a58601bf2bd54a356.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -886,6 +886,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#native-configuration" id="toc-native-configuration" class="nav-link active" data-scroll-target="#native-configuration">Native configuration</a></li>
+  <li><a href="#project-license-and-third-party-notices" id="toc-project-license-and-third-party-notices" class="nav-link" data-scroll-target="#project-license-and-third-party-notices">Project license and third-party notices</a></li>
   <li><a href="#powered-by-askr" id="toc-powered-by-askr" class="nav-link" data-scroll-target="#powered-by-askr">Powered by Askr</a></li>
   </ul>
 </nav>
@@ -936,17 +937,47 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> maintenance.qmd</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">'&lt;i class="bi bi-people" aria-hidden="true"&gt;&lt;/i&gt; Contributing'</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> contributing.qmd</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">right</span><span class="kw">:</span><span class="at"> </span><span class="st">"Your project's existing footer content"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">'&lt;i class="bi bi-file-earmark-text" aria-hidden="true"&gt;&lt;/i&gt; License'</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> license.qmd</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">'&lt;i class="bi bi-journal-text" aria-hidden="true"&gt;&lt;/i&gt; Third-party notices'</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> THIRD_PARTY.md</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">right</span><span class="kw">:</span><span class="at"> </span><span class="st">"Your project's existing footer content"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Replace the example destinations with your own. GitHub appears twice because these are two native navigation locations; Askr does not synchronize URLs. Use <a href="https://icons.getbootstrap.com/">Bootstrap icon names</a> and descriptive <code>text</code> / <code>aria-label</code> values. Icon-only Footer links require <code>aria-label</code>: Quarto attaches that name to their native icon. For unfamiliar community links, a short visible label makes the purpose clearer. Quarto 1.10.18’s Footer text rendering replaces a sibling <code>icon</code> when both are configured, so these examples put decorative Bootstrap icons inside native <code>text</code> markup instead. <code>aria-hidden</code> leaves the visible label as the link name.</p>
 <p>With <code>tools-collapse: true</code>, authored tools move into the Areas panel when space is insufficient. Theme, Search and optional Logout stay available in the Header. <code>false</code> keeps tools in the Header; use a small set so they fit your narrowest viewport. Long Footer labels wrap rather than scroll. Links use Quarto’s native <code>href</code>, <code>target</code> and <code>rel</code> behavior; Askr does not force new browser tabs. Existing links and build information remain authored content.</p>
+</section>
+<section id="project-license-and-third-party-notices" class="level2">
+<h2 class="anchored" data-anchor-id="project-license-and-third-party-notices">Project license and third-party notices</h2>
+<p>Use ordinary <code>page-footer</code> items for your project’s license and third-party notices, alongside its existing project and contribution links. Choose labels and destinations that match the documents you publish. Askr does not infer those documents or select a license for a consumer project. The Gallery links to Askr’s own MIT license and asset notices; those are not the license terms for a site that installs Askr.</p>
+<p>Make <code>license.qmd</code> a reading page that includes the canonical license file, rather than copying the legal text into a second source:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "License"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>The following is this project's canonical license.</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>{{&lt; include LICENSE &gt;}}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Footer <code>href</code> values in <code>_quarto.yml</code> are relative to that Quarto project. <code>license.qmd</code> and <code>THIRD_PARTY.md</code> link to their rendered <code>license.html</code> and <code>THIRD_PARTY.html</code>; include both sources in the project’s render inputs. Quarto adjusts links for deep pages, so <code>usage/header-footer.html</code> links back to <code>../license.html</code> and <code>../THIRD_PARTY.html</code>. Project-relative paths also retain deployment prefixes such as <code>/docs/</code> and version directories such as <code>/v1.2/</code>, without baking those directories into each link.</p>
+<p>An optional raw <code>LICENSE</code> link can offer the original file for download. The host’s content type and response headers determine whether it opens or downloads, so use the rendered page as the reading entry. If you offer that raw-file link, include the file in project resources:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> LICENSE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For separate language projects, each language can have its own reading page while including the same canonical file. For example, <code>zh-TW/license.qmd</code> uses <code>{{&lt; include ../LICENSE &gt;}}</code> and explains that the legal text remains in its original language. Its footer can link to that page and a shared notices page at the parent site root:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">website</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">page-footer</span><span class="kw">:</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">center</span><span class="kw">:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> 授權條款</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> license.qmd</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> 第三方聲明（英文）</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> ../THIRD_PARTY.html</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The parent project renders <code>THIRD_PARTY.md</code>. Quarto adjusts the relative paths again for deeper translated pages. If each language has its own authored notices, point each project to its own sources instead. Full HTTPS destinations are also valid when the authoritative document is hosted elsewhere. Existing GitHub, contribution and maintenance links and the appended Powered by Askr credit keep their own roles.</p>
 </section>
 <section id="powered-by-askr" class="level2">
 <h2 class="anchored" data-anchor-id="powered-by-askr">Powered by Askr</h2>
 <p>The Footer’s right section includes <code>Powered by Askr · version</code>. Askr links to its documentation; the version links to its GitHub Release. The installed extension’s <code>_extension.yml</code> is the version authority, not <code>askr-versions.json</code> or your document’s package version. Unreleased local edits still show their current package metadata version; this is not proof that those edits shipped.</p>
 <p>To omit this credit:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">askr</span><span class="kw">:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">footer</span><span class="kw">:</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">credit</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">askr</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">footer</span><span class="kw">:</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">credit</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Askr appends its credit without replacing your right-side content. Without an authored Footer it creates a minimal credit-only Footer; with credit disabled it creates nothing. No commit hash is generated or removed by Askr.</p>
 <p>See <a href="https://quarto.org/docs/websites/website-navigation">Quarto’s navigation guide</a> for menus, footer regions and additional native options.</p>
 
@@ -1660,6 +1691,16 @@ document.addEventListener('DOMContentLoaded', function () {
 <p><i class="bi bi-wrench" aria-hidden="true"></i> Maintenance guide</p>
 </a>
   </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../license.html">
+<p><i class="bi bi-file-earmark-text" aria-hidden="true"></i> License</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="../THIRD_PARTY.html">
+<p><i class="bi bi-journal-text" aria-hidden="true"></i> Third-party notices</p>
+</a>
+  </li>  
 </ul>
     </div>
     <div class="nav-footer-right">
@@ -1667,7 +1708,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.1" aria-label="Askr version 0.13.1">0.13.1</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.2" aria-label="Askr version 0.13.2">0.13.2</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="../zh-TW" hreflang="../zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 
