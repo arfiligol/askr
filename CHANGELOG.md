@@ -9,6 +9,8 @@ derive from these entries; an Unreleased entry is not a published release.
 
 - Make Quarto's current Page List link visibly distinct with a theme-aware row
   tint and inset accent cue.
+- Theme Quarto's responsive TOC toggles with Askr canvas and divider colors,
+  and hide the cloned nested TOC heading.
 
 ## 0.13.2 — 2026-10-28
 
