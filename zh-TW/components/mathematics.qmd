@@ -19,6 +19,12 @@ $$
 
 ## 複製設定
 
+::: {.callout-warning title="HTTP 預覽的複製限制"}
+使用手機 Safari 檢查 Copy 時，請在 HTTPS 網站上操作。以區域網路或 VPN 位址開啟的 HTTP 預覽不屬於安全環境；即使已連線 VPN，Safari 仍不開放標準剪貼簿 API，因此可能無法自動複製。此時可選取公式下方顯示的 LaTeX 原始碼，手動複製。
+
+請在 HTTPS 網站上再次確認 Copy；瀏覽器權限仍可能阻擋剪貼簿存取。詳見 [WebKit 的剪貼簿安全限制](https://webkit.org/blog/10855/async-clipboard-api/#security-and-privacy)。
+:::
+
 在 `_quarto.yml` 的網站層級設定中，使用巢狀選項 `askr.math-copy: false`：
 
 ```yaml

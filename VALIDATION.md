@@ -1,5 +1,19 @@
 # Candidate and release validation receipts
 
+## Askr v0.13.2 — accepted design and release documentation — 2026-10-28
+
+Semantic state: ACCEPTED. Delivery state: CANDIDATE; the v0.13.2 tag and
+publication are pending.
+
+| Check | Result |
+| --- | --- |
+| Human scope | ✅ The Human accepted the filename-code visual design and requested publication. |
+| Filename code QA | ✅ Existing dark-mode browser review at 390px and 841px confirmed actual Copy/paste, callout collapse, and one shared filename/source frame. |
+| Light desktop page | ✅ Lead served the candidate at [http://10.20.0.2:4614](http://10.20.0.2:4614). At 1280×720, the English Code page had no console errors; document client and scroll widths were both 1265px at `innerWidth` 1280px. Screenshot: `/tmp/askr-v0132-desktop-light.png`. |
+| Documentation sources | ✅ The native footer guide and bilingual HTML License pages are present from `0beff39`; Safari HTTP-preview clipboard guidance is present from `85708df`. Copy runtime behavior is unchanged. |
+| v0.13.1 archive | ✅ Root verified 241 files (26,374,137 bytes) from deployed `gh-pages` commit `bff50282f12d71dfb9ebaa34f8c6979160230452`; hashes match. |
+| Release checks | ⏳ Lead: default full render and existing CI, fresh native installation from the v0.13.2 tag, and public-site review. The tag does not yet exist. |
+
 ## Askr v0.13.1 — Copy source spacing hotfix — 2026-10-27
 
 | Check | Result |

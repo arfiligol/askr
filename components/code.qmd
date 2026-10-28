@@ -3,13 +3,17 @@ title: "Code"
 subtitle: "Inline code and fenced blocks"
 ---
 
-Inline code uses IBM Plex Mono on the highlight token. Fenced blocks keep a
-transparent fill, a 1px border, and a 5px radius, with padding that leaves
-the copy control clear of the first line. Quarto supplies the source and the
-`code-copy` availability setting; Askr uses its shared text `Copy` button
-instead of Quarto's icon-and-tooltip control. After a successful copy, the
-button shows `Copied!` with a green outline for about two seconds, then returns
-to `Copy`. Long lines scroll inside the block instead of widening the page.
+Inline code uses IBM Plex Mono on the highlight token. Fenced blocks use a
+transparent fill within a 1px frame with a 5px radius. Padding keeps the copy
+control clear of the first line.
+
+Filename blocks add a softly tinted header inside the same frame. Quarto
+supplies the source and the `code-copy` availability setting; Askr uses its
+shared text `Copy` button instead of Quarto's icon-and-tooltip control.
+
+After a successful copy, the button shows `Copied!` with a green outline for
+about two seconds, then returns to `Copy`. Long lines in scroll-enabled blocks
+stay inside the block instead of widening the page.
 
 An inline sample is `askr-html`.
 
@@ -26,8 +30,23 @@ def quiet(width: int) -> str:
     return f"measure {width}px"
 ```
 
+## Filename inside a callout
+
+A native filename labels the block without adding another card. Long paths
+scroll within the code area; the filename can wrap on a narrow screen.
+
+::: {.callout-note title="Example output paths" collapse="false"}
+These generic paths illustrate a report manifest, not a live filesystem.
+
+```{.default filename="reports/example-run/output-manifest.txt" .code-overflow-scroll}
+layout: /work/projects/example-study/runs/reference-model/exports/geometry/component-layout.svg
+results: /work/projects/example-study/runs/reference-model/analysis/frequency-sweep/results.csv
+report: /work/projects/example-study/runs/reference-model/reports/summary/index.html
+```
+:::
+
 ## Limits
 
-The theme contains a long source line by scrolling inside the fenced block.
+The filename example keeps a long source line inside its scrollable block.
 Do not wrap a paragraph in a code fence to force a measure; prose belongs in
 the article, and a fence is for source.

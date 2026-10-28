@@ -1,0 +1,10 @@
+---
+title: "License"
+---
+
+Askr is distributed under the MIT License below. This is Askr's project license;
+a documentation site using the theme chooses its own project license.
+
+[Download the original LICENSE](LICENSE)
+
+{{< include LICENSE >}}

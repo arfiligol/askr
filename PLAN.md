@@ -1,5 +1,26 @@
 # Askr release plan
 
+## Askr v0.13.2 — filename code frames and release docs — 2026-10-28
+
+Semantic state: ACCEPTED. Delivery state: CANDIDATE. The Human accepted the
+filename-code design and requested publication.
+
+This release includes the single-frame Quarto filename style and its bilingual
+example; native footer guidance and bilingual HTML License pages; and Safari
+HTTP-preview clipboard guidance. The Copy implementation and clipboard payload
+are unchanged. The typography preview is excluded. Existing documentation
+changes are `0beff39` (footer and License) and `85708df` (Safari clipboard note).
+
+✅ Root preserved the actual published v0.13.1 site at `/v0.13.1/` from deployed
+`gh-pages` commit `bff50282f12d71dfb9ebaa34f8c6979160230452`: 241 files,
+26,374,137 bytes, with hashes verified. Existing browser QA at 390px and 841px
+confirmed actual Copy/paste, callout collapse, and one filename/source frame;
+see [Validation](VALIDATION.md).
+
+⏳ Lead: run the default full render and existing CI, install the actual
+v0.13.2 tag in a fresh Quarto consumer, and review the public site. The tag and
+publication are not complete.
+
 ## Askr v0.13.1 — Copy source spacing hotfix — 2026-10-27
 
 Remove the shared Copy control's extra top padding from native code blocks,
