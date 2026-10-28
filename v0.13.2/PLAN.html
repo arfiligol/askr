@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>plan – Askr</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-079a207a29a081ff57bef15430bac181.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-6e87a31393c6f91a58601bf2bd54a356.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
+<link href="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<meta name="theme-color" content="#faf8f8">
+<script>
+(function () {
+  function paint() {
+    var link = document.querySelector("link#quarto-bootstrap.quarto-color-alternate");
+    var on = link && link.getAttribute("rel") === "stylesheet";
+    var meta = document.querySelector('meta[name="theme-color"]');
+    var canvas = getComputedStyle(document.documentElement).getPropertyValue("--qdk-canvas").trim();
+    if (meta && canvas) meta.setAttribute("content", canvas);
+    document.documentElement.style.colorScheme = on ? "dark" : "light";
+  }
+  function hook() {
+    requestAnimationFrame(paint);
+    // A newly enabled alternate sheet may finish loading after the rel change.
+    document.querySelectorAll('link.quarto-color-scheme').forEach(function (sheet) {
+      sheet.addEventListener("load", paint);
+    });
+    new MutationObserver(function () { requestAnimationFrame(paint); }).observe(document.body, {
+      attributes: true, attributeFilter: ["class"]
+    });
+    var link = document.querySelector("link#quarto-bootstrap.quarto-color-alternate");
+    if (link) new MutationObserver(function () { requestAnimationFrame(paint); }).observe(link, { attributes: true, attributeFilter: ["rel"] });
+    var orig = window.quartoToggleColorScheme;
+    if (!orig || orig.__qdk) return;
+    window.quartoToggleColorScheme = function () {
+      var result = orig.apply(this, arguments);
+      requestAnimationFrame(paint);
+      return result;
+    };
+    window.quartoToggleColorScheme.__qdk = true;
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", hook);
+  else hook();
+
+  // Quarto owns group selection and persistence. Its grouped-tab runtime updates
+  // active classes; mirror those classes into attributes, never a second state.
+  function groupedTabs() {
+    document.querySelectorAll('.panel-tabset[data-group]').forEach(function (tabset) {
+      if (tabset.dataset.askrTabsBound) return;
+      tabset.dataset.askrTabsBound = "true";
+      var tabs = Array.from(tabset.querySelectorAll(':scope > [role="tablist"] [role="tab"]'));
+      // Persisted group choices may activate a tab that Bootstrap did not
+      // initialize on load. Initialize every native Tab once for keyboard use.
+      if (window.bootstrap) tabs.forEach(function (tab) {
+        window.bootstrap.Tab.getOrCreateInstance(tab);
+      });
+      function sync() {
+        tabs.forEach(function (tab) {
+          var selected = tab.classList.contains("active");
+          tab.setAttribute("aria-selected", selected ? "true" : "false");
+          tab.setAttribute("tabindex", selected ? "0" : "-1");
+        });
+      }
+      var observer = new MutationObserver(sync);
+      tabs.forEach(function (tab) {
+        observer.observe(tab, { attributes: true, attributeFilter: ["class"] });
+      });
+      // Bootstrap keyboard activation is not a click. After it selects/focuses
+      // a tab, route that native activation through Quarto's group click handler;
+      // no group or storage logic is duplicated here.
+      tabset.addEventListener("keydown", function (event) {
+        if (!tabs.includes(event.target) || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
+        requestAnimationFrame(function () {
+          var selected = document.activeElement;
+          if (tabs.includes(selected) && selected.classList.contains("active")) selected.click();
+        });
+      }, true);
+      sync();
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", groupedTabs);
+  else groupedTabs();
+  window.addEventListener("pageshow", groupedTabs);
+
+  // Quarto owns announcement content, persistence, and document/sidebar offsets.
+  // Keep Askr's overlaid Pages control and Areas panel aligned to that header.
+  function announcements() {
+    var header = document.getElementById("quarto-header");
+    if (!header) return;
+    var navbar = header.querySelector(":scope > .navbar");
+    var frame;
+    function update() {
+      frame = null;
+      var bounds = header.getBoundingClientRect();
+      var top = navbar ? navbar.getBoundingClientRect().top - bounds.top : 0;
+      header.style.setProperty("--askr-navbar-top", top + "px");
+      header.style.setProperty("--askr-header-height", bounds.height + "px");
+    }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+    if (window.ResizeObserver) new ResizeObserver(schedule).observe(header);
+    window.addEventListener("resize", schedule);
+    window.addEventListener("pageshow", schedule);
+    update();
+    var announcement = document.getElementById("quarto-announcement");
+    if (!announcement) return;
+    var chinese = /^zh(?:-|$)/i.test(document.documentElement.lang);
+    announcement.setAttribute("role", "region");
+    announcement.setAttribute("aria-label", chinese ? "網站公告" : "Site announcement");
+    var icon = announcement.querySelector(".quarto-announcement-icon");
+    if (icon) icon.setAttribute("aria-hidden", "true");
+    var action = announcement.querySelector(".quarto-announcement-action");
+    if (!action || action.closest("button")) return;
+    var close = document.createElement("button");
+    close.type = "button";
+    close.className = "askr-announcement-close";
+    close.setAttribute("aria-label", chinese ? "關閉公告" : "Close announcement");
+    close.title = close.getAttribute("aria-label");
+    action.setAttribute("aria-hidden", "true");
+    action.before(close);
+    close.appendChild(action);
+    close.addEventListener("click", function (event) {
+      var returnFocus = document.activeElement === close;
+      // Keep the original node: Quarto binds its click handler to this icon.
+      if (event.target !== action) action.click();
+      if (returnFocus && !announcement.isConnected) {
+        var entry = Array.from(header.querySelectorAll("a[href], button")).find(function (control) {
+          return !control.disabled && control.getClientRects().length && getComputedStyle(control).visibility !== "hidden";
+        });
+        if (entry) entry.focus();
+      }
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", announcements);
+  else announcements();
+
+  function hideShown(selector) {
+    document.querySelectorAll(selector).forEach(function (el) {
+      if (!el.classList.contains("show") || !window.bootstrap) return;
+      window.bootstrap.Collapse.getOrCreateInstance(el, { toggle: false }).hide();
+    });
+  }
+  // Measure the existing inline layout, not a second navigation tree. Quarto /
+  // Bootstrap remain the owners of disclosure state and navigation links.
+  function adaptiveAreas() {
+    var header = document.querySelector("#quarto-header");
+    var container = header && header.querySelector(".navbar-container");
+    var area = header && header.querySelector("#navbarCollapse");
+    var button = header && header.querySelector(".navbar-toggler");
+    var brand = header && header.querySelector(".navbar-brand-container");
+    if (!container || !area || !button || !brand) return;
+    var tools = container.querySelector('.quarto-navbar-tools');
+    var collapseTools = tools && area.contains(tools);
+    var authoredTools = tools ? Array.from(tools.children).filter(function (el) {
+      return !el.matches('.quarto-color-scheme-toggle, .quarto-reader-toggle, .askr-logout, .askr-language-selector');
+    }) : [];
+    var panelTools;
+    if (collapseTools) {
+      container.appendChild(tools);
+      panelTools = document.createElement('div');
+      panelTools.className = 'askr-panel-tools';
+      area.appendChild(panelTools);
+    }
+    var mutations = new MutationObserver(schedule);
+    function observe() { mutations.observe(container, { childList: true, subtree: true, characterData: true }); }
+    button.setAttribute("aria-label", "Areas");
+    button.removeAttribute("role");
+    button.title = "Areas";
+    var frame;
+    var compact;
+    function update() {
+      frame = null;
+      // Moving native nodes is presentation only, not a new navigation authority.
+      mutations.disconnect();
+      if (collapseTools) authoredTools.slice().reverse().forEach(function (el) { tools.insertBefore(el, tools.firstChild); });
+      if (tools) container.style.setProperty('--askr-tools-width', tools.getBoundingClientRect().width + 'px');
+      var active = document.activeElement;
+      var previous = compact;
+      header.classList.add("askr-areas-measuring");
+      header.classList.remove("askr-areas-collapsed");
+      var mobile = window.matchMedia("(max-width: 991.98px)").matches;
+      var list = area.querySelector(".navbar-nav");
+      var title = brand.querySelector(".askr-version-title") || brand.querySelector(".navbar-title");
+      if (title) title.title = title.textContent.trim();
+      var titleFits = !title || title.scrollWidth <= title.clientWidth;
+      var linksFit = !list || list.scrollWidth <= area.clientWidth;
+      var areaRect = area.getBoundingClientRect();
+      var brandRect = brand.getBoundingClientRect();
+      var controlsFit = Array.from(container.querySelectorAll(":scope > #quarto-search, :scope > .quarto-navbar-tools")).every(function (control) {
+        var rect = control.getBoundingClientRect();
+        return !rect.width || rect.right <= areaRect.left || rect.left >= areaRect.right;
+      });
+      compact = mobile || !titleFits || !linksFit || brandRect.right > areaRect.left || !controlsFit;
+      header.classList.toggle("askr-areas-collapsed", compact);
+      header.classList.remove("askr-areas-measuring");
+      if (compact && collapseTools) authoredTools.forEach(function (el) { panelTools.appendChild(el); });
+      if (tools) container.style.setProperty('--askr-tools-width', tools.getBoundingClientRect().width + 'px');
+      if (mobile) {
+        var left = 0;
+        var right = container.getBoundingClientRect().right;
+        var gap = parseFloat(getComputedStyle(header.querySelector(".quarto-navbar-tools") || container).columnGap) || 0;
+        header.querySelectorAll(".quarto-btn-toggle, #quarto-search").forEach(function (control) {
+          var rect = control.getBoundingClientRect();
+          if (rect.width && getComputedStyle(control).display !== "none") left = Math.max(left, rect.right);
+        });
+        header.querySelectorAll(".quarto-navbar-tools, .navbar-toggler").forEach(function (control) {
+          var rect = control.getBoundingClientRect();
+          if (rect.width) right = Math.min(right, rect.left);
+        });
+        header.style.setProperty("--askr-brand-left", (left + gap) + "px");
+        header.style.setProperty("--askr-brand-right", (container.getBoundingClientRect().right - right + gap) + "px");
+      }
+      observe();
+      if (previous !== undefined && previous !== compact) {
+        // Complete any in-flight Bootstrap animation before resetting state.
+        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
+        hideShown("#navbarCollapse.show");
+        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
+        area.classList.remove("qdk-open");
+        document.querySelector("#qdk-area-glass").classList.remove("qdk-glass-in");
+        button.setAttribute("aria-expanded", "false");
+        if (compact && area.contains(active)) button.focus();
+        else if (!compact && active === button) {
+          var link = area.querySelector("a.nav-link");
+          if (link) link.focus();
+        }
+      }
+    }
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+    new ResizeObserver(schedule).observe(container);
+    // Version and Logout entries are mounted after the original Header.
+    observe();
+    window.addEventListener("resize", schedule);
+    window.addEventListener("pageshow", schedule);
+    if (document.fonts) {
+      document.fonts.ready.then(schedule);
+      document.fonts.addEventListener("loadingdone", schedule);
+    }
+    schedule();
+  }
+  function menus() {
+    if (!document.querySelector("#qdk-area-glass")) {
+      var glass = document.createElement("div");
+      glass.id = "qdk-area-glass";
+      glass.style.position = "fixed";
+      glass.style.inset = "0";
+      document.body.appendChild(glass);
+    }
+    var area = document.querySelector("#navbarCollapse");
+    var pages = document.querySelector("#quarto-sidebar");
+    var areaGlass = document.querySelector("#qdk-area-glass");
+    var pagesGlass = document.querySelector("#quarto-sidebar-glass");
+    if (area) {
+      area.addEventListener("show.bs.collapse", function (event) {
+        if (event.target !== area) return;
+        area.classList.add("qdk-open");
+        areaGlass.classList.add("qdk-glass-in");
+      });
+      area.addEventListener("hide.bs.collapse", function (event) {
+        if (event.target !== area) return;
+        area.classList.remove("qdk-open");
+        areaGlass.classList.remove("qdk-glass-in");
+        var header = document.querySelector("#quarto-header");
+        if (header.classList.contains("headroom--frozen") && !(pages && pages.classList.contains("qdk-open")) && window.quartoToggleHeadroom) window.quartoToggleHeadroom();
+      });
+    }
+    if (pages && pagesGlass) {
+      pages.addEventListener("show.bs.collapse", function (event) {
+        if (event.target !== pages) return;
+        pages.classList.add("qdk-open");
+        pagesGlass.classList.add("qdk-glass-in");
+      });
+      pages.addEventListener("hide.bs.collapse", function (event) {
+        if (event.target !== pages) return;
+        pages.classList.remove("qdk-open");
+        pagesGlass.classList.remove("qdk-glass-in");
+      });
+      pages.addEventListener("click", function (event) {
+        if (event.target.closest("a, button, .sidebar-item-toggle")) return;
+        hideShown(".quarto-sidebar-collapse-item.show");
+      });
+    }
+    var areaButton = document.querySelector("#quarto-header .navbar-toggler");
+    var pagesButton = document.querySelector("#quarto-header .quarto-btn-toggle");
+    if (areaButton) areaButton.addEventListener("click", function () {
+      hideShown(".quarto-sidebar-collapse-item.show");
+    });
+    if (area) area.addEventListener("click", function (event) {
+      if (event.target.closest("a.nav-link") && document.querySelector("#quarto-header.askr-areas-collapsed")) hideShown("#navbarCollapse.show");
+    });
+    if (pagesButton) pagesButton.addEventListener("click", function () {
+      hideShown("#navbarCollapse.show");
+    });
+    document.addEventListener("click", function (event) {
+      var area = document.querySelector("#navbarCollapse");
+      if (!area || !area.classList.contains("show")) return;
+      if (area.contains(event.target) || (areaButton && areaButton.contains(event.target))) return;
+      hideShown("#navbarCollapse.show");
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && area && area.classList.contains("show")) {
+        event.preventDefault();
+        hideShown("#navbarCollapse.show");
+        areaButton.focus();
+      }
+    });
+    versions(hideShown);
+    adaptiveAreas();
+  }
+  function versions(hideShown) {
+    var brand = document.querySelector("#quarto-header .navbar-brand");
+    var slot = document.querySelector("#quarto-header .navbar-brand-container");
+    if (!brand || !slot || slot.querySelector(".askr-version")) return;
+    var offset = document.querySelector('meta[name="quarto:offset"]');
+    var manifest = new URL((offset ? offset.getAttribute("content") : "./") + "askr-versions.json", location.href);
+    fetch(manifest.href).then(function (response) {
+      if (!response.ok) throw new Error("missing");
+      return response.json();
+    }).then(function (data) {
+      mountVersions(data, hideShown, brand, slot, new URL("./", manifest));
+    }).catch(function () {
+      var dataEl = document.getElementById("askr-versions");
+      if (!dataEl) return;
+      try { mountVersions(JSON.parse(dataEl.textContent), hideShown, brand, slot, new URL("./", manifest)); } catch (error) { return; }
+    });
+  }
+  function mountVersions(data, hideShown, brand, slot, siteRoot) {
+    if (!data.versions || !data.versions.length || slot.querySelector(".askr-version")) return;
+    var params = new URLSearchParams(location.search);
+    var mode = params.get("askr-version-mode") === "title" ? "title" : (data.mode === "title" ? "title" : "inline");
+    var title = brand.textContent.trim();
+    if (params.get("askr-version-mode") === "title" && data.longTitle) title = data.longTitle;
+    // Manifest roots are relative to the deployed site, not the origin. Quarto's
+    // offset locates that site even from a nested page under a repository prefix.
+    function versionRoot(item) {
+      var root = item.root || "/";
+      var relative = root.replace(/^\/+/, "");
+      return new URL(relative ? relative.replace(/\/?$/, "/") : "./", siteRoot);
+    }
+    function pathMatches(root) {
+      var path = location.pathname;
+      var normalized = root.pathname;
+      return path === normalized.slice(0, -1) || path.indexOf(normalized) === 0;
+    }
+    function itemHref(item) {
+      if (item.href) {
+        var fixed = new URL(item.href.replace(/^\/(?!\/)/, ""), siteRoot);
+        if (params.get("askr-version-mode")) fixed.searchParams.set("askr-version-mode", params.get("askr-version-mode"));
+        return fixed.href;
+      }
+      var path = location.pathname;
+      var bases = data.versions.filter(function (version) { return version.root; })
+        .sort(function (a, b) { return versionRoot(b).pathname.length - versionRoot(a).pathname.length; });
+      var from = bases.filter(function (version) { return pathMatches(versionRoot(version)); })[0];
+      var fromRoot = from ? versionRoot(from) : siteRoot;
+      var rest = path.slice(fromRoot.pathname.length);
+      var target = new URL(rest, versionRoot(item));
+      target.search = location.search;
+      target.hash = location.hash;
+      return target.href;
+    }
+    var current = data.versions.filter(function (item) { return item.label === params.get("askr-version"); })[0];
+    if (!current) {
+      var rooted = data.versions.filter(function (item) { return item.root && pathMatches(versionRoot(item)); })
+        .sort(function (a, b) { return b.root.length - a.root.length; });
+      current = rooted[0] || data.versions.filter(function (item) { return item.latest; })[0] || data.versions[0];
+    }
+    var root = document.createElement("div");
+    root.className = "askr-version";
+    root.dataset.mode = mode;
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "askr-version-button";
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", "askr-version-links");
+    var titleSpan = document.createElement("span");
+    titleSpan.className = "askr-version-title";
+    titleSpan.textContent = title;
+    button.appendChild(titleSpan);
+    if (mode === "inline") {
+      var number = document.createElement("span");
+      number.className = "askr-version-number";
+      number.textContent = current.label;
+      button.appendChild(number);
+    }
+    var chevron = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    chevron.setAttribute("class", "askr-version-chevron");
+    chevron.setAttribute("viewBox", "0 0 16 16");
+    chevron.setAttribute("aria-hidden", "true");
+    var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.setAttribute("d", "M4 6l4 4 4-4");
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "currentColor");
+    path.setAttribute("stroke-width", "1.6");
+    path.setAttribute("stroke-linecap", "round");
+    path.setAttribute("stroke-linejoin", "round");
+    chevron.appendChild(path);
+    button.appendChild(chevron);
+    var menu = document.createElement("div");
+    menu.className = "askr-version-menu";
+    menu.hidden = true;
+    menu.id = "askr-version-links";
+    data.versions.forEach(function (item) {
+      var link = document.createElement("a");
+      link.href = itemHref(item);
+      link.dataset.versionHome = versionRoot(item).href;
+      if (item.label === current.label) link.setAttribute("aria-current", "true");
+      var label = document.createElement("span");
+      label.textContent = item.label;
+      link.appendChild(label);
+      if (item.latest) {
+        var latest = document.createElement("span");
+        latest.className = "askr-version-latest";
+        latest.textContent = "Latest";
+        link.appendChild(latest);
+      }
+      menu.appendChild(link);
+    });
+    function setOpen(open) {
+      if (open) hideShown(".quarto-sidebar-collapse-item.show, #navbarCollapse.show");
+      menu.hidden = !open;
+      button.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    button.addEventListener("click", function (event) {
+      event.stopPropagation();
+      setOpen(menu.hidden);
+    });
+    document.addEventListener("click", function (event) {
+      if (!root.contains(event.target)) setOpen(false);
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && !menu.hidden) {
+        event.preventDefault();
+        setOpen(false);
+        button.focus();
+      }
+    });
+    root.addEventListener("focusout", function (event) {
+      if (!root.contains(event.relatedTarget)) setOpen(false);
+    });
+    root.appendChild(button);
+    root.appendChild(menu);
+    slot.appendChild(root);
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest && event.target.closest(".askr-version-menu a");
+      if (!link || !root.contains(link)) return;
+      var href = link.getAttribute("href");
+      if (!href) return;
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.origin !== location.origin) return;
+      event.preventDefault();
+      fetch(href).then(function (response) {
+        if (response.status !== 404) {
+          location.assign(href);
+          return;
+        }
+        location.assign(link.dataset.versionHome);
+      }).catch(function () {
+        location.assign(href);
+      });
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", menus);
+  else menus();
+})();
+</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <div id="quarto-announcement" data-announcement-id="f275954ab84ec6dd0941e1d5340b810a" class="alert alert-warning hidden"><i class="bi bi-info-circle quarto-announcement-icon"></i><div class="quarto-announcement-content">
+<p>Gallery demo: preview documentation — features may change before release.</p>
+</div></div>
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Askr</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Gallery</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./components.html"> 
+<span class="menu-text">Components</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./usage/add-askr.html"> 
+<span class="menu-text">Usage</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./credits.html"> 
+<span class="menu-text">Credits</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./gallery/long-list.html"> 
+<span class="menu-text">Long list</span></a>
+  </li>  
+</ul>
+              <div class="quarto-navbar-tools">
+    <a href="https://github.com/arfiligol/askr" title="GitHub repository" class="quarto-navigation-tool px-1" aria-label="GitHub repository"><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sections</h2>
+   
+  <ul>
+  <li><a href="#askr-release-plan" id="toc-askr-release-plan" class="nav-link active" data-scroll-target="#askr-release-plan">Askr release plan</a>
+  <ul class="collapse">
+  <li><a href="#askr-v0.13.2-filename-code-frames-and-release-docs-2026-10-28" id="toc-askr-v0.13.2-filename-code-frames-and-release-docs-2026-10-28" class="nav-link" data-scroll-target="#askr-v0.13.2-filename-code-frames-and-release-docs-2026-10-28">Askr v0.13.2 — filename code frames and release docs — 2026-10-28</a></li>
+  <li><a href="#askr-v0.13.1-copy-source-spacing-hotfix-2026-10-27" id="toc-askr-v0.13.1-copy-source-spacing-hotfix-2026-10-27" class="nav-link" data-scroll-target="#askr-v0.13.1-copy-source-spacing-hotfix-2026-10-27">Askr v0.13.1 — Copy source spacing hotfix — 2026-10-27</a></li>
+  <li><a href="#askr-v0.13.0-viewers-and-shared-copy-release-candidate-2026-10-27" id="toc-askr-v0.13.0-viewers-and-shared-copy-release-candidate-2026-10-27" class="nav-link" data-scroll-target="#askr-v0.13.0-viewers-and-shared-copy-release-candidate-2026-10-27">Askr v0.13.0 — viewers and shared Copy release candidate — 2026-10-27</a></li>
+  <li><a href="#native-announcement-support-v0.12.1-release-candidate-2026-10-26" id="toc-native-announcement-support-v0.12.1-release-candidate-2026-10-26" class="nav-link" data-scroll-target="#native-announcement-support-v0.12.1-release-candidate-2026-10-26">Native announcement support — v0.12.1 release candidate — 2026-10-26</a></li>
+  <li><a href="#native-card-component-v0.12.0-release-candidate-2026-10-25" id="toc-native-card-component-v0.12.0-release-candidate-2026-10-25" class="nav-link" data-scroll-target="#native-card-component-v0.12.0-release-candidate-2026-10-25">Native Card component — v0.12.0 release candidate — 2026-10-25</a></li>
+  <li><a href="#shared-text-copy-feedback-included-in-v0.13.0-release-scope" id="toc-shared-text-copy-feedback-included-in-v0.13.0-release-scope" class="nav-link" data-scroll-target="#shared-text-copy-feedback-included-in-v0.13.0-release-scope">Shared text-copy feedback — included in v0.13.0 release scope</a></li>
+  <li><a href="#previous-askr-0.11.0-mermaid-viewer-published-2026-10-21" id="toc-previous-askr-0.11.0-mermaid-viewer-published-2026-10-21" class="nav-link" data-scroll-target="#previous-askr-0.11.0-mermaid-viewer-published-2026-10-21">Previous: Askr 0.11.0 Mermaid viewer — published 2026-10-21</a></li>
+  <li><a href="#previous-documentation-version-archive-correction-2026-10-21" id="toc-previous-documentation-version-archive-correction-2026-10-21" class="nav-link" data-scroll-target="#previous-documentation-version-archive-correction-2026-10-21">Previous: Documentation version archive correction — 2026-10-21</a></li>
+  <li><a href="#published-askr-0.10.0-bilingual-release-2026-10-21" id="toc-published-askr-0.10.0-bilingual-release-2026-10-21" class="nav-link" data-scroll-target="#published-askr-0.10.0-bilingual-release-2026-10-21">Published: Askr 0.10.0 bilingual release — 2026-10-21</a></li>
+  <li><a href="#historical-work-packets" id="toc-historical-work-packets" class="nav-link" data-scroll-target="#historical-work-packets">Historical work packets</a></li>
+  <li><a href="#historical-local-candidate-packet-optional-header-language-selector-2026-10-21" id="toc-historical-local-candidate-packet-optional-header-language-selector-2026-10-21" class="nav-link" data-scroll-target="#historical-local-candidate-packet-optional-header-language-selector-2026-10-21">Historical local-candidate packet — Optional Header language selector — 2026-10-21</a></li>
+  <li><a href="#dense-scientific-reading-2026-10-21" id="toc-dense-scientific-reading-2026-10-21" class="nav-link" data-scroll-target="#dense-scientific-reading-2026-10-21">0.9.0 dense scientific reading — 2026-10-21</a></li>
+  <li><a href="#publication-authorization-2026-10-10" id="toc-publication-authorization-2026-10-10" class="nav-link" data-scroll-target="#publication-authorization-2026-10-10">0.8.0 publication authorization — 2026-10-10</a></li>
+  <li><a href="#dual-mode-image-viewer-local-candidate-2026-10-10" id="toc-dual-mode-image-viewer-local-candidate-2026-10-10" class="nav-link" data-scroll-target="#dual-mode-image-viewer-local-candidate-2026-10-10">Dual-mode image viewer — local candidate, 2026-10-10</a></li>
+  <li><a href="#publication-authorization-2026-10-09" id="toc-publication-authorization-2026-10-09" class="nav-link" data-scroll-target="#publication-authorization-2026-10-09">0.7.0 publication authorization — 2026-10-09</a></li>
+  <li><a href="#native-header-footer-links-local-candidate-2026-10-09" id="toc-native-header-footer-links-local-candidate-2026-10-09" class="nav-link" data-scroll-target="#native-header-footer-links-local-candidate-2026-10-09">Native Header / Footer links — local candidate, 2026-10-09</a></li>
+  <li><a href="#publication-authorization-2026-10-06" id="toc-publication-authorization-2026-10-06" class="nav-link" data-scroll-target="#publication-authorization-2026-10-06">0.6.1 publication authorization — 2026-10-06</a></li>
+  <li><a href="#publication-authorization-2026-10-06-1" id="toc-publication-authorization-2026-10-06-1" class="nav-link" data-scroll-target="#publication-authorization-2026-10-06-1">0.6.0 publication authorization — 2026-10-06</a></li>
+  <li><a href="#optional-logout-and-native-image-viewer-local-candidate-2026-10-06" id="toc-optional-logout-and-native-image-viewer-local-candidate-2026-10-06" class="nav-link" data-scroll-target="#optional-logout-and-native-image-viewer-local-candidate-2026-10-06">Optional logout and native image viewer — local candidate, 2026-10-06</a></li>
+  <li><a href="#acceptance-and-delivery-2026-10-06" id="toc-acceptance-and-delivery-2026-10-06" class="nav-link" data-scroll-target="#acceptance-and-delivery-2026-10-06">0.5.0 acceptance and delivery — 2026-10-06</a></li>
+  <li><a href="#goal-and-state" id="toc-goal-and-state" class="nav-link" data-scroll-target="#goal-and-state">Goal and state</a></li>
+  <li><a href="#ownership-and-interfaces" id="toc-ownership-and-interfaces" class="nav-link" data-scroll-target="#ownership-and-interfaces">Ownership and interfaces</a>
+  <ul class="collapse">
+  <li><a href="#active-0.5.0-engineering-package-2026-10-06" id="toc-active-0.5.0-engineering-package-2026-10-06" class="nav-link" data-scroll-target="#active-0.5.0-engineering-package-2026-10-06">Active 0.5.0 engineering package (2026-10-06)</a></li>
+  <li><a href="#current-bounded-typography-adjustment" id="toc-current-bounded-typography-adjustment" class="nav-link" data-scroll-target="#current-bounded-typography-adjustment">Current bounded typography adjustment</a></li>
+  </ul></li>
+  <li><a href="#adaptive-areas-and-smooth-scroll-repair-local-candidate" id="toc-adaptive-areas-and-smooth-scroll-repair-local-candidate" class="nav-link" data-scroll-target="#adaptive-areas-and-smooth-scroll-repair-local-candidate">Adaptive Areas and smooth-scroll repair — local candidate</a></li>
+  <li><a href="#candidate-behavior-and-failure-boundaries" id="toc-candidate-behavior-and-failure-boundaries" class="nav-link" data-scroll-target="#candidate-behavior-and-failure-boundaries">Candidate behavior and failure boundaries</a></li>
+  <li><a href="#exclusions" id="toc-exclusions" class="nav-link" data-scroll-target="#exclusions">Exclusions</a></li>
+  <li><a href="#validation-endpoint" id="toc-validation-endpoint" class="nav-link" data-scroll-target="#validation-endpoint">Validation endpoint</a></li>
+  <li><a href="#consolidated-visual-regression-checklist" id="toc-consolidated-visual-regression-checklist" class="nav-link" data-scroll-target="#consolidated-visual-regression-checklist">Consolidated visual regression checklist</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<section id="askr-release-plan" class="level1">
+<h1>Askr release plan</h1>
+<section id="askr-v0.13.2-filename-code-frames-and-release-docs-2026-10-28" class="level2">
+<h2 class="anchored" data-anchor-id="askr-v0.13.2-filename-code-frames-and-release-docs-2026-10-28">Askr v0.13.2 — filename code frames and release docs — 2026-10-28</h2>
+<p>Semantic state: ACCEPTED. Delivery state: CANDIDATE. The Human accepted the filename-code design and requested publication.</p>
+<p>This release includes the single-frame Quarto filename style and its bilingual example; native footer guidance and bilingual HTML License pages; and Safari HTTP-preview clipboard guidance. The Copy implementation and clipboard payload are unchanged. The typography preview is excluded. Existing documentation changes are <code>0beff39</code> (footer and License) and <code>85708df</code> (Safari clipboard note).</p>
+<p>✅ Root preserved the actual published v0.13.1 site at <code>/v0.13.1/</code> from deployed <code>gh-pages</code> commit <code>bff50282f12d71dfb9ebaa34f8c6979160230452</code>: 241 files, 26,374,137 bytes, with hashes verified. Existing browser QA at 390px and 841px confirmed actual Copy/paste, callout collapse, and one filename/source frame; see <a href="./VALIDATION.html">Validation</a>.</p>
+<p>⏳ Lead: run the default full render and existing CI, install the actual v0.13.2 tag in a fresh Quarto consumer, and review the public site. The tag and publication are not complete.</p>
+</section>
+<section id="askr-v0.13.1-copy-source-spacing-hotfix-2026-10-27" class="level2">
+<h2 class="anchored" data-anchor-id="askr-v0.13.1-copy-source-spacing-hotfix-2026-10-27">Askr v0.13.1 — Copy source spacing hotfix — 2026-10-27</h2>
+<p>Remove the shared Copy control’s extra top padding from native code blocks, including displayed Mermaid source. Keep the text Copy button, success/reset behavior and existing source content. Preserve the actual published v0.13.0 site as a historical snapshot before replacing the root site.</p>
+<p>✅ The actual published v0.13.0 site is preserved as a 241-file snapshot; the manifest, build resources and bilingual version guides retain it under <code>/v0.13.0/</code>. The Human authorized this hotfix release. ✅ Lead review, exact-candidate release render, archive identity, source spacing and Copy placement checks are complete. ⏳ Lead: complete promotion, main CI, tag installation and public-site review.</p>
+</section>
+<section id="askr-v0.13.0-viewers-and-shared-copy-release-candidate-2026-10-27" class="level2">
+<h2 class="anchored" data-anchor-id="askr-v0.13.0-viewers-and-shared-copy-release-candidate-2026-10-27">Askr v0.13.0 — viewers and shared Copy release candidate — 2026-10-27</h2>
+<p>Give static images and interactive HTML charts separate Component pages in English and Traditional Chinese. Move the image-viewer examples out of Figures while keeping the existing <code>#image-viewer</code> section as a link to the new page. The image viewer retains Askr zoom, pan and Fit. The chart viewer embeds trusted local HTML with its own chart controls and offers an inline frame or a button-only floating entry through <code>askr-chart-view</code>. The floating toolbar contains Open source and Close; chart operations stay inside the exported chart. The Components sidebar groups both viewer pages under a native top-level Viewers section (檢視器 in Traditional Chinese). The section collapses by default and opens for the current page; page URLs remain unchanged.</p>
+<p>The chart frame follows the Askr theme; the embedded chart retains its authored colors. Inline and floating frames have independent state. The public demo is a self-contained Plotly 3.1.0 sine curve with a retained MIT license and pinned rebuild script. Plotly is bundled only in that Gallery HTML, not the extension.</p>
+<p>✅ 2026-10-26: non-executing English/Traditional Chinese renders, desktop/mobile interaction, chart controls, independent frame state, keyboard closing, failure recovery and static-image state continuity were checked. See <a href="./VALIDATION.html">Validation</a>. ✅ The light/dark visual review is complete. ✅ The simplified floating toolbar and keyboard return behavior were rechecked. ✅ The native bilingual Viewers sidebar grouping and current-page identification were checked. The Human authorized this scope and the shared text Copy controls for the v0.13.0 release on 2026-10-27.</p>
+<p>Copy uses one text button on code, display math and Mermaid source: <code>Copy</code> changes to <code>Copied!</code> with a green outline, then returns after about two seconds. Retain Quarto code-copy availability and existing math exclusions. The source worker integrated the previously authored Copy changes, and the Lead verified the combined exact release candidate before promotion.</p>
+<p>✅ The v0.12.1 snapshot preserves the actual published Pages tree; the current selector and version guides now describe v0.13.0 with that archive retained. ✅ 2026-10-27: the exact combined release tree passed the default bilingual render, real clipboard checks, Copy feedback/reset and archive identity checks. ⏳ Lead: complete promotion, main CI, tag installation and public-site verification. The release remains pending; consumer adoption stays with consumer owners.</p>
+</section>
+<section id="native-announcement-support-v0.12.1-release-candidate-2026-10-26" class="level2">
+<h2 class="anchored" data-anchor-id="native-announcement-support-v0.12.1-release-candidate-2026-10-26">Native announcement support — v0.12.1 release candidate — 2026-10-26</h2>
+<p>Use Quarto’s existing <code>website.announcement</code> as Askr’s supported site-wide notice. Askr owns its wrapping, semantic colors and accessible close control; authors keep the native content, icon, type, position and dismissal settings. For persistent development-version warnings, the guide recommends a warning notice with dismissal disabled. The Gallery demonstrates the same notice in English and Traditional Chinese using public example text.</p>
+<p>The mobile overlap came from the Pages control occupying the top of the header while an above-navbar announcement occupied that same space. The implementation keeps Pages aligned with the navbar after wrapping, dismissal and viewport changes, while the native header controls article, sidebar and anchor offsets. Header controls share 150ms ease-in-out color, background, border and shadow transitions; reduced-motion preferences disable these transitions.</p>
+<p>✅ 2026-10-26: local implementation, Lead browser checks and the full bilingual release render are complete; see <a href="./VALIDATION.html#native-announcement-support--v0121-release-candidate--2026-10-26">Validation</a>. The Human authorized release of this scope as v0.12.1 on 2026-10-26. Retain the actual published v0.12.0 documentation as a versioned snapshot. ⏳ Lead: complete promotion, main CI, GitHub Release, Pages deployment and a fresh tag installation before marking publication complete. Consumer adoption remains with each consumer owner.</p>
+</section>
+<section id="native-card-component-v0.12.0-release-candidate-2026-10-25" class="level2">
+<h2 class="anchored" data-anchor-id="native-card-component-v0.12.0-release-candidate-2026-10-25">Native Card component — v0.12.0 release candidate — 2026-10-25</h2>
+<p>The Human authorized the v0.12.0 release endpoint for the Card component. The candidate interface uses <code>.askr-card</code>, <code>.askr-card-body</code>, and <code>.askr-card-title</code>. Its heading link is the primary navigation; the shell has no click handler, and links in the body retain their own native destinations. <code>.unlisted</code> excludes the real heading from the page table of contents without changing its author-chosen level.</p>
+<p>The English and Traditional Chinese guides provide the exact authoring source, the class mapping and CSS migration note, and two vertical Gallery examples linked to existing Usage pages. Their short and long CJK titles make wrapping visible; the cards contain no scientific examples or results. Inputs are the requested linked-heading behavior, existing theme tokens, and those Usage pages. The stylesheet implementation must use existing tokens and remain CSS-only; its rules are a dependency owned separately from this documentation package. Existing course-card migration renames only the outer, body, and title classes, preserves heading text, level, link target, and description content, then removes only local CSS scoped to the old course-card classes.</p>
+<p>Scope includes the Card rules in <code>_extensions/askr/qdk.scss</code> under its separate stylesheet owner, plus the two Cards pages, their navigation entries, links from the component overviews and README, and this package documentation. This documentation work package does not edit the stylesheet. Do not change consumer repositories, root pins, JavaScript, or dependencies. Semantic state: CONVERGING. Delivery state: CANDIDATE; the Human-authorized endpoint includes the exact-path <code>develop</code> checkpoint, main PR, v0.12.0 tag/release, Pages publication, and installation handoff. The separate shared Copy follow-up remains Unreleased and is not part of v0.12.0.</p>
+<p>The Lead completed the Card-only renders and Chromium review and the full bilingual site render recorded in <code>VALIDATION.md</code>. Before completing the release, the Lead still owns main PR/CI, v0.12.0 installation validation, Pages publication, and deployment/readback. Add no new tests and execute no notebooks or scientific content.</p>
+<p>If the markup cannot retain native heading and link behavior, return the issue for direction instead of adding JavaScript or making the full card clickable. Visual acceptance and completed publication remain separate outcomes.</p>
+</section>
+<section id="shared-text-copy-feedback-included-in-v0.13.0-release-scope" class="level2">
+<h2 class="anchored" data-anchor-id="shared-text-copy-feedback-included-in-v0.13.0-release-scope">Shared text-copy feedback — included in v0.13.0 release scope</h2>
+<p>This local follow-up applies one text-copy interaction to displayed-math source, Mermaid source and native code blocks. Keep the text button labelled <code>Copy</code>; after a successful copy, change that same button to <code>Copied!</code> with a green outline for about two seconds, then restore <code>Copy</code>. Use the same success state and animation across all three surfaces. Replace the native code-copy icon and tooltip while retaining Quarto’s <code>code-copy</code> availability setting.</p>
+<p>The source worker owns runtime integration; the Lead reviews the combined candidate and verifies clipboard payload, success/reset and readable controls in light/dark desktop/mobile layouts. The Human authorized delivery with the v0.13.0 viewers release on 2026-10-27. Earlier review outcomes remain in <code>VALIDATION.md</code>; publication is recorded only after the release checks pass.</p>
+</section>
+<section id="previous-askr-0.11.0-mermaid-viewer-published-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="previous-askr-0.11.0-mermaid-viewer-published-2026-10-21">Previous: Askr 0.11.0 Mermaid viewer — published 2026-10-21</h2>
+<p>The Mermaid viewer and the v0.10.0 site snapshot shipped in the published <a href="https://github.com/arfiligol/askr/releases/tag/v0.11.0">v0.11.0 GitHub Release</a>. The tag and release remain unchanged. The viewer uses one opt-in wrapper around a native Mermaid cell and the existing Askr modal; its source and browser observations are recorded in <code>VALIDATION.md</code> and the <a href="./usage/image-viewer.html#mermaid-viewer">Mermaid viewer guide</a>. The current shared-copy follow-up does not amend that published package.</p>
+</section>
+<section id="previous-documentation-version-archive-correction-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="previous-documentation-version-archive-correction-2026-10-21">Previous: Documentation version archive correction — 2026-10-21</h2>
+<p>At the time of the docs-only archive correction, 0.10.0 was the current published site. The correction kept the actual published 0.9.0 site as <code>v0.9.0/</code>, retained the frozen 0.3.0 snapshot and left the extension runtime, installed version and public options unchanged. The <code>v0.9.0/</code> source snapshot comes from the actual Pages tree at <code>32b83b78756c09dbcf7fd378996cd1170cfdbc48</code>; the full root render publishes that directory and generates compatible selector manifests. The 0.9.0 manifest uses one root relative to its own site directory for current-version matching and fixed homepage links for navigation; the frozen 0.3.0 manifest uses its <code>/askr/</code> origin prefix and fixed version-home links. Both HTML snapshots remain unchanged. The published 0.11.0 package preserved the actual 0.10.0 site under <code>/v0.10.0/</code> before replacing the current root; it did not add a second 0.10.0 entry.</p>
+<p>Historical sites are unmaintained. The docs-only archive correction shipped with v0.11.0; see <code>VALIDATION.md</code> for its render, browser and Pages receipt. The Lead retains Git, Pages and publication delivery authority. Semantic state: CONVERGING; delivery state: PUBLISHED.</p>
+</section>
+<section id="published-askr-0.10.0-bilingual-release-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="published-askr-0.10.0-bilingual-release-2026-10-21">Published: Askr 0.10.0 bilingual release — 2026-10-21</h2>
+<p>The Human authorized publication of Askr 0.10.0 and its later LCDH adoption. This package adds the optional Header language selector and an actual bilingual Gallery. English remains at the existing site root; a separate Traditional Chinese Quarto website is built under <code>/zh-TW/</code>, with its own navigation and search. Each site’s <code>askr.languages.current</code> is explicit, and both selector entries link to the two site homepages.</p>
+<p>The root Quarto project excludes <code>zh-TW/</code> from its own render. On a full site render, its post-render helper stages the current Askr extension and shared image/bibliography assets into ignored generated paths, then renders the child website into <code>_site/zh-TW/</code>. The three executable examples shared by both sites live once in <code>_includes/</code>; translated documents include those same cells instead of owning copies of executable code.</p>
+<p>Implement the site-level <code>askr.languages</code> option in Askr’s Header. Its <code>current</code> code must match exactly one entry in <code>items</code>; provide at least two entries, each with a unique nonempty scalar <code>code</code>, nonempty scalar <code>label</code>, and an HTTPS absolute URL or domain-root <code>/path</code> <code>href</code>. Reject protocol-relative and whitespace-containing destinations, and escape every configured string.</p>
+<p>Place a square language icon beside the existing Header tools. Give it the accessible name and tooltip <code>Language: &lt;current label&gt;</code>; keep it available on narrow screens independently of Areas and reserve its measured width in the Header layout. The menu uses Askr’s light/dark tokens. Each normal link uses its configured <code>href</code> in the current tab, with <code>lang</code>, <code>hreflang</code>, and a visible current marker plus <code>aria-current</code>. Omit the control when the option is absent; JavaScript-disabled output contains no dead button. Askr does not infer destinations, persist language choices, translate content, or alter search. Existing author-provided navbar language links remain in place; guidance tells authors to remove duplicates after configuring Askr.</p>
+<p>Askr owns the extension, Usage docs and bilingual Gallery build. The public Gallery is configured for its own English and Traditional Chinese homepages; consumer repositories, root pins and the frozen <code>v0.3.0/</code> remain outside this package. <code>v0.3.0/</code> remains the historical English snapshot.</p>
+<p>The corrected full root/child render passed with 106 English and 27 Traditional Chinese pages, and all three shared cells executed in both. The 27 Chinese pages have no broken static links; the English and Chinese search indexes contain 211 and 89 entries. The Lead also observed desktop language navigation, four separate page sidebars, Chinese-only search results and the Figures viewer. Detailed observations are in <code>VALIDATION.md</code>. The 0.10.0 release, Pages deployment and installation handoff are complete.</p>
+<p>Semantic state: CONVERGING. Delivery state: published as <code>v0.10.0</code>; the later documentation archive correction is a separate package.</p>
+</section>
+<section id="historical-work-packets" class="level2">
+<h2 class="anchored" data-anchor-id="historical-work-packets">Historical work packets</h2>
+</section>
+<section id="historical-local-candidate-packet-optional-header-language-selector-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="historical-local-candidate-packet-optional-header-language-selector-2026-10-21">Historical local-candidate packet — Optional Header language selector — 2026-10-21</h2>
+<p>The earlier local-candidate packet preceded the Human’s publication authorization and the bilingual Gallery assignment. Its feature contract and temporary-consumer observations remain historical context; its local-only endpoint and publication restrictions are superseded by the current package above.</p>
+</section>
+<section id="dense-scientific-reading-2026-10-21" class="level2">
+<h2 class="anchored" data-anchor-id="dense-scientific-reading-2026-10-21">0.9.0 dense scientific reading — 2026-10-21</h2>
+<p>Ship the Human-assigned P0 reading improvements: accessible scrolling tables, consistent normal/wide measure, compiled border tokens and contrast, compact search-clean equation copy, native semantic blocks, flat page facts, and natural wide figures. Askr Lead owns <code>quarto-design-kit/**</code>; consumers, root pins and the frozen <code>v0.3.0/</code> remain outside this package. Runtime assets stay local.</p>
+<p>Required observations are Quarto renders, a light/dark compiled public-token audit and actual browser reading/keyboard/copy/layout behavior, including scoped temporary probes outside the repository. Record results in <code>VALIDATION.md</code>. No durable tests, new gallery fixtures, CI workflows, scientific execution or optional SVG/Mermaid image-viewer extension are assigned.</p>
+<p>Delivery endpoint: develop checkpoint, reviewed main promotion, <code>v0.9.0</code> release, existing Pages publication, public observation and durable-child synchronization. The Lead retains Git/publication authority. Semantic state: CONVERGING; implementation and publication do not imply Human acceptance or stabilization.</p>
+</section>
+<section id="publication-authorization-2026-10-10" class="level2">
+<h2 class="anchored" data-anchor-id="publication-authorization-2026-10-10">0.8.0 publication authorization — 2026-10-10</h2>
+<p>Human authorized publication of the presented dual-mode viewer candidate. Publish the develop checkpoint through a develop-to-main PR, annotated v0.8.0 tag and GitHub Release; complete the existing main/Pages workflows, observe the public viewer and synchronize the durable child checkout. Update version metadata, install instructions, Gallery selector and Changelog. Preserve prior runtime observations for unchanged implementation; freshly render release metadata and check the exact publication diff. No new tests, root pins, consumers or deployment configuration changes. Semantic state remains CONVERGING; publication permission does not claim the unobserved touch/no-JavaScript cases or stabilization.</p>
+</section>
+<section id="dual-mode-image-viewer-local-candidate-2026-10-10" class="level2">
+<h2 class="anchored" data-anchor-id="dual-mode-image-viewer-local-candidate-2026-10-10">Dual-mode image viewer — local candidate, 2026-10-10</h2>
+<p>Askr Lead owns the extension, Figures and Usage. Implement the Human’s dual-mode plan: SVG/PNG/JPEG, inline interaction and a shared modal engine, existing button syntax, Quarto image eligibility/paths/captions/groups, focus and state continuity. CONVERGING; LOCAL CANDIDATE only; no_test_writes. No commit, push, publication, consumer edits, infrastructure or root pins. Remove the active GLightbox runtime. Observe actual desktop/tablet/mobile light/dark rendering and operations, inline/modal state, galleries, keyboard/touch, failures and temporary consumer installation. Record the actual observation source and remaining limits in VALIDATION.md; source inspection alone does not prove interaction.</p>
+<p>Implementation and local preview are available. Actual mouse/keyboard/modal, responsive chrome, gallery/failure and resource-path observations are recorded. Actual touchscreen pinch and JavaScript-disabled browser observations remain incomplete; this candidate is not labeled fully validated or accepted.</p>
+</section>
+<section id="publication-authorization-2026-10-09" class="level2">
+<h2 class="anchored" data-anchor-id="publication-authorization-2026-10-09">0.7.0 publication authorization — 2026-10-09</h2>
+<p>Human requested removal of Gallery’s descriptive right-side Footer text and publication of the native Header / Footer link package. Keep one Powered by Askr credit line in Gallery; preserve consumer-authored Footer content. Complete the develop checkpoint, develop-to-main PR, annotated v0.7.0 tag, GitHub Release, existing Pages CI/deployment, public rendering observation and clean durable-checkout synchronization. Do not update consumers, root pins, infrastructure or durable tests. Use prior unchanged implementation observations; freshly render release metadata and inspect the corrected Footer in the local and published site. Publication supersedes only the prior local-only endpoint; no automated-test stabilization is assigned.</p>
+</section>
+<section id="native-header-footer-links-local-candidate-2026-10-09" class="level2">
+<h2 class="anchored" data-anchor-id="native-header-footer-links-local-candidate-2026-10-09">Native Header / Footer links — local candidate, 2026-10-09</h2>
+<p>Owner: Askr Lead; base fff9ab1 on develop, clean at intake. Implement the Human-assigned native navbar.tools and page-footer styling, responsive links and default opt-out Powered by Askr credit from installed extension metadata. Authors own all navigation content; no second link configuration, no automatic commit display, no consumer or root-pin changes. CONVERGING, local preview only; no commit, push, publication or durable tests. Reuse existing structure. Observe actual desktop/tablet/mobile light/dark rendering, long labels and Header fit transition, link destinations/keyboard/Areas controls, footer with and without authored content, credit disabled and metadata version provenance. Record render/runtime observations in Validation and changes in Unreleased.</p>
+</section>
+<section id="publication-authorization-2026-10-06" class="level2">
+<h2 class="anchored" data-anchor-id="publication-authorization-2026-10-06">0.6.1 publication authorization — 2026-10-06</h2>
+<p>Human requested the complete publication flow for the adaptive Areas and RequireJS repair candidate. Deliver a develop checkpoint, develop-to-main PR, v0.6.1 tag and GitHub Release using CHANGELOG, existing Pages CI/deployment, public-site observation and clean local synchronization. The prior local-only endpoint is superseded for this delivery. No root pins, consumer or deployment configuration changes, new tests or stabilization are assigned. Semantic scope remains CONVERGING; release authorization is not automated-test stabilization. Reuse the recorded unchanged core implementation observations; render changed release documentation, verify exact source/tag identities and observe actual CI and published HTML/runtime rather than infer deployment from Git.</p>
+</section>
+<section id="publication-authorization-2026-10-06-1" class="level2">
+<h2 class="anchored" data-anchor-id="publication-authorization-2026-10-06-1">0.6.0 publication authorization — 2026-10-06</h2>
+<p>The Human requested publication of the optional Logout and native image-viewer candidate so the NCUAS Private Repo owner can test it. Endpoint: checkpoint <code>develop</code>, promote to <code>main</code> by PR, tag/release <code>v0.6.0</code>, observe the existing Pages workflow and actual public routes, and synchronize this durable child checkout. Publication is authorized; these new semantic scopes remain CONVERGING, not automatically accepted or stabilized. No durable tests, root pins, NCUAS integration, infrastructure edits, or real authentication actions. Retain prior rendered/source-review evidence for unchanged feature bytes; render release metadata and install instructions, verify exact Git/tag and deployment identities, and inspect published Usage/Figures. Existing historical 0.3.0 contents remain unchanged; no new history directory is assigned. The local-only endpoint below is superseded only for this release delivery.</p>
+</section>
+<section id="optional-logout-and-native-image-viewer-local-candidate-2026-10-06" class="level2">
+<h2 class="anchored" data-anchor-id="optional-logout-and-native-image-viewer-local-candidate-2026-10-06">Optional logout and native image viewer — local candidate, 2026-10-06</h2>
+<p>State: CONVERGING; endpoint: LOCAL CANDIDATE and running preview only. The Human assigned this bounded implementation and observations, not publication or automated-test stabilization. The Askr owner is the primary writer for extension, Gallery, Usage, and these receipts. <code>test_policy = no_test_writes</code>.</p>
+<ul>
+<li><code>askr.logout.href</code> (required when logout is configured) accepts HTTPS or a domain-root <code>/</code> path; <code>label</code> defaults to Logout. Absence means no control. An accessible Header icon navigates the current tab. Authentik/deployment owns session state, outpost endpoints, and real logout; Askr owns no account, cookie, or session handling. Invalid configuration fails at render time.</li>
+<li><code>askr-html</code> defaults to native <code>lightbox: auto</code>. Native <code>.nolightbox</code>, page <code>lightbox: false</code>, linked/inline image treatment, captions, galleries, zoom, drag, and close remain Quarto’s responsibility. Askr styles controls and descriptions and restores focus to the entry that opened the viewer.</li>
+<li><code>askr-image-view</code> accepts exactly one <code>target</code> (an existing eligible image/ figure ID) or <code>src</code> (a hidden native image), and optional <code>label</code> (View image). Bad targets and disabled-Lightbox conflicts fail during rendering; there is no image-page fallback. Non-HTML produces ordinary image/figure links.</li>
+<li>Add two Usage pages and real Figures examples using existing public assets. Never add private URLs/assets, change pixels, or promise sharper upscaling.</li>
+</ul>
+<p>Required evidence: non-executing render; actual desktop/mobile light/dark opening from image and both button forms, caption/relative-path handling, native zoom/drag, Escape/close, reading-position and focus restoration; excluded/linked images; missing-image behavior; temporary independent consumer with and without Logout, Header layout and exact destinations; invalid-input and non-HTML render probes; independent correctness/privacy review. One-off probes/screenshots stay outside the repository. Update VALIDATION with actual observations and limitations. No NCUAS/NPM/Authentik changes, real authentication exercise, consumer update, root pin, release, push, CI workflow, or durable test.</p>
+</section>
+<section id="acceptance-and-delivery-2026-10-06" class="level2">
+<h2 class="anchored" data-anchor-id="acceptance-and-delivery-2026-10-06">0.5.0 acceptance and delivery — 2026-10-06</h2>
+<p>After direct preview iteration the Human confirmed the current candidate and requested publication (“可以餒！就先這樣。可以發佈了。”). This accepts the 0.5.0 engineering and visual follow-ups below, including copyable display mathematics with original-sized Copy/Copied! feedback. State: ACCEPTED; automated-test stabilization is not assigned. Delivery endpoint: checkpoint develop, promote via PR to main, tag/release v0.5.0, observe existing CI/Pages, verify public routes and synchronize the durable child checkout. Existing historical v0.3.0 stays unchanged. No consumer changes or root pins. Earlier CONVERGING/pending statements below are historical candidate receipts superseded by this scope-bound acceptance, not additional active candidates.</p>
+</section>
+<section id="goal-and-state" class="level2">
+<h2 class="anchored" data-anchor-id="goal-and-state">Goal and state</h2>
+<p>This repository owns the <code>askr-html</code> native Quarto HTML extension and its local gallery. Askr is the reading page: measure, type, citations, and callouts. Quiet Quartz remains the visual theme name. The <strong>0.4.2 release</strong> targets Quarto 1.10.18. The public format is <code>askr-html</code>. Visual semantics remain CONVERGING until explicit Human acceptance; a version number, merge, or tag does not establish semantic stabilization or deployment.</p>
+</section>
+<section id="ownership-and-interfaces" class="level2">
+<h2 class="anchored" data-anchor-id="ownership-and-interfaces">Ownership and interfaces</h2>
+<section id="active-0.5.0-engineering-package-2026-10-06" class="level3">
+<h3 class="anchored" data-anchor-id="active-0.5.0-engineering-package-2026-10-06">Active 0.5.0 engineering package (2026-10-06)</h3>
+<p>Human authorized execution of this package. Owner/writer: Askr Lead in the registered local child checkout, <code>arfiligol/askr</code> on <code>develop</code>, starting at <code>efab6e77ba91a9d7b71dd2816a4e191769683e89</code>. State: CONVERGING / LOCAL CANDIDATE. No Cursor writer is active. Worker leases, when allocated, are disjoint.</p>
+<ol type="1">
+<li>Restore grouped tabs’ visual selection, content, ARIA selection and keyboard tab stops to one native Quarto state. Quarto retains switching, grouping and persistence; Askr synchronizes accessibility attributes from native active classes, including initial load and page return. Preserve .9rem labels and current spacing. If a narrow package fix is not viable, report evidence and discuss Plan B rather than silently removing groups.</li>
+<li>Resolve version links relative to the deployment site root, separately from version roots and page paths. Manifest <code>/</code> means the site root, including repository-prefix deployments. Keep the corresponding page and missing-page version-home behavior without hardcoded product paths. Use a disclosure button and ordinary links, native Enter/Space and Tab/Shift-Tab, Escape with trigger-focus restoration, and outside/focus-leave closing without stealing outside focus.</li>
+<li>Exclude controls from prose-link styling. Publish global and component design tokens (tabs, callouts, navigation/version/search, code, tables and blockquotes) while preserving <code>askr-html</code> and existing <code>--qdk-*</code> names. Sass owns compile-time defaults and derived CSS variables; theme-color reads the actual canvas token. Consumer bases remain authoritative at responsive sizes. Keep one external gallery version manifest; existing inline consumer input remains supported. Document overrides and show real rendered examples.</li>
+<li>Investigate a Quarto compatibility range rather than locking one patch. Keep 1.10.18 as reproducible CI baseline. Inspect native dependencies and upstream changes, then observe range boundaries/relevant changed releases. Report supported range separately from actually observed versions. No broad unobserved 1.x claim, adapter framework or standing CI version matrix.</li>
+</ol>
+<p>Required observations: desktop/mobile light/dark grouped tabs via mouse and keyboard, state/content/ARIA agreement, reload and page return; root and repository-prefix version routes including history/missing pages; disclosure focus; a clean independent consumer with token overrides; and selected Quarto versions. Source and rendered DOM/browser observations support these claims, not a synthetic PASS label. Temporary probes and screenshots stay outside the repository. Record interpretation and exact inputs in <code>VALIDATION.md</code>. No durable test writes or general validation framework are authorized.</p>
+<p>Independent review covers the frozen reusable/public-interface candidate. Present the full candidate for Human semantic acceptance before 0.5.0 develop-to-main promotion, tag and actual Pages/public-site verification. Do not modify consumers, root pins, infrastructure or private artifacts. The separately received logout-action design context is pending Human discussion and is not part of this package.</p>
+<p>Candidate implementation and the assigned browser observations are complete; see <code>VALIDATION.md</code> for actual inputs, outcomes and limits. The range candidate is stable Quarto <code>&gt;=1.9.38 &lt;1.11</code>, with 1.10.18 retained for CI. Public component tokens are documented in <code>usage/tokens.qmd</code>. Final independent delta review found no remaining requirement-backed defects. Human acceptance precedes publication; this is not a released 0.5.0 yet.</p>
+<section id="human-acceptance-packet-0.5.0-engineering-candidate" class="level4">
+<h4 class="anchored" data-anchor-id="human-acceptance-packet-0.5.0-engineering-candidate">Human acceptance packet: 0.5.0 engineering candidate</h4>
+<p>Copyable display mathematics follow-up (2026-10-06): add a shared HTML component around native standalone display math. A render filter captures the same Pandoc Math source used for display, without delimiters. A nearby keyboard-accessible Copy LaTeX button reports clipboard success; clipboard denial reveals selectable source, never false success. Inline math and non-HTML outputs remain native. Inspect actual clipboard content and light/dark desktop/mobile preview. Local candidate only; no durable tests or publication. Askr owns the wrapper and copy interaction, not math layout. Human visual refinement: visible button label is Copy; accessible name remains Copy LaTeX. The subsequent request restores the original .8rem type and .25rem/.5rem padding, superseding the compact-size candidate. Human success-feedback refinement: successful copy changes the button to green-outline Copied! for two seconds, then transitions back to Copy. Repeated clicks restart the feedback duration. Errors retain the manual-copy disclosure; reduced-motion preference disables transitions. Observe both success and automatic restoration in the local preview.</p>
+<p>Marked-text follow-up (2026-10-06): retain native mark semantics and the existing mark background token; inherit paragraph text color and use a muted amber dark fill. Inspect Prose in light/dark desktop and mobile. Deliver local preview only; no tests, release or consumer changes.</p>
+<p>Callout preview follow-up (2026-10-06): compare headered icon/no-icon native callouts, normalize shell/header block padding and center icon/title/disclosure glyph. Preserve titleless padding, nested content and native collapse. Inspect actual default/minimal, expanded/collapsed, long-title and desktop/mobile light/dark render geometry; deliver local preview, no tests or release. The same Human follow-up requests separate unordered/ordered list displays, each with a hierarchical Structure example in components/prose.qmd. Inspect their actual three-level list markup and mobile containment, without changing native list behavior or introducing scientific results. The ordered specimen uses native numeric/alphabetic/numeric markers at successive levels, as requested. A further callout follow-up removes native iconless-header negative bottom margin so the shared icon-derived row also produces equal outer insets.</p>
+<p>Human preview follow-up (2026-10-06): refine tab-pane padding and label-to-pane gap, refine header spacing, and repair Areas disclosure placement. Owner is the same Askr Lead; affected paths are qdk.scss, token documentation and this receipt. Preserve label size, native selection/collapse, consumer interfaces and other candidate behavior. Observe desktop/mobile light/dark spacing and actual Areas/Pages open/close/outside-click behavior in the rendered browser. Inspect every header control (Pages, Search, version, theme and Areas), including its position and resulting disclosure. Header-height self-reference and the native Pages minimum-height override are implementation defects in this scope. No test writes, consumer/root-pin change or release is assigned by this follow-up. Deliver an updated local preview for Human review. Only this visual delta invalidates the prior spacing/header observation; other source receipts remain bound to their original identity.</p>
+<ul>
+<li>Scope and behavior: grouped native tabs agree across content, selection, ARIA and tab stops, including keyboard/reload/return. Version disclosure uses ordinary links and predictable focus; routes remain deployment-root-relative. Prose/control styling is separated. Global/component overrides have one Sass compile authority and meaningful responsive consumer bases.</li>
+<li>Public interfaces: existing <code>askr-html</code>, <code>--qdk-*</code> names and version manifest fields remain; documented component tokens are added. Candidate Quarto range is stable <code>&gt;=1.9.38 &lt;1.11</code>, with 1.10.18 as CI baseline. Global radius default now actually controls component radii at the existing effective 6px value.</li>
+<li>Ownership: Quarto owns tab selection/persistence, collapse and search; Askr mirrors presentation/accessibility and owns tokens. Consumers own their styles, content, manifest and hosting. Historical sites are unchanged.</li>
+<li>Failure and edges: missing manifests keep the native brand (or existing inline input); same-origin 404 links use the selected version home. Network failure retains the original link; modified/external links stay browser-native. Invalid Sass/CSS inputs use native compiler/browser behavior, not invented replacement values. Native group persistence is unchanged.</li>
+<li>Limits/exclusions: not every Quarto patch was exercised; prerelease support, 1.11 adapters, scientific output, new tests, consumer changes, root pins, logout and infrastructure are excluded. A custom host error document remains a consumer/hosting responsibility.</li>
+<li>Completed evidence: actual desktop/mobile light/dark browser operations, independent consumer and root/prefix routing observations, selected-version renders/source investigation and independent review, detailed in VALIDATION.</li>
+<li>Unresolved semantic decisions: none proposed by the implementation. Human acceptance is pending; source candidate is not semantic acceptance.</li>
+<li>Delivery: candidate checkpoint on develop, then after explicit acceptance promote main/tag 0.5.0 and observe actual CI, Pages and public routes. The Pages-hosted 404 receipt is intentionally pending that delivery stage.</li>
+</ul>
+</section>
+</section>
+<section id="current-bounded-typography-adjustment" class="level3">
+<h3 class="anchored" data-anchor-id="current-bounded-typography-adjustment">Current bounded typography adjustment</h3>
+<p>Reduce native grouped-tabset labels to 0.9rem, following the Human-requested smaller candidate after the H4 comparison. Preserve Cursor’s current tab styling, native group synchronization, content, and heading sizes. Observe computed H3/H4/tab sizes and desktop (1440 × 900) and mobile (390 × 844) screenshots, then exercise the Palace/AEDT group synchronization. The Human requested publication on 2026-10-06: checkpoint develop, promote main, tag v0.4.2, and verify the existing Pages workflow and public tabset. No consumer update, root pin, new durable tests, or stabilization are assigned.</p>
+<p>The Human retained the 0.9rem label candidate and requested tighter vertical spacing: reduce label padding to .35rem and remove duplicate first/last child block margins inside native tab panes. Preserve horizontal spacing and content padding. Inspect the current preview at desktop and mobile sizes.</p>
+<p>The extension is self-contained at <code>_extensions/askr</code> and exposes one public format name: <code>askr-html</code>. Its token authority is <code>qdk.scss</code>: documented Quarto Sass variables own color, type, callout color, code, navbar, sidebar, and grid widths, and <code>scss:rules</code> applies the remaining Quartz-derived visuals without importing a Quartz runtime. Schibsted Grotesk (400/700) owns titles and navigation UI; Source Sans 3 (400/600 plus italic) is the locally pinned Source Sans Pro successor used for body text; IBM Plex Mono owns code. Consumers own content, IA, execution, math engine, viewer behavior, privacy, data, and navigation choices. The gallery at this repository root is the source-backed evaluation surface. The shared token authority distinguishes content dividers from quieter layout dividers in each native theme; manual Markdown <code>---</code> is the opt-in content divider, while sidebar and navigation boundaries use the layout token. Askr is a reusable design-system candidate for direct SCQ-repository adoption. Its layout contract is the theme variables <code>$grid-sidebar-width</code> and <code>$grid-margin-width</code> at 264px, <code>$grid-body-width</code> and <code>$grid-docked-body-width</code> at 630px, and <code>$grid-column-gutter-width</code> at 26px. The root font size is 18px. <code>$sidebar-border</code> is false. One <code>scss:rules</code> track list restates the docked grid from those variables so the 630px measure stays centered; Quarto’s own formula would add 200px to the body and leave the spare space in a right-hand 5fr column. That track rule is the residual coupling to Quarto’s grid line names.</p>
+</section>
+</section>
+<section id="adaptive-areas-and-smooth-scroll-repair-local-candidate" class="level2">
+<h2 class="anchored" data-anchor-id="adaptive-areas-and-smooth-scroll-repair-local-candidate">Adaptive Areas and smooth-scroll repair — local candidate</h2>
+<p>Human-assigned scope: remove the Gallery RequireJS/Zenscroll conflict while retaining native CSS smooth scrolling; show desktop Areas inline only when the site title, navigation and actual controls fit. Otherwise use the same Bootstrap Areas disclosure, without changing the Pages sidebar breakpoint. Long titles truncate only when necessary, retaining their accessible name. Recalculate after viewport, font and header-content changes; clear open state, overlay and hidden focus when changing presentation.</p>
+<p>Owner: Askr Lead; primary writer: this local task in the registered child checkout. Semantic state: CONVERGING; delivery endpoint: LOCAL CANDIDATE and preview. No release, PR mutation, root pins, consumer or infrastructure edits, or durable tests are assigned. Record changes in an English CHANGELOG with an Unreleased section and a factual 0.6.0 summary; future PR/Release summaries derive from it, not a second release-notes authority.</p>
+<p>Observe executed Figures output (RequireJS remains, no mismatch, working navigation, diagram and viewer). Use temporary consumers with generic long titles/Areas, with/without version selector and Logout. Inspect desktop, tablet, phone, light/dark and the actual fit boundary; operate every header control, Escape, keyboard, link selection and resizing while Areas is open. Rendered browser geometry/state and console are the observation authority; source/build success alone does not establish these outcomes. Record findings in VALIDATION; no private consumer payload enters the repository.</p>
+</section>
+<section id="candidate-behavior-and-failure-boundaries" class="level2">
+<h2 class="anchored" data-anchor-id="candidate-behavior-and-failure-boundaries">Candidate behavior and failure boundaries</h2>
+<p>The candidate supplies local fonts/icons, Quartz-on-Quarto light and dark tokens, accessible focus, and native Quarto callout styling. It does not replace Quarto collapse, navigation, highlighting, copying, execution, or rendering runtimes. If the extension cannot be resolved by Quarto, a consumer must fix its extension reference; it must not silently fall back to a remotely hosted asset or a Quartz runtime. Callout type determines color independent of nesting depth. The five Quarto-native types are reproduced within their DOM boundary; Quartz’s additional twelve-family showcase/aliases are not exposed because doing so would require a new authoring syntax transformer or public contract.</p>
+</section>
+<section id="exclusions" class="level2">
+<h2 class="anchored" data-anchor-id="exclusions">Exclusions</h2>
+<p>No tests are written while this scope is CONVERGING. A merge from <code>develop</code> into <code>main</code> renders this gallery and publishes it to GitHub Pages. Askr does not deploy a consumer’s site. It also does not provide analytics, a separate search engine, graphs, backlinks, hover previews, robots, emoji, consumer APIs, or scientific execution policy. The theme styles Quarto’s native overlay search. A website turns that control on with <code>search.location: navbar</code> and <code>search.type: overlay</code>. This gallery does that.</p>
+</section>
+<section id="validation-endpoint" class="level2">
+<h2 class="anchored" data-anchor-id="validation-endpoint">Validation endpoint</h2>
+<p>Render this gallery and a clean consumer that installs the reviewed version tag, including a documented Sass override. Inspect desktop/mobile and light/dark native Quarto behavior, focus, overflow, callout nesting/collapse, navigation, TOC and code-copy. Record factual outcomes in <code>VALIDATION.md</code>; those findings are not Human acceptance gates.</p>
+</section>
+<section id="consolidated-visual-regression-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="consolidated-visual-regression-checklist">Consolidated visual regression checklist</h2>
+<p>Before a final candidate review, inspect the native Quarto surface in this order: Callout geometry/rhythm (including nested and collapsed forms), Header alignment and toggle visibility, Layout tracks with and without a TOC plus mobile, Divider hierarchy, Typography rhythm, Code surface/overflow/copy, then the combined light/dark system. This checklist is a CONVERGING review aid, not an automated test suite or acceptance gate.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+(() => {
+  'use strict';
+
+  const timers = new WeakMap();
+  const attempts = new WeakMap();
+
+  function statusFor(button) {
+    if (button.dataset.askrCopyKind === 'math') {
+      return button.closest('.askr-copyable-math')?.querySelector(':scope > .askr-copy-status') || null;
+    }
+    const local = button.parentElement?.querySelector('.askr-copy-status');
+    if (local) return local;
+    const following = button.parentElement?.nextElementSibling;
+    return following?.classList.contains('askr-copy-status') ? following : null;
+  }
+
+  function begin(button) {
+    clearTimeout(timers.get(button));
+    timers.delete(button);
+    const attempt = (attempts.get(button) || 0) + 1;
+    attempts.set(button, attempt);
+    button.textContent = 'Copy';
+    button.classList.remove('is-copied');
+    button.setAttribute('aria-label', button.dataset.askrCopyLabel);
+    const status = statusFor(button);
+    if (status) {
+      status.classList.remove('askr-copy-status-success', 'askr-copy-status-error');
+      status.textContent = '';
+    }
+    return attempt;
+  }
+
+  function succeed(button, attempt) {
+    if (attempts.get(button) !== attempt) return;
+    button.textContent = 'Copied!';
+    button.classList.add('is-copied');
+    button.setAttribute('aria-label', `${button.dataset.askrCopyLabel} copied`);
+    const status = statusFor(button);
+    if (status) {
+      status.classList.add('askr-copy-status-success');
+      status.textContent = 'Copied to clipboard.';
+    }
+    timers.set(button, window.setTimeout(() => {
+      if (attempts.get(button) !== attempt) return;
+      button.textContent = 'Copy';
+      button.classList.remove('is-copied');
+      button.setAttribute('aria-label', button.dataset.askrCopyLabel);
+      if (status) {
+        status.classList.remove('askr-copy-status-success');
+        status.textContent = '';
+      }
+      timers.delete(button);
+    }, 2000));
+  }
+
+  function fail(button, attempt) {
+    if (attempts.get(button) !== attempt) return;
+    const status = statusFor(button);
+    if (status) {
+      status.classList.add('askr-copy-status-error');
+      const messages = {
+        code: 'Copy failed. Select the code above and copy it manually.',
+        math: 'Copy failed. Select the LaTeX source below and copy it manually.',
+        mermaid: 'Copy failed. Select the Mermaid source below and copy it manually.'
+      };
+      status.textContent = messages[button.dataset.askrCopyKind];
+    }
+  }
+
+  function codeText(button) {
+    const original = button.closest('.code-copy-outer-scaffold');
+    if (!original) throw new Error('The code block source is unavailable.');
+    const scaffold = original.cloneNode(true);
+    const code = scaffold.querySelector('code');
+    if (!code) throw new Error('The code block source is unavailable.');
+    for (const child of [...code.children]) {
+      const classes = [...child.classList];
+      if (classes.some(name => name.startsWith('code-annotation-') && name !== 'code-annotation-target')) child.remove();
+    }
+    return code.innerText;
+  }
+
+  function sourceFor(button) {
+    const kind = button.dataset.askrCopyKind;
+    if (kind === 'math') return button.closest('.askr-copyable-math')?.dataset.askrTex;
+    if (kind === 'mermaid') return button.closest('.askr-mermaid-view')?.dataset.askrMermaidSource;
+    if (kind === 'code') return codeText(button);
+    throw new Error('This copy control has no source.');
+  }
+
+  function legacyCodeCopy(text, button) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.readOnly = true;
+    textarea.tabIndex = -1;
+    textarea.setAttribute('aria-hidden', 'true');
+    textarea.style.position = 'fixed';
+    textarea.style.insetInlineStart = '-9999px';
+    document.body.append(textarea);
+    textarea.select();
+    let copied = false;
+    try { copied = document.execCommand('copy'); } catch (_) {}
+    textarea.remove();
+    button.focus({preventScroll:true});
+    if (!copied) throw new Error('The browser did not copy the code.');
+  }
+
+  async function copy(button) {
+    const attempt = begin(button);
+    let text;
+    try {
+      text = sourceFor(button);
+      if (typeof text !== 'string') throw new Error('The source is unavailable.');
+      if (!navigator.clipboard?.writeText) throw new Error('Clipboard access is unavailable.');
+      await navigator.clipboard.writeText(text);
+      succeed(button, attempt);
+    } catch (_) {
+      if (attempts.get(button) !== attempt) return;
+      if (button.dataset.askrCopyKind === 'code' && typeof text === 'string') {
+        try {
+          legacyCodeCopy(text, button);
+          succeed(button, attempt);
+          return;
+        } catch (_) {}
+      }
+      if (button.dataset.askrCopyKind === 'math') exposeMathSource(button);
+      fail(button, attempt);
+    }
+  }
+
+  function createButton(kind, label) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = `askr-copy-button askr-copy-${kind}`;
+    button.dataset.askrCopyKind = kind;
+    button.dataset.askrCopyLabel = label;
+    button.textContent = 'Copy';
+    button.setAttribute('aria-label', label);
+    return button;
+  }
+
+  function createStatus() {
+    const status = document.createElement('span');
+    status.className = 'askr-copy-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    return status;
+  }
+
+  function initializeMathCopy() {
+    document.querySelectorAll('.askr-copyable-math').forEach(component => {
+      if (component.closest('.no-math-copy') || component.querySelector('.no-math-copy') || component.querySelector(':scope > .askr-math-actions')) return;
+      const actions = document.createElement('div');
+      actions.className = 'askr-math-actions';
+      const button = createButton('math', 'Copy LaTeX');
+      const status = createStatus();
+      actions.append(button);
+      component.prepend(actions);
+      component.append(status);
+    });
+  }
+
+  function replaceNativeCodeButtons() {
+    document.querySelectorAll('.code-copy-outer-scaffold > .code-copy-button').forEach(nativeButton => {
+      const scaffold = nativeButton.parentElement;
+      const button = createButton('code', 'Copy code');
+      nativeButton.replaceWith(button);
+      scaffold.classList.add('askr-has-copy-control');
+      scaffold.after(createStatus());
+    });
+  }
+
+  function exposeMathSource(button) {
+    const component = button.closest('.askr-copyable-math');
+    if (!component) return;
+    let source = component.querySelector('.askr-math-source');
+    if (!source) {
+      source = document.createElement('div');
+      source.className = 'askr-math-source';
+      const textarea = document.createElement('textarea');
+      textarea.readOnly = true;
+      textarea.spellcheck = false;
+      textarea.setAttribute('aria-label', 'LaTeX source');
+      textarea.value = component.dataset.askrTex;
+      source.append(textarea);
+      component.append(source);
+    }
+    const textarea = source.querySelector('textarea');
+    textarea.focus();
+    textarea.select();
+  }
+
+  function initialize() {
+    if (document.documentElement.dataset.askrCopyBound) return;
+    document.documentElement.dataset.askrCopyBound = 'true';
+    replaceNativeCodeButtons();
+    initializeMathCopy();
+    document.addEventListener('click', event => {
+      if (!(event.target instanceof Element)) return;
+      const button = event.target.closest('.askr-copy-button');
+      if (button) void copy(button);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initialize, {once:true});
+  } else {
+    initialize();
+  }
+})();
+</script>
+<script>
+// Logout is independent of image viewing and remains plain navigation.
+(() => {
+  function setup() {
+    const template = document.getElementById('askr-logout-config');
+    if (template) {
+      const tools = document.querySelector('#quarto-header .quarto-navbar-tools');
+      if (!tools) throw new Error('Askr Logout requires a website Header with navbar tools.');
+      tools.append(template.content.cloneNode(true));
+      document.getElementById('quarto-header').classList.add('askr-has-logout');
+    }
+
+  }
+  if (document.readyState === 'complete') setup();
+  else window.addEventListener('load', setup, {once: true});
+})();
+</script>
+<script>
+// Append credit without interpreting or replacing native navigation configuration.
+document.addEventListener('DOMContentLoaded', function () {
+  const credit = document.getElementById('askr-footer-credit');
+  if (!credit) return;
+  let footer = document.querySelector('footer.footer');
+  if (!footer) {
+    footer = document.createElement('footer');
+    footer.className = 'footer';
+    const row = document.createElement('div');
+    row.className = 'nav-footer';
+    footer.append(row);
+    document.body.append(footer);
+  }
+  let right = footer.querySelector('.nav-footer-right');
+  if (!right) {
+    right = document.createElement('div');
+    right.className = 'nav-footer-right';
+    footer.querySelector('.nav-footer').append(right);
+  }
+  // Quarto emits a nonbreaking-space placeholder for an unauthored region.
+  if (!right.childElementCount && !right.textContent.trim()) right.textContent = '';
+  right.append(credit.content.cloneNode(true));
+});
+</script>
+<script>
+(() => {
+  function mount() {
+    const template = document.getElementById('askr-language-config');
+    if (!template) return;
+    const tools = document.querySelector('#quarto-header .quarto-navbar-tools');
+    if (!tools) throw new Error('Askr language selector requires a website Header with navbar tools.');
+    tools.append(template.content.cloneNode(true));
+    document.getElementById('quarto-header').classList.add('askr-has-language');
+  }
+  if (document.readyState === 'complete') mount();
+  else window.addEventListener('load', mount, {once: true});
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/arfiligol\.github\.io\/askr\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/arfiligol/askr">
+      <i class="bi bi-github" role="img" aria-label="GitHub repository">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="./usage/add-askr.html">
+<p><i class="bi bi-book" aria-hidden="true"></i> Usage guide</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/arfiligol/askr/blob/main/README.md">
+<p><i class="bi bi-wrench" aria-hidden="true"></i> Maintenance guide</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="./license.html">
+<p><i class="bi bi-file-earmark-text" aria-hidden="true"></i> License</p>
+</a>
+  </li>  
+    <li class="nav-item">
+    <a class="nav-link" href="./THIRD_PARTY.html">
+<p><i class="bi bi-journal-text" aria-hidden="true"></i> Third-party notices</p>
+</a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.2" aria-label="Askr version 0.13.2">0.13.2</a></span></template>
+<template id="askr-viewer-config" data-loop="true"></template>
+<template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
+
+
+
+
+</body></html>

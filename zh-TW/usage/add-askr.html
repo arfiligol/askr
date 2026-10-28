@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-6e87a31393c6f91a58601bf2bd54a356.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-536a6d2615c0c5fc3245e81261de7ef2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-d92e1ad2193218de3205d279bfdac79b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-536a6d2615c0c5fc3245e81261de7ef2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -909,8 +909,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>目前版本為 <code>0.13.2</code>，公開格式名稱為 <code>askr-html</code>，視覺主題為 Quiet Quartz。</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add arfiligol/askr@v0.13.2 <span class="at">--no-prompt</span></span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
+<p>目前版本為 <code>0.13.3</code>，公開格式名稱為 <code>askr-html</code>，視覺主題為 Quiet Quartz。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> add arfiligol/askr@v0.13.3 <span class="at">--no-prompt</span></span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -929,7 +929,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>若要升級，請安裝較新的標籤版本，並重新建置專案。將更新後的 <code>_extensions</code> 複本提交至專案。請重新安裝經審查的標籤版本，不要直接編輯 <code>_extensions/arfiligol/askr</code> 內的檔案。</p>
 <section id="quarto-相容性" class="level2">
 <h2 class="anchored" data-anchor-id="quarto-相容性">Quarto 相容性</h2>
-<p>Askr 0.13.2 支援穩定版 Quarto <code>&gt;=1.9.38 &lt;1.11</code>。Quarto 1.10.18 仍是可重現圖集與 CI 的基準；使用者可採用支援範圍內的其他穩定版本，不必固定使用該修補版本。較舊標籤版本仍保留其原有需求。</p>
+<p>Askr 0.13.3 支援穩定版 Quarto <code>&gt;=1.9.38 &lt;1.11</code>。Quarto 1.10.18 仍是可重現圖集與 CI 的基準；使用者可採用支援範圍內的其他穩定版本，不必固定使用該修補版本。較舊標籤版本仍保留其原有需求。</p>
 <p>設定 <code>respect-user-color-scheme: true</code> 可依照讀者的系統偏好選擇配色。若使用 RequireJS 相容設定，請設定 <code>smooth-scroll: false</code>。這些是由使用專案選擇的選項；Askr 格式預設值不變。</p>
 <p>選用的 Logout 與圖片檢視器仍保留原有設定方式。設定與權責範圍請見<a href="../usage/protected-docs.html">受保護文件與登出</a>及<a href="../usage/image-viewer.html">圖片檢視器</a>。</p>
 </section>
@@ -1682,7 +1682,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.2" aria-label="Askr version 0.13.2">0.13.2</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.3" aria-label="Askr version 0.13.3">0.13.3</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: 繁體中文" title="Language: 繁體中文"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"></span></a></li><li><a class="dropdown-item active" aria-current="true" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li></ul></div></template>
 

@@ -47,9 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-6e87a31393c6f91a58601bf2bd54a356.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-8d28a22fbd441a199ac932e96063abd0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-536a6d2615c0c5fc3245e81261de7ef2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d92e1ad2193218de3205d279bfdac79b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-536a6d2615c0c5fc3245e81261de7ef2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -763,6 +763,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#askr-release-plan" id="toc-askr-release-plan" class="nav-link active" data-scroll-target="#askr-release-plan">Askr release plan</a>
   <ul class="collapse">
+  <li><a href="#askr-v0.13.3-page-list-current-page-highlight-2026-10-28" id="toc-askr-v0.13.3-page-list-current-page-highlight-2026-10-28" class="nav-link" data-scroll-target="#askr-v0.13.3-page-list-current-page-highlight-2026-10-28">Askr v0.13.3 — Page List current-page highlight — 2026-10-28</a></li>
   <li><a href="#askr-v0.13.2-filename-code-frames-and-release-docs-2026-10-28" id="toc-askr-v0.13.2-filename-code-frames-and-release-docs-2026-10-28" class="nav-link" data-scroll-target="#askr-v0.13.2-filename-code-frames-and-release-docs-2026-10-28">Askr v0.13.2 — filename code frames and release docs — 2026-10-28</a></li>
   <li><a href="#askr-v0.13.1-copy-source-spacing-hotfix-2026-10-27" id="toc-askr-v0.13.1-copy-source-spacing-hotfix-2026-10-27" class="nav-link" data-scroll-target="#askr-v0.13.1-copy-source-spacing-hotfix-2026-10-27">Askr v0.13.1 — Copy source spacing hotfix — 2026-10-27</a></li>
   <li><a href="#askr-v0.13.0-viewers-and-shared-copy-release-candidate-2026-10-27" id="toc-askr-v0.13.0-viewers-and-shared-copy-release-candidate-2026-10-27" class="nav-link" data-scroll-target="#askr-v0.13.0-viewers-and-shared-copy-release-candidate-2026-10-27">Askr v0.13.0 — viewers and shared Copy release candidate — 2026-10-27</a></li>
@@ -807,12 +808,20 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="askr-release-plan" class="level1">
 <h1>Askr release plan</h1>
+<section id="askr-v0.13.3-page-list-current-page-highlight-2026-10-28" class="level2">
+<h2 class="anchored" data-anchor-id="askr-v0.13.3-page-list-current-page-highlight-2026-10-28">Askr v0.13.3 — Page List current-page highlight — 2026-10-28</h2>
+<p>Semantic state: ACCEPTED. Delivery state: CANDIDATE. The Human authorized publication of the accepted Page List highlight.</p>
+<p>This release highlights the current Quarto Page List item with a theme-aware row tint and semibold label. The highlight follows Quarto’s native active-page state. The release also preserves the published v0.13.2 Gallery under <code>/v0.13.2/</code> and updates the bilingual version guides.</p>
+<p>✅ The actual published v0.13.2 site was copied from <code>gh-pages</code> commit <code>ccac30acfab164ff2f8ba4db9be7efef7d5beb1a</code> into <code>v0.13.2/</code>: 244 files, 26,612,518 bytes. The source-tree SHA-256 manifest is <code>7bd39706a24f6385ec9dd0704e4929970bb6279e37a3940d5a1d4636c2001b67</code>. See <a href="./VALIDATION.html">Validation</a> for the exact paths and pending checks.</p>
+<p>✅ The default full-site render passed for 111 English and 32 Traditional Chinese inputs. Archive bytes match the published source exactly. Light/dark Page List review and the existing mobile row check passed; see <a href="./VALIDATION.html">Validation</a>.</p>
+<p>⏳ Lead: complete main CI, install the released tag in a fresh Quarto consumer, and publish the release.</p>
+</section>
 <section id="askr-v0.13.2-filename-code-frames-and-release-docs-2026-10-28" class="level2">
 <h2 class="anchored" data-anchor-id="askr-v0.13.2-filename-code-frames-and-release-docs-2026-10-28">Askr v0.13.2 — filename code frames and release docs — 2026-10-28</h2>
-<p>Semantic state: ACCEPTED. Delivery state: CANDIDATE. The Human accepted the filename-code design and requested publication.</p>
-<p>This release includes the single-frame Quarto filename style and its bilingual example; native footer guidance and bilingual HTML License pages; and Safari HTTP-preview clipboard guidance. The Copy implementation and clipboard payload are unchanged. The typography preview is excluded. Existing documentation changes are <code>0beff39</code> (footer and License) and <code>85708df</code> (Safari clipboard note).</p>
+<p>Semantic state: ACCEPTED. Delivery state: PUBLISHED.</p>
+<p>This release added the single-frame Quarto filename style and its bilingual example; native footer guidance and bilingual HTML License pages; and Safari HTTP-preview clipboard guidance. The Copy implementation and clipboard payload were unchanged. The typography preview was excluded. Existing documentation changes were <code>0beff39</code> (footer and License) and <code>85708df</code> (Safari clipboard note).</p>
 <p>✅ Root preserved the actual published v0.13.1 site at <code>/v0.13.1/</code> from deployed <code>gh-pages</code> commit <code>bff50282f12d71dfb9ebaa34f8c6979160230452</code>: 241 files, 26,374,137 bytes, with hashes verified. Existing browser QA at 390px and 841px confirmed actual Copy/paste, callout collapse, and one filename/source frame; see <a href="./VALIDATION.html">Validation</a>.</p>
-<p>⏳ Lead: run the default full render and existing CI, install the actual v0.13.2 tag in a fresh Quarto consumer, and review the public site. The tag and publication are not complete.</p>
+<p>✅ The bilingual 111-page English and 32-page Traditional Chinese gallery render, main Publish run, Pages deployment, fresh v0.13.2 install and consumer render completed successfully. See <a href="./VALIDATION.html">Validation</a>.</p>
 </section>
 <section id="askr-v0.13.1-copy-source-spacing-hotfix-2026-10-27" class="level2">
 <h2 class="anchored" data-anchor-id="askr-v0.13.1-copy-source-spacing-hotfix-2026-10-27">Askr v0.13.1 — Copy source spacing hotfix — 2026-10-27</h2>
@@ -1711,7 +1720,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.2" aria-label="Askr version 0.13.2">0.13.2</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.3" aria-label="Askr version 0.13.3">0.13.3</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
 
