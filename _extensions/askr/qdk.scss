@@ -889,7 +889,6 @@ footer.footer .nav-link .bi { line-height: 1; font-size: 1rem; }
 }
 .sidebar-navigation .sidebar-item a.sidebar-link.active {
   background-color: color-mix(in srgb, var(--qdk-link) 10%, transparent);
-  box-shadow: inset 2px 0 0 var(--qdk-link);
   color: var(--qdk-link);
   font-weight: 600;
 }
