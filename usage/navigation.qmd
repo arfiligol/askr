@@ -18,6 +18,10 @@ their full accessible name is retained.
 | Page List | Left column, titled Pages | The pages in the current Area |
 | Sections | Right column, titled Sections | Nothing. Quarto lists the current page's headings |
 
+The open page has a lightly tinted row, a 2px accent edge, and a semibold
+label in the Page List. Parent group rows keep their usual treatment when a
+child page is current.
+
 ```yaml
 website:
   navbar:

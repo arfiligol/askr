@@ -12,6 +12,8 @@ title: "Areas、Page List 與 Sections"
 | Page List | 左欄，標題為 Pages | 目前 Area 中的頁面 |
 | Sections | 右欄，標題為 Sections | 無需手動設定；Quarto 會列出目前頁面的標題 |
 
+Page List 會以淡色列底、2px 強調色側線與半粗體標籤標示目前頁面；子頁面為目前頁面時，父層群組仍維持原有樣式。
+
 ```yaml
 website:
   navbar:

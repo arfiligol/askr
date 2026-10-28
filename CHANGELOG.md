@@ -5,6 +5,11 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+### Changed
+
+- Make Quarto's current Page List link visibly distinct with a theme-aware row
+  tint and inset accent cue.
+
 ## 0.13.2 — 2026-10-28
 
 ### Added
