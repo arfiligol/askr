@@ -51,7 +51,7 @@ Askr 卡片使用 Quarto 原生的 fenced div（圍欄式區塊）語法。卡�
 Askr v0.12.0 新增卡片元件。請在使用中的 Quarto 專案安裝目前版本：
 
 ```bash
-quarto add arfiligol/askr@v0.13.2 --no-prompt
+quarto add arfiligol/askr@v0.13.3 --no-prompt
 ```
 
 只替換下列舊卡片類別，保留標題文字、標題層級、連結目的地與說明內容；

@@ -312,13 +312,6 @@ mark { background: var(--qdk-mark); border-radius: var(--qdk-inline-radius); col
 #quarto-header, #TOC { border-color: var(--qdk-divider-layout); }
 #quarto-sidebar, #quarto-sidebar .sidebar, #quarto-sidebar .sidebar-navigation, #quarto-sidebar .sidebar-menu-container, #quarto-sidebar .sidebar-item-container, .navbar, .offcanvas, .offcanvas-body { background-color: var(--qdk-canvas); }
 #quarto-sidebar, .offcanvas { border-color: var(--qdk-divider-layout); }
-// Quarto clones TOC children into these native responsive menus.
-#quarto-content :is(#quarto-toc-toggle, #quarto-lefttoc-toggle) { background: var(--qdk-canvas); border-color: var(--qdk-divider-layout); }
-#quarto-content :is(#quarto-toc-toggle, #quarto-lefttoc-toggle) .quarto-sidebar-toggle-title { color: var(--qdk-heading); }
-#quarto-content :is(#quarto-toc-toggle, #quarto-lefttoc-toggle).expanded .quarto-sidebar-toggle-title { border-bottom-color: var(--qdk-divider-layout); }
-#quarto-content :is(#quarto-toc-toggle, #quarto-lefttoc-toggle) .quarto-sidebar-toggle-icon { color: var(--qdk-muted); }
-#quarto-content :is(#quarto-toc-toggle, #quarto-lefttoc-toggle) .quarto-sidebar-toggle-contents { background: var(--qdk-canvas); }
-#quarto-content :is(#quarto-toc-toggle, #quarto-lefttoc-toggle) .quarto-sidebar-toggle-contents #toc-title { display: none; }
 .navbar { min-height: var(--qdk-nav-height); }
 #quarto-header > .navbar { padding-block: 0; }
 .navbar .navbar-brand, .navbar .nav-link { color: var(--qdk-control-color); font-family: var(--qdk-nav-font); }

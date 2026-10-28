@@ -1,15 +1,37 @@
 # Askr release plan
 
+## Askr v0.13.3 — Page List current-page highlight — 2026-10-28
+
+Semantic state: ACCEPTED. Delivery state: CANDIDATE. The Human authorized
+publication of the accepted Page List highlight.
+
+This release highlights the current Quarto Page List item with a theme-aware
+row tint and semibold label. The highlight follows Quarto's native active-page
+state. The release also preserves the published v0.13.2 Gallery under
+`/v0.13.2/` and updates the bilingual version guides.
+
+✅ The actual published v0.13.2 site was copied from `gh-pages` commit
+`ccac30acfab164ff2f8ba4db9be7efef7d5beb1a` into `v0.13.2/`: 244 files,
+26,612,518 bytes. The source-tree SHA-256 manifest is
+`7bd39706a24f6385ec9dd0704e4929970bb6279e37a3940d5a1d4636c2001b67`.
+See [Validation](VALIDATION.md) for the exact paths and pending checks.
+
+✅ The default full-site render passed for 111 English and 32 Traditional
+Chinese inputs. Archive bytes match the published source exactly. Light/dark
+Page List review and the existing mobile row check passed; see [Validation](VALIDATION.md).
+
+⏳ Lead: complete main CI, install the released tag in a fresh Quarto consumer,
+and publish the release.
+
 ## Askr v0.13.2 — filename code frames and release docs — 2026-10-28
 
-Semantic state: ACCEPTED. Delivery state: CANDIDATE. The Human accepted the
-filename-code design and requested publication.
+Semantic state: ACCEPTED. Delivery state: PUBLISHED.
 
-This release includes the single-frame Quarto filename style and its bilingual
+This release added the single-frame Quarto filename style and its bilingual
 example; native footer guidance and bilingual HTML License pages; and Safari
 HTTP-preview clipboard guidance. The Copy implementation and clipboard payload
-are unchanged. The typography preview is excluded. Existing documentation
-changes are `0beff39` (footer and License) and `85708df` (Safari clipboard note).
+were unchanged. The typography preview was excluded. Existing documentation
+changes were `0beff39` (footer and License) and `85708df` (Safari clipboard note).
 
 ✅ Root preserved the actual published v0.13.1 site at `/v0.13.1/` from deployed
 `gh-pages` commit `bff50282f12d71dfb9ebaa34f8c6979160230452`: 241 files,
@@ -17,9 +39,9 @@ changes are `0beff39` (footer and License) and `85708df` (Safari clipboard note)
 confirmed actual Copy/paste, callout collapse, and one filename/source frame;
 see [Validation](VALIDATION.md).
 
-⏳ Lead: run the default full render and existing CI, install the actual
-v0.13.2 tag in a fresh Quarto consumer, and review the public site. The tag and
-publication are not complete.
+✅ The bilingual 111-page English and 32-page Traditional Chinese gallery
+render, main Publish run, Pages deployment, fresh v0.13.2 install and consumer
+render completed successfully. See [Validation](VALIDATION.md).
 
 ## Askr v0.13.1 — Copy source spacing hotfix — 2026-10-27
 

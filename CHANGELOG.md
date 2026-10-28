@@ -5,12 +5,13 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+## 0.13.3 — 2026-10-28
+
 ### Changed
 
-- Make Quarto's current Page List link visibly distinct with a theme-aware row
-  tint and semibold label.
-- Theme Quarto's responsive TOC toggles with Askr canvas and divider colors,
-  and hide the cloned nested TOC heading.
+- Highlight the current Page List link with a theme-aware row tint and
+  semibold label.
+- Preserve the actual published 0.13.2 documentation site under `/v0.13.2/`.
 
 ## 0.13.2 — 2026-10-28
 

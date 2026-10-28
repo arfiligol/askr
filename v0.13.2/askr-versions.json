@@ -1,0 +1,15 @@
+{
+  "mode": "inline",
+  "longTitle": "Interferometric Purcell Filter",
+  "versions": [
+    {"label": "0.13.2", "root": "/", "latest": true},
+    {"label": "0.13.1", "root": "/v0.13.1/"},
+    {"label": "0.13.0", "root": "/v0.13.0/"},
+    {"label": "0.12.1", "root": "/v0.12.1/"},
+    {"label": "0.12.0", "root": "/v0.12.0/"},
+    {"label": "0.11.0", "root": "/v0.11.0/"},
+    {"label": "0.10.0", "root": "/v0.10.0/"},
+    {"label": "0.9.0", "root": "/v0.9.0/"},
+    {"label": "0.3.0", "root": "/v0.3.0/"}
+  ]
+}

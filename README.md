@@ -4,7 +4,7 @@ See [CHANGELOG](CHANGELOG.md) for published package changes. PR and GitHub
 Release summaries use the same entries.
 
 Askr is the reading page: measure, type, citations, callouts, and Cards. Quiet
-Quartz remains the name of the visual theme. `0.13.2` is the current release,
+Quartz remains the name of the visual theme. `0.13.3` is the current release,
 rendered with Quarto 1.10.18. Stable Quarto `>=1.9.38 <1.11` is supported. The
 public format is `askr-html`. The 0.10.0 release adds an optional Header language
 selector; the control is absent unless configured and does not change existing
@@ -24,14 +24,16 @@ see [Code component](components/code.qmd). It documents Safari clipboard limits
 on HTTP previews without changing Copy behavior, and native footer links to
 bilingual License pages and third-party notices; see
 [Header and footer links](usage/header-footer.qmd).
+Version 0.13.3 gives Quarto's current Page List item a theme-aware row tint
+and semibold label.
 
 ## Install
 
-Install release tag `v0.13.2`. Quarto's GitHub installer accepts
+Install release tag `v0.13.3`. Quarto's GitHub installer accepts
 branch and tag names, not commit SHA modifiers.
 
 ```bash
-quarto add arfiligol/askr@v0.13.2 --no-prompt
+quarto add arfiligol/askr@v0.13.3 --no-prompt
 ```
 
 ```yaml
@@ -86,9 +88,9 @@ both sites. The ignored copies under `zh-TW/_extensions/askr/`,
 build inputs, not vendored sources; maintain the extension and shared assets in
 the root `_extensions/askr/` and `components/` directories.
 
-The documentation version menu lists the current 0.13.2 site, the actual
-published 0.13.1, 0.13.0, 0.12.1, 0.12.0, 0.11.0, 0.10.0 and 0.9.0 snapshots,
-and the frozen 0.3.0 snapshot.
+The documentation version menu lists the current 0.13.3 site and the actual
+published 0.13.2, 0.13.1, 0.13.0, 0.12.1, 0.12.0, 0.11.0, 0.10.0 and 0.9.0
+snapshots, and the frozen 0.3.0 snapshot.
 Archived documentation is historical and unmaintained. Before a future release
 replaces the site root, preserve the then-current published site under its
 versioned path; the build generates selector manifests for each archive's
