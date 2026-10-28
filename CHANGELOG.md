@@ -5,10 +5,18 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+## 0.13.2 — 2026-10-28
+
+### Added
+
+- Add bilingual License pages and document native footer links for project
+  licenses and third-party notices.
+
 ### Changed
 
-- Style Quarto filename headers inside one shared code frame, with wrapping
-  filenames, source-local scrolling, and the existing Copy control.
+- Style Quarto filename code blocks with one shared frame, wrapping filenames,
+  local source scrolling, and the existing Copy control.
+- Document Safari's clipboard limits on HTTP previews. Copy behavior is unchanged.
 
 ## 0.13.1 — 2026-10-27
 

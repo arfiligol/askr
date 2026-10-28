@@ -55,7 +55,7 @@ Askr v0.12.0 introduced the Card component. Install the current release in the
 consumer project:
 
 ```bash
-quarto add arfiligol/askr@v0.13.1 --no-prompt
+quarto add arfiligol/askr@v0.13.2 --no-prompt
 ```
 
 Rename only the old card classes as shown. Preserve heading text, heading
