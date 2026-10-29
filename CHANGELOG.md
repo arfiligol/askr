@@ -13,9 +13,11 @@ derive from these entries; an Unreleased entry is not a published release.
 - Initialize language and Logout controls after DOM readiness, and seed the
   version selector from the local versions manifest while preserving runtime
   external configuration as the authority.
-- Add native cross-document main-content fades (120ms by default), disabled by
-  `askr.page-transitions: false` and suppressed for reduced motion. Navigation
-  remains native full-page navigation.
+- Gate the initial main-content reveal on document readiness, fonts, native
+  header offsets, responsive Areas, version links, and two stable frames. Show a
+  localized status after 180ms and fail open after 1800ms. Keep content visible
+  without JavaScript; Quarto retains geometry ownership. Navigation stays
+  browser-native full-page navigation.
 
 ### Fixed
 

@@ -45,11 +45,6 @@ website:
 
 在行動版中，Areas 與 Pages 是各自獨立的展開控制項。如果切換期間兩者都可操作，最後一次使用者操作會決定哪個面板保持開啟。按 Escape 或點擊背景會關閉目前面板，並將焦點移回開啟面板的控制項。選擇連結後，仍由瀏覽器執行一般整頁導覽。
 
-啟用時，Askr 會在文件導覽前後以 120 毫秒淡化主要內容。設定 `askr.page-transitions: false` 可停用此效果；系統偏好減少動態效果時也不會播放淡化。此效果不會將原生導覽改為 SPA。若要關閉此效果，請在 `_quarto.yml` 加入：
-
-```yaml
-askr:
-  page-transitions: false
-```
+導覽使用瀏覽器原生的整頁載入行為。顯示頁面前，Askr 會等待文件、字型、原生標題列位移、響應式 Areas 與版本連結就緒，並確認連續兩個動畫影格版面穩定。若等待超過 180 毫秒，會顯示本地化的載入狀態；即使相依項目尚未就緒，1800 毫秒後也會繼續顯示頁面。若 JavaScript 無法執行，靜態頁面仍會顯示。頁面幾何配置仍由 Quarto 控制。
 
 本圖集的 Areas 為 Gallery、Components、Usage、Credits 與 Long list。此分組方式請見[版面](../gallery/layout.qmd)。

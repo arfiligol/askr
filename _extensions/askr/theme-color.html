@@ -2,20 +2,177 @@
 <script>
 (function () {
   var drawerCoordinator;
-  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var reducedMotionStyle;
-  function updateReducedMotion() {
-    if (reducedMotion.matches && !reducedMotionStyle) {
-      reducedMotionStyle = document.createElement("style");
-      reducedMotionStyle.textContent = "@view-transition { navigation: none; }";
-      document.head.appendChild(reducedMotionStyle);
-    } else if (!reducedMotion.matches && reducedMotionStyle) {
-      reducedMotionStyle.remove();
-      reducedMotionStyle = null;
+  var layoutGateActive = !!document.documentElement;
+  var layoutGateReleased = false;
+  var layoutDomReady = document.readyState !== "loading";
+  var layoutFontsReady = !document.fonts;
+  var adaptiveAreasReady = false;
+  var versionManifestReady = true;
+  var layoutFrame = 0;
+  var stableLayoutFrames = 0;
+  var previousLayoutGeometry = null;
+  var layoutStatus;
+  var layoutObserversStarted = false;
+  var layoutSizeObserver;
+  var layoutHeaderObserver;
+  var onLayoutResize;
+  var onLayoutFontLoading;
+  var onLayoutFontLoaded;
+  var onLayoutFontError;
+  var onLayoutPagehide;
+  var onLayoutPageshow;
+  if (layoutGateActive) {
+    document.documentElement.classList.add("askr-layout-pending");
+    window.setTimeout(showLayoutStatus, 180);
+    window.setTimeout(function () { releaseLayoutGate("timeout"); }, 1800);
+    document.addEventListener("DOMContentLoaded", function () {
+      layoutDomReady = true;
+      startLayoutObservers();
+      scheduleLayoutCheck();
+    }, {once: true});
+    if (layoutDomReady) {
+      startLayoutObservers();
+      scheduleLayoutCheck();
+    }
+    if (document.fonts) {
+      document.fonts.ready.then(function () {
+        layoutFontsReady = document.fonts.status !== "loading";
+        if (layoutFontsReady) scheduleLayoutCheck();
+      }, function () {
+        layoutFontsReady = document.fonts.status !== "loading";
+        if (layoutFontsReady) scheduleLayoutCheck();
+      });
+      onLayoutFontLoading = function () {
+        layoutFontsReady = false;
+        resetLayoutStability();
+      };
+      onLayoutFontLoaded = function () {
+        layoutFontsReady = document.fonts.status === "loaded";
+        resetLayoutStability();
+      };
+      onLayoutFontError = function () {
+        layoutFontsReady = document.fonts.status !== "loading";
+        resetLayoutStability();
+      };
+      document.fonts.addEventListener("loading", onLayoutFontLoading);
+      document.fonts.addEventListener("loadingdone", onLayoutFontLoaded);
+      document.fonts.addEventListener("loadingerror", onLayoutFontError);
+    }
+    onLayoutResize = resetLayoutStability;
+    onLayoutPagehide = function () { releaseLayoutGate("pagehide"); };
+    onLayoutPageshow = function (event) {
+      if (event.persisted) releaseLayoutGate("bfcache");
+    };
+    window.addEventListener("resize", onLayoutResize);
+    window.addEventListener("pagehide", onLayoutPagehide, {once: true});
+    window.addEventListener("pageshow", onLayoutPageshow);
+  }
+  function showLayoutStatus() {
+    if (layoutGateReleased) return;
+    if (!document.body) {
+      window.setTimeout(showLayoutStatus, 50);
+      return;
+    }
+    if (layoutStatus) return;
+    layoutStatus = document.createElement("div");
+    layoutStatus.id = "askr-layout-status";
+    layoutStatus.setAttribute("role", "status");
+    layoutStatus.setAttribute("aria-live", "polite");
+    layoutStatus.setAttribute("aria-atomic", "true");
+    layoutStatus.textContent = /^zh(?:-|$)/i.test(document.documentElement.lang) ? "載入頁面中…" : "Loading page…";
+    document.body.appendChild(layoutStatus);
+  }
+  function startLayoutObservers() {
+    if (layoutGateReleased || layoutObserversStarted || !document.body) return;
+    layoutObserversStarted = true;
+    if (window.ResizeObserver) {
+      layoutSizeObserver = new ResizeObserver(resetLayoutStability);
+      [document.body, document.querySelector("header.fixed-top"), document.querySelector("#quarto-content")].forEach(function (element) {
+        if (element) layoutSizeObserver.observe(element);
+      });
+    }
+    var header = document.querySelector("#quarto-header");
+    if (header) {
+      layoutHeaderObserver = new MutationObserver(resetLayoutStability);
+      layoutHeaderObserver.observe(header, {attributes: true, childList: true, subtree: true, characterData: true});
     }
   }
-  updateReducedMotion();
-  reducedMotion.addEventListener("change", updateReducedMotion);
+  function resetLayoutStability() {
+    stableLayoutFrames = 0;
+    previousLayoutGeometry = null;
+    scheduleLayoutCheck();
+  }
+  function scheduleLayoutCheck() {
+    if (!layoutGateActive || layoutGateReleased || !layoutDomReady || !layoutFontsReady || !adaptiveAreasReady || !versionManifestReady || layoutFrame) return;
+    layoutFrame = requestAnimationFrame(checkLayoutReadiness);
+  }
+  function headerOffsetIsCoherent() {
+    var header = document.querySelector("header.fixed-top");
+    if (!header) return true;
+    var padding = parseFloat(getComputedStyle(document.body).paddingTop) || 0;
+    return Math.abs(padding - header.clientHeight) <= 1.5;
+  }
+  function layoutGeometry() {
+    var header = document.querySelector("header.fixed-top");
+    var main = document.querySelector("#quarto-content") || document.querySelector("main");
+    var title = document.querySelector("#title-block-header");
+    var sidebar = document.querySelector("#quarto-sidebar");
+    var announcement = document.querySelector("#quarto-announcement");
+    function values(element) {
+      if (!element) return [];
+      var rect = element.getBoundingClientRect();
+      return [rect.top, rect.height, rect.bottom].map(function (value) { return Math.round(value * 10) / 10; });
+    }
+    return JSON.stringify([
+      header && header.clientHeight,
+      getComputedStyle(document.body).paddingTop,
+      values(header), values(main), values(title), values(sidebar), values(announcement)
+    ]);
+  }
+  function checkLayoutReadiness() {
+    layoutFrame = 0;
+    if (layoutGateReleased) return;
+    if (!layoutDomReady || !layoutFontsReady || !adaptiveAreasReady || !versionManifestReady) {
+      stableLayoutFrames = 0;
+      previousLayoutGeometry = null;
+      return;
+    }
+    if (!headerOffsetIsCoherent()) {
+      stableLayoutFrames = 0;
+      previousLayoutGeometry = null;
+      layoutFrame = requestAnimationFrame(checkLayoutReadiness);
+      return;
+    }
+    var geometry = layoutGeometry();
+    if (geometry === previousLayoutGeometry) stableLayoutFrames += 1;
+    else stableLayoutFrames = 0;
+    previousLayoutGeometry = geometry;
+    if (stableLayoutFrames >= 2) releaseLayoutGate("stable");
+    else layoutFrame = requestAnimationFrame(checkLayoutReadiness);
+  }
+  function markAdaptiveAreasReady() {
+    adaptiveAreasReady = true;
+    scheduleLayoutCheck();
+  }
+  function releaseLayoutGate(reason) {
+    if (!layoutGateActive || layoutGateReleased) return;
+    layoutGateReleased = true;
+    if (layoutFrame) cancelAnimationFrame(layoutFrame);
+    if (layoutSizeObserver) layoutSizeObserver.disconnect();
+    if (layoutHeaderObserver) layoutHeaderObserver.disconnect();
+    window.removeEventListener("resize", onLayoutResize);
+    window.removeEventListener("pagehide", onLayoutPagehide);
+    window.removeEventListener("pageshow", onLayoutPageshow);
+    if (document.fonts) {
+      document.fonts.removeEventListener("loading", onLayoutFontLoading);
+      document.fonts.removeEventListener("loadingdone", onLayoutFontLoaded);
+      document.fonts.removeEventListener("loadingerror", onLayoutFontError);
+    }
+    document.documentElement.classList.remove("askr-layout-pending");
+    document.documentElement.dataset.askrLayoutReadyReason = reason;
+    if (layoutStatus) layoutStatus.remove();
+    layoutStatus = null;
+  }
   window.addEventListener("click", coordinateDrawerClick, true);
   function coordinateDrawerClick(event) {
     if (!event.target.closest) return;
@@ -165,7 +322,10 @@
     var area = header && header.querySelector("#navbarCollapse");
     var button = header && header.querySelector(".navbar-toggler");
     var brand = header && header.querySelector(".navbar-brand-container");
-    if (!container || !area || !button || !brand) return;
+    if (!container || !area || !button || !brand) {
+      markAdaptiveAreasReady();
+      return;
+    }
     var tools = container.querySelector('.quarto-navbar-tools');
     var collapseTools = tools && area.contains(tools);
     var authoredTools = tools ? Array.from(tools.children).filter(function (el) {
@@ -239,6 +399,7 @@
           if (link) link.focus();
         }
       }
+      markAdaptiveAreasReady();
     }
     function schedule() {
       if (!frame) frame = requestAnimationFrame(update);
@@ -459,6 +620,8 @@
     var brand = document.querySelector("#quarto-header .navbar-brand");
     var slot = document.querySelector("#quarto-header .navbar-brand-container");
     if (!brand || !slot) return;
+    if (!window.fetch) return;
+    versionManifestReady = false;
     var offset = document.querySelector('meta[name="quarto:offset"]');
     var manifest = new URL((offset ? offset.getAttribute("content") : "./") + "askr-versions.json", location.href);
     var local = document.getElementById("askr-versions-local");
@@ -475,6 +638,9 @@
       var dataEl = document.getElementById("askr-versions");
       if (!dataEl) return;
       try { mountVersions(JSON.parse(dataEl.textContent), brand, slot, new URL("./", manifest)); } catch (error) { return; }
+    }).then(function () {
+      versionManifestReady = true;
+      scheduleLayoutCheck();
     });
   }
   function mountVersions(data, brand, slot, siteRoot) {

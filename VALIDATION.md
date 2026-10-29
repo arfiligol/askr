@@ -7,19 +7,31 @@ remains PAUSED after Human interruption. The authorized endpoint is a
 `develop` candidate checkpoint and full bilingual preview; publication is not
 authorized.
 
+The Human previously reported page drops and jitter and preferred a short
+loading wait over an unstable layout. The current source includes the
+font-readiness race guard and has no cross-document fade or transition option.
+The tested viewport traces show stable geometry after reveal. The final
+bilingual build, consumer render, and browser checks passed; Human visual
+review remains.
+
 | Check | Result |
 | --- | --- |
-| JavaScript syntax and diff formatting | ✅ `node --check` for the scripts and `git diff --check` passed. |
-| Full bilingual preview | ✅ `quarto render --no-execute` passed for 111 English and 32 Traditional Chinese inputs after the final window-capture, breakpoint, and focus fixes; log: `/tmp/askr-ui-final-render.log`. |
-| Temporary packaged consumer | ✅ `quarto add /tmp/askr-ui-extension.tar.gz` found one extension with 44 files. The current 44-file source matched the temporary render source byte-for-byte. Because the local archive had no owner metadata, the temporary consumer was adjusted to production namespace `arfiligol/askr`; its two-page `--no-execute` render passed. Log: `/tmp/askr-installed-render.log`. |
-| Areas and Pages | ✅ CUA at 390×844 and 1170×984 confirmed rapid Areas→Pages last-intent behavior with matching ARIA and glass state, repeated transitions, Escape closing both during animation, and mobile Pages→desktop resize clearing the glass while Areas stayed compact. Areas backdrop closure returned focus after the panel was hidden. |
+| JavaScript and stylesheet checks | ✅ `node --check` passed for extracted inline JavaScript; Quarto compiled the SCSS during render. |
+| Current bilingual build | ✅ `quarto render --no-execute` passed for 111 English and 32 Traditional Chinese inputs; all 44 rendered extension files matched current source byte-for-byte. Log: `/tmp/askr-layout-final-render.log`. |
+| Current consumer render | ✅ Two-page consumer `--no-execute` render passed; log: `/tmp/askr-layout-consumer-render.log`. |
+| Native navigation and console | ✅ Fresh no-fade browser path Prose→Code→Mathematics→Back showed `ready=stable` on each page, empty console, and no ViewTransition errors. |
+| Desktop geometry | ✅ At 1170px, first frame was 97ms with title 94px, main 81px, sidebar 64px; first reveal was 149ms with stable title 130px, main 117px, sidebar 100px. No later geometry change. Trace: `/tmp/askr-layout-desktop-frames.json`. |
+| Mobile geometry | ✅ At 390px, first frame was 652ms with title 107px, main 80px, Pages Y=11.4px; first reveal was 753ms with stable title 158px, main 131px, Pages Y=71.7px. No later geometry change. Trace: `/tmp/askr-layout-mobile-frames.json`; screenshot: `/tmp/askr-layout-mobile-light.png`. |
+| Traditional Chinese tablet geometry | ✅ At 896px in dark mode, first frame was 527ms with title 112.5px; first reveal was 719ms with stable title 153.5px, main 123px, Pages Y=57.1px. No later geometry change. Trace: `/tmp/askr-layout-tablet-frames.json`; screenshot: `/tmp/askr-layout-tablet-dark.png`. |
+| Mobile Areas and Pages | ✅ Rapid Areas→Pages settled with Pages only; Escape closed it. |
+| Headerless standalone document and anchor | ✅ The headerless document remained `reason=stable` and visible. For `#quote`, native smooth scrolling occurred while content was hidden; history return showed content again. Exact scroll position was not measured. |
+| Fail-open and no-JavaScript | ✅ An intentionally incoherent padding fixture displayed Loading and released on timeout. With scripts stripped, Prose remained visible. |
 | Callout keyboard control | ✅ Enter and Space toggled it; the title remained readable. |
 | AEDT controls | ✅ Both groups selected and their content synchronized. |
 | Viewers | ✅ Image zoom remained at 125% through modal and inline return, with focus restored. Chart iframe navigation 1→2→1 returned focus to Expand. Search found the image viewer and ten documentation results. |
 | Language and Logout | ✅ Version selector Escape behavior and configured language root links were inspected. Logout fixture exposed only its configured `href`; no authentication flow was exercised. |
 | Copy behavior fixtures | ✅ Secure-loopback copy showed `Copied!` and reset. An injected permission denial showed a permission message and actual manual source; a missing source showed only the unavailable-source message and no textarea. With Clipboard API unavailable, secure loopback showed the manual-copy message, while VPN HTTP showed the insecure-context message and HTTPS guidance. The code button on the same missing-API fixture showed `Copied!` through the existing `execCommand` path. |
-| Screenshots | ✅ `/tmp/askr-ui-light.png`, `/tmp/askr-ui-dark.png`, and `/tmp/askr-ui-mobile.png`. |
-| `develop` candidate checkpoint | ⏳ Lead delivers this checkpoint next; its full remote SHA goes in the private receipt. |
+| Git delivery | Record the full commit and remote readback in the task delivery receipt. |
 | Human visual review | ⏳ Pending. |
 | Release and publication | ⏸ PAUSED; no release authorized. |
 
@@ -30,15 +42,18 @@ this turn because the CUA virtual clipboard was empty. Prior source-payload
 evidence remains separate from this observation. Controlled fixtures verified
 the secure-context and unavailable-API messages, but the CUA API sometimes
 allowed actual copying over HTTP; the real HTTP clipboard outcome remains
-inconclusive. Reduced-motion behavior and a tablet-sized viewport were checked
-in source/configuration only, not with the OS preference or a dedicated
-timeline measurement.
+inconclusive. Reduced-motion behavior was checked in source/configuration, but
+the OS preference was not toggled, so runtime suppression remains unverified.
 
-One MutationObserver message appeared in the browser log during chart
-navigation without a URL or stack. Temporary root, iframe, observer, error,
-and rejection probes captured nothing; the message was not attributed, and no
-product change was made from it. Native full-page navigation still reloads
-HTML. The requested behavior is listed in the current section of [PLAN.md](PLAN.md).
+These frame measurements are observations for the tested viewport and routes,
+not universal performance guarantees.
+
+The iframe/Plotly message reproduced in the minimal fixture documented at
+`/tmp/askr-observer-repro/README.md`, without Askr or Quarto; public source
+hashes matched. The exact runtime stack is unavailable, so the cause remains
+unresolved. This does not establish a browser bug or a fix. Native full-page
+navigation still reloads HTML.
+The requested behavior is listed in the current section of [PLAN.md](PLAN.md).
 
 ## Askr v0.13.3 — Page List current-page highlight — 2026-10-28
 

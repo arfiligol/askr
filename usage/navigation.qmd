@@ -60,15 +60,12 @@ one remains open. Escape and backdrop clicks close the active panel and return
 focus to its opener. Selecting a link still uses the browser's normal
 full-page navigation.
 
-When enabled, Askr applies a 120ms fade to the main content across document
-navigations. Set `askr.page-transitions: false` to disable it; reduced-motion
-preferences suppress the fade. This effect does not replace native navigation
-with an SPA. To turn it off, add this to `_quarto.yml`:
-
-```yaml
-askr:
-  page-transitions: false
-```
+Navigation uses the browser's native full-page behavior. Before revealing the
+page, Askr waits for the document, fonts, native header offsets, responsive
+Areas, and version links to settle across two animation frames. If this takes
+longer than 180ms, a localized loading status appears. The page continues after
+1800ms even if a dependency has not settled. Without JavaScript, the static
+page remains visible. Quarto still controls page geometry.
 
 This gallery's Areas are Gallery, Components, Usage, Credits, and Long list.
 The reading of that split is on the [Layout](../gallery/layout.qmd) page.

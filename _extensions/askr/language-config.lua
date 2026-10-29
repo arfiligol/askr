@@ -37,15 +37,6 @@ end
 function Pandoc(doc)
   if not quarto.doc.is_format('html:js') then return doc end
   local askr = doc.meta.askr
-  local transitions = askr and askr['page-transitions']
-  if transitions ~= nil then
-    if transitions ~= true and transitions ~= false then
-      fail('askr.page-transitions: expected true or false.')
-    end
-    if transitions == false then
-      quarto.doc.include_text('after-body', '<style>@view-transition { navigation: none; }</style>')
-    end
-  end
   local languages = askr and askr.languages
   if languages == nil then return doc end
 
