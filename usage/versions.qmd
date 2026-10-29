@@ -60,10 +60,10 @@ title and chevron, with the version number in the menu. Try the
 [long-title specimen](versions.html?askr-version-mode=title); `longTitle` is
 optional and used only in `title` mode.
 
-An inline `<script id="askr-versions" type="application/json">` can provide
-the list when a fetched manifest is unavailable. Choose one source rather than
-duplicating an external manifest and inline list. This Gallery uses the
-external JSON.
+The same local versions manifest seeds the selector's initial list. Runtime
+external configuration remains authoritative when supplied; theme version
+metadata is not used to infer selector entries. Keep one manifest as the
+maintained list rather than duplicating it in page markup.
 
 ## Keyboard interaction
 

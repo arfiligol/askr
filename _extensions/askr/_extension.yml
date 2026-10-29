@@ -26,6 +26,8 @@ contributes:
           at: post-render
         - path: language-config.lua
           at: post-render
+        - path: version-config.lua
+          at: post-render
       lightbox: auto
       toc: true
       page-layout: article

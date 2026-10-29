@@ -54,5 +54,21 @@ Pages in one Area share a purpose. This Usage area is that kind of split: Add
 Askr, this page, Versioning Docs, and Search are separate pages because each
 one is a different job.
 
+On mobile, Areas and Pages are separate disclosures. If both controls are
+available during a transition, the most recent user action determines which
+one remains open. Escape and backdrop clicks close the active panel and return
+focus to its opener. Selecting a link still uses the browser's normal
+full-page navigation.
+
+When enabled, Askr applies a 120ms fade to the main content across document
+navigations. Set `askr.page-transitions: false` to disable it; reduced-motion
+preferences suppress the fade. This effect does not replace native navigation
+with an SPA. To turn it off, add this to `_quarto.yml`:
+
+```yaml
+askr:
+  page-transitions: false
+```
+
 This gallery's Areas are Gallery, Components, Usage, Credits, and Long list.
 The reading of that split is on the [Layout](../gallery/layout.qmd) page.

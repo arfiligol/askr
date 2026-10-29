@@ -43,7 +43,7 @@ title: "文件版本"
 
 `inline` 模式會在短標題旁顯示目前版本；`title` 模式則顯示標題與箭頭，並在選單中顯示版本號。可試用[長標題範例](versions.html?askr-version-mode=title)。`longTitle` 為選填欄位，只在 `title` 模式使用。
 
-若無法取得外部版本清單檔，可在頁面中加入 `<script id="askr-versions" type="application/json">` 作為內嵌 JSON 清單。請選擇一種來源，不要同時維護外部檔案與內嵌清單。此圖集使用外部 JSON。
+同一份本機版本清單會提供選擇器的初始項目。若執行期間提供外部設定，仍以該設定為準；Askr 不會依主題版本中繼資料推測選擇器項目。請維護單一版本清單，避免在頁面標記中重複維護。
 
 ## 鍵盤操作
 

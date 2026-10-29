@@ -1,5 +1,33 @@
 # Askr release plan
 
+## Current candidate — UI stability follow-up after v0.13.3
+
+Semantic state: CONVERGING. Delivery state: CANDIDATE. The Human interrupted
+the v0.13.4 release work; release and publication remain PAUSED. The authorized
+endpoint is the `develop` candidate checkpoint and bilingual preview, after
+Lead UI results are reviewed. No release is authorized.
+
+Keep the accepted Page List density. Serialize the mobile Areas and Pages
+disclosures so the last user intent wins; Escape and backdrop closure must
+restore focus. Add keyboard support to the callout control. Initialize language
+and Logout controls after DOM readiness. Seed the version selector from the
+same local versions manifest; runtime external configuration remains
+authoritative, and theme version metadata must not be used to infer selector
+versions. Add native cross-document main-content fades with a 120ms duration,
+enabled by default, disabled by `askr.page-transitions: false`, and suppressed
+for reduced motion. Navigation remains native full-page navigation; this is
+not an SPA.
+
+Copy errors must be classified and communicated, with a manual source path
+available. Preserve code-only compatibility copying without a broad fallback.
+
+✅ Lead UI review and candidate behavior checks are recorded in
+[Validation](VALIDATION.md#current-ui-stability-candidate), including the final
+bilingual render after the window-capture, breakpoint, and focus fixes. ⏳ Lead:
+deliver the authorized `develop` candidate checkpoint and record its full
+remote SHA in the private receipt. Human visual review remains pending. The
+v0.13.4 release and publication remain paused.
+
 ## Askr v0.13.3 — Page List current-page highlight — 2026-10-28
 
 Semantic state: ACCEPTED. Delivery state: CANDIDATE. The Human authorized

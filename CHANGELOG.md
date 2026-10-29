@@ -7,9 +7,22 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ### Changed
 
-- Tighten desktop Page List row spacing while retaining the current font size
-  and mobile touch targets, with distinct hover feedback and inset keyboard
+- Keep the accepted Page List density while serializing mobile Areas and Pages
+  disclosures so the last user action wins; Escape and backdrop closure restore
   focus.
+- Initialize language and Logout controls after DOM readiness, and seed the
+  version selector from the local versions manifest while preserving runtime
+  external configuration as the authority.
+- Add native cross-document main-content fades (120ms by default), disabled by
+  `askr.page-transitions: false` and suppressed for reduced motion. Navigation
+  remains native full-page navigation.
+
+### Fixed
+
+- Add keyboard support to the callout control.
+- Report Copy failures by cause: HTTP/API failure, permission denied, or source
+  unavailable. When copying is denied, show the manual source; retain
+  code-only compatibility copying.
 
 ## 0.13.3 — 2026-10-28
 
