@@ -5,6 +5,12 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+### Changed
+
+- Tighten desktop Page List row spacing while retaining the current font size
+  and mobile touch targets, with distinct hover feedback and inset keyboard
+  focus.
+
 ## 0.13.3 — 2026-10-28
 
 ### Changed

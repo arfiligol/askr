@@ -821,6 +821,12 @@ footer.footer .nav-link .bi { line-height: 1; font-size: 1rem; }
 }
 .sidebar-navigation .sidebar-item a.sidebar-link, #TOC a { color: var(--qdk-text); font-size: calc(15px * var(--qdk-ui) * var(--_qdk-ui-scale) - 2px); font-weight: 400; line-height: 1.35; }
 .sidebar-navigation .sidebar-item a.sidebar-link { border-radius: var(--qdk-radius); padding: .2rem .45rem; }
+@media (min-width: 992px) {
+  .sidebar-navigation .sidebar-item { margin: 0 0 .125rem; }
+  .sidebar-navigation .sidebar-item a.sidebar-link { padding-block: .15rem; }
+  .sidebar-navigation .sidebar-item a.sidebar-link:focus-visible { outline-offset: -2px; }
+  .sidebar-navigation .sidebar-item a.sidebar-link:not(.active):hover { background-color: color-mix(in srgb, var(--qdk-link) 5%, transparent); }
+}
 // Areas has one panel presentation, independent of the Pages breakpoint.
 #quarto-header .navbar-brand { display: block; min-width: 0; max-width: 100%; }
 #quarto-header .navbar-title { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
