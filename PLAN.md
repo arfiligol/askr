@@ -1,5 +1,12 @@
 # Askr release plan
 
+## Documentation source consolidation
+
+Completed 2026-10-30: the nine historical version sources are under `archives/`,
+with their public `/v*/` routes and source bytes preserved. The README has been
+rewritten for readers. Inventory, route, snapshot, render, and consumer checks
+passed.
+
 ## Current candidate — UI stability follow-up after v0.13.3
 
 Semantic state: CONVERGING. Delivery state: CANDIDATE. The Human interrupted

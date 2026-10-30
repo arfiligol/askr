@@ -9,6 +9,18 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_SITE_PREFIX = "/askr/"
+ARCHIVED_SITES = (
+    "v0.3.0",
+    "v0.9.0",
+    "v0.10.0",
+    "v0.11.0",
+    "v0.12.0",
+    "v0.12.1",
+    "v0.13.0",
+    "v0.13.1",
+    "v0.13.2",
+)
+MODERN_ARCHIVES = ARCHIVED_SITES[1:]
 
 
 def copy_directory(source: Path, destination: Path) -> None:
@@ -29,6 +41,11 @@ def version_manifest() -> dict:
     return json.loads(source.read_text(encoding="utf-8"))
 
 
+def copy_archives(output: Path) -> None:
+    for archive in ARCHIVED_SITES:
+        copy_directory(ROOT / "archives" / archive, output / archive)
+
+
 def relative_site_root(archive: str, root: str) -> str:
     archive_path = archive.strip("/")
     target_path = root.strip("/") or "."
@@ -46,7 +63,7 @@ def write_manifest(path: Path, manifest: dict) -> None:
 def generate_archive_manifests(output: Path) -> None:
     source = version_manifest()
 
-    for archive in ("v0.9.0", "v0.10.0", "v0.11.0", "v0.12.0", "v0.12.1", "v0.13.0", "v0.13.1", "v0.13.2"):
+    for archive in MODERN_ARCHIVES:
         modern = copy.deepcopy(source)
         for item in modern["versions"]:
             root = relative_site_root(archive, item["root"])
@@ -73,6 +90,7 @@ def main() -> None:
         return
 
     output = ROOT / "_site"
+    copy_archives(output)
     generate_archive_manifests(output)
 
     child = ROOT / "zh-TW"

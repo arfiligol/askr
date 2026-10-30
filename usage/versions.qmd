@@ -44,9 +44,10 @@ single version-list source:
 Include the manifest in `project.resources`. Each `root` identifies a complete
 version site relative to that site's deployment root. The version selector is
 provided by Askr; consumers maintain their own archive directories and
-manifest. The Gallery's root build helper generates metadata for its own
-archived sites. It is source-repository build tooling and is not installed by
-`quarto add`.
+manifest. In this Gallery, source snapshots live in `archives/v*/`; the root
+build helper copies them to the public `_site/v*/` paths, then generates each
+archive's manifest. It is source-repository build tooling and is not installed
+by `quarto add`.
 
 Use `href` for a fixed destination instead of a `root`. Relative and
 single-slash `href` values are site-relative; absolute URLs keep their origin.
@@ -99,13 +100,14 @@ homepage rather than a missing page.
 
 ## Publishing a new version
 
-Before replacing the current site root, preserve the actual published site
-under its release path. For example, the next release should first archive
-0.13.3 as `/v0.13.3/`; only then should the root manifest name the new current
-release and retain the older entries. Keep a single current-version entry
-while that release remains at the site root. Consumers own this publishing step
-for their own sites; the Gallery helper only prepares this repository's archive
-metadata.
+Before replacing the current site root, place the actual published site in its
+source archive directory. For example, archive 0.13.3 in
+`archives/v0.13.3/`; the next build copies it to `_site/v0.13.3/`, preserving
+the public `/v0.13.3/` path, and generates its archive-local manifest. Then
+add `v0.13.3` to `ARCHIVED_SITES` in `_scripts/build_zh_tw.py` and update the
+root manifest to name the new current release and retain older entries. Keep a
+single current-version entry while that release remains at the site root.
+Consumers own this publishing step for their own sites.
 
 The Gallery's long-title specimen is available at
 [`versions.html?askr-version-mode=title`](versions.html?askr-version-mode=title).

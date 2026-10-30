@@ -26,6 +26,11 @@ derive from these entries; an Unreleased entry is not a published release.
   unavailable. When copying is denied, show the manual source; retain
   code-only compatibility copying.
 
+### Documentation
+
+- Consolidate the nine historical version sources under `archives/`, retaining
+  public `/v*/` URLs and snapshot bytes; rewrite the README for readers.
+
 ## 0.13.3 — 2026-10-28
 
 ### Changed

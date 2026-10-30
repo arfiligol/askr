@@ -1,5 +1,15 @@
 # Candidate and release validation receipts
 
+## Documentation source consolidation
+
+Status: ✅ Local checks completed 2026-10-30.
+
+| Check | Result |
+| --- | --- |
+| Archive inventory and identity | ✅ Nine historical sources consolidated under `archives/`; all 1,925 files match the baseline by SHA-256, and the root version directories are absent. |
+| Public routes and full render | ✅ Isolated `quarto render --no-execute` passed for 111 English and 32 Traditional Chinese inputs after explicitly excluding `archives/` from resources. Rendered `_site/v*/` files match the baseline except for regenerated `askr-versions.json`; manifest version labels match the root, with no duplicate `_site/archives/`. |
+| README links and consumer render | ✅ Live documentation links resolve to rendered pages; a minimal README configuration and index rendered in a temporary installed-namespace consumer. |
+
 ## Current UI stability candidate
 
 Semantic state: CONVERGING. Delivery state: CANDIDATE. The v0.13.4 release
