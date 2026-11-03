@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-536a6d2615c0c5fc3245e81261de7ef2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-d92e1ad2193218de3205d279bfdac79b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-536a6d2615c0c5fc3245e81261de7ef2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dc346bd7425d9dd406837a198dbfcf45.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-77efc18d66acfcd38dcebeeaecd23725.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dc346bd7425d9dd406837a198dbfcf45.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -117,6 +117,195 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="theme-color" content="#faf8f8">
 <script>
 (function () {
+  var drawerCoordinator;
+  var layoutGateActive = !!document.documentElement;
+  var layoutGateReleased = false;
+  var layoutDomReady = document.readyState !== "loading";
+  var layoutFontsReady = !document.fonts;
+  var adaptiveAreasReady = false;
+  var versionManifestReady = true;
+  var layoutFrame = 0;
+  var stableLayoutFrames = 0;
+  var previousLayoutGeometry = null;
+  var layoutStatus;
+  var layoutObserversStarted = false;
+  var layoutSizeObserver;
+  var layoutHeaderObserver;
+  var onLayoutResize;
+  var onLayoutFontLoading;
+  var onLayoutFontLoaded;
+  var onLayoutFontError;
+  var onLayoutPagehide;
+  var onLayoutPageshow;
+  if (layoutGateActive) {
+    document.documentElement.classList.add("askr-layout-pending");
+    window.setTimeout(showLayoutStatus, 180);
+    window.setTimeout(function () { releaseLayoutGate("timeout"); }, 1800);
+    document.addEventListener("DOMContentLoaded", function () {
+      layoutDomReady = true;
+      startLayoutObservers();
+      scheduleLayoutCheck();
+    }, {once: true});
+    if (layoutDomReady) {
+      startLayoutObservers();
+      scheduleLayoutCheck();
+    }
+    if (document.fonts) {
+      document.fonts.ready.then(function () {
+        layoutFontsReady = document.fonts.status !== "loading";
+        if (layoutFontsReady) scheduleLayoutCheck();
+      }, function () {
+        layoutFontsReady = document.fonts.status !== "loading";
+        if (layoutFontsReady) scheduleLayoutCheck();
+      });
+      onLayoutFontLoading = function () {
+        layoutFontsReady = false;
+        resetLayoutStability();
+      };
+      onLayoutFontLoaded = function () {
+        layoutFontsReady = document.fonts.status === "loaded";
+        resetLayoutStability();
+      };
+      onLayoutFontError = function () {
+        layoutFontsReady = document.fonts.status !== "loading";
+        resetLayoutStability();
+      };
+      document.fonts.addEventListener("loading", onLayoutFontLoading);
+      document.fonts.addEventListener("loadingdone", onLayoutFontLoaded);
+      document.fonts.addEventListener("loadingerror", onLayoutFontError);
+    }
+    onLayoutResize = resetLayoutStability;
+    onLayoutPagehide = function () { releaseLayoutGate("pagehide"); };
+    onLayoutPageshow = function (event) {
+      if (event.persisted) releaseLayoutGate("bfcache");
+    };
+    window.addEventListener("resize", onLayoutResize);
+    window.addEventListener("pagehide", onLayoutPagehide, {once: true});
+    window.addEventListener("pageshow", onLayoutPageshow);
+  }
+  function showLayoutStatus() {
+    if (layoutGateReleased) return;
+    if (!document.body) {
+      window.setTimeout(showLayoutStatus, 50);
+      return;
+    }
+    if (layoutStatus) return;
+    layoutStatus = document.createElement("div");
+    layoutStatus.id = "askr-layout-status";
+    layoutStatus.setAttribute("role", "status");
+    layoutStatus.setAttribute("aria-live", "polite");
+    layoutStatus.setAttribute("aria-atomic", "true");
+    layoutStatus.textContent = /^zh(?:-|$)/i.test(document.documentElement.lang) ? "載入頁面中…" : "Loading page…";
+    document.body.appendChild(layoutStatus);
+  }
+  function startLayoutObservers() {
+    if (layoutGateReleased || layoutObserversStarted || !document.body) return;
+    layoutObserversStarted = true;
+    if (window.ResizeObserver) {
+      layoutSizeObserver = new ResizeObserver(resetLayoutStability);
+      [document.body, document.querySelector("header.fixed-top"), document.querySelector("#quarto-content")].forEach(function (element) {
+        if (element) layoutSizeObserver.observe(element);
+      });
+    }
+    var header = document.querySelector("#quarto-header");
+    if (header) {
+      layoutHeaderObserver = new MutationObserver(resetLayoutStability);
+      layoutHeaderObserver.observe(header, {attributes: true, childList: true, subtree: true, characterData: true});
+    }
+  }
+  function resetLayoutStability() {
+    stableLayoutFrames = 0;
+    previousLayoutGeometry = null;
+    scheduleLayoutCheck();
+  }
+  function scheduleLayoutCheck() {
+    if (!layoutGateActive || layoutGateReleased || !layoutDomReady || !layoutFontsReady || !adaptiveAreasReady || !versionManifestReady || layoutFrame) return;
+    layoutFrame = requestAnimationFrame(checkLayoutReadiness);
+  }
+  function headerOffsetIsCoherent() {
+    var header = document.querySelector("header.fixed-top");
+    if (!header) return true;
+    var padding = parseFloat(getComputedStyle(document.body).paddingTop) || 0;
+    return Math.abs(padding - header.clientHeight) <= 1.5;
+  }
+  function layoutGeometry() {
+    var header = document.querySelector("header.fixed-top");
+    var main = document.querySelector("#quarto-content") || document.querySelector("main");
+    var title = document.querySelector("#title-block-header");
+    var sidebar = document.querySelector("#quarto-sidebar");
+    var announcement = document.querySelector("#quarto-announcement");
+    function values(element) {
+      if (!element) return [];
+      var rect = element.getBoundingClientRect();
+      return [rect.top, rect.height, rect.bottom].map(function (value) { return Math.round(value * 10) / 10; });
+    }
+    return JSON.stringify([
+      header && header.clientHeight,
+      getComputedStyle(document.body).paddingTop,
+      values(header), values(main), values(title), values(sidebar), values(announcement)
+    ]);
+  }
+  function checkLayoutReadiness() {
+    layoutFrame = 0;
+    if (layoutGateReleased) return;
+    if (!layoutDomReady || !layoutFontsReady || !adaptiveAreasReady || !versionManifestReady) {
+      stableLayoutFrames = 0;
+      previousLayoutGeometry = null;
+      return;
+    }
+    if (!headerOffsetIsCoherent()) {
+      stableLayoutFrames = 0;
+      previousLayoutGeometry = null;
+      layoutFrame = requestAnimationFrame(checkLayoutReadiness);
+      return;
+    }
+    var geometry = layoutGeometry();
+    if (geometry === previousLayoutGeometry) stableLayoutFrames += 1;
+    else stableLayoutFrames = 0;
+    previousLayoutGeometry = geometry;
+    if (stableLayoutFrames >= 2) releaseLayoutGate("stable");
+    else layoutFrame = requestAnimationFrame(checkLayoutReadiness);
+  }
+  function markAdaptiveAreasReady() {
+    adaptiveAreasReady = true;
+    scheduleLayoutCheck();
+  }
+  function releaseLayoutGate(reason) {
+    if (!layoutGateActive || layoutGateReleased) return;
+    layoutGateReleased = true;
+    if (layoutFrame) cancelAnimationFrame(layoutFrame);
+    if (layoutSizeObserver) layoutSizeObserver.disconnect();
+    if (layoutHeaderObserver) layoutHeaderObserver.disconnect();
+    window.removeEventListener("resize", onLayoutResize);
+    window.removeEventListener("pagehide", onLayoutPagehide);
+    window.removeEventListener("pageshow", onLayoutPageshow);
+    if (document.fonts) {
+      document.fonts.removeEventListener("loading", onLayoutFontLoading);
+      document.fonts.removeEventListener("loadingdone", onLayoutFontLoaded);
+      document.fonts.removeEventListener("loadingerror", onLayoutFontError);
+    }
+    document.documentElement.classList.remove("askr-layout-pending");
+    document.documentElement.dataset.askrLayoutReadyReason = reason;
+    if (layoutStatus) layoutStatus.remove();
+    layoutStatus = null;
+  }
+  window.addEventListener("click", coordinateDrawerClick, true);
+  function coordinateDrawerClick(event) {
+    if (!event.target.closest) return;
+    var areaButton = event.target.closest("#quarto-header .navbar-toggler");
+    var pagesButton = event.target.closest('[data-bs-toggle="collapse"][data-bs-target=".quarto-sidebar-collapse-item"]:not(#quarto-sidebar-glass)');
+    var backdrop = event.target.closest("#qdk-area-glass, #quarto-sidebar-glass");
+    if (!drawerCoordinator || !(areaButton || pagesButton || backdrop)) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if (areaButton || pagesButton) {
+      if (window.quartoToggleHeadroom) window.quartoToggleHeadroom();
+      var target = areaButton ? "area" : "pages";
+      drawerCoordinator.request(drawerCoordinator.isRequested(target) ? null : target);
+    } else {
+      drawerCoordinator.closeWithoutControl(true);
+    }
+  }
   function paint() {
     var link = document.querySelector("link#quarto-bootstrap.quarto-color-alternate");
     var on = link && link.getAttribute("rel") === "stylesheet";
@@ -241,12 +430,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", announcements);
   else announcements();
 
-  function hideShown(selector) {
-    document.querySelectorAll(selector).forEach(function (el) {
-      if (!el.classList.contains("show") || !window.bootstrap) return;
-      window.bootstrap.Collapse.getOrCreateInstance(el, { toggle: false }).hide();
-    });
-  }
   // Measure the existing inline layout, not a second navigation tree. Quarto /
   // Bootstrap remain the owners of disclosure state and navigation links.
   function adaptiveAreas() {
@@ -255,7 +438,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     var area = header && header.querySelector("#navbarCollapse");
     var button = header && header.querySelector(".navbar-toggler");
     var brand = header && header.querySelector(".navbar-brand-container");
-    if (!container || !area || !button || !brand) return;
+    if (!container || !area || !button || !brand) {
+      markAdaptiveAreasReady();
+      return;
+    }
     var tools = container.querySelector('.quarto-navbar-tools');
     var collapseTools = tools && area.contains(tools);
     var authoredTools = tools ? Array.from(tools.children).filter(function (el) {
@@ -275,6 +461,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     button.title = "Areas";
     var frame;
     var compact;
+    var mobileState;
     function update() {
       frame = null;
       // Moving native nodes is presentation only, not a new navigation authority.
@@ -283,9 +470,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       if (tools) container.style.setProperty('--askr-tools-width', tools.getBoundingClientRect().width + 'px');
       var active = document.activeElement;
       var previous = compact;
+      var previousMobile = mobileState;
       header.classList.add("askr-areas-measuring");
       header.classList.remove("askr-areas-collapsed");
       var mobile = window.matchMedia("(max-width: 991.98px)").matches;
+      mobileState = mobile;
       var list = area.querySelector(".navbar-nav");
       var title = brand.querySelector(".askr-version-title") || brand.querySelector(".navbar-title");
       if (title) title.title = title.textContent.trim();
@@ -318,20 +507,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         header.style.setProperty("--askr-brand-right", (container.getBoundingClientRect().right - right + gap) + "px");
       }
       observe();
-      if (previous !== undefined && previous !== compact) {
-        // Complete any in-flight Bootstrap animation before resetting state.
-        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
-        hideShown("#navbarCollapse.show");
-        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
-        area.classList.remove("qdk-open");
-        document.querySelector("#qdk-area-glass").classList.remove("qdk-glass-in");
-        button.setAttribute("aria-expanded", "false");
+      if ((previous !== undefined && previous !== compact) || (previousMobile !== undefined && previousMobile !== mobile)) {
+        if (drawerCoordinator) drawerCoordinator.closeForBreakpoint(active);
         if (compact && area.contains(active)) button.focus();
         else if (!compact && active === button) {
           var link = area.querySelector("a.nav-link");
           if (link) link.focus();
         }
       }
+      markAdaptiveAreasReady();
     }
     function schedule() {
       if (!frame) frame = requestAnimationFrame(update);
@@ -359,18 +543,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     var pages = document.querySelector("#quarto-sidebar");
     var areaGlass = document.querySelector("#qdk-area-glass");
     var pagesGlass = document.querySelector("#quarto-sidebar-glass");
+    var areaButton = document.querySelector("#quarto-header .navbar-toggler");
+    var pagesControls = Array.from(document.querySelectorAll('[data-bs-toggle="collapse"][data-bs-target=".quarto-sidebar-collapse-item"]:not(#quarto-sidebar-glass)'));
+    var pagesButton = pagesControls.find(function (control) { return control.tagName === "BUTTON"; }) || pagesControls[0];
+    pagesControls.forEach(function (control) {
+      control.setAttribute("aria-label", "Pages");
+      control.title = "Pages";
+    });
+    drawerCoordinator = createDrawerCoordinator(area, pages, areaButton, pagesButton, areaGlass, pagesGlass);
     if (area) {
       area.addEventListener("show.bs.collapse", function (event) {
         if (event.target !== area) return;
         area.classList.add("qdk-open");
         areaGlass.classList.add("qdk-glass-in");
+        if (areaButton) areaButton.setAttribute("aria-expanded", "true");
       });
       area.addEventListener("hide.bs.collapse", function (event) {
         if (event.target !== area) return;
         area.classList.remove("qdk-open");
         areaGlass.classList.remove("qdk-glass-in");
-        var header = document.querySelector("#quarto-header");
-        if (header.classList.contains("headroom--frozen") && !(pages && pages.classList.contains("qdk-open")) && window.quartoToggleHeadroom) window.quartoToggleHeadroom();
+        if (areaButton) areaButton.setAttribute("aria-expanded", "false");
       });
     }
     if (pages && pagesGlass) {
@@ -378,63 +570,201 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         if (event.target !== pages) return;
         pages.classList.add("qdk-open");
         pagesGlass.classList.add("qdk-glass-in");
+        syncPagesGlass(true);
+        pagesControls.forEach(function (control) { control.setAttribute("aria-expanded", "true"); });
       });
       pages.addEventListener("hide.bs.collapse", function (event) {
         if (event.target !== pages) return;
         pages.classList.remove("qdk-open");
         pagesGlass.classList.remove("qdk-glass-in");
+        syncPagesGlass(false);
+        pagesControls.forEach(function (control) { control.setAttribute("aria-expanded", "false"); });
       });
       pages.addEventListener("click", function (event) {
         if (event.target.closest("a, button, .sidebar-item-toggle")) return;
-        hideShown(".quarto-sidebar-collapse-item.show");
+        drawerCoordinator.closeWithoutControl(false);
       });
     }
-    var areaButton = document.querySelector("#quarto-header .navbar-toggler");
-    var pagesButton = document.querySelector("#quarto-header .quarto-btn-toggle");
-    if (areaButton) areaButton.addEventListener("click", function () {
-      hideShown(".quarto-sidebar-collapse-item.show");
-    });
     if (area) area.addEventListener("click", function (event) {
-      if (event.target.closest("a.nav-link") && document.querySelector("#quarto-header.askr-areas-collapsed")) hideShown("#navbarCollapse.show");
-    });
-    if (pagesButton) pagesButton.addEventListener("click", function () {
-      hideShown("#navbarCollapse.show");
+      if (event.target.closest("a.nav-link") && document.querySelector("#quarto-header.askr-areas-collapsed")) drawerCoordinator.request(null);
     });
     document.addEventListener("click", function (event) {
-      var area = document.querySelector("#navbarCollapse");
-      if (!area || !area.classList.contains("show")) return;
-      if (area.contains(event.target) || (areaButton && areaButton.contains(event.target))) return;
-      hideShown("#navbarCollapse.show");
+      if (!drawerCoordinator.isOpen()) return;
+      if (event.target.closest && event.target.closest(".askr-language-toggle")) {
+        drawerCoordinator.closeWithoutControl(false);
+        return;
+      }
+      if ((area && area.contains(event.target)) || (pages && pages.contains(event.target)) ||
+          (areaButton && areaButton.contains(event.target)) || pagesControls.some(function (control) { return control.contains(event.target); }) ||
+          (areaGlass && areaGlass.contains(event.target)) || (pagesGlass && pagesGlass.contains(event.target))) return;
+      drawerCoordinator.closeWithoutControl(false);
     });
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && area && area.classList.contains("show")) {
+      if (event.key === "Escape" && drawerCoordinator.isOpen()) {
         event.preventDefault();
-        hideShown("#navbarCollapse.show");
-        areaButton.focus();
+        drawerCoordinator.closeAndRestoreFocus();
       }
     });
-    versions(hideShown);
+    calloutControls();
+    versions();
     adaptiveAreas();
   }
-  function versions(hideShown) {
+  function syncPagesGlass(open) {
+    var glass = document.querySelector("#quarto-sidebar-glass");
+    if (!glass) return;
+    glass.classList.toggle("show", open);
+    glass.classList.remove("collapse", "collapsing");
+    glass.classList.toggle("collapsed", !open);
+    glass.style.removeProperty("height");
+    glass.style.removeProperty("overflow");
+  }
+  function createDrawerCoordinator(area, pages, areaButton, pagesButton, areaGlass, pagesGlass) {
+    var desired = null;
+    var reconciling = false;
+    var lastOpened = null;
+    var pendingFocus = null;
+    var collapse = {
+      area: area && window.bootstrap && window.bootstrap.Collapse.getOrCreateInstance(area, {toggle: false}),
+      pages: pages && window.bootstrap && window.bootstrap.Collapse.getOrCreateInstance(pages, {toggle: false})
+    };
+    function current() {
+      if (area && (area.classList.contains("show") || area.classList.contains("collapsing") && desired === "area")) return "area";
+      if (pages && (pages.classList.contains("show") || pages.classList.contains("collapsing") && desired === "pages")) return "pages";
+      return null;
+    }
+    function reconcile() {
+      if (reconciling) return;
+      var underway = [area, pages].some(function (el) { return el && el.classList.contains("collapsing"); });
+      if (underway) return;
+      var open = current();
+      if (open && open !== desired) {
+        reconciling = true;
+        collapse[open].hide();
+        reconciling = false;
+        return;
+      }
+      if (desired && !open && collapse[desired]) {
+        reconciling = true;
+        collapse[desired].show();
+        reconciling = false;
+      }
+    }
+    function restoreFocusWhenClosed() {
+      if (!pendingFocus || [area, pages].some(function (el) {
+        return el && (el.classList.contains("show") || el.classList.contains("collapsing"));
+      })) return;
+      var control = pendingFocus;
+      pendingFocus = null;
+      if (control.isConnected) control.focus();
+    }
+    [area, pages].forEach(function (el) {
+      if (!el) return;
+      el.addEventListener("shown.bs.collapse", function () {
+        reconcile();
+        restoreFocusWhenClosed();
+      });
+      el.addEventListener("hidden.bs.collapse", function () {
+        reconcile();
+        restoreFocusWhenClosed();
+      });
+    });
+    function request(next) {
+      if (next) {
+        lastOpened = next;
+        pendingFocus = null;
+      }
+      desired = next;
+      reconcile();
+    }
+    return {
+      request: request,
+      isOpen: function () {
+        return !!current() || !!desired || [area, pages].some(function (el) { return el && el.classList.contains("collapsing"); });
+      },
+      isRequested: function (target) { return desired === target || (!desired && current() === target); },
+      closeAndRestoreFocus: function () {
+        closeWithoutControl(true);
+      },
+      closeForBreakpoint: function (active) {
+        closeWithoutControl(false);
+        if (area && area.contains(active) && areaButton) areaButton.focus();
+        else if (pages && pages.contains(active) && pagesButton) pagesButton.focus();
+      },
+      closeWithoutControl: closeWithoutControl
+    };
+    function closeWithoutControl(restoreFocus) {
+      var open = current() || desired ||
+        (area && area.classList.contains("collapsing") ? "area" : null) ||
+        (pages && pages.classList.contains("collapsing") ? "pages" : null) || lastOpened;
+      var transitioning = [area, pages].some(function (el) { return el && el.classList.contains("collapsing"); });
+      if (!open || !(current() || desired || transitioning)) return;
+      if (restoreFocus) pendingFocus = open === "pages" ? pagesButton : areaButton;
+      request(null);
+      var header = document.querySelector("#quarto-header");
+      if (header && header.classList.contains("headroom--frozen") && window.quartoToggleHeadroom) window.quartoToggleHeadroom();
+      restoreFocusWhenClosed();
+    }
+  }
+  function calloutControls() {
+    document.querySelectorAll('.callout-header[data-bs-toggle="collapse"]').forEach(function (header) {
+      if (header.dataset.askrKeyboardBound === "true") return;
+      header.dataset.askrKeyboardBound = "true";
+      var callout = header.closest(".callout");
+      var label = callout && callout.getAttribute("title");
+      if (!label) {
+        var title = header.querySelector(".callout-title-container");
+        if (title) {
+          var visibleTitle = title.cloneNode(true);
+          visibleTitle.querySelectorAll(".screen-reader-only, .visually-hidden").forEach(function (el) { el.remove(); });
+          label = visibleTitle.textContent.trim();
+        }
+      }
+      header.setAttribute("role", "button");
+      header.setAttribute("tabindex", "0");
+      if (label) {
+        header.title = label;
+        header.setAttribute("aria-label", label);
+      }
+      header.addEventListener("keydown", function (event) {
+        if (event.target !== header || event.repeat || !["Enter", " "].includes(event.key)) return;
+        event.preventDefault();
+        header.click();
+      });
+    });
+  }
+  function versions() {
     var brand = document.querySelector("#quarto-header .navbar-brand");
     var slot = document.querySelector("#quarto-header .navbar-brand-container");
-    if (!brand || !slot || slot.querySelector(".askr-version")) return;
+    if (!brand || !slot) return;
+    if (!window.fetch) return;
+    versionManifestReady = false;
     var offset = document.querySelector('meta[name="quarto:offset"]');
     var manifest = new URL((offset ? offset.getAttribute("content") : "./") + "askr-versions.json", location.href);
+    var local = document.getElementById("askr-versions-local");
+    if (local) {
+      try { mountVersions(JSON.parse(local.textContent), brand, slot, new URL("./", manifest)); } catch (error) { /* unusable local manifest */ }
+    }
     fetch(manifest.href).then(function (response) {
       if (!response.ok) throw new Error("missing");
       return response.json();
     }).then(function (data) {
-      mountVersions(data, hideShown, brand, slot, new URL("./", manifest));
+      mountVersions(data, brand, slot, new URL("./", manifest));
     }).catch(function () {
+      if (slot.querySelector(".askr-version")) return;
       var dataEl = document.getElementById("askr-versions");
       if (!dataEl) return;
-      try { mountVersions(JSON.parse(dataEl.textContent), hideShown, brand, slot, new URL("./", manifest)); } catch (error) { return; }
+      try { mountVersions(JSON.parse(dataEl.textContent), brand, slot, new URL("./", manifest)); } catch (error) { return; }
+    }).then(function () {
+      versionManifestReady = true;
+      scheduleLayoutCheck();
     });
   }
-  function mountVersions(data, hideShown, brand, slot, siteRoot) {
-    if (!data.versions || !data.versions.length || slot.querySelector(".askr-version")) return;
+  function mountVersions(data, brand, slot, siteRoot) {
+    if (!data || !Array.isArray(data.versions) || !data.versions.length) return;
+    var signature = JSON.stringify(data);
+    var existing = slot.querySelector(".askr-version");
+    if (existing && existing.dataset.manifest === signature) return;
+    if (existing) existing.remove();
     var params = new URLSearchParams(location.search);
     var mode = params.get("askr-version-mode") === "title" ? "title" : (data.mode === "title" ? "title" : "inline");
     var title = brand.textContent.trim();
@@ -477,6 +807,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     var root = document.createElement("div");
     root.className = "askr-version";
     root.dataset.mode = mode;
+    root.dataset.manifest = signature;
     var button = document.createElement("button");
     button.type = "button";
     button.className = "askr-version-button";
@@ -526,7 +857,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       menu.appendChild(link);
     });
     function setOpen(open) {
-      if (open) hideShown(".quarto-sidebar-collapse-item.show, #navbarCollapse.show");
+      if (open && drawerCoordinator) drawerCoordinator.closeWithoutControl(false);
       menu.hidden = !open;
       button.setAttribute("aria-expanded", open ? "true" : "false");
     }
@@ -936,7 +1267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>此頁會在文件網站建置時執行一個簡短的公開算術範例。同一項計算也收錄在<a href="https://github.com/arfiligol/askr/blob/v0.10.0/notebooks/simple-output.ipynb">此版本的 Notebook 原始檔（英文）</a>；該檔案的輸出來自在本機執行這個 Notebook。</p>
-<div id="1171c29f" class="cell" data-execution_count="1">
+<div id="ba6ed4f9" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> [<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>]</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>total <span class="op">=</span> <span class="bu">sum</span>(values)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Saved notebook output: </span><span class="sc">{</span>values<span class="sc">}</span><span class="ss"> -&gt; </span><span class="sc">{</span>total<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1009,17 +1340,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }, 2000));
   }
 
-  function fail(button, attempt) {
+  function fail(button, attempt, reason, hasSource) {
     if (attempts.get(button) !== attempt) return;
     const status = statusFor(button);
     if (status) {
       status.classList.add('askr-copy-status-error');
+      const zh = document.documentElement.lang.toLowerCase().startsWith('zh-tw');
+      const kind = button.dataset.askrCopyKind;
+      const source = kind === 'code' ? (zh ? '上方程式碼' : 'the code above') : kind === 'math' ? (zh ? '公式下方的 LaTeX 原始碼' : 'the LaTeX source below') : (zh ? 'Mermaid 原始碼' : 'the Mermaid source');
       const messages = {
-        code: 'Copy failed. Select the code above and copy it manually.',
-        math: 'Copy failed. Select the LaTeX source below and copy it manually.',
-        mermaid: 'Copy failed. Select the Mermaid source below and copy it manually.'
+        insecure: zh ? '此 HTTP 頁面不屬於安全環境，瀏覽器無法使用剪貼簿。請改用 HTTPS。' : 'This HTTP page is not a secure context, so the browser cannot access the clipboard. Use HTTPS.',
+        unavailable: zh ? '此瀏覽器未提供剪貼簿功能。' : 'Clipboard access is unavailable in this browser.',
+        denied: zh ? '瀏覽器拒絕剪貼簿存取，請檢查網站權限。' : 'The browser denied clipboard access. Check the site permissions.',
+        missing: zh ? '找不到可複製的原始內容。' : 'The source text is unavailable.',
+        failed: zh ? '無法複製。' : 'Copy failed.'
       };
-      status.textContent = messages[button.dataset.askrCopyKind];
+      status.textContent = `${messages[reason] || messages.failed}${hasSource ? ` ${zh ? `請選取${source}並手動複製。` : `Select ${source} and copy it manually.`}` : ''}`;
     }
   }
 
@@ -1066,11 +1402,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     let text;
     try {
       text = sourceFor(button);
-      if (typeof text !== 'string') throw new Error('The source is unavailable.');
-      if (!navigator.clipboard?.writeText) throw new Error('Clipboard access is unavailable.');
+      if (typeof text !== 'string' || !text.trim()) { fail(button, attempt, 'missing', false); return; }
+      if (!navigator.clipboard?.writeText) {
+        const error = new Error('Clipboard API is unavailable.');
+        error.name = 'ClipboardUnavailableError';
+        throw error;
+      }
       await navigator.clipboard.writeText(text);
       succeed(button, attempt);
-    } catch (_) {
+    } catch (error) {
       if (attempts.get(button) !== attempt) return;
       if (button.dataset.askrCopyKind === 'code' && typeof text === 'string') {
         try {
@@ -1079,8 +1419,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           return;
         } catch (_) {}
       }
-      if (button.dataset.askrCopyKind === 'math') exposeMathSource(button);
-      fail(button, attempt);
+      if (button.dataset.askrCopyKind === 'math' && typeof text === 'string' && text.trim()) exposeMathSource(button, text);
+      const reason = typeof text !== 'string' || !text.trim() ? 'missing' : error?.name === 'NotAllowedError' ? 'denied' : !window.isSecureContext && location.protocol === 'http:' ? 'insecure' : error?.name === 'ClipboardUnavailableError' ? 'unavailable' : 'failed';
+      fail(button, attempt, reason, typeof text === 'string' && !!text.trim());
     }
   }
 
@@ -1126,7 +1467,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     });
   }
 
-  function exposeMathSource(button) {
+  function exposeMathSource(button, text) {
     const component = button.closest('.askr-copyable-math');
     if (!component) return;
     let source = component.querySelector('.askr-math-source');
@@ -1137,7 +1478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       textarea.readOnly = true;
       textarea.spellcheck = false;
       textarea.setAttribute('aria-label', 'LaTeX source');
-      textarea.value = component.dataset.askrTex;
+      textarea.value = text;
       source.append(textarea);
       component.append(source);
     }
@@ -1170,16 +1511,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 (() => {
   function setup() {
     const template = document.getElementById('askr-logout-config');
-    if (template) {
+    if (template && template.dataset.mounted !== 'true') {
       const tools = document.querySelector('#quarto-header .quarto-navbar-tools');
-      if (!tools) throw new Error('Askr Logout requires a website Header with navbar tools.');
+      if (!tools) return;
       tools.append(template.content.cloneNode(true));
+      template.dataset.mounted = 'true';
       document.getElementById('quarto-header').classList.add('askr-has-logout');
     }
 
   }
-  if (document.readyState === 'complete') setup();
-  else window.addEventListener('load', setup, {once: true});
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup, {once: true});
+  else setup();
 })();
 </script>
 <script>
@@ -1211,14 +1553,15 @@ document.addEventListener('DOMContentLoaded', function () {
 (() => {
   function mount() {
     const template = document.getElementById('askr-language-config');
-    if (!template) return;
+    if (!template || template.dataset.mounted === 'true') return;
     const tools = document.querySelector('#quarto-header .quarto-navbar-tools');
-    if (!tools) throw new Error('Askr language selector requires a website Header with navbar tools.');
+    if (!tools) return;
     tools.append(template.content.cloneNode(true));
+    template.dataset.mounted = 'true';
     document.getElementById('quarto-header').classList.add('askr-has-language');
   }
-  if (document.readyState === 'complete') mount();
-  else window.addEventListener('load', mount, {once: true});
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, {once: true});
+  else mount();
 })();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1671,7 +2014,7 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.3" aria-label="Askr version 0.13.3">0.13.3</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.14.0" aria-label="Askr version 0.14.0">0.14.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: 繁體中文" title="Language: 繁體中文"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"></span></a></li><li><a class="dropdown-item active" aria-current="true" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li></ul></div></template>
 

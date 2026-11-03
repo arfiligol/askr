@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-c7e68cbf4fd09285039b7e9a23f813c3.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-536a6d2615c0c5fc3245e81261de7ef2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-d92e1ad2193218de3205d279bfdac79b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-536a6d2615c0c5fc3245e81261de7ef2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dc346bd7425d9dd406837a198dbfcf45.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-77efc18d66acfcd38dcebeeaecd23725.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-dc346bd7425d9dd406837a198dbfcf45.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.js"></script>
 <link href="../site_libs/quarto-contrib/askr-image-viewer-1/image-viewer.css" rel="stylesheet">
 <script src="../site_libs/quarto-contrib/askr-reading-0.9.0/reading.js"></script>
@@ -117,6 +117,195 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="theme-color" content="#faf8f8">
 <script>
 (function () {
+  var drawerCoordinator;
+  var layoutGateActive = !!document.documentElement;
+  var layoutGateReleased = false;
+  var layoutDomReady = document.readyState !== "loading";
+  var layoutFontsReady = !document.fonts;
+  var adaptiveAreasReady = false;
+  var versionManifestReady = true;
+  var layoutFrame = 0;
+  var stableLayoutFrames = 0;
+  var previousLayoutGeometry = null;
+  var layoutStatus;
+  var layoutObserversStarted = false;
+  var layoutSizeObserver;
+  var layoutHeaderObserver;
+  var onLayoutResize;
+  var onLayoutFontLoading;
+  var onLayoutFontLoaded;
+  var onLayoutFontError;
+  var onLayoutPagehide;
+  var onLayoutPageshow;
+  if (layoutGateActive) {
+    document.documentElement.classList.add("askr-layout-pending");
+    window.setTimeout(showLayoutStatus, 180);
+    window.setTimeout(function () { releaseLayoutGate("timeout"); }, 1800);
+    document.addEventListener("DOMContentLoaded", function () {
+      layoutDomReady = true;
+      startLayoutObservers();
+      scheduleLayoutCheck();
+    }, {once: true});
+    if (layoutDomReady) {
+      startLayoutObservers();
+      scheduleLayoutCheck();
+    }
+    if (document.fonts) {
+      document.fonts.ready.then(function () {
+        layoutFontsReady = document.fonts.status !== "loading";
+        if (layoutFontsReady) scheduleLayoutCheck();
+      }, function () {
+        layoutFontsReady = document.fonts.status !== "loading";
+        if (layoutFontsReady) scheduleLayoutCheck();
+      });
+      onLayoutFontLoading = function () {
+        layoutFontsReady = false;
+        resetLayoutStability();
+      };
+      onLayoutFontLoaded = function () {
+        layoutFontsReady = document.fonts.status === "loaded";
+        resetLayoutStability();
+      };
+      onLayoutFontError = function () {
+        layoutFontsReady = document.fonts.status !== "loading";
+        resetLayoutStability();
+      };
+      document.fonts.addEventListener("loading", onLayoutFontLoading);
+      document.fonts.addEventListener("loadingdone", onLayoutFontLoaded);
+      document.fonts.addEventListener("loadingerror", onLayoutFontError);
+    }
+    onLayoutResize = resetLayoutStability;
+    onLayoutPagehide = function () { releaseLayoutGate("pagehide"); };
+    onLayoutPageshow = function (event) {
+      if (event.persisted) releaseLayoutGate("bfcache");
+    };
+    window.addEventListener("resize", onLayoutResize);
+    window.addEventListener("pagehide", onLayoutPagehide, {once: true});
+    window.addEventListener("pageshow", onLayoutPageshow);
+  }
+  function showLayoutStatus() {
+    if (layoutGateReleased) return;
+    if (!document.body) {
+      window.setTimeout(showLayoutStatus, 50);
+      return;
+    }
+    if (layoutStatus) return;
+    layoutStatus = document.createElement("div");
+    layoutStatus.id = "askr-layout-status";
+    layoutStatus.setAttribute("role", "status");
+    layoutStatus.setAttribute("aria-live", "polite");
+    layoutStatus.setAttribute("aria-atomic", "true");
+    layoutStatus.textContent = /^zh(?:-|$)/i.test(document.documentElement.lang) ? "載入頁面中…" : "Loading page…";
+    document.body.appendChild(layoutStatus);
+  }
+  function startLayoutObservers() {
+    if (layoutGateReleased || layoutObserversStarted || !document.body) return;
+    layoutObserversStarted = true;
+    if (window.ResizeObserver) {
+      layoutSizeObserver = new ResizeObserver(resetLayoutStability);
+      [document.body, document.querySelector("header.fixed-top"), document.querySelector("#quarto-content")].forEach(function (element) {
+        if (element) layoutSizeObserver.observe(element);
+      });
+    }
+    var header = document.querySelector("#quarto-header");
+    if (header) {
+      layoutHeaderObserver = new MutationObserver(resetLayoutStability);
+      layoutHeaderObserver.observe(header, {attributes: true, childList: true, subtree: true, characterData: true});
+    }
+  }
+  function resetLayoutStability() {
+    stableLayoutFrames = 0;
+    previousLayoutGeometry = null;
+    scheduleLayoutCheck();
+  }
+  function scheduleLayoutCheck() {
+    if (!layoutGateActive || layoutGateReleased || !layoutDomReady || !layoutFontsReady || !adaptiveAreasReady || !versionManifestReady || layoutFrame) return;
+    layoutFrame = requestAnimationFrame(checkLayoutReadiness);
+  }
+  function headerOffsetIsCoherent() {
+    var header = document.querySelector("header.fixed-top");
+    if (!header) return true;
+    var padding = parseFloat(getComputedStyle(document.body).paddingTop) || 0;
+    return Math.abs(padding - header.clientHeight) <= 1.5;
+  }
+  function layoutGeometry() {
+    var header = document.querySelector("header.fixed-top");
+    var main = document.querySelector("#quarto-content") || document.querySelector("main");
+    var title = document.querySelector("#title-block-header");
+    var sidebar = document.querySelector("#quarto-sidebar");
+    var announcement = document.querySelector("#quarto-announcement");
+    function values(element) {
+      if (!element) return [];
+      var rect = element.getBoundingClientRect();
+      return [rect.top, rect.height, rect.bottom].map(function (value) { return Math.round(value * 10) / 10; });
+    }
+    return JSON.stringify([
+      header && header.clientHeight,
+      getComputedStyle(document.body).paddingTop,
+      values(header), values(main), values(title), values(sidebar), values(announcement)
+    ]);
+  }
+  function checkLayoutReadiness() {
+    layoutFrame = 0;
+    if (layoutGateReleased) return;
+    if (!layoutDomReady || !layoutFontsReady || !adaptiveAreasReady || !versionManifestReady) {
+      stableLayoutFrames = 0;
+      previousLayoutGeometry = null;
+      return;
+    }
+    if (!headerOffsetIsCoherent()) {
+      stableLayoutFrames = 0;
+      previousLayoutGeometry = null;
+      layoutFrame = requestAnimationFrame(checkLayoutReadiness);
+      return;
+    }
+    var geometry = layoutGeometry();
+    if (geometry === previousLayoutGeometry) stableLayoutFrames += 1;
+    else stableLayoutFrames = 0;
+    previousLayoutGeometry = geometry;
+    if (stableLayoutFrames >= 2) releaseLayoutGate("stable");
+    else layoutFrame = requestAnimationFrame(checkLayoutReadiness);
+  }
+  function markAdaptiveAreasReady() {
+    adaptiveAreasReady = true;
+    scheduleLayoutCheck();
+  }
+  function releaseLayoutGate(reason) {
+    if (!layoutGateActive || layoutGateReleased) return;
+    layoutGateReleased = true;
+    if (layoutFrame) cancelAnimationFrame(layoutFrame);
+    if (layoutSizeObserver) layoutSizeObserver.disconnect();
+    if (layoutHeaderObserver) layoutHeaderObserver.disconnect();
+    window.removeEventListener("resize", onLayoutResize);
+    window.removeEventListener("pagehide", onLayoutPagehide);
+    window.removeEventListener("pageshow", onLayoutPageshow);
+    if (document.fonts) {
+      document.fonts.removeEventListener("loading", onLayoutFontLoading);
+      document.fonts.removeEventListener("loadingdone", onLayoutFontLoaded);
+      document.fonts.removeEventListener("loadingerror", onLayoutFontError);
+    }
+    document.documentElement.classList.remove("askr-layout-pending");
+    document.documentElement.dataset.askrLayoutReadyReason = reason;
+    if (layoutStatus) layoutStatus.remove();
+    layoutStatus = null;
+  }
+  window.addEventListener("click", coordinateDrawerClick, true);
+  function coordinateDrawerClick(event) {
+    if (!event.target.closest) return;
+    var areaButton = event.target.closest("#quarto-header .navbar-toggler");
+    var pagesButton = event.target.closest('[data-bs-toggle="collapse"][data-bs-target=".quarto-sidebar-collapse-item"]:not(#quarto-sidebar-glass)');
+    var backdrop = event.target.closest("#qdk-area-glass, #quarto-sidebar-glass");
+    if (!drawerCoordinator || !(areaButton || pagesButton || backdrop)) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if (areaButton || pagesButton) {
+      if (window.quartoToggleHeadroom) window.quartoToggleHeadroom();
+      var target = areaButton ? "area" : "pages";
+      drawerCoordinator.request(drawerCoordinator.isRequested(target) ? null : target);
+    } else {
+      drawerCoordinator.closeWithoutControl(true);
+    }
+  }
   function paint() {
     var link = document.querySelector("link#quarto-bootstrap.quarto-color-alternate");
     var on = link && link.getAttribute("rel") === "stylesheet";
@@ -241,12 +430,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", announcements);
   else announcements();
 
-  function hideShown(selector) {
-    document.querySelectorAll(selector).forEach(function (el) {
-      if (!el.classList.contains("show") || !window.bootstrap) return;
-      window.bootstrap.Collapse.getOrCreateInstance(el, { toggle: false }).hide();
-    });
-  }
   // Measure the existing inline layout, not a second navigation tree. Quarto /
   // Bootstrap remain the owners of disclosure state and navigation links.
   function adaptiveAreas() {
@@ -255,7 +438,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     var area = header && header.querySelector("#navbarCollapse");
     var button = header && header.querySelector(".navbar-toggler");
     var brand = header && header.querySelector(".navbar-brand-container");
-    if (!container || !area || !button || !brand) return;
+    if (!container || !area || !button || !brand) {
+      markAdaptiveAreasReady();
+      return;
+    }
     var tools = container.querySelector('.quarto-navbar-tools');
     var collapseTools = tools && area.contains(tools);
     var authoredTools = tools ? Array.from(tools.children).filter(function (el) {
@@ -275,6 +461,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     button.title = "Areas";
     var frame;
     var compact;
+    var mobileState;
     function update() {
       frame = null;
       // Moving native nodes is presentation only, not a new navigation authority.
@@ -283,9 +470,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       if (tools) container.style.setProperty('--askr-tools-width', tools.getBoundingClientRect().width + 'px');
       var active = document.activeElement;
       var previous = compact;
+      var previousMobile = mobileState;
       header.classList.add("askr-areas-measuring");
       header.classList.remove("askr-areas-collapsed");
       var mobile = window.matchMedia("(max-width: 991.98px)").matches;
+      mobileState = mobile;
       var list = area.querySelector(".navbar-nav");
       var title = brand.querySelector(".askr-version-title") || brand.querySelector(".navbar-title");
       if (title) title.title = title.textContent.trim();
@@ -318,20 +507,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         header.style.setProperty("--askr-brand-right", (container.getBoundingClientRect().right - right + gap) + "px");
       }
       observe();
-      if (previous !== undefined && previous !== compact) {
-        // Complete any in-flight Bootstrap animation before resetting state.
-        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
-        hideShown("#navbarCollapse.show");
-        if (area.classList.contains("collapsing")) area.dispatchEvent(new Event("transitionend"));
-        area.classList.remove("qdk-open");
-        document.querySelector("#qdk-area-glass").classList.remove("qdk-glass-in");
-        button.setAttribute("aria-expanded", "false");
+      if ((previous !== undefined && previous !== compact) || (previousMobile !== undefined && previousMobile !== mobile)) {
+        if (drawerCoordinator) drawerCoordinator.closeForBreakpoint(active);
         if (compact && area.contains(active)) button.focus();
         else if (!compact && active === button) {
           var link = area.querySelector("a.nav-link");
           if (link) link.focus();
         }
       }
+      markAdaptiveAreasReady();
     }
     function schedule() {
       if (!frame) frame = requestAnimationFrame(update);
@@ -359,18 +543,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     var pages = document.querySelector("#quarto-sidebar");
     var areaGlass = document.querySelector("#qdk-area-glass");
     var pagesGlass = document.querySelector("#quarto-sidebar-glass");
+    var areaButton = document.querySelector("#quarto-header .navbar-toggler");
+    var pagesControls = Array.from(document.querySelectorAll('[data-bs-toggle="collapse"][data-bs-target=".quarto-sidebar-collapse-item"]:not(#quarto-sidebar-glass)'));
+    var pagesButton = pagesControls.find(function (control) { return control.tagName === "BUTTON"; }) || pagesControls[0];
+    pagesControls.forEach(function (control) {
+      control.setAttribute("aria-label", "Pages");
+      control.title = "Pages";
+    });
+    drawerCoordinator = createDrawerCoordinator(area, pages, areaButton, pagesButton, areaGlass, pagesGlass);
     if (area) {
       area.addEventListener("show.bs.collapse", function (event) {
         if (event.target !== area) return;
         area.classList.add("qdk-open");
         areaGlass.classList.add("qdk-glass-in");
+        if (areaButton) areaButton.setAttribute("aria-expanded", "true");
       });
       area.addEventListener("hide.bs.collapse", function (event) {
         if (event.target !== area) return;
         area.classList.remove("qdk-open");
         areaGlass.classList.remove("qdk-glass-in");
-        var header = document.querySelector("#quarto-header");
-        if (header.classList.contains("headroom--frozen") && !(pages && pages.classList.contains("qdk-open")) && window.quartoToggleHeadroom) window.quartoToggleHeadroom();
+        if (areaButton) areaButton.setAttribute("aria-expanded", "false");
       });
     }
     if (pages && pagesGlass) {
@@ -378,63 +570,201 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         if (event.target !== pages) return;
         pages.classList.add("qdk-open");
         pagesGlass.classList.add("qdk-glass-in");
+        syncPagesGlass(true);
+        pagesControls.forEach(function (control) { control.setAttribute("aria-expanded", "true"); });
       });
       pages.addEventListener("hide.bs.collapse", function (event) {
         if (event.target !== pages) return;
         pages.classList.remove("qdk-open");
         pagesGlass.classList.remove("qdk-glass-in");
+        syncPagesGlass(false);
+        pagesControls.forEach(function (control) { control.setAttribute("aria-expanded", "false"); });
       });
       pages.addEventListener("click", function (event) {
         if (event.target.closest("a, button, .sidebar-item-toggle")) return;
-        hideShown(".quarto-sidebar-collapse-item.show");
+        drawerCoordinator.closeWithoutControl(false);
       });
     }
-    var areaButton = document.querySelector("#quarto-header .navbar-toggler");
-    var pagesButton = document.querySelector("#quarto-header .quarto-btn-toggle");
-    if (areaButton) areaButton.addEventListener("click", function () {
-      hideShown(".quarto-sidebar-collapse-item.show");
-    });
     if (area) area.addEventListener("click", function (event) {
-      if (event.target.closest("a.nav-link") && document.querySelector("#quarto-header.askr-areas-collapsed")) hideShown("#navbarCollapse.show");
-    });
-    if (pagesButton) pagesButton.addEventListener("click", function () {
-      hideShown("#navbarCollapse.show");
+      if (event.target.closest("a.nav-link") && document.querySelector("#quarto-header.askr-areas-collapsed")) drawerCoordinator.request(null);
     });
     document.addEventListener("click", function (event) {
-      var area = document.querySelector("#navbarCollapse");
-      if (!area || !area.classList.contains("show")) return;
-      if (area.contains(event.target) || (areaButton && areaButton.contains(event.target))) return;
-      hideShown("#navbarCollapse.show");
+      if (!drawerCoordinator.isOpen()) return;
+      if (event.target.closest && event.target.closest(".askr-language-toggle")) {
+        drawerCoordinator.closeWithoutControl(false);
+        return;
+      }
+      if ((area && area.contains(event.target)) || (pages && pages.contains(event.target)) ||
+          (areaButton && areaButton.contains(event.target)) || pagesControls.some(function (control) { return control.contains(event.target); }) ||
+          (areaGlass && areaGlass.contains(event.target)) || (pagesGlass && pagesGlass.contains(event.target))) return;
+      drawerCoordinator.closeWithoutControl(false);
     });
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && area && area.classList.contains("show")) {
+      if (event.key === "Escape" && drawerCoordinator.isOpen()) {
         event.preventDefault();
-        hideShown("#navbarCollapse.show");
-        areaButton.focus();
+        drawerCoordinator.closeAndRestoreFocus();
       }
     });
-    versions(hideShown);
+    calloutControls();
+    versions();
     adaptiveAreas();
   }
-  function versions(hideShown) {
+  function syncPagesGlass(open) {
+    var glass = document.querySelector("#quarto-sidebar-glass");
+    if (!glass) return;
+    glass.classList.toggle("show", open);
+    glass.classList.remove("collapse", "collapsing");
+    glass.classList.toggle("collapsed", !open);
+    glass.style.removeProperty("height");
+    glass.style.removeProperty("overflow");
+  }
+  function createDrawerCoordinator(area, pages, areaButton, pagesButton, areaGlass, pagesGlass) {
+    var desired = null;
+    var reconciling = false;
+    var lastOpened = null;
+    var pendingFocus = null;
+    var collapse = {
+      area: area && window.bootstrap && window.bootstrap.Collapse.getOrCreateInstance(area, {toggle: false}),
+      pages: pages && window.bootstrap && window.bootstrap.Collapse.getOrCreateInstance(pages, {toggle: false})
+    };
+    function current() {
+      if (area && (area.classList.contains("show") || area.classList.contains("collapsing") && desired === "area")) return "area";
+      if (pages && (pages.classList.contains("show") || pages.classList.contains("collapsing") && desired === "pages")) return "pages";
+      return null;
+    }
+    function reconcile() {
+      if (reconciling) return;
+      var underway = [area, pages].some(function (el) { return el && el.classList.contains("collapsing"); });
+      if (underway) return;
+      var open = current();
+      if (open && open !== desired) {
+        reconciling = true;
+        collapse[open].hide();
+        reconciling = false;
+        return;
+      }
+      if (desired && !open && collapse[desired]) {
+        reconciling = true;
+        collapse[desired].show();
+        reconciling = false;
+      }
+    }
+    function restoreFocusWhenClosed() {
+      if (!pendingFocus || [area, pages].some(function (el) {
+        return el && (el.classList.contains("show") || el.classList.contains("collapsing"));
+      })) return;
+      var control = pendingFocus;
+      pendingFocus = null;
+      if (control.isConnected) control.focus();
+    }
+    [area, pages].forEach(function (el) {
+      if (!el) return;
+      el.addEventListener("shown.bs.collapse", function () {
+        reconcile();
+        restoreFocusWhenClosed();
+      });
+      el.addEventListener("hidden.bs.collapse", function () {
+        reconcile();
+        restoreFocusWhenClosed();
+      });
+    });
+    function request(next) {
+      if (next) {
+        lastOpened = next;
+        pendingFocus = null;
+      }
+      desired = next;
+      reconcile();
+    }
+    return {
+      request: request,
+      isOpen: function () {
+        return !!current() || !!desired || [area, pages].some(function (el) { return el && el.classList.contains("collapsing"); });
+      },
+      isRequested: function (target) { return desired === target || (!desired && current() === target); },
+      closeAndRestoreFocus: function () {
+        closeWithoutControl(true);
+      },
+      closeForBreakpoint: function (active) {
+        closeWithoutControl(false);
+        if (area && area.contains(active) && areaButton) areaButton.focus();
+        else if (pages && pages.contains(active) && pagesButton) pagesButton.focus();
+      },
+      closeWithoutControl: closeWithoutControl
+    };
+    function closeWithoutControl(restoreFocus) {
+      var open = current() || desired ||
+        (area && area.classList.contains("collapsing") ? "area" : null) ||
+        (pages && pages.classList.contains("collapsing") ? "pages" : null) || lastOpened;
+      var transitioning = [area, pages].some(function (el) { return el && el.classList.contains("collapsing"); });
+      if (!open || !(current() || desired || transitioning)) return;
+      if (restoreFocus) pendingFocus = open === "pages" ? pagesButton : areaButton;
+      request(null);
+      var header = document.querySelector("#quarto-header");
+      if (header && header.classList.contains("headroom--frozen") && window.quartoToggleHeadroom) window.quartoToggleHeadroom();
+      restoreFocusWhenClosed();
+    }
+  }
+  function calloutControls() {
+    document.querySelectorAll('.callout-header[data-bs-toggle="collapse"]').forEach(function (header) {
+      if (header.dataset.askrKeyboardBound === "true") return;
+      header.dataset.askrKeyboardBound = "true";
+      var callout = header.closest(".callout");
+      var label = callout && callout.getAttribute("title");
+      if (!label) {
+        var title = header.querySelector(".callout-title-container");
+        if (title) {
+          var visibleTitle = title.cloneNode(true);
+          visibleTitle.querySelectorAll(".screen-reader-only, .visually-hidden").forEach(function (el) { el.remove(); });
+          label = visibleTitle.textContent.trim();
+        }
+      }
+      header.setAttribute("role", "button");
+      header.setAttribute("tabindex", "0");
+      if (label) {
+        header.title = label;
+        header.setAttribute("aria-label", label);
+      }
+      header.addEventListener("keydown", function (event) {
+        if (event.target !== header || event.repeat || !["Enter", " "].includes(event.key)) return;
+        event.preventDefault();
+        header.click();
+      });
+    });
+  }
+  function versions() {
     var brand = document.querySelector("#quarto-header .navbar-brand");
     var slot = document.querySelector("#quarto-header .navbar-brand-container");
-    if (!brand || !slot || slot.querySelector(".askr-version")) return;
+    if (!brand || !slot) return;
+    if (!window.fetch) return;
+    versionManifestReady = false;
     var offset = document.querySelector('meta[name="quarto:offset"]');
     var manifest = new URL((offset ? offset.getAttribute("content") : "./") + "askr-versions.json", location.href);
+    var local = document.getElementById("askr-versions-local");
+    if (local) {
+      try { mountVersions(JSON.parse(local.textContent), brand, slot, new URL("./", manifest)); } catch (error) { /* unusable local manifest */ }
+    }
     fetch(manifest.href).then(function (response) {
       if (!response.ok) throw new Error("missing");
       return response.json();
     }).then(function (data) {
-      mountVersions(data, hideShown, brand, slot, new URL("./", manifest));
+      mountVersions(data, brand, slot, new URL("./", manifest));
     }).catch(function () {
+      if (slot.querySelector(".askr-version")) return;
       var dataEl = document.getElementById("askr-versions");
       if (!dataEl) return;
-      try { mountVersions(JSON.parse(dataEl.textContent), hideShown, brand, slot, new URL("./", manifest)); } catch (error) { return; }
+      try { mountVersions(JSON.parse(dataEl.textContent), brand, slot, new URL("./", manifest)); } catch (error) { return; }
+    }).then(function () {
+      versionManifestReady = true;
+      scheduleLayoutCheck();
     });
   }
-  function mountVersions(data, hideShown, brand, slot, siteRoot) {
-    if (!data.versions || !data.versions.length || slot.querySelector(".askr-version")) return;
+  function mountVersions(data, brand, slot, siteRoot) {
+    if (!data || !Array.isArray(data.versions) || !data.versions.length) return;
+    var signature = JSON.stringify(data);
+    var existing = slot.querySelector(".askr-version");
+    if (existing && existing.dataset.manifest === signature) return;
+    if (existing) existing.remove();
     var params = new URLSearchParams(location.search);
     var mode = params.get("askr-version-mode") === "title" ? "title" : (data.mode === "title" ? "title" : "inline");
     var title = brand.textContent.trim();
@@ -477,6 +807,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     var root = document.createElement("div");
     root.className = "askr-version";
     root.dataset.mode = mode;
+    root.dataset.manifest = signature;
     var button = document.createElement("button");
     button.type = "button";
     button.className = "askr-version-button";
@@ -526,7 +857,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       menu.appendChild(link);
     });
     function setOpen(open) {
-      if (open) hideShown(".quarto-sidebar-collapse-item.show, #navbarCollapse.show");
+      if (open && drawerCoordinator) drawerCoordinator.closeWithoutControl(false);
       menu.hidden = !open;
       button.setAttribute("aria-expanded", open ? "true" : "false");
     }
@@ -909,8 +1240,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#columns" id="toc-columns" class="nav-link active" data-scroll-target="#columns">Columns</a></li>
+  <li><a href="#responsive-groups" id="toc-responsive-groups" class="nav-link" data-scroll-target="#responsive-groups">Responsive groups</a></li>
   <li><a href="#tabset" id="toc-tabset" class="nav-link" data-scroll-target="#tabset">Tabset</a></li>
   <li><a href="#image" id="toc-image" class="nav-link" data-scroll-target="#image">Image</a></li>
+  <li><a href="#figure-fit" id="toc-figure-fit" class="nav-link" data-scroll-target="#figure-fit">Fit a tall figure to the viewport</a></li>
   <li><a href="#image-viewer" id="toc-image-viewer" class="nav-link" data-scroll-target="#image-viewer">Image viewer</a></li>
   <li><a href="#theme-toggle" id="toc-theme-toggle" class="nav-link" data-scroll-target="#theme-toggle">Theme toggle</a></li>
   <li><a href="#diagram" id="toc-diagram" class="nav-link" data-scroll-target="#diagram">Diagram</a></li>
@@ -943,14 +1276,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Columns and images stay Quarto’s layout. Askr restyles grouped tabsets.</p>
+<p>Quarto keeps its native columns, figures and captions. The optional <code>.askr-grid</code> and <code>.askr-figure-fit</code> wrappers address specific layout needs while leaving content in the article.</p>
 <section id="columns" class="level2">
 <h2 class="anchored" data-anchor-id="columns">Columns</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>The left column is half of the content measure.</p>
 </div><div class="column" style="width:50%;">
-<p>The right column is the other half. A narrow screen stacks them.</p>
+<p>The right column is the other half. Standard Quarto columns retain Quarto’s responsive behavior; use <code>.askr-grid</code> for a pair that stays two columns from 768px and stacks below that width.</p>
+</div>
+</div>
+</section>
+<section id="responsive-groups" class="level2">
+<h2 class="anchored" data-anchor-id="responsive-groups">Responsive groups</h2>
+<p>Use <code>.askr-grid</code> around two callouts or cards to create equal columns at viewport widths of at least 768px and one column below that. Source order is also reading order.</p>
+<div class="askr-grid">
+<div class="callout callout-style-default callout-note callout-titled" title="Prepare the source">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Prepare the source
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Keep the first item concise and useful on its own.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Check the result">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Check the result
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The second item follows the first in both layout and reading order.</p>
+</div>
+</div>
+</div>
+<div class="askr-grid">
+<div class="askr-card">
+<section id="read-about-cards" class="level3 askr-card-title unlisted askr-card-body">
+<h3 class="askr-card-title unlisted anchored" data-anchor-id="read-about-cards"><a href="../components/cards.html">Read about cards</a></h3>
+<p>Cards keep their ordinary heading links.</p>
+</section>
+</div>
+<div class="askr-card">
+<section id="read-about-callouts" class="level3 askr-card-title unlisted askr-card-body">
+<h3 class="askr-card-title unlisted anchored" data-anchor-id="read-about-callouts"><a href="../components/callouts.html">Read about callouts</a></h3>
+<p>Callouts keep their native Quarto semantics.</p>
+</section>
 </div>
 </div>
 </section>
@@ -983,7 +1362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="image" class="level2">
 <h2 class="anchored" data-anchor-id="image">Image</h2>
 <p>Images in this document come from Embla. The chart below is its bars-and-markers figure, saved here as a static image. Quarto’s folded cell keeps the embed source behind Source and shows the image underneath.</p>
-<div id="c7570ab1" class="cell" data-execution_count="1">
+<div id="ce3b7051" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Source</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image</span>
@@ -992,13 +1371,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 <figure class="figure">
-<p><a href="figures_files/figure-html/cell-2-output-1.png" class="askr-image-entry" data-askr-description="" data-askr-gallery="" data-askr-image-key="1"><img src="figures_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></a></p>
+<p><a href="figures_files/figure-html/cell-2-output-1.png" class="askr-image-entry" data-askr-image-key="1" data-askr-gallery="" data-askr-description=""><img src="figures_files/figure-html/cell-2-output-1.png" class="img-fluid figure-img"></a></p>
 </figure>
 </div>
 </div>
 </div>
 <p>A page that only needs the picture, without a source disclosure, embeds it directly:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="al">![Bars with semantic markers](images/bars-semantic-markers.png)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="figure-fit" class="level2">
+<h2 class="anchored" data-anchor-id="figure-fit">Fit a tall figure to the viewport</h2>
+<p>Opt in with <code>.askr-figure-fit</code> when a tall image should fit within 70svh (70vh fallback) while keeping its aspect ratio. Ordinary figure behavior is unchanged. The native caption remains below the image, and the existing Askr Image Viewer continues to handle image inspection.</p>
+<div class="askr-figure-fit">
+<div id="fig-viewport-fit" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Tall flow diagram showing source, rendering and reading">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-viewport-fit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/tall-diagram.svg" class="askr-image-entry" data-askr-image-key="2" data-askr-gallery="" data-askr-description=""><img src="images/tall-diagram.svg" class="img-fluid figure-img" alt="Tall flow diagram showing source, rendering and reading"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-viewport-fit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: A tall public documentation flow showing how one authored source becomes a rendered page that a reader can follow, from top to bottom.
+</figcaption>
+</figure>
+</div>
+</div>
 </section>
 <section id="image-viewer" class="level2">
 <h2 class="anchored" data-anchor-id="image-viewer">Image viewer</h2>
@@ -1009,7 +1404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="theme-toggle">Theme toggle</h2>
 <p>Quarto keeps two outputs from one cell and shows one of them. <code>body.quarto-dark</code> hides <code>.light-content</code>; <code>body.quarto-light</code> hides <code>.dark-content</code>. Askr’s dark stylesheet is marked <code>data-mode="dark"</code>, so the header toggle adds and removes <code>quarto-dark</code> with the stylesheet.</p>
 <p>Emit the light output first, then the dark output:</p>
-<div id="647b6e15" class="cell" data-renderings="[&quot;light&quot;,&quot;dark&quot;]" data-execution_count="2">
+<div id="a7d7942d" class="cell" data-renderings="[&quot;light&quot;,&quot;dark&quot;]" data-execution_count="2">
 <details class="code-fold">
 <summary>Source</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> HTML, display</span>
@@ -1053,6 +1448,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>Mermaid also supports a conditional edge label on a branch. This example uses the existing diagram viewer wrapper:</p>
+<div class="askr-mermaid-view" data-view-label="View diagram" data-askr-mermaid-view="true" data-askr-mermaid-label="View diagram">
+<div class="cell" data-layout-align="default">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>flowchart TD</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  Start[Start] --&gt; Check{Ready?}</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  Check --&gt;|Yes| Done[Continue]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  Check --&gt;|No| Wait[Prepare inputs]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  Start[Start] --&gt; Check{Ready?}
+  Check --&gt;|Yes| Done[Continue]
+  Check --&gt;|No| Wait[Prepare inputs]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
 <p>This gallery does not ship a photograph.</p>
 </section>
 <section id="mermaid-viewer" class="level2">
@@ -1061,21 +1478,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="askr-wide-figure" aria-label="Public documentation flow">
 <div class="askr-mermaid-view" data-view-label="View diagram" data-askr-mermaid-view="true" data-askr-mermaid-label="View diagram">
 <div class="cell" data-layout-align="default">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  subgraph author["Authoring"]</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    direction TB</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    source["Write one native&lt;br/&gt;Mermaid block"] --&gt; wrapper["Add the optional&lt;br/&gt;viewer wrapper"]</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  end</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  subgraph build["Build and publish"]</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    direction TB</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    render["Quarto renders&lt;br/&gt;the HTML page"] --&gt; publish["Publish the&lt;br/&gt;documentation"]</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  end</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  subgraph reader["Reading"]</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    direction TB</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    article["Diagram appears&lt;br/&gt;in the article"] --&gt; open["Choose View diagram"] --&gt; inspect["Zoom, pan or Fit&lt;br/&gt;in the floating viewer"] --&gt; close["Close and return&lt;br/&gt;to the article"]</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  end</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  wrapper --&gt; render</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  publish --&gt; article</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>flowchart LR</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  subgraph author["Authoring"]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    direction TB</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    source["Write one native&lt;br/&gt;Mermaid block"] --&gt; wrapper["Add the optional&lt;br/&gt;viewer wrapper"]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  end</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  subgraph build["Build and publish"]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    direction TB</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    render["Quarto renders&lt;br/&gt;the HTML page"] --&gt; publish["Publish the&lt;br/&gt;documentation"]</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  end</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  subgraph reader["Reading"]</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    direction TB</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    article["Diagram appears&lt;br/&gt;in the article"] --&gt; open["Choose View diagram"] --&gt; inspect["Zoom, pan or Fit&lt;br/&gt;in the floating viewer"] --&gt; close["Close and return&lt;br/&gt;to the article"]</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  end</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  wrapper --&gt; render</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  publish --&gt; article</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
@@ -1107,7 +1524,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="limits" class="level2">
 <h2 class="anchored" data-anchor-id="limits">Limits</h2>
-<p>The columns, tabset and simple diagram fit the article width. The wider flow uses <code>.askr-wide-figure</code> to keep its natural size and scroll horizontally. A floating viewer can zoom, but does not replace readable labels or logical grouping. Redraw a diagram if its labels or relationships remain hard to follow; do not shrink its text to force a poster into a column.</p>
+<p>Standard columns, the opt-in <code>.askr-grid</code>, tabset and simple diagram fit the article width. The wider flow uses <code>.askr-wide-figure</code> to keep its natural size and scroll horizontally. A floating viewer can zoom, but does not replace readable labels or logical grouping. Redraw a diagram if its labels or relationships remain hard to follow; do not shrink its text to force a poster into a column.</p>
 
 
 </section>
@@ -1169,17 +1586,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }, 2000));
   }
 
-  function fail(button, attempt) {
+  function fail(button, attempt, reason, hasSource) {
     if (attempts.get(button) !== attempt) return;
     const status = statusFor(button);
     if (status) {
       status.classList.add('askr-copy-status-error');
+      const zh = document.documentElement.lang.toLowerCase().startsWith('zh-tw');
+      const kind = button.dataset.askrCopyKind;
+      const source = kind === 'code' ? (zh ? '上方程式碼' : 'the code above') : kind === 'math' ? (zh ? '公式下方的 LaTeX 原始碼' : 'the LaTeX source below') : (zh ? 'Mermaid 原始碼' : 'the Mermaid source');
       const messages = {
-        code: 'Copy failed. Select the code above and copy it manually.',
-        math: 'Copy failed. Select the LaTeX source below and copy it manually.',
-        mermaid: 'Copy failed. Select the Mermaid source below and copy it manually.'
+        insecure: zh ? '此 HTTP 頁面不屬於安全環境，瀏覽器無法使用剪貼簿。請改用 HTTPS。' : 'This HTTP page is not a secure context, so the browser cannot access the clipboard. Use HTTPS.',
+        unavailable: zh ? '此瀏覽器未提供剪貼簿功能。' : 'Clipboard access is unavailable in this browser.',
+        denied: zh ? '瀏覽器拒絕剪貼簿存取，請檢查網站權限。' : 'The browser denied clipboard access. Check the site permissions.',
+        missing: zh ? '找不到可複製的原始內容。' : 'The source text is unavailable.',
+        failed: zh ? '無法複製。' : 'Copy failed.'
       };
-      status.textContent = messages[button.dataset.askrCopyKind];
+      status.textContent = `${messages[reason] || messages.failed}${hasSource ? ` ${zh ? `請選取${source}並手動複製。` : `Select ${source} and copy it manually.`}` : ''}`;
     }
   }
 
@@ -1226,11 +1648,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     let text;
     try {
       text = sourceFor(button);
-      if (typeof text !== 'string') throw new Error('The source is unavailable.');
-      if (!navigator.clipboard?.writeText) throw new Error('Clipboard access is unavailable.');
+      if (typeof text !== 'string' || !text.trim()) { fail(button, attempt, 'missing', false); return; }
+      if (!navigator.clipboard?.writeText) {
+        const error = new Error('Clipboard API is unavailable.');
+        error.name = 'ClipboardUnavailableError';
+        throw error;
+      }
       await navigator.clipboard.writeText(text);
       succeed(button, attempt);
-    } catch (_) {
+    } catch (error) {
       if (attempts.get(button) !== attempt) return;
       if (button.dataset.askrCopyKind === 'code' && typeof text === 'string') {
         try {
@@ -1239,8 +1665,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           return;
         } catch (_) {}
       }
-      if (button.dataset.askrCopyKind === 'math') exposeMathSource(button);
-      fail(button, attempt);
+      if (button.dataset.askrCopyKind === 'math' && typeof text === 'string' && text.trim()) exposeMathSource(button, text);
+      const reason = typeof text !== 'string' || !text.trim() ? 'missing' : error?.name === 'NotAllowedError' ? 'denied' : !window.isSecureContext && location.protocol === 'http:' ? 'insecure' : error?.name === 'ClipboardUnavailableError' ? 'unavailable' : 'failed';
+      fail(button, attempt, reason, typeof text === 'string' && !!text.trim());
     }
   }
 
@@ -1286,7 +1713,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     });
   }
 
-  function exposeMathSource(button) {
+  function exposeMathSource(button, text) {
     const component = button.closest('.askr-copyable-math');
     if (!component) return;
     let source = component.querySelector('.askr-math-source');
@@ -1297,7 +1724,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       textarea.readOnly = true;
       textarea.spellcheck = false;
       textarea.setAttribute('aria-label', 'LaTeX source');
-      textarea.value = component.dataset.askrTex;
+      textarea.value = text;
       source.append(textarea);
       component.append(source);
     }
@@ -1330,16 +1757,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 (() => {
   function setup() {
     const template = document.getElementById('askr-logout-config');
-    if (template) {
+    if (template && template.dataset.mounted !== 'true') {
       const tools = document.querySelector('#quarto-header .quarto-navbar-tools');
-      if (!tools) throw new Error('Askr Logout requires a website Header with navbar tools.');
+      if (!tools) return;
       tools.append(template.content.cloneNode(true));
+      template.dataset.mounted = 'true';
       document.getElementById('quarto-header').classList.add('askr-has-logout');
     }
 
   }
-  if (document.readyState === 'complete') setup();
-  else window.addEventListener('load', setup, {once: true});
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup, {once: true});
+  else setup();
 })();
 </script>
 <script>
@@ -1371,14 +1799,15 @@ document.addEventListener('DOMContentLoaded', function () {
 (() => {
   function mount() {
     const template = document.getElementById('askr-language-config');
-    if (!template) return;
+    if (!template || template.dataset.mounted === 'true') return;
     const tools = document.querySelector('#quarto-header .quarto-navbar-tools');
-    if (!tools) throw new Error('Askr language selector requires a website Header with navbar tools.');
+    if (!tools) return;
     tools.append(template.content.cloneNode(true));
+    template.dataset.mounted = 'true';
     document.getElementById('quarto-header').classList.add('askr-has-language');
   }
-  if (document.readyState === 'complete') mount();
-  else window.addEventListener('load', mount, {once: true});
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, {once: true});
+  else mount();
 })();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1836,9 +2265,61 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </footer>
-<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.13.3" aria-label="Askr version 0.13.3">0.13.3</a></span></template>
+<template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.14.0" aria-label="Askr version 0.14.0">0.14.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
-<template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="../zh-TW" hreflang="../zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
+<template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: English" title="Language: English"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item active" aria-current="true" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li><li><a class="dropdown-item" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"></span></a></li></ul></div></template>
+<script type="application/json" id="askr-versions-local">{
+  "mode": "inline",
+  "longTitle": "Interferometric Purcell Filter",
+  "versions": [
+    {
+      "label": "0.14.0",
+      "root": "/",
+      "latest": true
+    },
+    {
+      "label": "0.13.3",
+      "root": "/v0.13.3/"
+    },
+    {
+      "label": "0.13.2",
+      "root": "/v0.13.2/"
+    },
+    {
+      "label": "0.13.1",
+      "root": "/v0.13.1/"
+    },
+    {
+      "label": "0.13.0",
+      "root": "/v0.13.0/"
+    },
+    {
+      "label": "0.12.1",
+      "root": "/v0.12.1/"
+    },
+    {
+      "label": "0.12.0",
+      "root": "/v0.12.0/"
+    },
+    {
+      "label": "0.11.0",
+      "root": "/v0.11.0/"
+    },
+    {
+      "label": "0.10.0",
+      "root": "/v0.10.0/"
+    },
+    {
+      "label": "0.9.0",
+      "root": "/v0.9.0/"
+    },
+    {
+      "label": "0.3.0",
+      "root": "/v0.3.0/"
+    }
+  ]
+}
+</script>
 
 
 

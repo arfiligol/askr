@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Documentation flow</title>
+  <desc id="desc">Source is rendered into a page, which a reader opens and follows.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0 10 5 0 10Z" fill="#365d72"/>
+    </marker>
+    <style>
+      text { font: 20px system-ui, sans-serif; fill: #183343; }
+      .title { font-size: 28px; font-weight: 700; }
+      .box { fill: #f1f7f8; stroke: #365d72; stroke-width: 3; rx: 18; }
+      .arrow { fill: none; stroke: #365d72; stroke-width: 4; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="480" height="1080" fill="#fff"/>
+  <text class="title" x="240" y="76" text-anchor="middle">From source to reader</text>
+  <rect class="box" x="70" y="140" width="340" height="150"/>
+  <text x="240" y="205" text-anchor="middle">Author</text>
+  <text x="240" y="240" text-anchor="middle">writes the page source</text>
+  <path class="arrow" d="M240 300v105"/>
+  <rect class="box" x="70" y="420" width="340" height="150"/>
+  <text x="240" y="485" text-anchor="middle">Quarto</text>
+  <text x="240" y="520" text-anchor="middle">renders the HTML page</text>
+  <path class="arrow" d="M240 580v105"/>
+  <rect class="box" x="70" y="700" width="340" height="150"/>
+  <text x="240" y="765" text-anchor="middle">Site</text>
+  <text x="240" y="800" text-anchor="middle">serves the published page</text>
+  <path class="arrow" d="M240 860v105"/>
+  <rect class="box" x="70" y="980" width="340" height="70"/>
+  <text x="240" y="1025" text-anchor="middle">Reader</text>
+</svg>

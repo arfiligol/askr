@@ -4,7 +4,7 @@
     "href": "usage/versions.html",
     "title": "文件版本",
     "section": "",
-    "text": "文件網站會將每個實際發布版本保存在各自的版本目錄中。目前版本維持在網站根目錄；舊目錄則是歷史版本，不再維護。\n這些路徑以部署網站為基準，因此同一份清單也能用在 /askr/ 這類儲存庫前綴下。根目錄的 askr-versions.json 是唯一的版本清單來源：\n請將版本清單檔加入 project.resources。每個 root 都代表一個完整版本網站，路徑以該網站的部署根目錄為基準。版本選擇器由 Askr 提供；網站使用者需自行管理封存目錄與版本清單檔。圖集的根目錄建置輔助工具會為圖集自己的封存網站產生中繼資料。這是來源儲存庫的建置工具，不會隨 quarto add 安裝。\n若要指定固定目的地，請使用 href，而非 root。相對路徑與單斜線開頭的 href 都以網站為基準；絕對網址則保留原本的網域。固定目的地不會保留目前頁面的路徑。若版本選擇器的版本清單檔位於封存網站內，其 root 項目仍以該封存網站的根目錄為基準。圖集會從根目錄版本清單產生這些封存站專用的中繼資料。\ninline 模式會在短標題旁顯示目前版本；title 模式則顯示標題與箭頭，並在選單中顯示版本號。可試用長標題範例。longTitle 為選填欄位，只在 title 模式使用。\n若無法取得外部版本清單檔，可在頁面中加入 &lt;script id=\"askr-versions\" type=\"application/json\"&gt; 作為內嵌 JSON 清單。請選擇一種來源，不要同時維護外部檔案與內嵌清單。此圖集使用外部 JSON。",
+    "text": "文件網站會將每個實際發布版本保存在各自的版本目錄中。目前版本維持在網站根目錄；舊目錄則是歷史版本，不再維護。\n這些路徑以部署網站為基準，因此同一份清單也能用在 /askr/ 這類儲存庫前綴下。根目錄的 askr-versions.json 是唯一的版本清單來源：\n請將版本清單檔加入 project.resources。每個 root 都代表一個完整版本網站，路徑以該網站的部署根目錄為基準。版本選擇器由 Askr 提供；網站使用者需自行管理封存目錄與版本清單檔。圖集的來源快照存放在 archives/v*/；根目錄建置輔助工具會將快照複製到公開的 _site/v*/，再產生各封存版本的清單檔。這是來源儲存庫的建置工具，不會隨 quarto add 安裝。\n若要指定固定目的地，請使用 href，而非 root。相對路徑與單斜線開頭的 href 都以網站為基準；絕對網址則保留原本的網域。固定目的地不會保留目前頁面的路徑。若版本選擇器的版本清單檔位於封存網站內，其 root 項目仍以該封存網站的根目錄為基準。圖集會從根目錄版本清單產生這些封存站專用的中繼資料。\ninline 模式會在短標題旁顯示目前版本；title 模式則顯示標題與箭頭，並在選單中顯示版本號。可試用長標題範例。longTitle 為選填欄位，只在 title 模式使用。\n同一份本機版本清單會提供選擇器的初始項目。若執行期間提供外部設定，仍以該設定為準；Askr 不會依主題版本中繼資料推測選擇器項目。請維護單一版本清單，避免在頁面標記中重複維護。",
     "crumbs": [
       "使用",
       "版本管理"
@@ -26,7 +26,7 @@
     "href": "usage/versions.html#歷史版本網站",
     "title": "文件版本",
     "section": "歷史版本網站",
-    "text": "歷史版本網站\n0.13.2、0.13.1、0.13.0、0.12.1、0.12.0、0.11.0、0.10.0 與 0.9.0 快照都取自各版實際發布於 GitHub Pages 的網站；0.3.0 快照維持原樣。這些都是不再維護的歷史文件。\n目前的 0.13.3 版本選擇器在切換版本時會保留目前頁面的路徑、查詢參數與片段識別字。一般同源點擊會先檢查目的頁；若回應為 404，便開啟所選網站的首頁。若發生網路錯誤，則保留原目的頁。使用 Cmd／Ctrl 點擊或在新分頁開啟等特殊點擊，以及外部網址，都維持瀏覽器的原有行為；這些情況由網站主機顯示錯誤頁面。\n0.13.2、0.13.1、0.13.0、0.12.1、0.12.0、0.11.0、0.10.0 與 0.9.0 的版本清單都只有一個封存站內的 root，值為 ./，用來標示目前版本；所有版本連結都會開啟各自設定的首頁。凍結版 0.3.0 的版本清單使用網域根目錄路徑與固定連結，讓 /askr/ 前綴下的導覽正常運作。圖集的建置輔助工具會依根目錄版本清單產生封存版本的清單檔，不會改寫舊版 HTML。\n0.3.0 快照沒有本頁。選擇該版本時會前往其首頁，而不會開啟不存在的頁面。",
+    "text": "歷史版本網站\n0.13.3、0.13.2、0.13.1、0.13.0、0.12.1、0.12.0、0.11.0、0.10.0 與 0.9.0 快照都取自各版實際發布於 GitHub Pages 的網站；0.3.0 快照維持原樣。這些都是不再維護的歷史文件。\n目前的 0.14.0 版本選擇器在切換版本時會保留目前頁面的路徑、查詢參數與片段識別字。一般同源點擊會先檢查目的頁；若回應為 404，便開啟所選網站的首頁。若發生網路錯誤，則保留原目的頁。使用 Cmd／Ctrl 點擊或在新分頁開啟等特殊點擊，以及外部網址，都維持瀏覽器的原有行為；這些情況由網站主機顯示錯誤頁面。\n0.13.3、0.13.2、0.13.1、0.13.0、0.12.1、0.12.0、0.11.0、0.10.0 與 0.9.0 的版本清單都只有一個封存站內的 root，值為 ./，用來標示目前版本；所有版本連結都會開啟各自設定的首頁。凍結版 0.3.0 的版本清單使用網域根目錄路徑與固定連結，讓 /askr/ 前綴下的導覽正常運作。圖集的建置輔助工具會依根目錄版本清單產生封存版本的清單檔，不會改寫舊版 HTML。\n0.3.0 快照沒有本頁。選擇該版本時會前往其首頁，而不會開啟不存在的頁面。",
     "crumbs": [
       "使用",
       "版本管理"
@@ -37,7 +37,7 @@
     "href": "usage/versions.html#發布新版本",
     "title": "文件版本",
     "section": "發布新版本",
-    "text": "發布新版本\n替換目前網站根目錄前，請先將實際發布中的網站保留在對應的版本目錄。例如，下一版發布前，應先將 0.13.3 封存至 /v0.13.3/；接著才更新根目錄版本清單檔，列出新的目前版本並保留較舊版本。0.13.3 仍是目前版本時，清單只需保留一筆目前版本。使用者需自行發布及管理所屬網站；圖集輔助工具只會準備這個儲存庫的封存中繼資料。\n圖集也提供長標題範例。其版本清單欄位 longTitle 為選填，不會影響版本導覽。",
+    "text": "發布新版本\n替換目前網站根目錄前，請先將實際發布中的網站放入來源封存目錄。例如，下一版發布前，先將 0.14.0 封存至 archives/v0.14.0/；下次建置會將快照複製到 _site/v0.14.0/，公開路徑仍為 /v0.14.0/，並在輸出目錄產生該封存版的清單檔。接著將 v0.14.0 加入 _scripts/build_zh_tw.py 的 ARCHIVED_SITES，並更新根目錄版本清單檔，列出新的目前版本並保留較舊版本。0.14.0 仍是目前版本時，清單只需保留一筆目前版本。網站使用者需自行發布及管理所屬網站。\n圖集也提供長標題範例。其版本清單欄位 longTitle 為選填，不會影響版本導覽。",
     "crumbs": [
       "使用",
       "版本管理"
@@ -59,7 +59,7 @@
     "href": "usage/navigation.html",
     "title": "Areas、Page List 與 Sections",
     "section": "",
-    "text": "這是三種不同的清單。Area 用來選擇要開啟的 Page List；Page List 用來選擇頁面；Sections 則列出該頁的標題。\n桌面版只會在網站標題、導覽與標題列控制項都容納得下時，才會將 Areas 顯示為行內項目；否則 Areas 按鈕會在面板中開啟相同導覽清單。此行為也會因應較長標籤與窄視窗，不需使用者設定斷點。Pages 仍依照自己的行動版側欄行為呈現。網站標題很長時，畫面上可能會縮短顯示，但無障礙名稱仍保留完整文字。\n\n\n\n\n\n\n\n\n角色\n顯示位置\n項目內容\n\n\n\n\nAreas\n標題列\n每個頁面群組各一項\n\n\nPage List\n左欄，標題為 Pages\n目前 Area 中的頁面\n\n\nSections\n右欄，標題為 Sections\n無需手動設定；Quarto 會列出目前頁面的標題\n\n\n\nPage List 會以淡色列底與半粗體標籤標示目前頁面；子頁面為目前頁面時，父層群組仍維持原有樣式。\nwebsite:\n  navbar:\n    left:\n      - href: index.qmd\n        text: Guide\n      - href: reference.qmd\n        text: Reference\n  sidebar:\n    - title: Pages\n      style: docked\n      contents:\n        - text: Overview\n          href: index.qmd\n        - text: Measure\n          href: guide/measure.qmd\n    - title: Pages\n      style: docked\n      contents:\n        - text: Overview\n          href: reference.qmd\n        - text: API\n          href: reference/api.qmd\n開啟 Guide 會顯示第一份 Page List；開啟 Reference 則會顯示第二份。設定 toc-title: Sections 與 toc-location: right，即可顯示右欄。標題只屬於 Sections，不應放在 Page List，也不應另設為 Area。\n同一個 Area 中的頁面應有共同用途。Usage 就是這類分組：安裝 Askr、本頁、文件版本管理與搜尋各自負責不同工作，因此分成不同頁面。\n本圖集的 Areas 為 Gallery、Components、Usage、Credits 與 Long list。此分組方式請見版面。",
+    "text": "這是三種不同的清單。Area 用來選擇要開啟的 Page List；Page List 用來選擇頁面；Sections 則列出該頁的標題。\n桌面版只會在網站標題、導覽與標題列控制項都容納得下時，才會將 Areas 顯示為行內項目；否則 Areas 按鈕會在面板中開啟相同導覽清單。此行為也會因應較長標籤與窄視窗，不需使用者設定斷點。Pages 仍依照自己的行動版側欄行為呈現。網站標題很長時，畫面上可能會縮短顯示，但無障礙名稱仍保留完整文字。\n\n\n\n\n\n\n\n\n角色\n顯示位置\n項目內容\n\n\n\n\nAreas\n標題列\n每個頁面群組各一項\n\n\nPage List\n左欄，標題為 Pages\n目前 Area 中的頁面\n\n\nSections\n右欄，標題為 Sections\n無需手動設定；Quarto 會列出目前頁面的標題\n\n\n\nPage List 會以淡色列底與半粗體標籤標示目前頁面；子頁面為目前頁面時，父層群組仍維持原有樣式。\nwebsite:\n  navbar:\n    left:\n      - href: index.qmd\n        text: Guide\n      - href: reference.qmd\n        text: Reference\n  sidebar:\n    - title: Pages\n      style: docked\n      contents:\n        - text: Overview\n          href: index.qmd\n        - text: Measure\n          href: guide/measure.qmd\n    - title: Pages\n      style: docked\n      contents:\n        - text: Overview\n          href: reference.qmd\n        - text: API\n          href: reference/api.qmd\n開啟 Guide 會顯示第一份 Page List；開啟 Reference 則會顯示第二份。設定 toc-title: Sections 與 toc-location: right，即可顯示右欄。標題只屬於 Sections，不應放在 Page List，也不應另設為 Area。\n同一個 Area 中的頁面應有共同用途。Usage 就是這類分組：安裝 Askr、本頁、文件版本管理與搜尋各自負責不同工作，因此分成不同頁面。\n在行動版中，Areas 與 Pages 是各自獨立的展開控制項。如果切換期間兩者都可操作，最後一次使用者操作會決定哪個面板保持開啟。按 Escape 或點擊背景會關閉目前面板，並將焦點移回開啟面板的控制項。選擇連結後，仍由瀏覽器執行一般整頁導覽。\n導覽使用瀏覽器原生的整頁載入行為。顯示頁面前，Askr 會等待文件、字型、原生標題列位移、響應式 Areas 與版本連結就緒，並確認連續兩個動畫影格版面穩定。若等待超過 180 毫秒，會顯示本地化的載入狀態；即使相依項目尚未就緒，1800 毫秒後也會繼續顯示頁面。若 JavaScript 無法執行，靜態頁面仍會顯示。頁面幾何配置仍由 Quarto 控制。\n本圖集的 Areas 為 Gallery、Components、Usage、Credits 與 Long list。此分組方式請見版面。",
     "crumbs": [
       "使用",
       "Areas、頁面清單與章節"
@@ -158,7 +158,7 @@
     "href": "usage/figures.html#寬圖與圖表",
     "title": "跟隨主題切換的圖形",
     "section": "寬圖與圖表",
-    "text": "寬圖與圖表\n將圖形或 Mermaid 區塊包在 .askr-wide-figure 中，可保留標籤的自然大小，並在具名且可用鍵盤聚焦的區域內捲動。捲動範圍由圖形本身的內在寬度決定，不需指定固定的使用者寬度。Mermaid 顏色會依 Askr 的明亮與深色調色盤變化。\n::: {.askr-wide-figure aria-label=\"Circuit signal path\"}\n```{mermaid}\nflowchart LR\n  Input --&gt; Resonator --&gt; Output\n```\n:::\n此工具保留 Quarto 原生圖形、標題與交互參照。",
+    "text": "寬圖與圖表\n將圖形或 Mermaid 區塊包在 .askr-wide-figure 中，可保留標籤的自然大小，並在具名且可用鍵盤聚焦的區域內捲動。捲動範圍由圖形本身的內在寬度決定，不需指定固定的使用者寬度。Mermaid 顏色會依 Askr 的明亮與深色調色盤變化。\n::: {.askr-wide-figure aria-label=\"Circuit signal path\"}\n```{mermaid}\nflowchart LR\n  Input --&gt; Resonator --&gt; Output\n```\n:::\n此工具保留 Quarto 原生圖形、標題與交互參照。\n若要並排呈現兩個相關提示框或卡片，.askr-grid 會在 768px 以上建立等寬雙欄， 低於此寬度時改為單欄；原始碼順序仍是閱讀順序。一般 Quarto .columns 則保留自身的響應式版面。\n若要限制高圖的視窗高度，可將它包在 .askr-figure-fit 中。此選用工具會將圖片高度限制為 70svh（並以 70vh 作為後備）、保留長寬比，且讓原生圖說顯示於圖片下方。未加包裝的圖形不變； 圖片檢視仍由既有的 Askr 圖片檢視器處理。 請見圖形元件範例。",
     "crumbs": [
       "使用",
       "隨章節切換的圖片"
@@ -473,7 +473,7 @@
     "href": "components/figures.html",
     "title": "圖形與群組",
     "section": "",
-    "text": "欄與圖片仍由 Quarto 排版；Askr 會調整分組分頁的樣式。",
+    "text": "Quarto 仍負責原生欄位、圖形與標題。選用的 .askr-grid 與 .askr-figure-fit 包裝則用於特定版面需求，內容仍留在文章中。",
     "crumbs": [
       "元件",
       "圖片與分組"
@@ -484,7 +484,18 @@
     "href": "components/figures.html#欄",
     "title": "圖形與群組",
     "section": "欄",
-    "text": "欄\n\n\n左欄占閱讀欄的一半。\n\n右欄占另一半。窄螢幕會將兩欄上下堆疊。",
+    "text": "欄\n\n\n左欄占閱讀欄的一半。\n\n右欄占另一半。一般 Quarto 欄位仍依 Quarto 的方式調整；若要讓一組內容在 768px 以上維持兩欄、以下改為單欄，請使用 .askr-grid。",
+    "crumbs": [
+      "元件",
+      "圖片與分組"
+    ]
+  },
+  {
+    "objectID": "components/figures.html#responsive-groups",
+    "href": "components/figures.html#responsive-groups",
+    "title": "圖形與群組",
+    "section": "響應式群組",
+    "text": "響應式群組\n將兩個提示框或卡片包在 .askr-grid 中，可在視窗寬度至少 768px 時呈現等寬雙欄， 低於該寬度時改為單欄。原始碼順序也就是閱讀順序。\n\n\n\n\n\n\n\n註釋準備來源\n\n\n\n第一個項目應簡潔，且單獨閱讀時仍有完整用途。\n\n\n\n\n\n\n\n\n提示檢查結果\n\n\n\n第二個項目在版面與閱讀順序中都接在第一個項目之後。\n\n\n\n\n\n\n卡片說明\n卡片仍使用一般標題連結。\n\n\n\n\n提示框說明\n提示框仍保有 Quarto 原生語意。",
     "crumbs": [
       "元件",
       "圖片與分組"
@@ -507,6 +518,17 @@
     "title": "圖形與群組",
     "section": "圖片",
     "text": "圖片\n本文件中的圖片來自 Embla。下方圖表是該專案的長條與標記圖，並以靜態圖片儲存於此。Quarto 折疊儲存格中的來源會收在 Source 後方，圖片則顯示於下方。\n\n\nSource\nfrom IPython.display import Image\nImage(\"images/bars-semantic-markers.png\")\n\n\n\n\n\n\n\n\n\n若頁面只需顯示圖片、不需公開來源，可直接嵌入：\n![Bars with semantic markers](images/bars-semantic-markers.png)",
+    "crumbs": [
+      "元件",
+      "圖片與分組"
+    ]
+  },
+  {
+    "objectID": "components/figures.html#figure-fit",
+    "href": "components/figures.html#figure-fit",
+    "title": "圖形與群組",
+    "section": "讓高圖形符合視窗高度",
+    "text": "讓高圖形符合視窗高度\n當高圖形需要在保留長寬比的同時符合 70svh（並以 70vh 作為後備）時，可選用 .askr-figure-fit。一般圖形行為不會改變。原生圖說仍顯示在圖片下方， 並由既有的 Askr 圖片檢視器提供圖片檢視功能。\n\n\n\n\n\n\n\n圖 1: 這張公開文件流程高圖從上到下，說明作者撰寫的來源如何成為產生後的頁面，再由讀者閱讀。",
     "crumbs": [
       "元件",
       "圖片與分組"
@@ -539,7 +561,7 @@
     "href": "components/figures.html#圖表",
     "title": "圖形與群組",
     "section": "圖表",
-    "text": "圖表\n下方未加包裝的簡單 Mermaid 區塊會維持原生文章呈現，不會新增檢視器控制項：\n\nflowchart LR\n  Areas[Areas] --&gt; Pages[Page List]\n  Pages --&gt; Article[Article]\n  Article --&gt; Sections[Section List]\n\n\n\n\nflowchart LR\n  Areas[Areas] --&gt; Pages[Page List]\n  Pages --&gt; Article[Article]\n  Article --&gt; Sections[Section List]\n\n\n\n\n\n\n本圖集不附照片。",
+    "text": "圖表\n下方未加包裝的簡單 Mermaid 區塊會維持原生文章呈現，不會新增檢視器控制項：\n\nflowchart LR\n  Areas[Areas] --&gt; Pages[Page List]\n  Pages --&gt; Article[Article]\n  Article --&gt; Sections[Section List]\n\n\n\n\nflowchart LR\n  Areas[Areas] --&gt; Pages[Page List]\n  Pages --&gt; Article[Article]\n  Article --&gt; Sections[Section List]\n\n\n\n\n\n\n本圖集不附照片。\nMermaid 也支援在分支上使用條件標籤。此範例使用既有的圖表檢視器包裝：\n\n\nflowchart TD\n  Start[開始] --&gt; Check{準備好了嗎？}\n  Check --&gt;|是| Done[繼續]\n  Check --&gt;|否| Wait[準備輸入資料]\n\n\n\n\nflowchart TD\n  Start[開始] --&gt; Check{準備好了嗎？}\n  Check --&gt;|是| Done[繼續]\n  Check --&gt;|否| Wait[準備輸入資料]",
     "crumbs": [
       "元件",
       "圖片與分組"
@@ -608,7 +630,7 @@
     "href": "components/callouts.html",
     "title": "提示框",
     "section": "",
-    "text": "擴充套件將 Quarto 原生類型對應至固定的視覺意義：note 使用柔和藍色與資訊圖示，tip 使用藍綠色與火焰圖示，important 使用薰衣草紫與警示圓形圖示，warning 使用琥珀色與三角形警示圖示，caution 使用珊瑚色與八角形警示圖示。圖示是本機隨附的 Lucide SVG，透過 CSS 遮罩呈現，不需新增執行環境。\n在 Quarto DOM 容許的範圍內，外框、標題、語意化透明邊框與填色、5px 圓角、圖示和箭頭都盡量貼近 Quartz 的提示框範例。Quarto 的五種原生類型、收合行為與巢狀提示框就是目前的介面；此處不另行創造 Quartz 的其他類型與別名。",
+    "text": "擴充套件將 Quarto 原生類型對應至固定的視覺意義：note 使用柔和藍色與資訊圖示，tip 使用藍綠色與火焰圖示，important 使用薰衣草紫與警示圓形圖示，warning 使用琥珀色與三角形警示圖示，caution 使用珊瑚色與八角形警示圖示。圖示是本機隨附的 Lucide SVG，透過 CSS 遮罩呈現，不需新增執行環境。\n在 Quarto DOM 容許的範圍內，外框、標題、語意化透明邊框與填色、5px 圓角、圖示和箭頭都盡量貼近 Quartz 的提示框範例。Quarto 的五種原生類型、收合行為與巢狀提示框就是目前的介面；此處不另行創造 Quartz 的其他類型與別名。\n若要在較寬螢幕並排呈現兩個提示框，請使用 .askr-grid。圖形頁的響應式群組範例說明斷點並展示一組提示框。",
     "crumbs": [
       "元件",
       "提示區塊"
@@ -696,7 +718,7 @@
     "href": "components/cards.html",
     "title": "卡片",
     "section": "",
-    "text": "Askr 卡片使用 Quarto 原生的 fenced div（圍欄式區塊）語法。卡片外框沒有點擊處理， 標題連結是卡片的主要導覽方式；若在本文加入其他連結，仍會使用各自的原生目的地。",
+    "text": "Askr 卡片使用 Quarto 原生的 fenced div（圍欄式區塊）語法。卡片外框沒有點擊處理， 標題連結是卡片的主要導覽方式；若在本文加入其他連結，仍會使用各自的原生目的地。\n若要在較寬螢幕並排呈現兩張卡片，請使用 .askr-grid。圖形頁的響應式群組範例說明斷點並展示一組卡片。",
     "crumbs": [
       "元件",
       "卡片"
@@ -729,7 +751,7 @@
     "href": "components/cards.html#遷移既有課程卡片",
     "title": "卡片",
     "section": "遷移既有課程卡片",
-    "text": "遷移既有課程卡片\nAskr v0.12.0 新增卡片元件。請在使用中的 Quarto 專案安裝目前版本：\nquarto add arfiligol/askr@v0.13.3 --no-prompt\n只替換下列舊卡片類別，保留標題文字、標題層級、連結目的地與說明內容； 同時移除 Bootstrap 通用的 card 與 card-body 類別。\n\n\n\n既有類別\nAskr 卡片類別\n\n\n\n\n.card.course-card\n.askr-card\n\n\n.card-body\n.askr-card-body\n\n\n.course-card-title\n.askr-card-title\n\n\n\n更新標記後，只移除本機針對舊課程卡片類別的 CSS 規則，保留其他專案樣式。 新撰寫的卡片則使用上方 fenced div 語法。",
+    "text": "遷移既有課程卡片\nAskr v0.12.0 新增卡片元件。請在使用中的 Quarto 專案安裝目前版本：\nquarto add arfiligol/askr@v0.14.0 --no-prompt\n只替換下列舊卡片類別，保留標題文字、標題層級、連結目的地與說明內容； 同時移除 Bootstrap 通用的 card 與 card-body 類別。\n\n\n\n既有類別\nAskr 卡片類別\n\n\n\n\n.card.course-card\n.askr-card\n\n\n.card-body\n.askr-card-body\n\n\n.course-card-title\n.askr-card-title\n\n\n\n更新標記後，只移除本機針對舊課程卡片類別的 CSS 規則，保留其他專案樣式。 新撰寫的卡片則使用上方 fenced div 語法。",
     "crumbs": [
       "元件",
       "卡片"
@@ -817,7 +839,7 @@
     "href": "components/mathematics.html#複製設定",
     "title": "數學公式",
     "section": "複製設定",
-    "text": "複製設定\n\n\n\n\n\n\n警告HTTP 預覽的複製限制\n\n\n\n使用手機 Safari 檢查 Copy 時，請在 HTTPS 網站上操作。以區域網路或 VPN 位址開啟的 HTTP 預覽不屬於安全環境；即使已連線 VPN，Safari 仍不開放標準剪貼簿 API，因此可能無法自動複製。此時可選取公式下方顯示的 LaTeX 原始碼，手動複製。\n請在 HTTPS 網站上再次確認 Copy；瀏覽器權限仍可能阻擋剪貼簿存取。詳見 WebKit 的剪貼簿安全限制。\n\n\n在 _quarto.yml 的網站層級設定中，使用巢狀選項 askr.math-copy: false：\naskr:\n  math-copy: false\n單一頁面使用扁平的 front matter 鍵 askr-math-copy: false。頁面值會覆寫網站設定；askr-math-copy: true 則會在該頁啟用此功能。若只要停用單一公式的複製功能，可用 .no-math-copy 包住公式的 div，或將此類別加到原生公式屬性（$$ … $$ {#eq-name .no-math-copy}）。緊密清單中的展示公式也支援複製。原始碼會保留在資料屬性中；只有在複製遭拒時才會建立可選取的後備文字。搜尋仍保留 Quarto 原生公式文字，不會額外加入 Askr 公式原始碼副本。",
+    "text": "複製設定\n\n\n\n\n\n\n警告HTTP 預覽的複製限制\n\n\n\n檢查 Copy 時，請在 HTTPS 網站上操作。以區域網路或 VPN 位址開啟的 HTTP 預覽不屬於安全環境，因此瀏覽器可能不提供標準剪貼簿 API，導致無法自動複製。此時可選取公式下方顯示的 LaTeX 原始碼，手動複製。\n請在 HTTPS 網站上再次確認 Copy；瀏覽器權限仍可能阻擋剪貼簿存取。詳見 MDN 的安全環境說明與 WebKit 的剪貼簿安全限制。\n\n\n在 _quarto.yml 的網站層級設定中，使用巢狀選項 askr.math-copy: false：\naskr:\n  math-copy: false\n單一頁面使用扁平的 front matter 鍵 askr-math-copy: false。頁面值會覆寫網站設定；askr-math-copy: true 則會在該頁啟用此功能。若只要停用單一公式的複製功能，可用 .no-math-copy 包住公式的 div，或將此類別加到原生公式屬性（$$ … $$ {#eq-name .no-math-copy}）。緊密清單中的展示公式也支援複製。原始碼會保留在資料屬性中；只有在複製遭拒時才會建立可選取的後備文字。搜尋仍保留 Quarto 原生公式文字，不會額外加入 Askr 公式原始碼副本。",
     "crumbs": [
       "元件",
       "數學"
@@ -966,7 +988,7 @@
     "href": "usage/add-askr.html",
     "title": "安裝 Askr",
     "section": "",
-    "text": "目前版本為 0.13.3，公開格式名稱為 askr-html，視覺主題為 Quiet Quartz。\n安裝後的擴充套件位於 _extensions/arfiligol/askr。Askr 不會從 CDN 載入字型、圖示或樣式。\n若要升級，請安裝較新的標籤版本，並重新建置專案。將更新後的 _extensions 複本提交至專案。請重新安裝經審查的標籤版本，不要直接編輯 _extensions/arfiligol/askr 內的檔案。",
+    "text": "目前版本為 0.14.0，公開格式名稱為 askr-html，視覺主題為 Quiet Quartz。\n安裝後的擴充套件位於 _extensions/arfiligol/askr。Askr 不會從 CDN 載入字型、圖示或樣式。\n若要升級，請安裝較新的標籤版本，並重新建置專案。將更新後的 _extensions 複本提交至專案。請重新安裝經審查的標籤版本，不要直接編輯 _extensions/arfiligol/askr 內的檔案。",
     "crumbs": [
       "使用",
       "安裝 Askr"
@@ -977,7 +999,7 @@
     "href": "usage/add-askr.html#quarto-相容性",
     "title": "安裝 Askr",
     "section": "Quarto 相容性",
-    "text": "Quarto 相容性\nAskr 0.13.3 支援穩定版 Quarto &gt;=1.9.38 &lt;1.11。Quarto 1.10.18 仍是可重現圖集與 CI 的基準；使用者可採用支援範圍內的其他穩定版本，不必固定使用該修補版本。較舊標籤版本仍保留其原有需求。\n設定 respect-user-color-scheme: true 可依照讀者的系統偏好選擇配色。若使用 RequireJS 相容設定，請設定 smooth-scroll: false。這些是由使用專案選擇的選項；Askr 格式預設值不變。\n選用的 Logout 與圖片檢視器仍保留原有設定方式。設定與權責範圍請見受保護文件與登出及圖片檢視器。",
+    "text": "Quarto 相容性\nAskr 0.14.0 支援穩定版 Quarto &gt;=1.9.38 &lt;1.11。Quarto 1.10.18 仍是可重現圖集與 CI 的基準；使用者可採用支援範圍內的其他穩定版本，不必固定使用該修補版本。較舊標籤版本仍保留其原有需求。\n設定 respect-user-color-scheme: true 可依照讀者的系統偏好選擇配色。若使用 RequireJS 相容設定，請設定 smooth-scroll: false。這些是由使用專案選擇的選項；Askr 格式預設值不變。\n選用的 Logout 與圖片檢視器仍保留原有設定方式。設定與權責範圍請見受保護文件與登出及圖片檢視器。",
     "crumbs": [
       "使用",
       "安裝 Askr"
