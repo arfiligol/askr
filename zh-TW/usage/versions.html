@@ -1307,7 +1307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>這些路徑以部署網站為基準，因此同一份清單也能用在 <code>/askr/</code> 這類儲存庫前綴下。根目錄的 <code>askr-versions.json</code> 是唯一的版本清單來源：</p>
+<p>這些路徑以部署網站為基準，因此同一份清單也能用在 <code>/askr/</code> 這類儲存庫前綴下。根目錄的 <code>askr-versions.json</code> 是唯一維護的版本清單來源。表格與下方 JSON 範例列出完整英文網站歷史；目前繁體中文標題列的版本選單則從 v0.14.0 開始，v0.13.3 及更舊的繁體中文快照維持不變：</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"mode"</span><span class="fu">:</span> <span class="st">"inline"</span><span class="fu">,</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">"longTitle"</span><span class="fu">:</span> <span class="st">"Interferometric Purcell Filter"</span><span class="fu">,</span></span>
@@ -1325,7 +1325,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span><span class="dt">"label"</span><span class="fu">:</span> <span class="st">"0.3.0"</span><span class="fu">,</span> <span class="dt">"root"</span><span class="fu">:</span> <span class="st">"/v0.3.0/"</span><span class="fu">}</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
-<p>請將版本清單檔加入 <code>project.resources</code>。每個 <code>root</code> 都代表一個完整版本網站，路徑以該網站的部署根目錄為基準。版本選擇器由 Askr 提供；網站使用者需自行管理封存目錄與版本清單檔。圖集的來源快照存放在 <code>archives/v*/</code>；根目錄建置輔助工具會將快照複製到公開的 <code>_site/v*/</code>，再產生各封存版本的清單檔。這是來源儲存庫的建置工具，不會隨 <code>quarto add</code> 安裝。</p>
+<p>請將版本清單檔加入 <code>project.resources</code>。每個 <code>root</code> 都代表一個完整版本網站，路徑以該網站的部署根目錄為基準。版本選擇器由 Askr 提供；網站使用者需自行管理封存目錄與版本清單檔。圖集的來源快照存放在 <code>archives/v*/</code>；從儲存庫根目錄執行完整的 <code>quarto render .</code> 會建置英文與繁體中文網站，並將快照複製到公開的 <code>_site/v*/</code>。目前的圖集建置會依這份根目錄清單產生繁體中文版本選單清單，納入 v0.14.0 起的版本；目前繁體中文網站的最新項目會連至自身根目錄 (<code>./</code>)，中文封存站則使用各自網站為基準的路徑。這是圖集網站的建置設定，不是擴充套件功能；v0.13.3 及更舊的繁體中文快照維持不變。不需另行維護第二份版本清單。建置輔助工具不會隨 <code>quarto add</code> 安裝。</p>
 <p>若要指定固定目的地，請使用 <code>href</code>，而非 <code>root</code>。相對路徑與單斜線開頭的 <code>href</code> 都以網站為基準；絕對網址則保留原本的網域。固定目的地不會保留目前頁面的路徑。若版本選擇器的版本清單檔位於封存網站內，其 <code>root</code> 項目仍以該封存網站的根目錄為基準。圖集會從根目錄版本清單產生這些封存站專用的中繼資料。</p>
 <p><code>inline</code> 模式會在短標題旁顯示目前版本；<code>title</code> 模式則顯示標題與箭頭，並在選單中顯示版本號。可試用<a href="versions.html?askr-version-mode=title">長標題範例</a>。<code>longTitle</code> 為選填欄位，只在 <code>title</code> 模式使用。</p>
 <p>同一份本機版本清單會提供選擇器的初始項目。若執行期間提供外部設定，仍以該設定為準；Askr 不會依主題版本中繼資料推測選擇器項目。請維護單一版本清單，避免在頁面標記中重複維護。</p>
@@ -2082,6 +2082,18 @@ document.addEventListener('DOMContentLoaded', function () {
 <template id="askr-footer-credit"><span class="askr-footer-credit">Powered by <a href="https://arfiligol.github.io/askr/">Askr</a><span aria-hidden="true">·</span><a href="https://github.com/arfiligol/askr/releases/tag/v0.14.0" aria-label="Askr version 0.14.0">0.14.0</a></span></template>
 <template id="askr-viewer-config" data-loop="true"></template>
 <template id="askr-language-config"><div class="askr-language-selector dropdown"><button class="askr-language-toggle dropdown-toggle" type="button" id="askr-language-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Language: 繁體中文" title="Language: 繁體中文"><svg aria-hidden="true" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"></path></svg></button><ul class="dropdown-menu dropdown-menu-end askr-language-menu" aria-labelledby="askr-language-toggle" aria-label="Available languages"><li><a class="dropdown-item" href="/askr/" lang="en" hreflang="en"><span class="askr-language-label">English</span><span class="askr-language-marker"></span></a></li><li><a class="dropdown-item active" aria-current="true" href="/askr/zh-TW/" lang="zh-TW" hreflang="zh-TW"><span class="askr-language-label">繁體中文</span><span class="askr-language-marker"><span class="askr-language-check" aria-hidden="true">✓</span><span class="visually-hidden">Current</span></span></a></li></ul></div></template>
+<script type="application/json" id="askr-versions-local">{
+  "mode": "inline",
+  "longTitle": "Interferometric Purcell Filter",
+  "versions": [
+    {
+      "label": "0.14.0",
+      "root": "./",
+      "latest": true
+    }
+  ]
+}
+</script>
 
 
 

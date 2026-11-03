@@ -1129,7 +1129,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#candidate-and-release-validation-receipts" id="toc-candidate-and-release-validation-receipts" class="nav-link active" data-scroll-target="#candidate-and-release-validation-receipts">Candidate and release validation receipts</a>
   <ul class="collapse">
-  <li><a href="#current-v0.14.0-candidate" id="toc-current-v0.14.0-candidate" class="nav-link" data-scroll-target="#current-v0.14.0-candidate">Current v0.14.0 candidate</a></li>
+  <li><a href="#current-docs-site-correction-traditional-chinese-version-menu" id="toc-current-docs-site-correction-traditional-chinese-version-menu" class="nav-link" data-scroll-target="#current-docs-site-correction-traditional-chinese-version-menu">Current docs-site correction — Traditional Chinese version menu</a></li>
+  <li><a href="#v0140-release" id="toc-v0140-release" class="nav-link" data-scroll-target="#v0140-release">Askr v0.14.0 release — published 2026-11-03</a></li>
   <li><a href="#documentation-source-consolidation" id="toc-documentation-source-consolidation" class="nav-link" data-scroll-target="#documentation-source-consolidation">Documentation source consolidation</a></li>
   <li><a href="#earlier-ui-stability-evidence-work-carried-into-v0.14.0" id="toc-earlier-ui-stability-evidence-work-carried-into-v0.14.0" class="nav-link" data-scroll-target="#earlier-ui-stability-evidence-work-carried-into-v0.14.0">Earlier UI stability evidence — work carried into v0.14.0</a>
   <ul class="collapse">
@@ -1198,9 +1199,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="candidate-and-release-validation-receipts" class="level1">
 <h1>Candidate and release validation receipts</h1>
-<section id="current-v0.14.0-candidate" class="level2">
-<h2 class="anchored" data-anchor-id="current-v0.14.0-candidate">Current v0.14.0 candidate</h2>
-<p>The Human accepted this candidate and authorized v0.14.0 publication on 2026-11-03. It combines the previously interrupted v0.13.4 UI stability work with issues #28–31; v0.13.4 is not a separate current candidate. Integration, release and deployment verification remain in progress. Issues #28–31 remain open until delivery; issue #27 remains open as enduring design guidance.</p>
+<section id="current-docs-site-correction-traditional-chinese-version-menu" class="level2">
+<h2 class="anchored" data-anchor-id="current-docs-site-correction-traditional-chinese-version-menu">Current docs-site correction — Traditional Chinese version menu</h2>
+<p>This Human-authorized docs-only main-site redeploy is the only current pending work. It applies to the current v0.14.0 documentation and creates no package version or tag. The v0.14.0 release below predates this separate correction. Root integration checks pass; the public redeploy and readback remain pending. The generated selector is website build configuration, not an extension bug. Do not claim the corrected Chinese menu is deployed yet.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Check</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bilingual version-guide explanation</td>
+<td>✅ The English and Traditional Chinese guides distinguish full English archive history from the Traditional Chinese menu beginning at v0.14.0 and describe the shared manifest source.</td>
+</tr>
+<tr class="even">
+<td>Root full render</td>
+<td>✅ 111 English and 32 Traditional Chinese pages rendered.</td>
+</tr>
+<tr class="odd">
+<td>Generated Traditional Chinese manifest</td>
+<td>✅ The generated child JSON matches the published resource; only v0.14.0 is listed and its current root is <code>./</code>.</td>
+</tr>
+<tr class="even">
+<td>Nested Chinese page behavior</td>
+<td>✅ Three root/nested Chinese pages seeded the inline selector exactly.</td>
+</tr>
+<tr class="odd">
+<td>Historical Chinese archives</td>
+<td>✅ Eight archived site inventories match their previous SHA-256 sets; the English root manifest is unchanged.</td>
+</tr>
+<tr class="even">
+<td>Future-version fixtures</td>
+<td>✅ Three fixtures passed: current v0.14.0 only; v0.15.0 current with v0.14.0 archive routing; and current/archive path math with page/query/fragment preservation.</td>
+</tr>
+<tr class="odd">
+<td>Header and menu interaction</td>
+<td>✅ On desktop and mobile 390px/320px, the v0.14.0 header control remained visible without overlap or horizontal scrolling. The dropdown contained one v0.14.0 link and preserved the Chinese current page, query and fragment; Enter and Escape worked. Fresh console checks found no errors.</td>
+</tr>
+<tr class="even">
+<td>Independent review</td>
+<td>✅ No actionable findings.</td>
+</tr>
+<tr class="odd">
+<td>Docs-only main redeploy and public readback</td>
+<td>⏳ Authorized; not yet verified.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="v0140-release" class="level2">
+<h2 class="anchored" data-anchor-id="v0140-release">Askr v0.14.0 release — published 2026-11-03</h2>
+<p>The Human accepted the candidate and authorized v0.14.0 publication on 2026-11-03. It combines the previously interrupted v0.13.4 UI stability work with issues #28–31; v0.13.4 was not a separate release. Semantic state: ACCEPTED. Delivery state: INTEGRATED; publication: PUBLISHED. Issue #27 remains open as enduring design guidance; issues #28–31 were completed with release replies and closed.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1227,7 +1282,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td>v0.13.3 archive</td>
-<td>✅ The pinned <code>gh-pages</code> snapshot contains 245 files and 26,627,319 bytes; all file hashes match.</td>
+<td>✅ The pinned <code>gh-pages</code> snapshot (<code>5bff72779071bd8f1e452d0018644cc741e1a849</code>) contains 245 files and 26,627,319 bytes; all file hashes match.</td>
 </tr>
 <tr class="even">
 <td>Full Gallery render</td>
@@ -1274,24 +1329,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>✅ No actionable findings.</td>
 </tr>
 <tr class="odd">
-<td>Independent release review</td>
-<td>✅ Review of the prepared exact release diff found no actionable findings.</td>
+<td>Release integration</td>
+<td>✅ Promotion PR #32 merged; main, develop and tag point to <code>ab12c10b61d590c00ce1316f700ed56227027d71</code>.</td>
 </tr>
 <tr class="even">
-<td>Final main preview and navigation</td>
-<td>✅ Completed 2026-11-03.</td>
+<td>GitHub Release</td>
+<td>✅ <a href="https://github.com/arfiligol/askr/releases/tag/v0.14.0">v0.14.0</a> was published on 2026-11-03.</td>
 </tr>
 <tr class="odd">
-<td>Human acceptance and publication authorization</td>
-<td>✅ The Human accepted the candidate and authorized v0.14.0 publication on 2026-11-03.</td>
+<td>Publish and Pages workflows</td>
+<td>✅ Publish run 41588100918 succeeded. Pages run 41588378879 succeeded at <code>96b6a20f960835efc9b218d20cfcc39034faeca9</code>; the live site is <a href="https://arfiligol.github.io/askr/">arfiligol.github.io/askr</a>.</td>
 </tr>
 <tr class="even">
-<td>Integration, release, and deployment</td>
-<td>⏳ Verification remains in progress; publication is not yet confirmed.</td>
+<td>Fresh tagged installation</td>
+<td>✅ <code>quarto add arfiligol/askr@v0.14.0 --no-prompt</code> installed 44 files matching the tag; the three-page consumer render and nested language-tag check passed.</td>
 </tr>
 <tr class="odd">
 <td>Issue follow-up</td>
-<td>⏳ Reply to and close #28–31 after delivery; retain #27.</td>
+<td>✅ Issues #28–31 each received a completion comment and were closed; #27 remains open.</td>
 </tr>
 </tbody>
 </table>
@@ -1328,8 +1383,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="earlier-ui-stability-evidence-work-carried-into-v0.14.0" class="level2">
 <h2 class="anchored" data-anchor-id="earlier-ui-stability-evidence-work-carried-into-v0.14.0">Earlier UI stability evidence — work carried into v0.14.0</h2>
-<p>These detailed UI stability receipts were first collected for the interrupted v0.13.4 work. That work is now included in the current v0.14.0 candidate above; the records below remain the evidence for those unchanged checks. Final main preview/navigation review completed 2026-11-03 as recorded above; Human visual review and release authorization remain pending.</p>
-<p>The Human previously reported page drops and jitter and preferred a short loading wait over an unstable layout. The current source includes the font-readiness race guard and has no cross-document fade or transition option. The tested viewport traces show stable geometry after reveal. The final bilingual build, consumer render, and browser checks passed; Human visual review remains.</p>
+<p>These detailed UI stability receipts were first collected for the interrupted v0.13.4 work. That work was included in v0.14.0; the records below preserve the evidence for those checks. The Human accepted the work, and the release was published and deployed on 2026-11-03 as recorded above.</p>
+<p>The Human previously reported page drops and jitter and preferred a short loading wait over an unstable layout. The current source includes the font-readiness race guard and has no cross-document fade or transition option. The tested viewport traces show stable geometry after reveal. The final bilingual build, consumer render, and browser checks passed; the subsequent Human acceptance and release are recorded above.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -1404,15 +1459,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td>Git delivery</td>
-<td>Record the full commit and remote readback in the task delivery receipt.</td>
+<td>✅ Integrated and released as v0.14.0; exact main, tag and deployment identities are recorded above.</td>
 </tr>
 <tr class="odd">
-<td>Human visual review</td>
-<td>⏳ Pending.</td>
+<td>Human acceptance</td>
+<td>✅ The Human accepted and authorized publication on 2026-11-03; see the release receipt above.</td>
 </tr>
 <tr class="even">
 <td>Release and publication</td>
-<td>⏸ PAUSED; no release authorized.</td>
+<td>✅ Published and deployed as v0.14.0 on 2026-11-03; see the release receipt above.</td>
 </tr>
 </tbody>
 </table>

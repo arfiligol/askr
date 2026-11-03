@@ -1,0 +1,11 @@
+{
+  "mode": "inline",
+  "longTitle": "Interferometric Purcell Filter",
+  "versions": [
+    {
+      "label": "0.14.0",
+      "root": "./",
+      "latest": true
+    }
+  ]
+}
