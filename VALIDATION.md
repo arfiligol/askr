@@ -1,12 +1,34 @@
 # Candidate and release validation receipts
 
-## Current v0.14.0 candidate
+## Current docs-site correction — Traditional Chinese version menu
 
-The Human accepted this candidate and authorized v0.14.0 publication on
+This Human-authorized docs-only main-site redeploy is the only current pending
+work. It applies to the current v0.14.0 documentation and creates no package
+version or tag. The v0.14.0 release below predates this separate correction.
+Root integration checks pass; the public redeploy and readback remain pending.
+The generated selector is website build configuration, not an extension bug.
+Do not claim the corrected Chinese menu is deployed yet.
+
+| Check | Result |
+| --- | --- |
+| Bilingual version-guide explanation | ✅ The English and Traditional Chinese guides distinguish full English archive history from the Traditional Chinese menu beginning at v0.14.0 and describe the shared manifest source. |
+| Root full render | ✅ 111 English and 32 Traditional Chinese pages rendered. |
+| Generated Traditional Chinese manifest | ✅ The generated child JSON matches the published resource; only v0.14.0 is listed and its current root is `./`. |
+| Nested Chinese page behavior | ✅ Three root/nested Chinese pages seeded the inline selector exactly. |
+| Historical Chinese archives | ✅ Eight archived site inventories match their previous SHA-256 sets; the English root manifest is unchanged. |
+| Future-version fixtures | ✅ Three fixtures passed: current v0.14.0 only; v0.15.0 current with v0.14.0 archive routing; and current/archive path math with page/query/fragment preservation. |
+| Header and menu interaction | ✅ On desktop and mobile 390px/320px, the v0.14.0 header control remained visible without overlap or horizontal scrolling. The dropdown contained one v0.14.0 link and preserved the Chinese current page, query and fragment; Enter and Escape worked. Fresh console checks found no errors. |
+| Independent review | ✅ No actionable findings. |
+| Docs-only main redeploy and public readback | ⏳ Authorized; not yet verified. |
+
+## Askr v0.14.0 release — published 2026-11-03 {#v0140-release}
+
+The Human accepted the candidate and authorized v0.14.0 publication on
 2026-11-03. It combines the previously interrupted v0.13.4 UI stability work
-with issues #28–31; v0.13.4 is not a separate current candidate. Integration,
-release and deployment verification remain in progress. Issues #28–31 remain
-open until delivery; issue #27 remains open as enduring design guidance.
+with issues #28–31; v0.13.4 was not a separate release. Semantic state:
+ACCEPTED. Delivery state: INTEGRATED; publication: PUBLISHED. Issue #27 remains
+open as enduring design guidance; issues #28–31 were completed with release
+replies and closed.
 
 | Check | Result |
 | --- | --- |
@@ -14,7 +36,7 @@ open until delivery; issue #27 remains open as enduring design guidance.
 | Markup and language-selector checks | ✅ Nine static checks covered root and nested attributes. Six deeper checks covered current-language markers with both English and Traditional Chinese project directories. |
 | Isolated release render and footer credit | ✅ The isolated full `--no-execute` build passed for 111 English and 32 Traditional Chinese inputs; the bilingual footer credit identifies v0.14.0. Log: `/tmp/askr-014-release-render.log`. |
 | Version and archive manifests | ✅ Current, new v0.13.3, and older v0.13.2 and v0.3.0 manifests mark v0.14.0 as latest and use the correct archive-local current root. Output contains no `_site/archives/`. |
-| v0.13.3 archive | ✅ The pinned `gh-pages` snapshot contains 245 files and 26,627,319 bytes; all file hashes match. |
+| v0.13.3 archive | ✅ The pinned `gh-pages` snapshot (`5bff72779071bd8f1e452d0018644cc741e1a849`) contains 245 files and 26,627,319 bytes; all file hashes match. |
 | Full Gallery render | ✅ Final `quarto render --no-execute` completed for 111 English and 32 Traditional Chinese inputs. All 44 rendered extension files matched source in both language outputs; three temporary installed consumers also passed. No scientific notebook or solver execution was performed. Log: `/tmp/askr-014-final-render.log`. |
 | Targeted component renders | ✅ The six final English and Traditional Chinese Callouts, Cards and Figures pages rendered with `--no-execute`. |
 | Final main preview | ✅ On 2026-11-03, frozen candidate output was served over VPN only at [Traditional Chinese Figures](http://10.20.0.2:4614/askr/zh-TW/components/figures.html?candidate=0.14.0#responsive-groups). The English and Traditional Chinese Gallery pages show the new components. |
@@ -26,11 +48,11 @@ open until delivery; issue #27 remains open as enduring design guidance.
 | Tall-figure fit and image viewer | ✅ `.askr-figure-fit` bounded the figure to 70svh, preserved aspect ratio, and kept the caption outside the image area; ordinary unwrapped images were unchanged. The existing viewer opened the source, zoomed to 125%, and Escape restored focus. |
 | Existing component spacing | ✅ Card padding measured 16px on mobile and 21.25px × 25.5px on desktop (1.25rem × 1.5rem at a 17px root size). |
 | Independent review | ✅ No actionable findings. |
-| Independent release review | ✅ Review of the prepared exact release diff found no actionable findings. |
-| Final main preview and navigation | ✅ Completed 2026-11-03. |
-| Human acceptance and publication authorization | ✅ The Human accepted the candidate and authorized v0.14.0 publication on 2026-11-03. |
-| Integration, release, and deployment | ⏳ Verification remains in progress; publication is not yet confirmed. |
-| Issue follow-up | ⏳ Reply to and close #28–31 after delivery; retain #27. |
+| Release integration | ✅ Promotion PR #32 merged; main, develop and tag point to `ab12c10b61d590c00ce1316f700ed56227027d71`. |
+| GitHub Release | ✅ [v0.14.0](https://github.com/arfiligol/askr/releases/tag/v0.14.0) was published on 2026-11-03. |
+| Publish and Pages workflows | ✅ Publish run 41588100918 succeeded. Pages run 41588378879 succeeded at `96b6a20f960835efc9b218d20cfcc39034faeca9`; the live site is [arfiligol.github.io/askr](https://arfiligol.github.io/askr/). |
+| Fresh tagged installation | ✅ `quarto add arfiligol/askr@v0.14.0 --no-prompt` installed 44 files matching the tag; the three-page consumer render and nested language-tag check passed. |
+| Issue follow-up | ✅ Issues #28–31 each received a completion comment and were closed; #27 remains open. |
 
 ## Documentation source consolidation
 
@@ -45,17 +67,16 @@ Status: ✅ Local checks completed 2026-10-30.
 ## Earlier UI stability evidence — work carried into v0.14.0
 
 These detailed UI stability receipts were first collected for the interrupted
-v0.13.4 work. That work is now included in the current v0.14.0 candidate above;
-the records below remain the evidence for those unchanged checks. Final main
-preview/navigation review completed 2026-11-03 as recorded above; Human visual
-review and release authorization remain pending.
+v0.13.4 work. That work was included in v0.14.0; the records below preserve the
+evidence for those checks. The Human accepted the work, and the release was
+published and deployed on 2026-11-03 as recorded above.
 
 The Human previously reported page drops and jitter and preferred a short
 loading wait over an unstable layout. The current source includes the
 font-readiness race guard and has no cross-document fade or transition option.
 The tested viewport traces show stable geometry after reveal. The final
-bilingual build, consumer render, and browser checks passed; Human visual
-review remains.
+bilingual build, consumer render, and browser checks passed; the subsequent
+Human acceptance and release are recorded above.
 
 | Check | Result |
 | --- | --- |
@@ -74,9 +95,9 @@ review remains.
 | Viewers | ✅ Image zoom remained at 125% through modal and inline return, with focus restored. Chart iframe navigation 1→2→1 returned focus to Expand. Search found the image viewer and ten documentation results. |
 | Language and Logout | ✅ Version selector Escape behavior and configured language root links were inspected. Logout fixture exposed only its configured `href`; no authentication flow was exercised. |
 | Copy behavior fixtures | ✅ Secure-loopback copy showed `Copied!` and reset. An injected permission denial showed a permission message and actual manual source; a missing source showed only the unavailable-source message and no textarea. With Clipboard API unavailable, secure loopback showed the manual-copy message, while VPN HTTP showed the insecure-context message and HTTPS guidance. The code button on the same missing-API fixture showed `Copied!` through the existing `execCommand` path. |
-| Git delivery | Record the full commit and remote readback in the task delivery receipt. |
-| Human visual review | ⏳ Pending. |
-| Release and publication | ⏸ PAUSED; no release authorized. |
+| Git delivery | ✅ Integrated and released as v0.14.0; exact main, tag and deployment identities are recorded above. |
+| Human acceptance | ✅ The Human accepted and authorized publication on 2026-11-03; see the release receipt above. |
+| Release and publication | ✅ Published and deployed as v0.14.0 on 2026-11-03; see the release receipt above. |
 
 ### Limits and follow-up
 

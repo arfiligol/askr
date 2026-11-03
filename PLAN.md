@@ -1,5 +1,40 @@
 # Askr release plan
 
+## Current docs-site correction — Traditional Chinese version menu
+
+The Human authorized a docs-only correction and main-site redeploy for the
+current v0.14.0 documentation; it does not create a package version or tag.
+Generate the Traditional Chinese version selector from the existing root
+manifest starting at v0.14.0, with
+`./` as the latest Chinese root and archive-local roots for newer Chinese
+history. Leave v0.13.3 and older Traditional Chinese archives unchanged. Keep
+one maintained version list and use the root full-site render to build both
+language sites. This is a website build-configuration correction, not an Askr
+extension defect. Root integration, full-render, archive-preservation, and
+selector-interaction checks passed. The authorized docs-only main-site
+redeploy and public readback remain pending; do not report this correction as
+deployed yet.
+
+## Askr v0.14.0 — published 2026-11-03 {#v0140-release}
+
+The Human accepted the candidate and authorized publication on 2026-11-03.
+Semantic state: ACCEPTED. Delivery state: INTEGRATED; publication: PUBLISHED.
+The release includes the UI stability work previously discussed for v0.13.4
+and issues #28–31; there is no separate v0.13.4 release. It adds `.askr-grid`
+for paired content and `.askr-figure-fit` for optional tall-image fitting, corrects
+nested Mermaid edge-label treatment, preserves configured language codes, and
+includes the accepted navigation, readiness, and Copy fixes. The Lead completed
+the main preview and navigation checks.
+
+PR #32 was merged, the v0.14.0 Release and Pages deployment completed, and a
+fresh tagged install plus consumer render passed. Issues #28–31 received
+completion replies and were closed. Issue #27 remains open as enduring design
+guidance; no redesign or Steps were added. Delivery evidence is recorded in
+[Validation](VALIDATION.md#v0140-release).
+
+README and the current installation/version guides describe v0.14.0. Source
+metadata and the v0.13.3 archive were prepared and verified before publication.
+
 ## Documentation source consolidation
 
 Completed 2026-10-30: the nine historical version sources are under `archives/`,
@@ -7,59 +42,27 @@ with their public `/v*/` routes and source bytes preserved. The README has been
 rewritten for readers. Inventory, route, snapshot, render, and consumer checks
 passed.
 
-## UI fixes and layout utilities — v0.14.0 candidate
+The release kept the accepted Page List density and serialized mobile Areas
+and Pages disclosures so the last user action wins; Escape and backdrop closure
+restore focus. It added callout keyboard support, initialized language and
+Logout controls after DOM readiness, and seeded the version selector from the
+local manifest while leaving runtime external configuration authoritative.
+It kept browser-native full-page navigation and omitted the unpublished
+cross-document fade and setting.
 
-This candidate combines the UI stability work previously discussed for
-v0.13.4 with accepted issues #28–31. The interrupted v0.13.4 effort is not a
-separate current candidate. The Human accepted the candidate and authorized
-publication on 2026-11-03. Semantic state: ACCEPTED. Delivery state: REVIEW/PR.
-Release and publication processing is in progress. The Human reported page
-drops and jitter and preferred a brief
-loading wait over unstable layout. The candidate includes the font-readiness
-race guard in the initial-layout gate and removes the unpublished
-cross-document fade. The Lead completed final main preview and navigation
-checks on 2026-11-03. Integration, release, and deployment checks remain to be
-verified; do not report the package as published until those checks complete.
+The initial content gate waits for DOM readiness, fonts, coherent native header
+offsets, adaptive Areas, the version fetch, and two stable animation frames. It
+shows localized status after 180ms and fails open after 1800ms. Content stays
+visible without JavaScript; Quarto retains geometry ownership and readiness
+listeners are removed when the gate releases.
 
-The candidate adds `.askr-grid` for paired content and `.askr-figure-fit` for
-optional tall-image fitting. It corrects nested Mermaid edge-label treatment
-and preserves configured language codes in generated language-link attributes.
-The bilingual guides show the new utilities with ordinary Quarto columns and
-figures clearly distinguished. Issue #27 remains enduring design guidance;
-do not redesign the related interface or add Steps.
+Copy errors are classified and communicated with a manual source path; the
+code-only compatibility path remains without a broad fallback.
 
-README and the current installation/version guides now describe v0.14.0.
-Current source metadata and the v0.13.3 archive are prepared and verified.
-After delivery, reply to and close issues #28–31; keep issue #27 open as
-enduring design guidance.
-
-Keep the accepted Page List density. Serialize the mobile Areas and Pages
-disclosures so the last user intent wins; Escape and backdrop closure must
-restore focus. Add keyboard support to the callout control. Initialize language
-and Logout controls after DOM readiness. Seed the version selector from the
-same local versions manifest; runtime external configuration remains
-authoritative, and theme version metadata must not be used to infer selector
-versions. Keep browser-native full-page navigation. Remove the cross-document
-120ms fade and its `askr.page-transitions` setting from this candidate before
-release; the setting was not published.
-
-Before revealing the main content, wait for DOMContentLoaded, fonts, coherent
-native header offsets, adaptive Areas, the version fetch, and two stable
-animation frames. Show a localized loading status only after 180ms, and fail
-open after 1800ms so the page cannot remain blank indefinitely. Keep content
-statically visible when JavaScript is unavailable. Quarto remains responsible
-for page geometry, and remove readiness listeners when the gate is released.
-
-Copy errors must be classified and communicated, with a manual source path
-available. Preserve code-only compatibility copying without a broad fallback.
-
-Candidate checks and the latest regression report are recorded in
-[Validation](VALIDATION.md#current-v0140-candidate). Full-gallery, three-version,
-static-markup, browser-layout and independent-review evidence is recorded
-there. Human acceptance and publication authorization were recorded
-2026-11-03. Integration, tag/release, Pages deployment and remote readback
-remain to be verified before recording publication. Git delivery records the
-full commit and remote readback in the task delivery receipt.
+Completed candidate checks and release validation are recorded in
+[Validation](VALIDATION.md#v0140-release). The docs-site correction above is
+the only current pending work; its Root checks passed, and its authorized
+main-site redeploy and public readback remain pending.
 
 ## Askr v0.13.3 — Page List current-page highlight — 2026-10-28
 

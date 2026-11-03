@@ -5,6 +5,17 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+### Fixed
+
+- Enable the Traditional Chinese version menu in the current Gallery build from
+  the shared root manifest; this docs-site correction leaves the v0.14.0
+  extension tag and older Chinese archives unchanged.
+
+### Documentation
+
+- Clarify that the version guide's history covers the full English site while
+  the generated Traditional Chinese menu starts at v0.14.0.
+
 ## 0.14.0 — 2026-11-03
 
 ### Changed
