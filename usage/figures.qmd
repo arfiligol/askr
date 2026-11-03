@@ -29,3 +29,13 @@ flowchart LR
 ````
 
 This utility keeps native Quarto figures, captions and cross references.
+
+For two related callouts or cards, `.askr-grid` creates equal columns from
+768px upward and stacks them below that breakpoint. The source order remains
+the reading order. Standard Quarto `.columns` keeps its own responsive layout.
+
+To constrain a tall figure to the viewport, wrap it in `.askr-figure-fit`.
+This optional utility caps the image at 70svh (with a 70vh fallback), preserves
+its aspect ratio and leaves the native caption below it. Unwrapped figures are
+unchanged; image inspection continues through the existing Askr Image Viewer.
+See the [Figures component examples](../components/figures.qmd).

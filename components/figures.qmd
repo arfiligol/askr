@@ -6,7 +6,9 @@ execute:
   echo: true
 ---
 
-Columns and images stay Quarto's layout. Askr restyles grouped tabsets.
+Quarto keeps its native columns, figures and captions. The optional
+`.askr-grid` and `.askr-figure-fit` wrappers address specific layout needs
+while leaving content in the article.
 
 ## Columns
 
@@ -16,8 +18,44 @@ The left column is half of the content measure.
 :::
 
 ::: {.column width="50%"}
-The right column is the other half. A narrow screen stacks them.
+The right column is the other half. Standard Quarto columns retain Quarto's
+responsive behavior; use `.askr-grid` for a pair that stays two columns from
+768px and stacks below that width.
 :::
+:::
+
+## Responsive groups {#responsive-groups}
+
+Use `.askr-grid` around two callouts or cards to create equal columns at
+viewport widths of at least 768px and one column below that. Source order is
+also reading order.
+
+::: {.askr-grid}
+::: {.callout-note title="Prepare the source"}
+Keep the first item concise and useful on its own.
+:::
+
+::: {.callout-tip title="Check the result"}
+The second item follows the first in both layout and reading order.
+:::
+:::
+
+::: {.askr-grid}
+:::: {.askr-card}
+::: {.askr-card-body}
+### [Read about cards](cards.qmd) {.askr-card-title .unlisted}
+
+Cards keep their ordinary heading links.
+:::
+::::
+
+:::: {.askr-card}
+::: {.askr-card-body}
+### [Read about callouts](callouts.qmd) {.askr-card-title .unlisted}
+
+Callouts keep their native Quarto semantics.
+:::
+::::
 :::
 
 ## Tabset
@@ -59,6 +97,17 @@ directly:
 ![Bars with semantic markers](images/bars-semantic-markers.png)
 ```
 
+## Fit a tall figure to the viewport {#figure-fit}
+
+Opt in with `.askr-figure-fit` when a tall image should fit within 70svh
+(70vh fallback) while keeping its aspect ratio. Ordinary figure behavior is
+unchanged. The native caption remains below the image, and the existing Askr
+Image Viewer continues to handle image inspection.
+
+::: {.askr-figure-fit}
+![A tall public documentation flow showing how one authored source becomes a rendered page that a reader can follow, from top to bottom.](images/tall-diagram.svg){#fig-viewport-fit fig-alt="Tall flow diagram showing source, rendering and reading"}
+:::
+
 ## Image viewer {#image-viewer}
 
 <span id="inline-interaction"></span>
@@ -92,6 +141,18 @@ flowchart LR
   Pages --> Article[Article]
   Article --> Sections[Section List]
 ```
+
+Mermaid also supports a conditional edge label on a branch. This example uses
+the existing diagram viewer wrapper:
+
+::: {.askr-mermaid-view view-label="View diagram"}
+```{mermaid}
+flowchart TD
+  Start[Start] --> Check{Ready?}
+  Check -->|Yes| Done[Continue]
+  Check -->|No| Wait[Prepare inputs]
+```
+:::
 
 This gallery does not ship a photograph.
 
@@ -132,7 +193,7 @@ and limits.
 
 ## Limits
 
-The columns, tabset and simple diagram fit the article width. The wider flow
+Standard columns, the opt-in `.askr-grid`, tabset and simple diagram fit the article width. The wider flow
 uses `.askr-wide-figure` to keep its natural size and scroll horizontally. A
 floating viewer can zoom, but does not replace readable labels or logical
 grouping. Redraw a diagram if its labels or relationships remain hard to

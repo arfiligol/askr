@@ -7,6 +7,8 @@ subtitle: "五種原生類型"
 
 在 Quarto DOM 容許的範圍內，外框、標題、語意化透明邊框與填色、5px 圓角、圖示和箭頭都盡量貼近 Quartz 的提示框範例。Quarto 的五種原生類型、收合行為與巢狀提示框就是目前的介面；此處不另行創造 Quartz 的其他類型與別名。
 
+若要在較寬螢幕並排呈現兩個提示框，請使用 `.askr-grid`。[圖形頁的響應式群組範例](figures.qmd#responsive-groups)說明斷點並展示一組提示框。
+
 ## 五種提示框
 
 ::: {.callout-note title="說明"}

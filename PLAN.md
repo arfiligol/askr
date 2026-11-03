@@ -1,5 +1,66 @@
 # Askr release plan
 
+## Documentation source consolidation
+
+Completed 2026-10-30: the nine historical version sources are under `archives/`,
+with their public `/v*/` routes and source bytes preserved. The README has been
+rewritten for readers. Inventory, route, snapshot, render, and consumer checks
+passed.
+
+## UI fixes and layout utilities — v0.14.0 candidate
+
+This candidate combines the UI stability work previously discussed for
+v0.13.4 with accepted issues #28–31. The interrupted v0.13.4 effort is not a
+separate current candidate. The Human accepted the candidate and authorized
+publication on 2026-11-03. Semantic state: ACCEPTED. Delivery state: REVIEW/PR.
+Release and publication processing is in progress. The Human reported page
+drops and jitter and preferred a brief
+loading wait over unstable layout. The candidate includes the font-readiness
+race guard in the initial-layout gate and removes the unpublished
+cross-document fade. The Lead completed final main preview and navigation
+checks on 2026-11-03. Integration, release, and deployment checks remain to be
+verified; do not report the package as published until those checks complete.
+
+The candidate adds `.askr-grid` for paired content and `.askr-figure-fit` for
+optional tall-image fitting. It corrects nested Mermaid edge-label treatment
+and preserves configured language codes in generated language-link attributes.
+The bilingual guides show the new utilities with ordinary Quarto columns and
+figures clearly distinguished. Issue #27 remains enduring design guidance;
+do not redesign the related interface or add Steps.
+
+README and the current installation/version guides now describe v0.14.0.
+Current source metadata and the v0.13.3 archive are prepared and verified.
+After delivery, reply to and close issues #28–31; keep issue #27 open as
+enduring design guidance.
+
+Keep the accepted Page List density. Serialize the mobile Areas and Pages
+disclosures so the last user intent wins; Escape and backdrop closure must
+restore focus. Add keyboard support to the callout control. Initialize language
+and Logout controls after DOM readiness. Seed the version selector from the
+same local versions manifest; runtime external configuration remains
+authoritative, and theme version metadata must not be used to infer selector
+versions. Keep browser-native full-page navigation. Remove the cross-document
+120ms fade and its `askr.page-transitions` setting from this candidate before
+release; the setting was not published.
+
+Before revealing the main content, wait for DOMContentLoaded, fonts, coherent
+native header offsets, adaptive Areas, the version fetch, and two stable
+animation frames. Show a localized loading status only after 180ms, and fail
+open after 1800ms so the page cannot remain blank indefinitely. Keep content
+statically visible when JavaScript is unavailable. Quarto remains responsible
+for page geometry, and remove readiness listeners when the gate is released.
+
+Copy errors must be classified and communicated, with a manual source path
+available. Preserve code-only compatibility copying without a broad fallback.
+
+Candidate checks and the latest regression report are recorded in
+[Validation](VALIDATION.md#current-v0140-candidate). Full-gallery, three-version,
+static-markup, browser-layout and independent-review evidence is recorded
+there. Human acceptance and publication authorization were recorded
+2026-11-03. Integration, tag/release, Pages deployment and remote readback
+remain to be verified before recording publication. Git delivery records the
+full commit and remote readback in the task delivery receipt.
+
 ## Askr v0.13.3 — Page List current-page highlight — 2026-10-28
 
 Semantic state: ACCEPTED. Delivery state: CANDIDATE. The Human authorized

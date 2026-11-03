@@ -7,6 +7,8 @@ description: "以 Quarto 原生區塊語法建立直向卡片，並保留一般�
 Askr 卡片使用 Quarto 原生的 fenced div（圍欄式區塊）語法。卡片外框沒有點擊處理，
 標題連結是卡片的主要導覽方式；若在本文加入其他連結，仍會使用各自的原生目的地。
 
+若要在較寬螢幕並排呈現兩張卡片，請使用 `.askr-grid`。[圖形頁的響應式群組範例](figures.qmd#responsive-groups)說明斷點並展示一組卡片。
+
 ## 撰寫語法
 
 請依照頁面章節結構選擇標題層級。`.unlisted` 會讓這個實際標題不列入頁面目錄；
@@ -51,7 +53,7 @@ Askr 卡片使用 Quarto 原生的 fenced div（圍欄式區塊）語法。卡�
 Askr v0.12.0 新增卡片元件。請在使用中的 Quarto 專案安裝目前版本：
 
 ```bash
-quarto add arfiligol/askr@v0.13.3 --no-prompt
+quarto add arfiligol/askr@v0.14.0 --no-prompt
 ```
 
 只替換下列舊卡片類別，保留標題文字、標題層級、連結目的地與說明內容；

@@ -1,5 +1,103 @@
 # Candidate and release validation receipts
 
+## Current v0.14.0 candidate
+
+The Human accepted this candidate and authorized v0.14.0 publication on
+2026-11-03. It combines the previously interrupted v0.13.4 UI stability work
+with issues #28–31; v0.13.4 is not a separate current candidate. Integration,
+release and deployment verification remain in progress. Issues #28–31 remain
+open until delivery; issue #27 remains open as enduring design guidance.
+
+| Check | Result |
+| --- | --- |
+| Quarto compatibility | ✅ The candidate built on Quarto 1.9.38, 1.10.18 and 1.10.19. |
+| Markup and language-selector checks | ✅ Nine static checks covered root and nested attributes. Six deeper checks covered current-language markers with both English and Traditional Chinese project directories. |
+| Isolated release render and footer credit | ✅ The isolated full `--no-execute` build passed for 111 English and 32 Traditional Chinese inputs; the bilingual footer credit identifies v0.14.0. Log: `/tmp/askr-014-release-render.log`. |
+| Version and archive manifests | ✅ Current, new v0.13.3, and older v0.13.2 and v0.3.0 manifests mark v0.14.0 as latest and use the correct archive-local current root. Output contains no `_site/archives/`. |
+| v0.13.3 archive | ✅ The pinned `gh-pages` snapshot contains 245 files and 26,627,319 bytes; all file hashes match. |
+| Full Gallery render | ✅ Final `quarto render --no-execute` completed for 111 English and 32 Traditional Chinese inputs. All 44 rendered extension files matched source in both language outputs; three temporary installed consumers also passed. No scientific notebook or solver execution was performed. Log: `/tmp/askr-014-final-render.log`. |
+| Targeted component renders | ✅ The six final English and Traditional Chinese Callouts, Cards and Figures pages rendered with `--no-execute`. |
+| Final main preview | ✅ On 2026-11-03, frozen candidate output was served over VPN only at [Traditional Chinese Figures](http://10.20.0.2:4614/askr/zh-TW/components/figures.html?candidate=0.14.0#responsive-groups). The English and Traditional Chinese Gallery pages show the new components. |
+| Fresh pages and browser console | ✅ Two fresh pages loaded without console errors. |
+| Navigation controls | ✅ Grouped tabsets selected Palace in both groups. On mobile, Pages and Areas opened with Enter and closed with Escape after Bootstrap animation; Search opened and closed with Escape. |
+| Language selector | ✅ English and Traditional Chinese links retained their `lang`/`hreflang` attributes, and the current-language marker matched the page language. |
+| Responsive layout | ✅ At desktop 1280px and tablet 768px, `.askr-grid` showed two equal columns with a 1rem gap; at mobile 390px it showed one column. Consecutive grids had a 17px desktop gap and 16px mobile gap, with the outer margin remaining 1rem. Independent item heights were preserved. |
+| Light/dark label contrast | ✅ In both themes, nested Mermaid edge labels had a readable background and foreground: light background 250 with text 78; dark background 22 with text 212. |
+| Tall-figure fit and image viewer | ✅ `.askr-figure-fit` bounded the figure to 70svh, preserved aspect ratio, and kept the caption outside the image area; ordinary unwrapped images were unchanged. The existing viewer opened the source, zoomed to 125%, and Escape restored focus. |
+| Existing component spacing | ✅ Card padding measured 16px on mobile and 21.25px × 25.5px on desktop (1.25rem × 1.5rem at a 17px root size). |
+| Independent review | ✅ No actionable findings. |
+| Independent release review | ✅ Review of the prepared exact release diff found no actionable findings. |
+| Final main preview and navigation | ✅ Completed 2026-11-03. |
+| Human acceptance and publication authorization | ✅ The Human accepted the candidate and authorized v0.14.0 publication on 2026-11-03. |
+| Integration, release, and deployment | ⏳ Verification remains in progress; publication is not yet confirmed. |
+| Issue follow-up | ⏳ Reply to and close #28–31 after delivery; retain #27. |
+
+## Documentation source consolidation
+
+Status: ✅ Local checks completed 2026-10-30.
+
+| Check | Result |
+| --- | --- |
+| Archive inventory and identity | ✅ Nine historical sources consolidated under `archives/`; all 1,925 files match the baseline by SHA-256, and the root version directories are absent. |
+| Public routes and full render | ✅ Isolated `quarto render --no-execute` passed for 111 English and 32 Traditional Chinese inputs after explicitly excluding `archives/` from resources. Rendered `_site/v*/` files match the baseline except for regenerated `askr-versions.json`; manifest version labels match the root, with no duplicate `_site/archives/`. |
+| README links and consumer render | ✅ Live documentation links resolve to rendered pages; a minimal README configuration and index rendered in a temporary installed-namespace consumer. |
+
+## Earlier UI stability evidence — work carried into v0.14.0
+
+These detailed UI stability receipts were first collected for the interrupted
+v0.13.4 work. That work is now included in the current v0.14.0 candidate above;
+the records below remain the evidence for those unchanged checks. Final main
+preview/navigation review completed 2026-11-03 as recorded above; Human visual
+review and release authorization remain pending.
+
+The Human previously reported page drops and jitter and preferred a short
+loading wait over an unstable layout. The current source includes the
+font-readiness race guard and has no cross-document fade or transition option.
+The tested viewport traces show stable geometry after reveal. The final
+bilingual build, consumer render, and browser checks passed; Human visual
+review remains.
+
+| Check | Result |
+| --- | --- |
+| JavaScript and stylesheet checks | ✅ `node --check` passed for extracted inline JavaScript; Quarto compiled the SCSS during render. |
+| Current bilingual build | ✅ `quarto render --no-execute` passed for 111 English and 32 Traditional Chinese inputs; all 44 rendered extension files matched current source byte-for-byte. Log: `/tmp/askr-layout-final-render.log`. |
+| Current consumer render | ✅ Two-page consumer `--no-execute` render passed; log: `/tmp/askr-layout-consumer-render.log`. |
+| Native navigation and console | ✅ Fresh no-fade browser path Prose→Code→Mathematics→Back showed `ready=stable` on each page, empty console, and no ViewTransition errors. |
+| Desktop geometry | ✅ At 1170px, first frame was 97ms with title 94px, main 81px, sidebar 64px; first reveal was 149ms with stable title 130px, main 117px, sidebar 100px. No later geometry change. Trace: `/tmp/askr-layout-desktop-frames.json`. |
+| Mobile geometry | ✅ At 390px, first frame was 652ms with title 107px, main 80px, Pages Y=11.4px; first reveal was 753ms with stable title 158px, main 131px, Pages Y=71.7px. No later geometry change. Trace: `/tmp/askr-layout-mobile-frames.json`; screenshot: `/tmp/askr-layout-mobile-light.png`. |
+| Traditional Chinese tablet geometry | ✅ At 896px in dark mode, first frame was 527ms with title 112.5px; first reveal was 719ms with stable title 153.5px, main 123px, Pages Y=57.1px. No later geometry change. Trace: `/tmp/askr-layout-tablet-frames.json`; screenshot: `/tmp/askr-layout-tablet-dark.png`. |
+| Mobile Areas and Pages | ✅ Rapid Areas→Pages settled with Pages only; Escape closed it. |
+| Headerless standalone document and anchor | ✅ The headerless document remained `reason=stable` and visible. For `#quote`, native smooth scrolling occurred while content was hidden; history return showed content again. Exact scroll position was not measured. |
+| Fail-open and no-JavaScript | ✅ An intentionally incoherent padding fixture displayed Loading and released on timeout. With scripts stripped, Prose remained visible. |
+| Callout keyboard control | ✅ Enter and Space toggled it; the title remained readable. |
+| AEDT controls | ✅ Both groups selected and their content synchronized. |
+| Viewers | ✅ Image zoom remained at 125% through modal and inline return, with focus restored. Chart iframe navigation 1→2→1 returned focus to Expand. Search found the image viewer and ten documentation results. |
+| Language and Logout | ✅ Version selector Escape behavior and configured language root links were inspected. Logout fixture exposed only its configured `href`; no authentication flow was exercised. |
+| Copy behavior fixtures | ✅ Secure-loopback copy showed `Copied!` and reset. An injected permission denial showed a permission message and actual manual source; a missing source showed only the unavailable-source message and no textarea. With Clipboard API unavailable, secure loopback showed the manual-copy message, while VPN HTTP showed the insecure-context message and HTTPS guidance. The code button on the same missing-API fixture showed `Copied!` through the existing `execCommand` path. |
+| Git delivery | Record the full commit and remote readback in the task delivery receipt. |
+| Human visual review | ⏳ Pending. |
+| Release and publication | ⏸ PAUSED; no release authorized. |
+
+### Limits and follow-up
+
+The browser clipboard showed `Copied!`, but actual paste was not verified in
+this turn because the CUA virtual clipboard was empty. Prior source-payload
+evidence remains separate from this observation. Controlled fixtures verified
+the secure-context and unavailable-API messages, but the CUA API sometimes
+allowed actual copying over HTTP; the real HTTP clipboard outcome remains
+inconclusive. Reduced-motion behavior was checked in source/configuration, but
+the OS preference was not toggled, so runtime suppression remains unverified.
+
+These frame measurements are observations for the tested viewport and routes,
+not universal performance guarantees.
+
+The iframe/Plotly message reproduced in the minimal fixture documented at
+`/tmp/askr-observer-repro/README.md`, without Askr or Quarto; public source
+hashes matched. The exact runtime stack is unavailable, so the cause remains
+unresolved. This does not establish a browser bug or a fix. Native full-page
+navigation still reloads HTML.
+The requested behavior is listed in the current section of [PLAN.md](PLAN.md).
+
 ## Askr v0.13.3 — Page List current-page highlight — 2026-10-28
 
 Semantic state: ACCEPTED. Delivery state: CANDIDATE. The Human authorized
