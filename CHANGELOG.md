@@ -5,6 +5,8 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+## 0.14.0 — 2026-11-03
+
 ### Changed
 
 - Keep the accepted Page List density while serializing mobile Areas and Pages

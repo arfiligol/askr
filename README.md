@@ -25,13 +25,13 @@ components.
 
 ## Quick start
 
-Askr `v0.13.3` supports stable Quarto `>=1.9.38 <1.11`; the gallery and CI
+Askr `v0.14.0` supports stable Quarto `>=1.9.38 <1.11`; the gallery and CI
 baseline is Quarto `1.10.18`.
 
 Install the current stable release:
 
 ```bash
-quarto add arfiligol/askr@v0.13.3 --no-prompt
+quarto add arfiligol/askr@v0.14.0 --no-prompt
 ```
 
 Create `_quarto.yml`:

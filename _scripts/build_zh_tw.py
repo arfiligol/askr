@@ -19,6 +19,7 @@ ARCHIVED_SITES = (
     "v0.13.0",
     "v0.13.1",
     "v0.13.2",
+    "v0.13.3",
 )
 MODERN_ARCHIVES = ARCHIVED_SITES[1:]
 

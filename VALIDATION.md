@@ -2,16 +2,19 @@
 
 ## Current v0.14.0 candidate
 
-This candidate combines the previously interrupted v0.13.4 UI stability work
-with accepted issues #28–31. The v0.13.4 work is included here; there is no
-separate current candidate. Source version metadata and installation guidance
-remain at v0.13.3 pending Human preview approval. No issue is closed, and no
-release or publication is authorized.
+The Human accepted this candidate and authorized v0.14.0 publication on
+2026-11-03. It combines the previously interrupted v0.13.4 UI stability work
+with issues #28–31; v0.13.4 is not a separate current candidate. Integration,
+release and deployment verification remain in progress. Issues #28–31 remain
+open until delivery; issue #27 remains open as enduring design guidance.
 
 | Check | Result |
 | --- | --- |
 | Quarto compatibility | ✅ The candidate built on Quarto 1.9.38, 1.10.18 and 1.10.19. |
 | Markup and language-selector checks | ✅ Nine static checks covered root and nested attributes. Six deeper checks covered current-language markers with both English and Traditional Chinese project directories. |
+| Isolated release render and footer credit | ✅ The isolated full `--no-execute` build passed for 111 English and 32 Traditional Chinese inputs; the bilingual footer credit identifies v0.14.0. Log: `/tmp/askr-014-release-render.log`. |
+| Version and archive manifests | ✅ Current, new v0.13.3, and older v0.13.2 and v0.3.0 manifests mark v0.14.0 as latest and use the correct archive-local current root. Output contains no `_site/archives/`. |
+| v0.13.3 archive | ✅ The pinned `gh-pages` snapshot contains 245 files and 26,627,319 bytes; all file hashes match. |
 | Full Gallery render | ✅ Final `quarto render --no-execute` completed for 111 English and 32 Traditional Chinese inputs. All 44 rendered extension files matched source in both language outputs; three temporary installed consumers also passed. No scientific notebook or solver execution was performed. Log: `/tmp/askr-014-final-render.log`. |
 | Targeted component renders | ✅ The six final English and Traditional Chinese Callouts, Cards and Figures pages rendered with `--no-execute`. |
 | Final main preview | ✅ On 2026-11-03, frozen candidate output was served over VPN only at [Traditional Chinese Figures](http://10.20.0.2:4614/askr/zh-TW/components/figures.html?candidate=0.14.0#responsive-groups). The English and Traditional Chinese Gallery pages show the new components. |
@@ -23,9 +26,11 @@ release or publication is authorized.
 | Tall-figure fit and image viewer | ✅ `.askr-figure-fit` bounded the figure to 70svh, preserved aspect ratio, and kept the caption outside the image area; ordinary unwrapped images were unchanged. The existing viewer opened the source, zoomed to 125%, and Escape restored focus. |
 | Existing component spacing | ✅ Card padding measured 16px on mobile and 21.25px × 25.5px on desktop (1.25rem × 1.5rem at a 17px root size). |
 | Independent review | ✅ No actionable findings. |
+| Independent release review | ✅ Review of the prepared exact release diff found no actionable findings. |
 | Final main preview and navigation | ✅ Completed 2026-11-03. |
-| Human visual review | ⏳ Pending. |
-| Release and publication | ⏸ Not authorized; Human preview approval remains pending. |
+| Human acceptance and publication authorization | ✅ The Human accepted the candidate and authorized v0.14.0 publication on 2026-11-03. |
+| Integration, release, and deployment | ⏳ Verification remains in progress; publication is not yet confirmed. |
+| Issue follow-up | ⏳ Reply to and close #28–31 after delivery; retain #27. |
 
 ## Documentation source consolidation
 
