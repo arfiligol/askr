@@ -8,6 +8,10 @@ Askr cards use nested Quarto fenced divs. The shell has no click handler, and
 the heading link supplies the card's primary navigation. Any links authored in
 the body keep their own native destinations.
 
+To place two cards side by side on wider screens, use `.askr-grid`. The
+[Figures responsive-groups example](figures.qmd#responsive-groups) shows the
+breakpoint and a paired card example.
+
 ## Authoring syntax
 
 Choose a heading level that fits the surrounding page outline. The `.unlisted`

@@ -7,15 +7,28 @@ with their public `/v*/` routes and source bytes preserved. The README has been
 rewritten for readers. Inventory, route, snapshot, render, and consumer checks
 passed.
 
-## Current candidate — UI stability follow-up after v0.13.3
+## UI fixes and layout utilities — v0.14.0 candidate
 
-Semantic state: CONVERGING. Delivery state: CANDIDATE. The Human interrupted
-the v0.13.4 release work; release and publication remain PAUSED. The latest
-review still found page drops and jitter. The Human prefers a brief loading
-wait over unstable layout. The candidate now includes a font-readiness race
-guard in its initial-layout gate, and removes the unpublished cross-document
-fade. Final bilingual, consumer, and browser checks passed. Human visual review
-remains; no release is authorized.
+This candidate combines the UI stability work previously discussed for
+v0.13.4 with accepted issues #28–31. The interrupted v0.13.4 effort is not a
+separate current candidate. Semantic state: CONVERGING. Delivery state:
+CANDIDATE. The Human reported page drops and jitter and preferred a brief
+loading wait over unstable layout. The candidate includes the font-readiness
+race guard in the initial-layout gate and removes the unpublished
+cross-document fade. The Lead completed final main preview and navigation
+checks on 2026-11-03. Human visual review and release approval remain pending;
+no release or publication is authorized.
+
+The candidate adds `.askr-grid` for paired content and `.askr-figure-fit` for
+optional tall-image fitting. It corrects nested Mermaid edge-label treatment
+and preserves configured language codes in generated language-link attributes.
+The bilingual guides show the new utilities with ordinary Quarto columns and
+figures clearly distinguished. Issue #27 remains enduring design guidance;
+do not redesign the related interface or add Steps.
+
+Keep source version metadata and installation guidance at v0.13.3 until the
+Human reviews the preview and approves the next release step. Do not close
+issues #28–31 as part of candidate authoring.
 
 Keep the accepted Page List density. Serialize the mobile Areas and Pages
 disclosures so the last user intent wins; Escape and backdrop closure must
@@ -38,10 +51,11 @@ Copy errors must be classified and communicated, with a manual source path
 available. Preserve code-only compatibility copying without a broad fallback.
 
 Candidate checks and the latest regression report are recorded in
-[Validation](VALIDATION.md#current-ui-stability-candidate). Human visual
-review remains pending. Git delivery records the full commit and remote
-readback in the task delivery receipt. The v0.13.4 release and publication
-remain paused.
+[Validation](VALIDATION.md#current-v0140-candidate). Full-gallery, three-version,
+static-markup, browser-layout and independent-review evidence is recorded
+there. Final main preview/navigation checks completed on 2026-11-03; Human
+visual review remains pending. Git delivery records the full commit and remote
+readback in the task delivery receipt.
 
 ## Askr v0.13.3 — Page List current-page highlight — 2026-10-28
 

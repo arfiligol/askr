@@ -19,9 +19,19 @@ derive from these entries; an Unreleased entry is not a published release.
   without JavaScript; Quarto retains geometry ownership. Navigation stays
   browser-native full-page navigation.
 
+### Added
+
+- Add `.askr-grid` for paired content: equal columns at viewport widths of at
+  least 768px, one column below, and a 1rem gap. (#30)
+- Add the opt-in `.askr-figure-fit` wrapper, which fits tall images within 70svh
+  while preserving aspect ratio and the native caption. (#29)
+
 ### Fixed
 
 - Add keyboard support to the callout control.
+- Render nested Mermaid edge labels with a readable background. (#28)
+- Preserve configured language codes for the language selector's `lang` and
+  `hreflang` attributes. (#31)
 - Report Copy failures by cause: HTTP/API failure, permission denied, or source
   unavailable. When copying is denied, show the manual source; retain
   code-only compatibility copying.
@@ -30,6 +40,7 @@ derive from these entries; an Unreleased entry is not a published release.
 
 - Consolidate the nine historical version sources under `archives/`, retaining
   public `/v*/` URLs and snapshot bytes; rewrite the README for readers.
+- Document the new components and behavior in English and Traditional Chinese.
 
 ## 0.13.3 — 2026-10-28
 

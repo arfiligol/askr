@@ -1,5 +1,32 @@
 # Candidate and release validation receipts
 
+## Current v0.14.0 candidate
+
+This candidate combines the previously interrupted v0.13.4 UI stability work
+with accepted issues #28–31. The v0.13.4 work is included here; there is no
+separate current candidate. Source version metadata and installation guidance
+remain at v0.13.3 pending Human preview approval. No issue is closed, and no
+release or publication is authorized.
+
+| Check | Result |
+| --- | --- |
+| Quarto compatibility | ✅ The candidate built on Quarto 1.9.38, 1.10.18 and 1.10.19. |
+| Markup and language-selector checks | ✅ Nine static checks covered root and nested attributes. Six deeper checks covered current-language markers with both English and Traditional Chinese project directories. |
+| Full Gallery render | ✅ Final `quarto render --no-execute` completed for 111 English and 32 Traditional Chinese inputs. All 44 rendered extension files matched source in both language outputs; three temporary installed consumers also passed. No scientific notebook or solver execution was performed. Log: `/tmp/askr-014-final-render.log`. |
+| Targeted component renders | ✅ The six final English and Traditional Chinese Callouts, Cards and Figures pages rendered with `--no-execute`. |
+| Final main preview | ✅ On 2026-11-03, frozen candidate output was served over VPN only at [Traditional Chinese Figures](http://10.20.0.2:4614/askr/zh-TW/components/figures.html?candidate=0.14.0#responsive-groups). The English and Traditional Chinese Gallery pages show the new components. |
+| Fresh pages and browser console | ✅ Two fresh pages loaded without console errors. |
+| Navigation controls | ✅ Grouped tabsets selected Palace in both groups. On mobile, Pages and Areas opened with Enter and closed with Escape after Bootstrap animation; Search opened and closed with Escape. |
+| Language selector | ✅ English and Traditional Chinese links retained their `lang`/`hreflang` attributes, and the current-language marker matched the page language. |
+| Responsive layout | ✅ At desktop 1280px and tablet 768px, `.askr-grid` showed two equal columns with a 1rem gap; at mobile 390px it showed one column. Consecutive grids had a 17px desktop gap and 16px mobile gap, with the outer margin remaining 1rem. Independent item heights were preserved. |
+| Light/dark label contrast | ✅ In both themes, nested Mermaid edge labels had a readable background and foreground: light background 250 with text 78; dark background 22 with text 212. |
+| Tall-figure fit and image viewer | ✅ `.askr-figure-fit` bounded the figure to 70svh, preserved aspect ratio, and kept the caption outside the image area; ordinary unwrapped images were unchanged. The existing viewer opened the source, zoomed to 125%, and Escape restored focus. |
+| Existing component spacing | ✅ Card padding measured 16px on mobile and 21.25px × 25.5px on desktop (1.25rem × 1.5rem at a 17px root size). |
+| Independent review | ✅ No actionable findings. |
+| Final main preview and navigation | ✅ Completed 2026-11-03. |
+| Human visual review | ⏳ Pending. |
+| Release and publication | ⏸ Not authorized; Human preview approval remains pending. |
+
 ## Documentation source consolidation
 
 Status: ✅ Local checks completed 2026-10-30.
@@ -10,12 +37,13 @@ Status: ✅ Local checks completed 2026-10-30.
 | Public routes and full render | ✅ Isolated `quarto render --no-execute` passed for 111 English and 32 Traditional Chinese inputs after explicitly excluding `archives/` from resources. Rendered `_site/v*/` files match the baseline except for regenerated `askr-versions.json`; manifest version labels match the root, with no duplicate `_site/archives/`. |
 | README links and consumer render | ✅ Live documentation links resolve to rendered pages; a minimal README configuration and index rendered in a temporary installed-namespace consumer. |
 
-## Current UI stability candidate
+## Earlier UI stability evidence — work carried into v0.14.0
 
-Semantic state: CONVERGING. Delivery state: CANDIDATE. The v0.13.4 release
-remains PAUSED after Human interruption. The authorized endpoint is a
-`develop` candidate checkpoint and full bilingual preview; publication is not
-authorized.
+These detailed UI stability receipts were first collected for the interrupted
+v0.13.4 work. That work is now included in the current v0.14.0 candidate above;
+the records below remain the evidence for those unchanged checks. Final main
+preview/navigation review completed 2026-11-03 as recorded above; Human visual
+review and release authorization remain pending.
 
 The Human previously reported page drops and jitter and preferred a short
 loading wait over an unstable layout. The current source includes the

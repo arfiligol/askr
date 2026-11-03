@@ -6,7 +6,8 @@ execute:
   echo: true
 ---
 
-欄與圖片仍由 Quarto 排版；Askr 會調整分組分頁的樣式。
+Quarto 仍負責原生欄位、圖形與標題。選用的 `.askr-grid` 與
+`.askr-figure-fit` 包裝則用於特定版面需求，內容仍留在文章中。
 
 ## 欄
 
@@ -16,8 +17,42 @@ execute:
 :::
 
 ::: {.column width="50%"}
-右欄占另一半。窄螢幕會將兩欄上下堆疊。
+右欄占另一半。一般 Quarto 欄位仍依 Quarto 的方式調整；若要讓一組內容在
+768px 以上維持兩欄、以下改為單欄，請使用 `.askr-grid`。
 :::
+:::
+
+## 響應式群組 {#responsive-groups}
+
+將兩個提示框或卡片包在 `.askr-grid` 中，可在視窗寬度至少 768px 時呈現等寬雙欄，
+低於該寬度時改為單欄。原始碼順序也就是閱讀順序。
+
+::: {.askr-grid}
+::: {.callout-note title="準備來源"}
+第一個項目應簡潔，且單獨閱讀時仍有完整用途。
+:::
+
+::: {.callout-tip title="檢查結果"}
+第二個項目在版面與閱讀順序中都接在第一個項目之後。
+:::
+:::
+
+::: {.askr-grid}
+:::: {.askr-card}
+::: {.askr-card-body}
+### [卡片說明](cards.qmd) {.askr-card-title .unlisted}
+
+卡片仍使用一般標題連結。
+:::
+::::
+
+:::: {.askr-card}
+::: {.askr-card-body}
+### [提示框說明](callouts.qmd) {.askr-card-title .unlisted}
+
+提示框仍保有 Quarto 原生語意。
+:::
+::::
 :::
 
 ## 分頁組
@@ -56,6 +91,16 @@ AEDT Q3D 使用相同版圖與自己的輸入綁定。
 ![Bars with semantic markers](images/bars-semantic-markers.png)
 ```
 
+## 讓高圖形符合視窗高度 {#figure-fit}
+
+當高圖形需要在保留長寬比的同時符合 70svh（並以 70vh 作為後備）時，可選用
+`.askr-figure-fit`。一般圖形行為不會改變。原生圖說仍顯示在圖片下方，
+並由既有的 Askr 圖片檢視器提供圖片檢視功能。
+
+::: {.askr-figure-fit}
+![這張公開文件流程高圖從上到下，說明作者撰寫的來源如何成為產生後的頁面，再由讀者閱讀。](images/tall-diagram.svg){#fig-viewport-fit fig-alt="顯示來源、產生與閱讀流程的高圖"}
+:::
+
 ## 圖片檢視器 {#image-viewer}
 
 <span id="行內互動"></span>
@@ -88,6 +133,17 @@ flowchart LR
 ```
 
 本圖集不附照片。
+
+Mermaid 也支援在分支上使用條件標籤。此範例使用既有的圖表檢視器包裝：
+
+::: {.askr-mermaid-view view-label="檢視圖表"}
+```{mermaid}
+flowchart TD
+  Start[開始] --> Check{準備好了嗎？}
+  Check -->|是| Done[繼續]
+  Check -->|否| Wait[準備輸入資料]
+```
+:::
 
 ## Mermaid 檢視器 {#mermaid-viewer}
 
