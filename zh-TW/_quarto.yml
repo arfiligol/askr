@@ -6,6 +6,8 @@ project:
     - "components/*.qmd"
     - "gallery/*.qmd"
     - "usage/*.qmd"
+  resources:
+    - askr-versions.json
 
 lang: zh-TW
 

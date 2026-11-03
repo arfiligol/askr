@@ -2,6 +2,7 @@ import copy
 import json
 import os
 import posixpath
+import re
 import shutil
 import subprocess
 from pathlib import Path
@@ -9,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_SITE_PREFIX = "/askr/"
+ZH_TW_MIN_VERSION = (0, 14, 0)
 ARCHIVED_SITES = (
     "v0.3.0",
     "v0.9.0",
@@ -86,6 +88,47 @@ def generate_archive_manifests(output: Path) -> None:
     write_manifest(output / "v0.3.0" / "askr-versions.json", legacy)
 
 
+def stable_version(label: str) -> tuple[int, int, int] | None:
+    match = re.fullmatch(r"(\d+)\.(\d+)\.(\d+)", label)
+    return tuple(map(int, match.groups())) if match else None
+
+
+def zh_tw_manifest() -> dict:
+    """Build a language-local manifest from the root manifest authority."""
+    source = version_manifest()
+    manifest = copy.deepcopy(source)
+    manifest["versions"] = [
+        copy.deepcopy(item)
+        for item in source["versions"]
+        if (version := stable_version(str(item.get("label", "")))) is not None
+        and version >= ZH_TW_MIN_VERSION
+    ]
+    return manifest
+
+
+def zh_tw_target_root(item: dict) -> str:
+    root = item.get("root", "/").strip("/")
+    return posixpath.join(root, "zh-TW") + "/"
+
+
+def generate_zh_tw_manifest(path: Path, site_root: str = "zh-TW") -> None:
+    manifest = zh_tw_manifest()
+    for item in manifest["versions"]:
+        item["root"] = relative_site_root(site_root, zh_tw_target_root(item))
+        item.pop("href", None)
+    write_manifest(path, manifest)
+
+
+def generate_archive_zh_tw_manifests(output: Path) -> None:
+    """Write manifests only into copied modern archives that contain zh-TW."""
+    for site in sorted(output.glob("v*/zh-TW")):
+        archive = site.parent.name
+        version = stable_version(archive.removeprefix("v"))
+        if version is None or version < ZH_TW_MIN_VERSION:
+            continue
+        generate_zh_tw_manifest(site / "askr-versions.json", f"{archive}/zh-TW")
+
+
 def main() -> None:
     if os.environ.get("QUARTO_PROJECT_RENDER_ALL") != "1":
         return
@@ -93,8 +136,10 @@ def main() -> None:
     output = ROOT / "_site"
     copy_archives(output)
     generate_archive_manifests(output)
+    generate_archive_zh_tw_manifests(output)
 
     child = ROOT / "zh-TW"
+    generate_zh_tw_manifest(child / "askr-versions.json")
     copy_directory(ROOT / "_extensions" / "askr", child / "_extensions" / "askr")
     copy_directory(ROOT / "components" / "images", child / "components" / "images")
     copy_file(ROOT / "components" / "references.bib", child / "components" / "references.bib")

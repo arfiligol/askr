@@ -22,7 +22,9 @@ and unmaintained.
 
 These paths are relative to the deployed site, so the same list works under a
 repository prefix such as `/askr/`. Askr's root `askr-versions.json` is the
-single version-list source:
+single maintained version-list source. The table and JSON example below show
+the full English site history. The current Traditional Chinese header menu
+begins at v0.14.0; its v0.13.3-and-older snapshots remain unchanged.
 
 ```json
 {
@@ -47,10 +49,15 @@ single version-list source:
 Include the manifest in `project.resources`. Each `root` identifies a complete
 version site relative to that site's deployment root. The version selector is
 provided by Askr; consumers maintain their own archive directories and
-manifest. In this Gallery, source snapshots live in `archives/v*/`; the root
-build helper copies them to the public `_site/v*/` paths, then generates each
-archive's manifest. It is source-repository build tooling and is not installed
-by `quarto add`.
+manifest. In this Gallery, source snapshots live in `archives/v*/`; a full
+`quarto render .` from the repository root builds both language sites and
+copies the snapshots to public `_site/v*/` paths. The current Gallery build
+derives the Traditional Chinese selector manifest from this root list using
+entries from v0.14.0 onward. Its current Chinese root is `./`; archive roots
+remain relative to each Chinese site. This is Gallery build configuration, not
+an extension feature, and older Chinese archives remain unchanged. No second
+version list is maintained. The helper is source-repository tooling and is
+not installed by `quarto add`.
 
 Use `href` for a fixed destination instead of a `root`. Relative and
 single-slash `href` values are site-relative; absolute URLs keep their origin.
