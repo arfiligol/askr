@@ -1,0 +1,45 @@
+---
+title: "標籤"
+---
+
+標籤可以放在標題下方、段落或表格中，用短文字標示文件狀態、主題或適用範圍。
+
+## 加入標籤
+
+用 `.askr-label` 套用標籤樣式，再加上一個色名類別。下例用深海軍藍標示「技術預覽」。
+
+[技術預覽]{.askr-label .askr-label-navy}
+
+```markdown
+[技術預覽]{.askr-label .askr-label-navy}
+```
+
+文字與顏色可各自選擇。只寫 `.askr-label` 時會使用石板灰。標籤文字可用 Quarto 站內搜尋找到。若要依分類篩選頁面清單，請使用 Quarto 的 `categories`。
+
+## 色票
+
+每組色票下方列出色名；加上 `.askr-label-` 前綴即可使用。
+
+### 中性與暖灰
+
+[石板灰]{.askr-label .askr-label-slate} [暖石灰]{.askr-label .askr-label-stone} [淺砂色]{.askr-label .askr-label-sand}
+
+`slate` · `stone` · `sand`
+
+### 綠與青
+
+[淺薄荷綠]{.askr-label .askr-label-mint} [鼠尾草綠]{.askr-label .askr-label-sage} [橄欖綠]{.askr-label .askr-label-olive} [霧青]{.askr-label .askr-label-teal} [深松綠]{.askr-label .askr-label-pine}
+
+`mint` · `sage` · `olive` · `teal` · `pine`
+
+### 藍與紫
+
+[淡天空藍]{.askr-label .askr-label-sky} [灰牛仔藍]{.askr-label .askr-label-denim} [深海軍藍]{.askr-label .askr-label-navy} [長春花藍紫]{.askr-label .askr-label-periwinkle} [淺薰衣草紫]{.askr-label .askr-label-lavender} [深梅紫]{.askr-label .askr-label-plum}
+
+`sky` · `denim` · `navy` · `periwinkle` · `lavender` · `plum`
+
+### 黃、橙與紅
+
+[淡奶油黃]{.askr-label .askr-label-butter} [柔琥珀]{.askr-label .askr-label-amber} [淡蜜桃]{.askr-label .askr-label-peach} [陶土橘]{.askr-label .askr-label-terracotta} [淡玫瑰紅]{.askr-label .askr-label-rose} [深莓紅]{.askr-label .askr-label-berry}
+
+`butter` · `amber` · `peach` · `terracotta` · `rose` · `berry`

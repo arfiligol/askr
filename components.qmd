@@ -16,6 +16,7 @@ divs. Each page below focuses on one family or pattern.
   icons, and disclosure chevron.
 - [Cards](components/cards.qmd). A CSS-only nested fenced-div pattern with a
   real heading and one title link.
+- [Labels](components/labels.qmd). Searchable inline labels in 20 translucent colors.
 - [Code](components/code.qmd). Inline code, fenced blocks, and local overflow.
 - [Tables](components/tables.qmd). Header and cell rules.
 - [Mathematics](components/mathematics.qmd). Display math scrolls inside the

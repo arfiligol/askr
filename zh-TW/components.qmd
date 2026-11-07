@@ -10,6 +10,7 @@ title: "元件"
 - [內文](components/prose.qmd)。文章連結、醒目文字、清單標記、引文與內容分隔線。
 - [提示框](components/callouts.qmd)。五種原生類型及其外框、圖示與展開箭頭。
 - [卡片](components/cards.qmd)。以巢狀 fenced div 組成卡片，保留真正的標題與單一標題連結，且不需 JavaScript。
+- [標籤](components/labels.qmd)。可搜尋的行內標籤，提供 20 種半透明配色。
 - [程式碼](components/code.qmd)。行內程式碼、圍欄程式碼區塊與本機溢位處理。
 - [表格](components/tables.qmd)。表頭與儲存格的分隔線。
 - [數學公式](components/mathematics.qmd)。展示公式會在內容寬度內捲動。

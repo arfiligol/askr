@@ -81,6 +81,8 @@ website:
               href: components/callouts.qmd
             - text: 卡片
               href: components/cards.qmd
+            - text: 標籤
+              href: components/labels.qmd
             - text: 程式碼
               href: components/code.qmd
             - text: 表格
