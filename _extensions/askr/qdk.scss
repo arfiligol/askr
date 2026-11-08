@@ -1300,3 +1300,142 @@ section.askr-card-title { font-size: inherit; margin: 0; }
   #quarto-announcement,
   #quarto-announcement .askr-announcement-close { transition: none; }
 }
+
+/* Inline labels */
+.askr-label {
+  display: inline-block;
+  max-inline-size: 100%;
+  padding: .35em .72em;
+  border: 1px solid color-mix(in srgb, var(--askr-label-tint, #8190a6) 30%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--askr-label-tint, #8190a6) 15%, transparent);
+  color: var(--askr-label-light, #515b69);
+  font-size: .8em;
+  font-weight: 500;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+body.quarto-dark .askr-label {
+  color: var(--askr-label-dark, #c7cfda);
+}
+
+.askr-label.askr-label-slate {
+  --askr-label-light: #515b69;
+  --askr-label-dark: #c7cfda;
+  --askr-label-tint: #8190a6;
+}
+
+.askr-label.askr-label-stone {
+  --askr-label-light: #625b50;
+  --askr-label-dark: #d4c9b8;
+  --askr-label-tint: #a69781;
+}
+
+.askr-label.askr-label-sand {
+  --askr-label-light: #6e573b;
+  --askr-label-dark: #e0c7a5;
+  --askr-label-tint: #b89e78;
+}
+
+.askr-label.askr-label-mint {
+  --askr-label-light: #386453;
+  --askr-label-dark: #b2d8c5;
+  --askr-label-tint: #75ae97;
+}
+
+.askr-label.askr-label-sage {
+  --askr-label-light: #3c624d;
+  --askr-label-dark: #acd0bb;
+  --askr-label-tint: #7bac91;
+}
+
+.askr-label.askr-label-olive {
+  --askr-label-light: #586235;
+  --askr-label-dark: #c8d4a1;
+  --askr-label-tint: #9fac75;
+}
+
+.askr-label.askr-label-teal {
+  --askr-label-light: #34666a;
+  --askr-label-dark: #abd4d5;
+  --askr-label-tint: #6da9ad;
+}
+
+.askr-label.askr-label-pine {
+  --askr-label-light: #294e43;
+  --askr-label-dark: #8abca8;
+  --askr-label-tint: #4b8e76;
+}
+
+.askr-label.askr-label-sky {
+  --askr-label-light: #3b617c;
+  --askr-label-dark: #b1d6ee;
+  --askr-label-tint: #83b9db;
+}
+
+.askr-label.askr-label-denim {
+  --askr-label-light: #415773;
+  --askr-label-dark: #b2c6e0;
+  --askr-label-tint: #7895bf;
+}
+
+.askr-label.askr-label-navy {
+  --askr-label-light: #2c426b;
+  --askr-label-dark: #a8b9e1;
+  --askr-label-tint: #526da4;
+}
+
+.askr-label.askr-label-periwinkle {
+  --askr-label-light: #535a83;
+  --askr-label-dark: #c5c9eb;
+  --askr-label-tint: #929acb;
+}
+
+.askr-label.askr-label-lavender {
+  --askr-label-light: #65517c;
+  --askr-label-dark: #d6c4eb;
+  --askr-label-tint: #ae96cb;
+}
+
+.askr-label.askr-label-plum {
+  --askr-label-light: #58395e;
+  --askr-label-dark: #cfabd6;
+  --askr-label-tint: #996da3;
+}
+
+.askr-label.askr-label-butter {
+  --askr-label-light: #685821;
+  --askr-label-dark: #e7d8a4;
+  --askr-label-tint: #c8b675;
+}
+
+.askr-label.askr-label-amber {
+  --askr-label-light: #73551f;
+  --askr-label-dark: #e1c693;
+  --askr-label-tint: #c29a55;
+}
+
+.askr-label.askr-label-peach {
+  --askr-label-light: #754f39;
+  --askr-label-dark: #e6bda5;
+  --askr-label-tint: #cc997f;
+}
+
+.askr-label.askr-label-terracotta {
+  --askr-label-light: #774639;
+  --askr-label-dark: #ddb09f;
+  --askr-label-tint: #bd8575;
+}
+
+.askr-label.askr-label-rose {
+  --askr-label-light: #774651;
+  --askr-label-dark: #e5b7c2;
+  --askr-label-tint: #ca8f9e;
+}
+
+.askr-label.askr-label-berry {
+  --askr-label-light: #6a3953;
+  --askr-label-dark: #d5a8c0;
+  --askr-label-tint: #a87093;
+}

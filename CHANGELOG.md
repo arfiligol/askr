@@ -5,6 +5,11 @@ derive from these entries; an Unreleased entry is not a published release.
 
 ## Unreleased
 
+### Added
+
+- Searchable inline labels with 20 translucent colors. Authors choose the text
+  and color independently. Both component guides show the full palette.
+
 ### Fixed
 
 - Enable the Traditional Chinese version menu in the current Gallery build from

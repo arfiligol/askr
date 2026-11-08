@@ -1,0 +1,45 @@
+---
+title: "Labels"
+---
+
+Add a short label below a heading, in a paragraph, or in a table to show a document’s status, topic, or scope.
+
+## Add a label
+
+Add `.askr-label` for the label style and a second class to select a color. This example uses deep navy for “Technical preview”.
+
+[Technical preview]{.askr-label .askr-label-navy}
+
+```markdown
+[Technical preview]{.askr-label .askr-label-navy}
+```
+
+Choose any text and color independently. With just `.askr-label`, the label uses slate. Quarto site search indexes the visible label text. To filter a page listing by category, use Quarto’s `categories` metadata.
+
+## Color palette
+
+Each group lists the color names in display order. Prefix the name with `.askr-label-` to use it.
+
+### Neutrals
+
+[Slate]{.askr-label .askr-label-slate} [Stone]{.askr-label .askr-label-stone} [Sand]{.askr-label .askr-label-sand}
+
+`slate` · `stone` · `sand`
+
+### Greens and teals
+
+[Light mint]{.askr-label .askr-label-mint} [Sage]{.askr-label .askr-label-sage} [Olive]{.askr-label .askr-label-olive} [Muted teal]{.askr-label .askr-label-teal} [Deep pine]{.askr-label .askr-label-pine}
+
+`mint` · `sage` · `olive` · `teal` · `pine`
+
+### Blues and violets
+
+[Light sky blue]{.askr-label .askr-label-sky} [Muted denim]{.askr-label .askr-label-denim} [Deep navy]{.askr-label .askr-label-navy} [Periwinkle]{.askr-label .askr-label-periwinkle} [Light lavender]{.askr-label .askr-label-lavender} [Deep plum]{.askr-label .askr-label-plum}
+
+`sky` · `denim` · `navy` · `periwinkle` · `lavender` · `plum`
+
+### Yellows, oranges and reds
+
+[Light butter yellow]{.askr-label .askr-label-butter} [Soft amber]{.askr-label .askr-label-amber} [Light peach]{.askr-label .askr-label-peach} [Terracotta]{.askr-label .askr-label-terracotta} [Light rose]{.askr-label .askr-label-rose} [Deep berry]{.askr-label .askr-label-berry}
+
+`butter` · `amber` · `peach` · `terracotta` · `rose` · `berry`
